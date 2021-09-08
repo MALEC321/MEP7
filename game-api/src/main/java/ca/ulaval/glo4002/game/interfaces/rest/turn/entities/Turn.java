@@ -9,7 +9,16 @@ public class Turn {
     private List<Object> actions;
 
     public Turn(UUID id, int number, List<Object> actions) {
+        this.id = id;
         this.number = number;
         this.actions = actions;
+    }
+
+    public int getNumber() {
+        return number;
+    }
+
+    public UUID getId() {
+        return id;
     }
 }

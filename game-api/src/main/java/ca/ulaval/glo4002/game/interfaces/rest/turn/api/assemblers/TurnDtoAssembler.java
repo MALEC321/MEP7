@@ -16,7 +16,7 @@ public class TurnDtoAssembler {
 
     public TurnResponse toResponse(TurnDto turnDto) {
         TurnResponse response = new TurnResponse();
-        response.number = turnDto.number;
+        response.turnNumber = turnDto.turnNumber;
 
         return response;
     }
