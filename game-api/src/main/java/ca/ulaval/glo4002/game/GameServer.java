@@ -1,5 +1,7 @@
 package ca.ulaval.glo4002.game;
 
+import ca.ulaval.glo4002.game.interfaces.rest.actions.entities.*;
+import ca.ulaval.glo4002.game.interfaces.rest.actions.infrastructure.persistence.ActionRepositoryInMemory;
 import ca.ulaval.glo4002.game.interfaces.rest.turn.api.TurnResource;
 import ca.ulaval.glo4002.game.interfaces.rest.turn.api.assemblers.TurnDtoAssembler;
 import ca.ulaval.glo4002.game.interfaces.rest.turn.application.TurnUseCase;
@@ -16,6 +18,7 @@ import org.glassfish.jersey.servlet.ServletContainer;
 import javax.ws.rs.core.Application;
 import java.util.HashSet;
 import java.util.Set;
+import java.util.UUID;
 
 public class GameServer implements Runnable {
     private static final int PORT = 8181;
@@ -29,7 +32,8 @@ public class GameServer implements Runnable {
         TurnFactory turnFactory = new TurnFactory();
         TurnRepository turnRepository = new TurnRepositoryInMemory();
         TurnAssembler turnAssembler = new TurnAssembler();
-        TurnUseCase turnUseCase = new TurnUseCase(turnFactory, turnRepository, turnAssembler);
+        ActionRepository actionRepository = new ActionRepositoryInMemory();
+        TurnUseCase turnUseCase = new TurnUseCase(turnFactory, turnRepository, turnAssembler, actionRepository);
 
         TurnDtoAssembler turnDtoAssembler = new TurnDtoAssembler();
         TurnResource turnResource = new TurnResource(turnUseCase, turnDtoAssembler);

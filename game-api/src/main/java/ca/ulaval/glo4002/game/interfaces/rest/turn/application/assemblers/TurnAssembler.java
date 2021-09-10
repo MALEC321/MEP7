@@ -7,7 +7,7 @@ public class TurnAssembler {
 
     public TurnDto toDto(Turn turn) {
         TurnDto dto = new TurnDto();
-        dto.turnNumber = turn.getNumber();
+        dto.turnNumber = Turn.number;
 
         return dto;
     }
