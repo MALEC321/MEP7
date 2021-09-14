@@ -31,6 +31,8 @@ public class TurnUseCase {
 
     public void createTurn() {
         setupActions(actionRepository);
+
+
         List<Actions> actions = actionRepository.getWaitingActions();
         Turn turn = turnFactory.create(actions);
         actionRepository.execute();
@@ -38,6 +40,7 @@ public class TurnUseCase {
     }
 
     public void setupActions(ActionRepository actionRepository) {
+        //Todo add list of 250 kg of water...
         Actions firstAction = new ActionFactory().create("burger", Command.ADD);
         Actions secondAction = new ActionFactory().create("salad", Command.RETRIEVE);
         actionRepository.save(firstAction);
