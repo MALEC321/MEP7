@@ -1,4 +1,4 @@
-package ca.ulaval.glo4002.game.exceptions;
+package ca.ulaval.glo4002.game.interfaces.rest.exceptions;
 
 import javax.ws.rs.NotAllowedException;
 import javax.ws.rs.core.Response;
