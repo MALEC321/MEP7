@@ -1,6 +1,6 @@
 package ca.ulaval.glo4002.game.interfaces.rest.dinosaur.entities;
 
-import ca.ulaval.glo4002.game.interfaces.rest.exceptions.DuplicateNameException;
+import ca.ulaval.glo4002.game.interfaces.rest.exceptions.entities.DuplicateNameException;
 
 public class DinosaurFactory {
     private final DinosaurRepository dinosaurRepository;
@@ -15,8 +15,8 @@ public class DinosaurFactory {
     }
 
     private void validateName(String name) {
-        if(dinosaurRepository.findByName(name) != null){
-            System.out.println("Invalide Name");
+        if(dinosaurRepository.findByName(name) != null) {
+            throw new DuplicateNameException();
         }
     }
 }
