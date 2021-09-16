@@ -2,6 +2,13 @@ package ca.ulaval.glo4002.game;
 
 import ca.ulaval.glo4002.game.interfaces.rest.actions.entities.*;
 import ca.ulaval.glo4002.game.interfaces.rest.actions.infrastructure.persistence.ActionRepositoryInMemory;
+import ca.ulaval.glo4002.game.interfaces.rest.dinosaur.api.DinosaurResource;
+import ca.ulaval.glo4002.game.interfaces.rest.dinosaur.api.assemblers.DinosaurDtoAssembler;
+import ca.ulaval.glo4002.game.interfaces.rest.dinosaur.application.DinosaurUseCase;
+import ca.ulaval.glo4002.game.interfaces.rest.dinosaur.application.assemblers.DinosaurAssembler;
+import ca.ulaval.glo4002.game.interfaces.rest.dinosaur.entities.DinosaurFactory;
+import ca.ulaval.glo4002.game.interfaces.rest.dinosaur.entities.DinosaurRepository;
+import ca.ulaval.glo4002.game.interfaces.rest.dinosaur.infrastructure.persistence.DinosaurRepositoryInMemory;
 import ca.ulaval.glo4002.game.interfaces.rest.turn.api.TurnResource;
 import ca.ulaval.glo4002.game.interfaces.rest.turn.api.assemblers.TurnDtoAssembler;
 import ca.ulaval.glo4002.game.interfaces.rest.turn.application.TurnUseCase;
@@ -33,6 +40,16 @@ public class GameServer implements Runnable {
         TurnRepository turnRepository = new TurnRepositoryInMemory();
         TurnAssembler turnAssembler = new TurnAssembler();
         ActionRepository actionRepository = new ActionRepositoryInMemory();
+
+        // Dinosaur
+        DinosaurFactory dinosaurFactory = new DinosaurFactory();
+        DinosaurRepository dinosaurRepository = new DinosaurRepositoryInMemory();
+        DinosaurAssembler dinosaurAssembler = new DinosaurAssembler();
+        DinosaurUseCase dinosaurUseCase = new DinosaurUseCase(dinosaurFactory, dinosaurRepository, dinosaurAssembler);
+
+        DinosaurDtoAssembler dinosaurDtoAssembler = new DinosaurDtoAssembler();
+        DinosaurResource dinosaurResource = new DinosaurResource(dinosaurUseCase, dinosaurDtoAssembler);
+
         TurnUseCase turnUseCase = new TurnUseCase(turnFactory, turnRepository, turnAssembler, actionRepository);
 
         TurnDtoAssembler turnDtoAssembler = new TurnDtoAssembler();
@@ -44,6 +61,7 @@ public class GameServer implements Runnable {
             public Set<Object> getSingletons() {
                 Set<Object> resources = new HashSet<>();
                 resources.add(turnResource);
+                resources.add(dinosaurResource);
                 return resources;
             }
         }
