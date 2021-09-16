@@ -8,14 +8,14 @@ import java.util.Map;
 import java.util.UUID;
 
 public class DinosaurRepositoryInMemory implements DinosaurRepository {
-    private final Map<UUID, Dinosaur> dinosaursById = new HashMap<>();
+    private final Map<String, Dinosaur> dinosaursByName = new HashMap<>();
 
     @Override
-    public Dinosaur findById(UUID id) {
-        return dinosaursById.get(id);
+    public Dinosaur findByName(String name) {
+        return dinosaursByName.get(name);
     }
 
     @Override public void save(Dinosaur dinosaur) {
-        dinosaursById.put(dinosaur.getId(), dinosaur);
+        dinosaursByName.put(dinosaur.getName(), dinosaur);
     }
 }
