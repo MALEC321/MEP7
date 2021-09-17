@@ -16,13 +16,13 @@ class DinosaurFactoryTest {
         DinosaurRepository dinosaurRepository = mock(DinosaurRepository.class);
         duplicateNameException = mock(DuplicateNameException.class);
         dinosaurFactory = new DinosaurFactory(dinosaurRepository);
-        Dinosaur dinosaur = new Dinosaur("name", 89, "f", "");
+        Dinosaur dinosaur = new Dinosaur("name", 89, "f", "Ankylosaurus", "Herbivore");
         when(dinosaurRepository.findByName("name")).thenReturn(dinosaur);
     }
 
     @Test
     void whenNameIsValid_thenCreateDinosaur() {
-        dinosaurFactory.create("anotherName", 89, "f", "");
+        dinosaurFactory.create("anotherName", 89, "f", "Ankylosaurus");
 
         verify(duplicateNameException, never()).getCode();
     }
@@ -31,7 +31,14 @@ class DinosaurFactoryTest {
     @Test
     void whenNameIsInvalid_thenCreateDinosaur() {
         assertThrows(DuplicateNameException.class, () -> {
-            dinosaurFactory.create("name", 89, "f", "");
+            dinosaurFactory.create("name", 89, "f", "Ankylosaurus");
         });
+    }
+
+    @Test
+    void when1000kgFemaleAnkylosaurusIsCreated_thenForceIsEqualTo(){
+        Dinosaur dinosaur = new Dinosaur("name", 1000, "f", "Triceratops", "Carnivore");
+
+        assertEquals(2250, dinosaur.getForce());
     }
 }
