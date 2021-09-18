@@ -1,7 +1,7 @@
-package ca.ulaval.glo4002.game.interfaces.rest.manageresources.infrastructure.persistence;
+package ca.ulaval.glo4002.game.interfaces.rest.resources.infrastructure.persistence;
 
-import ca.ulaval.glo4002.game.interfaces.rest.manageresources.entities.Resource;
-import ca.ulaval.glo4002.game.interfaces.rest.manageresources.entities.ResourceRepository;
+import ca.ulaval.glo4002.game.interfaces.rest.resources.entities.Resource;
+import ca.ulaval.glo4002.game.interfaces.rest.resources.entities.ResourceRepository;
 
 import java.util.*;
 

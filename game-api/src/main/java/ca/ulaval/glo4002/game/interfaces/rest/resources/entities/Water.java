@@ -1,4 +1,4 @@
-package ca.ulaval.glo4002.game.interfaces.rest.manageresources.entities;
+package ca.ulaval.glo4002.game.interfaces.rest.resources.entities;
 
 public class Water extends ResourceElements implements ResourceType{
     private static int expiration = 10;
