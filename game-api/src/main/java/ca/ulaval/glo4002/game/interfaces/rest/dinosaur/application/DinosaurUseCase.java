@@ -32,10 +32,10 @@ public class DinosaurUseCase {
         return dinosaurAssembler.toDtos(dinosaurs);
     }
 
-//    public DinosaurDto getSeller(ID id) throws InvalidSellerIdException {
-//        Seller seller = sellerRepository.findById(id.toString());
-//        return sellerAssembler.toDto(seller);
-//    }
+    public DinosaurDto getDinosaur(String name) {
+        Dinosaur dinosaur = dinosaurRepository.findByName(name);
+        return dinosaurAssembler.toDto(dinosaur);
+    }
 
 //    public TurnDto getFromId(UUID id) {
 //        Dinosaur dinosaur = dinosaurFactory.findById(id);

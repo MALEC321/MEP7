@@ -1,13 +1,11 @@
 package ca.ulaval.glo4002.game.interfaces.rest.dinosaur.api.assemblers;
 
-import ca.ulaval.glo4002.game.interfaces.rest.dinosaur.api.DinosaurResource;
 import ca.ulaval.glo4002.game.interfaces.rest.dinosaur.api.dtos.DinosaurRequest;
 import ca.ulaval.glo4002.game.interfaces.rest.dinosaur.api.dtos.DinosaurResponseItem;
 import ca.ulaval.glo4002.game.interfaces.rest.dinosaur.api.dtos.DinosaursResponse;
 import ca.ulaval.glo4002.game.interfaces.rest.dinosaur.application.dtos.DinosaurCreationDto;
 import ca.ulaval.glo4002.game.interfaces.rest.dinosaur.application.dtos.DinosaurDto;
 
-import java.time.Instant;
 import java.util.List;
 import java.util.stream.Collectors;
 
