@@ -13,6 +13,6 @@ public class AddAction extends Actions{
     @Override
     public void execute() {
         getResourceRepository().add(getResource());
-        System.out.println(getResourceRepository().findAll().peek());
+        System.out.println(getResourceRepository().findAll().size());
     }
 }
