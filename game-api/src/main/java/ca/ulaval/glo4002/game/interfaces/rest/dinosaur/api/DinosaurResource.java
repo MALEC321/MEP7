@@ -46,4 +46,14 @@ public class DinosaurResource {
 
         return Response.ok().entity(response).build();
     }
+
+    @Path("/dinosaurs/{name}")
+    @GET
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response getDinosaur(String name) {
+
+        DinosaurDto dinosaur = dinosaurUseCase.getDinosaur(name);
+        DinosaurResponseItem response = dinosaurDtoAssembler.toResponse(dinosaur);
+        return Response.ok().entity(response).build();
+    }
 }
