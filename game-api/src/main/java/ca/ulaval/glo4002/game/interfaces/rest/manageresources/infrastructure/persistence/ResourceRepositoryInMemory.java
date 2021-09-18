@@ -3,20 +3,28 @@ package ca.ulaval.glo4002.game.interfaces.rest.manageresources.infrastructure.pe
 import ca.ulaval.glo4002.game.interfaces.rest.manageresources.entities.Resource;
 import ca.ulaval.glo4002.game.interfaces.rest.manageresources.entities.ResourceRepository;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.UUID;
+import java.util.*;
 
 public class ResourceRepositoryInMemory implements ResourceRepository {
-    private final Map<UUID, Resource> inventory = new HashMap<>();
+    private Queue<Resource> inventory = new LinkedList<>();
 
     @Override
     public void add(Resource resource) {
-        inventory.put(resource.getId(), resource);
+        inventory.add(resource);
     }
 
     @Override
-    public Resource removeStale(UUID id) {
-        return inventory.remove(id);
+    public void removeStale() {
+        inventory.remove();
+    }
+
+    public int getTotalElementInventory(){
+        return inventory.size();
+    }
+
+    public void printAllData() {
+        for(Resource resource : inventory){
+            resource.printAllResources();
+        }
     }
 }
