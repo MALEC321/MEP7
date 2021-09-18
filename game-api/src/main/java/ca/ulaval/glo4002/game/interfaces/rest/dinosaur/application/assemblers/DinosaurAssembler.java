@@ -10,7 +10,10 @@ public class DinosaurAssembler {
 
     public DinosaurDto toDto(Dinosaur dinosaur) {
         DinosaurDto dto = new DinosaurDto();
-
+        dto.name = dinosaur.getName();
+        dto.weight = dinosaur.getWeight();
+        dto.gender = dinosaur.getGender();
+        dto.species = dinosaur.getSpecies();
         return dto;
     }
 

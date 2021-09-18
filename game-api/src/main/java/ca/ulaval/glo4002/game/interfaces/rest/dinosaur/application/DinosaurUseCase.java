@@ -36,9 +36,4 @@ public class DinosaurUseCase {
         Dinosaur dinosaur = dinosaurRepository.findByName(name);
         return dinosaurAssembler.toDto(dinosaur);
     }
-
-//    public TurnDto getFromId(UUID id) {
-//        Dinosaur dinosaur = dinosaurFactory.findById(id);
-//        return dinosaurAssembler.toDto(dinosaur);
-//    }
 }
