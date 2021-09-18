@@ -1,10 +1,10 @@
 package ca.ulaval.glo4002.game.interfaces.rest.dinosaur.entities;
 
 public class Dinosaur {
-    private final String name;
-    private int weight;
-    private final String gender;
-    private final String species;
+    public final String name;
+    public final int weight;
+    public final String gender;
+    public final String species;
     private final double force;
     private final String diet;
 
@@ -17,10 +17,10 @@ public class Dinosaur {
         this.force = calculForce(weight, gender, diet);
     }
 
-    private double calculForce(int weight, String gender, String diet){
-        double T = (diet.equals("Carnivore"))? 1.5 : 1;
-        double S = (gender.equals("f"))? 1.5 : 1;
-        return weight*T*S;
+    private double calculForce(int weight, String gender, String diet) {
+        double T = (diet.equals("Carnivore")) ? 1.5 : 1;
+        double S = (gender.equals("f")) ? 1.5 : 1;
+        return weight * T * S;
     }
 
     public String getName() {

@@ -19,6 +19,7 @@ public class TurnUseCase {
     private final TurnRepository turnRepository;
     private final TurnAssembler turnAssembler;
     private final ActionRepository actionRepository;
+
     public TurnUseCase(TurnFactory turnFactory,
                        TurnRepository turnRepository,
                        TurnAssembler turnAssembler,

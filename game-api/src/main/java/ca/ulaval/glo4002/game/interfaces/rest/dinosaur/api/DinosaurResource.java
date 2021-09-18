@@ -1,13 +1,17 @@
 package ca.ulaval.glo4002.game.interfaces.rest.dinosaur.api;
 
 import ca.ulaval.glo4002.game.interfaces.rest.dinosaur.api.assemblers.DinosaurDtoAssembler;
-import ca.ulaval.glo4002.game.interfaces.rest.dinosaur.api.dtos.DinosaurResponse;
+import ca.ulaval.glo4002.game.interfaces.rest.dinosaur.api.dtos.DinosaurRequest;
+import ca.ulaval.glo4002.game.interfaces.rest.dinosaur.api.dtos.DinosaurResponseItem;
+import ca.ulaval.glo4002.game.interfaces.rest.dinosaur.api.dtos.DinosaursResponse;
 import ca.ulaval.glo4002.game.interfaces.rest.dinosaur.application.DinosaurUseCase;
+import ca.ulaval.glo4002.game.interfaces.rest.dinosaur.application.dtos.DinosaurCreationDto;
 import ca.ulaval.glo4002.game.interfaces.rest.dinosaur.application.dtos.DinosaurDto;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+import java.util.List;
 
 @Path("/")
 public class DinosaurResource {
@@ -24,17 +28,22 @@ public class DinosaurResource {
     @POST
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
-    public Response createDinosaur(DinosaurDto newDinosaur) {
+    public Response createDinosaur(DinosaurRequest dinosaurRequest) {
 
-        DinosaurDto dinosaurDto = new DinosaurDto();
-        dinosaurDto.name = newDinosaur.name;
-        dinosaurDto.weight = newDinosaur.weight;
-        dinosaurDto.gender = newDinosaur.gender;
-        dinosaurDto.species = newDinosaur.species;
+        DinosaurCreationDto dto = dinosaurDtoAssembler.fromRequest(dinosaurRequest);
+        String name = dinosaurUseCase.createDinosaur(dto);
 
-        dinosaurUseCase.createDinosaur(dinosaurDto.name, dinosaurDto.weight, dinosaurDto.gender, dinosaurDto.species);
-        DinosaurResponse response = dinosaurDtoAssembler.toResponse(dinosaurDto);
+        return Response.status(Response.Status.CREATED).build();
+    }
 
-        return Response.status(Response.Status.CREATED).entity(response).build();
+    @Path("/dinosaurs")
+    @GET
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response getAllDinosaurs() {
+
+        List<DinosaurDto> dinosaurs = dinosaurUseCase.getAllDinosaurs();
+        DinosaursResponse response = dinosaurDtoAssembler.toResponse(dinosaurs);
+
+        return Response.ok().entity(response).build();
     }
 }
