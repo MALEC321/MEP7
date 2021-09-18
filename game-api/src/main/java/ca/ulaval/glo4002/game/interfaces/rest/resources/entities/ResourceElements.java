@@ -1,12 +1,10 @@
 package ca.ulaval.glo4002.game.interfaces.rest.resources.entities;
 
-public class ResourceElements {
+public abstract class ResourceElements {
     private int quantity;
-    private String name;
 
-    public ResourceElements(int quantity, String name) {
+    public ResourceElements(int quantity) {
         this.quantity = quantity;
-        this.name = name;
     }
 
     public int getQuantity() {
@@ -15,13 +13,5 @@ public class ResourceElements {
 
     public void setQuantity(int quantity) {
         this.quantity = quantity;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
     }
 }

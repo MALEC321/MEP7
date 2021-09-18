@@ -2,6 +2,8 @@ package ca.ulaval.glo4002.game;
 
 import ca.ulaval.glo4002.game.interfaces.rest.actions.entities.*;
 import ca.ulaval.glo4002.game.interfaces.rest.actions.infrastructure.persistence.ActionRepositoryInMemory;
+import ca.ulaval.glo4002.game.interfaces.rest.resources.entities.ResourceRepository;
+import ca.ulaval.glo4002.game.interfaces.rest.resources.infrastructure.persistence.ResourceRepositoryInMemory;
 import ca.ulaval.glo4002.game.interfaces.rest.turn.api.TurnResource;
 import ca.ulaval.glo4002.game.interfaces.rest.turn.api.assemblers.TurnDtoAssembler;
 import ca.ulaval.glo4002.game.interfaces.rest.turn.application.TurnUseCase;
@@ -31,9 +33,10 @@ public class GameServer implements Runnable {
         // Turn
         TurnFactory turnFactory = new TurnFactory();
         TurnRepository turnRepository = new TurnRepositoryInMemory();
+        ResourceRepository resourceRepository = new ResourceRepositoryInMemory();
         TurnAssembler turnAssembler = new TurnAssembler();
         ActionRepository actionRepository = new ActionRepositoryInMemory();
-        TurnUseCase turnUseCase = new TurnUseCase(turnFactory, turnRepository, turnAssembler, actionRepository);
+        TurnUseCase turnUseCase = new TurnUseCase(turnFactory, turnRepository,resourceRepository, turnAssembler, actionRepository);
 
         TurnDtoAssembler turnDtoAssembler = new TurnDtoAssembler();
         TurnResource turnResource = new TurnResource(turnUseCase, turnDtoAssembler);

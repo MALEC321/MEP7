@@ -3,8 +3,8 @@ package ca.ulaval.glo4002.game.interfaces.rest.resources.entities;
 public class Salad extends ResourceElements implements ResourceType{
     private static int expiration = 3;
 
-    public Salad(int quantity, String name) {
-        super(quantity, name);
+    public Salad(int quantity) {
+        super(quantity);
     }
 
     @Override
@@ -15,11 +15,6 @@ public class Salad extends ResourceElements implements ResourceType{
     @Override
     public int getDaysLeft() {
         return expiration;
-    }
-
-    @Override
-    public String getResourceName() {
-        return super.getName();
     }
 
     @Override

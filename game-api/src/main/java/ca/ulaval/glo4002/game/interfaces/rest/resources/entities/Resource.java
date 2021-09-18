@@ -1,18 +1,34 @@
 package ca.ulaval.glo4002.game.interfaces.rest.resources.entities;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class Resource {
-    private final List<ResourceType> resourceTypeList = new ArrayList<>();
+    private final Map<String, ResourceElements> resources = new HashMap<String, ResourceElements>(3){{
+        put("Burgers", new Burger(0));
+        put("Salads", new Salad(0));
+        put("Water", new Water(0));
+    }};
 
-    public void addResourceType(ResourceType resourceType) {
-        resourceTypeList.add(resourceType);
+    public Resource(Burger burger, Salad salad, Water water) {
+        resources.replace("Burgers", burger);
+        resources.replace("Salads", salad);
+        resources.replace("Water", water);
     }
 
-    public void printAllResources() {
-        for (ResourceType resourceType : resourceTypeList) {
-            System.out.println("Type : " + resourceType.getResourceName() + "," + " Value: " + resourceType.getResourceQty());
-        }
+    public Map<String, ResourceElements> getResources() {
+        return resources;
     }
+
+    //    public void addResourceType(ResourceType resourceType) {
+//        resourceTypeList.add(resourceType);
+//    }
+//
+//    public void printAllResources() {
+//        for (ResourceType resourceType : resourceTypeList) {
+//            System.out.println("Type : " + resourceType.getResourceName() + "," + " Value: " + resourceType.getResourceQty());
+//        }
+//    }
 }

@@ -3,8 +3,8 @@ package ca.ulaval.glo4002.game.interfaces.rest.resources.entities;
 public class Water extends ResourceElements implements ResourceType{
     private static int expiration = 10;
 
-    public Water(int quantity, String name) {
-        super(quantity, name);
+    public Water(int quantity) {
+        super(quantity);
     }
 
     @Override
@@ -17,10 +17,6 @@ public class Water extends ResourceElements implements ResourceType{
         return expiration;
     }
 
-    @Override
-    public String getResourceName() {
-        return super.getName();
-    }
 
     @Override
     public int getResourceQty() {
