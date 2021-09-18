@@ -2,7 +2,7 @@ package ca.ulaval.glo4002.game.interfaces.rest.actions.entities;
 
 import java.util.UUID;
 
-public class AddAction extends Actions{
+public class AddAction extends Actions {
 
     public AddAction(UUID id, String resource, Command command) {
         super(id, resource, command);

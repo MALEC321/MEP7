@@ -4,6 +4,8 @@ import java.util.List;
 
 public interface ActionRepository {
     void save(Actions action);
+
     List<Actions> getWaitingActions();
+
     void execute();
 }

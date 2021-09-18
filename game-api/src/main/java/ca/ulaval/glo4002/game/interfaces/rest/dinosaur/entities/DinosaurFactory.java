@@ -13,7 +13,7 @@ public class DinosaurFactory {
     }
 
     //Changer diet pour enum?
-    private static final Map<String, String> speciesDiet  = new HashMap<String, String>() {{
+    private static final Map<String, String> speciesDiet = new HashMap<String, String>() {{
         put("Ankylosaurus", "Herbivore");
         put("Brachiosaurus", "Herbivore");
         put("Diplodocus", "Herbivore");
@@ -32,7 +32,7 @@ public class DinosaurFactory {
     }
 
     private void validateName(String name) {
-        if(dinosaurRepository.findByName(name) != null) {
+        if (dinosaurRepository.findByName(name) != null) {
             throw new DuplicateNameException();
         }
     }

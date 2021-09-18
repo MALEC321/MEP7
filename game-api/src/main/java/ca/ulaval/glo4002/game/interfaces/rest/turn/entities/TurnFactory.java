@@ -7,7 +7,8 @@ import java.util.UUID;
 
 public class TurnFactory {
 
-    public TurnFactory() {}
+    public TurnFactory() {
+    }
 
     public Turn create(List<Actions> actions) {
 

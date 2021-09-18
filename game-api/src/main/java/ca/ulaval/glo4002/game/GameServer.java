@@ -1,6 +1,6 @@
 package ca.ulaval.glo4002.game;
 
-import ca.ulaval.glo4002.game.interfaces.rest.actions.entities.*;
+import ca.ulaval.glo4002.game.interfaces.rest.actions.entities.ActionRepository;
 import ca.ulaval.glo4002.game.interfaces.rest.actions.infrastructure.persistence.ActionRepositoryInMemory;
 import ca.ulaval.glo4002.game.interfaces.rest.dinosaur.api.DinosaurResource;
 import ca.ulaval.glo4002.game.interfaces.rest.dinosaur.api.assemblers.DinosaurDtoAssembler;
@@ -25,7 +25,6 @@ import org.glassfish.jersey.servlet.ServletContainer;
 import javax.ws.rs.core.Application;
 import java.util.HashSet;
 import java.util.Set;
-import java.util.UUID;
 
 public class GameServer implements Runnable {
     private static final int PORT = 8181;
@@ -57,14 +56,14 @@ public class GameServer implements Runnable {
         Server server = new Server(PORT);
         ServletContextHandler contextHandler = new ServletContextHandler(server, "/");
         ResourceConfig packageConfig = ResourceConfig.forApplication(new Application() {
-            @Override
-            public Set<Object> getSingletons() {
-                Set<Object> resources = new HashSet<>();
-                resources.add(turnResource);
-                resources.add(dinosaurResource);
-                return resources;
-            }
-        }
+                                                                         @Override
+                                                                         public Set<Object> getSingletons() {
+                                                                             Set<Object> resources = new HashSet<>();
+                                                                             resources.add(turnResource);
+                                                                             resources.add(dinosaurResource);
+                                                                             return resources;
+                                                                         }
+                                                                     }
         );
         ServletContainer container = new ServletContainer(packageConfig);
         ServletHolder servletHolder = new ServletHolder(container);
@@ -77,9 +76,9 @@ public class GameServer implements Runnable {
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
-        	if (server.isRunning()) {
-		        server.destroy();
-	        }
+            if (server.isRunning()) {
+                server.destroy();
+            }
         }
     }
 }
