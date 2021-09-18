@@ -22,8 +22,9 @@ public class ResourceRepositoryInMemory implements ResourceRepository {
         resourceInventory.remove();
     }
 
-    public int getTotalElementInventory(){
-        return resourceInventory.size();
+    @Override
+    public Queue<ResourceElements> findAll(){
+        return resourceInventory;
     }
 
 //    public void printAllData() {

@@ -45,7 +45,7 @@ public class TurnUseCase {
 
     public void setupActions(ActionRepository actionRepository) {
         //Todo add list of 250 kg of water...
-        Actions firstAction = new ActionFactory().create(new Burger(10), Command.ADD, resourceRepository);
+        Actions firstAction = new ActionFactory().create(new Burger(100), Command.ADD, resourceRepository);
         Actions secondAction = new ActionFactory().create(new Salad(0), Command.RETRIEVE, resourceRepository);
         actionRepository.save(firstAction);
         actionRepository.save(secondAction);

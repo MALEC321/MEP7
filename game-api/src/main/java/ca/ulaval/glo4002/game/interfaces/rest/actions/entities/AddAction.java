@@ -6,13 +6,13 @@ import ca.ulaval.glo4002.game.interfaces.rest.resources.entities.ResourceReposit
 import java.util.UUID;
 
 public class AddAction extends Actions{
-
     public AddAction(UUID id, ResourceElements resource, ResourceRepository resourceRepository) {
         super(id, resource, resourceRepository);
     }
 
     @Override
     public void execute() {
-        System.out.println("Get resource in repository and add a value to it");
+        getResourceRepository().add(getResource());
+        System.out.println(getResourceRepository().findAll().peek());
     }
 }

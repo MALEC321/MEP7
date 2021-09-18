@@ -18,11 +18,6 @@ public class Burger extends ResourceElements implements ResourceType{
     }
 
     @Override
-    public String getResourceName() {
-        return super.getName();
-    }
-
-    @Override
     public int getResourceQty() {
         return super.getQuantity();
     }
