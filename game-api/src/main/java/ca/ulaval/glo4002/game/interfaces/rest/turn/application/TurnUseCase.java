@@ -40,11 +40,11 @@ public class TurnUseCase {
     }
 
     public void setupActions(ActionRepository actionRepository) {
-        //Todo add list of 250 kg of water...
-        Actions firstAction = new ActionFactory().create("burger", Command.ADD);
-        Actions secondAction = new ActionFactory().create("salad", Command.RETRIEVE);
-        actionRepository.save(firstAction);
-        actionRepository.save(secondAction);
+//        //Todo add list of 250 kg of water...
+//        Actions firstAction = new ActionFactory().create("burger", Command.ADD);
+//        Actions secondAction = new ActionFactory().create("salad", Command.RETRIEVE);
+//        actionRepository.save(firstAction);
+//        actionRepository.save(secondAction);
     }
 
     public TurnDto getFromId(UUID id) {
