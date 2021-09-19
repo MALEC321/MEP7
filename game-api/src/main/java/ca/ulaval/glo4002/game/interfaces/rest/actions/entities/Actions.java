@@ -7,25 +7,25 @@ import java.util.UUID;
 
 public abstract class Actions {
     private final UUID id;
-    private final ResourceElements resource;
-    private final ResourceRepository resourceRepository;
+    private final Object object;
+    private final Object objectRepository;
 
-    public Actions(UUID id, ResourceElements resource, ResourceRepository resourceRepository) {
+    public Actions(UUID id, Object object, Object objectRepository) {
         this.id = id;
-        this.resource = resource;
-        this.resourceRepository = resourceRepository;
+        this.object = object;
+        this.objectRepository = objectRepository;
     }
 
     public UUID getId() {
         return id;
     }
 
-    public ResourceRepository getResourceRepository() {
-        return resourceRepository;
+    public Object getObject() {
+        return object;
     }
 
-    public ResourceElements getResource() {
-        return resource;
+    public Object getObjectRepository() {
+        return objectRepository;
     }
 
     abstract public void execute();

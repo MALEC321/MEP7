@@ -12,7 +12,7 @@ public class AddAction extends Actions{
 
     @Override
     public void execute() {
-        getResourceRepository().add(getResource());
-        System.out.println(getResourceRepository().findAll().size());
+        ((ResourceRepository)getObjectRepository()).add((ResourceElements) getObject());
+        System.out.println(((ResourceRepository)getObjectRepository()).findAll().size());
     }
 }
