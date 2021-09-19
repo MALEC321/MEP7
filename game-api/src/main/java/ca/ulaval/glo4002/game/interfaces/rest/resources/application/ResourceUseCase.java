@@ -13,7 +13,6 @@ import ca.ulaval.glo4002.game.interfaces.rest.resources.entities.ResourceFactory
 import ca.ulaval.glo4002.game.interfaces.rest.resources.entities.ResourceRepository;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class ResourceUseCase {
     private final ResourceFactory resourceFactory;
@@ -31,8 +30,6 @@ public class ResourceUseCase {
     }
 
     public ResourceDto createResource(ResourceCreationDto resourceCreationDto) {
-        List<Actions> actions = actionRepository.getWaitingActions();
-
         Resource resources = resourceFactory.create(resourceCreationDto.qtyBurger, resourceCreationDto.qtySalad, resourceCreationDto.qtyWater);
         addResourceToActionWaitingList(resources);
         return resourceAssemblers.toDto(resources);

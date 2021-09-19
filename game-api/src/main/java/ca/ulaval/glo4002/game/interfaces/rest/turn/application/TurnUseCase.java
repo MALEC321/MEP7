@@ -7,6 +7,7 @@ import ca.ulaval.glo4002.game.interfaces.rest.actions.entities.Command;
 import ca.ulaval.glo4002.game.interfaces.rest.resources.entities.Burger;
 import ca.ulaval.glo4002.game.interfaces.rest.resources.entities.ResourceRepository;
 import ca.ulaval.glo4002.game.interfaces.rest.resources.entities.Salad;
+import ca.ulaval.glo4002.game.interfaces.rest.resources.entities.Water;
 import ca.ulaval.glo4002.game.interfaces.rest.turn.application.assemblers.TurnAssembler;
 import ca.ulaval.glo4002.game.interfaces.rest.turn.application.dtos.TurnDto;
 import ca.ulaval.glo4002.game.interfaces.rest.turn.entities.Turn;
@@ -44,11 +45,12 @@ public class TurnUseCase {
     }
 
     public void setupActions(ActionRepository actionRepository) {
-        //Todo add list of 250 kg of water...
-        Actions firstAction = new ActionFactory().create(new Burger(100), Command.ADD, resourceRepository);
-        Actions secondAction = new ActionFactory().create(new Salad(0), Command.RETRIEVE, resourceRepository);
-        actionRepository.save(firstAction);
-        actionRepository.save(secondAction);
+        Actions addWater = new ActionFactory().create(new Water(10), Command.ADD, resourceRepository);
+        Actions addSalad = new ActionFactory().create(new Salad(250), Command.ADD, resourceRepository);
+        Actions addBurger = new ActionFactory().create(new Burger(100), Command.ADD, resourceRepository);
+        actionRepository.save(addWater);
+        actionRepository.save(addSalad);
+        actionRepository.save(addBurger);
     }
 
     public TurnDto getFromId(UUID id) {

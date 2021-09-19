@@ -17,7 +17,6 @@ public class Water extends ResourceElements implements ResourceType{
         return expiration;
     }
 
-
     @Override
     public int getResourceQty() {
         return super.getQuantity();
