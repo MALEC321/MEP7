@@ -41,20 +41,4 @@ public class DinosaurUseCase {
     Dinosaur dinosaur = dinosaurRepository.findByName(name);
     return dinosaurAssembler.toDto(dinosaur);
   }
-
-  private double calculateWaterNeed(int weight) {
-    return Math.round(weight * 0.6) + 2 * 3;
-  }
-
-  private double calculateFoodNeed(int weight, String specy, boolean isNewlyCreated) {
-    double foodNeed = (weight * getPonderationByDietType(specy)) / 200;
-    if (isNewlyCreated) {
-      foodNeed = Math.ceil(foodNeed * 2);
-    }
-    return foodNeed;
-  }
-
-  private double getPonderationByDietType(String specy) {
-    return SpeciesDiet.valueOf(specy).equals(DietType.HERBIVORE) ? 0.5 : 0.2;
-  }
 }

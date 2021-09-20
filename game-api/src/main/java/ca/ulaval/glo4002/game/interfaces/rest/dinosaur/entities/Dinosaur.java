@@ -42,4 +42,8 @@ public class Dinosaur {
     public double getForce() {
         return force;
     }
+
+    public String getDiet() {
+        return diet;
+    }
 }

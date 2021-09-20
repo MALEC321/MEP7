@@ -2,6 +2,20 @@ package ca.ulaval.glo4002.game;
 
 import ca.ulaval.glo4002.game.interfaces.rest.actions.entities.*;
 import ca.ulaval.glo4002.game.interfaces.rest.actions.infrastructure.persistence.ActionRepositoryInMemory;
+import ca.ulaval.glo4002.game.interfaces.rest.dinosaur.api.DinosaurResource;
+import ca.ulaval.glo4002.game.interfaces.rest.dinosaur.api.assemblers.DinosaurDtoAssembler;
+import ca.ulaval.glo4002.game.interfaces.rest.dinosaur.application.DinosaurUseCase;
+import ca.ulaval.glo4002.game.interfaces.rest.dinosaur.application.assemblers.DinosaurAssembler;
+import ca.ulaval.glo4002.game.interfaces.rest.dinosaur.entities.DinosaurFactory;
+import ca.ulaval.glo4002.game.interfaces.rest.dinosaur.entities.DinosaurRepository;
+import ca.ulaval.glo4002.game.interfaces.rest.dinosaur.infrastructure.persistence.DinosaurRepositoryInMemory;
+import ca.ulaval.glo4002.game.interfaces.rest.resources.api.ResourceResource;
+import ca.ulaval.glo4002.game.interfaces.rest.resources.api.assemblers.ResourceDtoAssembler;
+import ca.ulaval.glo4002.game.interfaces.rest.resources.application.ResourceUseCase;
+import ca.ulaval.glo4002.game.interfaces.rest.resources.application.assemblers.ResourceAssemblers;
+import ca.ulaval.glo4002.game.interfaces.rest.resources.entities.ResourceFactory;
+import ca.ulaval.glo4002.game.interfaces.rest.resources.entities.ResourceRepository;
+import ca.ulaval.glo4002.game.interfaces.rest.resources.infrastructure.persistence.ResourceRepositoryInMemory;
 import ca.ulaval.glo4002.game.interfaces.rest.turn.api.TurnResource;
 import ca.ulaval.glo4002.game.interfaces.rest.turn.api.assemblers.TurnDtoAssembler;
 import ca.ulaval.glo4002.game.interfaces.rest.turn.application.TurnUseCase;
@@ -18,7 +32,6 @@ import org.glassfish.jersey.servlet.ServletContainer;
 import javax.ws.rs.core.Application;
 import java.util.HashSet;
 import java.util.Set;
-import java.util.UUID;
 
 public class GameServer implements Runnable {
     private static final int PORT = 8181;
@@ -34,6 +47,8 @@ public class GameServer implements Runnable {
         ResourceRepository resourceRepository = new ResourceRepositoryInMemory();
         TurnAssembler turnAssembler = new TurnAssembler();
         ActionRepository actionRepository = new ActionRepositoryInMemory();
+        ActionFactory actionFactory = new ActionFactory();
+
 
         // Dinosaur
         DinosaurRepository dinosaurRepository = new DinosaurRepositoryInMemory();
@@ -44,7 +59,7 @@ public class GameServer implements Runnable {
         DinosaurDtoAssembler dinosaurDtoAssembler = new DinosaurDtoAssembler();
         DinosaurResource dinosaurResource = new DinosaurResource(dinosaurUseCase, dinosaurDtoAssembler);
 
-        TurnUseCase turnUseCase = new TurnUseCase(turnFactory, turnRepository, turnAssembler, actionRepository);
+        TurnUseCase turnUseCase = new TurnUseCase(turnFactory, turnRepository, resourceRepository, dinosaurRepository, turnAssembler, actionRepository);
 
         TurnDtoAssembler turnDtoAssembler = new TurnDtoAssembler();
         TurnResource turnResource = new TurnResource(turnUseCase, turnDtoAssembler);
@@ -61,18 +76,12 @@ public class GameServer implements Runnable {
                                                                          @Override
                                                                          public Set<Object> getSingletons() {
                                                                              Set<Object> resources = new HashSet<>();
+                                                                             resources.add(resourceResource);
                                                                              resources.add(turnResource);
                                                                              resources.add(dinosaurResource);
                                                                              return resources;
                                                                          }
-                                                                     }
-            @Override
-            public Set<Object> getSingletons() {
-                Set<Object> resources = new HashSet<>();
-                resources.add(turnResource);
-                resources.add(resourceResource);
-                return resources;
-            }
+
         }
         );
         ServletContainer container = new ServletContainer(packageConfig);

@@ -1,10 +1,11 @@
 package ca.ulaval.glo4002.game.interfaces.rest.actions.entities;
 
+import ca.ulaval.glo4002.game.interfaces.rest.resources.entities.ResourceType;
 import java.util.UUID;
 
 public class AddAction extends Actions {
 
-    public AddAction(UUID id, String resource, Command command) {
+    public AddAction(UUID id, ResourceType resource, Command command) {
         super(id, resource, command);
     }
 
