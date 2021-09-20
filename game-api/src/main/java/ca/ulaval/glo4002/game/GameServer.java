@@ -1,14 +1,7 @@
 package ca.ulaval.glo4002.game;
 
-import ca.ulaval.glo4002.game.interfaces.rest.actions.entities.ActionRepository;
+import ca.ulaval.glo4002.game.interfaces.rest.actions.entities.*;
 import ca.ulaval.glo4002.game.interfaces.rest.actions.infrastructure.persistence.ActionRepositoryInMemory;
-import ca.ulaval.glo4002.game.interfaces.rest.dinosaur.api.DinosaurResource;
-import ca.ulaval.glo4002.game.interfaces.rest.dinosaur.api.assemblers.DinosaurDtoAssembler;
-import ca.ulaval.glo4002.game.interfaces.rest.dinosaur.application.DinosaurUseCase;
-import ca.ulaval.glo4002.game.interfaces.rest.dinosaur.application.assemblers.DinosaurAssembler;
-import ca.ulaval.glo4002.game.interfaces.rest.dinosaur.entities.DinosaurFactory;
-import ca.ulaval.glo4002.game.interfaces.rest.dinosaur.entities.DinosaurRepository;
-import ca.ulaval.glo4002.game.interfaces.rest.dinosaur.infrastructure.persistence.DinosaurRepositoryInMemory;
 import ca.ulaval.glo4002.game.interfaces.rest.turn.api.TurnResource;
 import ca.ulaval.glo4002.game.interfaces.rest.turn.api.assemblers.TurnDtoAssembler;
 import ca.ulaval.glo4002.game.interfaces.rest.turn.application.TurnUseCase;
@@ -25,6 +18,7 @@ import org.glassfish.jersey.servlet.ServletContainer;
 import javax.ws.rs.core.Application;
 import java.util.HashSet;
 import java.util.Set;
+import java.util.UUID;
 
 public class GameServer implements Runnable {
     private static final int PORT = 8181;
@@ -37,6 +31,7 @@ public class GameServer implements Runnable {
         // Turn
         TurnFactory turnFactory = new TurnFactory();
         TurnRepository turnRepository = new TurnRepositoryInMemory();
+        ResourceRepository resourceRepository = new ResourceRepositoryInMemory();
         TurnAssembler turnAssembler = new TurnAssembler();
         ActionRepository actionRepository = new ActionRepositoryInMemory();
 
@@ -53,6 +48,13 @@ public class GameServer implements Runnable {
 
         TurnDtoAssembler turnDtoAssembler = new TurnDtoAssembler();
         TurnResource turnResource = new TurnResource(turnUseCase, turnDtoAssembler);
+
+        ResourceFactory resourceFactory = new ResourceFactory();
+        ResourceAssemblers resourceAssemblers = new ResourceAssemblers();
+        ResourceUseCase resourceUseCase = new ResourceUseCase(resourceFactory, resourceRepository, resourceAssemblers, actionRepository, actionFactory);
+        ResourceDtoAssembler resourceDtoAssembler = new ResourceDtoAssembler();
+        ResourceResource resourceResource = new ResourceResource(resourceUseCase, resourceDtoAssembler);
+
         Server server = new Server(PORT);
         ServletContextHandler contextHandler = new ServletContextHandler(server, "/");
         ResourceConfig packageConfig = ResourceConfig.forApplication(new Application() {
@@ -64,6 +66,14 @@ public class GameServer implements Runnable {
                                                                              return resources;
                                                                          }
                                                                      }
+            @Override
+            public Set<Object> getSingletons() {
+                Set<Object> resources = new HashSet<>();
+                resources.add(turnResource);
+                resources.add(resourceResource);
+                return resources;
+            }
+        }
         );
         ServletContainer container = new ServletContainer(packageConfig);
         ServletHolder servletHolder = new ServletHolder(container);

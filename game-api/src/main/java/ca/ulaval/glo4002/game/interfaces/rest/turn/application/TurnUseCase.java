@@ -17,15 +17,18 @@ public class TurnUseCase {
 
     private final TurnFactory turnFactory;
     private final TurnRepository turnRepository;
+    private final ResourceRepository resourceRepository;
     private final TurnAssembler turnAssembler;
     private final ActionRepository actionRepository;
 
     public TurnUseCase(TurnFactory turnFactory,
                        TurnRepository turnRepository,
+                       ResourceRepository resourceRepository,
                        TurnAssembler turnAssembler,
                        ActionRepository actionRepository) {
         this.turnFactory = turnFactory;
         this.turnRepository = turnRepository;
+        this.resourceRepository = resourceRepository;
         this.turnAssembler = turnAssembler;
         this.actionRepository = actionRepository;
     }
@@ -41,11 +44,12 @@ public class TurnUseCase {
     }
 
     public void setupActions(ActionRepository actionRepository) {
-//        //Todo add list of 250 kg of water...
-//        Actions firstAction = new ActionFactory().create("burger", Command.ADD);
-//        Actions secondAction = new ActionFactory().create("salad", Command.RETRIEVE);
-//        actionRepository.save(firstAction);
-//        actionRepository.save(secondAction);
+        Actions addWater = new ActionFactory().create(new Water(10), Command.ADD, resourceRepository);
+        Actions addSalad = new ActionFactory().create(new Salad(250), Command.ADD, resourceRepository);
+        Actions addBurger = new ActionFactory().create(new Burger(100), Command.ADD, resourceRepository);
+        actionRepository.save(addWater);
+        actionRepository.save(addSalad);
+        actionRepository.save(addBurger);
     }
 
     public TurnDto getFromId(UUID id) {
