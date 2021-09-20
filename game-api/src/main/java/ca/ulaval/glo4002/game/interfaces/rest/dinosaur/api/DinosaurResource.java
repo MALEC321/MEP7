@@ -50,7 +50,7 @@ public class DinosaurResource {
     @Path("/dinosaurs/{name}")
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    public Response getDinosaur(String name) {
+    public Response getDinosaur(@PathParam("name") String name) {
 
         DinosaurDto dinosaur = dinosaurUseCase.getDinosaur(name);
         DinosaurResponseItem response = dinosaurDtoAssembler.toResponse(dinosaur);
