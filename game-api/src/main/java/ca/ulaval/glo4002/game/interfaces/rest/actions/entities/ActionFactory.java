@@ -7,8 +7,8 @@ import java.util.UUID;
 
 public class ActionFactory {
 
-    public Actions create(ResourceElements resource, Command command, ResourceRepository resourceRepository) {
-        return (command == Command.ADD)? new AddAction(UUID.randomUUID(), resource, resourceRepository) :
+    public Action create(ResourceElements resource, Command command, ResourceRepository resourceRepository) {
+        return (command == Command.ADD)? new AddResource(UUID.randomUUID(), resource, resourceRepository) :
                 new RetrieveAction(UUID.randomUUID(), resource, resourceRepository);
     }
 }

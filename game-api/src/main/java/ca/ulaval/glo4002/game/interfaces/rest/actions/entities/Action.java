@@ -5,12 +5,12 @@ import ca.ulaval.glo4002.game.interfaces.rest.resources.entities.ResourceReposit
 
 import java.util.UUID;
 
-public abstract class Actions {
+public abstract class Action {
     private final UUID id;
     private final Object object;
     private final Object objectRepository;
 
-    public Actions(UUID id, Object object, Object objectRepository) {
+    public Action(UUID id, Object object, Object objectRepository) {
         this.id = id;
         this.object = object;
         this.objectRepository = objectRepository;

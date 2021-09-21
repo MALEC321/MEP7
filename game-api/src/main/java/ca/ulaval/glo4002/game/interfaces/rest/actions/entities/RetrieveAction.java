@@ -5,7 +5,7 @@ import ca.ulaval.glo4002.game.interfaces.rest.resources.entities.ResourceReposit
 
 import java.util.UUID;
 
-public class RetrieveAction extends Actions {
+public class RetrieveAction extends Action {
     public RetrieveAction(UUID id, ResourceElements resource, ResourceRepository resourceRepository) {
         super(id, resource, resourceRepository);
     }
