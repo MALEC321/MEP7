@@ -21,4 +21,5 @@ public class Water extends ResourceElements implements ResourceType{
     public int getResourceQty() {
         return super.getQuantity();
     }
+
 }

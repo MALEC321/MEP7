@@ -1,7 +1,7 @@
 package ca.ulaval.glo4002.game.interfaces.rest.resources.entities;
 
 public class Burger extends ResourceElements implements ResourceType{
-    private static int expiration = 4;
+    private int expiration = 4;
 
     public Burger(int quantity) {
         super(quantity);
