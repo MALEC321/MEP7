@@ -38,7 +38,7 @@ public class ResourceUseCase {
     }
 
 //    public List<ResourceDto> getAllResources() {
-//            Queue<ResourceElements> resources = resourceRepository.findAll();
+//        Queue<ResourceElements> resources = resourceRepository.findAll();
 //        resourceAssemblers.toDtos(resources);
 //    }
 

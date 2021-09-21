@@ -19,4 +19,16 @@ public class Resource {
     public Map<String, ResourceElements> getResources() {
         return resources;
     }
+
+    public void addBurger(int quantity) {
+        resources.get("Burgers").addQuantity(quantity);
+    }
+
+    public void addSalad(int quantity) {
+        resources.get("Salads").addQuantity(quantity);
+    }
+
+    public void addWater(int quantity) {
+        resources.get("Water").addQuantity(quantity);
+    }
 }

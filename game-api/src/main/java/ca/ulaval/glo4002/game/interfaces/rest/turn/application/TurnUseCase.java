@@ -42,7 +42,6 @@ public class TurnUseCase {
         Turn turn = turnFactory.create(actions);
         actionRepository.execute();
         turnRepository.save(turn);
-        //Todo empty the waiting list
     }
 
     public void preAction(ActionRepository actionRepository) {

@@ -19,4 +19,11 @@ public abstract class ResourceElements {
     public void setQuantity(int quantity) {
         this.quantity = quantity;
     }
+
+    public void addQuantity(int quantity) {
+        this.quantity += quantity;
+    }
+
+    public abstract int getDaysLeft();
+    public abstract void consumeResource();
 }
