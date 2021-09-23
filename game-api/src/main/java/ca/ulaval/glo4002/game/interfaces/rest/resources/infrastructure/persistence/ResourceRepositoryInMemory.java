@@ -28,19 +28,6 @@ public class ResourceRepositoryInMemory implements ResourceRepository {
         return resourceInventory;
     }
 
-    @Override
-    public boolean eat(ResourceElements resourceElement, int quantity) {
-        if (resourceElement instanceof Burger) {
-            return eatBurger(resources.getValue0(), quantity);
-        }  else if (resourceElement instanceof Salad) {
-            return eatSalad(resources.getValue1(), quantity);
-        }  else if (resourceElement instanceof Water) {
-            return drinkWater(resources.getValue2(), quantity);
-        }
-
-        return false;
-    }
-
     private int findResourceQuantity(ResourceElements resourceElement) {
         int quantity = 0;
         if (resourceElement instanceof Burger) {
@@ -61,8 +48,9 @@ public class ResourceRepositoryInMemory implements ResourceRepository {
         }
     }
 
-    private boolean eatBurger(Queue<Burger> BurgerBank, int quantity) {
-        for (ResourceElements burgerBowl: BurgerBank) {
+    @Override
+    public boolean eatBurger(int quantity) {
+        for (ResourceElements burgerBowl: resources.getValue0()) {
             int actualQuantity = burgerBowl.getQuantity();
             if (burgerBowl.removeElement(quantity)) {
                 consumedResources.addBurger(quantity);
@@ -73,8 +61,10 @@ public class ResourceRepositoryInMemory implements ResourceRepository {
         }
         return false;
     }
-    private boolean eatSalad(Queue<Salad> saladBank, int quantity) {
-        for (ResourceElements saladBowl: saladBank) {
+
+    @Override
+    public boolean eatSalad(int quantity) {
+        for (ResourceElements saladBowl: resources.getValue1()) {
             int actualQuantity = saladBowl.getQuantity();
             if (saladBowl.removeElement(quantity)) {
                 consumedResources.addSalad(quantity);
@@ -85,8 +75,10 @@ public class ResourceRepositoryInMemory implements ResourceRepository {
         }
         return false;
     }
-    private boolean drinkWater(Queue<Water> waterBanks, int quantity) {
-        for (ResourceElements waterBank: waterBanks) {
+
+    @Override
+    public boolean drinkWater(int quantity) {
+        for (ResourceElements waterBank: resources.getValue2()) {
             int actualQuantity = waterBank.getQuantity();
             if (waterBank.removeElement(quantity)) {
                 consumedResources.addWater(quantity);

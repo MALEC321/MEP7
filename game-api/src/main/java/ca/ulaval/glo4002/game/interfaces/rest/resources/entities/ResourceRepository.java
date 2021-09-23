@@ -4,7 +4,9 @@ import java.util.Queue;
 
 public interface ResourceRepository {
     void add(ResourceElements resource);
-    boolean eat(ResourceElements resourceElement, int Quantity);
+    boolean eatBurger(int Quantity);
+    boolean eatSalad(int Quantity);
+    boolean drinkWater(int Quantity);
     void removeStale();
     Queue<ResourceElements>  findAll();
 }
