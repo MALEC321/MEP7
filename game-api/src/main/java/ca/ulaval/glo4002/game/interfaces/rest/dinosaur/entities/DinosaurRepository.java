@@ -8,4 +8,6 @@ public interface DinosaurRepository {
     Dinosaur findByName(String name);
 
     void save(Dinosaur dinosaur);
+
+    List<Dinosaur> getSortedDinosaursByStrength();
 }

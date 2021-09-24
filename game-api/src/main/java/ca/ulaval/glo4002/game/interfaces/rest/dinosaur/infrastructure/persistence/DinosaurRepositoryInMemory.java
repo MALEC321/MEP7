@@ -3,10 +3,8 @@ package ca.ulaval.glo4002.game.interfaces.rest.dinosaur.infrastructure.persisten
 import ca.ulaval.glo4002.game.interfaces.rest.dinosaur.entities.Dinosaur;
 import ca.ulaval.glo4002.game.interfaces.rest.dinosaur.entities.DinosaurRepository;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
+import java.util.stream.Collectors;
 
 public class DinosaurRepositoryInMemory implements DinosaurRepository {
     private final Map<String, Dinosaur> dinosaursByName = new HashMap<>();
@@ -25,4 +23,13 @@ public class DinosaurRepositoryInMemory implements DinosaurRepository {
     public void save(Dinosaur dinosaur) {
         dinosaursByName.put(dinosaur.getName(), dinosaur);
     }
+
+    @Override
+    public List<Dinosaur> getSortedDinosaursByStrength() {
+        return this.findAll().stream()
+                .sorted(Comparator.comparingDouble(Dinosaur::getForce))
+                .sorted(Comparator.comparing(Dinosaur::getName))
+                .collect(Collectors.toList());
+    }
+
 }
