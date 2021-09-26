@@ -44,7 +44,7 @@ public class DinosaurResource {
         List<DinosaurDto> dinosaurs = dinosaurUseCase.getAllDinosaurs();
         DinosaursResponse response = dinosaurDtoAssembler.toResponse(dinosaurs);
 
-        return Response.ok().entity(response).build();
+        return Response.ok().entity(response.items).build();
     }
 
     @Path("/dinosaurs/{name}")
