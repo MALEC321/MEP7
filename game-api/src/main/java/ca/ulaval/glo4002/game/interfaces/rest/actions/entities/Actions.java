@@ -4,25 +4,25 @@ import java.util.UUID;
 
 public abstract class Actions {
     private final UUID id;
-    private final String resource; //Todo change this to type Resource
-    private final Command command;
+    private final Object object; //Todo change this to type Resource
+    private final Object repository;
 
-    public Actions(UUID id, String resource, Command command) {
+    public Actions(UUID id, Object object, Object repository) {
         this.id = id;
-        this.resource = resource;
-        this.command = command;
+        this.object = object;
+        this.repository = repository;
     }
 
     public UUID getId() {
         return id;
     }
 
-    public String getResource() {
-        return resource;
+    public Object getObject() {
+        return object;
     }
 
-    public Command getCommand() {
-        return command;
+    public Object getRepository() {
+        return repository;
     }
 
     abstract public void execute();

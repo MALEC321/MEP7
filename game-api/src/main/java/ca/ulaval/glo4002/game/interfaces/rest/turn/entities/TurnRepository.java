@@ -4,5 +4,6 @@ import java.util.UUID;
 
 public interface TurnRepository {
     Turn findById(UUID id);
+
     void save(Turn turn);
 }
