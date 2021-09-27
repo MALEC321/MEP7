@@ -31,8 +31,7 @@ public class DinosaurResource {
     public Response createDinosaur(DinosaurRequest dinosaurRequest) {
 
         DinosaurCreationDto dto = dinosaurDtoAssembler.fromRequest(dinosaurRequest);
-        String name = dinosaurUseCase.createDinosaur(dto);
-
+        dinosaurUseCase.createDinosaur(dto);
         return Response.status(Response.Status.CREATED).build();
     }
 
@@ -42,7 +41,6 @@ public class DinosaurResource {
 
         List<DinosaurDto> dinosaurs = dinosaurUseCase.getAllDinosaurs();
         DinosaursResponse response = dinosaurDtoAssembler.toResponse(dinosaurs);
-
         return Response.ok().entity(response.items).build();
     }
 
