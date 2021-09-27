@@ -53,7 +53,7 @@ public class DinosaurUseCase {
   }
 
   private void addDinoToActionWaitingList(Dinosaur dinosaur) {
-      Actions addDinos = actionFactory.create(dinosaur, Command.ADD, dinosaurRepository);
+      Actions addDinos = actionFactory.create(dinosaur, Command.ADD_DINO, dinosaurRepository);
       actionRepository.save(addDinos);
   }
 

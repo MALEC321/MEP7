@@ -72,11 +72,11 @@ public class TurnUseCase {
     }
 
     private void feedDinosaursByDietType(List<Dinosaur> sortedDinosaursByForce) {
-        sortedDinosaursByForce.forEach(dinosaur -> {
+        for(Dinosaur dinosaur: sortedDinosaursByForce) {
 
             ResourceElements resourceElements = resourceRepository.findAll().element();
             //TODO: CHECKER COMMENT CHERCHER LE BURGER OU SALADE
-            if(dinosaur.getDiet().equals(DietType.HERBIVORE.name())) {
+            if (dinosaur.getDiet().equals(DietType.HERBIVORE.name())) {
                 //resourceRepository.eat(resourceElements, dinosaur.getFoodNeed());
             } else {
                 // resourceElements. consommer burger
@@ -84,10 +84,10 @@ public class TurnUseCase {
             }
             //resourceRepository.eat(resourceElements, dinosaur.getFoodNeed());
 
-            if(dinosaur.isNewlyAdded()) {
+            if (dinosaur.isNewlyAdded()) {
                 dinosaur.setNewlyAdded(false);
             }
-        });
+        }
     }
 
 }
