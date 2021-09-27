@@ -13,7 +13,6 @@ import javax.ws.rs.core.Response;
 import java.util.List;
 
 @Path("/resources")
-
 public class ResourceResource {
 
     private final ResourceUseCase resourceUseCase;

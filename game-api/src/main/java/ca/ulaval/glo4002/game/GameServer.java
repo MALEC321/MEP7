@@ -2,6 +2,13 @@ package ca.ulaval.glo4002.game;
 
 import ca.ulaval.glo4002.game.interfaces.rest.actions.entities.*;
 import ca.ulaval.glo4002.game.interfaces.rest.actions.infrastructure.persistence.ActionRepositoryInMemory;
+import ca.ulaval.glo4002.game.interfaces.rest.dinosaur.api.DinosaurResource;
+import ca.ulaval.glo4002.game.interfaces.rest.dinosaur.api.assemblers.DinosaurDtoAssembler;
+import ca.ulaval.glo4002.game.interfaces.rest.dinosaur.application.DinosaurUseCase;
+import ca.ulaval.glo4002.game.interfaces.rest.dinosaur.application.assemblers.DinosaurAssembler;
+import ca.ulaval.glo4002.game.interfaces.rest.dinosaur.entities.DinosaurFactory;
+import ca.ulaval.glo4002.game.interfaces.rest.dinosaur.entities.DinosaurRepository;
+import ca.ulaval.glo4002.game.interfaces.rest.dinosaur.infrastructure.persistence.DinosaurRepositoryInMemory;
 import ca.ulaval.glo4002.game.interfaces.rest.resources.api.ResourceResource;
 import ca.ulaval.glo4002.game.interfaces.rest.resources.api.assemblers.ResourceDtoAssembler;
 import ca.ulaval.glo4002.game.interfaces.rest.resources.application.ResourceUseCase;
@@ -25,7 +32,6 @@ import org.glassfish.jersey.servlet.ServletContainer;
 import javax.ws.rs.core.Application;
 import java.util.HashSet;
 import java.util.Set;
-import java.util.UUID;
 
 public class GameServer implements Runnable {
     private static final int PORT = 8181;
@@ -35,15 +41,26 @@ public class GameServer implements Runnable {
     }
 
     public void run() {
-        //action
-        ActionRepository actionRepository = new ActionRepositoryInMemory();
-        ActionFactory actionFactory = new ActionFactory();
         // Turn
         TurnFactory turnFactory = new TurnFactory();
         TurnRepository turnRepository = new TurnRepositoryInMemory();
         ResourceRepository resourceRepository = new ResourceRepositoryInMemory();
         TurnAssembler turnAssembler = new TurnAssembler();
-        TurnUseCase turnUseCase = new TurnUseCase(turnFactory, turnRepository,resourceRepository, turnAssembler, actionRepository);
+        ActionRepository actionRepository = new ActionRepositoryInMemory();
+        ActionFactory actionFactory = new ActionFactory();
+
+
+        // Dinosaur
+        DinosaurRepository dinosaurRepository = new DinosaurRepositoryInMemory();
+        DinosaurFactory dinosaurFactory = new DinosaurFactory(dinosaurRepository);
+        DinosaurAssembler dinosaurAssembler = new DinosaurAssembler();
+        DinosaurUseCase dinosaurUseCase = new DinosaurUseCase(dinosaurFactory, dinosaurRepository, dinosaurAssembler, actionRepository, actionFactory);
+
+        DinosaurDtoAssembler dinosaurDtoAssembler = new DinosaurDtoAssembler();
+        DinosaurResource dinosaurResource = new DinosaurResource(dinosaurUseCase, dinosaurDtoAssembler);
+
+        TurnUseCase turnUseCase = new TurnUseCase(turnFactory, turnRepository, resourceRepository, dinosaurRepository, turnAssembler, actionRepository);
+
         TurnDtoAssembler turnDtoAssembler = new TurnDtoAssembler();
         TurnResource turnResource = new TurnResource(turnUseCase, turnDtoAssembler);
 
@@ -56,13 +73,15 @@ public class GameServer implements Runnable {
         Server server = new Server(PORT);
         ServletContextHandler contextHandler = new ServletContextHandler(server, "/");
         ResourceConfig packageConfig = ResourceConfig.forApplication(new Application() {
-            @Override
-            public Set<Object> getSingletons() {
-                Set<Object> resources = new HashSet<>();
-                resources.add(turnResource);
-                resources.add(resourceResource);
-                return resources;
-            }
+                                                                         @Override
+                                                                         public Set<Object> getSingletons() {
+                                                                             Set<Object> resources = new HashSet<>();
+                                                                             resources.add(resourceResource);
+                                                                             resources.add(turnResource);
+                                                                             resources.add(dinosaurResource);
+                                                                             return resources;
+                                                                         }
+
         }
         );
         ServletContainer container = new ServletContainer(packageConfig);
@@ -76,9 +95,9 @@ public class GameServer implements Runnable {
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
-        	if (server.isRunning()) {
-		        server.destroy();
-	        }
+            if (server.isRunning()) {
+                server.destroy();
+            }
         }
     }
 }

@@ -4,10 +4,10 @@ import ca.ulaval.glo4002.game.interfaces.rest.actions.entities.ActionFactory;
 import ca.ulaval.glo4002.game.interfaces.rest.actions.entities.ActionRepository;
 import ca.ulaval.glo4002.game.interfaces.rest.actions.entities.Action;
 import ca.ulaval.glo4002.game.interfaces.rest.actions.entities.Command;
-import ca.ulaval.glo4002.game.interfaces.rest.resources.entities.Burger;
-import ca.ulaval.glo4002.game.interfaces.rest.resources.entities.ResourceRepository;
-import ca.ulaval.glo4002.game.interfaces.rest.resources.entities.Salad;
-import ca.ulaval.glo4002.game.interfaces.rest.resources.entities.Water;
+import ca.ulaval.glo4002.game.interfaces.rest.dinosaur.entities.Dinosaur;
+import ca.ulaval.glo4002.game.interfaces.rest.dinosaur.entities.DinosaurRepository;
+import ca.ulaval.glo4002.game.interfaces.rest.dinosaur.entities.enums.DietType;
+import ca.ulaval.glo4002.game.interfaces.rest.resources.entities.*;
 import ca.ulaval.glo4002.game.interfaces.rest.turn.application.assemblers.TurnAssembler;
 import ca.ulaval.glo4002.game.interfaces.rest.turn.application.dtos.TurnDto;
 import ca.ulaval.glo4002.game.interfaces.rest.turn.entities.Turn;
@@ -24,14 +24,19 @@ public class TurnUseCase {
     private final ResourceRepository resourceRepository;
     private final TurnAssembler turnAssembler;
     private final ActionRepository actionRepository;
-    public TurnUseCase(TurnFactory turnFactory,
-                       TurnRepository turnRepository,
-                       ResourceRepository resourceRepository,
-                       TurnAssembler turnAssembler,
-                       ActionRepository actionRepository) {
+    private final DinosaurRepository dinosaurRepository;
+
+    public TurnUseCase(
+            TurnFactory turnFactory,
+            TurnRepository turnRepository,
+            ResourceRepository resourceRepository,
+            DinosaurRepository dinosaurRepository,
+            TurnAssembler turnAssembler,
+            ActionRepository actionRepository) {
         this.turnFactory = turnFactory;
         this.turnRepository = turnRepository;
         this.resourceRepository = resourceRepository;
+        this.dinosaurRepository = dinosaurRepository;
         this.turnAssembler = turnAssembler;
         this.actionRepository = actionRepository;
     }
@@ -42,6 +47,7 @@ public class TurnUseCase {
         Turn turn = turnFactory.create(actions);
         actionRepository.execute();
         turnRepository.save(turn);
+        feedDinosaurs();
     }
 
     public void preAction(ActionRepository actionRepository) {
@@ -58,4 +64,26 @@ public class TurnUseCase {
 
         return turnAssembler.toDto(turn);
     }
+
+    public void feedDinosaurs() {
+        feedDinosaursByDietType(dinosaurRepository.getSortedDinosaursByStrength());
+    }
+
+    //TODO: Test uniter cette méthode
+    private void feedDinosaursByDietType(List<Dinosaur> sortedDinosaursByForce) {
+        sortedDinosaursByForce.forEach(dinosaur -> {
+
+            if (dinosaur.getDiet().equals(DietType.HERBIVORE.name())) {
+                resourceRepository.consume(new Salad(0), dinosaur.getFoodNeed());
+            } else {
+                resourceRepository.consume(new Burger(0), dinosaur.getFoodNeed());
+            }
+            resourceRepository.consume(new Water(0), dinosaur.getWaterNeed());
+
+            if (dinosaur.isNewlyAdded()) {
+                dinosaur.setNewlyAdded(false);
+            }
+        });
+    }
+
 }

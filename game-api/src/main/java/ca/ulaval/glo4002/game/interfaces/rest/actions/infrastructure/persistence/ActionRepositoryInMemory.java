@@ -17,6 +17,7 @@ public class ActionRepositoryInMemory implements ActionRepository {
     public List<Action> getWaitingActions() {
         return waitingActions;
     }
+
     @Override
     public void execute() {
         for (Action action: waitingActions) {

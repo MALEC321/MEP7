@@ -7,7 +7,7 @@ import java.util.*;
 
 public class ResourceRepositoryInMemory implements ResourceRepository {
     private final Queue<ResourceElements> resourceInventory = new LinkedList<>();
-    Triplet<Queue<Burger>, Queue<Salad>, Queue<Water>> resources;
+    private final Triplet<Queue<Burger>, Queue<Salad>, Queue<Water>> resources = Triplet.with(new LinkedList<>(),new LinkedList<>(), new LinkedList<>()) ;
     private final Resource consumedResources = new Resource(new Burger(0), new Salad(0), new Water(0));
     private final Resource expiredResources = new Resource(new Burger(0), new Salad(0), new Water(0));
 
@@ -26,6 +26,19 @@ public class ResourceRepositoryInMemory implements ResourceRepository {
     @Override
     public Queue<ResourceElements> findAll(){
         return resourceInventory;
+    }
+
+    @Override
+    public boolean consume(ResourceElements resourceElement, int quantity) {
+        if (resourceElement instanceof Burger) {
+            return eatBurger(quantity);
+        }  else if (resourceElement instanceof Salad) {
+            return eatSalad(quantity);
+        }  else if (resourceElement instanceof Water) {
+            return drinkWater(quantity);
+        }
+
+        return false;
     }
 
     private int findResourceQuantity(ResourceElements resourceElement) {
