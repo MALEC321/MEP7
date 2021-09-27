@@ -1,8 +1,8 @@
 package ca.ulaval.glo4002.game.interfaces.rest.dinosaur.application;
 
+import ca.ulaval.glo4002.game.interfaces.rest.actions.entities.Action;
 import ca.ulaval.glo4002.game.interfaces.rest.actions.entities.ActionFactory;
 import ca.ulaval.glo4002.game.interfaces.rest.actions.entities.ActionRepository;
-import ca.ulaval.glo4002.game.interfaces.rest.actions.entities.Actions;
 import ca.ulaval.glo4002.game.interfaces.rest.actions.entities.Command;
 import ca.ulaval.glo4002.game.interfaces.rest.dinosaur.application.assemblers.DinosaurAssembler;
 import ca.ulaval.glo4002.game.interfaces.rest.dinosaur.application.dtos.DinosaurCreationDto;
@@ -10,8 +10,6 @@ import ca.ulaval.glo4002.game.interfaces.rest.dinosaur.application.dtos.Dinosaur
 import ca.ulaval.glo4002.game.interfaces.rest.dinosaur.entities.Dinosaur;
 import ca.ulaval.glo4002.game.interfaces.rest.dinosaur.entities.DinosaurFactory;
 import ca.ulaval.glo4002.game.interfaces.rest.dinosaur.entities.DinosaurRepository;
-import ca.ulaval.glo4002.game.interfaces.rest.resources.entities.ResourceElements;
-import ca.ulaval.glo4002.game.interfaces.rest.resources.entities.ResourceRepository;
 
 import java.util.List;
 
@@ -22,18 +20,16 @@ public class DinosaurUseCase {
   private final DinosaurAssembler dinosaurAssembler;
   private final ActionRepository actionRepository;
   private final ActionFactory actionFactory;
-  private final ResourceRepository resourceRepository;
 
   public DinosaurUseCase(
           DinosaurFactory dinosaurFactory,
           DinosaurRepository dinosaurRepository,
-          DinosaurAssembler dinosaurAssembler, ActionRepository actionRepository, ActionFactory actionFactory, ResourceRepository resourceRepository) {
+          DinosaurAssembler dinosaurAssembler, ActionRepository actionRepository, ActionFactory actionFactory) {
     this.dinosaurFactory = dinosaurFactory;
     this.dinosaurRepository = dinosaurRepository;
     this.dinosaurAssembler = dinosaurAssembler;
     this.actionRepository = actionRepository;
     this.actionFactory = actionFactory;
-    this.resourceRepository = resourceRepository;
   }
 
   public String createDinosaur(DinosaurCreationDto dto) {
@@ -53,7 +49,7 @@ public class DinosaurUseCase {
   }
 
   private void addDinoToActionWaitingList(Dinosaur dinosaur) {
-      Actions addDinos = actionFactory.create(dinosaur, Command.ADD, dinosaurRepository);
+      Action addDinos = actionFactory.create(dinosaur, Command.ADD_DINO, dinosaurRepository);
       actionRepository.save(addDinos);
   }
 

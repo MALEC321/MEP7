@@ -54,7 +54,7 @@ public class GameServer implements Runnable {
         DinosaurRepository dinosaurRepository = new DinosaurRepositoryInMemory();
         DinosaurFactory dinosaurFactory = new DinosaurFactory(dinosaurRepository);
         DinosaurAssembler dinosaurAssembler = new DinosaurAssembler();
-        DinosaurUseCase dinosaurUseCase = new DinosaurUseCase(dinosaurFactory, dinosaurRepository, dinosaurAssembler, actionRepository, actionFactory, resourceRepository);
+        DinosaurUseCase dinosaurUseCase = new DinosaurUseCase(dinosaurFactory, dinosaurRepository, dinosaurAssembler, actionRepository, actionFactory);
 
         DinosaurDtoAssembler dinosaurDtoAssembler = new DinosaurDtoAssembler();
         DinosaurResource dinosaurResource = new DinosaurResource(dinosaurUseCase, dinosaurDtoAssembler);

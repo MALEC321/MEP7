@@ -2,7 +2,7 @@ package ca.ulaval.glo4002.game.interfaces.rest.resources.application;
 
 import ca.ulaval.glo4002.game.interfaces.rest.actions.entities.ActionFactory;
 import ca.ulaval.glo4002.game.interfaces.rest.actions.entities.ActionRepository;
-import ca.ulaval.glo4002.game.interfaces.rest.actions.entities.Actions;
+import ca.ulaval.glo4002.game.interfaces.rest.actions.entities.Action;
 import ca.ulaval.glo4002.game.interfaces.rest.actions.entities.Command;
 import ca.ulaval.glo4002.game.interfaces.rest.resources.application.assemblers.ResourceAssemblers;
 import ca.ulaval.glo4002.game.interfaces.rest.resources.application.dtos.ResourceCreationDto;
@@ -13,6 +13,8 @@ import ca.ulaval.glo4002.game.interfaces.rest.resources.entities.ResourceFactory
 import ca.ulaval.glo4002.game.interfaces.rest.resources.entities.ResourceRepository;
 
 import java.util.ArrayList;
+import java.util.List;
+import java.util.Queue;
 
 public class ResourceUseCase {
     private final ResourceFactory resourceFactory;
@@ -35,10 +37,15 @@ public class ResourceUseCase {
         return resourceAssemblers.toDto(resources);
     }
 
+//    public List<ResourceDto> getAllResources() {
+//        Queue<ResourceElements> resources = resourceRepository.findAll();
+//        resourceAssemblers.toDtos(resources);
+//    }
+
     private void addResourceToActionWaitingList(Resource resources) {
         for (ResourceElements resource: new ArrayList<>(resources.getResources().values())) {
             if (resource.getQuantity() == 0 ) { continue;}
-            Actions addResources = actionFactory.create(resource, Command.ADD, resourceRepository);
+            Action addResources = actionFactory.create(resource, Command.ADD, resourceRepository);
             actionRepository.save(addResources);
         }
     }

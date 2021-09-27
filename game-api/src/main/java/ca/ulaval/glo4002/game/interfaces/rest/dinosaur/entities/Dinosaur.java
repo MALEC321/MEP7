@@ -3,6 +3,7 @@ package ca.ulaval.glo4002.game.interfaces.rest.dinosaur.entities;
 import ca.ulaval.glo4002.game.interfaces.rest.dinosaur.entities.enums.DietType;
 import ca.ulaval.glo4002.game.interfaces.rest.dinosaur.entities.enums.SpeciesDiet;
 
+//TODO: CRÉER TESTS UNITS
 public class Dinosaur {
     public String name;
     public int weight;
@@ -60,11 +61,11 @@ public class Dinosaur {
         return weight * T * S;
     }
 
-    public double getWaterNeed() {
-        return Math.round(this.weight * 0.6) + 2 * 3;
+    public int getWaterNeed() {
+        return Math.toIntExact(Math.round(this.weight * 0.6) + 2 * 3);
     }
 
-    public double getFoodNeed() {
+    public int getFoodNeed() {
         double foodNeed =
                 (this.getWeight() * getConsiderationByDietType()) / 200;
 
@@ -72,7 +73,7 @@ public class Dinosaur {
             foodNeed = Math.ceil(foodNeed * 2);
         }
 
-        return foodNeed;
+        return Math.toIntExact(Math.round(foodNeed));
     }
 
     private double getConsiderationByDietType() {

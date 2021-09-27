@@ -27,16 +27,15 @@ class DinosaurFactoryTest {
         verify(duplicateNameException, never()).getCode();
     }
 
-
     @Test
-    void whenNameIsInvalid_thenCreateDinosaur() {
+    void whenNameIsAlreadyTaken_thenThrowsDuplicateNameException() {
         assertThrows(DuplicateNameException.class, () -> {
             dinosaurFactory.create("name", 89, "f", "Ankylosaurus");
         });
     }
 
     @Test
-    void when1000kgFemaleAnkylosaurusIsCreated_thenForceIsEqualTo(){
+    void when1000kgFemaleAnkylosaurusIsCreated_thenForceIsEqualTo() {
         Dinosaur dinosaur = new Dinosaur("name", 1000, "f", "Triceratops", "Carnivore");
 
         assertEquals(2250, dinosaur.getForce());

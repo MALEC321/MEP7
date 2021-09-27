@@ -2,15 +2,15 @@ package ca.ulaval.glo4002.game.interfaces.rest.actions.entities;
 
 import java.util.UUID;
 
-public abstract class Actions {
+public abstract class Action {
     private final UUID id;
-    private final Object object; //Todo change this to type Resource
-    private final Object repository;
+    private final Object object;
+    private final Object objectRepository;
 
-    public Actions(UUID id, Object object, Object repository) {
+    public Action(UUID id, Object object, Object objectRepository) {
         this.id = id;
         this.object = object;
-        this.repository = repository;
+        this.objectRepository = objectRepository;
     }
 
     public UUID getId() {
@@ -21,8 +21,8 @@ public abstract class Actions {
         return object;
     }
 
-    public Object getRepository() {
-        return repository;
+    public Object getObjectRepository() {
+        return objectRepository;
     }
 
     abstract public void execute();

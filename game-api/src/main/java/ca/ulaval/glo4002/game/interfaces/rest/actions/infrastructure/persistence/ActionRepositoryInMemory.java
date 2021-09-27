@@ -1,27 +1,26 @@
 package ca.ulaval.glo4002.game.interfaces.rest.actions.infrastructure.persistence;
 
+import ca.ulaval.glo4002.game.interfaces.rest.actions.entities.Action;
 import ca.ulaval.glo4002.game.interfaces.rest.actions.entities.ActionRepository;
-import ca.ulaval.glo4002.game.interfaces.rest.actions.entities.Actions;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class ActionRepositoryInMemory implements ActionRepository {
-    private final List<Actions> waitingActions = new ArrayList<>();
-
+    private final List<Action> waitingActions = new ArrayList<>();
     @Override
-    public void save(Actions action) {
+    public void save(Action action) {
         waitingActions.add(action);
     }
 
     @Override
-    public List<Actions> getWaitingActions() {
+    public List<Action> getWaitingActions() {
         return waitingActions;
     }
 
     @Override
     public void execute() {
-        for (Actions action : waitingActions) {
+        for (Action action: waitingActions) {
             action.execute();
         }
         waitingActions.clear();
