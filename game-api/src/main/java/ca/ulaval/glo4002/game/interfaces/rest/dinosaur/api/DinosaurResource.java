@@ -31,7 +31,7 @@ public class DinosaurResource {
     public Response createDinosaur(DinosaurRequest dinosaurRequest) {
 
         DinosaurCreationDto dto = dinosaurDtoAssembler.fromRequest(dinosaurRequest);
-        String name = dinosaurUseCase.createDinosaur(dto);
+        dinosaurUseCase.createDinosaur(dto);
 
         return Response.status(Response.Status.CREATED).build();
     }

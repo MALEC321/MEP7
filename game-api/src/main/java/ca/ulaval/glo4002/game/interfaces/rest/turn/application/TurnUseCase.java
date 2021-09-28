@@ -2,7 +2,7 @@ package ca.ulaval.glo4002.game.interfaces.rest.turn.application;
 
 import ca.ulaval.glo4002.game.interfaces.rest.actions.entities.ActionFactory;
 import ca.ulaval.glo4002.game.interfaces.rest.actions.entities.ActionRepository;
-import ca.ulaval.glo4002.game.interfaces.rest.actions.entities.Actions;
+import ca.ulaval.glo4002.game.interfaces.rest.actions.entities.Action;
 import ca.ulaval.glo4002.game.interfaces.rest.actions.entities.Command;
 import ca.ulaval.glo4002.game.interfaces.rest.dinosaur.entities.Dinosaur;
 import ca.ulaval.glo4002.game.interfaces.rest.dinosaur.entities.DinosaurRepository;
@@ -42,20 +42,18 @@ public class TurnUseCase {
     }
 
     public void createTurn() {
-        setupActions(actionRepository);
-
-        List<Actions> actions = actionRepository.getWaitingActions();
+        preAction(actionRepository);
+        List<Action> actions = actionRepository.getWaitingActions();
         Turn turn = turnFactory.create(actions);
         actionRepository.execute();
         turnRepository.save(turn);
         feedDinosaurs();
     }
 
-    public void setupActions(ActionRepository actionRepository) {
-        Actions addWater = new ActionFactory().create(new Water(10), Command.ADD, resourceRepository);
-        Actions addSalad = new ActionFactory().create(new Salad(250), Command.ADD, resourceRepository);
-        Actions addBurger =
-                new ActionFactory().create(new Burger(100), Command.ADD, resourceRepository);
+    public void preAction(ActionRepository actionRepository) {
+        Action addWater = new ActionFactory().create(new Water(10000), Command.ADD, resourceRepository);
+        Action addSalad = new ActionFactory().create(new Salad(250), Command.ADD, resourceRepository);
+        Action addBurger = new ActionFactory().create(new Burger(100), Command.ADD, resourceRepository);
         actionRepository.save(addWater);
         actionRepository.save(addSalad);
         actionRepository.save(addBurger);
@@ -71,18 +69,16 @@ public class TurnUseCase {
         feedDinosaursByDietType(dinosaurRepository.getSortedDinosaursByStrength());
     }
 
+    //TODO: Test uniter cette méthode
     private void feedDinosaursByDietType(List<Dinosaur> sortedDinosaursByForce) {
         for(Dinosaur dinosaur: sortedDinosaursByForce) {
-
-            ResourceElements resourceElements = resourceRepository.findAll().element();
-            //TODO: CHECKER COMMENT CHERCHER LE BURGER OU SALADE
+          
             if (dinosaur.getDiet().equals(DietType.HERBIVORE.name())) {
-                //resourceRepository.eat(resourceElements, dinosaur.getFoodNeed());
+                resourceRepository.consume(new Salad(0), dinosaur.getFoodNeed());
             } else {
-                // resourceElements. consommer burger
-                //resourceRepository.eat(resourceElements, dinosaur.getFoodNeed());
+                resourceRepository.consume(new Burger(0), dinosaur.getFoodNeed());
             }
-            //resourceRepository.eat(resourceElements, dinosaur.getFoodNeed());
+            resourceRepository.consume(new Water(0), dinosaur.getWaterNeed());
 
             if (dinosaur.isNewlyAdded()) {
                 dinosaur.setNewlyAdded(false);

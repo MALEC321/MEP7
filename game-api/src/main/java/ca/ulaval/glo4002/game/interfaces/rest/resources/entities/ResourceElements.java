@@ -11,7 +11,19 @@ public abstract class ResourceElements {
         return quantity;
     }
 
+    public boolean removeElement(int quantity) {
+        this.quantity = (quantity <= this.quantity)? this.quantity - quantity : 0;
+        return quantity <= this.quantity;
+    }
+
     public void setQuantity(int quantity) {
         this.quantity = quantity;
     }
+
+    public void addQuantity(int quantity) {
+        this.quantity += quantity;
+    }
+
+    public abstract int getDaysLeft();
+    public abstract void consumeResource();
 }

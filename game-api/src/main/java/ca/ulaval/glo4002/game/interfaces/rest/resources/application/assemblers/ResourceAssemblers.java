@@ -4,6 +4,8 @@ import ca.ulaval.glo4002.game.interfaces.rest.resources.application.dtos.Resourc
 import ca.ulaval.glo4002.game.interfaces.rest.resources.entities.Resource;
 import ca.ulaval.glo4002.game.interfaces.rest.resources.entities.ResourceElements;
 
+import java.util.List;
+
 public class ResourceAssemblers {
 
     public ResourceDto toDto(Resource resource) {
@@ -14,4 +16,14 @@ public class ResourceAssemblers {
 
         return dto;
     }
+
+//    public List<ResourceDto> toDtos(Resource resource) {
+//        return
+//        ResourceDto dto = new ResourceDto();
+//        dto.qtyBurger = resource.getResources().get("Burgers").getQuantity();
+//        dto.qtySalad = resource.getResources().get("Salads").getQuantity();
+//        dto.qtyWater = resource.getResources().get("Water").getQuantity();
+//
+//        return dto;
+//    }
 }
