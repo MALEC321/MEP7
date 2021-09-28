@@ -19,13 +19,59 @@ public class ResourceRepositoryInMemory implements ResourceRepository {
     }
 
     @Override
-    public void removeStale() {
-        resourceInventory.remove();
+    public void decreaseExpirationDate() {
+        removeAllEmptyResources();
+        removeAllExpiredResources();
+        for (Burger burgersContainer: resources.getValue0()) {
+            burgersContainer.decreaseExpirationDate();
+        }
+
+        for (Salad saladBowl : resources.getValue1()) {
+            if (saladBowl.getQuantity() == 0) resources.getValue1().remove(saladBowl);
+            saladBowl.decreaseExpirationDate();
+        }
+
+        for (Water waterBank: resources.getValue2()) {
+            if (waterBank.getQuantity() == 0)  resources.getValue2().remove(waterBank);
+            waterBank.decreaseExpirationDate();
+        }
+    }
+
+    private void removeAllEmptyResources() {
+        while (resources.getValue0().peek() != null && resources.getValue0().peek().getQuantity() == 0) {
+            resources.getValue0().poll();
+        }
+        while (resources.getValue1().peek() != null && resources.getValue1().peek().getQuantity() == 0) {
+            resources.getValue1().poll();
+        }
+        while (resources.getValue2().peek() != null && resources.getValue2().peek().getQuantity() == 0) {
+            resources.getValue2().poll();
+        }
+    }
+
+    private void removeAllExpiredResources() {
+        while (resources.getValue0().peek() != null && resources.getValue0().peek().getDaysLeft() == 0) {
+            assert resources.getValue0().peek() != null;
+            expiredResources.addBurger(resources.getValue0().peek().getQuantity());
+            resources.getValue0().poll();
+        }
+
+        while (resources.getValue1().peek() != null && resources.getValue1().peek().getDaysLeft() == 0) {
+            assert resources.getValue1().peek() != null;
+            expiredResources.addSalad(resources.getValue1().peek().getQuantity());
+            resources.getValue1().poll();
+        }
+
+        while (resources.getValue2().peek() != null && resources.getValue2().peek().getDaysLeft() == 0) {
+            assert resources.getValue2().peek() != null;
+            expiredResources.addWater(resources.getValue2().peek().getQuantity());
+            resources.getValue2().poll();
+        }
     }
 
     @Override
-    public Queue<ResourceElements> findAll(){
-        return resourceInventory;
+    public Triplet<Queue<Burger>, Queue<Salad>, Queue<Water>> findAll(){
+        return resources;
     }
 
     @Override
@@ -61,8 +107,7 @@ public class ResourceRepositoryInMemory implements ResourceRepository {
         }
     }
 
-    @Override
-    public boolean eatBurger(int quantity) {
+    private boolean eatBurger(int quantity) {
         for (ResourceElements burgerBowl: resources.getValue0()) {
             int actualQuantity = burgerBowl.getQuantity();
             if (burgerBowl.removeElement(quantity)) {
@@ -75,8 +120,7 @@ public class ResourceRepositoryInMemory implements ResourceRepository {
         return false;
     }
 
-    @Override
-    public boolean eatSalad(int quantity) {
+    private boolean eatSalad(int quantity) {
         for (ResourceElements saladBowl: resources.getValue1()) {
             int actualQuantity = saladBowl.getQuantity();
             if (saladBowl.removeElement(quantity)) {
@@ -89,8 +133,7 @@ public class ResourceRepositoryInMemory implements ResourceRepository {
         return false;
     }
 
-    @Override
-    public boolean drinkWater(int quantity) {
+    private boolean drinkWater(int quantity) {
         for (ResourceElements waterBank: resources.getValue2()) {
             int actualQuantity = waterBank.getQuantity();
             if (waterBank.removeElement(quantity)) {

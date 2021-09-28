@@ -47,7 +47,7 @@ public class TurnUseCase {
         Turn turn = turnFactory.create(actions);
         actionRepository.execute();
         turnRepository.save(turn);
-        feedDinosaurs();
+        postAction();
     }
 
     public void preAction(ActionRepository actionRepository) {
@@ -59,7 +59,13 @@ public class TurnUseCase {
         actionRepository.save(addBurger);
     }
 
-    public TurnDto getFromId(UUID id) {
+    public void postAction() { //Todo rajouter les post action ici
+        resourceRepository.decreaseExpirationDate();
+        feedDinosaurs();
+    }
+
+
+        public TurnDto getFromId(UUID id) {
         Turn turn = turnRepository.findById(id);
 
         return turnAssembler.toDto(turn);
@@ -74,11 +80,11 @@ public class TurnUseCase {
         for(Dinosaur dinosaur: sortedDinosaursByForce) {
           
             if (dinosaur.getDiet().equals(DietType.HERBIVORE.name())) {
-                resourceRepository.consume(new Salad(0), dinosaur.getFoodNeed());
+                if(!resourceRepository.consume(new Salad(0), dinosaur.getFoodNeed())) dinosaurRepository.remove(dinosaur);
             } else {
-                resourceRepository.consume(new Burger(0), dinosaur.getFoodNeed());
+                if(!resourceRepository.consume(new Burger(0), dinosaur.getFoodNeed())) dinosaurRepository.remove(dinosaur);
             }
-            resourceRepository.consume(new Water(0), dinosaur.getWaterNeed());
+            if(!resourceRepository.consume(new Water(0), dinosaur.getWaterNeed())) dinosaurRepository.remove(dinosaur);
 
             if (dinosaur.isNewlyAdded()) {
                 dinosaur.setNewlyAdded(false);

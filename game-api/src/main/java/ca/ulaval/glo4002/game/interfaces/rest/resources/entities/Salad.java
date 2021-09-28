@@ -8,7 +8,7 @@ public class Salad extends ResourceElements {
     }
 
     @Override
-    public void consumeResource() {
+    public void decreaseExpirationDate() {
         expiration--;
     }
 

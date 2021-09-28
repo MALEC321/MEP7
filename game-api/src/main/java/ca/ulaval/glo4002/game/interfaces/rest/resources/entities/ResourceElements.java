@@ -25,5 +25,5 @@ public abstract class ResourceElements {
     }
 
     public abstract int getDaysLeft();
-    public abstract void consumeResource();
+    public abstract void decreaseExpirationDate();
 }

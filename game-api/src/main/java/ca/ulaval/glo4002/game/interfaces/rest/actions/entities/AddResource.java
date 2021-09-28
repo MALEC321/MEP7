@@ -12,6 +12,8 @@ public class AddResource extends Action {
     @Override
     public void execute() {
         ((ResourceRepository)getObjectRepository()).add((ResourceElements) getObject());
-        System.out.println(((ResourceRepository)getObjectRepository()).findAll().size());
+        System.out.println(((ResourceRepository)getObjectRepository()).findAll().getValue0());
+        System.out.println(((ResourceRepository)getObjectRepository()).findAll().getValue1());
+        System.out.println(((ResourceRepository)getObjectRepository()).findAll().getValue2());
     }
 }

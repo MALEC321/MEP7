@@ -9,5 +9,7 @@ public interface DinosaurRepository {
 
     void save(Dinosaur dinosaur);
 
+    void remove(Dinosaur dinosaur);
+
     List<Dinosaur> getSortedDinosaursByStrength();
 }
