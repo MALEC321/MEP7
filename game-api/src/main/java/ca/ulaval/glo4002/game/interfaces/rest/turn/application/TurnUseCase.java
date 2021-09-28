@@ -71,8 +71,8 @@ public class TurnUseCase {
 
     //TODO: Test uniter cette méthode
     private void feedDinosaursByDietType(List<Dinosaur> sortedDinosaursByForce) {
-        sortedDinosaursByForce.forEach(dinosaur -> {
-
+        for(Dinosaur dinosaur: sortedDinosaursByForce) {
+          
             if (dinosaur.getDiet().equals(DietType.HERBIVORE.name())) {
                 resourceRepository.consume(new Salad(0), dinosaur.getFoodNeed());
             } else {
@@ -83,7 +83,7 @@ public class TurnUseCase {
             if (dinosaur.isNewlyAdded()) {
                 dinosaur.setNewlyAdded(false);
             }
-        });
+        }
     }
 
 }
