@@ -6,7 +6,6 @@ import org.javatuples.Triplet;
 import java.util.*;
 
 public class ResourceRepositoryInMemory implements ResourceRepository {
-    private final Queue<ResourceElements> resourceInventory = new LinkedList<>();
     private final Triplet<Queue<Burger>, Queue<Salad>, Queue<Water>> resources = Triplet.with(new LinkedList<>(),new LinkedList<>(), new LinkedList<>()) ;
     private final Resource consumedResources = new Resource(new Burger(0), new Salad(0), new Water(0));
     private final Resource expiredResources = new Resource(new Burger(0), new Salad(0), new Water(0));
@@ -16,6 +15,16 @@ public class ResourceRepositoryInMemory implements ResourceRepository {
         if (resourceElement instanceof Burger) resources.getValue0().add((Burger)resourceElement);
         if (resourceElement instanceof Salad) resources.getValue1().add((Salad)resourceElement);
         if (resourceElement instanceof Water) resources.getValue2().add((Water)resourceElement);
+    }
+
+    @Override
+    public Resource findConsumedResource() {
+        return this.consumedResources;
+    }
+
+    @Override
+    public Resource findExpiredResource() {
+        return this.expiredResources;
     }
 
     @Override
@@ -70,8 +79,13 @@ public class ResourceRepositoryInMemory implements ResourceRepository {
     }
 
     @Override
-    public Triplet<Queue<Burger>, Queue<Salad>, Queue<Water>> findAll(){
-        return resources;
+    public List<Resource> findAll() {
+        return Arrays.asList(findFreshResource(), findExpiredResource(), findConsumedResource());
+    }
+
+    @Override
+    public Resource findFreshResource(){
+        return new Resource(new Burger(findResourceQuantity(0)), new Salad(findResourceQuantity(1)),new Water(findResourceQuantity(2)));
     }
 
     @Override
@@ -87,14 +101,15 @@ public class ResourceRepositoryInMemory implements ResourceRepository {
         return false;
     }
 
-    private int findResourceQuantity(ResourceElements resourceElement) {
+    @Override
+    public int findResourceQuantity(int value) {
         int quantity = 0;
-        if (resourceElement instanceof Burger) {
+        if (value == 0) {
             for (Burger burger: resources.getValue0()) {
                 quantity += burger.getQuantity();
             }
             return quantity;
-        }  else if (resourceElement instanceof Salad) {
+        }  else if (value == 1) {
             for (Salad salad: resources.getValue1()) {
                 quantity += salad.getQuantity();
             }

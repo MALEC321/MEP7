@@ -31,4 +31,14 @@ public class Resource {
     public void addWater(int quantity) {
         resources.get("Water").addQuantity(quantity);
     }
+
+    public int getBurgersQuantity() {
+        return resources.get("Burgers").getQuantity();
+    }
+    public int getSaladQuantity() {
+        return resources.get("Salads").getQuantity();
+    }
+    public int getWaterQuantity() {
+        return resources.get("Water").getQuantity();
+    }
 }
