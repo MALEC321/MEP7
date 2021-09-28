@@ -13,7 +13,7 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import java.util.List;
 
-@Path("/")
+@Path("/dinosaurs")
 public class DinosaurResource {
 
     private final DinosaurUseCase dinosaurUseCase;
@@ -24,7 +24,7 @@ public class DinosaurResource {
         this.dinosaurDtoAssembler = dinosaurDtoAssembler;
     }
 
-    @Path("/dinosaurs")
+
     @POST
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
@@ -32,22 +32,20 @@ public class DinosaurResource {
 
         DinosaurCreationDto dto = dinosaurDtoAssembler.fromRequest(dinosaurRequest);
         dinosaurUseCase.createDinosaur(dto);
-
+        
         return Response.status(Response.Status.CREATED).build();
     }
 
-    @Path("/dinosaurs")
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     public Response getAllDinosaurs() {
 
         List<DinosaurDto> dinosaurs = dinosaurUseCase.getAllDinosaurs();
         DinosaursResponse response = dinosaurDtoAssembler.toResponse(dinosaurs);
-
-        return Response.ok().entity(response).build();
+        return Response.ok().entity(response.items).build();
     }
 
-    @Path("/dinosaurs/{name}")
+    @Path("{name}")
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     public Response getDinosaur(@PathParam("name") String name) {
