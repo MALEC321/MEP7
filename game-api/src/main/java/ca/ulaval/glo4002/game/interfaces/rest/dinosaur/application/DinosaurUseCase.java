@@ -10,6 +10,7 @@ import ca.ulaval.glo4002.game.interfaces.rest.dinosaur.application.dtos.Dinosaur
 import ca.ulaval.glo4002.game.interfaces.rest.dinosaur.entities.Dinosaur;
 import ca.ulaval.glo4002.game.interfaces.rest.dinosaur.entities.DinosaurFactory;
 import ca.ulaval.glo4002.game.interfaces.rest.dinosaur.entities.DinosaurRepository;
+import ca.ulaval.glo4002.game.interfaces.rest.exceptions.entities.DuplicateNameException;
 
 import java.util.List;
 
@@ -43,7 +44,10 @@ public class DinosaurUseCase {
     return dinosaurAssembler.toDtos(dinosaurs);
   }
 
-  public DinosaurDto getDinosaur(String name) {
+  public DinosaurDto getDinosaur(String name) throws DuplicateNameException {
+    if (dinosaurRepository.findByName(name) == null) {
+      throw new DuplicateNameException();
+    }
     Dinosaur dinosaur = dinosaurRepository.findByName(name);
     return dinosaurAssembler.toDto(dinosaur);
   }

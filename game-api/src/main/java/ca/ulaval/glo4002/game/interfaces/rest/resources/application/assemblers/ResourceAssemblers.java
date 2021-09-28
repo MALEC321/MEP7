@@ -2,9 +2,6 @@ package ca.ulaval.glo4002.game.interfaces.rest.resources.application.assemblers;
 
 import ca.ulaval.glo4002.game.interfaces.rest.resources.application.dtos.ResourceDto;
 import ca.ulaval.glo4002.game.interfaces.rest.resources.entities.Resource;
-import ca.ulaval.glo4002.game.interfaces.rest.resources.entities.ResourceElements;
-
-import java.util.List;
 
 public class ResourceAssemblers {
 
