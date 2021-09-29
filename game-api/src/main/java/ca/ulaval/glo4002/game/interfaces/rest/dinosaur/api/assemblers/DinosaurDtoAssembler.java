@@ -11,9 +11,7 @@ import ca.ulaval.glo4002.game.interfaces.rest.exceptions.entities.InvalidGenderE
 import ca.ulaval.glo4002.game.interfaces.rest.exceptions.entities.InvalidSpeciesException;
 import ca.ulaval.glo4002.game.interfaces.rest.exceptions.entities.InvalidWeightException;
 
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 import java.util.stream.Collectors;
 
 public class DinosaurDtoAssembler {

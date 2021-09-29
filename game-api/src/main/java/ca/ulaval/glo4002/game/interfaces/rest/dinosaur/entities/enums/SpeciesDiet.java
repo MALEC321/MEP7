@@ -1,8 +1,5 @@
 package ca.ulaval.glo4002.game.interfaces.rest.dinosaur.entities.enums;
 
-import java.util.HashSet;
-import java.util.Set;
-
 public enum SpeciesDiet {
     Ankylosaurus("Ankylosaurus", DietType.HERBIVORE.name()),
     Brachiosaurus("Brachiosaurus", DietType.HERBIVORE.name()),

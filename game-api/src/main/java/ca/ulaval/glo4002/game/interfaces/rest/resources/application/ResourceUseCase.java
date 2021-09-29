@@ -13,6 +13,7 @@ import ca.ulaval.glo4002.game.interfaces.rest.resources.entities.ResourceFactory
 import ca.ulaval.glo4002.game.interfaces.rest.resources.entities.ResourceRepository;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class ResourceUseCase {
     private final ResourceFactory resourceFactory;
@@ -35,10 +36,10 @@ public class ResourceUseCase {
         return resourceAssemblers.toDto(resources);
     }
 
-//    public List<ResourceDto> getAllResources() {
-//        Queue<ResourceElements> resources = resourceRepository.findAll();
-//        resourceAssemblers.toDtos(resources);
-//    }
+    public List<ResourceDto> getAllResources() {
+        List<Resource> resources = resourceRepository.findAll();
+        return resourceAssemblers.toDtos(resources);
+    }
 
     private void addResourceToActionWaitingList(Resource resources) {
         for (ResourceElements resource: new ArrayList<>(resources.getResources().values())) {

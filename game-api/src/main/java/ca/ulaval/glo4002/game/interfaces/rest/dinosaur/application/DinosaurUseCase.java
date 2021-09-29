@@ -13,7 +13,6 @@ import ca.ulaval.glo4002.game.interfaces.rest.dinosaur.entities.DinosaurReposito
 import ca.ulaval.glo4002.game.interfaces.rest.exceptions.entities.DuplicateNameException;
 import ca.ulaval.glo4002.game.interfaces.rest.exceptions.entities.NotFoundNameException;
 
-import javax.naming.InvalidNameException;
 import java.util.List;
 
 public class DinosaurUseCase {
