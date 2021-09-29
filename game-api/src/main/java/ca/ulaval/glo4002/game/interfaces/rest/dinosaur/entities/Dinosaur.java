@@ -13,12 +13,12 @@ public class Dinosaur {
     private final String diet;
     private boolean isNewlyAdded;
 
-    public Dinosaur(String name, int weight, String gender, String species, String diet) {
+    public Dinosaur(String name, int weight, String gender, String species) {
         this.name = name;
         this.weight = weight;
         this.gender = gender;
         this.species = species;
-        this.diet = diet;
+        this.diet = SpeciesDiet.valueOf(species).name();
         this.isNewlyAdded = true;
         this.force = calculateStrength(weight, gender, diet);
     }

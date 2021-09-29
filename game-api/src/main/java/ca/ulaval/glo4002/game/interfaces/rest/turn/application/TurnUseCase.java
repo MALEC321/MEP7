@@ -64,8 +64,7 @@ public class TurnUseCase {
         feedDinosaurs();
     }
 
-
-        public TurnDto getFromId(UUID id) {
+    public TurnDto getFromId(UUID id) {
         Turn turn = turnRepository.findById(id);
 
         return turnAssembler.toDto(turn);

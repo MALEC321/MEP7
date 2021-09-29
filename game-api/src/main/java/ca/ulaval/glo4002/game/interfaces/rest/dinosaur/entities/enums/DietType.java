@@ -4,7 +4,7 @@ public enum DietType {
   HERBIVORE("Herbivore"),
   CARNIVORE("Carnivore");
 
-  private String dietType;
+  private final String dietType;
 
   DietType(String dietType) {
     this.dietType = dietType;

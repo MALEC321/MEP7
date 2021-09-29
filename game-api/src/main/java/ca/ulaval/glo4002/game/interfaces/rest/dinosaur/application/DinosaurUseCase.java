@@ -52,5 +52,4 @@ public class DinosaurUseCase {
       Action addDinos = actionFactory.create(dinosaur, Command.ADD_DINO, dinosaurRepository);
       actionRepository.save(addDinos);
   }
-
 }

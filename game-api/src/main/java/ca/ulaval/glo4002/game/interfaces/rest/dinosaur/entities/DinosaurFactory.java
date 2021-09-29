@@ -12,7 +12,7 @@ public class DinosaurFactory {
 
     public Dinosaur create(String name, int weight, String gender, String species) {
         validateName(name);
-        return new Dinosaur(name, weight, gender, species, SpeciesDiet.valueOf(species).name());
+        return new Dinosaur(name, weight, gender, species);
     }
 
     private void validateName(String name) {
