@@ -11,7 +11,9 @@ import ca.ulaval.glo4002.game.interfaces.rest.dinosaur.entities.Dinosaur;
 import ca.ulaval.glo4002.game.interfaces.rest.dinosaur.entities.DinosaurFactory;
 import ca.ulaval.glo4002.game.interfaces.rest.dinosaur.entities.DinosaurRepository;
 import ca.ulaval.glo4002.game.interfaces.rest.exceptions.entities.DuplicateNameException;
+import ca.ulaval.glo4002.game.interfaces.rest.exceptions.entities.NotFoundNameException;
 
+import javax.naming.InvalidNameException;
 import java.util.List;
 
 public class DinosaurUseCase {
@@ -46,7 +48,7 @@ public class DinosaurUseCase {
 
   public DinosaurDto getDinosaur(String name) throws DuplicateNameException {
     if (dinosaurRepository.findByName(name) == null) {
-      throw new DuplicateNameException();
+      throw new NotFoundNameException();
     }
     Dinosaur dinosaur = dinosaurRepository.findByName(name);
     return dinosaurAssembler.toDto(dinosaur);

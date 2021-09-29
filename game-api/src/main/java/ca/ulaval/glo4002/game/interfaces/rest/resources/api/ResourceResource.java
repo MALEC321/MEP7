@@ -33,7 +33,7 @@ public class ResourceResource {
         ResourceDto resource = resourceUseCase.createResource(dto);
         ResourceResponse resourceResponse = resourceDtoAssembler.toResponse(resource);
 
-        return Response.status(Response.Status.CREATED).entity(resourceResponse).build();
+        return Response.status(Response.Status.OK).entity(resourceResponse).build();
     }
 
 //    @GET

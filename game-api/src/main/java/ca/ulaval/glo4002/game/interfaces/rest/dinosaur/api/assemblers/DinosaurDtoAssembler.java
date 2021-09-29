@@ -22,11 +22,6 @@ public class DinosaurDtoAssembler {
     public DinosaurCreationDto fromRequest(DinosaurRequest request) {
         DinosaurCreationDto dto = new DinosaurCreationDto();
 
-//        try {
-//            dinosaurFactory.validateName(request.name);
-//        } catch (IllegalArgumentException ex) {
-//            throw new DuplicateNameException();
-//        }
         if (request.weight <= 0) {
             throw new InvalidWeightException();
         }
