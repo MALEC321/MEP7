@@ -1,6 +1,6 @@
-package ca.ulaval.glo4002.game.interfaces.rest.exceptions.errorMapper;
+package ca.ulaval.glo4002.game.interfaces.rest.exceptions.assemblers.errorMapper;
 
-import ca.ulaval.glo4002.game.interfaces.rest.exceptions.ExceptionResponseDto;
+import ca.ulaval.glo4002.game.interfaces.rest.exceptions.dtos.ExceptionResponseDto;
 import ca.ulaval.glo4002.game.interfaces.rest.exceptions.entities.HTTPExceptionItem;
 
 import javax.ws.rs.core.Response;
