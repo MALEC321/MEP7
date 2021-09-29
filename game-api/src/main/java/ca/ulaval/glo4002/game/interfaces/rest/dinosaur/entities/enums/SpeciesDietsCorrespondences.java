@@ -3,7 +3,7 @@ package ca.ulaval.glo4002.game.interfaces.rest.dinosaur.entities.enums;
 import java.util.Dictionary;
 import java.util.Hashtable;
 
-public class SpeciesDietsCorrespondances {
+public class SpeciesDietsCorrespondences {
     public static final Dictionary<String, String> speciesDictionary = new Hashtable<>() { {
             put("Ankylosaurus", "Herbivore");
             put("Brachiosaurus", "Herbivore");

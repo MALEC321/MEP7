@@ -66,6 +66,14 @@ public class Dinosaur {
 
         BigDecimal bdWaterNeed = bdWeight.multiply(bdMultiplicand);
 
+        if (this.isNewlyAdded()) {
+            this.isNewlyAdded = false;
+
+            BigDecimal bdDoubleResourcesNeeds = new BigDecimal(2);
+
+            return bdWaterNeed.multiply(bdDoubleResourcesNeeds).setScale(0, RoundingMode.CEILING).intValue();
+        }
+
         return bdWaterNeed.setScale(0, RoundingMode.CEILING).intValue();
     }
 
@@ -77,9 +85,11 @@ public class Dinosaur {
         BigDecimal bdTotalFoodNeed = bdWeight.multiply(bdConsiderationByDietType).divide(bdDividend);
 
         if (this.isNewlyAdded()) {
-            BigDecimal bdDoubleFoodNeed = new BigDecimal(2);
+            this.isNewlyAdded = false;
 
-            return bdTotalFoodNeed.multiply(bdDoubleFoodNeed).setScale(0, RoundingMode.CEILING).intValue();
+            BigDecimal bdDoubleResourcesNeeds = new BigDecimal(2);
+
+            return bdTotalFoodNeed.multiply(bdDoubleResourcesNeeds).setScale(0, RoundingMode.CEILING).intValue();
         }
 
         return bdTotalFoodNeed.setScale(0, RoundingMode.CEILING).intValue() ;
