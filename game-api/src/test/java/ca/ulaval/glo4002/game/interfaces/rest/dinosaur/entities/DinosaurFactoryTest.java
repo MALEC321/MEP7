@@ -32,11 +32,4 @@ class DinosaurFactoryTest {
         assertThrows(DuplicateNameException.class, () ->
                 dinosaurFactory.create("name", 89, "f", "Ankylosaurus"));
     }
-
-    @Test
-    void when1000kgFemaleAnkylosaurusIsCreated_thenForceIsEqualTo() {
-        Dinosaur dinosaur = new Dinosaur("name", 1000, "f", "Triceratops");
-
-        assertEquals(2250, dinosaur.getForce());
-    }
 }

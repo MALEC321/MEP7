@@ -1,14 +1,14 @@
 package ca.ulaval.glo4002.game.interfaces.rest.dinosaur.entities;
 
-import ca.ulaval.glo4002.game.interfaces.rest.dinosaur.entities.enums.DietType;
 import ca.ulaval.glo4002.game.interfaces.rest.dinosaur.entities.enums.SpeciesDiet;
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 
-//TODO: CRÉER TESTS UNITS
 public class Dinosaur {
-    public String name;
-    public int weight;
-    public String gender;
-    public String species;
+    private final String name;
+    private final int weight;
+    private final String gender;
+    private final String species;
     private final double force;
     private final String diet;
     private boolean isNewlyAdded;
@@ -18,7 +18,7 @@ public class Dinosaur {
         this.weight = weight;
         this.gender = gender;
         this.species = species;
-        this.diet = SpeciesDiet.valueOf(species).name();
+        this.diet = SpeciesDiet.valueOf(species).getDietType();
         this.isNewlyAdded = true;
         this.force = calculateStrength(weight, gender, diet);
     }
@@ -27,9 +27,7 @@ public class Dinosaur {
         return name;
     }
 
-    public int getWeight() {
-        return weight;
-    }
+    public int getWeight() { return weight; }
 
     public String getGender() {
         return gender;
@@ -58,25 +56,36 @@ public class Dinosaur {
     private double calculateStrength(int weight, String gender, String diet) {
         double T = (diet.equals("Carnivore")) ? 1.5 : 1;
         double S = (gender.equals("f")) ? 1.5 : 1;
+
         return weight * T * S;
     }
 
     public int getWaterNeed() {
-        return Math.toIntExact(Math.round(this.weight * 0.6) + 2 * 3);
+        BigDecimal bdWeight = new BigDecimal(this.weight);
+        BigDecimal bdMultiplicand = new BigDecimal(0.6);
+
+        BigDecimal bdWaterNeed = bdWeight.multiply(bdMultiplicand);
+
+        return bdWaterNeed.setScale(0, RoundingMode.CEILING).intValue();
     }
 
     public int getFoodNeed() {
-        double foodNeed =
-                (this.getWeight() * getConsiderationByDietType()) / 200;
+        BigDecimal bdWeight = new BigDecimal(this.weight);
+        BigDecimal bdConsiderationByDietType = new BigDecimal(getConsiderationByDietType());
+        BigDecimal bdDividend = new BigDecimal(200);
 
-        if (this.isNewlyAdded) {
-            foodNeed = Math.ceil(foodNeed * 2);
+        BigDecimal bdTotalFoodNeed = bdWeight.multiply(bdConsiderationByDietType).divide(bdDividend);
+
+        if (this.isNewlyAdded()) {
+            BigDecimal bdDoubleFoodNeed = new BigDecimal(2);
+
+            return bdTotalFoodNeed.multiply(bdDoubleFoodNeed).setScale(0, RoundingMode.CEILING).intValue();
         }
 
-        return Math.toIntExact(Math.round(foodNeed));
+        return bdTotalFoodNeed.setScale(0, RoundingMode.CEILING).intValue() ;
     }
 
     private double getConsiderationByDietType() {
-        return SpeciesDiet.valueOf(this.species).name().equals(DietType.HERBIVORE.name()) ? 0.5 : 0.2;
+        return SpeciesDiet.valueOf(this.species).getDietType() == "Herbivore" ? 0.5 : 0.2;
     }
 }

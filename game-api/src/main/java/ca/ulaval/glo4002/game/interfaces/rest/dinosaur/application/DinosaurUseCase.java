@@ -14,7 +14,7 @@ import ca.ulaval.glo4002.game.interfaces.rest.dinosaur.entities.DinosaurReposito
 import java.util.List;
 
 public class DinosaurUseCase {
-
+  
   private final DinosaurFactory dinosaurFactory;
   private final DinosaurRepository dinosaurRepository;
   private final DinosaurAssembler dinosaurAssembler;
@@ -32,10 +32,9 @@ public class DinosaurUseCase {
     this.actionFactory = actionFactory;
   }
 
-  public String createDinosaur(DinosaurCreationDto dto) {
+  public void createDinosaur(DinosaurCreationDto dto) {
     Dinosaur dinosaur = dinosaurFactory.create(dto.name, dto.weight, dto.gender, dto.species);
     addDinoToActionWaitingList(dinosaur);
-    return dinosaur.name;
   }
 
   public List<DinosaurDto> getAllDinosaurs() {

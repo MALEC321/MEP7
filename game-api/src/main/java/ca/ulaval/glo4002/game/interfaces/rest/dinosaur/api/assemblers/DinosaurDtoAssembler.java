@@ -12,12 +12,12 @@ import java.util.stream.Collectors;
 public class DinosaurDtoAssembler {
 
     public DinosaurCreationDto fromRequest(DinosaurRequest request) {
-
         DinosaurCreationDto dto = new DinosaurCreationDto();
         dto.name = request.name;
         dto.weight = request.weight;
         dto.gender = request.gender;
         dto.species = request.species;
+
         return dto;
     }
 
