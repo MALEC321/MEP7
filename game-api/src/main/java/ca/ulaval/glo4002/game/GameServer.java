@@ -8,7 +8,9 @@ import ca.ulaval.glo4002.game.interfaces.rest.dinosaur.application.DinosaurUseCa
 import ca.ulaval.glo4002.game.interfaces.rest.dinosaur.application.assemblers.DinosaurAssembler;
 import ca.ulaval.glo4002.game.interfaces.rest.dinosaur.entities.DinosaurFactory;
 import ca.ulaval.glo4002.game.interfaces.rest.dinosaur.entities.DinosaurRepository;
+import ca.ulaval.glo4002.game.interfaces.rest.dinosaur.entities.enums.SpeciesDietsCorrespondances;
 import ca.ulaval.glo4002.game.interfaces.rest.dinosaur.infrastructure.persistence.DinosaurRepositoryInMemory;
+import ca.ulaval.glo4002.game.interfaces.rest.exceptions.exceptionMappers.*;
 import ca.ulaval.glo4002.game.interfaces.rest.resources.api.ResourceResource;
 import ca.ulaval.glo4002.game.interfaces.rest.resources.api.assemblers.ResourceDtoAssembler;
 import ca.ulaval.glo4002.game.interfaces.rest.resources.application.ResourceUseCase;
@@ -48,11 +50,12 @@ public class GameServer implements Runnable {
         TurnAssembler turnAssembler = new TurnAssembler();
         ActionRepository actionRepository = new ActionRepositoryInMemory();
         ActionFactory actionFactory = new ActionFactory();
+        SpeciesDietsCorrespondances speciesDietsCorrespondances = new SpeciesDietsCorrespondances();
 
 
         // Dinosaur
         DinosaurRepository dinosaurRepository = new DinosaurRepositoryInMemory();
-        DinosaurFactory dinosaurFactory = new DinosaurFactory(dinosaurRepository);
+        DinosaurFactory dinosaurFactory = new DinosaurFactory(dinosaurRepository, speciesDietsCorrespondances);
         DinosaurAssembler dinosaurAssembler = new DinosaurAssembler();
         DinosaurUseCase dinosaurUseCase = new DinosaurUseCase(dinosaurFactory, dinosaurRepository, dinosaurAssembler, actionRepository, actionFactory);
 
@@ -79,6 +82,15 @@ public class GameServer implements Runnable {
                                                                              resources.add(resourceResource);
                                                                              resources.add(turnResource);
                                                                              resources.add(dinosaurResource);
+
+                                                                             resources.add(new InvalidResourceExceptionMapper());
+                                                                             resources.add(new UnknownExceptionGrabber());
+                                                                             resources.add(new NotExistentNameExceptionMapper());
+                                                                             resources.add(new InvalidGenderExceptionMapper());
+                                                                             resources.add(new InvalidSpeciesExceptionMapper());
+                                                                             resources.add(new InvalidWeightExceptionMapper());
+                                                                             resources.add(new DuplicateNameExceptionMapper());
+
                                                                              return resources;
                                                                          }
 

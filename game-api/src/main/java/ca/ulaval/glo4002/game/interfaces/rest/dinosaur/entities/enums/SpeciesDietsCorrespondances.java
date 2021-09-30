@@ -2,6 +2,7 @@ package ca.ulaval.glo4002.game.interfaces.rest.dinosaur.entities.enums;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 
 public class SpeciesDietsCorrespondances {
     public static final Map<String, DietType> speciesDictionary = new HashMap<String, DietType>() {{
@@ -18,10 +19,8 @@ public class SpeciesDietsCorrespondances {
     }};
 
     public boolean dinosaurExists(String name) {
-        for (String dinosaurName : speciesDictionary.keySet()) {
-            if (dinosaurName == name) {
-                return true;
-            }
+        if(speciesDictionary.containsKey(name)){
+            return true;
         }
         return false;
     }

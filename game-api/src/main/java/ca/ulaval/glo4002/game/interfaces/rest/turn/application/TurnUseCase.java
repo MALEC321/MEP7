@@ -1,13 +1,16 @@
 package ca.ulaval.glo4002.game.interfaces.rest.turn.application;
 
+import ca.ulaval.glo4002.game.interfaces.rest.actions.entities.Action;
 import ca.ulaval.glo4002.game.interfaces.rest.actions.entities.ActionFactory;
 import ca.ulaval.glo4002.game.interfaces.rest.actions.entities.ActionRepository;
-import ca.ulaval.glo4002.game.interfaces.rest.actions.entities.Action;
 import ca.ulaval.glo4002.game.interfaces.rest.actions.entities.Command;
 import ca.ulaval.glo4002.game.interfaces.rest.dinosaur.entities.Dinosaur;
 import ca.ulaval.glo4002.game.interfaces.rest.dinosaur.entities.DinosaurRepository;
 import ca.ulaval.glo4002.game.interfaces.rest.dinosaur.entities.enums.DietType;
-import ca.ulaval.glo4002.game.interfaces.rest.resources.entities.*;
+import ca.ulaval.glo4002.game.interfaces.rest.resources.entities.Burger;
+import ca.ulaval.glo4002.game.interfaces.rest.resources.entities.ResourceRepository;
+import ca.ulaval.glo4002.game.interfaces.rest.resources.entities.Salad;
+import ca.ulaval.glo4002.game.interfaces.rest.resources.entities.Water;
 import ca.ulaval.glo4002.game.interfaces.rest.turn.application.assemblers.TurnAssembler;
 import ca.ulaval.glo4002.game.interfaces.rest.turn.application.dtos.TurnDto;
 import ca.ulaval.glo4002.game.interfaces.rest.turn.entities.Turn;

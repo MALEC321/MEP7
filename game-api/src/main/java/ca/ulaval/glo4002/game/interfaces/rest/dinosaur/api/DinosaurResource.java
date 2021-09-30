@@ -31,7 +31,7 @@ public class DinosaurResource {
         DinosaurCreationDto dto = dinosaurDtoAssembler.fromRequest(dinosaurRequest);
         dinosaurUseCase.createDinosaur(dto);
         
-        return Response.status(Response.Status.CREATED).build();
+        return Response.status(Response.Status.OK).build();
     }
 
     @GET

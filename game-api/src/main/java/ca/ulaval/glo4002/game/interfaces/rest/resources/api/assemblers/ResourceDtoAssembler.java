@@ -12,6 +12,11 @@ import java.util.stream.Collectors;
 public class ResourceDtoAssembler {
     public ResourceCreationDto fromRequest(ResourceRequest request) {
         ResourceCreationDto dto = new ResourceCreationDto();
+
+//        if (request.qtyBurger < 0 || request.qtySalad < 0 || request.qtyWater < 0) {
+//            throw new InvalidResourceQuantityException();
+//        }
+
         dto.qtyBurger = request.qtyBurger;
         dto.qtySalad = request.qtySalad;
         dto.qtyWater = request.qtyWater;

@@ -5,11 +5,12 @@ import ca.ulaval.glo4002.game.interfaces.rest.dinosaur.api.dtos.DinosaurResponse
 import ca.ulaval.glo4002.game.interfaces.rest.dinosaur.api.dtos.DinosaursResponse;
 import ca.ulaval.glo4002.game.interfaces.rest.dinosaur.application.dtos.DinosaurCreationDto;
 import ca.ulaval.glo4002.game.interfaces.rest.dinosaur.application.dtos.DinosaurDto;
-
+import ca.ulaval.glo4002.game.interfaces.rest.dinosaur.entities.DinosaurFactory;
 import java.util.List;
 import java.util.stream.Collectors;
 
 public class DinosaurDtoAssembler {
+    DinosaurFactory dinosaurFactory;
 
     public DinosaurCreationDto fromRequest(DinosaurRequest request) {
         DinosaurCreationDto dto = new DinosaurCreationDto();

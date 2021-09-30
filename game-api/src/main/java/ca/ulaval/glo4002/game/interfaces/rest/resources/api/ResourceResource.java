@@ -27,9 +27,9 @@ public class ResourceResource {
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
     public Response createResource(ResourceRequest resourceRequest) {
+
         ResourceCreationDto dto = resourceDtoAssembler.fromRequest(resourceRequest);
         resourceUseCase.createResource(dto);
-
         return Response.status(Response.Status.OK).build();
     }
 

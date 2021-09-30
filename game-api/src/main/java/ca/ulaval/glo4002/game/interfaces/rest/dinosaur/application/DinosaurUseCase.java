@@ -10,6 +10,7 @@ import ca.ulaval.glo4002.game.interfaces.rest.dinosaur.application.dtos.Dinosaur
 import ca.ulaval.glo4002.game.interfaces.rest.dinosaur.entities.Dinosaur;
 import ca.ulaval.glo4002.game.interfaces.rest.dinosaur.entities.DinosaurFactory;
 import ca.ulaval.glo4002.game.interfaces.rest.dinosaur.entities.DinosaurRepository;
+import ca.ulaval.glo4002.game.interfaces.rest.exceptions.entities.NotExistentNameException;
 
 import java.util.List;
 
@@ -35,6 +36,7 @@ public class DinosaurUseCase {
   public void createDinosaur(DinosaurCreationDto dto) {
     Dinosaur dinosaur = dinosaurFactory.create(dto.name, dto.weight, dto.gender, dto.species);
     addDinoToActionWaitingList(dinosaur);
+    return dinosaur.getName();
   }
 
   public List<DinosaurDto> getAllDinosaurs() {
@@ -42,7 +44,10 @@ public class DinosaurUseCase {
     return dinosaurAssembler.toDtos(dinosaurs);
   }
 
-  public DinosaurDto getDinosaur(String name) {
+  public DinosaurDto getDinosaur(String name) throws NotExistentNameException {
+    if (dinosaurRepository.findByName(name) == null) {
+      throw new NotExistentNameException();
+    }
     Dinosaur dinosaur = dinosaurRepository.findByName(name);
     return dinosaurAssembler.toDto(dinosaur);
   }
