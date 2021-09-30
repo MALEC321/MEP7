@@ -36,7 +36,6 @@ public class DinosaurUseCase {
   public void createDinosaur(DinosaurCreationDto dto) {
     Dinosaur dinosaur = dinosaurFactory.create(dto.name, dto.weight, dto.gender, dto.species);
     addDinoToActionWaitingList(dinosaur);
-    return dinosaur.getName();
   }
 
   public List<DinosaurDto> getAllDinosaurs() {
