@@ -1,6 +1,7 @@
 package ca.ulaval.glo4002.game.interfaces.rest.dinosaur.entities;
 
 import ca.ulaval.glo4002.game.interfaces.rest.dinosaur.entities.enums.SpeciesDiet;
+import ca.ulaval.glo4002.game.interfaces.rest.dinosaur.entities.enums.SpeciesDietsCorrespondances;
 import ca.ulaval.glo4002.game.interfaces.rest.exceptions.entities.DuplicateNameException;
 import ca.ulaval.glo4002.game.interfaces.rest.exceptions.entities.InvalidGenderException;
 import ca.ulaval.glo4002.game.interfaces.rest.exceptions.entities.InvalidSpeciesException;
@@ -9,25 +10,26 @@ import ca.ulaval.glo4002.game.interfaces.rest.exceptions.entities.InvalidWeightE
 import java.util.Objects;
 
 public class DinosaurFactory {
+    public static final int MIN_WEIGHT = 0;
     private final DinosaurRepository dinosaurRepository;
+    private final SpeciesDietsCorrespondances speciesDietsCorrespondances;
 
-    public DinosaurFactory(DinosaurRepository dinosaurRepository) {
+    public DinosaurFactory(DinosaurRepository dinosaurRepository, SpeciesDietsCorrespondances speciesDietsCorrespondances) {
         this.dinosaurRepository = dinosaurRepository;
+        this.speciesDietsCorrespondances = speciesDietsCorrespondances;
     }
 
     public Dinosaur create(String name, int weight, String gender, String species) {
         validateName(name);
-        if (Objects.equals(species, "Tyrannosaurus Rex")) {
-            species = "Tyrannosaurus";
-        }
 
-        if (weight <= 0) {
+        if (weight <= MIN_WEIGHT) {
             throw new InvalidWeightException();
         }
         if ((!"f".equals(gender)) && (!"m".equals(gender))) {
             throw new InvalidGenderException();
         }
-        if (!SpeciesDiet.contains(species)) {
+
+        if(!speciesDietsCorrespondances.dinosaurExists(species)){
             throw new InvalidSpeciesException();
         }
 

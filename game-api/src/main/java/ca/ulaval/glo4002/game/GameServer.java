@@ -8,6 +8,7 @@ import ca.ulaval.glo4002.game.interfaces.rest.dinosaur.application.DinosaurUseCa
 import ca.ulaval.glo4002.game.interfaces.rest.dinosaur.application.assemblers.DinosaurAssembler;
 import ca.ulaval.glo4002.game.interfaces.rest.dinosaur.entities.DinosaurFactory;
 import ca.ulaval.glo4002.game.interfaces.rest.dinosaur.entities.DinosaurRepository;
+import ca.ulaval.glo4002.game.interfaces.rest.dinosaur.entities.enums.SpeciesDietsCorrespondances;
 import ca.ulaval.glo4002.game.interfaces.rest.dinosaur.infrastructure.persistence.DinosaurRepositoryInMemory;
 import ca.ulaval.glo4002.game.interfaces.rest.exceptions.exceptionMappers.*;
 import ca.ulaval.glo4002.game.interfaces.rest.resources.api.ResourceResource;
@@ -49,11 +50,12 @@ public class GameServer implements Runnable {
         TurnAssembler turnAssembler = new TurnAssembler();
         ActionRepository actionRepository = new ActionRepositoryInMemory();
         ActionFactory actionFactory = new ActionFactory();
+        SpeciesDietsCorrespondances speciesDietsCorrespondances = new SpeciesDietsCorrespondances();
 
 
         // Dinosaur
         DinosaurRepository dinosaurRepository = new DinosaurRepositoryInMemory();
-        DinosaurFactory dinosaurFactory = new DinosaurFactory(dinosaurRepository);
+        DinosaurFactory dinosaurFactory = new DinosaurFactory(dinosaurRepository, speciesDietsCorrespondances);
         DinosaurAssembler dinosaurAssembler = new DinosaurAssembler();
         DinosaurUseCase dinosaurUseCase = new DinosaurUseCase(dinosaurFactory, dinosaurRepository, dinosaurAssembler, actionRepository, actionFactory);
 
