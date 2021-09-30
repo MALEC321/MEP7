@@ -1,6 +1,5 @@
 package ca.ulaval.glo4002.game.interfaces.rest.resources.api.assemblers;
 
-import ca.ulaval.glo4002.game.interfaces.rest.exceptions.entities.InvalidResourceQuantityException;
 import ca.ulaval.glo4002.game.interfaces.rest.resources.api.dtos.ResourceRequest;
 import ca.ulaval.glo4002.game.interfaces.rest.resources.api.dtos.ResourceResponse;
 import ca.ulaval.glo4002.game.interfaces.rest.resources.api.dtos.ResourcesResponse;
@@ -14,9 +13,9 @@ public class ResourceDtoAssembler {
     public ResourceCreationDto fromRequest(ResourceRequest request) {
         ResourceCreationDto dto = new ResourceCreationDto();
 
-        if (request.qtyBurger < 0 || request.qtySalad < 0 || request.qtyWater < 0) {
-            throw new InvalidResourceQuantityException();
-        }
+//        if (request.qtyBurger < 0 || request.qtySalad < 0 || request.qtyWater < 0) {
+//            throw new InvalidResourceQuantityException();
+//        }
 
         dto.qtyBurger = request.qtyBurger;
         dto.qtySalad = request.qtySalad;

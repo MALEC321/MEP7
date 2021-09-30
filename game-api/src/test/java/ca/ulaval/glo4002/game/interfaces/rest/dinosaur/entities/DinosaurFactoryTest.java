@@ -24,7 +24,7 @@ class DinosaurFactoryTest {
     void whenNameIsValid_thenCreateDinosaur() {
         dinosaurFactory.create("anotherName", 89, "f", "Ankylosaurus");
 
-        verify(duplicateNameException, never()).getCode();
+        verify(duplicateNameException, never()).getMessage();
     }
 
     @Test

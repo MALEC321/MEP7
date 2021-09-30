@@ -6,11 +6,6 @@ import ca.ulaval.glo4002.game.interfaces.rest.dinosaur.api.dtos.DinosaursRespons
 import ca.ulaval.glo4002.game.interfaces.rest.dinosaur.application.dtos.DinosaurCreationDto;
 import ca.ulaval.glo4002.game.interfaces.rest.dinosaur.application.dtos.DinosaurDto;
 import ca.ulaval.glo4002.game.interfaces.rest.dinosaur.entities.DinosaurFactory;
-import ca.ulaval.glo4002.game.interfaces.rest.dinosaur.entities.enums.SpeciesDiet;
-import ca.ulaval.glo4002.game.interfaces.rest.exceptions.entities.InvalidGenderException;
-import ca.ulaval.glo4002.game.interfaces.rest.exceptions.entities.InvalidSpeciesException;
-import ca.ulaval.glo4002.game.interfaces.rest.exceptions.entities.InvalidWeightException;
-
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -19,18 +14,6 @@ public class DinosaurDtoAssembler {
 
     public DinosaurCreationDto fromRequest(DinosaurRequest request) {
         DinosaurCreationDto dto = new DinosaurCreationDto();
-
-        if (request.weight <= 0) {
-            throw new InvalidWeightException();
-        }
-        if ((!"f".equals(request.gender)) && (!"m".equals(request.gender))) {
-            throw new InvalidGenderException();
-        }
-
-        if (!SpeciesDiet.contains(request.species)) {
-            throw new InvalidSpeciesException();
-        }
-
         dto.name = request.name;
         dto.weight = request.weight;
         dto.gender = request.gender;
