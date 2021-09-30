@@ -30,7 +30,9 @@ public class ResourceDtoAssembler {
 
     public ResourcesResponse toResponse(List<ResourceDto> resourceDtos) {
         ResourcesResponse response = new ResourcesResponse();
-        response.resource = resourceDtos.stream().map(this::toResponse).collect(Collectors.toList());
+        response.fresh = resourceDtos.stream().map(this::toResponse).collect(Collectors.toList()).get(0);
+        response.expired = resourceDtos.stream().map(this::toResponse).collect(Collectors.toList()).get(1);
+        response.consumed = resourceDtos.stream().map(this::toResponse).collect(Collectors.toList()).get(2);
 
         return response;
     }
