@@ -1,8 +1,8 @@
 package ca.ulaval.glo4002.game.interfaces.rest.resources.application;
 
+import ca.ulaval.glo4002.game.interfaces.rest.actions.entities.Action;
 import ca.ulaval.glo4002.game.interfaces.rest.actions.entities.ActionFactory;
 import ca.ulaval.glo4002.game.interfaces.rest.actions.entities.ActionRepository;
-import ca.ulaval.glo4002.game.interfaces.rest.actions.entities.Action;
 import ca.ulaval.glo4002.game.interfaces.rest.actions.entities.Command;
 import ca.ulaval.glo4002.game.interfaces.rest.resources.application.assemblers.ResourceAssemblers;
 import ca.ulaval.glo4002.game.interfaces.rest.resources.application.dtos.ResourceCreationDto;
@@ -14,7 +14,6 @@ import ca.ulaval.glo4002.game.interfaces.rest.resources.entities.ResourceReposit
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Queue;
 
 public class ResourceUseCase {
     private final ResourceFactory resourceFactory;

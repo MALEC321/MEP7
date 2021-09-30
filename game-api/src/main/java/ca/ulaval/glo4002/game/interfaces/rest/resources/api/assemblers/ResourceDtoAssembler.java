@@ -12,6 +12,11 @@ import java.util.stream.Collectors;
 public class ResourceDtoAssembler {
     public ResourceCreationDto fromRequest(ResourceRequest request) {
         ResourceCreationDto dto = new ResourceCreationDto();
+
+//        if (request.qtyBurger < 0 || request.qtySalad < 0 || request.qtyWater < 0) {
+//            throw new InvalidResourceQuantityException();
+//        }
+
         dto.qtyBurger = request.qtyBurger;
         dto.qtySalad = request.qtySalad;
         dto.qtyWater = request.qtyWater;
@@ -30,7 +35,9 @@ public class ResourceDtoAssembler {
 
     public ResourcesResponse toResponse(List<ResourceDto> resourceDtos) {
         ResourcesResponse response = new ResourcesResponse();
-        response.resource = resourceDtos.stream().map(this::toResponse).collect(Collectors.toList());
+        response.fresh = resourceDtos.stream().map(this::toResponse).collect(Collectors.toList()).get(0);
+        response.expired = resourceDtos.stream().map(this::toResponse).collect(Collectors.toList()).get(1);
+        response.consumed = resourceDtos.stream().map(this::toResponse).collect(Collectors.toList()).get(2);
 
         return response;
     }

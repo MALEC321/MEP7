@@ -1,9 +1,6 @@
 package ca.ulaval.glo4002.game.interfaces.rest.resources.entities;
 
-import org.javatuples.Triplet;
-
 import java.util.List;
-import java.util.Queue;
 
 public interface ResourceRepository {
     void add(ResourceElements resource);

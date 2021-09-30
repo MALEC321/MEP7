@@ -3,7 +3,10 @@ package ca.ulaval.glo4002.game.interfaces.rest.resources.infrastructure.persiste
 import ca.ulaval.glo4002.game.interfaces.rest.resources.entities.*;
 import org.javatuples.Triplet;
 
-import java.util.*;
+import java.util.Arrays;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Queue;
 
 public class ResourceRepositoryInMemory implements ResourceRepository {
     private final Triplet<Queue<Burger>, Queue<Salad>, Queue<Water>> resources = Triplet.with(new LinkedList<>(),new LinkedList<>(), new LinkedList<>()) ;
