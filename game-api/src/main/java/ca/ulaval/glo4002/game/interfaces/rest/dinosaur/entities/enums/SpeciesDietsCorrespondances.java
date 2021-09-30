@@ -16,4 +16,13 @@ public class SpeciesDietsCorrespondances {
         put("Tyrannosaurus Rex", DietType.CARNIVORE);
         put("Velociraptor", DietType.CARNIVORE);
     }};
+
+    public boolean dinosaurExists(String name) {
+        for (String dinosaurName : speciesDictionary.keySet()) {
+            if (dinosaurName == name) {
+                return true;
+            }
+        }
+        return false;
+    }
 }
