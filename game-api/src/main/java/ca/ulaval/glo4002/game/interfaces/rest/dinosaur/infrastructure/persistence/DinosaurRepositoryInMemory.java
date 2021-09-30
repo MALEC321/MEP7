@@ -26,7 +26,7 @@ public class DinosaurRepositoryInMemory implements DinosaurRepository {
 
     @Override
     public void remove(Dinosaur dinosaur) {
-        dinosaursByName.remove(dinosaur.name);
+        dinosaursByName.remove(dinosaur.getName());
     }
 
     //TODO: CRÉER TESTS UNITS

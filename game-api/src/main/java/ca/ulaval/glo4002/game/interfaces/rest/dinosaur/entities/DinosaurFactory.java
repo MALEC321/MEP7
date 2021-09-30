@@ -1,13 +1,10 @@
 package ca.ulaval.glo4002.game.interfaces.rest.dinosaur.entities;
 
-import ca.ulaval.glo4002.game.interfaces.rest.dinosaur.entities.enums.SpeciesDiet;
 import ca.ulaval.glo4002.game.interfaces.rest.dinosaur.entities.enums.SpeciesDietsCorrespondances;
 import ca.ulaval.glo4002.game.interfaces.rest.exceptions.entities.DuplicateNameException;
 import ca.ulaval.glo4002.game.interfaces.rest.exceptions.entities.InvalidGenderException;
 import ca.ulaval.glo4002.game.interfaces.rest.exceptions.entities.InvalidSpeciesException;
 import ca.ulaval.glo4002.game.interfaces.rest.exceptions.entities.InvalidWeightException;
-
-import java.util.Objects;
 
 public class DinosaurFactory {
     public static final int MIN_WEIGHT = 0;
@@ -33,7 +30,7 @@ public class DinosaurFactory {
             throw new InvalidSpeciesException();
         }
 
-        return new Dinosaur(name, weight, gender, species, SpeciesDiet.valueOf(species).name());
+        return new Dinosaur(name, weight, gender, species);
     }
 
     public void validateName(String name) {
