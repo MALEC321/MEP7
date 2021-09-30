@@ -15,7 +15,7 @@ import ca.ulaval.glo4002.game.interfaces.rest.exceptions.entities.NotExistentNam
 import java.util.List;
 
 public class DinosaurUseCase {
-
+  
   private final DinosaurFactory dinosaurFactory;
   private final DinosaurRepository dinosaurRepository;
   private final DinosaurAssembler dinosaurAssembler;
@@ -33,7 +33,7 @@ public class DinosaurUseCase {
     this.actionFactory = actionFactory;
   }
 
-  public String createDinosaur(DinosaurCreationDto dto) {
+  public void createDinosaur(DinosaurCreationDto dto) {
     Dinosaur dinosaur = dinosaurFactory.create(dto.name, dto.weight, dto.gender, dto.species);
     addDinoToActionWaitingList(dinosaur);
     return dinosaur.getName();
@@ -56,5 +56,4 @@ public class DinosaurUseCase {
       Action addDinos = actionFactory.create(dinosaur, Command.ADD_DINO, dinosaurRepository);
       actionRepository.save(addDinos);
   }
-
 }

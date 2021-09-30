@@ -2,11 +2,9 @@ package ca.ulaval.glo4002.game.interfaces.rest.dinosaur.entities;
 
 import ca.ulaval.glo4002.game.interfaces.rest.dinosaur.entities.enums.DietType;
 import ca.ulaval.glo4002.game.interfaces.rest.dinosaur.entities.enums.SpeciesDietsCorrespondances;
-
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 
-//TODO: CRÉER TESTS UNITS
 public class Dinosaur {
     private final String name;
     private final int weight;

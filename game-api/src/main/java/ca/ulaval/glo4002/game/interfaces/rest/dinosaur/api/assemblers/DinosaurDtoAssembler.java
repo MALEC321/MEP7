@@ -18,6 +18,7 @@ public class DinosaurDtoAssembler {
         dto.weight = request.weight;
         dto.gender = request.gender;
         dto.species = request.species;
+
         return dto;
     }
 

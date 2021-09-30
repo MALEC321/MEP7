@@ -67,8 +67,7 @@ public class TurnUseCase {
         feedDinosaurs();
     }
 
-
-        public TurnDto getFromId(UUID id) {
+    public TurnDto getFromId(UUID id) {
         Turn turn = turnRepository.findById(id);
 
         return turnAssembler.toDto(turn);
@@ -81,17 +80,19 @@ public class TurnUseCase {
     //TODO: Test uniter cette méthode
     private void feedDinosaursByDietType(List<Dinosaur> sortedDinosaursByForce) {
         for(Dinosaur dinosaur: sortedDinosaursByForce) {
-            if (dinosaur.getDiet().equals(DietType.HERBIVORE.name())) {
-                if(!resourceRepository.consume(new Salad(0), dinosaur.getFoodNeed())) dinosaurRepository.remove(dinosaur);
+            if (dinosaur.getDiet().equals(DietType.HERBIVORE)) {
+                if(!resourceRepository.consume(new Salad(0), dinosaur.getFoodNeed())){
+                    dinosaurRepository.remove(dinosaur);
+                }
             } else {
-                if(!resourceRepository.consume(new Burger(0), dinosaur.getFoodNeed())) dinosaurRepository.remove(dinosaur);
+                if(!resourceRepository.consume(new Burger(0), dinosaur.getFoodNeed())) {
+                    dinosaurRepository.remove(dinosaur);
+                }
             }
-            if(!resourceRepository.consume(new Water(0), dinosaur.getWaterNeed())) dinosaurRepository.remove(dinosaur);
 
-            if (dinosaur.isNewlyAdded()) {
-                dinosaur.setNewlyAdded(false);
+            if(!resourceRepository.consume(new Water(0), dinosaur.getWaterNeed())) {
+                dinosaurRepository.remove(dinosaur);
             }
         }
     }
-
 }
