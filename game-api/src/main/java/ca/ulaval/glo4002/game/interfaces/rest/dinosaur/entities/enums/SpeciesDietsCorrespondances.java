@@ -1,6 +1,5 @@
 package ca.ulaval.glo4002.game.interfaces.rest.dinosaur.entities.enums;
 
-import ca.ulaval.glo4002.game.interfaces.rest.dinosaur.entities.enums.DietType;
 import java.util.HashMap;
 import java.util.Map;
 

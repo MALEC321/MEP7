@@ -20,7 +20,6 @@ public class Dinosaur {
         this.gender = gender;
         this.species = species;
         this.diet = SpeciesDietsCorrespondances.speciesDictionary.get(species);
-        System.out.println(diet);
         this.isNewlyAdded = true;
         this.force = calculateStrength(weight, gender, diet);
     }
