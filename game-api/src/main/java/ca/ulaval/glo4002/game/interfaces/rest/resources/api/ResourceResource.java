@@ -2,7 +2,6 @@ package ca.ulaval.glo4002.game.interfaces.rest.resources.api;
 
 import ca.ulaval.glo4002.game.interfaces.rest.resources.api.assemblers.ResourceDtoAssembler;
 import ca.ulaval.glo4002.game.interfaces.rest.resources.api.dtos.ResourceRequest;
-import ca.ulaval.glo4002.game.interfaces.rest.resources.api.dtos.ResourceResponse;
 import ca.ulaval.glo4002.game.interfaces.rest.resources.api.dtos.ResourcesResponse;
 import ca.ulaval.glo4002.game.interfaces.rest.resources.application.ResourceUseCase;
 import ca.ulaval.glo4002.game.interfaces.rest.resources.application.dtos.ResourceCreationDto;
@@ -29,10 +28,9 @@ public class ResourceResource {
     @Consumes(MediaType.APPLICATION_JSON)
     public Response createResource(ResourceRequest resourceRequest) {
         ResourceCreationDto dto = resourceDtoAssembler.fromRequest(resourceRequest);
-        ResourceDto resource = resourceUseCase.createResource(dto);
-        ResourceResponse resourceResponse = resourceDtoAssembler.toResponse(resource);
+        resourceUseCase.createResource(dto);
 
-        return Response.status(Response.Status.CREATED).entity(resourceResponse).build();
+        return Response.status(Response.Status.OK).build();
     }
 
     @GET
@@ -41,7 +39,7 @@ public class ResourceResource {
         List<ResourceDto> resources = resourceUseCase.getAllResources();
         ResourcesResponse response = resourceDtoAssembler.toResponse(resources);
 
-        return Response.ok().entity(response.resource).build();
+        return Response.ok().entity(response).build();
     }
 
 }
