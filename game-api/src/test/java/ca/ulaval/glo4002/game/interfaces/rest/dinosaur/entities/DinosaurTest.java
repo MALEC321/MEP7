@@ -2,6 +2,7 @@ package ca.ulaval.glo4002.game.interfaces.rest.dinosaur.entities;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+import ca.ulaval.glo4002.game.interfaces.rest.dinosaur.entities.enums.DietType;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -13,26 +14,26 @@ class DinosaurTest {
     @BeforeEach
     void setUp() {
         herbivoreFemale = new Dinosaur("herbivoreFemale", 1000, "f", "Brachiosaurus");
-        carnivoreMale = new Dinosaur("carnivoreMale", 50, "m", "Tyrannosaurus");
+        carnivoreMale = new Dinosaur("carnivoreMale", 50, "m", "Tyrannosaurus Rex");
     }
 
     @Test
     void whenCreatingHerbivoreDinosaur_shouldSetDietToHerbivore() {
         Dinosaur petitpied = new Dinosaur("petitpied", 1000, "f", "Ankylosaurus");
 
-        assertEquals("Herbivore", petitpied.getDiet());
+        assertEquals(DietType.HERBIVORE, petitpied.getDiet());
     }
 
     @Test
     void whenCreatingCarnivoreDinosaur_shouldSetDietToCarnivore() {
         Dinosaur petitpied = new Dinosaur("petitpied", 1000, "f", "Megalosaurus");
 
-        assertEquals("Carnivore", petitpied.getDiet());
+        assertEquals(DietType.CARNIVORE, petitpied.getDiet());
     }
 
     @Test
-    void givenDinosaur_waterNeedShouldBeExact() {
-        int waterNeeded = 600;
+    void givenNewlyAddedDinosaur_waterNeedShouldBeDoubled() {
+        int waterNeeded = 1200;
 
         assertEquals(waterNeeded, herbivoreFemale.getWaterNeed());
     }

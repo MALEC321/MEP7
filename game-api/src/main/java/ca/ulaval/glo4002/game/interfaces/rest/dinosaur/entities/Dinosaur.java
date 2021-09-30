@@ -55,7 +55,7 @@ public class Dinosaur {
     }
 
     private double calculateStrength(int weight, String gender, DietType diet) {
-        double T = (diet.equals(DietType.CARNIVORE)) ? 1.5 : 1;
+        double T = (diet == DietType.CARNIVORE) ? 1.5 : 1;
         double S = (gender.equals("f")) ? 1.5 : 1;
 
         return weight * T * S;
