@@ -24,12 +24,10 @@ public class DinosaurResource {
         this.dinosaurDtoAssembler = dinosaurDtoAssembler;
     }
 
-
     @POST
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
     public Response createDinosaur(DinosaurRequest dinosaurRequest) {
-
         DinosaurCreationDto dto = dinosaurDtoAssembler.fromRequest(dinosaurRequest);
         dinosaurUseCase.createDinosaur(dto);
         
@@ -39,7 +37,6 @@ public class DinosaurResource {
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     public Response getAllDinosaurs() {
-
         List<DinosaurDto> dinosaurs = dinosaurUseCase.getAllDinosaurs();
         DinosaursResponse response = dinosaurDtoAssembler.toResponse(dinosaurs);
         return Response.ok().entity(response.items).build();
@@ -49,7 +46,6 @@ public class DinosaurResource {
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     public Response getDinosaur(@PathParam("name") String name) {
-
         DinosaurDto dinosaur = dinosaurUseCase.getDinosaur(name);
         DinosaurResponseItem response = dinosaurDtoAssembler.toResponse(dinosaur);
         return Response.ok().entity(response).build();
