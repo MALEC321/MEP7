@@ -77,7 +77,7 @@ public class TurnUseCase {
     //TODO: Test uniter cette méthode
     private void feedDinosaursByDietType(List<Dinosaur> sortedDinosaursByForce) {
         for(Dinosaur dinosaur: sortedDinosaursByForce) {
-            if (dinosaur.getDiet().equals(DietType.HERBIVORE.name())) {
+            if (dinosaur.getDiet().equals(DietType.HERBIVORE)) {
                 if(!resourceRepository.consume(new Salad(0), dinosaur.getFoodNeed())) dinosaurRepository.remove(dinosaur);
             } else {
                 if(!resourceRepository.consume(new Burger(0), dinosaur.getFoodNeed())) dinosaurRepository.remove(dinosaur);

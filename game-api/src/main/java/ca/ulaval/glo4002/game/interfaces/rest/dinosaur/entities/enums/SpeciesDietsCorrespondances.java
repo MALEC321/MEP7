@@ -1,19 +1,20 @@
 package ca.ulaval.glo4002.game.interfaces.rest.dinosaur.entities.enums;
 
-import java.util.Dictionary;
-import java.util.Hashtable;
+import ca.ulaval.glo4002.game.interfaces.rest.dinosaur.entities.enums.DietType;
+import java.util.HashMap;
+import java.util.Map;
 
 public class SpeciesDietsCorrespondances {
-    public static final Dictionary<String, String> speciesDictionary = new Hashtable<>() { {
-            put("Ankylosaurus", "Herbivore");
-            put("Brachiosaurus", "Herbivore");
-            put("Diplodocus", "Herbivore");
-            put("Stegosaurus", "Herbivore");
-            put("Triceratops", "Herbivore");
-            put("Allosaurus", "Carnivore");
-            put("Megalosaurus", "Carnivore");
-            put("Spinosauraus", "Carnivore");
-            put("Tyrannosaurus Rex", "Carnivore");
-            put("Velociraptor", "Carnivore");
-    } };
+    public static final Map<String, DietType> speciesDictionary = new HashMap<String, DietType>() {{
+        put("Ankylosaurus", DietType.HERBIVORE);
+        put("Brachiosaurus", DietType.HERBIVORE);
+        put("Diplodocus", DietType.HERBIVORE);
+        put("Stegosaurus", DietType.HERBIVORE);
+        put("Triceratops", DietType.HERBIVORE);
+        put("Allosaurus", DietType.CARNIVORE);
+        put("Megalosaurus", DietType.CARNIVORE);
+        put("Spinosauraus", DietType.CARNIVORE);
+        put("Tyrannosaurus Rex", DietType.CARNIVORE);
+        put("Velociraptor", DietType.CARNIVORE);
+    }};
 }

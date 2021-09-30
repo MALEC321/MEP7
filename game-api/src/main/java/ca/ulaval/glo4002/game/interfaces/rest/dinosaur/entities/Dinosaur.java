@@ -1,6 +1,7 @@
 package ca.ulaval.glo4002.game.interfaces.rest.dinosaur.entities;
 
-import ca.ulaval.glo4002.game.interfaces.rest.dinosaur.entities.enums.SpeciesDiet;
+import ca.ulaval.glo4002.game.interfaces.rest.dinosaur.entities.enums.DietType;
+import ca.ulaval.glo4002.game.interfaces.rest.dinosaur.entities.enums.SpeciesDietsCorrespondances;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 
@@ -10,7 +11,7 @@ public class Dinosaur {
     private final String gender;
     private final String species;
     private final double force;
-    private final String diet;
+    private final DietType diet;
     private boolean isNewlyAdded;
 
     public Dinosaur(String name, int weight, String gender, String species) {
@@ -18,7 +19,8 @@ public class Dinosaur {
         this.weight = weight;
         this.gender = gender;
         this.species = species;
-        this.diet = SpeciesDiet.valueOf(species).getDietType();
+        this.diet = SpeciesDietsCorrespondances.speciesDictionary.get(species);
+        System.out.println(diet);
         this.isNewlyAdded = true;
         this.force = calculateStrength(weight, gender, diet);
     }
@@ -41,7 +43,7 @@ public class Dinosaur {
         return force;
     }
 
-    public String getDiet() {
+    public DietType getDiet() {
         return diet;
     }
 
@@ -53,8 +55,8 @@ public class Dinosaur {
         this.isNewlyAdded = isNewlyAdded;
     }
 
-    private double calculateStrength(int weight, String gender, String diet) {
-        double T = (diet.equals("Carnivore")) ? 1.5 : 1;
+    private double calculateStrength(int weight, String gender, DietType diet) {
+        double T = (diet.equals(DietType.CARNIVORE)) ? 1.5 : 1;
         double S = (gender.equals("f")) ? 1.5 : 1;
 
         return weight * T * S;
@@ -86,6 +88,6 @@ public class Dinosaur {
     }
 
     private double getConsiderationByDietType() {
-        return SpeciesDiet.valueOf(this.species).getDietType() == "Herbivore" ? 0.5 : 0.2;
+        return this.diet == DietType.HERBIVORE ? 0.5 : 0.2;
     }
 }

@@ -1,6 +1,5 @@
 package ca.ulaval.glo4002.game.interfaces.rest.dinosaur.entities;
 
-import ca.ulaval.glo4002.game.interfaces.rest.dinosaur.entities.enums.SpeciesDiet;
 import ca.ulaval.glo4002.game.interfaces.rest.exceptions.entities.DuplicateNameException;
 
 public class DinosaurFactory {
