@@ -54,17 +54,18 @@ public class TurnUseCase {
     }
 
     public void preAction(ActionRepository actionRepository) {
+    }
+
+    public void postAction() { //Todo rajouter les post action ici
+        resourceRepository.decreaseExpirationDate();
+        feedDinosaurs();
+
         Action addWater = new ActionFactory().create(new Water(10000), Command.ADD, resourceRepository);
         Action addSalad = new ActionFactory().create(new Salad(250), Command.ADD, resourceRepository);
         Action addBurger = new ActionFactory().create(new Burger(100), Command.ADD, resourceRepository);
         actionRepository.save(addWater);
         actionRepository.save(addSalad);
         actionRepository.save(addBurger);
-    }
-
-    public void postAction() { //Todo rajouter les post action ici
-        resourceRepository.decreaseExpirationDate();
-        feedDinosaurs();
     }
 
     public TurnDto getFromId(UUID id) {
