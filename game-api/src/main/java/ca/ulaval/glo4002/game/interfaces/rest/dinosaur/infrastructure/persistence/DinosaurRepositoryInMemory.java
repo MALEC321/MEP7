@@ -10,9 +10,7 @@ public class DinosaurRepositoryInMemory implements DinosaurRepository {
     private final Map<String, Dinosaur> dinosaursByName = new HashMap<>();
 
     @Override
-    public List<Dinosaur> findAll() {
-        return new ArrayList<>(dinosaursByName.values());
-    }
+    public List<Dinosaur> findAll() { return new ArrayList<>(dinosaursByName.values()); }
 
     @Override
     public Dinosaur findByName(String name) {
@@ -33,7 +31,7 @@ public class DinosaurRepositoryInMemory implements DinosaurRepository {
     public List<Dinosaur> getSortedDinosaursByStrengthThenName() {
         List<Dinosaur> copiedDinoList = this.findAll();
 
-        copiedDinoList.sort(Comparator.comparing(Dinosaur::getForce).reversed().thenComparing(Dinosaur::getName));
+        copiedDinoList.sort(Comparator.comparing(Dinosaur::getStrength).reversed().thenComparing(Dinosaur::getName));
 
         return copiedDinoList;
     }

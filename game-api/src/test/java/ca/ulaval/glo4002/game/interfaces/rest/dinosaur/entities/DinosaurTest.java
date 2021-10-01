@@ -40,18 +40,18 @@ class DinosaurTest {
     }
 
     @Test
-    void given1003kgFemaleHerbivore_thenForceIsEqualTo1500() {
+    void given1003kgFemaleHerbivore_thenStrengthIsEqualTo1500() {
         Dinosaur grosPied = new Dinosaur("grosPied", 1003, "f", "Ankylosaurus");
-        int expectedForce = 1505;
+        int expectedStrength = 1505;
 
-        assertEquals(expectedForce, grosPied.getForce());
+        assertEquals(expectedStrength, grosPied.getStrength());
     }
 
     @Test
-    void given50kgMaleCarnivore_thenForceIsEqualTo75() {
-        int expectedForce = 75;
+    void given50kgMaleCarnivore_thenStrengthIsEqualTo75() {
+        int expectedStrength = 75;
 
-        assertEquals(expectedForce, carnivoreMale.getForce());
+        assertEquals(expectedStrength, carnivoreMale.getStrength());
     }
 
     @Test

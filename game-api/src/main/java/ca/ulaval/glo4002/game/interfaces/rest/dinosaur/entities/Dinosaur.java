@@ -10,7 +10,7 @@ public class Dinosaur {
     private final int weight;
     private final String gender;
     private final String species;
-    private final int force;
+    private final int strength;
     private final DietType diet;
     private boolean isNewlyAdded;
 
@@ -21,7 +21,7 @@ public class Dinosaur {
         this.species = species;
         this.diet = SpeciesDietsCorrespondances.speciesDictionary.get(species);
         this.isNewlyAdded = true;
-        this.force = calculateStrength(weight, gender, diet);
+        this.strength = calculateStrength(weight, gender, diet);
     }
 
     public String getName() {
@@ -38,8 +38,8 @@ public class Dinosaur {
         return species;
     }
 
-    public int getForce() {
-        return force;
+    public int getStrength() {
+        return strength;
     }
 
     public DietType getDiet() {
