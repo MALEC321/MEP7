@@ -32,10 +32,15 @@ public class DinosaurRepositoryInMemory implements DinosaurRepository {
     //TODO: CRÉER TESTS UNITS
     @Override
     public List<Dinosaur> getSortedDinosaursByStrength() {
-        return this.findAll().stream()
-                .sorted(Comparator.comparingDouble(Dinosaur::getForce))
-                .sorted(Comparator.comparing(Dinosaur::getName))
-                .collect(Collectors.toList());
+        List<Dinosaur> copiedDinoList = this.findAll();
+        copiedDinoList.sort((lhs, rhs) -> {
+            if (lhs.getForce() == rhs.getForce()) {
+                return lhs.getName().compareTo(rhs.getName());
+            } else {
+                return Double.compare(rhs.getForce(), lhs.getForce());
+            }
+        });
+         return copiedDinoList;
     }
 
 }
