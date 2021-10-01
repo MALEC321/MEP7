@@ -96,4 +96,10 @@ public class TurnUseCase {
             }
         }
     }
+
+    public void reset() {
+        turnRepository.reset();
+        resourceRepository.reset();
+        dinosaurRepository.reset();
+    }
 }

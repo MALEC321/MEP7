@@ -35,4 +35,10 @@ public class DinosaurRepositoryInMemory implements DinosaurRepository {
 
         return copiedDinoList;
     }
+
+    @Override
+    public void reset(){
+        dinosaursByName.clear();
+    }
+
 }

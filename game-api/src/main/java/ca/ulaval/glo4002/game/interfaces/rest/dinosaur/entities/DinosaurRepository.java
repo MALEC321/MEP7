@@ -12,4 +12,7 @@ public interface DinosaurRepository {
     void remove(Dinosaur dinosaur);
 
     List<Dinosaur> getSortedDinosaursByStrengthThenName();
+
+    void reset();
+
 }

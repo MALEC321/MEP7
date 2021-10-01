@@ -41,4 +41,8 @@ public class Resource {
     public int getWaterQuantity() {
         return resources.get("Water").getQuantity();
     }
+
+    public void clear() {
+        this.resources.clear();
+    }
 }

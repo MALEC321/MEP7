@@ -45,6 +45,7 @@ public class TurnResource {
     @Consumes(MediaType.APPLICATION_JSON)
     public Response reset() {
         Turn.number = 0;
+        turnUseCase.reset();
 
         return Response.status(Response.Status.OK).build();
     }

@@ -19,4 +19,9 @@ public class TurnRepositoryInMemory implements TurnRepository {
     public Turn findById(UUID id) {
         return turnsById.get(id);
     }
+
+    @Override
+    public void reset() {
+        turnsById.clear();
+    }
 }

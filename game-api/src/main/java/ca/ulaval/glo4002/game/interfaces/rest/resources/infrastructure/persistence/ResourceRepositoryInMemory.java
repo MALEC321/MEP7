@@ -164,4 +164,12 @@ public class ResourceRepositoryInMemory implements ResourceRepository {
         return false;
     }
 
+    @Override
+    public void reset() {
+        resources.getValue0().clear();
+        resources.getValue1().clear();
+        resources.getValue2().clear();
+        consumedResources.clear();
+        expiredResources.clear();
+    }
 }
