@@ -45,15 +45,17 @@ public class TurnUseCase {
     }
 
     public void createTurn() {
-        preAction();
+        //Todo This not gonna work with the turn because we need to find a way to add the cookIt as well
         List<Action> actions = actionRepository.getWaitingActions();
         Turn turn = turnFactory.create(actions);
+        actionRepository.execute(); //This play the turn addDino addResource
+        cookIt();
         actionRepository.execute();
         turnRepository.save(turn);
         postAction();
     }
 
-    public void preAction() {
+    private void cookIt() {
         Action addWater = new ActionFactory().create(new Water(10000), Command.ADD, resourceRepository);
         Action addSalad = new ActionFactory().create(new Salad(250), Command.ADD, resourceRepository);
         Action addBurger = new ActionFactory().create(new Burger(100), Command.ADD, resourceRepository);
