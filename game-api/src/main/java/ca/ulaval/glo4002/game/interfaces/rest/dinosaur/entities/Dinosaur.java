@@ -55,10 +55,11 @@ public class Dinosaur {
     }
 
     private double calculateStrength(int weight, String gender, DietType diet) {
-        double T = (diet == DietType.CARNIVORE) ? 1.5 : 1;
-        double S = (gender.equals("f")) ? 1.5 : 1;
+        BigDecimal bdDietMultiplicand = (diet.equals(DietType.CARNIVORE)) ? new BigDecimal(1.5) : new BigDecimal(1);
+        BigDecimal bdSexMultiplicand = (gender.equals("f")) ? new BigDecimal(1.5) : new BigDecimal(1);
+        BigDecimal bdStrength = new BigDecimal(weight).multiply(bdDietMultiplicand).multiply(bdSexMultiplicand);
 
-        return weight * T * S;
+        return bdStrength.setScale(0, RoundingMode.CEILING).intValue();
     }
 
     public int getWaterNeed() {
