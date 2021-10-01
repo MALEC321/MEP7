@@ -10,7 +10,7 @@ public class Dinosaur {
     private final int weight;
     private final String gender;
     private final String species;
-    private final double force;
+    private final int strength;
     private final DietType diet;
     private boolean isNewlyAdded;
 
@@ -21,7 +21,7 @@ public class Dinosaur {
         this.species = species;
         this.diet = SpeciesDietsCorrespondances.speciesDictionary.get(species);
         this.isNewlyAdded = true;
-        this.force = calculateStrength(weight, gender, diet);
+        this.strength = calculateStrength(weight, gender, diet);
     }
 
     public String getName() {
@@ -38,8 +38,8 @@ public class Dinosaur {
         return species;
     }
 
-    public double getForce() {
-        return force;
+    public int getStrength() {
+        return strength;
     }
 
     public DietType getDiet() {
@@ -54,11 +54,19 @@ public class Dinosaur {
         this.isNewlyAdded = isNewlyAdded;
     }
 
-    private double calculateStrength(int weight, String gender, DietType diet) {
-        double T = (diet == DietType.CARNIVORE) ? 1.5 : 1;
-        double S = (gender.equals("f")) ? 1.5 : 1;
+    private int calculateStrength(int weight, String gender, DietType diet) {
+        BigDecimal bdDietMultiplicand = (diet.equals(DietType.CARNIVORE)) ? new BigDecimal(1.5) : new BigDecimal(1);
+        BigDecimal bdSexMultiplicand = (gender.equals("f")) ? new BigDecimal(1.5) : new BigDecimal(1);
+        BigDecimal bdStrength = new BigDecimal(weight).multiply(bdDietMultiplicand).multiply(bdSexMultiplicand);
 
-        return weight * T * S;
+        return bdStrength.setScale(0, RoundingMode.CEILING).intValue();
+    }
+
+    public int feedWater() {
+        int waterNeed = getWaterNeed();
+        this.isNewlyAdded = false;
+
+        return waterNeed;
     }
 
     public int getWaterNeed() {
@@ -68,14 +76,19 @@ public class Dinosaur {
         BigDecimal bdWaterNeed = bdWeight.multiply(bdMultiplicand);
 
         if (this.isNewlyAdded()) {
-            this.isNewlyAdded = false;
-
             BigDecimal bdDoubleResourcesNeeds = new BigDecimal(2);
 
             return bdWaterNeed.multiply(bdDoubleResourcesNeeds).setScale(0, RoundingMode.CEILING).intValue();
         }
 
         return bdWaterNeed.setScale(0, RoundingMode.CEILING).intValue();
+    }
+
+    public int feedFood() {
+        int foodNeed = getFoodNeed();
+        this.isNewlyAdded = false;
+
+        return foodNeed;
     }
 
     public int getFoodNeed() {
@@ -86,8 +99,6 @@ public class Dinosaur {
         BigDecimal bdTotalFoodNeed = bdWeight.multiply(bdConsiderationByDietType).divide(bdDividend);
 
         if (this.isNewlyAdded()) {
-            this.isNewlyAdded = false;
-
             BigDecimal bdDoubleResourcesNeeds = new BigDecimal(2);
 
             return bdTotalFoodNeed.multiply(bdDoubleResourcesNeeds).setScale(0, RoundingMode.CEILING).intValue();

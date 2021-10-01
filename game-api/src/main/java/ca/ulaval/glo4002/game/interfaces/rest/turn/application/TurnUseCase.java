@@ -74,23 +74,23 @@ public class TurnUseCase {
     }
 
     public void feedDinosaurs() {
-        feedDinosaursByDietType(dinosaurRepository.getSortedDinosaursByStrength());
+        feedDinosaursByDietType(dinosaurRepository.getSortedDinosaursByStrengthThenName());
     }
 
     //TODO: Test uniter cette méthode
-    private void feedDinosaursByDietType(List<Dinosaur> sortedDinosaursByForce) {
-        for(Dinosaur dinosaur: sortedDinosaursByForce) {
+    private void feedDinosaursByDietType(List<Dinosaur> sortedDinosaursByStrengthThenName) {
+        for(Dinosaur dinosaur: sortedDinosaursByStrengthThenName) {
             if (dinosaur.getDiet().equals(DietType.HERBIVORE)) {
-                if(!resourceRepository.consume(new Salad(0), dinosaur.getFoodNeed())){
+                if(!resourceRepository.consume(new Salad(0), dinosaur.feedFood())){
                     dinosaurRepository.remove(dinosaur);
                 }
             } else {
-                if(!resourceRepository.consume(new Burger(0), dinosaur.getFoodNeed())) {
+                if(!resourceRepository.consume(new Burger(0), dinosaur.feedFood())) {
                     dinosaurRepository.remove(dinosaur);
                 }
             }
 
-            if(!resourceRepository.consume(new Water(0), dinosaur.getWaterNeed())) {
+            if(!resourceRepository.consume(new Water(0), dinosaur.feedWater())) {
                 dinosaurRepository.remove(dinosaur);
             }
         }

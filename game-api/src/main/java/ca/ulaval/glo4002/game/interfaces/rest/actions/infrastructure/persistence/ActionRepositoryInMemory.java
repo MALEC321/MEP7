@@ -23,6 +23,7 @@ public class ActionRepositoryInMemory implements ActionRepository {
         for (Action action: waitingActions) {
             action.execute();
         }
+
         waitingActions.clear();
     }
 }
