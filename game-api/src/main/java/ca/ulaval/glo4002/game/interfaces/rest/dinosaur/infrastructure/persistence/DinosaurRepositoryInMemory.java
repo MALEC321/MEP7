@@ -29,7 +29,6 @@ public class DinosaurRepositoryInMemory implements DinosaurRepository {
         dinosaursByName.remove(dinosaur.getName());
     }
 
-    //TODO: CRÉER TESTS UNITS
     @Override
     public List<Dinosaur> getSortedDinosaursByStrengthThenName() {
         List<Dinosaur> copiedDinoList = this.findAll();

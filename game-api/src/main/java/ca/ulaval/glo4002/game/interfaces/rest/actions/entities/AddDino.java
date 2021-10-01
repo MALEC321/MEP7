@@ -6,7 +6,6 @@ import ca.ulaval.glo4002.game.interfaces.rest.dinosaur.entities.DinosaurReposito
 import java.util.UUID;
 
 public class AddDino extends Action {
-
     public AddDino(UUID id, Dinosaur dinosaur, DinosaurRepository dinosaurRepository) {
         super(id, dinosaur, dinosaurRepository);
     }
@@ -14,6 +13,5 @@ public class AddDino extends Action {
     @Override
     public void execute() {
         ((DinosaurRepository)getObjectRepository()).save((Dinosaur) getObject());
-        System.out.println(((DinosaurRepository)getObjectRepository()).findAll().size() + " dinos added");
     }
 }
