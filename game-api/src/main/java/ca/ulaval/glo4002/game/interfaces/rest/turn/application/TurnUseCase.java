@@ -74,7 +74,7 @@ public class TurnUseCase {
     }
 
     public void feedDinosaurs() {
-        feedDinosaursByDietType(dinosaurRepository.getSortedDinosaursByStrength());
+        feedDinosaursByDietType(dinosaurRepository.getSortedDinosaursByStrengthThenName());
     }
 
     //TODO: Test uniter cette méthode

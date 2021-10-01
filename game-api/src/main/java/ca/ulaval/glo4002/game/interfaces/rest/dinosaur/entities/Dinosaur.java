@@ -10,7 +10,7 @@ public class Dinosaur {
     private final int weight;
     private final String gender;
     private final String species;
-    private final double force;
+    private final int force;
     private final DietType diet;
     private boolean isNewlyAdded;
 
@@ -38,7 +38,7 @@ public class Dinosaur {
         return species;
     }
 
-    public double getForce() {
+    public int getForce() {
         return force;
     }
 
@@ -54,7 +54,7 @@ public class Dinosaur {
         this.isNewlyAdded = isNewlyAdded;
     }
 
-    private double calculateStrength(int weight, String gender, DietType diet) {
+    private int calculateStrength(int weight, String gender, DietType diet) {
         BigDecimal bdDietMultiplicand = (diet.equals(DietType.CARNIVORE)) ? new BigDecimal(1.5) : new BigDecimal(1);
         BigDecimal bdSexMultiplicand = (gender.equals("f")) ? new BigDecimal(1.5) : new BigDecimal(1);
         BigDecimal bdStrength = new BigDecimal(weight).multiply(bdDietMultiplicand).multiply(bdSexMultiplicand);

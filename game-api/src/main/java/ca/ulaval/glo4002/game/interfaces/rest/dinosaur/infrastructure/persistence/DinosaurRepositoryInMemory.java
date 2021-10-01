@@ -31,16 +31,11 @@ public class DinosaurRepositoryInMemory implements DinosaurRepository {
 
     //TODO: CRÉER TESTS UNITS
     @Override
-    public List<Dinosaur> getSortedDinosaursByStrength() {
+    public List<Dinosaur> getSortedDinosaursByStrengthThenName() {
         List<Dinosaur> copiedDinoList = this.findAll();
-        copiedDinoList.sort((lhs, rhs) -> {
-            if (lhs.getForce() == rhs.getForce()) {
-                return lhs.getName().compareTo(rhs.getName());
-            } else {
-                return Double.compare(rhs.getForce(), lhs.getForce());
-            }
-        });
-         return copiedDinoList;
-    }
 
+        copiedDinoList.sort(Comparator.comparing(Dinosaur::getForce).reversed().thenComparing(Dinosaur::getName));
+
+        return copiedDinoList;
+    }
 }
