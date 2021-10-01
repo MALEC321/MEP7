@@ -22,7 +22,7 @@ class DinosaurRepositoryInMemoryTest {
     void whenSortingDinosaurs_thenCorrectlySortByStrengthThenName() {
         Dinosaur firstDino = new Dinosaur("ba", 100, "f", "Ankylosaurus");
         Dinosaur secondDino = new Dinosaur("bb", 100, "f", "Ankylosaurus");
-        Dinosaur thirdDino = new Dinosaur("ab", 1, "m", "Ankylosaurus");
+        Dinosaur thirdDino = new Dinosaur("ab", 50, "m", "Ankylosaurus");
         Dinosaur lastDino = new Dinosaur("aa", 1, "f", "Ankylosaurus");
         dinosaurRepositoryInMemory.save(secondDino);
         dinosaurRepositoryInMemory.save(lastDino);
