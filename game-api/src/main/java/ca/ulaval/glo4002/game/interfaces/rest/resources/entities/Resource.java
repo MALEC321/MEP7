@@ -43,6 +43,6 @@ public class Resource {
     }
 
     public void clear() {
-        this.resources.clear();
+        for (ResourceElements resource: resources.values()) resource.reset();
     }
 }

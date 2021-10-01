@@ -45,7 +45,7 @@ public class TurnUseCase {
     }
 
     public void createTurn() {
-        preAction(actionRepository);
+        preAction();
         List<Action> actions = actionRepository.getWaitingActions();
         Turn turn = turnFactory.create(actions);
         actionRepository.execute();
@@ -53,19 +53,18 @@ public class TurnUseCase {
         postAction();
     }
 
-    public void preAction(ActionRepository actionRepository) {
+    public void preAction() {
+        Action addWater = new ActionFactory().create(new Water(10000), Command.ADD, resourceRepository);
+        Action addSalad = new ActionFactory().create(new Salad(250), Command.ADD, resourceRepository);
+        Action addBurger = new ActionFactory().create(new Burger(100), Command.ADD, resourceRepository);
+        actionRepository.save(addBurger);
+        actionRepository.save(addSalad);
+        actionRepository.save(addWater);
     }
 
     public void postAction() { //Todo rajouter les post action ici
         resourceRepository.decreaseExpirationDate();
         feedDinosaurs();
-
-        Action addWater = new ActionFactory().create(new Water(10000), Command.ADD, resourceRepository);
-        Action addSalad = new ActionFactory().create(new Salad(250), Command.ADD, resourceRepository);
-        Action addBurger = new ActionFactory().create(new Burger(100), Command.ADD, resourceRepository);
-        actionRepository.save(addWater);
-        actionRepository.save(addSalad);
-        actionRepository.save(addBurger);
     }
 
     public TurnDto getFromId(UUID id) {

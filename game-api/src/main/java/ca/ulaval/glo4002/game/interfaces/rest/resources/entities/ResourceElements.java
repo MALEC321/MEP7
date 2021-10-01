@@ -16,6 +16,10 @@ public abstract class ResourceElements {
         return quantity <= this.quantity;
     }
 
+    public void reset() {
+        this.quantity = 0;
+    }
+
     public void setQuantity(int quantity) {
         this.quantity = quantity;
     }
