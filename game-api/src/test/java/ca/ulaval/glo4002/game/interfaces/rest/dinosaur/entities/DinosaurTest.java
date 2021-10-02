@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import ca.ulaval.glo4002.game.interfaces.rest.dinosaur.entities.enums.DietType;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 class DinosaurTest {
@@ -39,17 +40,18 @@ class DinosaurTest {
     }
 
     @Test
-    void given1000kgFemaleHerbivore_thenForceIsEqualTo1500() {
-        int expectedForce = 1500;
+    void given1003kgFemaleHerbivore_thenStrengthIsEqualTo1500() {
+        Dinosaur grosPied = new Dinosaur("grosPied", 1003, "f", "Ankylosaurus");
+        int expectedStrength = 1505;
 
-        assertEquals(expectedForce, herbivoreFemale.getForce());
+        assertEquals(expectedStrength, grosPied.getStrength());
     }
 
     @Test
-    void given50kgMaleCarnivore_thenForceIsEqualTo75() {
-        int expectedForce = 75;
+    void given50kgMaleCarnivore_thenStrengthIsEqualTo75() {
+        int expectedStrength = 75;
 
-        assertEquals(expectedForce, carnivoreMale.getForce());
+        assertEquals(expectedStrength, carnivoreMale.getStrength());
     }
 
     @Test

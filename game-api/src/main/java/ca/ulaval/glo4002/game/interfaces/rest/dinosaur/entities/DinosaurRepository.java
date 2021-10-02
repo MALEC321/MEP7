@@ -11,5 +11,5 @@ public interface DinosaurRepository {
 
     void remove(Dinosaur dinosaur);
 
-    List<Dinosaur> getSortedDinosaursByStrength();
+    List<Dinosaur> getSortedDinosaursByStrengthThenName();
 }
