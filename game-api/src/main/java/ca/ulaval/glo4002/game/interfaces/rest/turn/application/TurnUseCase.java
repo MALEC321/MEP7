@@ -50,11 +50,9 @@ public class TurnUseCase {
 
         Turn turn = turnFactory.create(actions);
         turnRepository.save(turn);
-        
-        postAction();
 
         actionRepository.execute();
-
+        postAction();
 
     }
 
