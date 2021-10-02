@@ -8,6 +8,7 @@ import java.util.List;
 
 public class ActionRepositoryInMemory implements ActionRepository {
     private final List<Action> waitingActions = new ArrayList<>();
+
     @Override
     public void save(Action action) {
         waitingActions.add(action);
