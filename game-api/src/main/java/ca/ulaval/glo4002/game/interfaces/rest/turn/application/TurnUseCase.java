@@ -50,22 +50,19 @@ public class TurnUseCase {
         Turn turn = turnFactory.create(actions);
         turnRepository.save(turn);
 
-        cookIt();
         actionRepository.execute();
 
         postAction();
     }
 
     private void cookIt() {
-        Action addWater = new ActionFactory().create(new Water(10000), Command.ADD, resourceRepository);
-        Action addSalad = new ActionFactory().create(new Salad(250), Command.ADD, resourceRepository);
-        Action addBurger = new ActionFactory().create(new Burger(100), Command.ADD, resourceRepository);
-        actionRepository.save(addBurger);
-        actionRepository.save(addSalad);
-        actionRepository.save(addWater);
+        resourceRepository.add(new Burger(100));
+        resourceRepository.add(new Salad(250));
+        resourceRepository.add(new Water(10000));
     }
 
     public void postAction() { //Todo rajouter les post action ici
+        cookIt();
         resourceRepository.decreaseExpirationDate();
         feedDinosaurs();
     }
