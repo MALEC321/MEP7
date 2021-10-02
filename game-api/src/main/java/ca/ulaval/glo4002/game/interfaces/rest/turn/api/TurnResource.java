@@ -30,11 +30,11 @@ public class TurnResource {
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
     public Response createTurn() {
+        turnUseCase.createTurn();
 
         TurnDto turnDto = new TurnDto();
         turnDto.turnNumber = Turn.number;
         TurnResponse response = turnDtoAssembler.toResponse(turnDto);
-        turnUseCase.createTurn();
 
         return Response.status(Response.Status.OK).entity(response).build();
     }
