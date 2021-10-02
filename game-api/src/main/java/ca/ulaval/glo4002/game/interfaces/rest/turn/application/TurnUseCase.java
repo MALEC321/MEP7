@@ -63,8 +63,9 @@ public class TurnUseCase {
 
     public void postAction() { //Todo rajouter les post action ici
         cookIt();
-        resourceRepository.decreaseExpirationDate();
         feedDinosaurs();
+        resourceRepository.decreaseExpirationDate();
+
     }
 
     public TurnDto getFromId(UUID id) {

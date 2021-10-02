@@ -3,12 +3,11 @@ package ca.ulaval.glo4002.game.interfaces.rest.dinosaur.infrastructure.persisten
 import ca.ulaval.glo4002.game.interfaces.rest.dinosaur.entities.Dinosaur;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.mockito.Mock;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class DinosaurRepositoryInMemoryTest {
     DinosaurRepositoryInMemory dinosaurRepositoryInMemory;
@@ -20,9 +19,9 @@ class DinosaurRepositoryInMemoryTest {
 
     @Test
     void whenSortingDinosaurs_thenCorrectlySortByStrengthThenName() {
-        Dinosaur firstDino = new Dinosaur("ba", 100, "f", "Ankylosaurus");
-        Dinosaur secondDino = new Dinosaur("bb", 100, "f", "Ankylosaurus");
-        Dinosaur thirdDino = new Dinosaur("ab", 50, "m", "Ankylosaurus");
+        Dinosaur firstDino = new Dinosaur("aaa", 100, "f", "Ankylosaurus");
+        Dinosaur secondDino = new Dinosaur("ab", 100, "f", "Ankylosaurus");
+        Dinosaur thirdDino = new Dinosaur("a", 50, "m", "Ankylosaurus");
         Dinosaur lastDino = new Dinosaur("aa", 1, "f", "Ankylosaurus");
         dinosaurRepositoryInMemory.save(secondDino);
         dinosaurRepositoryInMemory.save(lastDino);
@@ -33,6 +32,10 @@ class DinosaurRepositoryInMemoryTest {
         dinoListInOrder.add(secondDino);
         dinoListInOrder.add(thirdDino);
         dinoListInOrder.add(lastDino);
+
+        for (Dinosaur dinosaur : dinoListInOrder) {
+            System.out.println(dinosaur.getName() + " " + dinosaur.getStrength());
+        }
 
         assertEquals(dinoListInOrder, dinosaurRepositoryInMemory.getSortedDinosaursByStrengthThenName());
     }
