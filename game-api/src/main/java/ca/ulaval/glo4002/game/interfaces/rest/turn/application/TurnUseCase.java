@@ -48,9 +48,9 @@ public class TurnUseCase {
         //Todo This not gonna work with the turn because we need to find a way to add the cookIt as well
         List<Action> actions = actionRepository.getWaitingActions();
         Turn turn = turnFactory.create(actions);
-        //actionRepository.execute(); //This play the turn addDino addResource
+        actionRepository.execute(); //This play the turn addDino addResource
         cookIt();
-        //actionRepository.execute();
+        actionRepository.execute();
         turnRepository.save(turn);
 
         postAction();
@@ -63,7 +63,6 @@ public class TurnUseCase {
         actionRepository.save(addBurger);
         actionRepository.save(addSalad);
         actionRepository.save(addWater);
-        actionRepository.execute();
     }
 
     public void postAction() { //Todo rajouter les post action ici
