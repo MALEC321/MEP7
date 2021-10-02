@@ -36,7 +36,7 @@ public class TurnResource {
         turnDto.turnNumber = Turn.number;
         TurnResponse response = turnDtoAssembler.toResponse(turnDto);
 
-        return Response.status(Response.Status.CREATED).entity(response).build();
+        return Response.status(Response.Status.OK).entity(response).build();
     }
 
     @Path("/reset")
