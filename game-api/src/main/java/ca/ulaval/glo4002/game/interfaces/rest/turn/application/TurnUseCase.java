@@ -48,10 +48,10 @@ public class TurnUseCase {
         //Todo This not gonna work with the turn because we need to find a way to add the cookIt as well
         List<Action> actions = actionRepository.getWaitingActions();
 
+        actionRepository.execute();
+
         Turn turn = turnFactory.create(actions);
         turnRepository.save(turn);
-
-        actionRepository.execute();
         postAction();
 
     }
