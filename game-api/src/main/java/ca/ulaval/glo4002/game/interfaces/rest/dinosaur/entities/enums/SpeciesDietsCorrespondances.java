@@ -13,7 +13,7 @@ public class SpeciesDietsCorrespondances {
         put("Triceratops", DietType.HERBIVORE);
         put("Allosaurus", DietType.CARNIVORE);
         put("Megalosaurus", DietType.CARNIVORE);
-        put("Spinosauraus", DietType.CARNIVORE);
+        put("Spinosaurus", DietType.CARNIVORE);
         put("Tyrannosaurus Rex", DietType.CARNIVORE);
         put("Velociraptor", DietType.CARNIVORE);
     }};
