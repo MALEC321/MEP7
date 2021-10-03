@@ -125,15 +125,15 @@ public class ResourceRepositoryInMemory implements ResourceRepository {
         }
     }
 
-    private boolean eatBurger(int quantity) {
+    private boolean eatBurger(int quantityNeeded) { //900
         for (ResourceElements burgerBowl: resources.getValue0()) {
             int actualQuantity = burgerBowl.getQuantity();
-            if (burgerBowl.removeElement(quantity)) {
-                consumedResources.addBurger(quantity);
+            if (burgerBowl.removeElement(quantityNeeded)) {
+                consumedResources.addBurger(quantityNeeded);
                 return true;
             }
-            quantity -= actualQuantity;
-            consumedResources.addBurger(quantity);
+            consumedResources.addBurger(actualQuantity);
+            quantityNeeded -= actualQuantity;
         }
         return false;
     }
@@ -145,8 +145,8 @@ public class ResourceRepositoryInMemory implements ResourceRepository {
                 consumedResources.addSalad(quantity);
                 return true;
             }
+            consumedResources.addSalad(actualQuantity);
             quantity -= actualQuantity; //Because salad quantity will be 0 after removeElement
-            consumedResources.addSalad(quantity);
         }
         return false;
     }
@@ -158,8 +158,8 @@ public class ResourceRepositoryInMemory implements ResourceRepository {
                 consumedResources.addWater(quantity);
                 return true;
             }
+            consumedResources.addWater(actualQuantity);
             quantity -= actualQuantity;
-            consumedResources.addWater(quantity);
         }
         return false;
     }
