@@ -13,7 +13,7 @@ public class NotExistentNameExceptionMapper extends ExceptionResponse implements
     public Response toResponse(NotExistentNameException e) {
         ExceptionResponseDto exceptionResponseDto = new ExceptionResponseDto();
         exceptionResponseDto.error = ExceptionErrorAndDescription.NON_EXISTENT_NAME.getError();
-        exceptionResponseDto.description = ExceptionErrorAndDescription.DUPLICATE_NAME.getDescription();
+        exceptionResponseDto.description = ExceptionErrorAndDescription.NON_EXISTENT_NAME.getDescription();
         return exceptionResponse(Response.Status.NOT_FOUND, exceptionResponseDto);
     }
 }
