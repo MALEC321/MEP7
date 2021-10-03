@@ -55,8 +55,8 @@ public class Dinosaur {
     }
 
     private int calculateStrength(int weight, String gender, DietType diet) {
-        BigDecimal bdDietMultiplicand = (diet.equals(DietType.CARNIVORE)) ? new BigDecimal(1.5) : new BigDecimal(1);
-        BigDecimal bdSexMultiplicand = (gender.equals("f")) ? new BigDecimal(1.5) : new BigDecimal(1);
+        BigDecimal bdDietMultiplicand = (diet.equals(DietType.CARNIVORE)) ? new BigDecimal("1.5") : new BigDecimal("1");
+        BigDecimal bdSexMultiplicand = (gender.equals("f")) ? new BigDecimal("1.5") : new BigDecimal("1");
         BigDecimal bdStrength = new BigDecimal(weight).multiply(bdDietMultiplicand).multiply(bdSexMultiplicand);
 
         return bdStrength.setScale(0, RoundingMode.CEILING).intValue();
@@ -71,7 +71,7 @@ public class Dinosaur {
 
     public int getWaterNeed() {
         BigDecimal bdWeight = new BigDecimal(this.weight);
-        BigDecimal bdMultiplicand = new BigDecimal(0.6);
+        BigDecimal bdMultiplicand = new BigDecimal("0.6");
 
         BigDecimal bdWaterNeed = bdWeight.multiply(bdMultiplicand);
 
@@ -107,7 +107,7 @@ public class Dinosaur {
         return bdTotalFoodNeed.setScale(0, RoundingMode.CEILING).intValue() ;
     }
 
-    private double getConsiderationByDietType() {
-        return this.diet == DietType.HERBIVORE ? 0.5 : 0.2;
+    private String getConsiderationByDietType() {
+        return this.diet == DietType.HERBIVORE ? "0.5" : "0.2";
     }
 }
