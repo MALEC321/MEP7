@@ -1,9 +1,7 @@
 package ca.ulaval.glo4002.game.interfaces.rest.turn.application;
 
 import ca.ulaval.glo4002.game.interfaces.rest.actions.entities.Action;
-import ca.ulaval.glo4002.game.interfaces.rest.actions.entities.ActionFactory;
 import ca.ulaval.glo4002.game.interfaces.rest.actions.entities.ActionRepository;
-import ca.ulaval.glo4002.game.interfaces.rest.actions.entities.Command;
 import ca.ulaval.glo4002.game.interfaces.rest.dinosaur.entities.Dinosaur;
 import ca.ulaval.glo4002.game.interfaces.rest.dinosaur.entities.DinosaurRepository;
 import ca.ulaval.glo4002.game.interfaces.rest.dinosaur.entities.enums.DietType;
@@ -48,8 +46,8 @@ public class TurnUseCase {
         //Todo This not gonna work with the turn because we need to find a way to add the cookIt as well
         List<Action> actions = actionRepository.getWaitingActions();
 
-        actionRepository.execute();
         postAction();
+        actionRepository.execute();
 
         Turn turn = turnFactory.create(actions);
         turnRepository.save(turn);
@@ -83,19 +81,22 @@ public class TurnUseCase {
     //TODO: Test uniter cette méthode
     private void feedDinosaursByDietType(List<Dinosaur> sortedDinosaursByStrengthThenName) {
         for(Dinosaur dinosaur: sortedDinosaursByStrengthThenName) {
+            boolean dead = false;
             if (dinosaur.getDiet().equals(DietType.HERBIVORE)) {
-                if(!resourceRepository.consume(new Salad(0), dinosaur.feedFood())){
-                    dinosaurRepository.remove(dinosaur);
+                if(!resourceRepository.eatSalad(dinosaur.feedFood())){
+                    dead = true;
                 }
             } else {
-                if(!resourceRepository.consume(new Burger(0), dinosaur.feedFood())) {
-                    dinosaurRepository.remove(dinosaur);
+                if(!resourceRepository.eatBurger(dinosaur.feedFood())) {
+                    dead = true;
                 }
             }
 
-            if(!resourceRepository.consume(new Water(0), dinosaur.feedWater())) {
-                dinosaurRepository.remove(dinosaur);
+            if(!resourceRepository.drinkWater(dinosaur.feedWater())) {
+                dead = true;
             }
+
+            if (dead) dinosaurRepository.remove(dinosaur);
         }
     }
 
