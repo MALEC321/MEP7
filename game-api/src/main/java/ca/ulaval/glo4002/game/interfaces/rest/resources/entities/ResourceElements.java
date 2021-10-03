@@ -12,8 +12,9 @@ public abstract class ResourceElements {
     }
 
     public boolean removeElement(int quantity) {
-        this.quantity = (quantity <= this.quantity)? this.quantity - quantity : 0;
-        return quantity <= this.quantity;
+        int actualQuantity = this.quantity;
+        this.quantity = (quantity <= this.quantity) ? this.quantity - quantity : 0;
+        return quantity <= actualQuantity;
     }
 
     public void reset() {
