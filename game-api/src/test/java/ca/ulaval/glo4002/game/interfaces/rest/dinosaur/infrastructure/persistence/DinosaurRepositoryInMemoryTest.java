@@ -33,10 +33,6 @@ class DinosaurRepositoryInMemoryTest {
         dinoListInOrder.add(thirdDino);
         dinoListInOrder.add(lastDino);
 
-        for (Dinosaur dinosaur : dinoListInOrder) {
-            System.out.println(dinosaur.getName() + " " + dinosaur.getStrength());
-        }
-
         assertEquals(dinoListInOrder, dinosaurRepositoryInMemory.getSortedDinosaursByStrengthThenName());
     }
 }
