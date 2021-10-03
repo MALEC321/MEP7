@@ -1,9 +1,7 @@
 package ca.ulaval.glo4002.game.interfaces.rest.turn.application;
 
 import ca.ulaval.glo4002.game.interfaces.rest.actions.entities.Action;
-import ca.ulaval.glo4002.game.interfaces.rest.actions.entities.ActionFactory;
 import ca.ulaval.glo4002.game.interfaces.rest.actions.entities.ActionRepository;
-import ca.ulaval.glo4002.game.interfaces.rest.actions.entities.Command;
 import ca.ulaval.glo4002.game.interfaces.rest.dinosaur.entities.Dinosaur;
 import ca.ulaval.glo4002.game.interfaces.rest.dinosaur.entities.DinosaurRepository;
 import ca.ulaval.glo4002.game.interfaces.rest.dinosaur.entities.enums.DietType;
@@ -48,8 +46,8 @@ public class TurnUseCase {
         //Todo This not gonna work with the turn because we need to find a way to add the cookIt as well
         List<Action> actions = actionRepository.getWaitingActions();
 
-        actionRepository.execute();
         postAction();
+        actionRepository.execute();
 
         Turn turn = turnFactory.create(actions);
         turnRepository.save(turn);
