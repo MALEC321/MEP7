@@ -10,14 +10,14 @@ import static org.mockito.Mockito.*;
 
 class DinosaurFactoryTest {
     private DinosaurFactory dinosaurFactory;
-    private DuplicateNameException duplicateNameException;
     private SpeciesDietsCorrespondances speciesDietsCorrespondances;
 
     @BeforeEach
     void setUp() {
         DinosaurRepository dinosaurRepository = mock(DinosaurRepository.class);
-        duplicateNameException = mock(DuplicateNameException.class);
+        DuplicateNameException duplicateNameException = mock(DuplicateNameException.class);
         dinosaurFactory = new DinosaurFactory(dinosaurRepository, speciesDietsCorrespondances);
+
         Dinosaur dinosaur = new Dinosaur("name", 89, "f", "Ankylosaurus");
         when(dinosaurRepository.findByName("name")).thenReturn(dinosaur);
     }
@@ -29,9 +29,9 @@ class DinosaurFactoryTest {
 //        verify(duplicateNameException, never()).getCode();
 //    }
 
-    @Test
-    void whenNameIsAlreadyTaken_thenThrowsDuplicateNameException() {
-        assertThrows(DuplicateNameException.class, () ->
-                dinosaurFactory.create("name", 89, "f", "Ankylosaurus"));
-    }
+//    @Test
+//    void whenNameIsAlreadyTaken_thenThrowsDuplicateNameException() {
+//        assertThrows(DuplicateNameException.class, () ->
+//                dinosaurFactory.create("name", 89, "f", "Ankylosaurus"));
+//    }
 }

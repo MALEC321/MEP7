@@ -40,9 +40,33 @@ class DinosaurTest {
     }
 
     @Test
-    void given1003kgFemaleHerbivore_thenStrengthIsEqualTo1500() {
-        Dinosaur grosPied = new Dinosaur("grosPied", 1003, "f", "Ankylosaurus");
-        int expectedStrength = 1505;
+    void given123kgFemaleHerbivore_thenStrengthIsEqualTo185() {
+        Dinosaur grosPied = new Dinosaur("grosPied", 2, "f", "Ankylosaurus");
+        int expectedStrength = 3;
+
+        assertEquals(expectedStrength, grosPied.getStrength());
+    }
+
+    @Test
+    void given123kgMaleHerbivore_thenStrengthIsEqualTo185() {
+        Dinosaur grosPied = new Dinosaur("grosPied", 1, "m", "Ankylosaurus");
+        int expectedStrength = 1;
+
+        assertEquals(expectedStrength, grosPied.getStrength());
+    }
+
+    @Test
+    void given123kgFemaleCarnivore_thenStrengthIsEqualTo277() {//12345678
+        Dinosaur grosPied = new Dinosaur("grosPied", 1, "f", "Velociraptor");
+        int expectedStrength = 3;
+
+        assertEquals(expectedStrength, grosPied.getStrength());
+    }
+
+    @Test
+    void given121kgMaleCarnivore_thenStrengthIsEqualTo273() {
+        Dinosaur grosPied = new Dinosaur("grosPied", 2, "m", "Velociraptor");
+        int expectedStrength = 3;
 
         assertEquals(expectedStrength, grosPied.getStrength());
     }
@@ -66,6 +90,23 @@ class DinosaurTest {
         int expectedFoodNeeds = 5;
 
         assertEquals(expectedFoodNeeds, herbivoreFemale.getFoodNeed());
+    }
+
+    @Test
+    void givenNewlyAdded50000kgFemaleCarnivore_thenFoodNeedsEquals100()  {
+        Dinosaur grosPied = new Dinosaur("grosPied", 50000, "f", "Velociraptor");
+        int expectedFoodNeeds = 100;
+
+        assertEquals(expectedFoodNeeds, grosPied.getFoodNeed());
+    }
+
+    @Test
+    void givenNotNewlyAdded50000kgFemaleCarnivore_thenFoodNeedsEquals50()  {
+        Dinosaur grosPied = new Dinosaur("grosPied", 50000, "f", "Velociraptor");
+        int expectedFoodNeeds = 50;
+        grosPied.setNewlyAdded(false);
+
+        assertEquals(expectedFoodNeeds, grosPied.getFoodNeed());
     }
 
     @Test
