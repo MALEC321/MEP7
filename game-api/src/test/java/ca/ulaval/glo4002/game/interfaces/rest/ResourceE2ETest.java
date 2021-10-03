@@ -183,6 +183,7 @@ public class ResourceE2ETest {
         expectedBody = expectedBody.replace(" ", "");
         Assert.assertEquals(body.asString(), expectedBody);
         System.out.println("FIN TEST testEnonceRes *******************************");
+        //
 
     }
 }
