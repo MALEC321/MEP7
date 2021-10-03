@@ -93,9 +93,18 @@ class DinosaurTest {
     }
 
     @Test
-    void givenNewlyAdded50000kgFemaleCarnivore_thenFoodNeedsEquals1()  {
+    void givenNewlyAdded50000kgFemaleCarnivore_thenFoodNeedsEquals100()  {
         Dinosaur grosPied = new Dinosaur("grosPied", 50000, "f", "Velociraptor");
         int expectedFoodNeeds = 100;
+
+        assertEquals(expectedFoodNeeds, grosPied.getFoodNeed());
+    }
+
+    @Test
+    void givenNotNewlyAdded50000kgFemaleCarnivore_thenFoodNeedsEquals50()  {
+        Dinosaur grosPied = new Dinosaur("grosPied", 50000, "f", "Velociraptor");
+        int expectedFoodNeeds = 50;
+        grosPied.setNewlyAdded(false);
 
         assertEquals(expectedFoodNeeds, grosPied.getFoodNeed());
     }
