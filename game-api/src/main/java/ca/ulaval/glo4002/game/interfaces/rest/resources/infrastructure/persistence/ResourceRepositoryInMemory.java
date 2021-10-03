@@ -92,19 +92,6 @@ public class ResourceRepositoryInMemory implements ResourceRepository {
     }
 
     @Override
-    public boolean consume(ResourceElements resourceElement, int quantity) {
-        if (resourceElement instanceof Burger) {
-            return eatBurger(quantity);
-        }  else if (resourceElement instanceof Salad) {
-            return eatSalad(quantity);
-        }  else if (resourceElement instanceof Water) {
-            return drinkWater(quantity);
-        }
-
-        return false;
-    }
-
-    @Override
     public int findResourceQuantity(int value) {
         int quantity = 0;
         if (value == 0) {
@@ -125,7 +112,8 @@ public class ResourceRepositoryInMemory implements ResourceRepository {
         }
     }
 
-    private boolean eatBurger(int quantityNeeded) { //900
+    @Override
+    public boolean eatBurger(int quantityNeeded) { //900
         for (ResourceElements burgerBowl: resources.getValue0()) {
             int actualQuantity = burgerBowl.getQuantity();
             if (burgerBowl.removeElement(quantityNeeded)) {
@@ -138,7 +126,8 @@ public class ResourceRepositoryInMemory implements ResourceRepository {
         return false;
     }
 
-    private boolean eatSalad(int quantity) {
+    @Override
+    public boolean eatSalad(int quantity) {
         for (ResourceElements saladBowl: resources.getValue1()) {
             int actualQuantity = saladBowl.getQuantity();
             if (saladBowl.removeElement(quantity)) {
@@ -151,7 +140,8 @@ public class ResourceRepositoryInMemory implements ResourceRepository {
         return false;
     }
 
-    private boolean drinkWater(int quantity) {
+    @Override
+    public boolean drinkWater(int quantity) {
         for (ResourceElements waterBank: resources.getValue2()) {
             int actualQuantity = waterBank.getQuantity();
             if (waterBank.removeElement(quantity)) {
