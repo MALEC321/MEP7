@@ -39,7 +39,7 @@ public class ResourceResource {
         List<ResourceDto> resources = resourceUseCase.getAllResources();
         ResourcesResponse response = resourceDtoAssembler.toResponse(resources);
 
-        return Response.ok().entity(response).build();
+        return Response.status(Response.Status.OK).entity(response).build();
     }
 
 }
