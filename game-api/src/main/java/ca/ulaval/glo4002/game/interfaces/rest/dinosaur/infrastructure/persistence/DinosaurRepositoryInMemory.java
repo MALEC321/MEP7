@@ -18,7 +18,7 @@ public class DinosaurRepositoryInMemory implements DinosaurRepository {
 
     @Override
     public void save(Dinosaur dinosaur) {
-        dinosaursByName.put(dinosaur.getName(), dinosaur);
+        dinosaursByName.putIfAbsent(dinosaur.getName(), dinosaur);
     }
 
     @Override
