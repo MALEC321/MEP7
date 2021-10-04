@@ -6,4 +6,5 @@ public interface ActionRepository {
     void save(Action action);
     List<Action> getWaitingActions();
     void execute();
+    void reset();
 }

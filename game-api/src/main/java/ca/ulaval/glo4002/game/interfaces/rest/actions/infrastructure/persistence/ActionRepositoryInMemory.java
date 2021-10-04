@@ -27,4 +27,9 @@ public class ActionRepositoryInMemory implements ActionRepository {
 
         waitingActions.clear();
     }
+
+    @Override
+    public void reset() {
+        waitingActions.clear();
+    }
 }

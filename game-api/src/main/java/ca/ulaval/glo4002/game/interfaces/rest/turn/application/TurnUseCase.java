@@ -103,5 +103,6 @@ public class TurnUseCase {
         turnRepository.reset();
         resourceRepository.reset();
         dinosaurRepository.reset();
+        actionRepository.reset();
     }
 }
