@@ -85,10 +85,7 @@ public class Dinosaur {
     }
 
     public int feedFood() {
-        int foodNeed = getFoodNeed();
-        this.isNewlyAdded = false;
-
-        return foodNeed;
+        return getFoodNeed();
     }
 
     public int getFoodNeed() {
