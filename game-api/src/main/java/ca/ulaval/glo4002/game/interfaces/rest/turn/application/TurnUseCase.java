@@ -45,11 +45,12 @@ public class TurnUseCase {
     public void createTurn() {
         //Todo This not gonna work with the turn because we need to find a way to add the cookIt as well
         List<Action> actions = actionRepository.getWaitingActions();
+        cookIt();
 
         actionRepository.execute();
         postAction();
 
-        Turn turn = turnFactory.create(actions);
+        Turn turn = turnFactory.create(actions); //+1
         turnRepository.save(turn);
     }
 
@@ -60,8 +61,6 @@ public class TurnUseCase {
     }
 
     public void postAction() { //Todo rajouter les post action ici
-        cookIt();
-
         resourceRepository.decreaseExpirationDate();
 
         feedDinosaurs();
