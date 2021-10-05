@@ -1,6 +1,13 @@
 package ca.ulaval.glo4002.game.configuration;
 
+import ca.ulaval.glo4002.game.application.bebe.BebeUseCase;
+import ca.ulaval.glo4002.game.controllers.bebe.BebeResource;
+import ca.ulaval.glo4002.game.controllers.bebe.dtos.BebeAssembler;
+import ca.ulaval.glo4002.game.controllers.bebe.dtos.BebeDtoAssembler;
+import ca.ulaval.glo4002.game.domain.bebe.BebeFactory;
+import ca.ulaval.glo4002.game.domain.bebe.BebeRepository;
 import ca.ulaval.glo4002.game.repositories.actions.ActionRepositoryInMemory;
+import ca.ulaval.glo4002.game.repositories.bebe.BebeRepositoryInMemory;
 import ca.ulaval.glo4002.game.repositories.dinosaur.DinosaurRepositoryInMemory;
 import ca.ulaval.glo4002.game.application.dinosaur.DinosaurUseCase;
 import ca.ulaval.glo4002.game.repositories.resources.ResourceRepositoryInMemory;
@@ -64,6 +71,15 @@ public class AppConfig {
     static ResourceDtoAssembler resourceDtoAssembler = new ResourceDtoAssembler();
     static ResourceResource resourceResource = new ResourceResource(resourceUseCase, resourceDtoAssembler);
 
+    // Bebe
+    static BebeRepository bebeRepository = new BebeRepositoryInMemory();
+    static BebeFactory bebeFactory = new BebeFactory(bebeRepository);
+    static BebeAssembler bebeAssembler = new BebeAssembler();
+    static BebeUseCase bebeUseCase = new BebeUseCase(bebeFactory, bebeRepository, bebeAssembler, actionRepository, actionFactory);
+
+    static BebeDtoAssembler bebeDtoAssembler = new BebeDtoAssembler();
+    static BebeResource bebeResource = new BebeResource(bebeUseCase, bebeDtoAssembler);
+
     static HeartbeatResource heartbeatResource = new HeartbeatResource();
 
 
@@ -75,6 +91,7 @@ public class AppConfig {
                                                                          resources.add(turnResource);
                                                                          resources.add(dinosaurResource);
                                                                          resources.add(heartbeatResource);
+                                                                         resources.add(bebeResource);
                                                                          resources.add(new InvalidResourceExceptionMapper());
                                                                          resources.add(new UnknownExceptionGrabber());
                                                                          resources.add(new NotExistentNameExceptionMapper());
