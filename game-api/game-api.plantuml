@@ -1,0 +1,675 @@
+@startuml
+
+title __GAME-API's Class Diagram__\n
+
+    namespace ca.ulaval.glo4002.game {
+      class ca.ulaval.glo4002.game.GameServer {
+      }
+     namespace ca.ulaval.glo4002.game {
+      namespace application.dinosaur {
+        class ca.ulaval.glo4002.game.application.dinosaur.DinosaurUseCase {
+        }
+      }
+    
+    namespace ca.ulaval.glo4002.game {
+      namespace application.resources {
+        class ca.ulaval.glo4002.game.application.resources.ResourceUseCase {
+        }
+      }
+    
+    namespace ca.ulaval.glo4002.game {
+      namespace application.turn {
+        class ca.ulaval.glo4002.game.application.turn.TurnUseCase {
+        }
+      }
+    }
+  
+  
+
+   
+    namespace ca.ulaval.glo4002.game {
+      namespace configuration {
+        class ca.ulaval.glo4002.game.configuration.AppConfig {
+        }
+      }
+    
+    namespace ca.ulaval.glo4002.game {
+      namespace configuration {
+        class ca.ulaval.glo4002.game.configuration.CustomJsonProvider {
+        }
+      }
+    
+    namespace ca.ulaval.glo4002.game {
+      namespace controllers.dinosaur {
+        class ca.ulaval.glo4002.game.controllers.dinosaur.DinosaurResource {
+        }
+      }
+    
+    namespace ca.ulaval.glo4002.game {
+      namespace controllers.dinosaur {
+        namespace dtos {
+          class ca.ulaval.glo4002.game.controllers.dinosaur.dtos.DinosaurAssembler {
+          }
+        }
+      }
+    }
+
+  
+
+   
+    namespace ca.ulaval.glo4002.game {
+      namespace controllers.dinosaur {
+        namespace dtos {
+          class ca.ulaval.glo4002.game.controllers.dinosaur.dtos.DinosaurCreationDto {
+          }
+        }
+      }
+    }
+
+   
+    namespace ca.ulaval.glo4002.game {
+      namespace controllers.dinosaur {
+        namespace dtos {
+          class ca.ulaval.glo4002.game.controllers.dinosaur.dtos.DinosaurDto {
+          }
+        }
+      }
+    
+    namespace ca.ulaval.glo4002.game {
+      namespace controllers.dinosaur {
+        namespace dtos {
+          class ca.ulaval.glo4002.game.controllers.dinosaur.dtos.DinosaurDtoAssembler {
+          }
+        }
+      }
+    }  
+
+   
+    namespace ca.ulaval.glo4002.game {
+      namespace controllers.dinosaur {
+        namespace dtos {
+          class ca.ulaval.glo4002.game.controllers.dinosaur.dtos.DinosaurRequest {
+          }
+        }
+      }
+    }
+  
+    namespace ca.ulaval.glo4002.game {
+      namespace controllers.dinosaur {
+        namespace dtos {
+          class ca.ulaval.glo4002.game.controllers.dinosaur.dtos.DinosaurResponseItem {
+          }
+        }
+      }
+    }
+  
+    namespace ca.ulaval.glo4002.game {
+      namespace controllers.dinosaur {
+        namespace dtos {
+          class ca.ulaval.glo4002.game.controllers.dinosaur.dtos.DinosaursResponse {
+          }
+        }
+      }
+    }
+  
+    namespace ca.ulaval.glo4002.game {
+      namespace controllers.resources {
+        class ca.ulaval.glo4002.game.controllers.resources.ResourceResource {
+        }
+      }
+    }
+  
+    namespace ca.ulaval.glo4002.game {
+      namespace controllers.resources {
+        namespace dtos {
+          class ca.ulaval.glo4002.game.controllers.resources.dtos.ResourceAssemblers {
+          }
+        }
+      }
+    }
+  
+    namespace ca.ulaval.glo4002.game {
+      namespace controllers.resources {
+        namespace dtos {
+          class ca.ulaval.glo4002.game.controllers.resources.dtos.ResourceCreationDto {
+          }
+        }
+      }
+    }
+  
+    namespace ca.ulaval.glo4002.game {
+      namespace controllers.resources {
+        namespace dtos {
+          class ca.ulaval.glo4002.game.controllers.resources.dtos.ResourceDto {
+          }
+        }
+      }
+    }
+  
+    namespace ca.ulaval.glo4002.game {
+      namespace controllers.resources {
+        namespace dtos {
+          class ca.ulaval.glo4002.game.controllers.resources.dtos.ResourceDtoAssembler {
+          }
+        }
+      }
+    }
+  
+    namespace ca.ulaval.glo4002.game {
+      namespace controllers.resources {
+        namespace dtos {
+          class ca.ulaval.glo4002.game.controllers.resources.dtos.ResourceRequest {
+          }
+        }
+      }
+    }
+  
+    namespace ca.ulaval.glo4002.game {
+      namespace controllers.resources {
+        namespace dtos {
+          class ca.ulaval.glo4002.game.controllers.resources.dtos.ResourceResponse {
+          }
+        }
+      }
+    }
+  
+    namespace ca.ulaval.glo4002.game {
+      namespace controllers.resources {
+        namespace dtos {
+          class ca.ulaval.glo4002.game.controllers.resources.dtos.ResourcesResponse {
+          }
+        }
+      }
+    }
+  
+    namespace ca.ulaval.glo4002.game {
+      namespace controllers.turn {
+        class ca.ulaval.glo4002.game.controllers.turn.TurnResource {
+        }
+      }
+    }
+  
+    namespace ca.ulaval.glo4002.game {
+      namespace controllers.turn {
+        namespace dtos {
+          class ca.ulaval.glo4002.game.controllers.turn.dtos.TurnAssembler {
+          }
+        }
+      }
+    }
+  
+    namespace ca.ulaval.glo4002.game {
+      namespace controllers.turn {
+        namespace dtos {
+          class ca.ulaval.glo4002.game.controllers.turn.dtos.TurnDto {
+          }
+        }
+      }
+    }
+  
+    namespace ca.ulaval.glo4002.game {
+      namespace controllers.turn {
+        namespace dtos {
+          class ca.ulaval.glo4002.game.controllers.turn.dtos.TurnDtoAssembler {
+          }
+        }
+      }
+    }
+  
+    namespace ca.ulaval.glo4002.game {
+      namespace controllers.turn {
+        namespace dtos {
+          class ca.ulaval.glo4002.game.controllers.turn.dtos.TurnResponse {
+          }
+        }
+      }
+    }
+  
+    namespace ca.ulaval.glo4002.game {
+      namespace domain.actions {
+        abstract class ca.ulaval.glo4002.game.domain.actions.Action {
+        }
+      }
+    }
+  
+    namespace ca.ulaval.glo4002.game {
+      namespace domain.actions {
+        class ca.ulaval.glo4002.game.domain.actions.ActionFactory {
+        }
+      }
+    }
+  
+    namespace ca.ulaval.glo4002.game {
+      namespace domain.actions {
+        interface ca.ulaval.glo4002.game.domain.actions.ActionRepository {
+        }
+      }
+    }
+  
+    namespace ca.ulaval.glo4002.game {
+      namespace domain.actions {
+        class ca.ulaval.glo4002.game.domain.actions.AddDino {
+        }
+      }
+    }
+  
+    namespace ca.ulaval.glo4002.game {
+      namespace domain.actions {
+        class ca.ulaval.glo4002.game.domain.actions.AddResource {
+        }
+      }
+    }
+  
+    namespace ca.ulaval.glo4002.game {
+      namespace domain.actions {
+        enum Command {
+        }
+      }
+    }
+  
+    namespace ca.ulaval.glo4002.game {
+      namespace domain.actions {
+        class ca.ulaval.glo4002.game.domain.actions.RetrieveAction {
+        }
+      }
+    }
+  
+    namespace ca.ulaval.glo4002.game {
+      namespace domain.dinosaur {
+        class ca.ulaval.glo4002.game.domain.dinosaur.Dinosaur {
+        }
+      }
+    }
+  
+    namespace ca.ulaval.glo4002.game {
+      namespace domain.dinosaur {
+        class ca.ulaval.glo4002.game.domain.dinosaur.DinosaurFactory {
+        }
+      }
+    }
+  
+    namespace ca.ulaval.glo4002.game {
+      namespace domain.dinosaur {
+        interface ca.ulaval.glo4002.game.domain.dinosaur.DinosaurRepository {
+        }
+      }
+    }
+  
+    namespace ca.ulaval.glo4002.game {
+      namespace domain.dinosaur {
+        namespace enums {
+          enum DietType {
+          }
+        }
+      }
+    }
+  
+    namespace ca.ulaval.glo4002.game {
+      namespace domain.dinosaur {
+        namespace enums {
+          class ca.ulaval.glo4002.game.domain.dinosaur.enums.SpeciesDietsCorrespondances {
+          }
+        }
+      }
+    }
+  
+    namespace ca.ulaval.glo4002.game {
+      namespace domain.resources {
+        class ca.ulaval.glo4002.game.domain.resources.Burger {
+        }
+      }
+    }
+  
+    namespace ca.ulaval.glo4002.game {
+      namespace domain.resources {
+        class ca.ulaval.glo4002.game.domain.resources.Resource {
+        }
+      }
+    }
+  
+    namespace ca.ulaval.glo4002.game {
+      namespace domain.resources {
+        abstract class ca.ulaval.glo4002.game.domain.resources.ResourceElements {
+        }
+      }
+    }
+  
+    namespace ca.ulaval.glo4002.game {
+      namespace domain.resources {
+        class ca.ulaval.glo4002.game.domain.resources.ResourceFactory {
+        }
+      }
+    }
+  
+    namespace ca.ulaval.glo4002.game {
+      namespace domain.resources {
+        interface ca.ulaval.glo4002.game.domain.resources.ResourceRepository {
+        }
+      }
+    }
+  
+    namespace ca.ulaval.glo4002.game {
+      namespace domain.resources {
+        class ca.ulaval.glo4002.game.domain.resources.Salad {
+        }
+      }
+    }
+  
+    namespace ca.ulaval.glo4002.game {
+      namespace domain.resources {
+        class ca.ulaval.glo4002.game.domain.resources.Water {
+        }
+      }
+    }
+  
+    namespace ca.ulaval.glo4002.game {
+      namespace domain.turn {
+        class ca.ulaval.glo4002.game.domain.turn.Turn {
+        }
+      }
+    }
+  
+    namespace ca.ulaval.glo4002.game {
+      namespace domain.turn {
+        class ca.ulaval.glo4002.game.domain.turn.TurnFactory {
+        }
+      }
+    }
+  
+    namespace ca.ulaval.glo4002.game {
+      namespace domain.turn {
+        interface ca.ulaval.glo4002.game.domain.turn.TurnRepository {
+        }
+      }
+    }
+  
+    namespace ca.ulaval.glo4002.game {
+      namespace exceptions {
+        enum ExceptionErrorAndDescription {
+        }
+      }
+    }
+  
+    namespace ca.ulaval.glo4002.game {
+      namespace exceptions {
+        abstract class ca.ulaval.glo4002.game.exceptions.ExceptionResponse {
+        }
+      }
+    }
+  
+    namespace ca.ulaval.glo4002.game {
+      namespace exceptions {
+        namespace dtos {
+          class ca.ulaval.glo4002.game.exceptions.dtos.ExceptionResponseDto {
+          }
+        }
+      }
+    }
+  
+    namespace ca.ulaval.glo4002.game {
+      namespace exceptions {
+        namespace exceptionMappers {
+          class ca.ulaval.glo4002.game.exceptions.exceptionMappers.DuplicateNameExceptionMapper {
+          }
+        }
+      }
+    }
+  
+    namespace ca.ulaval.glo4002.game {
+      namespace exceptions {
+        namespace exceptionMappers {
+          class ca.ulaval.glo4002.game.exceptions.exceptionMappers.InvalidFatherExceptionMapper {
+          }
+        }
+      }
+    }
+  
+    namespace ca.ulaval.glo4002.game {
+      namespace exceptions {
+        namespace exceptionMappers {
+          class ca.ulaval.glo4002.game.exceptions.exceptionMappers.InvalidGenderExceptionMapper {
+          }
+        }
+      }
+    }
+  
+    namespace ca.ulaval.glo4002.game {
+      namespace exceptions {
+        namespace exceptionMappers {
+          class ca.ulaval.glo4002.game.exceptions.exceptionMappers.InvalidMotherExceptionMapper {
+          }
+        }
+      }
+    }
+  
+    namespace ca.ulaval.glo4002.game {
+      namespace exceptions {
+        namespace exceptionMappers {
+          class ca.ulaval.glo4002.game.exceptions.exceptionMappers.InvalidResourceExceptionMapper {
+          }
+        }
+      }
+    }
+  
+    namespace ca.ulaval.glo4002.game {
+      namespace exceptions {
+        namespace exceptionMappers {
+          class ca.ulaval.glo4002.game.exceptions.exceptionMappers.InvalidSpeciesExceptionMapper {
+          }
+        }
+      }
+    }
+  
+    namespace ca.ulaval.glo4002.game {
+      namespace exceptions {
+        namespace exceptionMappers {
+          class ca.ulaval.glo4002.game.exceptions.exceptionMappers.InvalidWeightExceptionMapper {
+          }
+        }
+      }
+    }
+  
+    namespace ca.ulaval.glo4002.game {
+      namespace exceptions {
+        namespace exceptionMappers {
+          class ca.ulaval.glo4002.game.exceptions.exceptionMappers.NotExistentNameExceptionMapper {
+          }
+        }
+      }
+    }
+  
+    namespace ca.ulaval.glo4002.game {
+      namespace exceptions {
+        namespace exceptionMappers {
+          class ca.ulaval.glo4002.game.exceptions.exceptionMappers.UnknownExceptionGrabber {
+          }
+        }
+      }
+    }
+  
+    namespace ca.ulaval.glo4002.game {
+      namespace exceptions {
+        namespace types {
+          class ca.ulaval.glo4002.game.exceptions.types.DuplicateNameException {
+          }
+        }
+      }
+    }
+  
+    namespace ca.ulaval.glo4002.game {
+      namespace exceptions {
+        namespace types {
+          class ca.ulaval.glo4002.game.exceptions.types.InvalidFatherException {
+          }
+        }
+      }
+    }
+  
+    namespace ca.ulaval.glo4002.game {
+      namespace exceptions {
+        namespace types {
+          class ca.ulaval.glo4002.game.exceptions.types.InvalidGenderException {
+          }
+        }
+      }
+    }
+  
+    namespace ca.ulaval.glo4002.game {
+      namespace exceptions {
+        namespace types {
+          class ca.ulaval.glo4002.game.exceptions.types.InvalidMotherException {
+          }
+        }
+      }
+    }
+  
+    namespace ca.ulaval.glo4002.game {
+      namespace exceptions {
+        namespace types {
+          class ca.ulaval.glo4002.game.exceptions.types.InvalidResourceQuantityException {
+          }
+        }
+      }
+    }
+  
+    namespace ca.ulaval.glo4002.game {
+      namespace exceptions {
+        namespace types {
+          class ca.ulaval.glo4002.game.exceptions.types.InvalidSpeciesException {
+          }
+        }
+      }
+    }
+  
+    namespace ca.ulaval.glo4002.game {
+      namespace exceptions {
+        namespace types {
+          class ca.ulaval.glo4002.game.exceptions.types.InvalidWeightException {
+          }
+        }
+      }
+    }
+  
+    namespace ca.ulaval.glo4002.game {
+      namespace exceptions {
+        namespace types {
+          class ca.ulaval.glo4002.game.exceptions.types.NotExistentNameException {
+          }
+        }
+      }
+    }
+  
+    namespace ca.ulaval.glo4002.game {
+      namespace heartbeat {
+        class ca.ulaval.glo4002.game.heartbeat.HeartbeatResource {
+        }
+      }
+    }
+  
+    namespace ca.ulaval.glo4002.game {
+      namespace heartbeat {
+        class ca.ulaval.glo4002.game.heartbeat.HeartbeatResponse {
+        }
+      }
+    }
+  
+    namespace ca.ulaval.glo4002.game {
+      namespace repositories.actions {
+        class ca.ulaval.glo4002.game.repositories.actions.ActionRepositoryInMemory {
+        }
+      }
+    }
+  
+    namespace ca.ulaval.glo4002.game {
+      namespace repositories.dinosaur {
+        class ca.ulaval.glo4002.game.repositories.dinosaur.DinosaurRepositoryInMemory {
+        }
+      }
+    }
+  
+    namespace ca.ulaval.glo4002.game {
+      namespace repositories.resources {
+        class ca.ulaval.glo4002.game.repositories.resources.ResourceRepositoryInMemory {
+        }
+      }
+    }
+  
+    namespace ca.ulaval.glo4002.game {
+      namespace repositories.turn {
+        class ca.ulaval.glo4002.game.repositories.turn.TurnRepositoryInMemory {
+        }
+      }
+    }
+  }
+  
+
+  ca.ulaval.glo4002.game.GameServer .up.|> java.lang.Runnable
+  ca.ulaval.glo4002.game.application.dinosaur.DinosaurUseCase o-- ca.ulaval.glo4002.game.domain.actions.ActionFactory : actionFactory
+  ca.ulaval.glo4002.game.application.dinosaur.DinosaurUseCase o-- ca.ulaval.glo4002.game.domain.actions.ActionRepository : actionRepository
+  ca.ulaval.glo4002.game.application.dinosaur.DinosaurUseCase o-- ca.ulaval.glo4002.game.controllers.dinosaur.dtos.DinosaurAssembler : dinosaurAssembler
+  ca.ulaval.glo4002.game.application.dinosaur.DinosaurUseCase o-- ca.ulaval.glo4002.game.domain.dinosaur.DinosaurFactory : dinosaurFactory
+  ca.ulaval.glo4002.game.application.dinosaur.DinosaurUseCase o-- ca.ulaval.glo4002.game.domain.dinosaur.DinosaurRepository : dinosaurRepository
+  ca.ulaval.glo4002.game.application.resources.ResourceUseCase o-- ca.ulaval.glo4002.game.domain.actions.ActionFactory : actionFactory
+  ca.ulaval.glo4002.game.application.resources.ResourceUseCase o-- ca.ulaval.glo4002.game.domain.actions.ActionRepository : actionRepository
+  ca.ulaval.glo4002.game.application.resources.ResourceUseCase o-- ca.ulaval.glo4002.game.controllers.resources.dtos.ResourceAssemblers : resourceAssemblers
+  ca.ulaval.glo4002.game.application.resources.ResourceUseCase o-- ca.ulaval.glo4002.game.domain.resources.ResourceFactory : resourceFactory
+  ca.ulaval.glo4002.game.application.resources.ResourceUseCase o-- ca.ulaval.glo4002.game.domain.resources.ResourceRepository : resourceRepository
+  ca.ulaval.glo4002.game.application.turn.TurnUseCase o-- ca.ulaval.glo4002.game.domain.actions.ActionRepository : actionRepository
+  ca.ulaval.glo4002.game.application.turn.TurnUseCase o-- ca.ulaval.glo4002.game.domain.dinosaur.DinosaurRepository : dinosaurRepository
+  ca.ulaval.glo4002.game.application.turn.TurnUseCase o-- ca.ulaval.glo4002.game.domain.resources.ResourceRepository : resourceRepository
+  ca.ulaval.glo4002.game.application.turn.TurnUseCase o-- ca.ulaval.glo4002.game.controllers.turn.dtos.TurnAssembler : turnAssembler
+  ca.ulaval.glo4002.game.application.turn.TurnUseCase o-- ca.ulaval.glo4002.game.domain.turn.TurnFactory : turnFactory
+  ca.ulaval.glo4002.game.application.turn.TurnUseCase o-- ca.ulaval.glo4002.game.domain.turn.TurnRepository : turnRepository
+  ca.ulaval.glo4002.game.configuration.CustomJsonProvider -up-|> org.glassfish.jersey.jackson.internal.jackson.jaxrs.json.JacksonJaxbJsonProvider
+  ca.ulaval.glo4002.game.controllers.dinosaur.DinosaurResource o-- ca.ulaval.glo4002.game.controllers.dinosaur.dtos.DinosaurDtoAssembler : dinosaurDtoAssembler
+  ca.ulaval.glo4002.game.controllers.dinosaur.DinosaurResource o-- ca.ulaval.glo4002.game.application.dinosaur.DinosaurUseCase : dinosaurUseCase
+  ca.ulaval.glo4002.game.controllers.dinosaur.dtos.DinosaurDtoAssembler o-- ca.ulaval.glo4002.game.domain.dinosaur.DinosaurFactory : dinosaurFactory
+  ca.ulaval.glo4002.game.controllers.resources.ResourceResource o-- ca.ulaval.glo4002.game.controllers.resources.dtos.ResourceDtoAssembler : resourceDtoAssembler
+  ca.ulaval.glo4002.game.controllers.resources.ResourceResource o-- ca.ulaval.glo4002.game.application.resources.ResourceUseCase : resourceUseCase
+  ca.ulaval.glo4002.game.controllers.resources.dtos.ResourcesResponse o-- ca.ulaval.glo4002.game.controllers.resources.dtos.ResourceResponse : consumed
+  ca.ulaval.glo4002.game.controllers.resources.dtos.ResourcesResponse o-- ca.ulaval.glo4002.game.controllers.resources.dtos.ResourceResponse : expired
+  ca.ulaval.glo4002.game.controllers.resources.dtos.ResourcesResponse o-- ca.ulaval.glo4002.game.controllers.resources.dtos.ResourceResponse : fresh
+  ca.ulaval.glo4002.game.controllers.turn.TurnResource o-- ca.ulaval.glo4002.game.controllers.turn.dtos.TurnDtoAssembler : turnDtoAssembler
+  ca.ulaval.glo4002.game.controllers.turn.TurnResource o-- ca.ulaval.glo4002.game.application.turn.TurnUseCase : turnUseCase
+  ca.ulaval.glo4002.game.domain.actions.AddDino -up-|> ca.ulaval.glo4002.game.domain.actions.Action
+  ca.ulaval.glo4002.game.domain.actions.AddResource -up-|> ca.ulaval.glo4002.game.domain.actions.Action
+  ca.ulaval.glo4002.game.domain.actions.RetrieveAction -up-|> ca.ulaval.glo4002.game.domain.actions.Action
+  ca.ulaval.glo4002.game.domain.dinosaur.Dinosaur o-- ca.ulaval.glo4002.game.domain.dinosaur.enums.DietType : diet
+  ca.ulaval.glo4002.game.domain.dinosaur.DinosaurFactory o-- ca.ulaval.glo4002.game.domain.dinosaur.DinosaurRepository : dinosaurRepository
+  ca.ulaval.glo4002.game.domain.dinosaur.DinosaurFactory o-- ca.ulaval.glo4002.game.domain.dinosaur.enums.SpeciesDietsCorrespondances : speciesDietsCorrespondances
+  ca.ulaval.glo4002.game.domain.resources.Burger -up-|> ca.ulaval.glo4002.game.domain.resources.ResourceElements
+  ca.ulaval.glo4002.game.domain.resources.Salad -up-|> ca.ulaval.glo4002.game.domain.resources.ResourceElements
+  ca.ulaval.glo4002.game.domain.resources.Water -up-|> ca.ulaval.glo4002.game.domain.resources.ResourceElements
+  ca.ulaval.glo4002.game.exceptions.exceptionMappers.DuplicateNameExceptionMapper .up.|> javax.ws.rs.ext.ExceptionMapper
+  ca.ulaval.glo4002.game.exceptions.exceptionMappers.DuplicateNameExceptionMapper -up-|> ca.ulaval.glo4002.game.exceptions.ExceptionResponse
+  ca.ulaval.glo4002.game.exceptions.exceptionMappers.InvalidFatherExceptionMapper .up.|> javax.ws.rs.ext.ExceptionMapper
+  ca.ulaval.glo4002.game.exceptions.exceptionMappers.InvalidFatherExceptionMapper -up-|> ca.ulaval.glo4002.game.exceptions.ExceptionResponse
+  ca.ulaval.glo4002.game.exceptions.exceptionMappers.InvalidGenderExceptionMapper .up.|> javax.ws.rs.ext.ExceptionMapper
+  ca.ulaval.glo4002.game.exceptions.exceptionMappers.InvalidGenderExceptionMapper -up-|> ca.ulaval.glo4002.game.exceptions.ExceptionResponse
+  ca.ulaval.glo4002.game.exceptions.exceptionMappers.InvalidMotherExceptionMapper .up.|> javax.ws.rs.ext.ExceptionMapper
+  ca.ulaval.glo4002.game.exceptions.exceptionMappers.InvalidMotherExceptionMapper -up-|> ca.ulaval.glo4002.game.exceptions.ExceptionResponse
+  ca.ulaval.glo4002.game.exceptions.exceptionMappers.InvalidResourceExceptionMapper .up.|> javax.ws.rs.ext.ExceptionMapper
+  ca.ulaval.glo4002.game.exceptions.exceptionMappers.InvalidResourceExceptionMapper -up-|> ca.ulaval.glo4002.game.exceptions.ExceptionResponse
+  ca.ulaval.glo4002.game.exceptions.exceptionMappers.InvalidSpeciesExceptionMapper .up.|> javax.ws.rs.ext.ExceptionMapper
+  ca.ulaval.glo4002.game.exceptions.exceptionMappers.InvalidSpeciesExceptionMapper -up-|> ca.ulaval.glo4002.game.exceptions.ExceptionResponse
+  ca.ulaval.glo4002.game.exceptions.exceptionMappers.InvalidWeightExceptionMapper .up.|> javax.ws.rs.ext.ExceptionMapper
+  ca.ulaval.glo4002.game.exceptions.exceptionMappers.InvalidWeightExceptionMapper -up-|> ca.ulaval.glo4002.game.exceptions.ExceptionResponse
+  ca.ulaval.glo4002.game.exceptions.exceptionMappers.NotExistentNameExceptionMapper .up.|> javax.ws.rs.ext.ExceptionMapper
+  ca.ulaval.glo4002.game.exceptions.exceptionMappers.NotExistentNameExceptionMapper -up-|> ca.ulaval.glo4002.game.exceptions.ExceptionResponse
+  ca.ulaval.glo4002.game.exceptions.exceptionMappers.UnknownExceptionGrabber .up.|> javax.ws.rs.ext.ExceptionMapper
+  ca.ulaval.glo4002.game.repositories.actions.ActionRepositoryInMemory .up.|> ca.ulaval.glo4002.game.domain.actions.ActionRepository
+  ca.ulaval.glo4002.game.repositories.dinosaur.DinosaurRepositoryInMemory .up.|> ca.ulaval.glo4002.game.domain.dinosaur.DinosaurRepository
+  ca.ulaval.glo4002.game.repositories.resources.ResourceRepositoryInMemory .up.|> ca.ulaval.glo4002.game.domain.resources.ResourceRepository
+  ca.ulaval.glo4002.game.repositories.resources.ResourceRepositoryInMemory o-- ca.ulaval.glo4002.game.domain.resources.Resource : consumedResources
+  ca.ulaval.glo4002.game.repositories.resources.ResourceRepositoryInMemory o-- ca.ulaval.glo4002.game.domain.resources.Resource : expiredResources
+  ca.ulaval.glo4002.game.repositories.turn.TurnRepositoryInMemory .up.|> ca.ulaval.glo4002.game.domain.turn.TurnRepository
+
+
+right footer
+
+
+PlantUML diagram generated by SketchIt! (https://bitbucket.org/pmesmeur/sketch.it)
+For more information about this tool, please contact philippe.mesmeur@gmail.com
+endfooter
+
+@enduml

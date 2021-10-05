@@ -1,0 +1,148 @@
+@startuml
+
+title __EXCEPTIONMAPPERS's Class Diagram__\n
+
+  namespace  {
+    namespace a.ulaval.glo4002.game {
+      namespace exceptions {
+        namespace exceptionMappers {
+          class ca.ulaval.glo4002.game.exceptions.exceptionMappers.DuplicateNameExceptionMapper {
+              + toResponse()
+          }
+        }
+      }
+    }
+  }
+  
+
+  namespace  {
+    namespace a.ulaval.glo4002.game {
+      namespace exceptions {
+        namespace exceptionMappers {
+          class ca.ulaval.glo4002.game.exceptions.exceptionMappers.InvalidFatherExceptionMapper {
+              + toResponse()
+          }
+        }
+      }
+    }
+  }
+  
+
+  namespace  {
+    namespace a.ulaval.glo4002.game {
+      namespace exceptions {
+        namespace exceptionMappers {
+          class ca.ulaval.glo4002.game.exceptions.exceptionMappers.InvalidGenderExceptionMapper {
+              + toResponse()
+          }
+        }
+      }
+    }
+  }
+  
+
+  namespace  {
+    namespace a.ulaval.glo4002.game {
+      namespace exceptions {
+        namespace exceptionMappers {
+          class ca.ulaval.glo4002.game.exceptions.exceptionMappers.InvalidMotherExceptionMapper {
+              + toResponse()
+          }
+        }
+      }
+    }
+  }
+  
+
+  namespace  {
+    namespace a.ulaval.glo4002.game {
+      namespace exceptions {
+        namespace exceptionMappers {
+          class ca.ulaval.glo4002.game.exceptions.exceptionMappers.InvalidResourceExceptionMapper {
+              + toResponse()
+          }
+        }
+      }
+    }
+  }
+  
+
+  namespace  {
+    namespace a.ulaval.glo4002.game {
+      namespace exceptions {
+        namespace exceptionMappers {
+          class ca.ulaval.glo4002.game.exceptions.exceptionMappers.InvalidSpeciesExceptionMapper {
+              + toResponse()
+          }
+        }
+      }
+    }
+  }
+  
+
+  namespace  {
+    namespace a.ulaval.glo4002.game {
+      namespace exceptions {
+        namespace exceptionMappers {
+          class ca.ulaval.glo4002.game.exceptions.exceptionMappers.InvalidWeightExceptionMapper {
+              + toResponse()
+          }
+        }
+      }
+    }
+  }
+  
+
+  namespace  {
+    namespace a.ulaval.glo4002.game {
+      namespace exceptions {
+        namespace exceptionMappers {
+          class ca.ulaval.glo4002.game.exceptions.exceptionMappers.NotExistentNameExceptionMapper {
+              + toResponse()
+          }
+        }
+      }
+    }
+  }
+  
+
+  namespace  {
+    namespace a.ulaval.glo4002.game {
+      namespace exceptions {
+        namespace exceptionMappers {
+          class ca.ulaval.glo4002.game.exceptions.exceptionMappers.UnknownExceptionGrabber {
+              + toResponse()
+          }
+        }
+      }
+    }
+  }
+  
+
+  ca.ulaval.glo4002.game.exceptions.exceptionMappers.DuplicateNameExceptionMapper .up.|> javax.ws.rs.ext.ExceptionMapper
+  ca.ulaval.glo4002.game.exceptions.exceptionMappers.DuplicateNameExceptionMapper -up-|> ca.ulaval.glo4002.game.exceptions.ExceptionResponse
+  ca.ulaval.glo4002.game.exceptions.exceptionMappers.InvalidFatherExceptionMapper .up.|> javax.ws.rs.ext.ExceptionMapper
+  ca.ulaval.glo4002.game.exceptions.exceptionMappers.InvalidFatherExceptionMapper -up-|> ca.ulaval.glo4002.game.exceptions.ExceptionResponse
+  ca.ulaval.glo4002.game.exceptions.exceptionMappers.InvalidGenderExceptionMapper .up.|> javax.ws.rs.ext.ExceptionMapper
+  ca.ulaval.glo4002.game.exceptions.exceptionMappers.InvalidGenderExceptionMapper -up-|> ca.ulaval.glo4002.game.exceptions.ExceptionResponse
+  ca.ulaval.glo4002.game.exceptions.exceptionMappers.InvalidMotherExceptionMapper .up.|> javax.ws.rs.ext.ExceptionMapper
+  ca.ulaval.glo4002.game.exceptions.exceptionMappers.InvalidMotherExceptionMapper -up-|> ca.ulaval.glo4002.game.exceptions.ExceptionResponse
+  ca.ulaval.glo4002.game.exceptions.exceptionMappers.InvalidResourceExceptionMapper .up.|> javax.ws.rs.ext.ExceptionMapper
+  ca.ulaval.glo4002.game.exceptions.exceptionMappers.InvalidResourceExceptionMapper -up-|> ca.ulaval.glo4002.game.exceptions.ExceptionResponse
+  ca.ulaval.glo4002.game.exceptions.exceptionMappers.InvalidSpeciesExceptionMapper .up.|> javax.ws.rs.ext.ExceptionMapper
+  ca.ulaval.glo4002.game.exceptions.exceptionMappers.InvalidSpeciesExceptionMapper -up-|> ca.ulaval.glo4002.game.exceptions.ExceptionResponse
+  ca.ulaval.glo4002.game.exceptions.exceptionMappers.InvalidWeightExceptionMapper .up.|> javax.ws.rs.ext.ExceptionMapper
+  ca.ulaval.glo4002.game.exceptions.exceptionMappers.InvalidWeightExceptionMapper -up-|> ca.ulaval.glo4002.game.exceptions.ExceptionResponse
+  ca.ulaval.glo4002.game.exceptions.exceptionMappers.NotExistentNameExceptionMapper .up.|> javax.ws.rs.ext.ExceptionMapper
+  ca.ulaval.glo4002.game.exceptions.exceptionMappers.NotExistentNameExceptionMapper -up-|> ca.ulaval.glo4002.game.exceptions.ExceptionResponse
+  ca.ulaval.glo4002.game.exceptions.exceptionMappers.UnknownExceptionGrabber .up.|> javax.ws.rs.ext.ExceptionMapper
+
+
+right footer
+
+
+PlantUML diagram generated by SketchIt! (https://bitbucket.org/pmesmeur/sketch.it)
+For more information about this tool, please contact philippe.mesmeur@gmail.com
+endfooter
+
+@enduml
