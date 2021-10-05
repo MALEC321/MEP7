@@ -82,6 +82,8 @@ public class AppConfig {
                                                                          resources.add(new InvalidSpeciesExceptionMapper());
                                                                          resources.add(new InvalidWeightExceptionMapper());
                                                                          resources.add(new DuplicateNameExceptionMapper());
+                                                                         resources.add(new InvalidMotherExceptionMapper());
+                                                                         resources.add(new InvalidFatherExceptionMapper());
                                                                          return resources;
                                                                      }
 
