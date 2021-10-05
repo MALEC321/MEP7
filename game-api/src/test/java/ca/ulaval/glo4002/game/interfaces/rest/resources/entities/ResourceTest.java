@@ -52,11 +52,29 @@ public class ResourceTest {
     /************************ TESTING RESOURCEELEMENTS ************************/
 
     @Test
-    void whenRemovingRemovingElementResources_shouldDecreaseQuantity() {
+    void whenRemovingResourceElement_shouldDecreaseQuantity() {
         burger.removeElement(49); // there's 50 at the start
         assertEquals(1, burger.getQuantity());
         burger.removeElement(2);
         assertEquals(0, burger.getQuantity());
+    }
+
+    @Test
+    void whenResetingResourceElement_quantityShouldEqualZero() {
+        salad.reset();
+        assertEquals(0, salad.getQuantity());
+    }
+
+    @Test
+    void whenSettingResourceElementQuantity_shouldChangeQuantity() {
+        water.setQuantity(20);
+        assertEquals(20, water.getQuantity());
+    }
+
+    @Test
+    void whenAddingResourceElementQuantity_shouldChangeQuantity() {
+        burger.addQuantity(1971);
+        assertEquals(2021, burger.getQuantity());
     }
 
 }
