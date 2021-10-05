@@ -1,0 +1,390 @@
+@startuml
+participant Actor
+Actor -> TurnResource : createTurn
+activate TurnResource
+TurnResource -> TurnUseCase : createTurn
+activate TurnUseCase
+TurnUseCase -> ActionRepository : getWaitingActions
+activate ActionRepository
+ActionRepository -> ActionRepositoryInMemory : getWaitingActions
+activate ActionRepositoryInMemory
+ActionRepositoryInMemory --> ActionRepository
+deactivate ActionRepositoryInMemory
+ActionRepository --> TurnUseCase
+deactivate ActionRepository
+TurnUseCase -> TurnUseCase : cookIt
+activate TurnUseCase
+TurnUseCase -> Burger : new
+activate Burger
+Burger -> ResourceElements : new
+activate ResourceElements
+ResourceElements --> Burger
+deactivate ResourceElements
+Burger --> TurnUseCase
+deactivate Burger
+TurnUseCase -> ResourceRepository : add
+activate ResourceRepository
+ResourceRepository -> ResourceRepositoryInMemory : add
+activate ResourceRepositoryInMemory
+ResourceRepositoryInMemory --> ResourceRepository
+deactivate ResourceRepositoryInMemory
+ResourceRepository --> TurnUseCase
+deactivate ResourceRepository
+TurnUseCase -> Salad : new
+activate Salad
+Salad -> ResourceElements : new
+activate ResourceElements
+ResourceElements --> Salad
+deactivate ResourceElements
+Salad --> TurnUseCase
+deactivate Salad
+TurnUseCase -> ResourceRepository : add
+activate ResourceRepository
+ResourceRepository -> ResourceRepositoryInMemory : add
+activate ResourceRepositoryInMemory
+ResourceRepositoryInMemory --> ResourceRepository
+deactivate ResourceRepositoryInMemory
+ResourceRepository --> TurnUseCase
+deactivate ResourceRepository
+TurnUseCase -> Water : new
+activate Water
+Water -> ResourceElements : new
+activate ResourceElements
+ResourceElements --> Water
+deactivate ResourceElements
+Water --> TurnUseCase
+deactivate Water
+TurnUseCase -> ResourceRepository : add
+activate ResourceRepository
+ResourceRepository -> ResourceRepositoryInMemory : add
+activate ResourceRepositoryInMemory
+ResourceRepositoryInMemory --> ResourceRepository
+deactivate ResourceRepositoryInMemory
+ResourceRepository --> TurnUseCase
+deactivate ResourceRepository
+TurnUseCase --> TurnUseCase
+deactivate TurnUseCase
+TurnUseCase -> ActionRepository : execute
+activate ActionRepository
+ActionRepository -> ActionRepositoryInMemory : execute
+activate ActionRepositoryInMemory
+ActionRepositoryInMemory -> Action : execute
+activate Action
+Action --> ActionRepositoryInMemory
+deactivate Action
+ActionRepositoryInMemory --> ActionRepository
+deactivate ActionRepositoryInMemory
+ActionRepository --> TurnUseCase
+deactivate ActionRepository
+TurnUseCase -> TurnUseCase : postAction
+activate TurnUseCase
+TurnUseCase -> ResourceRepository : decreaseExpirationDate
+activate ResourceRepository
+ResourceRepository -> ResourceRepositoryInMemory : decreaseExpirationDate
+activate ResourceRepositoryInMemory
+ResourceRepositoryInMemory -> ResourceRepositoryInMemory : removeAllEmptyResources
+activate ResourceRepositoryInMemory
+ResourceRepositoryInMemory -> ResourceElements : getQuantity
+activate ResourceElements
+ResourceElements --> ResourceRepositoryInMemory
+deactivate ResourceElements
+ResourceRepositoryInMemory -> ResourceElements : getQuantity
+activate ResourceElements
+ResourceElements --> ResourceRepositoryInMemory
+deactivate ResourceElements
+ResourceRepositoryInMemory -> ResourceElements : getQuantity
+activate ResourceElements
+ResourceElements --> ResourceRepositoryInMemory
+deactivate ResourceElements
+ResourceRepositoryInMemory --> ResourceRepositoryInMemory
+deactivate ResourceRepositoryInMemory
+ResourceRepositoryInMemory -> ResourceRepositoryInMemory : removeAllExpiredResources
+activate ResourceRepositoryInMemory
+ResourceRepositoryInMemory -> Burger : getDaysLeft
+activate Burger
+Burger --> ResourceRepositoryInMemory
+deactivate Burger
+ResourceRepositoryInMemory -> ResourceElements : getQuantity
+activate ResourceElements
+ResourceElements --> ResourceRepositoryInMemory
+deactivate ResourceElements
+ResourceRepositoryInMemory -> Resource : addBurger
+activate Resource
+Resource -> ResourceElements : addQuantity
+activate ResourceElements
+ResourceElements --> Resource
+deactivate ResourceElements
+Resource --> ResourceRepositoryInMemory
+deactivate Resource
+ResourceRepositoryInMemory -> Salad : getDaysLeft
+activate Salad
+Salad --> ResourceRepositoryInMemory
+deactivate Salad
+ResourceRepositoryInMemory -> ResourceElements : getQuantity
+activate ResourceElements
+ResourceElements --> ResourceRepositoryInMemory
+deactivate ResourceElements
+ResourceRepositoryInMemory -> Resource : addSalad
+activate Resource
+Resource -> ResourceElements : addQuantity
+activate ResourceElements
+ResourceElements --> Resource
+deactivate ResourceElements
+Resource --> ResourceRepositoryInMemory
+deactivate Resource
+ResourceRepositoryInMemory -> Water : getDaysLeft
+activate Water
+Water --> ResourceRepositoryInMemory
+deactivate Water
+ResourceRepositoryInMemory -> ResourceElements : getQuantity
+activate ResourceElements
+ResourceElements --> ResourceRepositoryInMemory
+deactivate ResourceElements
+ResourceRepositoryInMemory -> Resource : addWater
+activate Resource
+Resource -> ResourceElements : addQuantity
+activate ResourceElements
+ResourceElements --> Resource
+deactivate ResourceElements
+Resource --> ResourceRepositoryInMemory
+deactivate Resource
+ResourceRepositoryInMemory --> ResourceRepositoryInMemory
+deactivate ResourceRepositoryInMemory
+ResourceRepositoryInMemory -> Burger : decreaseExpirationDate
+activate Burger
+Burger --> ResourceRepositoryInMemory
+deactivate Burger
+ResourceRepositoryInMemory -> ResourceElements : getQuantity
+activate ResourceElements
+ResourceElements --> ResourceRepositoryInMemory
+deactivate ResourceElements
+ResourceRepositoryInMemory -> Salad : decreaseExpirationDate
+activate Salad
+Salad --> ResourceRepositoryInMemory
+deactivate Salad
+ResourceRepositoryInMemory -> ResourceElements : getQuantity
+activate ResourceElements
+ResourceElements --> ResourceRepositoryInMemory
+deactivate ResourceElements
+ResourceRepositoryInMemory -> Water : decreaseExpirationDate
+activate Water
+Water --> ResourceRepositoryInMemory
+deactivate Water
+ResourceRepositoryInMemory --> ResourceRepository
+deactivate ResourceRepositoryInMemory
+ResourceRepository --> TurnUseCase
+deactivate ResourceRepository
+TurnUseCase -> TurnUseCase : feedDinosaurs
+activate TurnUseCase
+TurnUseCase -> DinosaurRepository : getSortedDinosaursByStrengthThenName
+activate DinosaurRepository
+DinosaurRepository -> DinosaurRepositoryInMemory : getSortedDinosaursByStrengthThenName
+activate DinosaurRepositoryInMemory
+DinosaurRepositoryInMemory -> DinosaurRepositoryInMemory : findAll
+activate DinosaurRepositoryInMemory
+DinosaurRepositoryInMemory --> DinosaurRepositoryInMemory
+deactivate DinosaurRepositoryInMemory
+DinosaurRepositoryInMemory -> Dinosaur : getStrength
+activate Dinosaur
+Dinosaur --> DinosaurRepositoryInMemory
+deactivate Dinosaur
+DinosaurRepositoryInMemory -> Dinosaur : getName
+activate Dinosaur
+Dinosaur --> DinosaurRepositoryInMemory
+deactivate Dinosaur
+DinosaurRepositoryInMemory --> DinosaurRepository
+deactivate DinosaurRepositoryInMemory
+DinosaurRepository --> TurnUseCase
+deactivate DinosaurRepository
+TurnUseCase -> TurnUseCase : feedDinosaursByDietType
+activate TurnUseCase
+TurnUseCase -> Dinosaur : getDiet
+activate Dinosaur
+Dinosaur --> TurnUseCase
+deactivate Dinosaur
+TurnUseCase -> Dinosaur : feedFood
+activate Dinosaur
+Dinosaur -> Dinosaur : getFoodNeed
+activate Dinosaur
+Dinosaur -> Dinosaur : getConsiderationByDietType
+activate Dinosaur
+Dinosaur --> Dinosaur
+deactivate Dinosaur
+Dinosaur -> Dinosaur : isNewlyAdded
+activate Dinosaur
+Dinosaur --> Dinosaur
+deactivate Dinosaur
+Dinosaur --> Dinosaur
+deactivate Dinosaur
+Dinosaur --> TurnUseCase
+deactivate Dinosaur
+TurnUseCase -> ResourceRepository : eatSalad
+activate ResourceRepository
+ResourceRepository -> ResourceRepositoryInMemory : eatSalad
+activate ResourceRepositoryInMemory
+ResourceRepositoryInMemory -> ResourceElements : getQuantity
+activate ResourceElements
+ResourceElements --> ResourceRepositoryInMemory
+deactivate ResourceElements
+ResourceRepositoryInMemory -> ResourceElements : removeElement
+activate ResourceElements
+ResourceElements --> ResourceRepositoryInMemory
+deactivate ResourceElements
+ResourceRepositoryInMemory -> Resource : addSalad
+activate Resource
+Resource -> ResourceElements : addQuantity
+activate ResourceElements
+ResourceElements --> Resource
+deactivate ResourceElements
+Resource --> ResourceRepositoryInMemory
+deactivate Resource
+ResourceRepositoryInMemory -> Resource : addSalad
+activate Resource
+Resource -> ResourceElements : addQuantity
+activate ResourceElements
+ResourceElements --> Resource
+deactivate ResourceElements
+Resource --> ResourceRepositoryInMemory
+deactivate Resource
+ResourceRepositoryInMemory --> ResourceRepository
+deactivate ResourceRepositoryInMemory
+ResourceRepository --> TurnUseCase
+deactivate ResourceRepository
+TurnUseCase -> Dinosaur : feedFood
+activate Dinosaur
+Dinosaur -> Dinosaur : getFoodNeed
+activate Dinosaur
+Dinosaur -> Dinosaur : getConsiderationByDietType
+activate Dinosaur
+Dinosaur --> Dinosaur
+deactivate Dinosaur
+Dinosaur -> Dinosaur : isNewlyAdded
+activate Dinosaur
+Dinosaur --> Dinosaur
+deactivate Dinosaur
+Dinosaur --> Dinosaur
+deactivate Dinosaur
+Dinosaur --> TurnUseCase
+deactivate Dinosaur
+TurnUseCase -> ResourceRepository : eatBurger
+activate ResourceRepository
+ResourceRepository -> ResourceRepositoryInMemory : eatBurger
+activate ResourceRepositoryInMemory
+ResourceRepositoryInMemory -> ResourceElements : getQuantity
+activate ResourceElements
+ResourceElements --> ResourceRepositoryInMemory
+deactivate ResourceElements
+ResourceRepositoryInMemory -> ResourceElements : removeElement
+activate ResourceElements
+ResourceElements --> ResourceRepositoryInMemory
+deactivate ResourceElements
+ResourceRepositoryInMemory -> Resource : addBurger
+activate Resource
+Resource -> ResourceElements : addQuantity
+activate ResourceElements
+ResourceElements --> Resource
+deactivate ResourceElements
+Resource --> ResourceRepositoryInMemory
+deactivate Resource
+ResourceRepositoryInMemory -> Resource : addBurger
+activate Resource
+Resource -> ResourceElements : addQuantity
+activate ResourceElements
+ResourceElements --> Resource
+deactivate ResourceElements
+Resource --> ResourceRepositoryInMemory
+deactivate Resource
+ResourceRepositoryInMemory --> ResourceRepository
+deactivate ResourceRepositoryInMemory
+ResourceRepository --> TurnUseCase
+deactivate ResourceRepository
+TurnUseCase -> Dinosaur : feedWater
+activate Dinosaur
+Dinosaur -> Dinosaur : getWaterNeed
+activate Dinosaur
+Dinosaur -> Dinosaur : isNewlyAdded
+activate Dinosaur
+Dinosaur --> Dinosaur
+deactivate Dinosaur
+Dinosaur --> Dinosaur
+deactivate Dinosaur
+Dinosaur --> TurnUseCase
+deactivate Dinosaur
+TurnUseCase -> ResourceRepository : drinkWater
+activate ResourceRepository
+ResourceRepository -> ResourceRepositoryInMemory : drinkWater
+activate ResourceRepositoryInMemory
+ResourceRepositoryInMemory -> ResourceElements : getQuantity
+activate ResourceElements
+ResourceElements --> ResourceRepositoryInMemory
+deactivate ResourceElements
+ResourceRepositoryInMemory -> ResourceElements : removeElement
+activate ResourceElements
+ResourceElements --> ResourceRepositoryInMemory
+deactivate ResourceElements
+ResourceRepositoryInMemory -> Resource : addWater
+activate Resource
+Resource -> ResourceElements : addQuantity
+activate ResourceElements
+ResourceElements --> Resource
+deactivate ResourceElements
+Resource --> ResourceRepositoryInMemory
+deactivate Resource
+ResourceRepositoryInMemory -> Resource : addWater
+activate Resource
+Resource -> ResourceElements : addQuantity
+activate ResourceElements
+ResourceElements --> Resource
+deactivate ResourceElements
+Resource --> ResourceRepositoryInMemory
+deactivate Resource
+ResourceRepositoryInMemory --> ResourceRepository
+deactivate ResourceRepositoryInMemory
+ResourceRepository --> TurnUseCase
+deactivate ResourceRepository
+TurnUseCase -> DinosaurRepository : remove
+activate DinosaurRepository
+DinosaurRepository -> DinosaurRepositoryInMemory : remove
+activate DinosaurRepositoryInMemory
+DinosaurRepositoryInMemory -> Dinosaur : getName
+activate Dinosaur
+Dinosaur --> DinosaurRepositoryInMemory
+deactivate Dinosaur
+DinosaurRepositoryInMemory --> DinosaurRepository
+deactivate DinosaurRepositoryInMemory
+DinosaurRepository --> TurnUseCase
+deactivate DinosaurRepository
+TurnUseCase --> TurnUseCase
+deactivate TurnUseCase
+TurnUseCase --> TurnUseCase
+deactivate TurnUseCase
+TurnUseCase --> TurnUseCase
+deactivate TurnUseCase
+TurnUseCase -> TurnFactory : create
+activate TurnFactory
+TurnFactory -> Turn : new
+activate Turn
+Turn --> TurnFactory
+deactivate Turn
+TurnFactory --> TurnUseCase
+deactivate TurnFactory
+TurnUseCase -> TurnRepository : save
+activate TurnRepository
+TurnRepository -> TurnRepositoryInMemory : save
+activate TurnRepositoryInMemory
+TurnRepositoryInMemory -> Turn : getId
+activate Turn
+Turn --> TurnRepositoryInMemory
+deactivate Turn
+TurnRepositoryInMemory --> TurnRepository
+deactivate TurnRepositoryInMemory
+TurnRepository --> TurnUseCase
+deactivate TurnRepository
+TurnUseCase --> TurnResource
+deactivate TurnUseCase
+TurnResource -> TurnDtoAssembler : toResponse
+activate TurnDtoAssembler
+TurnDtoAssembler --> TurnResource
+deactivate TurnDtoAssembler
+return
+@enduml
