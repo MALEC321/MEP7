@@ -1,13 +1,13 @@
-package ca.ulaval.glo4002.game.application.turn;
+package ca.ulaval.glo4002.game.repositories.turn;
 
 import ca.ulaval.glo4002.game.domain.turn.Turn;
-import ca.ulaval.glo4002.game.repositories.turn.TurnRepository;
+import ca.ulaval.glo4002.game.domain.turn.TurnRepository;
 
 import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
 
-public class TurnServices implements TurnRepository {
+public class TurnRepositoryInMemory implements TurnRepository {
     private final Map<UUID, Turn> turnsById = new HashMap<>();
 
     @Override

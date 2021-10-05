@@ -1,11 +1,11 @@
 package ca.ulaval.glo4002.game.configuration;
 
-import ca.ulaval.glo4002.game.application.actions.ActionServices;
-import ca.ulaval.glo4002.game.application.dinosaur.DinosaurServices;
+import ca.ulaval.glo4002.game.repositories.actions.ActionRepositoryInMemory;
+import ca.ulaval.glo4002.game.repositories.dinosaur.DinosaurRepositoryInMemory;
 import ca.ulaval.glo4002.game.application.dinosaur.DinosaurUseCase;
-import ca.ulaval.glo4002.game.application.resources.ResourceServices;
+import ca.ulaval.glo4002.game.repositories.resources.ResourceRepositoryInMemory;
 import ca.ulaval.glo4002.game.application.resources.ResourceUseCase;
-import ca.ulaval.glo4002.game.application.turn.TurnServices;
+import ca.ulaval.glo4002.game.repositories.turn.TurnRepositoryInMemory;
 import ca.ulaval.glo4002.game.application.turn.TurnUseCase;
 import ca.ulaval.glo4002.game.controllers.dinosaur.DinosaurResource;
 import ca.ulaval.glo4002.game.controllers.dinosaur.dtos.DinosaurAssembler;
@@ -23,10 +23,10 @@ import ca.ulaval.glo4002.game.domain.resources.ResourceFactory;
 import ca.ulaval.glo4002.game.domain.turn.TurnFactory;
 import ca.ulaval.glo4002.game.exceptions.exceptionMappers.*;
 import ca.ulaval.glo4002.game.heartbeat.HeartbeatResource;
-import ca.ulaval.glo4002.game.repositories.actions.ActionRepository;
-import ca.ulaval.glo4002.game.repositories.dinosaur.DinosaurRepository;
-import ca.ulaval.glo4002.game.repositories.resources.ResourceRepository;
-import ca.ulaval.glo4002.game.repositories.turn.TurnRepository;
+import ca.ulaval.glo4002.game.domain.actions.ActionRepository;
+import ca.ulaval.glo4002.game.domain.dinosaur.DinosaurRepository;
+import ca.ulaval.glo4002.game.domain.resources.ResourceRepository;
+import ca.ulaval.glo4002.game.domain.turn.TurnRepository;
 import org.glassfish.jersey.server.ResourceConfig;
 
 import javax.ws.rs.core.Application;
@@ -36,16 +36,16 @@ import java.util.Set;
 public class AppConfig {
     // Turn
     static TurnFactory turnFactory = new TurnFactory();
-    static TurnRepository turnRepository = new TurnServices();
-    static ResourceRepository resourceRepository = new ResourceServices();
+    static TurnRepository turnRepository = new TurnRepositoryInMemory();
+    static ResourceRepository resourceRepository = new ResourceRepositoryInMemory();
     static TurnAssembler turnAssembler = new TurnAssembler();
-    static ActionRepository actionRepository = new ActionServices();
+    static ActionRepository actionRepository = new ActionRepositoryInMemory();
     static ActionFactory actionFactory = new ActionFactory();
     static SpeciesDietsCorrespondances speciesDietsCorrespondances = new SpeciesDietsCorrespondances();
 
 
     // Dinosaur
-    static DinosaurRepository dinosaurRepository = new DinosaurServices();
+    static DinosaurRepository dinosaurRepository = new DinosaurRepositoryInMemory();
     static DinosaurFactory dinosaurFactory = new DinosaurFactory(dinosaurRepository, speciesDietsCorrespondances);
     static DinosaurAssembler dinosaurAssembler = new DinosaurAssembler();
     static DinosaurUseCase dinosaurUseCase = new DinosaurUseCase(dinosaurFactory, dinosaurRepository, dinosaurAssembler, actionRepository, actionFactory);

@@ -5,7 +5,6 @@ import ca.ulaval.glo4002.game.exceptions.types.DuplicateNameException;
 import ca.ulaval.glo4002.game.exceptions.types.InvalidGenderException;
 import ca.ulaval.glo4002.game.exceptions.types.InvalidSpeciesException;
 import ca.ulaval.glo4002.game.exceptions.types.InvalidWeightException;
-import ca.ulaval.glo4002.game.repositories.dinosaur.DinosaurRepository;
 
 public class DinosaurFactory {
     public static final int MIN_WEIGHT = 0;

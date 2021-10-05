@@ -2,18 +2,18 @@ package ca.ulaval.glo4002.game.application.turn;
 
 import ca.ulaval.glo4002.game.controllers.turn.dtos.TurnAssembler;
 import ca.ulaval.glo4002.game.domain.actions.Action;
-import ca.ulaval.glo4002.game.repositories.actions.ActionRepository;
+import ca.ulaval.glo4002.game.domain.actions.ActionRepository;
 import ca.ulaval.glo4002.game.domain.dinosaur.Dinosaur;
-import ca.ulaval.glo4002.game.repositories.dinosaur.DinosaurRepository;
+import ca.ulaval.glo4002.game.domain.dinosaur.DinosaurRepository;
 import ca.ulaval.glo4002.game.domain.dinosaur.enums.DietType;
 import ca.ulaval.glo4002.game.domain.resources.Burger;
-import ca.ulaval.glo4002.game.repositories.resources.ResourceRepository;
+import ca.ulaval.glo4002.game.domain.resources.ResourceRepository;
 import ca.ulaval.glo4002.game.domain.resources.Salad;
 import ca.ulaval.glo4002.game.domain.resources.Water;
 import ca.ulaval.glo4002.game.controllers.turn.dtos.TurnDto;
 import ca.ulaval.glo4002.game.domain.turn.Turn;
 import ca.ulaval.glo4002.game.domain.turn.TurnFactory;
-import ca.ulaval.glo4002.game.repositories.turn.TurnRepository;
+import ca.ulaval.glo4002.game.domain.turn.TurnRepository;
 
 import java.util.List;
 import java.util.UUID;

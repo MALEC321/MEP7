@@ -1,6 +1,4 @@
-package ca.ulaval.glo4002.game.repositories.turn;
-
-import ca.ulaval.glo4002.game.domain.turn.Turn;
+package ca.ulaval.glo4002.game.domain.turn;
 
 import java.util.UUID;
 

@@ -2,7 +2,7 @@ package ca.ulaval.glo4002.game.application.resources;
 
 import ca.ulaval.glo4002.game.domain.actions.Action;
 import ca.ulaval.glo4002.game.domain.actions.ActionFactory;
-import ca.ulaval.glo4002.game.repositories.actions.ActionRepository;
+import ca.ulaval.glo4002.game.domain.actions.ActionRepository;
 import ca.ulaval.glo4002.game.domain.actions.Command;
 import ca.ulaval.glo4002.game.controllers.resources.dtos.ResourceAssemblers;
 import ca.ulaval.glo4002.game.controllers.resources.dtos.ResourceCreationDto;
@@ -10,7 +10,7 @@ import ca.ulaval.glo4002.game.controllers.resources.dtos.ResourceDto;
 import ca.ulaval.glo4002.game.domain.resources.Resource;
 import ca.ulaval.glo4002.game.domain.resources.ResourceElements;
 import ca.ulaval.glo4002.game.domain.resources.ResourceFactory;
-import ca.ulaval.glo4002.game.repositories.resources.ResourceRepository;
+import ca.ulaval.glo4002.game.domain.resources.ResourceRepository;
 
 import java.util.ArrayList;
 import java.util.List;

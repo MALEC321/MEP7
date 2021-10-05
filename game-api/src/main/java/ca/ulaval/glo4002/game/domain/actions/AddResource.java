@@ -1,7 +1,7 @@
 package ca.ulaval.glo4002.game.domain.actions;
 
 import ca.ulaval.glo4002.game.domain.resources.ResourceElements;
-import ca.ulaval.glo4002.game.repositories.resources.ResourceRepository;
+import ca.ulaval.glo4002.game.domain.resources.ResourceRepository;
 
 import java.util.UUID;
 

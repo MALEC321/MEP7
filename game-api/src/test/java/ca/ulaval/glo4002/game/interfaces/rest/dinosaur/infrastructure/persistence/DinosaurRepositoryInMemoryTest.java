@@ -1,6 +1,6 @@
 package ca.ulaval.glo4002.game.interfaces.rest.dinosaur.infrastructure.persistence;
 
-import ca.ulaval.glo4002.game.application.dinosaur.DinosaurServices;
+import ca.ulaval.glo4002.game.repositories.dinosaur.DinosaurRepositoryInMemory;
 import ca.ulaval.glo4002.game.domain.dinosaur.Dinosaur;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -11,11 +11,11 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class DinosaurRepositoryInMemoryTest {
-    DinosaurServices dinosaurRepositoryInMemory;
+    DinosaurRepositoryInMemory dinosaurRepositoryInMemory;
 
     @BeforeEach
     void setup() {
-        dinosaurRepositoryInMemory = new DinosaurServices();
+        dinosaurRepositoryInMemory = new DinosaurRepositoryInMemory();
     }
 
     @Test

@@ -1,7 +1,7 @@
-package ca.ulaval.glo4002.game.application.resources;
+package ca.ulaval.glo4002.game.repositories.resources;
 
 import ca.ulaval.glo4002.game.domain.resources.*;
-import ca.ulaval.glo4002.game.repositories.resources.ResourceRepository;
+import ca.ulaval.glo4002.game.domain.resources.ResourceRepository;
 import org.javatuples.Triplet;
 
 import java.util.Arrays;
@@ -9,7 +9,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Queue;
 
-public class ResourceServices implements ResourceRepository {
+public class ResourceRepositoryInMemory implements ResourceRepository {
     private final Triplet<Queue<Burger>, Queue<Salad>, Queue<Water>> resources = Triplet.with(new LinkedList<>(),new LinkedList<>(), new LinkedList<>()) ;
     private final Resource consumedResources = new Resource(new Burger(0), new Salad(0), new Water(0));
     private final Resource expiredResources = new Resource(new Burger(0), new Salad(0), new Water(0));

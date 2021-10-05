@@ -1,7 +1,4 @@
-package ca.ulaval.glo4002.game.repositories.resources;
-
-import ca.ulaval.glo4002.game.domain.resources.Resource;
-import ca.ulaval.glo4002.game.domain.resources.ResourceElements;
+package ca.ulaval.glo4002.game.domain.resources;
 
 import java.util.List;
 

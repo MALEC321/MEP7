@@ -1,6 +1,4 @@
-package ca.ulaval.glo4002.game.repositories.dinosaur;
-
-import ca.ulaval.glo4002.game.domain.dinosaur.Dinosaur;
+package ca.ulaval.glo4002.game.domain.dinosaur;
 
 import java.util.List;
 

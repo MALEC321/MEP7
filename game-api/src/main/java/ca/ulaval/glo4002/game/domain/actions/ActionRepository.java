@@ -1,6 +1,4 @@
-package ca.ulaval.glo4002.game.repositories.actions;
-
-import ca.ulaval.glo4002.game.domain.actions.Action;
+package ca.ulaval.glo4002.game.domain.actions;
 
 import java.util.List;
 

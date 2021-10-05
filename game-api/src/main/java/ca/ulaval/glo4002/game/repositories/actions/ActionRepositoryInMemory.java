@@ -1,12 +1,12 @@
-package ca.ulaval.glo4002.game.application.actions;
+package ca.ulaval.glo4002.game.repositories.actions;
 
 import ca.ulaval.glo4002.game.domain.actions.Action;
-import ca.ulaval.glo4002.game.repositories.actions.ActionRepository;
+import ca.ulaval.glo4002.game.domain.actions.ActionRepository;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class ActionServices implements ActionRepository {
+public class ActionRepositoryInMemory implements ActionRepository {
     private final List<Action> waitingActions = new ArrayList<>();
 
     @Override

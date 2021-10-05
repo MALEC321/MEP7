@@ -1,11 +1,11 @@
-package ca.ulaval.glo4002.game.application.dinosaur;
+package ca.ulaval.glo4002.game.repositories.dinosaur;
 
 import ca.ulaval.glo4002.game.domain.dinosaur.Dinosaur;
-import ca.ulaval.glo4002.game.repositories.dinosaur.DinosaurRepository;
+import ca.ulaval.glo4002.game.domain.dinosaur.DinosaurRepository;
 
 import java.util.*;
 
-public class DinosaurServices implements DinosaurRepository {
+public class DinosaurRepositoryInMemory implements DinosaurRepository {
     private final Map<String, Dinosaur> dinosaursByName = new HashMap<>();
 
     @Override
