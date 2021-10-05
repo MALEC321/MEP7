@@ -9,6 +9,7 @@ import javax.ws.rs.core.Response;
 import javax.ws.rs.ext.ExceptionMapper;
 
 public class InvalidMotherExceptionMapper extends ExceptionResponse implements ExceptionMapper<InvalidMotherException> {
+
     @Override
     public Response toResponse(InvalidMotherException e) {
         ExceptionResponseDto exceptionResponseDto = new ExceptionResponseDto();
