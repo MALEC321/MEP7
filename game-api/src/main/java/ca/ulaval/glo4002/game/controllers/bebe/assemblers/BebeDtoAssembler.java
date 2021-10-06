@@ -1,10 +1,14 @@
-package ca.ulaval.glo4002.game.controllers.bebe.dtos;
+package ca.ulaval.glo4002.game.controllers.bebe.assemblers;
 
-import ca.ulaval.glo4002.game.domain.bebe.BebeFactory;
+import ca.ulaval.glo4002.game.application.bebe.dtos.BebeDto;
+import ca.ulaval.glo4002.game.application.bebe.dtos.BebeRequest;
+import ca.ulaval.glo4002.game.controllers.bebe.dtos.BebeCreationDto;
+import ca.ulaval.glo4002.game.controllers.bebe.dtos.BebeResponse;
+import ca.ulaval.glo4002.game.domain.dinosaur.BabyFactory;
 
 public class BebeDtoAssembler {
 
-    BebeFactory bebeFactory;
+    BabyFactory bebeFactory;
 
     public BebeCreationDto fromRequest(BebeRequest request) {
         BebeCreationDto dto = new BebeCreationDto();

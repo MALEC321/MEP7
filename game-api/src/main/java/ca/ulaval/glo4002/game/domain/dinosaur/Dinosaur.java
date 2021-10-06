@@ -5,7 +5,7 @@ import ca.ulaval.glo4002.game.domain.dinosaur.enums.SpeciesDietsCorrespondances;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 
-public class Dinosaur {
+public abstract class Dinosaur {
     private final String name;
     private final int weight;
     private final String gender;

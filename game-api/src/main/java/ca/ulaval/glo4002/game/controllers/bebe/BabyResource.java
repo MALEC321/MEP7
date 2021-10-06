@@ -1,9 +1,9 @@
 package ca.ulaval.glo4002.game.controllers.bebe;
 
-import ca.ulaval.glo4002.game.application.bebe.BebeUseCase;
+import ca.ulaval.glo4002.game.application.bebe.BabyUseCase;
 import ca.ulaval.glo4002.game.controllers.bebe.dtos.BebeCreationDto;
-import ca.ulaval.glo4002.game.controllers.bebe.dtos.BebeDtoAssembler;
-import ca.ulaval.glo4002.game.controllers.bebe.dtos.BebeRequest;
+import ca.ulaval.glo4002.game.controllers.bebe.assemblers.BebeDtoAssembler;
+import ca.ulaval.glo4002.game.application.bebe.dtos.BebeRequest;
 
 import javax.ws.rs.Consumes;
 import javax.ws.rs.POST;
@@ -13,12 +13,12 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
 @Path("/breed")
-public class BebeResource {
+public class BabyResource {
 
-    private final BebeUseCase bebeUseCase;
+    private final BabyUseCase bebeUseCase;
     private final BebeDtoAssembler bebeDtoAssembler;
 
-    public BebeResource(BebeUseCase bebeUseCase, BebeDtoAssembler bebeDtoAssembler) {
+    public BabyResource(BabyUseCase bebeUseCase, BebeDtoAssembler bebeDtoAssembler) {
         this.bebeUseCase = bebeUseCase;
         this.bebeDtoAssembler = bebeDtoAssembler;
     }

@@ -30,7 +30,7 @@ public class DinosaurFactory {
             throw new InvalidSpeciesException();
         }
 
-        return new Dinosaur(name, weight, gender, species);
+        return new DinosaurAdult(name, weight, gender, species);
     }
 
     public void validateName(String name) {

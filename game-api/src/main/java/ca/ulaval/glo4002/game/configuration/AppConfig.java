@@ -1,13 +1,11 @@
 package ca.ulaval.glo4002.game.configuration;
 
-import ca.ulaval.glo4002.game.application.bebe.BebeUseCase;
-import ca.ulaval.glo4002.game.controllers.bebe.BebeResource;
-import ca.ulaval.glo4002.game.controllers.bebe.dtos.BebeAssembler;
-import ca.ulaval.glo4002.game.controllers.bebe.dtos.BebeDtoAssembler;
-import ca.ulaval.glo4002.game.domain.bebe.BebeFactory;
-import ca.ulaval.glo4002.game.domain.bebe.BebeRepository;
+import ca.ulaval.glo4002.game.application.bebe.BabyUseCase;
+import ca.ulaval.glo4002.game.controllers.bebe.BabyResource;
+import ca.ulaval.glo4002.game.controllers.bebe.assemblers.BebeAssembler;
+import ca.ulaval.glo4002.game.controllers.bebe.assemblers.BebeDtoAssembler;
+import ca.ulaval.glo4002.game.domain.dinosaur.BabyFactory;
 import ca.ulaval.glo4002.game.repositories.actions.ActionRepositoryInMemory;
-import ca.ulaval.glo4002.game.repositories.bebe.BebeRepositoryInMemory;
 import ca.ulaval.glo4002.game.repositories.dinosaur.DinosaurRepositoryInMemory;
 import ca.ulaval.glo4002.game.application.dinosaur.DinosaurUseCase;
 import ca.ulaval.glo4002.game.repositories.resources.ResourceRepositoryInMemory;
@@ -72,13 +70,12 @@ public class AppConfig {
     static ResourceResource resourceResource = new ResourceResource(resourceUseCase, resourceDtoAssembler);
 
     // Bebe
-    static BebeRepository bebeRepository = new BebeRepositoryInMemory();
-    static BebeFactory bebeFactory = new BebeFactory(bebeRepository);
+    static BabyFactory bebeFactory = new BabyFactory(dinosaurRepository);
     static BebeAssembler bebeAssembler = new BebeAssembler();
-    static BebeUseCase bebeUseCase = new BebeUseCase(bebeFactory, bebeRepository, bebeAssembler, actionRepository, actionFactory);
+    static BabyUseCase bebeUseCase = new BabyUseCase(bebeFactory, dinosaurRepository, bebeAssembler, actionRepository, actionFactory);
 
     static BebeDtoAssembler bebeDtoAssembler = new BebeDtoAssembler();
-    static BebeResource bebeResource = new BebeResource(bebeUseCase, bebeDtoAssembler);
+    static BabyResource bebeResource = new BabyResource(bebeUseCase, bebeDtoAssembler);
 
     static HeartbeatResource heartbeatResource = new HeartbeatResource();
 
