@@ -2,8 +2,8 @@ package ca.ulaval.glo4002.game.configuration;
 
 import ca.ulaval.glo4002.game.application.bebe.BabyUseCase;
 import ca.ulaval.glo4002.game.controllers.bebe.BabyResource;
-import ca.ulaval.glo4002.game.controllers.bebe.assemblers.BebeAssembler;
-import ca.ulaval.glo4002.game.controllers.bebe.assemblers.BebeDtoAssembler;
+import ca.ulaval.glo4002.game.application.bebe.dtos.BebeAssembler;
+import ca.ulaval.glo4002.game.controllers.bebe.dtos.BebeDtoAssembler;
 import ca.ulaval.glo4002.game.domain.dinosaur.BabyFactory;
 import ca.ulaval.glo4002.game.repositories.actions.ActionRepositoryInMemory;
 import ca.ulaval.glo4002.game.repositories.dinosaur.DinosaurRepositoryInMemory;

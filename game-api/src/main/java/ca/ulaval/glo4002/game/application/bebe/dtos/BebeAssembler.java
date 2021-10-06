@@ -1,4 +1,4 @@
-package ca.ulaval.glo4002.game.controllers.bebe.assemblers;
+package ca.ulaval.glo4002.game.application.bebe.dtos;
 
 import ca.ulaval.glo4002.game.application.bebe.dtos.BebeDto;
 import ca.ulaval.glo4002.game.domain.dinosaur.DinosaurBaby;

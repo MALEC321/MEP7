@@ -1,6 +1,6 @@
 package ca.ulaval.glo4002.game.application.bebe;
 
-import ca.ulaval.glo4002.game.controllers.bebe.assemblers.BebeAssembler;
+import ca.ulaval.glo4002.game.application.bebe.dtos.BebeAssembler;
 import ca.ulaval.glo4002.game.controllers.bebe.dtos.BebeCreationDto;
 import ca.ulaval.glo4002.game.domain.actions.ActionFactory;
 import ca.ulaval.glo4002.game.domain.actions.ActionRepository;
