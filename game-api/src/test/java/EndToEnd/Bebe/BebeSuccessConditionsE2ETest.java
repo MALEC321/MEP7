@@ -16,14 +16,12 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-import static org.hamcrest.Matchers.equalTo;
-import static org.hamcrest.Matchers.hasItems;
-
 public class BebeSuccessConditionsE2ETest{
     private static Thread thread;
     RequestSpecification httpRequest;
     Response response;
     JsonPath jsonPathEvaluator;
+    JSONObject request;
 
     @BeforeClass
     public static void groundZero() {
@@ -61,8 +59,6 @@ public class BebeSuccessConditionsE2ETest{
                 .post("/reset")
                 .then()
                 .statusCode(200);
-
-        JSONObject request;
 
         request = new JSONObject();
         request.put("name", "Mother test");
@@ -120,25 +116,8 @@ public class BebeSuccessConditionsE2ETest{
     }
 
     @Test
-    public void givenCreatedBaby_whenPostTurn_thenSpeciesIsSameAsParents(){
-
-        RestAssured.given()
-                .get("/dinosaurs/Bebe test").then().
-                statusCode(200).
-                body("name", equalTo("Bebe test")).
-                body("weight", equalTo(1)).
-                body("species", equalTo("Triceratops")).
-                log().all();
-
-        RestAssured.given()
-                .get("/dinosaurs").then().
-                statusCode(400).
-                body("name", hasItems("Bebe test", "Bebe test")).
-                log().all();
-    }
-
-    @Test
-    public void givenCreatedBaby_whenPostTurn_thenParentsAreMaleAndFemale(){
+    public void givenCreatedBaby_whenGetDinosaurs_thenParentsAreMaleAndFemale(){
+        //redondant
     }
 
     @Test
@@ -161,6 +140,7 @@ public class BebeSuccessConditionsE2ETest{
         httpRequest = RestAssured.given();
         response = httpRequest.get("/dinosaurs");
         jsonPathEvaluator = response.jsonPath();
+
         List<String> listDinoNames = jsonPathEvaluator.getList("name");
         Boolean nomIdentique = false;
         Set<String> setDinoNames = new HashSet<>();
@@ -174,23 +154,70 @@ public class BebeSuccessConditionsE2ETest{
     }
 
     @Test
-    public void givenCreatedBaby_whenGetDinosaurs_thenBabyIsNotPresent() {
+    public void givenCreatedBaby_whenNoPostTurnAndGetDinosaurs_thenBabyIsNotPresent() {
+        request = new JSONObject();
+        request.put("name", "Bebe test 2");
+        request.put("fatherName", "Father test");
+        request.put("motherName", "Mother test");
+        RestAssured.given()
+                .contentType(ContentType.JSON)
+                .body("")
+                .when()
+                .post("/breed")
+                .then()
+                .statusCode(200);
 
+        httpRequest = RestAssured.given();
+        response = httpRequest.get("/dinosaurs");
+        jsonPathEvaluator = response.jsonPath();
+
+        List<String> listDinoNames = jsonPathEvaluator.getList("name");
+        Assert.assertFalse(listDinoNames.contains("Bebe Test 2"));
     }
 
     @Test
     public void givenCreatedBaby_whenPostTurnAndGetDinosaurs_thenBabyIsPresent() {
+        httpRequest = RestAssured.given();
+        response = httpRequest.get("/dinosaurs");
+        jsonPathEvaluator = response.jsonPath();
 
+        List<String> listDinoNames = jsonPathEvaluator.getList("name");
+        Assert.assertTrue(listDinoNames.contains("Bebe Test"));
     }
 
     @Test
     public void givenInvalidBaby_whenPostTurnAndGetDinosaurs_thenBabyIsNotPresent() {
+        request = new JSONObject();
+        request.put("name", "Bebe test 2");
+        request.put("fatherName", "Non-existent father");
+        request.put("motherName", "Non-existent Mother");
+        RestAssured.given()
+                .contentType(ContentType.JSON)
+                .body("")
+                .when()
+                .post("/breed")
+                .then()
+                .statusCode(200);
 
+        RestAssured.given()
+                .contentType(ContentType.JSON)
+                .body("")
+                .when()
+                .post("/turn")
+                .then()
+                .statusCode(200);
+
+        httpRequest = RestAssured.given();
+        response = httpRequest.get("/dinosaurs");
+        jsonPathEvaluator = response.jsonPath();
+
+        List<String> listDinoNames = jsonPathEvaluator.getList("name");
+        Assert.assertFalse(listDinoNames.contains("Bebe Test 2"));
     }
 
     @Test
-    public void givenValidBabys_whenGetDinosaurs_thenAtLeastOneParentLives() {
-
+    public void givenBothParentsDead_whenGetDinosaurs_thenBabyIsDead() {
+        //Difficile à faire
     }
 }
 
