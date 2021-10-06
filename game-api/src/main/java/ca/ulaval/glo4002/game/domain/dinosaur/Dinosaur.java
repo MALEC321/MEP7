@@ -55,10 +55,15 @@ public abstract class Dinosaur {
     }
 
     private int calculateStrength(int weight, String gender, DietType diet) {
-        BigDecimal bdDietMultiplicand = (diet.equals(DietType.CARNIVORE)) ? new BigDecimal("1.5") : new BigDecimal("1");
-        BigDecimal bdSexMultiplicand = (gender.equals("f")) ? new BigDecimal("1.5") : new BigDecimal("1");
+        BigDecimal bdDietMultiplicand = null;
+        if(diet != null){
+            bdDietMultiplicand = (diet.equals(DietType.CARNIVORE)) ? new BigDecimal("1.5") : new BigDecimal("1");
+        }
+        BigDecimal bdSexMultiplicand = null;
+        if(gender != null) {
+            bdSexMultiplicand = (gender.equals("f")) ? new BigDecimal("1.5") : new BigDecimal("1");
+        }
         BigDecimal bdStrength = new BigDecimal(weight).multiply(bdDietMultiplicand).multiply(bdSexMultiplicand);
-
         return bdStrength.setScale(0, RoundingMode.CEILING).intValue();
     }
 

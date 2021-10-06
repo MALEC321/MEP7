@@ -8,7 +8,8 @@ public class BabyFactory {
         this.dinosaurRepository = dinosaurRepository;
     }
 
+    //TODO enlever les variables hardcoder
     public DinosaurBaby create(String name, String fatherName, String motherName){
-        return new DinosaurBaby(name, 1, null, null, fatherName, motherName);
+        return new DinosaurBaby(name, 1, "f", "Ankylosaurus", fatherName, motherName);
     }
 }

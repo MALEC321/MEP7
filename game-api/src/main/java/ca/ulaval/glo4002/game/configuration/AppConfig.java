@@ -75,7 +75,7 @@ public class AppConfig {
     static BabyUseCase bebeUseCase = new BabyUseCase(bebeFactory, dinosaurRepository, bebeAssembler, actionRepository, actionFactory);
 
     static BebeDtoAssembler bebeDtoAssembler = new BebeDtoAssembler();
-    static BabyResource bebeResource = new BabyResource(bebeUseCase, bebeDtoAssembler);
+    static BabyResource babyResource = new BabyResource(bebeUseCase, bebeDtoAssembler);
 
     static HeartbeatResource heartbeatResource = new HeartbeatResource();
 
@@ -88,7 +88,7 @@ public class AppConfig {
                                                                          resources.add(turnResource);
                                                                          resources.add(dinosaurResource);
                                                                          resources.add(heartbeatResource);
-                                                                         resources.add(bebeResource);
+                                                                         resources.add(babyResource);
                                                                          resources.add(new InvalidResourceExceptionMapper());
                                                                          resources.add(new UnknownExceptionGrabber());
                                                                          resources.add(new NotExistentNameExceptionMapper());

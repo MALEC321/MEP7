@@ -1,5 +1,6 @@
 package ca.ulaval.glo4002.game.interfaces.rest.dinosaur.infrastructure.persistence;
 
+import ca.ulaval.glo4002.game.domain.dinosaur.DinosaurAdult;
 import ca.ulaval.glo4002.game.repositories.dinosaur.DinosaurRepositoryInMemory;
 import ca.ulaval.glo4002.game.domain.dinosaur.Dinosaur;
 import org.junit.jupiter.api.BeforeEach;
@@ -20,10 +21,10 @@ class DinosaurRepositoryInMemoryTest {
 
     @Test
     void whenSortingDinosaurs_thenCorrectlySortByStrengthThenName() {
-        Dinosaur firstDino = new Dinosaur("aaa", 100, "f", "Ankylosaurus");
-        Dinosaur secondDino = new Dinosaur("ab", 100, "f", "Ankylosaurus");
-        Dinosaur thirdDino = new Dinosaur("a", 50, "m", "Ankylosaurus");
-        Dinosaur lastDino = new Dinosaur("aa", 1, "f", "Ankylosaurus");
+        Dinosaur firstDino = new DinosaurAdult("aaa", 100, "f", "Ankylosaurus");
+        Dinosaur secondDino = new DinosaurAdult("ab", 100, "f", "Ankylosaurus");
+        Dinosaur thirdDino = new DinosaurAdult("a", 50, "m", "Ankylosaurus");
+        Dinosaur lastDino = new DinosaurAdult("aa", 1, "f", "Ankylosaurus");
         dinosaurRepositoryInMemory.save(secondDino);
         dinosaurRepositoryInMemory.save(lastDino);
         dinosaurRepositoryInMemory.save(firstDino);
