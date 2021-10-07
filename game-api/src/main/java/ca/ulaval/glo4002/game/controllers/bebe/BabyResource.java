@@ -5,7 +5,6 @@ import ca.ulaval.glo4002.game.controllers.bebe.dtos.BebeCreationDto;
 import ca.ulaval.glo4002.game.application.bebe.dtos.BebeRequest;
 import ca.ulaval.glo4002.game.controllers.bebe.dtos.BebeDtoAssembler;
 import ca.ulaval.glo4002.game.controllers.bebe.dtos.ExternalApiCreationDto;
-import ca.ulaval.glo4002.game.controllers.turn.dtos.TurnResponse;
 
 import javax.ws.rs.Consumes;
 import javax.ws.rs.POST;
@@ -31,14 +30,12 @@ public class BabyResource {
     @Consumes(MediaType.APPLICATION_JSON)
     public Response createBebe(BebeRequest bebeRequest) {
         //Get Bebe dinosaur's parents
-        ExternalApiCreationDto externalApiCreationDto = new ExternalApiCreationDto();
-        externalApiCreationDto.fatherSpecies = "Ankylosaurus";
-        externalApiCreationDto.motherSpecies = "Ankylosaurus";
+        ExternalApiCreationDto externalApiCreationDto;
+        externalApiCreationDto = bebeUseCase.getParentsSpecies(bebeRequest.fatherName, bebeRequest.motherName);
 
         //Call to external API
         Client client = ClientBuilder.newClient();
         Response response = client.target("http://localhost:8080/breed").request(MediaType.APPLICATION_JSON).post(Entity.entity(externalApiCreationDto, MediaType.APPLICATION_JSON));
-        System.out.println(response);
 
         //Create Baby dinosaur
         BebeCreationDto dto = bebeDtoAssembler.fromRequest(bebeRequest);
