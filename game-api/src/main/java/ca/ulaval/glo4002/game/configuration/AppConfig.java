@@ -1,9 +1,9 @@
 package ca.ulaval.glo4002.game.configuration;
 
-import ca.ulaval.glo4002.game.application.bebe.BabyUseCase;
-import ca.ulaval.glo4002.game.controllers.bebe.BabyResource;
-import ca.ulaval.glo4002.game.application.bebe.dtos.BebeAssembler;
-import ca.ulaval.glo4002.game.controllers.bebe.dtos.BebeDtoAssembler;
+import ca.ulaval.glo4002.game.application.baby.BabyUseCase;
+import ca.ulaval.glo4002.game.controllers.baby.BabyResource;
+import ca.ulaval.glo4002.game.application.baby.dtos.BabyAssembler;
+import ca.ulaval.glo4002.game.controllers.baby.dtos.BabyDtoAssembler;
 import ca.ulaval.glo4002.game.domain.dinosaur.BabyFactory;
 import ca.ulaval.glo4002.game.repositories.actions.ActionRepositoryInMemory;
 import ca.ulaval.glo4002.game.repositories.dinosaur.DinosaurRepositoryInMemory;
@@ -71,11 +71,11 @@ public class AppConfig {
 
     // Bebe
     static BabyFactory bebeFactory = new BabyFactory(dinosaurRepository);
-    static BebeAssembler bebeAssembler = new BebeAssembler();
-    static BabyUseCase bebeUseCase = new BabyUseCase(bebeFactory, dinosaurRepository, bebeAssembler, actionRepository, actionFactory);
+    static BabyAssembler babyAssembler = new BabyAssembler();
+    static BabyUseCase bebeUseCase = new BabyUseCase(bebeFactory, dinosaurRepository, babyAssembler, actionRepository, actionFactory);
 
-    static BebeDtoAssembler bebeDtoAssembler = new BebeDtoAssembler();
-    static BabyResource babyResource = new BabyResource(bebeUseCase, bebeDtoAssembler);
+    static BabyDtoAssembler babyDtoAssembler = new BabyDtoAssembler();
+    static BabyResource babyResource = new BabyResource(bebeUseCase, babyDtoAssembler);
 
     static HeartbeatResource heartbeatResource = new HeartbeatResource();
 

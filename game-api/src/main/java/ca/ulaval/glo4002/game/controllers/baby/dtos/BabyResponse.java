@@ -1,6 +1,6 @@
-package ca.ulaval.glo4002.game.controllers.bebe.dtos;
+package ca.ulaval.glo4002.game.controllers.baby.dtos;
 
-public class BebeResponse {
+public class BabyResponse {
     public String name;
     public String fatherName;
     public String motherName;
