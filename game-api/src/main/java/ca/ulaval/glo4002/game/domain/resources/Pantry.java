@@ -1,4 +1,4 @@
-package ca.ulaval.glo4002.game.interfaces.rest.resources.entities;
+package ca.ulaval.glo4002.game.domain.resources;
 
 import java.util.LinkedList;
 import java.util.Queue;
