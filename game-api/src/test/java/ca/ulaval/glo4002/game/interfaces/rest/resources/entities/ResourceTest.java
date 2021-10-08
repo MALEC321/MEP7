@@ -2,7 +2,7 @@ package ca.ulaval.glo4002.game.interfaces.rest.resources.entities;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-import ca.ulaval.glo4002.game.interfaces.rest.resources.entities.*;
+import ca.ulaval.glo4002.game.domain.resources.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
