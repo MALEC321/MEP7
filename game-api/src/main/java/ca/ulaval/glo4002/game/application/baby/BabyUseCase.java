@@ -29,7 +29,7 @@ public class BabyUseCase {
     }
 
     public void createBebe(BabyCreationDto dto) {
-        dinosaurFactory.create(dto.name, dto.fatherName, dto.motherName);
+        dinosaurFactory.create(dto.name, dto.fatherName, dto.motherName, dto.gender, dto.species);
     }
 
     public ExternalApiCreationDto getParentsSpecies(String fatherName, String motherName) {

@@ -1,6 +1,7 @@
 package ca.ulaval.glo4002.game.controllers.baby;
 
 import ca.ulaval.glo4002.game.application.baby.BabyUseCase;
+import ca.ulaval.glo4002.game.application.baby.dtos.ExternalApiBebeListDto;
 import ca.ulaval.glo4002.game.controllers.baby.dtos.BabyCreationDto;
 import ca.ulaval.glo4002.game.application.baby.dtos.BabyRequest;
 import ca.ulaval.glo4002.game.controllers.baby.dtos.BabyDtoAssembler;
@@ -36,9 +37,9 @@ public class BabyResource {
         //Call to external API
         Client client = ClientBuilder.newClient();
         Response response = client.target("http://localhost:8080/breed").request(MediaType.APPLICATION_JSON).post(Entity.entity(externalApiCreationDto, MediaType.APPLICATION_JSON));
-
+        ExternalApiBebeListDto externalApiBebeListDto = response.readEntity(ExternalApiBebeListDto.class);
         //Create Baby dinosaur
-        BabyCreationDto dto = babyDtoAssembler.fromRequest(babyRequest);
+        BabyCreationDto dto = babyDtoAssembler.fromRequest(babyRequest, externalApiBebeListDto);
         bebeUseCase.createBebe(dto);
 
         return Response.status(Response.Status.OK).build();
