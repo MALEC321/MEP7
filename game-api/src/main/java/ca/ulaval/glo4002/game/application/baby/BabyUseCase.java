@@ -3,8 +3,10 @@ package ca.ulaval.glo4002.game.application.baby;
 import ca.ulaval.glo4002.game.application.baby.dtos.BabyAssembler;
 import ca.ulaval.glo4002.game.controllers.baby.dtos.BabyCreationDto;
 import ca.ulaval.glo4002.game.controllers.baby.dtos.ExternalApiCreationDto;
+import ca.ulaval.glo4002.game.domain.actions.Action;
 import ca.ulaval.glo4002.game.domain.actions.ActionFactory;
 import ca.ulaval.glo4002.game.domain.actions.ActionRepository;
+import ca.ulaval.glo4002.game.domain.actions.Command;
 import ca.ulaval.glo4002.game.domain.dinosaur.*;
 import ca.ulaval.glo4002.game.exceptions.types.InvalidFatherException;
 import ca.ulaval.glo4002.game.exceptions.types.InvalidMotherException;
@@ -29,7 +31,8 @@ public class BabyUseCase {
     }
 
     public void createBebe(BabyCreationDto dto) {
-        dinosaurFactory.create(dto.name, dto.fatherName, dto.motherName, dto.gender, dto.species);
+        DinosaurBaby dinosaurBaby = dinosaurFactory.create(dto.name, dto.fatherName, dto.motherName, dto.gender, dto.species);
+        addDinoToActionWaitingList(dinosaurBaby);
     }
 
     public ExternalApiCreationDto getParentsSpecies(String fatherName, String motherName) {
@@ -47,6 +50,7 @@ public class BabyUseCase {
         if (!Objects.equals(dinosaurRepository.findByName(fatherName).getGender(), "m")) {
             throw new InvalidFatherException();
         }
+
         if (!Objects.equals(dinosaurRepository.findByName(motherName).getGender(), "f")) {
             throw new InvalidMotherException();
         }
@@ -58,5 +62,10 @@ public class BabyUseCase {
         motherSpecies = dinosaurMother.getSpecies();
 
         return babyAssembler.toExternalDto(fatherSpecies, motherSpecies);
+    }
+
+    private void addDinoToActionWaitingList(DinosaurBaby dinosaur) {
+        Action addDinos = actionFactory.create(dinosaur, Command.ADD_DINO, dinosaurRepository);
+        actionRepository.save(addDinos);
     }
 }
