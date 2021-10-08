@@ -34,12 +34,11 @@ public class DinosaurFactory {
 
         return new DinosaurAdult(name, weight, gender, species);
     }
-
+    //TODO remove hardcoded values
     public DinosaurBaby create(String name, String fatherName, String motherName){
         validateName(name);
         return new DinosaurBaby(name, 1, "f", "Ankylosaurus", fatherName, motherName);
     }
-
 
     public void validateName(String name) {
         if (dinosaurRepository.findByName(name) != null) {
