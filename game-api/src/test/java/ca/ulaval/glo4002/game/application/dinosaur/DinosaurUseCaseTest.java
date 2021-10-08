@@ -25,7 +25,6 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
 class DinosaurUseCaseTest {
-
     private DinosaurUseCase dinosaurUseCase;
     private DinosaurDtoAssembler dinosaurDtoAssembler;
     private TurnUseCase turnUseCase;

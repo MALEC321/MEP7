@@ -13,11 +13,10 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 class DinosaurFactoryTest {
-
     private DinosaurFactory dinosaurFactory;
+
     @BeforeEach
     void setUp() {
-
         SpeciesDietsCorrespondances speciesDietsCorrespondances = new SpeciesDietsCorrespondances();
         DinosaurRepository dinosaurRepository = mock(DinosaurRepository.class);
         dinosaurFactory = new DinosaurFactory(dinosaurRepository, speciesDietsCorrespondances);
