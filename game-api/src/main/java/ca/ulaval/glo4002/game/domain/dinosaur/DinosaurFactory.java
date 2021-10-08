@@ -37,8 +37,6 @@ public class DinosaurFactory {
 
     public DinosaurBaby create(String name, String fatherName, String motherName){
         validateName(name);
-        validateName(fatherName);
-        validateName(motherName);
         return new DinosaurBaby(name, 1, "f", "Ankylosaurus", fatherName, motherName);
     }
 
