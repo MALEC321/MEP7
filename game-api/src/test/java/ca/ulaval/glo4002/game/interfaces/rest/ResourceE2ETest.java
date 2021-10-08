@@ -2,8 +2,6 @@ package ca.ulaval.glo4002.game.interfaces.rest;
 
 import ca.ulaval.glo4002.game.GameServer;
 import io.restassured.RestAssured;
-import io.restassured.filter.log.RequestLoggingFilter;
-import io.restassured.filter.log.ResponseLoggingFilter;
 import io.restassured.http.ContentType;
 import io.restassured.parsing.Parser;
 import io.restassured.path.json.JsonPath;
@@ -46,7 +44,7 @@ public class ResourceE2ETest {
 
     @Before
     public void setup() {
-        RestAssured.filters(new RequestLoggingFilter(), new ResponseLoggingFilter());
+        //RestAssured.filters(new RequestLoggingFilter(), new ResponseLoggingFilter());
         RestAssured.port = 8181;
         RestAssured.basePath = "/";
         RestAssured.baseURI = "http://localhost";
@@ -80,6 +78,9 @@ public class ResourceE2ETest {
     {
         RestAssured.given()
                 .contentType(ContentType.JSON)
+                .log().uri()
+                .log().body()
+                .log().params()
                 .body(invalidResource)
                 .when()
                 .post("/resources")
@@ -159,8 +160,7 @@ public class ResourceE2ETest {
 
         httpRequest = RestAssured.given();
         response = httpRequest.get("/resources");
-        jsonPathEvaluator = response.jsonPath();
-        ResponseBody body = response.getBody();
+        ResponseBody body = response.getBody().prettyPeek();
         //Copier-coller de la réponse fournit sur la page RES dont j'enlève les espaces et les retours de ligne
         String expectedBody = "{\n" +
             "  \"fresh\": {\n" +

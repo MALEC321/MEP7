@@ -1,0 +1,58 @@
+@startuml
+participant Actor
+Actor -> TurnResource : reset
+activate TurnResource
+TurnResource -> TurnUseCase : reset
+activate TurnUseCase
+TurnUseCase -> TurnRepository : reset
+activate TurnRepository
+TurnRepository -> TurnRepositoryInMemory : reset
+activate TurnRepositoryInMemory
+TurnRepositoryInMemory --> TurnRepository
+deactivate TurnRepositoryInMemory
+TurnRepository --> TurnUseCase
+deactivate TurnRepository
+TurnUseCase -> ResourceRepository : reset
+activate ResourceRepository
+ResourceRepository -> ResourceRepositoryInMemory : reset
+activate ResourceRepositoryInMemory
+ResourceRepositoryInMemory -> Resource : clear
+activate Resource
+Resource -> ResourceElements : reset
+activate ResourceElements
+ResourceElements --> Resource
+deactivate ResourceElements
+Resource --> ResourceRepositoryInMemory
+deactivate Resource
+ResourceRepositoryInMemory -> Resource : clear
+activate Resource
+Resource -> ResourceElements : reset
+activate ResourceElements
+ResourceElements --> Resource
+deactivate ResourceElements
+Resource --> ResourceRepositoryInMemory
+deactivate Resource
+ResourceRepositoryInMemory --> ResourceRepository
+deactivate ResourceRepositoryInMemory
+ResourceRepository --> TurnUseCase
+deactivate ResourceRepository
+TurnUseCase -> DinosaurRepository : reset
+activate DinosaurRepository
+DinosaurRepository -> DinosaurRepositoryInMemory : reset
+activate DinosaurRepositoryInMemory
+DinosaurRepositoryInMemory --> DinosaurRepository
+deactivate DinosaurRepositoryInMemory
+DinosaurRepository --> TurnUseCase
+deactivate DinosaurRepository
+TurnUseCase -> ActionRepository : reset
+activate ActionRepository
+ActionRepository -> ActionRepositoryInMemory : reset
+activate ActionRepositoryInMemory
+ActionRepositoryInMemory --> ActionRepository
+deactivate ActionRepositoryInMemory
+ActionRepository --> TurnUseCase
+deactivate ActionRepository
+TurnUseCase --> TurnResource
+deactivate TurnUseCase
+return
+@enduml

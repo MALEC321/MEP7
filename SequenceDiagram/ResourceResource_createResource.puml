@@ -1,0 +1,114 @@
+@startuml
+participant Actor
+Actor -> ResourceResource : createResource
+activate ResourceResource
+ResourceResource -> ResourceDtoAssembler : fromRequest
+activate ResourceDtoAssembler
+ResourceDtoAssembler --> ResourceResource
+deactivate ResourceDtoAssembler
+ResourceResource -> ResourceUseCase : createResource
+activate ResourceUseCase
+ResourceUseCase -> ResourceFactory : create
+activate ResourceFactory
+ResourceFactory -> Burger : new
+activate Burger
+Burger -> ResourceElements : new
+activate ResourceElements
+ResourceElements --> Burger
+deactivate ResourceElements
+Burger --> ResourceFactory
+deactivate Burger
+ResourceFactory -> Salad : new
+activate Salad
+Salad -> ResourceElements : new
+activate ResourceElements
+ResourceElements --> Salad
+deactivate ResourceElements
+Salad --> ResourceFactory
+deactivate Salad
+ResourceFactory -> Water : new
+activate Water
+Water -> ResourceElements : new
+activate ResourceElements
+ResourceElements --> Water
+deactivate ResourceElements
+Water --> ResourceFactory
+deactivate Water
+ResourceFactory -> Resource : new
+activate Resource
+Resource --> ResourceFactory
+deactivate Resource
+ResourceFactory --> ResourceUseCase
+deactivate ResourceFactory
+ResourceUseCase -> ResourceUseCase : addResourceToActionWaitingList
+activate ResourceUseCase
+ResourceUseCase -> Resource : getResources
+activate Resource
+Resource --> ResourceUseCase
+deactivate Resource
+ResourceUseCase -> ResourceElements : getQuantity
+activate ResourceElements
+ResourceElements --> ResourceUseCase
+deactivate ResourceElements
+ResourceUseCase -> ActionFactory : create
+activate ActionFactory
+ActionFactory -> AddResource : new
+activate AddResource
+AddResource -> Action : new
+activate Action
+Action --> AddResource
+deactivate Action
+AddResource --> ActionFactory
+deactivate AddResource
+ActionFactory -> RetrieveAction : new
+activate RetrieveAction
+RetrieveAction -> Action : new
+activate Action
+Action --> RetrieveAction
+deactivate Action
+RetrieveAction --> ActionFactory
+deactivate RetrieveAction
+ActionFactory --> ResourceUseCase
+deactivate ActionFactory
+ResourceUseCase -> ActionRepository : save
+activate ActionRepository
+ActionRepository -> ActionRepositoryInMemory : save
+activate ActionRepositoryInMemory
+ActionRepositoryInMemory --> ActionRepository
+deactivate ActionRepositoryInMemory
+ActionRepository --> ResourceUseCase
+deactivate ActionRepository
+ResourceUseCase --> ResourceUseCase
+deactivate ResourceUseCase
+ResourceUseCase -> ResourceAssemblers : toDto
+activate ResourceAssemblers
+ResourceAssemblers -> Resource : getBurgersQuantity
+activate Resource
+Resource -> ResourceElements : getQuantity
+activate ResourceElements
+ResourceElements --> Resource
+deactivate ResourceElements
+Resource --> ResourceAssemblers
+deactivate Resource
+ResourceAssemblers -> Resource : getSaladQuantity
+activate Resource
+Resource -> ResourceElements : getQuantity
+activate ResourceElements
+ResourceElements --> Resource
+deactivate ResourceElements
+Resource --> ResourceAssemblers
+deactivate Resource
+ResourceAssemblers -> Resource : getWaterQuantity
+activate Resource
+Resource -> ResourceElements : getQuantity
+activate ResourceElements
+ResourceElements --> Resource
+deactivate ResourceElements
+Resource --> ResourceAssemblers
+deactivate Resource
+ResourceAssemblers --> ResourceUseCase
+deactivate ResourceAssemblers
+ResourceUseCase --> ResourceResource
+deactivate ResourceUseCase
+return
+@enduml
