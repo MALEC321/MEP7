@@ -13,6 +13,7 @@ public abstract class Dinosaur {
     private final int strength;
     private final DietType diet;
     private boolean isNewlyAdded;
+    private String type;
 
     public Dinosaur(String name, int weight, String gender, String species) {
         this.name = name;
@@ -44,6 +45,10 @@ public abstract class Dinosaur {
 
     public DietType getDiet() {
         return diet;
+    }
+
+    public String getType() {
+        return type;
     }
 
     public boolean isNewlyAdded() {

@@ -4,6 +4,7 @@ import ca.ulaval.glo4002.game.controllers.turn.dtos.TurnAssembler;
 import ca.ulaval.glo4002.game.domain.actions.Action;
 import ca.ulaval.glo4002.game.domain.actions.ActionRepository;
 import ca.ulaval.glo4002.game.domain.dinosaur.Dinosaur;
+import ca.ulaval.glo4002.game.domain.dinosaur.DinosaurBaby;
 import ca.ulaval.glo4002.game.domain.dinosaur.DinosaurRepository;
 import ca.ulaval.glo4002.game.domain.dinosaur.enums.DietType;
 import ca.ulaval.glo4002.game.domain.resources.Burger;
@@ -95,9 +96,18 @@ public class TurnUseCase {
                 dead = true;
             }
 
+            if (dinosaur instanceof DinosaurBaby) {
+                if(dinosaurRepository.findByName(((DinosaurBaby) dinosaur).getFatherName()) == null
+                        && dinosaurRepository.findByName(((DinosaurBaby) dinosaur).getMotherName())== null){
+                    dead = true;
+                }
+            }
+
             if (dead) dinosaurRepository.remove(dinosaur);
         }
     }
+
+
 
     public void reset() {
         turnRepository.reset();

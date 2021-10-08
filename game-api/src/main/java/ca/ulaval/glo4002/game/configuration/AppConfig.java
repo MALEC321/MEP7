@@ -4,7 +4,6 @@ import ca.ulaval.glo4002.game.application.baby.BabyUseCase;
 import ca.ulaval.glo4002.game.controllers.baby.BabyResource;
 import ca.ulaval.glo4002.game.application.baby.dtos.BabyAssembler;
 import ca.ulaval.glo4002.game.controllers.baby.dtos.BabyDtoAssembler;
-import ca.ulaval.glo4002.game.domain.dinosaur.BabyFactory;
 import ca.ulaval.glo4002.game.repositories.actions.ActionRepositoryInMemory;
 import ca.ulaval.glo4002.game.repositories.dinosaur.DinosaurRepositoryInMemory;
 import ca.ulaval.glo4002.game.application.dinosaur.DinosaurUseCase;
@@ -70,9 +69,8 @@ public class AppConfig {
     static ResourceResource resourceResource = new ResourceResource(resourceUseCase, resourceDtoAssembler);
 
     // Bebe
-    static BabyFactory bebeFactory = new BabyFactory(dinosaurRepository);
     static BabyAssembler babyAssembler = new BabyAssembler();
-    static BabyUseCase bebeUseCase = new BabyUseCase(bebeFactory, dinosaurRepository, babyAssembler, actionRepository, actionFactory);
+    static BabyUseCase bebeUseCase = new BabyUseCase(dinosaurRepository, babyAssembler, actionRepository, actionFactory, dinosaurFactory);
 
     static BabyDtoAssembler babyDtoAssembler = new BabyDtoAssembler();
     static BabyResource babyResource = new BabyResource(bebeUseCase, babyDtoAssembler);
