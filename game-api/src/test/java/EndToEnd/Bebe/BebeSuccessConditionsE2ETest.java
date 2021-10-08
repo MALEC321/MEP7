@@ -23,25 +23,25 @@ public class BebeSuccessConditionsE2ETest{
     JsonPath jsonPathEvaluator;
     JSONObject request;
 
-    @BeforeClass
-    public static void groundZero() {
-        thread =
-                new Thread(
-                        () -> {
-                            GameServer app = new GameServer();
-                            app.run();
-                        });
-        thread.start();
-    }
+   @BeforeClass
+   public static void groundZero() {
+       thread =
+               new Thread(
+                       () -> {
+                           GameServer app = new GameServer();
+                           app.run();
+                       });
+       thread.start();
+   }
 
-    @AfterClass
-    public static void cleanUp() {
-        try {
-            thread.interrupt();
-        } catch (SecurityException e) {
-            e.printStackTrace();
-        }
-    }
+   @AfterClass
+   public static void cleanUp() {
+       try {
+           thread.interrupt();
+       } catch (SecurityException e) {
+           e.printStackTrace();
+       }
+   }
 
     @Before
     public void setup() {
@@ -100,7 +100,7 @@ public class BebeSuccessConditionsE2ETest{
         request.put("motherName", "Mother test");
         RestAssured.given()
                 .contentType(ContentType.JSON)
-                .body("")
+                .body(request)
                 .when()
                 .post("/breed")
                 .then()
@@ -161,7 +161,7 @@ public class BebeSuccessConditionsE2ETest{
         request.put("motherName", "Mother test");
         RestAssured.given()
                 .contentType(ContentType.JSON)
-                .body("")
+                .body(request)
                 .when()
                 .post("/breed")
                 .then()
@@ -182,7 +182,7 @@ public class BebeSuccessConditionsE2ETest{
         jsonPathEvaluator = response.jsonPath();
 
         List<String> listDinoNames = jsonPathEvaluator.getList("name");
-        Assert.assertTrue(listDinoNames.contains("Bebe Test"));
+        Assert.assertTrue(listDinoNames.contains("Bebe test"));
     }
 
     @Test
@@ -193,11 +193,11 @@ public class BebeSuccessConditionsE2ETest{
         request.put("motherName", "Non-existent Mother");
         RestAssured.given()
                 .contentType(ContentType.JSON)
-                .body("")
+                .body(request)
                 .when()
                 .post("/breed")
                 .then()
-                .statusCode(200);
+                .statusCode(404);
 
         RestAssured.given()
                 .contentType(ContentType.JSON)
