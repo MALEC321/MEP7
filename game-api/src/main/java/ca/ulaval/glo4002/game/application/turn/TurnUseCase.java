@@ -61,11 +61,9 @@ public class TurnUseCase {
         resourceRepository.add(new Water(10000));
     }
 
-    public void postAction() { //Todo rajouter les post action ici
+    public void postAction() {
         resourceRepository.decreaseExpirationDate();
-
         feedDinosaurs();
-
     }
 
     public TurnDto getFromId(UUID id) {
