@@ -42,7 +42,10 @@ public class ResourceUseCase {
 
     private void addResourceToActionWaitingList(Resource resources) {
         for (ResourceElements resource: new ArrayList<>(resources.getResources().values())) {
-            if (resource.getQuantity() == 0 ) { continue;}
+            if (resource.isEmpty()) {
+                continue;
+            }
+
             Action addResources = actionFactory.create(resource, resourceRepository);
             actionRepository.save(addResources);
         }

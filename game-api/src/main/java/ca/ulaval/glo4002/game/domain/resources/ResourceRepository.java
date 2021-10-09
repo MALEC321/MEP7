@@ -3,15 +3,11 @@ package ca.ulaval.glo4002.game.domain.resources;
 import java.util.List;
 
 public interface ResourceRepository {
-    void add(ResourceElements resource);
+    void add(ResourceElements resourceElements);
     void reset();
-    boolean eatBurger(int quantityNeeded);
+    boolean eatBurger(int quantity);
     boolean eatSalad(int quantity);
     boolean drinkWater(int quantity);
     void decreaseExpirationDate();
-    int findResourceQuantity(int value);
     List<Resource> findAll();
-    Resource findFreshResource();
-    Resource findConsumedResource();
-    Resource findExpiredResource();
 }
