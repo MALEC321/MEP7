@@ -82,21 +82,21 @@ public class TurnUseCase {
     private void feedDinosaursByDietType(List<Dinosaur> sortedDinosaursByStrengthThenName) {
         boolean dead = false;
         for (Dinosaur dinosaur : sortedDinosaursByStrengthThenName) {
-            if (dinosaur.getDiet().equals(DietType.HERBIVORE)) {
-                if (!resourceRepository.eatSalad(dinosaur.feedFood())) {
+                if (dinosaur.getDiet().equals(DietType.HERBIVORE)) {
+                    if (!resourceRepository.eatSalad(dinosaur.feedFood())) {
+                        dead = true;
+                    }
+                } else {
+                    if (!resourceRepository.eatBurger(dinosaur.feedFood())) {
+                        dead = true;
+                    }
+                }
+
+                if (!resourceRepository.drinkWater(dinosaur.feedWater())) {
                     dead = true;
                 }
-            } else {
-                if (!resourceRepository.eatBurger(dinosaur.feedFood())) {
-                    dead = true;
-                }
-            }
 
-            if (!resourceRepository.drinkWater(dinosaur.feedWater())) {
-                dead = true;
-            }
-
-            if (dead) dinosaurRepository.remove(dinosaur);
+                if (dead) dinosaurRepository.remove(dinosaur);
         }
 
         //Delete baby dinosaur if both parents are dead

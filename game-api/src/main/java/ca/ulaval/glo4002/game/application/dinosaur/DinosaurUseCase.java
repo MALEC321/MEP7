@@ -1,6 +1,5 @@
 package ca.ulaval.glo4002.game.application.dinosaur;
 
-import ca.ulaval.glo4002.game.domain.actions.Action;
 import ca.ulaval.glo4002.game.domain.actions.ActionFactory;
 import ca.ulaval.glo4002.game.domain.actions.ActionRepository;
 import ca.ulaval.glo4002.game.controllers.dinosaur.dtos.DinosaurAssembler;
@@ -35,6 +34,7 @@ public class DinosaurUseCase {
   public void createDinosaur(DinosaurCreationDto dto) {
     Dinosaur dinosaur = dinosaurFactory.create(dto.name, dto.weight, dto.gender, dto.species);
     actionRepository.save(actionFactory.create(dinosaur, dinosaurRepository));
+
   }
 
   public List<DinosaurDto> getAllDinosaurs() {

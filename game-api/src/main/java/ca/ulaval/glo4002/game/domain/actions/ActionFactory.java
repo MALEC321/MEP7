@@ -8,7 +8,6 @@ import ca.ulaval.glo4002.game.domain.resources.ResourceRepository;
 import java.util.UUID;
 
 public class ActionFactory {
-
     public Action create(Dinosaur dinosaur, DinosaurRepository dinosaurRepository) {
         return new AddDino(UUID.randomUUID(), dinosaur, dinosaurRepository);
     }
