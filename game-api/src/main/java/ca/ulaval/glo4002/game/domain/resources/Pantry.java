@@ -157,5 +157,8 @@ public class Pantry {
         burgerQueue.clear();
         saladQueue.clear();
         waterQueue.clear();
+
+        expiredResources.clear();
+        consumedResources.clear();
     }
 }
