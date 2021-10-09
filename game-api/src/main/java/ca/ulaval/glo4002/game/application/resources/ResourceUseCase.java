@@ -3,7 +3,6 @@ package ca.ulaval.glo4002.game.application.resources;
 import ca.ulaval.glo4002.game.domain.actions.Action;
 import ca.ulaval.glo4002.game.domain.actions.ActionFactory;
 import ca.ulaval.glo4002.game.domain.actions.ActionRepository;
-import ca.ulaval.glo4002.game.domain.actions.Command;
 import ca.ulaval.glo4002.game.controllers.resources.dtos.ResourceAssemblers;
 import ca.ulaval.glo4002.game.controllers.resources.dtos.ResourceCreationDto;
 import ca.ulaval.glo4002.game.controllers.resources.dtos.ResourceDto;
@@ -44,7 +43,7 @@ public class ResourceUseCase {
     private void addResourceToActionWaitingList(Resource resources) {
         for (ResourceElements resource: new ArrayList<>(resources.getResources().values())) {
             if (resource.getQuantity() == 0 ) { continue;}
-            Action addResources = actionFactory.create(resource, Command.ADD, resourceRepository);
+            Action addResources = actionFactory.create(resource, resourceRepository);
             actionRepository.save(addResources);
         }
     }

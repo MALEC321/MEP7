@@ -1,7 +1,6 @@
 package ca.ulaval.glo4002.game.interfaces.rest.dinosaur.entities;
 
 import ca.ulaval.glo4002.game.domain.dinosaur.Dinosaur;
-import ca.ulaval.glo4002.game.domain.dinosaur.DinosaurAdult;
 import ca.ulaval.glo4002.game.domain.dinosaur.DinosaurFactory;
 import ca.ulaval.glo4002.game.domain.dinosaur.enums.SpeciesDietsCorrespondances;
 import ca.ulaval.glo4002.game.exceptions.types.DuplicateNameException;
@@ -20,7 +19,7 @@ class DinosaurFactoryTest {
         DuplicateNameException duplicateNameException = mock(DuplicateNameException.class);
         dinosaurFactory = new DinosaurFactory(dinosaurRepository, speciesDietsCorrespondances);
 
-        Dinosaur dinosaur = new DinosaurAdult("name", 89, "f", "Ankylosaurus");
+        Dinosaur dinosaur = new Dinosaur("name", 89, "f", "Ankylosaurus");
         when(dinosaurRepository.findByName("name")).thenReturn(dinosaur);
     }
 

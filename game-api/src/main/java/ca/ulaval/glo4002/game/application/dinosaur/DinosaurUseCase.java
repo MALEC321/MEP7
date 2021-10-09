@@ -3,7 +3,6 @@ package ca.ulaval.glo4002.game.application.dinosaur;
 import ca.ulaval.glo4002.game.domain.actions.Action;
 import ca.ulaval.glo4002.game.domain.actions.ActionFactory;
 import ca.ulaval.glo4002.game.domain.actions.ActionRepository;
-import ca.ulaval.glo4002.game.domain.actions.Command;
 import ca.ulaval.glo4002.game.controllers.dinosaur.dtos.DinosaurAssembler;
 import ca.ulaval.glo4002.game.controllers.dinosaur.dtos.DinosaurCreationDto;
 import ca.ulaval.glo4002.game.controllers.dinosaur.dtos.DinosaurDto;
@@ -35,7 +34,7 @@ public class DinosaurUseCase {
 
   public void createDinosaur(DinosaurCreationDto dto) {
     Dinosaur dinosaur = dinosaurFactory.create(dto.name, dto.weight, dto.gender, dto.species);
-    addDinoToActionWaitingList(dinosaur);
+    actionRepository.save(actionFactory.create(dinosaur, dinosaurRepository));
   }
 
   public List<DinosaurDto> getAllDinosaurs() {
@@ -49,10 +48,5 @@ public class DinosaurUseCase {
     }
     Dinosaur dinosaur = dinosaurRepository.findByName(name);
     return dinosaurAssembler.toDto(dinosaur);
-  }
-
-  private void addDinoToActionWaitingList(Dinosaur dinosaur) {
-      Action addDinos = actionFactory.create(dinosaur, Command.ADD_DINO, dinosaurRepository);
-      actionRepository.save(addDinos);
   }
 }

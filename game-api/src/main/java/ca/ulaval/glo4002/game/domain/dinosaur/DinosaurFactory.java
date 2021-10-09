@@ -18,7 +18,7 @@ public class DinosaurFactory {
 
 
 
-    public DinosaurAdult create(String name, int weight, String gender, String species) {
+    public Dinosaur create(String name, int weight, String gender, String species) {
         validateName(name);
 
         if (weight <= MIN_WEIGHT) {
@@ -28,11 +28,11 @@ public class DinosaurFactory {
             throw new InvalidGenderException();
         }
 
-        if(!speciesDietsCorrespondances.dinosaurExists(species)){
+        if(!speciesDietsCorrespondances.dinosaurTypeExists(species)){
             throw new InvalidSpeciesException();
         }
 
-        return new DinosaurAdult(name, weight, gender, species);
+        return new Dinosaur(name, weight, gender, species);
     }
 
     public DinosaurBaby create(String name, String fatherName, String motherName, String gender, String species){

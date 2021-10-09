@@ -1,6 +1,7 @@
 package ca.ulaval.glo4002.game.application.baby;
 
 import ca.ulaval.glo4002.game.application.baby.dtos.BabyAssembler;
+import ca.ulaval.glo4002.game.application.dinosaur.DinosaurUseCase;
 import ca.ulaval.glo4002.game.controllers.baby.dtos.BabyCreationDto;
 import ca.ulaval.glo4002.game.controllers.baby.dtos.ExternalApiCreationDto;
 import ca.ulaval.glo4002.game.domain.actions.ActionFactory;
@@ -29,12 +30,13 @@ public class BabyUseCase {
     }
 
     public void createBebe(BabyCreationDto dto) {
-        dinosaurFactory.create(dto.name, dto.fatherName, dto.motherName, dto.gender, dto.species);
+        Dinosaur baby = dinosaurFactory.create(dto.name, dto.fatherName, dto.motherName, dto.gender, dto.species);
+        actionRepository.save(actionFactory.create(baby, dinosaurRepository));
     }
 
     public ExternalApiCreationDto getParentsSpecies(String fatherName, String motherName) {
-        String fatherSpecies = null;
-        String motherSpecies = null;
+        String fatherSpecies;
+        String motherSpecies;
 
         if (dinosaurRepository.findByName(fatherName) == null) {
             throw new NotExistentNameException();
