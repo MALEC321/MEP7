@@ -16,5 +16,4 @@ public class Burger extends ResourceElements {
     public int getDaysLeft() {
         return expiration;
     }
-
 }

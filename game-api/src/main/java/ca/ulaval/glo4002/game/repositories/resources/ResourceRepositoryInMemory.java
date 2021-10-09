@@ -32,6 +32,7 @@ public class ResourceRepositoryInMemory implements ResourceRepository {
     public void decreaseExpirationDate() {
         removeAllEmptyResources();
         removeAllExpiredResources();
+
         for (Burger burgersContainer: freshResources.burgerQueue) {
             burgersContainer.decreaseExpirationDate();
         }
@@ -66,13 +67,13 @@ public class ResourceRepositoryInMemory implements ResourceRepository {
 
         while (freshResources.saladQueue.peek() != null && freshResources.saladQueue.peek().getDaysLeft() == 0) {
             assert freshResources.saladQueue.peek() != null;
-            expiredResources.addWater(freshResources.saladQueue.peek().getQuantity());
+            expiredResources.addSalad(freshResources.saladQueue.peek().getQuantity());
             freshResources.saladQueue.poll();
         }
 
         while (freshResources.waterQueue.peek() != null && freshResources.waterQueue.peek().getDaysLeft() == 0) {
             assert freshResources.waterQueue.peek() != null;
-            expiredResources.addSalad(freshResources.waterQueue.peek().getQuantity());
+            expiredResources.addWater(freshResources.waterQueue.peek().getQuantity());
             freshResources.waterQueue.poll();
         }
     }
@@ -90,20 +91,24 @@ public class ResourceRepositoryInMemory implements ResourceRepository {
     @Override
     public int findResourceQuantity(int value) {
         int quantity = 0;
+
         if (value == 0) {
             for (Burger burger: freshResources.burgerQueue) {
                 quantity += burger.getQuantity();
             }
+
             return quantity;
         }  else if (value == 1) {
             for (Salad salad: freshResources.saladQueue) {
                 quantity += salad.getQuantity();
             }
+
             return quantity;
         }  else {
             for (Water water: freshResources.waterQueue) {
                 quantity += water.getQuantity();
             }
+
             return quantity;
         }
     }
