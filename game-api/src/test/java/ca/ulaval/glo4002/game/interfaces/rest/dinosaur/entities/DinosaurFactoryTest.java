@@ -1,11 +1,12 @@
 package ca.ulaval.glo4002.game.interfaces.rest.dinosaur.entities;
 
-import ca.ulaval.glo4002.game.interfaces.rest.dinosaur.entities.enums.SpeciesDietsCorrespondances;
-import ca.ulaval.glo4002.game.interfaces.rest.exceptions.entities.DuplicateNameException;
+import ca.ulaval.glo4002.game.domain.dinosaur.Dinosaur;
+import ca.ulaval.glo4002.game.domain.dinosaur.DinosaurFactory;
+import ca.ulaval.glo4002.game.domain.dinosaur.enums.SpeciesDietsCorrespondances;
+import ca.ulaval.glo4002.game.exceptions.types.DuplicateNameException;
+import ca.ulaval.glo4002.game.domain.dinosaur.DinosaurRepository;
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
 class DinosaurFactoryTest {

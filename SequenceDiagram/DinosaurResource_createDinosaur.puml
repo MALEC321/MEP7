@@ -1,0 +1,74 @@
+@startuml
+participant Actor
+Actor -> DinosaurResource : createDinosaur
+activate DinosaurResource
+DinosaurResource -> DinosaurDtoAssembler : fromRequest
+activate DinosaurDtoAssembler
+DinosaurDtoAssembler --> DinosaurResource
+deactivate DinosaurDtoAssembler
+DinosaurResource -> DinosaurUseCase : createDinosaur
+activate DinosaurUseCase
+DinosaurUseCase -> DinosaurFactory : create
+activate DinosaurFactory
+DinosaurFactory -> DinosaurFactory : validateName
+activate DinosaurFactory
+DinosaurFactory -> DinosaurRepository : findByName
+activate DinosaurRepository
+DinosaurRepository -> DinosaurRepositoryInMemory : findByName
+activate DinosaurRepositoryInMemory
+DinosaurRepositoryInMemory --> DinosaurRepository
+deactivate DinosaurRepositoryInMemory
+DinosaurRepository --> DinosaurFactory
+deactivate DinosaurRepository
+DinosaurFactory --> DinosaurFactory
+deactivate DinosaurFactory
+DinosaurFactory -> SpeciesDietsCorrespondances : dinosaurExists
+activate SpeciesDietsCorrespondances
+SpeciesDietsCorrespondances --> DinosaurFactory
+deactivate SpeciesDietsCorrespondances
+DinosaurFactory -> Dinosaur : new
+activate Dinosaur
+Dinosaur -> Dinosaur : calculateStrength
+activate Dinosaur
+Dinosaur --> Dinosaur
+deactivate Dinosaur
+Dinosaur --> DinosaurFactory
+deactivate Dinosaur
+DinosaurFactory --> DinosaurUseCase
+deactivate DinosaurFactory
+DinosaurUseCase -> DinosaurUseCase : addDinoToActionWaitingList
+activate DinosaurUseCase
+DinosaurUseCase -> ActionFactory : create
+activate ActionFactory
+ActionFactory -> AddDino : new
+activate AddDino
+AddDino -> Action : new
+activate Action
+Action --> AddDino
+deactivate Action
+AddDino --> ActionFactory
+deactivate AddDino
+ActionFactory -> RetrieveAction : new
+activate RetrieveAction
+RetrieveAction -> Action : new
+activate Action
+Action --> RetrieveAction
+deactivate Action
+RetrieveAction --> ActionFactory
+deactivate RetrieveAction
+ActionFactory --> DinosaurUseCase
+deactivate ActionFactory
+DinosaurUseCase -> ActionRepository : save
+activate ActionRepository
+ActionRepository -> ActionRepositoryInMemory : save
+activate ActionRepositoryInMemory
+ActionRepositoryInMemory --> ActionRepository
+deactivate ActionRepositoryInMemory
+ActionRepository --> DinosaurUseCase
+deactivate ActionRepository
+DinosaurUseCase --> DinosaurUseCase
+deactivate DinosaurUseCase
+DinosaurUseCase --> DinosaurResource
+deactivate DinosaurUseCase
+return
+@enduml

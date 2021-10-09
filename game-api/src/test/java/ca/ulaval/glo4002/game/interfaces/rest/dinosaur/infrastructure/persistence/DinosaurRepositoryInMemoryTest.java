@@ -1,6 +1,7 @@
 package ca.ulaval.glo4002.game.interfaces.rest.dinosaur.infrastructure.persistence;
 
-import ca.ulaval.glo4002.game.interfaces.rest.dinosaur.entities.Dinosaur;
+import ca.ulaval.glo4002.game.repositories.dinosaur.DinosaurRepositoryInMemory;
+import ca.ulaval.glo4002.game.domain.dinosaur.Dinosaur;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
