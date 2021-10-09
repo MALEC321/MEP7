@@ -37,10 +37,11 @@ public class BabyResource {
         //Call to external API
         Client client = ClientBuilder.newClient();
         Response response = client.target("http://localhost:8080/breed").request(MediaType.APPLICATION_JSON).post(Entity.entity(externalApiCreationDto, MediaType.APPLICATION_JSON));
-        ExternalApiBebeListDto externalApiBebeListDto = response.readEntity(ExternalApiBebeListDto.class);
-        //Create Baby dinosaur
-        BabyCreationDto dto = babyDtoAssembler.fromRequest(babyRequest, externalApiBebeListDto);
-        bebeUseCase.createBebe(dto);
+        if (response.getStatusInfo().getFamily().name().equals("SUCCESSFUL")) {
+            ExternalApiBebeListDto externalApiBebeListDto = response.readEntity(ExternalApiBebeListDto.class);
+            BabyCreationDto dto = babyDtoAssembler.fromRequest(babyRequest, externalApiBebeListDto);
+            bebeUseCase.createBebe(dto);
+        }
 
         return Response.status(Response.Status.OK).build();
     }
