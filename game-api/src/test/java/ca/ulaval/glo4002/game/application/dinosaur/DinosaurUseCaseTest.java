@@ -61,6 +61,6 @@ class DinosaurUseCaseTest {
         turnUseCase.createTurn();
 
         assertThrows(NotExistentNameException.class, () ->
-                dinosaurUseCase.getDinosaur("Will"));
+                dinosaurUseCase.getDinosaur("Willl"));
     }
 }
