@@ -4,6 +4,7 @@ import ca.ulaval.glo4002.game.controllers.turn.dtos.TurnAssembler;
 import ca.ulaval.glo4002.game.domain.actions.Action;
 import ca.ulaval.glo4002.game.domain.actions.ActionRepository;
 import ca.ulaval.glo4002.game.domain.dinosaur.Dinosaur;
+import ca.ulaval.glo4002.game.domain.dinosaur.DinosaurBaby;
 import ca.ulaval.glo4002.game.domain.dinosaur.DinosaurRepository;
 import ca.ulaval.glo4002.game.domain.dinosaur.enums.DietType;
 import ca.ulaval.glo4002.game.domain.resources.Burger;
@@ -79,30 +80,40 @@ public class TurnUseCase {
 
     //TODO: Test uniter cette méthode
     private void feedDinosaursByDietType(List<Dinosaur> sortedDinosaursByStrengthThenName) {
-        for(Dinosaur dinosaur: sortedDinosaursByStrengthThenName) {
-            boolean dead = false;
-            if (dinosaur.getDiet().equals(DietType.HERBIVORE)) {
-                if(!resourceRepository.eatSalad(dinosaur.feedFood())){
+        boolean dead = false;
+        for (Dinosaur dinosaur : sortedDinosaursByStrengthThenName) {
+                if (dinosaur.getDiet().equals(DietType.HERBIVORE)) {
+                    if (!resourceRepository.eatSalad(dinosaur.feedFood())) {
+                        dead = true;
+                    }
+                } else {
+                    if (!resourceRepository.eatBurger(dinosaur.feedFood())) {
+                        dead = true;
+                    }
+                }
+
+                if (!resourceRepository.drinkWater(dinosaur.feedWater())) {
                     dead = true;
                 }
-            } else {
-                if(!resourceRepository.eatBurger(dinosaur.feedFood())) {
+
+                if (dead) dinosaurRepository.remove(dinosaur);
+        }
+
+        //Delete baby dinosaur if both parents are dead
+        for (Dinosaur dinosaur : sortedDinosaursByStrengthThenName) {
+            if (dinosaur instanceof DinosaurBaby) {
+                if (dinosaurRepository.findByName(((DinosaurBaby) dinosaur).getFatherName()) == null
+                        && dinosaurRepository.findByName(((DinosaurBaby) dinosaur).getMotherName()) == null) {
                     dead = true;
                 }
+                if (dead) dinosaurRepository.remove(dinosaur);
             }
-
-            if(!resourceRepository.drinkWater(dinosaur.feedWater())) {
-                dead = true;
-            }
-
-            if (dead) dinosaurRepository.remove(dinosaur);
         }
     }
-
-    public void reset() {
-        turnRepository.reset();
-        resourceRepository.reset();
-        dinosaurRepository.reset();
-        actionRepository.reset();
-    }
+        public void reset() {
+            turnRepository.reset();
+            resourceRepository.reset();
+            dinosaurRepository.reset();
+            actionRepository.reset();
+        }
 }

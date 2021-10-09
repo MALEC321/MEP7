@@ -1,4 +1,4 @@
-package ca.ulaval.glo4002.game.interfaces.rest;
+package EndToEnd.Resources;
 
 import ca.ulaval.glo4002.game.GameServer;
 import io.restassured.RestAssured;
@@ -13,14 +13,10 @@ import org.junit.*;
 import java.util.HashMap;
 import java.util.Map;
 
-
-
-
 public class ResourceE2ETest {
     private static Thread thread;
     private static Map<String, Integer> validResource = new HashMap<>();
     private static Map<String, Integer> invalidResource = new HashMap<>();
-
 
     @BeforeClass
     public static void groundZero() {
@@ -57,8 +53,6 @@ public class ResourceE2ETest {
         invalidResource.put("qtyBurger", -1);
         invalidResource.put("qtySalad", 0);
         invalidResource.put("qtySalad", 0);
-
-
     }
 
     @Test
@@ -183,7 +177,5 @@ public class ResourceE2ETest {
         expectedBody = expectedBody.replace(" ", "");
         Assert.assertEquals(body.asString(), expectedBody);
         System.out.println("FIN TEST testEnonceRes *******************************");
-        //
-
     }
 }

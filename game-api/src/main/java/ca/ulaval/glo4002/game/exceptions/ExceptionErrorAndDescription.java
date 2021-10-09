@@ -8,7 +8,7 @@ public enum ExceptionErrorAndDescription {
     INVALID_SPECIES("INVALID_SPECIES", "The specified species is not supported."),
     NON_EXISTENT_NAME("NON_EXISTENT_NAME", "The specified name does not exist."),
     INVALID_FATHER("INVALID_FATHER", "Father must be a male."),
-    INVALID_MOTHER("INVALID_FATHER", "Mother must be a female.");
+    INVALID_MOTHER("INVALID_MOTHER", "Mother must be a female.");
 
     private final String error;
     private final String description;

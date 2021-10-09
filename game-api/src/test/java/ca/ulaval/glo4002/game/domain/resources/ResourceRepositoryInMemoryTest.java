@@ -1,4 +1,4 @@
-package ca.ulaval.glo4002.game.interfaces.rest.resources.infrastructure.persistence;
+package ca.ulaval.glo4002.game.domain.resources;
 
 import org.junit.jupiter.api.Test;
 

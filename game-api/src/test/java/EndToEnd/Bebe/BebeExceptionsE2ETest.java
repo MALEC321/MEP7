@@ -96,7 +96,7 @@ public class BebeExceptionsE2ETest {
         request.put("motherName", "Mother test");
         RestAssured.given()
                 .contentType(ContentType.JSON)
-                .body("")
+                .body(request)
                 .when()
                 .post("/breed")
                 .then()

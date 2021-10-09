@@ -1,13 +1,11 @@
-package ca.ulaval.glo4002.game.interfaces.rest.resources.entities;
+package ca.ulaval.glo4002.game.domain.resources;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-import ca.ulaval.glo4002.game.domain.resources.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 public class ResourceTest {
-
     private Burger burger;
     private Salad salad;
     private Water water;
@@ -76,5 +74,4 @@ public class ResourceTest {
         burger.addQuantity(1971);
         assertEquals(2021, burger.getQuantity());
     }
-
 }
