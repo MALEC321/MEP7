@@ -15,8 +15,4 @@ public class AddDino extends Action {
     public void execute() {
         ((DinosaurRepository)getObjectRepository()).save((Dinosaur) getObject());
     }
-
-    public AddDino(UUID id, DinosaurBaby dinosaur, DinosaurRepository dinosaurRepository) {
-        super(id, dinosaur, dinosaurRepository);
-    }
 }

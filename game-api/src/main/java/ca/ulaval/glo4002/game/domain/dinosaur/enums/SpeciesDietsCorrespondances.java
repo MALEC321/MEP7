@@ -4,7 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class SpeciesDietsCorrespondances {
-    public static final Map<String, DietType> speciesDictionary = new HashMap<String, DietType>() {{
+    private static final Map<String, DietType> speciesDictionary = new HashMap<>() {{
         put("Ankylosaurus", DietType.HERBIVORE);
         put("Brachiosaurus", DietType.HERBIVORE);
         put("Diplodocus", DietType.HERBIVORE);
@@ -17,10 +17,11 @@ public class SpeciesDietsCorrespondances {
         put("Velociraptor", DietType.CARNIVORE);
     }};
 
-    public boolean dinosaurExists(String name) {
-        if(speciesDictionary.containsKey(name)){
-            return true;
-        }
-        return false;
+    public boolean dinosaurTypeExists(String name) {
+        return speciesDictionary.containsKey(name);
+    }
+
+    public static DietType getDietFromSpecies(String species) {
+        return speciesDictionary.get(species);
     }
 }

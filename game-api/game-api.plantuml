@@ -268,13 +268,6 @@ title __GAME-API's Class Diagram__\n
     }
   
     namespace ca.ulaval.glo4002.game {
-      namespace domain.actions {
-        class ca.ulaval.glo4002.game.domain.actions.RetrieveAction {
-        }
-      }
-    }
-  
-    namespace ca.ulaval.glo4002.game {
       namespace domain.dinosaur {
         class ca.ulaval.glo4002.game.domain.dinosaur.Dinosaur {
         }
@@ -633,7 +626,6 @@ title __GAME-API's Class Diagram__\n
   ca.ulaval.glo4002.game.controllers.turn.TurnResource o-- ca.ulaval.glo4002.game.application.turn.TurnUseCase : turnUseCase
   ca.ulaval.glo4002.game.domain.actions.AddDino -up-|> ca.ulaval.glo4002.game.domain.actions.Action
   ca.ulaval.glo4002.game.domain.actions.AddResource -up-|> ca.ulaval.glo4002.game.domain.actions.Action
-  ca.ulaval.glo4002.game.domain.actions.RetrieveAction -up-|> ca.ulaval.glo4002.game.domain.actions.Action
   ca.ulaval.glo4002.game.domain.dinosaur.Dinosaur o-- ca.ulaval.glo4002.game.domain.dinosaur.enums.DietType : diet
   ca.ulaval.glo4002.game.domain.dinosaur.DinosaurFactory o-- ca.ulaval.glo4002.game.domain.dinosaur.DinosaurRepository : dinosaurRepository
   ca.ulaval.glo4002.game.domain.dinosaur.DinosaurFactory o-- ca.ulaval.glo4002.game.domain.dinosaur.enums.SpeciesDietsCorrespondances : speciesDietsCorrespondances

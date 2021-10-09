@@ -5,7 +5,7 @@ import ca.ulaval.glo4002.game.domain.dinosaur.enums.SpeciesDietsCorrespondances;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 
-public abstract class Dinosaur {
+public class Dinosaur {
     private final String name;
     private final int weight;
     private final String gender;
@@ -19,9 +19,9 @@ public abstract class Dinosaur {
         this.weight = weight;
         this.gender = gender;
         this.species = species;
-        this.diet = SpeciesDietsCorrespondances.speciesDictionary.get(species);
+        this.diet = SpeciesDietsCorrespondances.getDietFromSpecies(species);
         this.isNewlyAdded = true;
-        this.strength = calculateStrength(weight, gender, diet);
+        this.strength = calculateStrength();
     }
 
     public String getName() {
@@ -54,7 +54,7 @@ public abstract class Dinosaur {
         this.isNewlyAdded = isNewlyAdded;
     }
 
-    private int calculateStrength(int weight, String gender, DietType diet) {
+    private int calculateStrength() {
         BigDecimal bdDietMultiplicand = null;
         if(diet != null){
             bdDietMultiplicand = (diet.equals(DietType.CARNIVORE)) ? new BigDecimal("1.5") : new BigDecimal("1");

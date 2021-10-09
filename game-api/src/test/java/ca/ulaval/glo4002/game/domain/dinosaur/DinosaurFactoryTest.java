@@ -21,7 +21,7 @@ class DinosaurFactoryTest {
         DinosaurRepository dinosaurRepository = mock(DinosaurRepository.class);
         dinosaurFactory = new DinosaurFactory(dinosaurRepository, speciesDietsCorrespondances);
 
-        Dinosaur dinosaur = new DinosaurAdult("Effie", 89, "f", "Ankylosaurus");
+        Dinosaur dinosaur = new Dinosaur("Effie", 89, "f", "Ankylosaurus");
         when(dinosaurRepository.findByName("Effie")).thenReturn(dinosaur);
     }
 

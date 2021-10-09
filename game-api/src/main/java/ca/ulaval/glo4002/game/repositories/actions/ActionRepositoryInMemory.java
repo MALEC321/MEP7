@@ -29,6 +29,11 @@ public class ActionRepositoryInMemory implements ActionRepository {
     }
 
     @Override
+    public void addElementToActionWaitingList(Object element) {
+
+    }
+
+    @Override
     public void reset() {
         waitingActions.clear();
     }

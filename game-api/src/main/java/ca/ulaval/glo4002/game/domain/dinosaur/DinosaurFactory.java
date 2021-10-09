@@ -16,6 +16,8 @@ public class DinosaurFactory {
         this.speciesDietsCorrespondances = speciesDietsCorrespondances;
     }
 
+
+
     public Dinosaur create(String name, int weight, String gender, String species) {
         validateName(name);
 
@@ -26,11 +28,16 @@ public class DinosaurFactory {
             throw new InvalidGenderException();
         }
 
-        if(!speciesDietsCorrespondances.dinosaurExists(species)){
+        if(!speciesDietsCorrespondances.dinosaurTypeExists(species)){
             throw new InvalidSpeciesException();
         }
 
-        return new DinosaurAdult(name, weight, gender, species);
+        return new Dinosaur(name, weight, gender, species);
+    }
+
+    public DinosaurBaby create(String name, String fatherName, String motherName, String gender, String species){
+        validateName(name);
+        return new DinosaurBaby(name, 1, gender, species, fatherName, motherName);
     }
 
     public void validateName(String name) {
