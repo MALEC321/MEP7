@@ -18,9 +18,6 @@ public class SpeciesDietsCorrespondances {
     }};
 
     public boolean dinosaurExists(String name) {
-        if(speciesDictionary.containsKey(name)){
-            return true;
-        }
-        return false;
+        return speciesDictionary.containsKey(name);
     }
 }

@@ -28,12 +28,14 @@ class DinosaurRepositoryInMemoryTest {
         dinosaurRepositoryInMemory.save(lastDino);
         dinosaurRepositoryInMemory.save(firstDino);
         dinosaurRepositoryInMemory.save(thirdDino);
+
+        List<Dinosaur> sortedDinosaurs = dinosaurRepositoryInMemory.getSortedDinosaursByStrengthThenName();
+
         List<Dinosaur> dinoListInOrder = new ArrayList<>();
         dinoListInOrder.add(firstDino);
         dinoListInOrder.add(secondDino);
         dinoListInOrder.add(thirdDino);
         dinoListInOrder.add(lastDino);
-
-        assertEquals(dinoListInOrder, dinosaurRepositoryInMemory.getSortedDinosaursByStrengthThenName());
+        assertEquals(dinoListInOrder, sortedDinosaurs);
     }
 }
