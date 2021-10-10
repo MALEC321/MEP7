@@ -4,7 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class Resource {
-    private final Map<String, ResourceElements> resources = new HashMap<String, ResourceElements>(3){{
+    private final Map<String, ResourceElements> resources = new HashMap<String, ResourceElements>(3) {{
             put("Burgers", new Burger(0));
             put("Salads", new Salad(0));
             put("Water", new Water(0));
@@ -35,9 +35,11 @@ public class Resource {
     public int getBurgersQuantity() {
         return resources.get("Burgers").getQuantity();
     }
+
     public int getSaladQuantity() {
         return resources.get("Salads").getQuantity();
     }
+
     public int getWaterQuantity() {
         return resources.get("Water").getQuantity();
     }

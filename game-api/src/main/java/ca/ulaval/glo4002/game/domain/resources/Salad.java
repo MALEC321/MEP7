@@ -18,4 +18,7 @@ public class Salad extends ResourceElements {
     public int getDaysLeft() {
         return expiration;
     }
+
+    @Override
+    public boolean isExpired() { return expiration == 0; }
 }
