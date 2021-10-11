@@ -64,6 +64,7 @@ public class TurnUseCase {
     public void postAction() {
         resourceRepository.decreaseExpirationDate();
         feedDinosaurs();
+        removeBabyDinosaurs();
     }
 
     public TurnDto getFromId(UUID id) {
@@ -74,6 +75,10 @@ public class TurnUseCase {
 
     public void feedDinosaurs() {
         feedDinosaursByDietType(dinosaurRepository.getSortedDinosaursByStrengthThenName());
+    }
+
+    public void removeBabyDinosaurs() {
+        removeBabyDinosaur(dinosaurRepository.getSortedDinosaursByStrengthThenName());
     }
 
     //TODO: Test uniter cette méthode
@@ -96,8 +101,9 @@ public class TurnUseCase {
 
                 if (dead) dinosaurRepository.remove(dinosaur);
         }
-
-        //Delete baby dinosaur if both parents are dead
+    }
+    private void removeBabyDinosaur(List<Dinosaur> sortedDinosaursByStrengthThenName) {
+        boolean dead = false;
         for (Dinosaur dinosaur : sortedDinosaursByStrengthThenName) {
             if (dinosaur instanceof DinosaurBaby) {
                 if (dinosaurRepository.findByName(((DinosaurBaby) dinosaur).getFatherName()) == null
@@ -106,7 +112,9 @@ public class TurnUseCase {
                 }
                 if (dead) dinosaurRepository.remove(dinosaur);
             }
-        }
+    }
+    //Delete baby dinosaur if both parents are dead
+
     }
         public void reset() {
             turnRepository.reset();
