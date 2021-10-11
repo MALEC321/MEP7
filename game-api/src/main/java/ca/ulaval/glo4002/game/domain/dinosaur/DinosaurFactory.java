@@ -16,8 +16,6 @@ public class DinosaurFactory {
         this.speciesDietsCorrespondances = speciesDietsCorrespondances;
     }
 
-
-
     public Dinosaur create(String name, int weight, String gender, String species) {
         validateName(name);
 
