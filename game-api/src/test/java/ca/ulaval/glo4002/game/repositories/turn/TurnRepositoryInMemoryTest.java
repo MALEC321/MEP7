@@ -66,6 +66,8 @@ class TurnRepositoryInMemoryTest {
         turnRepository.save(turn1);
         turnRepository.save(turn2);
 
+        turnRepository.reset();
+
         assertNotEquals(turn1, turnRepository.findById(idTurn1));
         assertNotEquals(turn2, turnRepository.findById(idTurn2));
     }
