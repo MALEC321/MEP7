@@ -40,9 +40,9 @@ public class Pantry {
         for (ResourceElements burgers: burgerQueue) {
             int actualQuantity = burgers.getQuantity();
 
-            if (burgers.removeElement(quantity)) {
+            boolean enoughQuantity = burgers.removeElement(quantity);
+            if (enoughQuantity) {
                 consumedResources.addBurger(quantity);
-
                 return true;
             }
 
@@ -57,9 +57,9 @@ public class Pantry {
         for (ResourceElements salad: saladQueue) {
             int actualQuantity = salad.getQuantity();
 
-            if (salad.removeElement(quantity)) {
+            boolean enoughQuantity = salad.removeElement(quantity);
+            if (enoughQuantity) {
                 consumedResources.addSalad(quantity);
-
                 return true;
             }
 
@@ -74,9 +74,9 @@ public class Pantry {
         for (ResourceElements water: waterQueue) {
             int actualQuantity = water.getQuantity();
 
-            if (water.removeElement(quantity)) {
+            boolean enoughQuantity = water.removeElement(quantity);
+            if (enoughQuantity) {
                 consumedResources.addWater(quantity);
-
                 return true;
             }
 
