@@ -56,13 +56,15 @@ public class Dinosaur {
 
     private int calculateStrength() {
         BigDecimal bdDietMultiplicand = null;
-        if(diet != null){
+        if (diet != null) {
             bdDietMultiplicand = (diet.equals(DietType.CARNIVORE)) ? new BigDecimal("1.5") : new BigDecimal("1");
         }
+
         BigDecimal bdSexMultiplicand = null;
-        if(gender != null) {
+        if (gender != null) {
             bdSexMultiplicand = (gender.equals("f")) ? new BigDecimal("1.5") : new BigDecimal("1");
         }
+
         BigDecimal bdStrength = new BigDecimal(weight).multiply(bdDietMultiplicand).multiply(bdSexMultiplicand);
         return bdStrength.setScale(0, RoundingMode.CEILING).intValue();
     }
