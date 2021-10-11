@@ -1,42 +1,33 @@
 package ca.ulaval.glo4002.game.domain.resources;
 
+import java.util.HashMap;
 import java.util.LinkedList;
+import java.util.Map;
 import java.util.Queue;
 
 public class Pantry {
-    private Queue<Burger> burgerQueue = new LinkedList<>();
-    private Queue<Salad> saladQueue = new LinkedList<>();
-    private Queue<Water> waterQueue = new LinkedList<>();
+    private final Queue<Burger> burgerQueue = new LinkedList<>();
+    private final Queue<Salad> saladQueue = new LinkedList<>();
+    private final Queue<Water> waterQueue = new LinkedList<>();
+    private final Resource consumedResources = new Resource();
+    private final Resource expiredResources = new Resource();
 
-    private final Resource consumedResources = new Resource(new Burger(0), new Salad(0), new Water(0));
-    private final Resource expiredResources = new Resource(new Burger(0), new Salad(0), new Water(0));
+    public Resource findFreshResource() {
+        Resource resource = new Resource();
 
-    public Resource findFreshResource(){
-        return new Resource(new Burger(findResourceQuantity(0)), new Salad(findResourceQuantity(1)),new Water(findResourceQuantity(2)));
-    }
-
-    public int findResourceQuantity(int value) {
-        int quantity = 0;
-
-        if (value == 0) {
-            for (Burger burger: burgerQueue) {
-                quantity += burger.getQuantity();
-            }
-
-            return quantity;
-        }  else if (value == 1) {
-            for (Salad salad: saladQueue) {
-                quantity += salad.getQuantity();
-            }
-
-            return quantity;
-        }  else {
-            for (Water water: waterQueue) {
-                quantity += water.getQuantity();
-            }
-
-            return quantity;
+        for (Burger burger: burgerQueue) {
+            resource.addBurger(burger.getQuantity());
         }
+
+        for (Salad salad: saladQueue) {
+            resource.addSalad(salad.getQuantity());
+        }
+
+        for (Water water: waterQueue) {
+            resource.addWater(water.getQuantity());
+        }
+
+        return resource;
     }
 
     public void add(ResourceElements resourceElements) {
@@ -45,7 +36,7 @@ public class Pantry {
         if (resourceElements instanceof Water) waterQueue.add((Water)resourceElements);
     }
 
-    public boolean eatBurger(int quantity) {
+    public boolean removeBurgers(int quantity) {
         for (ResourceElements burgers: burgerQueue) {
             int actualQuantity = burgers.getQuantity();
 
@@ -62,7 +53,7 @@ public class Pantry {
         return false;
     }
 
-    public boolean eatSalad(int quantity) {
+    public boolean removeSalads(int quantity) {
         for (ResourceElements salad: saladQueue) {
             int actualQuantity = salad.getQuantity();
 
@@ -79,7 +70,7 @@ public class Pantry {
         return false;
     }
 
-    public boolean drinkWater(int quantity) {
+    public boolean removeWater(int quantity) {
         for (ResourceElements water: waterQueue) {
             int actualQuantity = water.getQuantity();
 
@@ -100,9 +91,11 @@ public class Pantry {
         while (burgerQueue.peek() != null && burgerQueue.peek().isEmpty()) {
             burgerQueue.poll();
         }
+
         while (saladQueue.peek() != null && saladQueue.peek().isEmpty()) {
             saladQueue.poll();
         }
+
         while (waterQueue.peek() != null && waterQueue.peek().isEmpty()) {
             waterQueue.poll();
         }
