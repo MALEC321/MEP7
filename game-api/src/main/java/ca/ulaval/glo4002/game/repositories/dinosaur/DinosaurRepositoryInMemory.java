@@ -1,6 +1,7 @@
 package ca.ulaval.glo4002.game.repositories.dinosaur;
 
 import ca.ulaval.glo4002.game.domain.dinosaur.Dinosaur;
+import ca.ulaval.glo4002.game.domain.dinosaur.DinosaurBaby;
 import ca.ulaval.glo4002.game.domain.dinosaur.DinosaurRepository;
 
 import java.util.*;
@@ -33,6 +34,12 @@ public class DinosaurRepositoryInMemory implements DinosaurRepository {
         copiedDinoList.sort(Comparator.comparing(Dinosaur::getStrength).reversed().thenComparing(Dinosaur::getName));
 
         return copiedDinoList;
+    }
+
+    @Override
+    public boolean areBothParentsDead(Dinosaur dinosaur) {
+        return dinosaursByName.get(((DinosaurBaby) dinosaur).getFatherName()) == null
+                && dinosaursByName.get(((DinosaurBaby) dinosaur).getMotherName()) == null;
     }
 
     @Override

@@ -13,6 +13,8 @@ public interface DinosaurRepository {
 
     List<Dinosaur> getSortedDinosaursByStrengthThenName();
 
+    boolean areBothParentsDead(Dinosaur dinosaur);
+
     void reset();
 
 }

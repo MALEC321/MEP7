@@ -43,4 +43,8 @@ public class ResourceRepositoryInMemory implements ResourceRepository {
     public void reset() {
         pantry.clear();
     }
+
+    public Pantry getPantry() {
+        return pantry;
+    }
 }
