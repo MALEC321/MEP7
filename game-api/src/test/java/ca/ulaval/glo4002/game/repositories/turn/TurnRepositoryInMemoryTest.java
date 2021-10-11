@@ -31,7 +31,7 @@ class TurnRepositoryInMemoryTest {
     }
 
     @Test
-    void quandEnregistreUnTour_alorsRepoContientLeBontour() {
+    void whenGetAturnWithCorrectId_thenRightTurnIsReturned() {
         UUID idTurn1 = setTurnMock1();
 
         turnRepository.save(turn1);
@@ -50,7 +50,7 @@ class TurnRepositoryInMemoryTest {
     }
 
     @Test
-    void quandRecupereUnTourAvecLeMauvaisId_alorsAucunTourEstRetourner() {
+    void whenGetOneTurnWithTheBadId_thenNoneTurnIsReturned() {
         UUID idTurn1 = setTurnMock1();
 
         turnRepository.save(turn1);
@@ -59,7 +59,7 @@ class TurnRepositoryInMemoryTest {
     }
 
     @Test
-    void repoContientDeuxTours_quandResetLesTours_alorsRepoNeContientPlusDeTour() {
+    void repoContainsTwoTurns_whenResetTurns_thenRepoContainsNoMoreTurn() {
         UUID idTurn1 = setTurnMock1();
         UUID idTurn2 = setTurnMock2();
 
