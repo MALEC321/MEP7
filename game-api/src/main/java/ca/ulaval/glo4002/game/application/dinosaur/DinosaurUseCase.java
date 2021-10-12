@@ -23,29 +23,31 @@ public class DinosaurUseCase {
     public DinosaurUseCase(
             DinosaurFactory dinosaurFactory,
             DinosaurRepository dinosaurRepository,
-            DinosaurAssembler dinosaurAssembler, ActionRepository actionRepository, ActionFactory actionFactory) {
-      this.dinosaurFactory = dinosaurFactory;
-      this.dinosaurRepository = dinosaurRepository;
-      this.dinosaurAssembler = dinosaurAssembler;
-      this.actionRepository = actionRepository;
-      this.actionFactory = actionFactory;
+            DinosaurAssembler dinosaurAssembler,
+            ActionRepository actionRepository,
+            ActionFactory actionFactory) {
+        this.dinosaurFactory = dinosaurFactory;
+        this.dinosaurRepository = dinosaurRepository;
+        this.dinosaurAssembler = dinosaurAssembler;
+        this.actionRepository = actionRepository;
+        this.actionFactory = actionFactory;
     }
 
     public void createDinosaur(DinosaurCreationDto dto) {
-      Dinosaur dinosaur = dinosaurFactory.create(dto.name, dto.weight, dto.gender, dto.species);
-      actionRepository.save(actionFactory.create(dinosaur, dinosaurRepository));
+        Dinosaur dinosaur = dinosaurFactory.create(dto.name, dto.weight, dto.gender, dto.species);
+        actionRepository.save(actionFactory.create(dinosaur, dinosaurRepository));
     }
 
     public List<DinosaurDto> getAllDinosaurs() {
-      List<Dinosaur> dinosaurs = dinosaurRepository.findAll();
-      return dinosaurAssembler.toDtos(dinosaurs);
+        List<Dinosaur> dinosaurs = dinosaurRepository.findAll();
+        return dinosaurAssembler.toDtos(dinosaurs);
     }
 
     public DinosaurDto getDinosaur(String name) throws NotExistentNameException {
-      if (dinosaurRepository.findByName(name) == null) {
-        throw new NotExistentNameException();
-      }
-      Dinosaur dinosaur = dinosaurRepository.findByName(name);
-      return dinosaurAssembler.toDto(dinosaur);
+        if (dinosaurRepository.findByName(name) == null) {
+            throw new NotExistentNameException();
+        }
+        Dinosaur dinosaur = dinosaurRepository.findByName(name);
+        return dinosaurAssembler.toDto(dinosaur);
     }
 }
