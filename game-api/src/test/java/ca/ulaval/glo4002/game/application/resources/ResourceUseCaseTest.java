@@ -50,7 +50,7 @@ class ResourceUseCaseTest {
     }
 
     @Test
-    public void ifResource_CreateOne_ActionsListNotEmpty(){
+    public void givenResource_whenCreateOne_ActionsListNotEmpty(){
         ResourceCreationDto resourceCreationDto = new ResourceCreationDto();
         resourceCreationDto.qtyBurger = QYT_BURGER;
         resourceCreationDto.qtySalad = QYT_SALAD;
@@ -63,14 +63,14 @@ class ResourceUseCaseTest {
     }
 
     @Test
-    public void IfResource_ZeroCreated_ActionsListIsEmpty(){
+    public void givenResource_ZeroCreated_ActionsListIsEmpty(){
         List<ResourceDto> actionList = resourceUseCase.getAllResources();
 
         assertFalse(actionList.isEmpty());
     }
 
     @Test
-    public void IfResource_OneTurn_ResourceRepoNotEmpty(){
+    public void givenResource_OneTurn_ResourceRepoNotEmpty(){
         ResourceRepository resourceRepository = new ResourceRepositoryInMemory();
         turnUseCase.createTurn();
 
