@@ -18,7 +18,6 @@ import ca.ulaval.glo4002.game.controllers.resources.ResourceResource;
 import ca.ulaval.glo4002.game.controllers.resources.dtos.ResourceAssemblers;
 import ca.ulaval.glo4002.game.controllers.resources.dtos.ResourceDtoAssembler;
 import ca.ulaval.glo4002.game.controllers.turn.TurnResource;
-import ca.ulaval.glo4002.game.controllers.turn.dtos.TurnAssembler;
 import ca.ulaval.glo4002.game.controllers.turn.dtos.TurnDtoAssembler;
 import ca.ulaval.glo4002.game.domain.actions.ActionFactory;
 import ca.ulaval.glo4002.game.domain.dinosaur.DinosaurFactory;
@@ -42,7 +41,6 @@ public class AppConfig {
     static TurnFactory turnFactory = new TurnFactory();
     static TurnRepository turnRepository = new TurnRepositoryInMemory();
     static ResourceRepository resourceRepository = new ResourceRepositoryInMemory();
-    static TurnAssembler turnAssembler = new TurnAssembler();
     static ActionRepository actionRepository = new ActionRepositoryInMemory();
     static ActionFactory actionFactory = new ActionFactory();
     static SpeciesDietsCorrespondances speciesDietsCorrespondances = new SpeciesDietsCorrespondances();
@@ -57,7 +55,7 @@ public class AppConfig {
     static DinosaurDtoAssembler dinosaurDtoAssembler = new DinosaurDtoAssembler();
     static DinosaurResource dinosaurResource = new DinosaurResource(dinosaurUseCase, dinosaurDtoAssembler);
 
-    static TurnUseCase turnUseCase = new TurnUseCase(turnFactory, turnRepository, resourceRepository, dinosaurRepository, turnAssembler, actionRepository);
+    static TurnUseCase turnUseCase = new TurnUseCase(turnFactory, turnRepository, resourceRepository, dinosaurRepository, actionRepository);
 
     static TurnDtoAssembler turnDtoAssembler = new TurnDtoAssembler();
     static TurnResource turnResource = new TurnResource(turnUseCase, turnDtoAssembler);

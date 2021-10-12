@@ -1,11 +1,9 @@
 package ca.ulaval.glo4002.game.domain.resources;
 
-import java.util.HashMap;
 import java.util.LinkedList;
-import java.util.Map;
 import java.util.Queue;
 
-public class Pantry {
+public class Pantry implements Eatable {
     private final Queue<Burger> burgerQueue = new LinkedList<>();
     private final Queue<Salad> saladQueue = new LinkedList<>();
     private final Queue<Water> waterQueue = new LinkedList<>();
@@ -34,6 +32,13 @@ public class Pantry {
         if (resourceElements instanceof Burger) burgerQueue.add((Burger)resourceElements);
         if (resourceElements instanceof Salad) saladQueue.add((Salad)resourceElements);
         if (resourceElements instanceof Water) waterQueue.add((Water)resourceElements);
+    }
+
+    @Override
+    public boolean remove(int quantity, ResourceType resourceType) {
+        if (resourceType == ResourceType.BURGER) return removeBurgers(quantity);
+        if (resourceType == ResourceType.SALAD) return removeSalads(quantity);
+        return removeWater(quantity);
     }
 
     public boolean removeBurgers(int quantity) {

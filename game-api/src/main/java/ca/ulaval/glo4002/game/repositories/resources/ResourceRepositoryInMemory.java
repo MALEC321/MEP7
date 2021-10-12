@@ -20,6 +20,11 @@ public class ResourceRepositoryInMemory implements ResourceRepository {
     }
 
     @Override
+    public Pantry getPantry() {
+        return pantry;
+    }
+
+    @Override
     public void decreaseExpirationDate() {
         pantry.decreaseExpirationDate();
     }
@@ -42,9 +47,5 @@ public class ResourceRepositoryInMemory implements ResourceRepository {
     @Override
     public void reset() {
         pantry.clear();
-    }
-
-    public Pantry getPantry() {
-        return pantry;
     }
 }
