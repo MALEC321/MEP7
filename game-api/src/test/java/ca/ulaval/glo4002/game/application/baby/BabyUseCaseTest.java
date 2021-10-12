@@ -43,7 +43,7 @@ class BabyUseCaseTest {
     }
 
     @Test
-    public void babyDinosaur_whenGetDinosaurNotExistent_shouldThrowsNotExistentNameException(){
+    public void givenBabyDinosaur_whenGetDinosaurNotExistent_shouldThrowsNotExistentNameException(){
         BabyCreationDto babyCreationDto = new BabyCreationDto();
         babyCreationDto.name = this.name;
         babyCreationDto.fatherName = this.fatherName;
