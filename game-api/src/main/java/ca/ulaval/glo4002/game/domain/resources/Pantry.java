@@ -8,30 +8,26 @@ import java.util.Queue;
 import static ca.ulaval.glo4002.game.domain.resources.ResourceTypesEnum.*;
 
 public class Pantry {
-    private final Queue<Burger> burgerQueue = new LinkedList<>();
-    private final Queue<Salad> saladQueue = new LinkedList<>();
-    private final Queue<Water> waterQueue = new LinkedList<>();
+    private final Queue<Burger> burgerQueue;
+    private final Queue<Salad> saladQueue ;
+    private final Queue<Water> waterQueue ;
 
     private final HashMap<ResourceTypesEnum, Object> mapResourceQueue;
 
-    private final Resource consumedResources = new Resource();
-    private final Resource expiredResources = new Resource();
+    private final Resource consumedResources;
+    private final Resource expiredResources ;
 
     public Pantry() {
+        burgerQueue = new LinkedList<>();
+        saladQueue = new LinkedList<>();
+        waterQueue = new LinkedList<>();
         mapResourceQueue = new HashMap<>();
+        consumedResources = new Resource();
+        expiredResources = new Resource();
+
         mapResourceQueue.put(Burger, burgerQueue);
         mapResourceQueue.put(Salad, saladQueue);
         mapResourceQueue.put(Water, waterQueue);
-        //  ResourceElements re = new Burger(1);
-        //  Queue<ResourceElements> qre = (Queue<ResourceElements>) mapResourceQueue.get(Burger);
-        //  qre.add(re);
-
-       // this.freshResources = new HashMap<ResourceTypesEnum, Queue<? extends ResourceElements>>();
-       // freshResources.put(Burger, burgerQueue);
-       // freshResources.put(Salad, saladQueue);
-       // freshResources.put(Water, waterQueue);
-
-
     }
 
     public Resource findFreshResource() {
@@ -42,24 +38,6 @@ public class Pantry {
         }
         return resource;
     }
-
- //   public Resource findFreshResource() {
- //       Resource resource = new Resource();
-//
- //       for (Burger burger: burgerQueue) {
- //           resource.addBurger(burger.getQuantity());
- //       }
-//
- //       for (Salad salad: saladQueue) {
- //           resource.addSalad(salad.getQuantity());
- //       }
-//
- //       for (Water water: waterQueue) {
- //           resource.addWater(water.getQuantity());
- //       }
-//
- //       return resource;
- //   }
 
     public void add(ResourceElements resourceElements) {
         Queue<ResourceElements> burgerQueue = (Queue<ResourceElements>) mapResourceQueue.get(Burger);
@@ -86,57 +64,6 @@ public class Pantry {
         }
     return false;
     }
-
- //   public boolean removeBurgers(int quantity) {
- //       for (ResourceElements burgers: burgerQueue) {
- //           int actualQuantity = burgers.getQuantity();
-//
- //           boolean enoughQuantity = burgers.removeElement(quantity);
- //           if (enoughQuantity) {
- //               consumedResources.addBurger(quantity);
- //               return true;
- //           }
-//
- //           consumedResources.addBurger(actualQuantity);
- //           quantity -= actualQuantity;
- //       }
-//
- //       return false;
- //   }
-//
- //   public boolean removeSalads(int quantity) {
- //       for (ResourceElements salad: saladQueue) {
- //           int actualQuantity = salad.getQuantity();
-//
- //           boolean enoughQuantity = salad.removeElement(quantity);
- //           if (enoughQuantity) {
- //               consumedResources.addSalad(quantity);
- //               return true;
- //           }
-//
- //           consumedResources.addSalad(actualQuantity);
- //           quantity -= actualQuantity;
- //       }
-//
- //       return false;
- //   }
-//
- //   public boolean removeWater(int quantity) {
- //       for (ResourceElements water: waterQueue) {
- //           int actualQuantity = water.getQuantity();
-//
- //           boolean enoughQuantity = water.removeElement(quantity);
- //           if (enoughQuantity) {
- //               consumedResources.addWater(quantity);
- //               return true;
- //           }
-//
- //           consumedResources.addWater(actualQuantity);
- //           quantity -= actualQuantity;
- //       }
-//
- //       return false;
- //   }
 
     public void removeAllEmptyResources() {
         for (Map.Entry<ResourceTypesEnum, Object> entry : mapResourceQueue.entrySet()) {

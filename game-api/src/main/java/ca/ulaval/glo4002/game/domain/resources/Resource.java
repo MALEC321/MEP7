@@ -33,30 +33,6 @@ public class Resource {
         return resources.get(type).getQuantity();
     }
 
-//    public void addBurger(int quantity) {
-//        resources.get("Burgers").addQuantity(quantity);
-//    }
-//
-//    public void addSalad(int quantity) {
-//        resources.get("Salads").addQuantity(quantity);
-//    }
-//
-//    public void addWater(int quantity) {
-//        resources.get("Water").addQuantity(quantity);
-//    }
-//
-//    public int getBurgersQuantity() {
-//        return resources.get("Burgers").getQuantity();
-//    }
-//
-//    public int getSaladQuantity() {
-//        return resources.get("Salads").getQuantity();
-//    }
-//
-//    public int getWaterQuantity() {
-//        return resources.get("Water").getQuantity();
-//    }
-
     public void clear() {
         for (ResourceElements resource: resources.values()) resource.reset();
     }
