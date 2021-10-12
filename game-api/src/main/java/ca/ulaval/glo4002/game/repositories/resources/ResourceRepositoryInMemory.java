@@ -7,7 +7,7 @@ import java.util.Arrays;
 import java.util.List;
 
 public class ResourceRepositoryInMemory implements ResourceRepository {
-    private final Pantry pantry = new Pantry();
+    private Pantry pantry = new Pantry();
 
     @Override
     public void add(ResourceElements resourceElements) {

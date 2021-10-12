@@ -3,10 +3,7 @@ package ca.ulaval.glo4002.game.repositories.actions;
 import ca.ulaval.glo4002.game.domain.actions.Action;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.mockito.InOrder;
-import org.mockito.Mock;
-import org.mockito.Mockito;
-import org.mockito.MockitoAnnotations;
+import org.mockito.*;
 import org.mockito.internal.util.reflection.Whitebox;
 
 import java.util.ArrayList;
@@ -17,7 +14,9 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class ActionRepositoryInMemoryTest {
 
+    @InjectMocks
     private ActionRepositoryInMemory actionRepositoryInMemory;
+
     private List<Action> waitingActionsActual;
 
     @Mock
@@ -32,7 +31,6 @@ class ActionRepositoryInMemoryTest {
     @BeforeEach
     void setUp() {
         MockitoAnnotations.initMocks(this);
-        this.actionRepositoryInMemory = new ActionRepositoryInMemory();
         this.waitingActionsActual = new ArrayList<>();
     }
 
