@@ -5,47 +5,63 @@ import ca.ulaval.glo4002.game.exceptions.types.DuplicateNameException;
 import ca.ulaval.glo4002.game.exceptions.types.InvalidGenderException;
 import ca.ulaval.glo4002.game.exceptions.types.InvalidSpeciesException;
 import ca.ulaval.glo4002.game.exceptions.types.InvalidWeightException;
+import ca.ulaval.glo4002.game.repositories.dinosaur.DinosaurRepositoryInMemory;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
 
 class DinosaurFactoryTest {
+
     private DinosaurFactory dinosaurFactory;
+    private DinosaurRepository dinosaurRepository;
 
     @BeforeEach
     void setUp() {
         SpeciesDietsCorrespondances speciesDietsCorrespondances = new SpeciesDietsCorrespondances();
-        DinosaurRepository dinosaurRepository = mock(DinosaurRepository.class);
+        dinosaurRepository = new DinosaurRepositoryInMemory();
         dinosaurFactory = new DinosaurFactory(dinosaurRepository, speciesDietsCorrespondances);
-
-        Dinosaur dinosaur = new Dinosaur("Effie", 89, "f", "Ankylosaurus");
-        when(dinosaurRepository.findByName("Effie")).thenReturn(dinosaur);
     }
 
+    //Test Dinosaur Adult
     @Test
-    void whenNameIsAlreadyTaken_thenThrowsDuplicateNameException() {
+    void givenADinosaurAdult_whenNameIsAlreadyTaken_thenThrowsDuplicateNameException() {
+        Dinosaur dinosaurAdult = new Dinosaur("Effie", 89, "f", "Ankylosaurus");
+        dinosaurRepository.save(dinosaurAdult);
         assertThrows(DuplicateNameException.class, () ->
                 dinosaurFactory.create("Effie", 89, "f", "Ankylosaurus"));
     }
 
     @Test
-    void whenGenderIsInvalid_thenThrowsInvalidGenderException() {
+    void givenADinosaurAdult_whenGenderIsInvalid_thenThrowsInvalidGenderException() {
         assertThrows(InvalidGenderException.class, () ->
                 dinosaurFactory.create("Charly", 89, "x", "Ankylosaurus"));
     }
 
     @Test
-    void whenWeightIsNegative_thenThrowsInvalidWeightException() {
+    void givenADinosaurAdult_whenWeightIsNegative_thenThrowsInvalidWeightException() {
         assertThrows(InvalidWeightException.class, () ->
                 dinosaurFactory.create("George", -3, "f", "Ankylosaurus"));
     }
 
     @Test
-    void whenSpecieIsNotSupported_thenThrowsInvalidSpeciesException() {
+    void givenADinosaurAdult_whenSpecieIsNotSupported_thenThrowsInvalidSpeciesException() {
         assertThrows(InvalidSpeciesException.class, () ->
                 dinosaurFactory.create("Thom", 89, "f", "Raptors"));
+    }
+
+    //Test Dinosaur Baby
+    @Test
+    void givenADinosaurBaby_whenNameIsAlreadyTaken_thenThrowsDuplicateNameException() {
+        DinosaurBaby dinosaurBaby = new DinosaurBaby("Carey Price", 1, "m", "Ankylosaurus", "Bob", "Angela");
+        dinosaurRepository.save(dinosaurBaby);
+        assertThrows(DuplicateNameException.class, () ->
+                dinosaurFactory.create("Carey Price", "Bob", "Angela", "m", "Ankylosaurus"));
+    }
+
+    @Test
+    void givenADinosaurBaby_whenCreating_thenWeightIsOne(){
+        DinosaurBaby dinosaurBaby = new DinosaurBaby("Carey Price", 1, "m", "Ankylosaurus", "Bob", "Angela");
+        assertEquals(1, dinosaurBaby.getWeight());
     }
 }
