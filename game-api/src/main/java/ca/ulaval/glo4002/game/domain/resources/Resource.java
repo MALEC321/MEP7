@@ -2,7 +2,7 @@ package ca.ulaval.glo4002.game.domain.resources;
 
 import java.util.HashMap;
 import java.util.Map;
-import static ca.ulaval.glo4002.game.domain.resources.ResourceTypesEnum.*
+import static ca.ulaval.glo4002.game.domain.resources.ResourceTypesEnum.*;
 
 public class Resource {
     private final Map<ResourceTypesEnum, ResourceElements> resources = new HashMap<>(3) {{

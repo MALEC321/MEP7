@@ -18,6 +18,7 @@ import ca.ulaval.glo4002.game.domain.turn.TurnRepository;
 
 import java.util.List;
 import java.util.UUID;
+import static ca.ulaval.glo4002.game.domain.resources.ResourceTypesEnum.*;
 
 public class TurnUseCase {
 
@@ -80,14 +81,14 @@ public class TurnUseCase {
 
         for (Dinosaur dinosaur : sortedDinosaursByStrengthThenName) {
                 if (dinosaur.getDiet().equals(DietType.HERBIVORE)) {
-                    if (!resourceRepository.removeSalads(dinosaur.feedFood())) {
+                    if (!resourceRepository.removeResources(Salad, dinosaur.feedFood())) {
                         dead = true;
                     }
-                } else if (!resourceRepository.removeBurgers(dinosaur.feedFood())){
+                } else if (!resourceRepository.removeResources(Burger, dinosaur.feedFood())){
                         dead = true;
                 }
 
-                if (!resourceRepository.removeWater(dinosaur.feedWater())) {
+                if (!resourceRepository.removeResources(Water, dinosaur.feedWater())) {
                     dead = true;
                 }
 

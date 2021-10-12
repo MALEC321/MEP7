@@ -24,9 +24,16 @@ public class Pantry {
         mapResourceQueue.put(Burger, burgerQueue);
         mapResourceQueue.put(Salad, saladQueue);
         mapResourceQueue.put(Water, waterQueue);
-        ResourceElements re = new Burger(1);
-        Queue<ResourceElements> qre = (Queue<ResourceElements>) mapResourceQueue.get(Burger);
-        qre.add(re);
+        //  ResourceElements re = new Burger(1);
+        //  Queue<ResourceElements> qre = (Queue<ResourceElements>) mapResourceQueue.get(Burger);
+        //  qre.add(re);
+
+       // this.freshResources = new HashMap<ResourceTypesEnum, Queue<? extends ResourceElements>>();
+       // freshResources.put(Burger, burgerQueue);
+       // freshResources.put(Salad, saladQueue);
+       // freshResources.put(Water, waterQueue);
+
+
     }
 
     public Resource findFreshResource() {
@@ -81,6 +88,7 @@ public class Pantry {
                 quantity -= actualQuantity;
             }
         }
+        return false;
     }
 
  //   public boolean removeBurgers(int quantity) {
