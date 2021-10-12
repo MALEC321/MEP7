@@ -72,21 +72,19 @@ public class Pantry {
     }
 
     public boolean removeResource(ResourceTypesEnum typeResource, int quantity) {
-        for (Map.Entry<ResourceTypesEnum, Object> entry : mapResourceQueue.entrySet()) {
-            for (ResourceElements resourceElement : (Queue<ResourceElements>) entry.getValue()) {
-                int actualQuantity = resourceElement.getQuantity();
+        for (ResourceElements resourceElement : (Queue<ResourceElements>) mapResourceQueue.get(typeResource)) {
+            int actualQuantity = resourceElement.getQuantity();
 
-                boolean enoughQuantity = resourceElement.removeElement(quantity);
-                if (enoughQuantity) {
-                    consumedResources.addResource(entry.getKey(), quantity);
-                    return true;
-                }
-
-                consumedResources.addResource(entry.getKey(), actualQuantity);
-                quantity -= actualQuantity;
+            boolean enoughQuantity = resourceElement.removeElement(quantity);
+            if (enoughQuantity) {
+                consumedResources.addResource(typeResource, quantity);
+                return true;
             }
+
+            consumedResources.addResource(typeResource, actualQuantity);
+            quantity -= actualQuantity;
         }
-        return false;
+    return false;
     }
 
  //   public boolean removeBurgers(int quantity) {
