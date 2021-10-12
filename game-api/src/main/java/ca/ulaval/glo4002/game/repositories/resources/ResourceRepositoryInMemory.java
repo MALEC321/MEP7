@@ -26,7 +26,7 @@ public class ResourceRepositoryInMemory implements ResourceRepository {
 
     @Override
     public boolean removeResources(ResourceTypesEnum type, int quantity) {
-        return false;
+        return pantry.removeResource(type, quantity);
     }
 
     //@Override

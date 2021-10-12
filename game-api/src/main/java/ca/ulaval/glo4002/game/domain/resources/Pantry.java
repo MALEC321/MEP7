@@ -5,9 +5,7 @@ import java.util.LinkedList;
 import java.util.Map;
 import java.util.Queue;
 
-import static ca.ulaval.glo4002.game.domain.resources.ResourceTypesEnum.Burger;
-import static ca.ulaval.glo4002.game.domain.resources.ResourceTypesEnum.Salad;
-import static ca.ulaval.glo4002.game.domain.resources.ResourceTypesEnum.Water;
+import static ca.ulaval.glo4002.game.domain.resources.ResourceTypesEnum.*;
 
 public class Pantry {
     private final Queue<Burger> burgerQueue = new LinkedList<>();
