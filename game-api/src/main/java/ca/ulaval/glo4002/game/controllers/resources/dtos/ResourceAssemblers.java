@@ -9,15 +9,6 @@ import static ca.ulaval.glo4002.game.domain.resources.ResourceTypesEnum.*;
 
 public class ResourceAssemblers {
 
-//    public ResourceDto toDto(Resource resource) {
-//        ResourceDto dto = new ResourceDto();
-//        dto.qtyBurger = resource.getResources().get("Burgers").getQuantity();
-//        dto.qtySalad = resource.getResources().get("Salads").getQuantity();
-//        dto.qtyWater = resource.getResources().get("Water").getQuantity();
-//
-//        return dto;
-//    }
-
     public ResourceDto toDto(Resource resource) {
         ResourceDto dto = new ResourceDto();
         dto.qtyBurger = resource.getResourceQuantity(Burger);

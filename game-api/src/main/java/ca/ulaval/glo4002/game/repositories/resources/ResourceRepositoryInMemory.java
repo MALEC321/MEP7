@@ -29,21 +29,6 @@ public class ResourceRepositoryInMemory implements ResourceRepository {
         return pantry.removeResource(type, quantity);
     }
 
-    //@Override
-    //public boolean removeBurgers(int quantity) {
-    //    return pantry.removeBurgers(quantity);
-    //}
-//
-    //@Override
-    //public boolean removeSalads(int quantity) {
-    //    return pantry.removeSalads(quantity);
-    //}
-//
-    //@Override
-    //public boolean removeWater(int quantity) {
-    //    return pantry.removeWater(quantity);
-    //}
-
     @Override
     public void reset() {
         pantry.clear();
