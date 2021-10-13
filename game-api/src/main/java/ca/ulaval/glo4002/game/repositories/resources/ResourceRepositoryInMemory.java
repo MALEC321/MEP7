@@ -7,7 +7,7 @@ import java.util.Arrays;
 import java.util.List;
 
 public class ResourceRepositoryInMemory implements ResourceRepository {
-    private final Pantry pantry = new Pantry();
+    private Pantry pantry = new Pantry();
 
     @Override
     public void add(ResourceElements resourceElements) {
@@ -25,18 +25,18 @@ public class ResourceRepositoryInMemory implements ResourceRepository {
     }
 
     @Override
-    public boolean eatBurger(int quantity) { //900
-        return pantry.eatBurger(quantity);
+    public boolean removeBurgers(int quantity) {
+        return pantry.removeBurgers(quantity);
     }
 
     @Override
-    public boolean eatSalad(int quantity) {
-        return pantry.eatSalad(quantity);
+    public boolean removeSalads(int quantity) {
+        return pantry.removeSalads(quantity);
     }
 
     @Override
-    public boolean drinkWater(int quantity) {
-        return pantry.drinkWater(quantity);
+    public boolean removeWater(int quantity) {
+        return pantry.removeWater(quantity);
     }
 
     @Override

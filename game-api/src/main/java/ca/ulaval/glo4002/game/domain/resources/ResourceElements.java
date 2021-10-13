@@ -3,6 +3,10 @@ package ca.ulaval.glo4002.game.domain.resources;
 public abstract class ResourceElements {
     private int quantity;
 
+    public ResourceElements() {
+        this(0);
+    }
+
     public ResourceElements(int quantity) {
         this.quantity = quantity;
     }

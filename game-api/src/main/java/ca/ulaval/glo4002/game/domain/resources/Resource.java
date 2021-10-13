@@ -4,11 +4,15 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class Resource {
-    private final Map<String, ResourceElements> resources = new HashMap<String, ResourceElements>(3) {{
+    private final Map<String, ResourceElements> resources = new HashMap<>(3) {{
             put("Burgers", new Burger(0));
             put("Salads", new Salad(0));
             put("Water", new Water(0));
     }};
+
+    public Resource() {
+        this(new Burger(0), new Salad(0), new Water(0));
+    }
 
     public Resource(Burger burger, Salad salad, Water water) {
         resources.replace("Burgers", burger);

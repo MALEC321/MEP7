@@ -44,14 +44,13 @@ public class TurnUseCase {
     }
 
     public void createTurn() {
-        //Todo This not gonna work with the turn because we need to find a way to add the cookIt as well
         List<Action> actions = actionRepository.getWaitingActions();
         cookIt();
 
         actionRepository.execute();
         postAction();
 
-        Turn turn = turnFactory.create(actions); //+1
+        Turn turn = turnFactory.create(actions);
         turnRepository.save(turn);
     }
 
@@ -69,7 +68,6 @@ public class TurnUseCase {
 
     public TurnDto getFromId(UUID id) {
         Turn turn = turnRepository.findById(id);
-
         return turnAssembler.toDto(turn);
     }
 
@@ -84,18 +82,17 @@ public class TurnUseCase {
     //TODO: Test uniter cette méthode
     private void feedDinosaursByDietType(List<Dinosaur> sortedDinosaursByStrengthThenName) {
         boolean dead = false;
+
         for (Dinosaur dinosaur : sortedDinosaursByStrengthThenName) {
                 if (dinosaur.getDiet().equals(DietType.HERBIVORE)) {
-                    if (!resourceRepository.eatSalad(dinosaur.feedFood())) {
+                    if (!resourceRepository.removeSalads(dinosaur.feedFood())) {
                         dead = true;
                     }
-                } else {
-                    if (!resourceRepository.eatBurger(dinosaur.feedFood())) {
+                } else if (!resourceRepository.removeBurgers(dinosaur.feedFood())){
                         dead = true;
-                    }
                 }
 
-                if (!resourceRepository.drinkWater(dinosaur.feedWater())) {
+                if (!resourceRepository.removeWater(dinosaur.feedWater())) {
                     dead = true;
                 }
 
@@ -110,16 +107,20 @@ public class TurnUseCase {
                         && dinosaurRepository.findByName(((DinosaurBaby) dinosaur).getMotherName()) == null) {
                     dead = true;
                 }
-                if (dead) dinosaurRepository.remove(dinosaur);
+
+                if (dead) {
+                    dinosaurRepository.remove(dinosaur);
+                }
             }
     }
     //Delete baby dinosaur if both parents are dead
 
     }
-        public void reset() {
-            turnRepository.reset();
-            resourceRepository.reset();
-            dinosaurRepository.reset();
-            actionRepository.reset();
-        }
+
+    public void reset() {
+        turnRepository.reset();
+        resourceRepository.reset();
+        dinosaurRepository.reset();
+        actionRepository.reset();
+    }
 }
