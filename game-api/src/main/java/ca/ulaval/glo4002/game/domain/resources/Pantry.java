@@ -44,9 +44,12 @@ public class Pantry {
         Queue<ResourceElements> saladQueue = (Queue<ResourceElements>) mapResourceQueue.get(Salad);
         Queue<ResourceElements> waterQueue = (Queue<ResourceElements>) mapResourceQueue.get(Water);
 
-        if (resourceElements instanceof Burger) burgerQueue.add((Burger)resourceElements);
-        if (resourceElements instanceof Salad) saladQueue.add((Salad)resourceElements);
-        if (resourceElements instanceof Water) waterQueue.add((Water)resourceElements);
+        if (resourceElements instanceof Burger)
+            burgerQueue.add(resourceElements);
+        else if (resourceElements instanceof Salad)
+            saladQueue.add(resourceElements);
+        else if (resourceElements instanceof Water)
+            waterQueue.add(resourceElements);
     }
 
     public boolean removeResource(ResourceTypesEnum typeResource, int quantity) {
