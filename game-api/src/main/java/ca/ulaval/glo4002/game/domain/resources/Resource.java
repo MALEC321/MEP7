@@ -10,7 +10,7 @@ public class Resource {
             put(BURGER, new Burger(0));
             put(SALAD, new Salad(0));
             put(WATER, new Water(0));
-    }};
+        }};
 
     public Resource() {
         this(new Burger(0), new Salad(0), new Water(0));
@@ -26,15 +26,17 @@ public class Resource {
         return resources;
     }
 
-    public void addResource(ResourceType type, int quantity){
+    public void addResource(ResourceType type, int quantity) {
         resources.get(type).addQuantity(quantity);
     }
 
-    public int getResourceQuantity(ResourceType type){
+    public int getResourceQuantity(ResourceType type) {
         return resources.get(type).getQuantity();
     }
 
     public void clear() {
-        for (ResourceElements resource: resources.values()) resource.reset();
+        for (ResourceElements resource: resources.values()) {
+            resource.reset();
+        }
     }
 }

@@ -1,7 +1,5 @@
 package ca.ulaval.glo4002.game.domain.resources;
 
-import ca.ulaval.glo4002.game.domain.resources.ResourceElements;
-
 public class Water extends ResourceElements {
     private int expiration = 10;
 
@@ -20,5 +18,7 @@ public class Water extends ResourceElements {
     }
 
     @Override
-    public boolean isExpired() { return expiration == 0; }
+    public boolean isExpired() {
+        return expiration == 0;
+    }
 }

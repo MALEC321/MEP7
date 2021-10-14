@@ -1,17 +1,17 @@
 package ca.ulaval.glo4002.game.application.baby;
 
+import java.util.Objects;
 import ca.ulaval.glo4002.game.application.baby.dtos.BabyAssembler;
 import ca.ulaval.glo4002.game.controllers.baby.dtos.BabyCreationDto;
 import ca.ulaval.glo4002.game.controllers.baby.dtos.ExternalApiCreationDto;
-import ca.ulaval.glo4002.game.domain.actions.Action;
 import ca.ulaval.glo4002.game.domain.actions.ActionFactory;
 import ca.ulaval.glo4002.game.domain.actions.ActionRepository;
-import ca.ulaval.glo4002.game.domain.dinosaur.*;
+import ca.ulaval.glo4002.game.domain.dinosaur.Dinosaur;
+import ca.ulaval.glo4002.game.domain.dinosaur.DinosaurFactory;
+import ca.ulaval.glo4002.game.domain.dinosaur.DinosaurRepository;
 import ca.ulaval.glo4002.game.exceptions.types.InvalidFatherException;
 import ca.ulaval.glo4002.game.exceptions.types.InvalidMotherException;
 import ca.ulaval.glo4002.game.exceptions.types.NotExistentNameException;
-
-import java.util.Objects;
 
 public class BabyUseCase {
 
@@ -21,7 +21,8 @@ public class BabyUseCase {
     private final ActionFactory actionFactory;
     private final DinosaurFactory dinosaurFactory;
 
-    public BabyUseCase(DinosaurRepository dinosaurRepository, BabyAssembler babyAssembler, ActionRepository actionRepository, ActionFactory actionFactory, DinosaurFactory dinosaurFactory) {
+    public BabyUseCase(DinosaurRepository dinosaurRepository, BabyAssembler babyAssembler, ActionRepository actionRepository, ActionFactory actionFactory,
+                       DinosaurFactory dinosaurFactory) {
         this.dinosaurRepository = dinosaurRepository;
         this.babyAssembler = babyAssembler;
         this.actionRepository = actionRepository;
