@@ -8,6 +8,7 @@ import ca.ulaval.glo4002.game.exceptions.types.InvalidWeightException;
 
 public class DinosaurFactory {
     public static final int MIN_WEIGHT = 0;
+    public static final int BABY_WEIGHT = 1;
     private final DinosaurRepository dinosaurRepository;
     private final SpeciesDietsCorrespondances speciesDietsCorrespondances;
 
@@ -35,7 +36,7 @@ public class DinosaurFactory {
 
     public DinosaurBaby create(String name, String fatherName, String motherName, String gender, String species){
         validateName(name);
-        return new DinosaurBaby(name, 1, gender, species, fatherName, motherName);
+        return new DinosaurBaby(name, BABY_WEIGHT, gender, species, fatherName, motherName);
     }
 
     public void validateName(String name) {
