@@ -106,7 +106,7 @@ public class Dinosaur {
             return bdTotalFoodNeed.multiply(bdDoubleResourcesNeeds).setScale(0, RoundingMode.CEILING).intValue();
         }
 
-        return bdTotalFoodNeed.setScale(0, RoundingMode.CEILING).intValue() ;
+        return bdTotalFoodNeed.setScale(0, RoundingMode.CEILING).intValue();
     }
 
     private String getConsiderationByDietType() {

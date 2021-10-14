@@ -9,6 +9,7 @@ title __ENUMS's Class Diagram__\n
           enum DietType {
             CARNIVORE
             HERBIVORE
+            OMNIVORE
           }
         }
       }

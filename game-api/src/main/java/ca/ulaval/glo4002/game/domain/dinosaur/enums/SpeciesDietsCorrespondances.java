@@ -15,6 +15,11 @@ public class SpeciesDietsCorrespondances {
         put("Spinosaurus", DietType.CARNIVORE);
         put("Tyrannosaurus Rex", DietType.CARNIVORE);
         put("Velociraptor", DietType.CARNIVORE);
+        put("Eoraptor", DietType.CARNIVORE);
+        put("Gigantoraptor", DietType.CARNIVORE);
+        put("Heterodontosaurus", DietType.CARNIVORE);
+        put("Ornithomimus", DietType.CARNIVORE);
+        put("Struthiomimus", DietType.CARNIVORE);
     }};
 
     public boolean dinosaurTypeExists(String name) {
