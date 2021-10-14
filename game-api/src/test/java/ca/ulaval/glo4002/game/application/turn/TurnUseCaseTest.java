@@ -1,85 +1,49 @@
 package ca.ulaval.glo4002.game.application.turn;
 
 import ca.ulaval.glo4002.game.application.manager.ZooManager;
-import ca.ulaval.glo4002.game.domain.actions.ActionRepository;
-import ca.ulaval.glo4002.game.domain.actions.AddDino;
 import ca.ulaval.glo4002.game.domain.dinosaur.Dinosaur;
 import ca.ulaval.glo4002.game.domain.dinosaur.DinosaurRepository;
+import ca.ulaval.glo4002.game.domain.resources.Pantry;
 import ca.ulaval.glo4002.game.domain.resources.ResourceRepository;
-import ca.ulaval.glo4002.game.domain.turn.TurnFactory;
-import ca.ulaval.glo4002.game.domain.turn.TurnRepository;
-import ca.ulaval.glo4002.game.repositories.actions.ActionRepositoryInMemory;
-import ca.ulaval.glo4002.game.repositories.dinosaur.DinosaurRepositoryInMemory;
-import ca.ulaval.glo4002.game.repositories.resources.ResourceRepositoryInMemory;
-import ca.ulaval.glo4002.game.repositories.turn.TurnRepositoryInMemory;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.mockito.InjectMocks;
 import org.mockito.Mock;
+import org.mockito.MockitoAnnotations;
 
-import java.util.UUID;
+import java.util.ArrayList;
+import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.mockito.Mockito.*;
 
 class TurnUseCaseTest {
 
-    final int BURGER_QUANTITY = 100;
-    final int SALAD_QUANTITY = 250;
-    final int WATER_QUANTITY = 10000;
-
-    private final TurnFactory turnFactory = new TurnFactory();
-    private final TurnRepository turnRepository = new TurnRepositoryInMemory();
-    private final ResourceRepository resourceRepository = new ResourceRepositoryInMemory();
-    private final ActionRepository actionRepository = new ActionRepositoryInMemory();
-    private final DinosaurRepository dinosaurRepository = new DinosaurRepositoryInMemory();
+    @Mock
+    private ResourceRepository resourceRepository;
+    @Mock
+    private DinosaurRepository dinosaurRepository;
     @Mock
     private ZooManager zooManager;
+    @Mock
+    private Pantry pantry;
+
     private final Dinosaur dinosaurTest = new Dinosaur("DinoTest", 1, "m", "Ankylosaurus");
 
-
-
+    @InjectMocks
     private TurnUseCase turnUseCase;
 
     @BeforeEach
     void setUp() {
-        turnUseCase = new TurnUseCase(turnFactory, turnRepository, resourceRepository, dinosaurRepository, actionRepository);
-    }
-
-    void addOneHerbivoreDinosaur() {
-        actionRepository.save(new AddDino(UUID.randomUUID(), dinosaurTest, dinosaurRepository));
-        turnUseCase.createTurn();
+        MockitoAnnotations.initMocks(this);
+        when(resourceRepository.getPantry()).thenReturn(pantry);
     }
 
     @Test
-    void createTurn() {
-    }
+    void whenDinosaurIsStarving_ThenDinosaurShouldBeRemove() {
+        List<Dinosaur> dinosaurs = new ArrayList<>(List.of(dinosaurTest));
+        when(zooManager.feedThenCheckIfStarving(pantry, dinosaurTest)).thenReturn(true);
+        turnUseCase.feedDinosaursByDietType(dinosaurs);
 
-    @Test
-    void cookItShouldReturnExpectedQuantity() {
-        turnUseCase.cookIt();
-
-    }
-
-//    @Test
-//    void whenFeedHerbivoreDinosaurs_ThenFreshSaladAndWaterShouldBeRetrieve() {
-//        addOneHerbivoreDinosaur();
-//
-//        int actualSaladQuantity = SALAD_QUANTITY - dinosaurTest.getFoodQuantityNeeded();
-//        int actualWaterQuantity = WATER_QUANTITY - dinosaurTest.getWaterQuantityNeeded();
-//
-//        assertEquals(actualSaladQuantity, resourceRepository.findAll().get(0).getSaladQuantity());
-//        assertEquals(actualWaterQuantity, resourceRepository.findAll().get(0).getWaterQuantity());
-//
-//    }
-
-    @Test
-    void whenFeedHerbivoreDinosaurs_ThenFreshWaterShouldBeRetrieve() {
-    }
-
-    @Test
-    void removeBabyDinosaurs() {
-    }
-
-    @Test
-    void reset() {
+        verify(dinosaurRepository, times(1)).remove(dinosaurTest);
     }
 }

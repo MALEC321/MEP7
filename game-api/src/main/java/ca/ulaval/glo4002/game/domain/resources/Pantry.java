@@ -105,6 +105,10 @@ public class Pantry implements Eatable {
         return expiredResources;
     }
 
+    public int getFreshResourceQuantity(ResourceType resourceType) {
+        return ((Queue<ResourceElements>)mapResourceQueue.get(resourceType)).size();
+    }
+
     public void clear() {
         for (Map.Entry<ResourceType, Object> entry : mapResourceQueue.entrySet()) {
             Queue<ResourceElements> resourceQueue = (Queue<ResourceElements>) entry.getValue();

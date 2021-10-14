@@ -1,5 +1,6 @@
 package ca.ulaval.glo4002.game.application.dinosaur;
 
+import ca.ulaval.glo4002.game.application.manager.ZooManager;
 import ca.ulaval.glo4002.game.application.turn.TurnUseCase;
 import ca.ulaval.glo4002.game.controllers.dinosaur.dtos.DinosaurAssembler;
 import ca.ulaval.glo4002.game.controllers.dinosaur.dtos.DinosaurCreationDto;
@@ -32,6 +33,7 @@ class DinosaurUseCaseTest {
     void setUp() {
         SpeciesDietsCorrespondances speciesDietsCorrespondances = new SpeciesDietsCorrespondances();
         ActionRepository actionRepository = new ActionRepositoryInMemory();
+        ZooManager zooManager = new ZooManager();
         ActionFactory actionFactory = new ActionFactory();
 
         DinosaurRepository dinosaurRepository = new DinosaurRepositoryInMemory();
@@ -43,7 +45,7 @@ class DinosaurUseCaseTest {
         TurnFactory turnFactory = new TurnFactory();
         TurnRepository turnRepository = new TurnRepositoryInMemory();
         ResourceRepository resourceRepository = new ResourceRepositoryInMemory();
-        turnUseCase = new TurnUseCase(turnFactory, turnRepository, resourceRepository, dinosaurRepository, actionRepository);
+        turnUseCase = new TurnUseCase(turnFactory, turnRepository, resourceRepository, dinosaurRepository, actionRepository, zooManager);
     }
 
     @Test

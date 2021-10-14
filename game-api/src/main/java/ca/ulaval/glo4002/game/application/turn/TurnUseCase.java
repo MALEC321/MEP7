@@ -14,6 +14,7 @@ import ca.ulaval.glo4002.game.domain.turn.Turn;
 import ca.ulaval.glo4002.game.domain.turn.TurnFactory;
 import ca.ulaval.glo4002.game.domain.turn.TurnRepository;
 
+import javax.inject.Inject;
 import java.util.List;
 
 public class TurnUseCase {
@@ -30,13 +31,14 @@ public class TurnUseCase {
             TurnRepository turnRepository,
             ResourceRepository resourceRepository,
             DinosaurRepository dinosaurRepository,
-            ActionRepository actionRepository) {
+            ActionRepository actionRepository,
+            ZooManager zooManager) {
         this.turnFactory = turnFactory;
         this.turnRepository = turnRepository;
         this.resourceRepository = resourceRepository;
         this.dinosaurRepository = dinosaurRepository;
         this.actionRepository = actionRepository;
-        zooManager = new ZooManager();
+        this.zooManager = zooManager;
     }
 
     public void createTurn() {
@@ -71,7 +73,7 @@ public class TurnUseCase {
     }
 
     //TODO: Test uniter cette méthode
-    private void feedDinosaursByDietType(List<Dinosaur> sortedDinosaursByStrengthThenName) {
+    protected void feedDinosaursByDietType(List<Dinosaur> sortedDinosaursByStrengthThenName) {
         boolean isStarving;
 
         for (Dinosaur dinosaur : sortedDinosaursByStrengthThenName) {

@@ -25,6 +25,11 @@ public class ResourceRepositoryInMemory implements ResourceRepository {
     }
 
     @Override
+    public int getFreshResourceQuantity(ResourceType resourceType) {
+        return pantry.getFreshResourceQuantity(resourceType);
+    }
+
+    @Override
     public void decreaseExpirationDate() {
         pantry.decreaseExpirationDate();
     }
