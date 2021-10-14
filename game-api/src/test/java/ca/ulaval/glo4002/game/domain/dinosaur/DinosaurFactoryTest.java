@@ -15,6 +15,7 @@ class DinosaurFactoryTest {
 
     private DinosaurFactory dinosaurFactory;
     private DinosaurRepository dinosaurRepository;
+    private static final int BABY_WEIGHT = 1;
 
     @BeforeEach
     void setUp() {
@@ -25,7 +26,7 @@ class DinosaurFactoryTest {
 
     //Test Dinosaur Adult
     @Test
-    void givenADinosaurAdult_whenNameIsAlreadyTaken_thenThrowsDuplicateNameException() {
+    void givenADinosaur_whenNameIsAlreadyTaken_thenThrowsDuplicateNameException() {
         Dinosaur dinosaurAdult = new Dinosaur("Effie", 89, "f", "Ankylosaurus");
         dinosaurRepository.save(dinosaurAdult);
         assertThrows(DuplicateNameException.class, () ->
@@ -33,19 +34,19 @@ class DinosaurFactoryTest {
     }
 
     @Test
-    void givenADinosaurAdult_whenGenderIsInvalid_thenThrowsInvalidGenderException() {
+    void givenADinosaur_whenGenderIsInvalid_thenThrowsInvalidGenderException() {
         assertThrows(InvalidGenderException.class, () ->
                 dinosaurFactory.create("Charly", 89, "x", "Ankylosaurus"));
     }
 
     @Test
-    void givenADinosaurAdult_whenWeightIsNegative_thenThrowsInvalidWeightException() {
+    void givenADinosaur_whenWeightIsNegative_thenThrowsInvalidWeightException() {
         assertThrows(InvalidWeightException.class, () ->
                 dinosaurFactory.create("George", -3, "f", "Ankylosaurus"));
     }
 
     @Test
-    void givenADinosaurAdult_whenSpecieIsNotSupported_thenThrowsInvalidSpeciesException() {
+    void givenADinosaur_whenSpecieIsNotSupported_thenThrowsInvalidSpeciesException() {
         assertThrows(InvalidSpeciesException.class, () ->
                 dinosaurFactory.create("Thom", 89, "f", "Raptors"));
     }
@@ -53,7 +54,7 @@ class DinosaurFactoryTest {
     //Test Dinosaur Baby
     @Test
     void givenADinosaurBaby_whenNameIsAlreadyTaken_thenThrowsDuplicateNameException() {
-        DinosaurBaby dinosaurBaby = new DinosaurBaby("Carey Price", 1, "m", "Ankylosaurus", "Bob", "Angela");
+        DinosaurBaby dinosaurBaby = new DinosaurBaby("Carey Price", BABY_WEIGHT, "m", "Ankylosaurus", "Bob", "Angela");
         dinosaurRepository.save(dinosaurBaby);
         assertThrows(DuplicateNameException.class, () ->
                 dinosaurFactory.create("Carey Price", "Bob", "Angela", "m", "Ankylosaurus"));
@@ -61,7 +62,7 @@ class DinosaurFactoryTest {
 
     @Test
     void givenADinosaurBaby_whenCreating_thenWeightIsOne(){
-        DinosaurBaby dinosaurBaby = new DinosaurBaby("Carey Price", 1, "m", "Ankylosaurus", "Bob", "Angela");
+        DinosaurBaby dinosaurBaby = new DinosaurBaby("Carey Price", BABY_WEIGHT, "m", "Ankylosaurus", "Bob", "Angela");
         assertEquals(1, dinosaurBaby.getWeight());
     }
 }
