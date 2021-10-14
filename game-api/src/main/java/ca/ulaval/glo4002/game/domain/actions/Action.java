@@ -25,5 +25,5 @@ public abstract class Action {
         return objectRepository;
     }
 
-    abstract public void execute();
+    public abstract void execute();
 }

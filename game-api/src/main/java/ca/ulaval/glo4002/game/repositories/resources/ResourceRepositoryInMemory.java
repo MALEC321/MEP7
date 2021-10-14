@@ -20,12 +20,22 @@ public class ResourceRepositoryInMemory implements ResourceRepository {
     }
 
     @Override
+    public Pantry getPantry() {
+        return pantry;
+    }
+
+    @Override
+    public int getFreshResourceQuantity(ResourceType resourceType) {
+        return pantry.getFreshResourceQuantity(resourceType);
+    }
+
+    @Override
     public void decreaseExpirationDate() {
         pantry.decreaseExpirationDate();
     }
 
     @Override
-    public boolean removeResources(ResourceTypesEnum type, int quantity) {
+    public boolean removeResources(ResourceType type, int quantity) {
         return pantry.removeResource(type, quantity);
     }
 

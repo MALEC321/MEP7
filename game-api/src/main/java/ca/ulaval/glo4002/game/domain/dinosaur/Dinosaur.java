@@ -1,9 +1,10 @@
 package ca.ulaval.glo4002.game.domain.dinosaur;
 
-import ca.ulaval.glo4002.game.domain.dinosaur.enums.DietType;
-import ca.ulaval.glo4002.game.domain.dinosaur.enums.SpeciesDietsCorrespondances;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
+
+import ca.ulaval.glo4002.game.domain.dinosaur.enums.DietType;
+import ca.ulaval.glo4002.game.domain.dinosaur.enums.SpeciesDietsCorrespondances;
 
 public class Dinosaur {
     private final String name;
@@ -28,7 +29,9 @@ public class Dinosaur {
         return name;
     }
 
-    public int getWeight() { return weight; }
+    public int getWeight() {
+        return weight;
+    }
 
     public String getGender() {
         return gender;
@@ -54,6 +57,10 @@ public class Dinosaur {
         this.isNewlyAdded = isNewlyAdded;
     }
 
+    public boolean isHerbivore() {
+        return diet.equals(DietType.HERBIVORE);
+    }
+
     private int calculateStrength() {
         BigDecimal bdDietMultiplicand = null;
         if (diet != null) {
@@ -69,7 +76,7 @@ public class Dinosaur {
         return bdStrength.setScale(0, RoundingMode.CEILING).intValue();
     }
 
-    public int feedWater() {
+    public int getWaterQuantityNeeded() {
         int waterNeed = getWaterNeed();
         this.isNewlyAdded = false;
 
@@ -91,7 +98,7 @@ public class Dinosaur {
         return bdWaterNeed.setScale(0, RoundingMode.CEILING).intValue();
     }
 
-    public int feedFood() {
+    public int getFoodQuantityNeeded() {
         return getFoodNeed();
     }
 
@@ -108,7 +115,7 @@ public class Dinosaur {
             return bdTotalFoodNeed.multiply(bdDoubleResourcesNeeds).setScale(0, RoundingMode.CEILING).intValue();
         }
 
-        return bdTotalFoodNeed.setScale(0, RoundingMode.CEILING).intValue() ;
+        return bdTotalFoodNeed.setScale(0, RoundingMode.CEILING).intValue();
     }
 
     private String getConsiderationByDietType() {

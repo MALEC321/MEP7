@@ -15,7 +15,13 @@ public abstract class ResourceElements {
         return quantity;
     }
 
-    public boolean isEmpty() { return quantity == 0; }
+    public void setQuantity(int quantity) {
+        this.quantity = quantity;
+    }
+
+    public boolean isEmpty() {
+        return quantity == 0;
+    }
 
     public boolean removeElement(int quantity) {
         int actualQuantity = this.quantity;
@@ -28,15 +34,13 @@ public abstract class ResourceElements {
         this.quantity = 0;
     }
 
-    public void setQuantity(int quantity) {
-        this.quantity = quantity;
-    }
-
     public void addQuantity(int quantity) {
         this.quantity += quantity;
     }
 
     public abstract int getDaysLeft();
+
     public abstract void decreaseExpirationDate();
+
     public abstract boolean isExpired();
 }

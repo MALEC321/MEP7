@@ -1,11 +1,11 @@
 package ca.ulaval.glo4002.game.application.dinosaur;
 
+import ca.ulaval.glo4002.game.application.manager.ZooManager;
 import ca.ulaval.glo4002.game.application.turn.TurnUseCase;
 import ca.ulaval.glo4002.game.controllers.dinosaur.dtos.DinosaurAssembler;
 import ca.ulaval.glo4002.game.controllers.dinosaur.dtos.DinosaurCreationDto;
 import ca.ulaval.glo4002.game.controllers.dinosaur.dtos.DinosaurDtoAssembler;
 import ca.ulaval.glo4002.game.controllers.dinosaur.dtos.DinosaurRequest;
-import ca.ulaval.glo4002.game.controllers.turn.dtos.TurnAssembler;
 import ca.ulaval.glo4002.game.domain.actions.ActionFactory;
 import ca.ulaval.glo4002.game.domain.actions.ActionRepository;
 import ca.ulaval.glo4002.game.domain.dinosaur.DinosaurFactory;
@@ -33,6 +33,7 @@ class DinosaurUseCaseTest {
     void setUp() {
         SpeciesDietsCorrespondances speciesDietsCorrespondances = new SpeciesDietsCorrespondances();
         ActionRepository actionRepository = new ActionRepositoryInMemory();
+        ZooManager zooManager = new ZooManager();
         ActionFactory actionFactory = new ActionFactory();
 
         DinosaurRepository dinosaurRepository = new DinosaurRepositoryInMemory();
@@ -44,8 +45,7 @@ class DinosaurUseCaseTest {
         TurnFactory turnFactory = new TurnFactory();
         TurnRepository turnRepository = new TurnRepositoryInMemory();
         ResourceRepository resourceRepository = new ResourceRepositoryInMemory();
-        TurnAssembler turnAssembler = new TurnAssembler();
-        turnUseCase = new TurnUseCase(turnFactory, turnRepository, resourceRepository, dinosaurRepository, turnAssembler, actionRepository);
+        turnUseCase = new TurnUseCase(turnFactory, turnRepository, resourceRepository, dinosaurRepository, actionRepository, zooManager);
     }
 
     @Test

@@ -1,5 +1,6 @@
 package ca.ulaval.glo4002.game.application.resources;
 
+import ca.ulaval.glo4002.game.application.manager.ZooManager;
 import ca.ulaval.glo4002.game.application.turn.TurnUseCase;
 import ca.ulaval.glo4002.game.controllers.resources.dtos.ResourceAssemblers;
 import ca.ulaval.glo4002.game.controllers.resources.dtos.ResourceCreationDto;
@@ -38,6 +39,7 @@ class ResourceUseCaseTest {
         ResourceAssemblers resourceAssemblers = new ResourceAssemblers();
         ResourceRepository resourceRepository = new ResourceRepositoryInMemory();
         ActionRepository actionRepository = new ActionRepositoryInMemory();
+        ZooManager zooManager = new ZooManager();
         ActionFactory actionFactory = new ActionFactory();
 
         TurnFactory turnFactory = new TurnFactory();
@@ -45,7 +47,7 @@ class ResourceUseCaseTest {
         TurnAssembler turnAssembler = new TurnAssembler();
         DinosaurRepository dinosaurRepository = new DinosaurRepositoryInMemory();
 
-        turnUseCase = new TurnUseCase(turnFactory, turnRepository, resourceRepository, dinosaurRepository, turnAssembler, actionRepository);
+        turnUseCase = new TurnUseCase(turnFactory, turnRepository, resourceRepository, dinosaurRepository, actionRepository, zooManager);
         resourceUseCase = new ResourceUseCase(resourceFactory, resourceRepository, resourceAssemblers, actionRepository, actionFactory);
     }
 

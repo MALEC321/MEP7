@@ -1,6 +1,7 @@
 package ca.ulaval.glo4002.game.configuration;
 
 import ca.ulaval.glo4002.game.application.baby.BabyUseCase;
+import ca.ulaval.glo4002.game.application.manager.ZooManager;
 import ca.ulaval.glo4002.game.controllers.baby.BabyResource;
 import ca.ulaval.glo4002.game.application.baby.dtos.BabyAssembler;
 import ca.ulaval.glo4002.game.controllers.baby.dtos.BabyDtoAssembler;
@@ -18,7 +19,6 @@ import ca.ulaval.glo4002.game.controllers.resources.ResourceResource;
 import ca.ulaval.glo4002.game.controllers.resources.dtos.ResourceAssemblers;
 import ca.ulaval.glo4002.game.controllers.resources.dtos.ResourceDtoAssembler;
 import ca.ulaval.glo4002.game.controllers.turn.TurnResource;
-import ca.ulaval.glo4002.game.controllers.turn.dtos.TurnAssembler;
 import ca.ulaval.glo4002.game.controllers.turn.dtos.TurnDtoAssembler;
 import ca.ulaval.glo4002.game.domain.actions.ActionFactory;
 import ca.ulaval.glo4002.game.domain.dinosaur.DinosaurFactory;
@@ -26,7 +26,6 @@ import ca.ulaval.glo4002.game.domain.dinosaur.enums.SpeciesDietsCorrespondances;
 import ca.ulaval.glo4002.game.domain.resources.ResourceFactory;
 import ca.ulaval.glo4002.game.domain.turn.TurnFactory;
 import ca.ulaval.glo4002.game.exceptions.exceptionMappers.*;
-import ca.ulaval.glo4002.game.heartbeat.HeartbeatResource;
 import ca.ulaval.glo4002.game.domain.actions.ActionRepository;
 import ca.ulaval.glo4002.game.domain.dinosaur.DinosaurRepository;
 import ca.ulaval.glo4002.game.domain.resources.ResourceRepository;
@@ -42,10 +41,10 @@ public class AppConfig {
     static TurnFactory turnFactory = new TurnFactory();
     static TurnRepository turnRepository = new TurnRepositoryInMemory();
     static ResourceRepository resourceRepository = new ResourceRepositoryInMemory();
-    static TurnAssembler turnAssembler = new TurnAssembler();
     static ActionRepository actionRepository = new ActionRepositoryInMemory();
     static ActionFactory actionFactory = new ActionFactory();
     static SpeciesDietsCorrespondances speciesDietsCorrespondances = new SpeciesDietsCorrespondances();
+    static ZooManager zooManager = new ZooManager();
 
 
     // Dinosaur
@@ -57,7 +56,7 @@ public class AppConfig {
     static DinosaurDtoAssembler dinosaurDtoAssembler = new DinosaurDtoAssembler();
     static DinosaurResource dinosaurResource = new DinosaurResource(dinosaurUseCase, dinosaurDtoAssembler);
 
-    static TurnUseCase turnUseCase = new TurnUseCase(turnFactory, turnRepository, resourceRepository, dinosaurRepository, turnAssembler, actionRepository);
+    static TurnUseCase turnUseCase = new TurnUseCase(turnFactory, turnRepository, resourceRepository, dinosaurRepository, actionRepository, zooManager);
 
     static TurnDtoAssembler turnDtoAssembler = new TurnDtoAssembler();
     static TurnResource turnResource = new TurnResource(turnUseCase, turnDtoAssembler);
@@ -75,7 +74,6 @@ public class AppConfig {
     static BabyDtoAssembler babyDtoAssembler = new BabyDtoAssembler();
     static BabyResource babyResource = new BabyResource(bebeUseCase, babyDtoAssembler);
 
-    static HeartbeatResource heartbeatResource = new HeartbeatResource();
 
 
     public static ResourceConfig packageConfig = ResourceConfig.forApplication(new Application() {
@@ -85,7 +83,6 @@ public class AppConfig {
                                                                          resources.add(resourceResource);
                                                                          resources.add(turnResource);
                                                                          resources.add(dinosaurResource);
-                                                                         resources.add(heartbeatResource);
                                                                          resources.add(babyResource);
                                                                          resources.add(new InvalidResourceExceptionMapper());
                                                                          resources.add(new UnknownExceptionGrabber());
