@@ -26,7 +26,6 @@ import ca.ulaval.glo4002.game.domain.dinosaur.enums.SpeciesDietsCorrespondances;
 import ca.ulaval.glo4002.game.domain.resources.ResourceFactory;
 import ca.ulaval.glo4002.game.domain.turn.TurnFactory;
 import ca.ulaval.glo4002.game.exceptions.exceptionMappers.*;
-import ca.ulaval.glo4002.game.heartbeat.HeartbeatResource;
 import ca.ulaval.glo4002.game.domain.actions.ActionRepository;
 import ca.ulaval.glo4002.game.domain.dinosaur.DinosaurRepository;
 import ca.ulaval.glo4002.game.domain.resources.ResourceRepository;
@@ -75,7 +74,6 @@ public class AppConfig {
     static BabyDtoAssembler babyDtoAssembler = new BabyDtoAssembler();
     static BabyResource babyResource = new BabyResource(bebeUseCase, babyDtoAssembler);
 
-    static HeartbeatResource heartbeatResource = new HeartbeatResource();
 
 
     public static ResourceConfig packageConfig = ResourceConfig.forApplication(new Application() {
@@ -85,7 +83,6 @@ public class AppConfig {
                                                                          resources.add(resourceResource);
                                                                          resources.add(turnResource);
                                                                          resources.add(dinosaurResource);
-                                                                         resources.add(heartbeatResource);
                                                                          resources.add(babyResource);
                                                                          resources.add(new InvalidResourceExceptionMapper());
                                                                          resources.add(new UnknownExceptionGrabber());
