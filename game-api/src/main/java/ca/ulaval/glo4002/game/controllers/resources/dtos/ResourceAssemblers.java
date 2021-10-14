@@ -1,9 +1,9 @@
 package ca.ulaval.glo4002.game.controllers.resources.dtos;
 
-import ca.ulaval.glo4002.game.domain.resources.Resource;
-
 import java.util.List;
 import java.util.stream.Collectors;
+
+import ca.ulaval.glo4002.game.domain.resources.Resource;
 
 import static ca.ulaval.glo4002.game.domain.resources.ResourceType.*;
 

@@ -1,16 +1,17 @@
 package ca.ulaval.glo4002.game.repositories.turn;
 
-import ca.ulaval.glo4002.game.domain.turn.Turn;
-import ca.ulaval.glo4002.game.domain.turn.TurnRepository;
+import java.util.UUID;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 
-import java.util.UUID;
-
 import static org.junit.jupiter.api.Assertions.*;
+
+import ca.ulaval.glo4002.game.domain.turn.Turn;
+import ca.ulaval.glo4002.game.domain.turn.TurnRepository;
 
 class TurnRepositoryInMemoryTest {
 

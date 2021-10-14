@@ -1,12 +1,12 @@
 package ca.ulaval.glo4002.game.exceptions.exceptionMappers;
 
+import javax.ws.rs.core.Response;
+import javax.ws.rs.ext.ExceptionMapper;
+
 import ca.ulaval.glo4002.game.exceptions.ExceptionErrorAndDescription;
 import ca.ulaval.glo4002.game.exceptions.ExceptionResponse;
 import ca.ulaval.glo4002.game.exceptions.dtos.ExceptionResponseDto;
 import ca.ulaval.glo4002.game.exceptions.types.DuplicateNameException;
-
-import javax.ws.rs.core.Response;
-import javax.ws.rs.ext.ExceptionMapper;
 
 public class DuplicateNameExceptionMapper extends ExceptionResponse implements ExceptionMapper<DuplicateNameException> {
     @Override

@@ -1,16 +1,21 @@
 package ca.ulaval.glo4002.game.repositories.actions;
 
-import ca.ulaval.glo4002.game.domain.actions.Action;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
-import org.mockito.*;
-import org.mockito.internal.util.reflection.Whitebox;
-
 import java.util.ArrayList;
 import java.util.List;
 
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.mockito.InOrder;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.Mockito;
+import org.mockito.MockitoAnnotations;
+import org.mockito.internal.util.reflection.Whitebox;
+
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+
+import ca.ulaval.glo4002.game.domain.actions.Action;
 
 class ActionRepositoryInMemoryTest {
 

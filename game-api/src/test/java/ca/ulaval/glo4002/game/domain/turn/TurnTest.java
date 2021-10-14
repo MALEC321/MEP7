@@ -1,14 +1,15 @@
 package ca.ulaval.glo4002.game.domain.turn;
 
-import ca.ulaval.glo4002.game.domain.actions.Action;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
-import static org.junit.jupiter.api.Assertions.*;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
+import ca.ulaval.glo4002.game.domain.actions.Action;
 
 public class TurnTest {
     private UUID id;

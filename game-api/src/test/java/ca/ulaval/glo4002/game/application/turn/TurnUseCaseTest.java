@@ -1,20 +1,21 @@
 package ca.ulaval.glo4002.game.application.turn;
 
-import ca.ulaval.glo4002.game.application.manager.ZooManager;
-import ca.ulaval.glo4002.game.domain.dinosaur.Dinosaur;
-import ca.ulaval.glo4002.game.domain.dinosaur.DinosaurRepository;
-import ca.ulaval.glo4002.game.domain.resources.Pantry;
-import ca.ulaval.glo4002.game.domain.resources.ResourceRepository;
+import java.util.ArrayList;
+import java.util.List;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import static org.mockito.Mockito.*;
+
+import ca.ulaval.glo4002.game.application.manager.ZooManager;
+import ca.ulaval.glo4002.game.domain.dinosaur.Dinosaur;
+import ca.ulaval.glo4002.game.domain.dinosaur.DinosaurRepository;
+import ca.ulaval.glo4002.game.domain.resources.Pantry;
+import ca.ulaval.glo4002.game.domain.resources.ResourceRepository;
 
 class TurnUseCaseTest {
 

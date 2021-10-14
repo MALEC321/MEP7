@@ -1,18 +1,18 @@
 package ca.ulaval.glo4002.game.application.resources;
 
-import ca.ulaval.glo4002.game.domain.actions.Action;
-import ca.ulaval.glo4002.game.domain.actions.ActionFactory;
-import ca.ulaval.glo4002.game.domain.actions.ActionRepository;
+import java.util.ArrayList;
+import java.util.List;
+
 import ca.ulaval.glo4002.game.controllers.resources.dtos.ResourceAssemblers;
 import ca.ulaval.glo4002.game.controllers.resources.dtos.ResourceCreationDto;
 import ca.ulaval.glo4002.game.controllers.resources.dtos.ResourceDto;
+import ca.ulaval.glo4002.game.domain.actions.Action;
+import ca.ulaval.glo4002.game.domain.actions.ActionFactory;
+import ca.ulaval.glo4002.game.domain.actions.ActionRepository;
 import ca.ulaval.glo4002.game.domain.resources.Resource;
 import ca.ulaval.glo4002.game.domain.resources.ResourceElements;
 import ca.ulaval.glo4002.game.domain.resources.ResourceFactory;
 import ca.ulaval.glo4002.game.domain.resources.ResourceRepository;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class ResourceUseCase {
     private final ResourceFactory resourceFactory;
@@ -21,7 +21,8 @@ public class ResourceUseCase {
     private final ActionRepository actionRepository;
     private final ActionFactory actionFactory;
 
-    public ResourceUseCase(ResourceFactory resourceFactory, ResourceRepository resourceRepository, ResourceAssemblers resourceAssemblers, ActionRepository actionRepository, ActionFactory actionFactory) {
+    public ResourceUseCase(ResourceFactory resourceFactory, ResourceRepository resourceRepository, ResourceAssemblers resourceAssemblers,
+                           ActionRepository actionRepository, ActionFactory actionFactory) {
         this.resourceFactory = resourceFactory;
         this.resourceRepository = resourceRepository;
         this.resourceAssemblers = resourceAssemblers;
@@ -41,7 +42,7 @@ public class ResourceUseCase {
     }
 
     private void addResourceToActionWaitingList(Resource resources) {
-        for (ResourceElements resource: new ArrayList<>(resources.getResources().values())) {
+        for (ResourceElements resource : new ArrayList<>(resources.getResources().values())) {
             if (resource.isEmpty()) {
                 continue;
             }

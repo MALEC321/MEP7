@@ -1,5 +1,7 @@
 package ca.ulaval.glo4002.game.application.turn;
 
+import java.util.List;
+
 import ca.ulaval.glo4002.game.application.manager.ZooManager;
 import ca.ulaval.glo4002.game.domain.actions.Action;
 import ca.ulaval.glo4002.game.domain.actions.ActionRepository;
@@ -14,9 +16,6 @@ import ca.ulaval.glo4002.game.domain.turn.Turn;
 import ca.ulaval.glo4002.game.domain.turn.TurnFactory;
 import ca.ulaval.glo4002.game.domain.turn.TurnRepository;
 
-import javax.inject.Inject;
-import java.util.List;
-
 public class TurnUseCase {
 
     private final TurnFactory turnFactory;
@@ -27,12 +26,12 @@ public class TurnUseCase {
     private final ZooManager zooManager;
 
     public TurnUseCase(
-            TurnFactory turnFactory,
-            TurnRepository turnRepository,
-            ResourceRepository resourceRepository,
-            DinosaurRepository dinosaurRepository,
-            ActionRepository actionRepository,
-            ZooManager zooManager) {
+        TurnFactory turnFactory,
+        TurnRepository turnRepository,
+        ResourceRepository resourceRepository,
+        DinosaurRepository dinosaurRepository,
+        ActionRepository actionRepository,
+        ZooManager zooManager) {
         this.turnFactory = turnFactory;
         this.turnRepository = turnRepository;
         this.resourceRepository = resourceRepository;
@@ -71,14 +70,14 @@ public class TurnUseCase {
     protected void removeBabyDinosaurs() {
         removeBabyDinosaur(dinosaurRepository.getSortedDinosaursByStrengthThenName());
     }
-
-    //TODO: Test uniter cette méthode
     protected void feedDinosaursByDietType(List<Dinosaur> sortedDinosaursByStrengthThenName) {
         boolean isStarving;
 
         for (Dinosaur dinosaur : sortedDinosaursByStrengthThenName) {
-            isStarving = zooManager.feedThenCheckIfStarving(resourceRepository.getPantry(),dinosaur);
-            if (isStarving) dinosaurRepository.remove(dinosaur);
+            isStarving = zooManager.feedThenCheckIfStarving(resourceRepository.getPantry(), dinosaur);
+            if (isStarving) {
+                dinosaurRepository.remove(dinosaur);
+            }
         }
     }
 

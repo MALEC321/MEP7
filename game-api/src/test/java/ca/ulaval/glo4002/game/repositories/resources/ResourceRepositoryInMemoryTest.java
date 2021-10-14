@@ -1,6 +1,5 @@
 package ca.ulaval.glo4002.game.repositories.resources;
 
-import ca.ulaval.glo4002.game.domain.resources.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
@@ -8,8 +7,14 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 
-import static org.mockito.Mockito.*;
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
+
+import ca.ulaval.glo4002.game.domain.resources.Burger;
+import ca.ulaval.glo4002.game.domain.resources.Pantry;
+import ca.ulaval.glo4002.game.domain.resources.ResourceElements;
+import ca.ulaval.glo4002.game.domain.resources.Water;
 
 class ResourceRepositoryInMemoryTest {
 

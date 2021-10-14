@@ -35,7 +35,7 @@ public class Resource {
     }
 
     public void clear() {
-        for (ResourceElements resource: resources.values()) {
+        for (ResourceElements resource : resources.values()) {
             resource.reset();
         }
     }

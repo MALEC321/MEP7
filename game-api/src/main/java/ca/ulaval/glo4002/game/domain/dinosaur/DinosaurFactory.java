@@ -23,7 +23,7 @@ public class DinosaurFactory {
         if (weight <= MIN_WEIGHT) {
             throw new InvalidWeightException();
         }
-        if (!"f".equals(gender) && (!"m".equals(gender))) {
+        if (!"f".equals(gender) && !"m".equals(gender)) {
             throw new InvalidGenderException();
         }
 

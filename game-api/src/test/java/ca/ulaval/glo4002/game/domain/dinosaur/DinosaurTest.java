@@ -1,10 +1,11 @@
 package ca.ulaval.glo4002.game.domain.dinosaur;
 
-import ca.ulaval.glo4002.game.domain.dinosaur.enums.DietType;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
+import ca.ulaval.glo4002.game.domain.dinosaur.enums.DietType;
 
 class DinosaurTest {
 
@@ -110,7 +111,7 @@ class DinosaurTest {
     }
 
     @Test
-    void givenNewlyAdded50000kgFemaleCarnivore_thenFoodNeedsEquals100()  {
+    void givenNewlyAdded50000kgFemaleCarnivore_thenFoodNeedsEquals100() {
         Dinosaur grosPied = new Dinosaur("grosPied", 50001, "f", "Velociraptor");
         int expectedFoodNeeds = 101;
 
@@ -118,7 +119,7 @@ class DinosaurTest {
     }
 
     @Test
-    void givenNotNewlyAdded50000kgFemaleCarnivore_thenFoodNeedsEquals50()  {
+    void givenNotNewlyAdded50000kgFemaleCarnivore_thenFoodNeedsEquals50() {
         Dinosaur grosPied = new Dinosaur("grosPied", 50001, "f", "Velociraptor");
         int expectedFoodNeeds = 51;
         grosPied.setNewlyAdded(false);

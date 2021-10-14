@@ -1,13 +1,14 @@
 package ca.ulaval.glo4002.game.repositories.dinosaur;
 
-import ca.ulaval.glo4002.game.domain.dinosaur.Dinosaur;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
-
 import java.util.Arrays;
 import java.util.List;
 
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+
 import static org.junit.jupiter.api.Assertions.*;
+
+import ca.ulaval.glo4002.game.domain.dinosaur.Dinosaur;
 
 class DinosaurRepositoryInMemoryTest {
 

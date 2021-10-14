@@ -1,5 +1,10 @@
 package ca.ulaval.glo4002.game.application.dinosaur;
 
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.assertThrows;
+
 import ca.ulaval.glo4002.game.application.manager.ZooManager;
 import ca.ulaval.glo4002.game.application.turn.TurnUseCase;
 import ca.ulaval.glo4002.game.controllers.dinosaur.dtos.DinosaurAssembler;
@@ -19,10 +24,6 @@ import ca.ulaval.glo4002.game.repositories.actions.ActionRepositoryInMemory;
 import ca.ulaval.glo4002.game.repositories.dinosaur.DinosaurRepositoryInMemory;
 import ca.ulaval.glo4002.game.repositories.resources.ResourceRepositoryInMemory;
 import ca.ulaval.glo4002.game.repositories.turn.TurnRepositoryInMemory;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 class DinosaurUseCaseTest {
     private DinosaurUseCase dinosaurUseCase;
@@ -37,7 +38,7 @@ class DinosaurUseCaseTest {
         ActionFactory actionFactory = new ActionFactory();
 
         DinosaurRepository dinosaurRepository = new DinosaurRepositoryInMemory();
-        DinosaurFactory  dinosaurFactory = new DinosaurFactory(dinosaurRepository, speciesDietsCorrespondances);
+        DinosaurFactory dinosaurFactory = new DinosaurFactory(dinosaurRepository, speciesDietsCorrespondances);
         DinosaurAssembler dinosaurAssembler = new DinosaurAssembler();
         dinosaurDtoAssembler = new DinosaurDtoAssembler();
         dinosaurUseCase = new DinosaurUseCase(dinosaurFactory, dinosaurRepository, dinosaurAssembler, actionRepository, actionFactory);
@@ -61,6 +62,6 @@ class DinosaurUseCaseTest {
         turnUseCase.createTurn();
 
         assertThrows(NotExistentNameException.class, () ->
-                dinosaurUseCase.getDinosaur("Willl"));
+            dinosaurUseCase.getDinosaur("Willl"));
     }
 }

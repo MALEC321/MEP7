@@ -1,5 +1,12 @@
 package ca.ulaval.glo4002.game.application.resources;
 
+import java.util.List;
+
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.assertFalse;
+
 import ca.ulaval.glo4002.game.application.manager.ZooManager;
 import ca.ulaval.glo4002.game.application.turn.TurnUseCase;
 import ca.ulaval.glo4002.game.controllers.resources.dtos.ResourceAssemblers;
@@ -18,12 +25,6 @@ import ca.ulaval.glo4002.game.repositories.actions.ActionRepositoryInMemory;
 import ca.ulaval.glo4002.game.repositories.dinosaur.DinosaurRepositoryInMemory;
 import ca.ulaval.glo4002.game.repositories.resources.ResourceRepositoryInMemory;
 import ca.ulaval.glo4002.game.repositories.turn.TurnRepositoryInMemory;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
-
-import java.util.List;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 class ResourceUseCaseTest {
 
@@ -52,7 +53,7 @@ class ResourceUseCaseTest {
     }
 
     @Test
-    public void givenResource_whenCreateOne_ActionsListNotEmpty(){
+    public void givenResource_whenCreateOne_ActionsListNotEmpty() {
         ResourceCreationDto resourceCreationDto = new ResourceCreationDto();
         resourceCreationDto.qtyBurger = QYT_BURGER;
         resourceCreationDto.qtySalad = QYT_SALAD;
@@ -65,14 +66,14 @@ class ResourceUseCaseTest {
     }
 
     @Test
-    public void givenResource_ZeroCreated_ActionsListIsEmpty(){
+    public void givenResource_ZeroCreated_ActionsListIsEmpty() {
         List<ResourceDto> actionList = resourceUseCase.getAllResources();
 
         assertFalse(actionList.isEmpty());
     }
 
     @Test
-    public void givenResource_OneTurn_ResourceRepoNotEmpty(){
+    public void givenResource_OneTurn_ResourceRepoNotEmpty() {
         ResourceRepository resourceRepository = new ResourceRepositoryInMemory();
         turnUseCase.createTurn();
 

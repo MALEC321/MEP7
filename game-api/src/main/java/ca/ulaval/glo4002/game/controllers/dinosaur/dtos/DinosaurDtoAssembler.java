@@ -1,8 +1,9 @@
 package ca.ulaval.glo4002.game.controllers.dinosaur.dtos;
 
-import ca.ulaval.glo4002.game.domain.dinosaur.DinosaurFactory;
 import java.util.List;
 import java.util.stream.Collectors;
+
+import ca.ulaval.glo4002.game.domain.dinosaur.DinosaurFactory;
 
 public class DinosaurDtoAssembler {
     DinosaurFactory dinosaurFactory;
@@ -30,7 +31,7 @@ public class DinosaurDtoAssembler {
     public DinosaursResponse toResponse(List<DinosaurDto> dinosaurDtos) {
         DinosaursResponse response = new DinosaursResponse();
         response.items = dinosaurDtos.stream().map(this::toResponse)
-                .collect(Collectors.toList());
+            .collect(Collectors.toList());
 
         return response;
     }

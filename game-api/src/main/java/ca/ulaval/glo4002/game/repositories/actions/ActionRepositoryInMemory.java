@@ -1,10 +1,10 @@
 package ca.ulaval.glo4002.game.repositories.actions;
 
-import ca.ulaval.glo4002.game.domain.actions.Action;
-import ca.ulaval.glo4002.game.domain.actions.ActionRepository;
-
 import java.util.ArrayList;
 import java.util.List;
+
+import ca.ulaval.glo4002.game.domain.actions.Action;
+import ca.ulaval.glo4002.game.domain.actions.ActionRepository;
 
 public class ActionRepositoryInMemory implements ActionRepository {
     private final List<Action> waitingActions = new ArrayList<>();
@@ -21,7 +21,7 @@ public class ActionRepositoryInMemory implements ActionRepository {
 
     @Override
     public void execute() {
-        for (Action action: waitingActions) {
+        for (Action action : waitingActions) {
             action.execute();
         }
 
@@ -30,7 +30,6 @@ public class ActionRepositoryInMemory implements ActionRepository {
 
     @Override
     public void addElementToActionWaitingList(Object element) {
-
     }
 
     @Override
