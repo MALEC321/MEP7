@@ -60,6 +60,9 @@ public class Dinosaur {
     public boolean isHerbivore() {
         return diet.equals(DietType.HERBIVORE);
     }
+    public boolean isOmnivore() {
+        return diet.equals(DietType.OMNIVORE);
+    }
 
     private int calculateStrength() {
         BigDecimal bdDietMultiplicand = null;
