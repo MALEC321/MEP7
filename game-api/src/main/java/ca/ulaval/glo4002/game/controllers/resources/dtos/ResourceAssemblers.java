@@ -6,7 +6,6 @@ import java.util.List;
 import java.util.stream.Collectors;
 import static ca.ulaval.glo4002.game.domain.resources.ResourceTypesEnum.*;
 
-
 public class ResourceAssemblers {
 
     public ResourceDto toDto(Resource resource) {
@@ -22,4 +21,4 @@ public class ResourceAssemblers {
         return resources.stream().map(this::toDto).collect(Collectors.toList());
     }
 
-    }
+}
