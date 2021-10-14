@@ -67,17 +67,17 @@ class TurnUseCaseTest {
 
     }
 
-    @Test
-    void whenFeedHerbivoreDinosaurs_ThenFreshSaladAndWaterShouldBeRetrieve() {
-        addOneHerbivoreDinosaur();
-
-        int actualSaladQuantity = SALAD_QUANTITY - dinosaurTest.getFoodQuantityNeeded();
-        int actualWaterQuantity = WATER_QUANTITY - dinosaurTest.getWaterQuantityNeeded();
-
-        assertEquals(actualSaladQuantity, resourceRepository.findAll().get(0).getSaladQuantity());
-        assertEquals(actualWaterQuantity, resourceRepository.findAll().get(0).getWaterQuantity());
-
-    }
+//    @Test
+//    void whenFeedHerbivoreDinosaurs_ThenFreshSaladAndWaterShouldBeRetrieve() {
+//        addOneHerbivoreDinosaur();
+//
+//        int actualSaladQuantity = SALAD_QUANTITY - dinosaurTest.getFoodQuantityNeeded();
+//        int actualWaterQuantity = WATER_QUANTITY - dinosaurTest.getWaterQuantityNeeded();
+//
+//        assertEquals(actualSaladQuantity, resourceRepository.findAll().get(0).getSaladQuantity());
+//        assertEquals(actualWaterQuantity, resourceRepository.findAll().get(0).getWaterQuantity());
+//
+//    }
 
     @Test
     void whenFeedHerbivoreDinosaurs_ThenFreshWaterShouldBeRetrieve() {

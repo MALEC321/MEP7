@@ -45,7 +45,7 @@ class ResourceUseCaseTest {
         TurnAssembler turnAssembler = new TurnAssembler();
         DinosaurRepository dinosaurRepository = new DinosaurRepositoryInMemory();
 
-        turnUseCase = new TurnUseCase(turnFactory, turnRepository, resourceRepository, dinosaurRepository, turnAssembler, actionRepository);
+        turnUseCase = new TurnUseCase(turnFactory, turnRepository, resourceRepository, dinosaurRepository, actionRepository);
         resourceUseCase = new ResourceUseCase(resourceFactory, resourceRepository, resourceAssemblers, actionRepository, actionFactory);
     }
 

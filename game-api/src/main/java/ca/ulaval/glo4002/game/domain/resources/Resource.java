@@ -3,11 +3,13 @@ package ca.ulaval.glo4002.game.domain.resources;
 import java.util.HashMap;
 import java.util.Map;
 
+import static ca.ulaval.glo4002.game.domain.resources.ResourceType.*;
+
 public class Resource {
     private final Map<ResourceType, ResourceElements> resources = new HashMap<>(3) {{
-            put(Burger, new Burger(0));
-            put(Salad, new Salad(0));
-            put(Water, new Water(0));
+            put(BURGER, new Burger(0));
+            put(SALAD, new Salad(0));
+            put(WATER, new Water(0));
     }};
 
     public Resource() {
@@ -15,9 +17,9 @@ public class Resource {
     }
 
     public Resource(Burger burger, Salad salad, Water water) {
-        resources.replace(Burger, burger);
-        resources.replace(Salad, salad);
-        resources.replace(Water, water);
+        resources.replace(BURGER, burger);
+        resources.replace(SALAD, salad);
+        resources.replace(WATER, water);
     }
 
     public Map<ResourceType, ResourceElements> getResources() {
