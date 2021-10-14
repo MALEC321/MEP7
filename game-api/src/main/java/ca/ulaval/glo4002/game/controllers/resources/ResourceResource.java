@@ -1,16 +1,21 @@
 package ca.ulaval.glo4002.game.controllers.resources;
 
-import ca.ulaval.glo4002.game.controllers.resources.dtos.ResourceDtoAssembler;
-import ca.ulaval.glo4002.game.controllers.resources.dtos.ResourceRequest;
-import ca.ulaval.glo4002.game.controllers.resources.dtos.ResourcesResponse;
+import java.util.List;
+
+import javax.ws.rs.Consumes;
+import javax.ws.rs.GET;
+import javax.ws.rs.POST;
+import javax.ws.rs.Path;
+import javax.ws.rs.Produces;
+import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
+
 import ca.ulaval.glo4002.game.application.resources.ResourceUseCase;
 import ca.ulaval.glo4002.game.controllers.resources.dtos.ResourceCreationDto;
 import ca.ulaval.glo4002.game.controllers.resources.dtos.ResourceDto;
-
-import javax.ws.rs.*;
-import javax.ws.rs.core.MediaType;
-import javax.ws.rs.core.Response;
-import java.util.List;
+import ca.ulaval.glo4002.game.controllers.resources.dtos.ResourceDtoAssembler;
+import ca.ulaval.glo4002.game.controllers.resources.dtos.ResourceRequest;
+import ca.ulaval.glo4002.game.controllers.resources.dtos.ResourcesResponse;
 
 @Path("/resources")
 public class ResourceResource {

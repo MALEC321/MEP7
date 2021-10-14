@@ -1,26 +1,19 @@
 package ca.ulaval.glo4002.game.controllers.resources.dtos;
 
-import ca.ulaval.glo4002.game.domain.resources.Resource;
-
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class ResourceAssemblers {
+import ca.ulaval.glo4002.game.domain.resources.Resource;
 
-//    public ResourceDto toDto(Resource resource) {
-//        ResourceDto dto = new ResourceDto();
-//        dto.qtyBurger = resource.getResources().get("Burgers").getQuantity();
-//        dto.qtySalad = resource.getResources().get("Salads").getQuantity();
-//        dto.qtyWater = resource.getResources().get("Water").getQuantity();
-//
-//        return dto;
-//    }
+import static ca.ulaval.glo4002.game.domain.resources.ResourceType.*;
+
+public class ResourceAssemblers {
 
     public ResourceDto toDto(Resource resource) {
         ResourceDto dto = new ResourceDto();
-        dto.qtyBurger = resource.getBurgersQuantity();
-        dto.qtySalad = resource.getSaladQuantity();
-        dto.qtyWater = resource.getWaterQuantity();
+        dto.qtyBurger = resource.getResourceQuantity(BURGER);
+        dto.qtySalad = resource.getResourceQuantity(SALAD);
+        dto.qtyWater = resource.getResourceQuantity(WATER);
 
         return dto;
     }
@@ -29,4 +22,4 @@ public class ResourceAssemblers {
         return resources.stream().map(this::toDto).collect(Collectors.toList());
     }
 
-    }
+}

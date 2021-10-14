@@ -1,15 +1,22 @@
 package ca.ulaval.glo4002.game.repositories.dinosaur;
 
-import ca.ulaval.glo4002.game.domain.dinosaur.Dinosaur;
-import ca.ulaval.glo4002.game.domain.dinosaur.DinosaurRepository;
+import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
-import java.util.*;
+import ca.ulaval.glo4002.game.domain.dinosaur.Dinosaur;
+import ca.ulaval.glo4002.game.domain.dinosaur.DinosaurBaby;
+import ca.ulaval.glo4002.game.domain.dinosaur.DinosaurRepository;
 
 public class DinosaurRepositoryInMemory implements DinosaurRepository {
     private final Map<String, Dinosaur> dinosaursByName = new HashMap<>();
 
     @Override
-    public List<Dinosaur> findAll() { return new ArrayList<>(dinosaursByName.values()); }
+    public List<Dinosaur> findAll() {
+        return new ArrayList<>(dinosaursByName.values());
+    }
 
     @Override
     public Dinosaur findByName(String name) {
@@ -36,7 +43,13 @@ public class DinosaurRepositoryInMemory implements DinosaurRepository {
     }
 
     @Override
-    public void reset(){
+    public boolean areBothParentsDead(Dinosaur dinosaur) {
+        return dinosaursByName.get(((DinosaurBaby) dinosaur).getFatherName()) == null
+            && dinosaursByName.get(((DinosaurBaby) dinosaur).getMotherName()) == null;
+    }
+
+    @Override
+    public void reset() {
         dinosaursByName.clear();
     }
 

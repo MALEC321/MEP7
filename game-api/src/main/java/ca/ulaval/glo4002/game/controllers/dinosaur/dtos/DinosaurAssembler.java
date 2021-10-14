@@ -1,9 +1,9 @@
 package ca.ulaval.glo4002.game.controllers.dinosaur.dtos;
 
-import ca.ulaval.glo4002.game.domain.dinosaur.Dinosaur;
-
 import java.util.List;
 import java.util.stream.Collectors;
+
+import ca.ulaval.glo4002.game.domain.dinosaur.Dinosaur;
 
 public class DinosaurAssembler {
 

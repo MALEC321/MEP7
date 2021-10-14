@@ -18,5 +18,7 @@ public class Burger extends ResourceElements {
     }
 
     @Override
-    public boolean isExpired() { return expiration == 0; }
+    public boolean isExpired() {
+        return expiration == 0;
+    }
 }

@@ -1,9 +1,9 @@
 package ca.ulaval.glo4002.game.exceptions.exceptionMappers;
 
-import ca.ulaval.glo4002.game.exceptions.dtos.ExceptionResponseDto;
-
 import javax.ws.rs.core.Response;
 import javax.ws.rs.ext.ExceptionMapper;
+
+import ca.ulaval.glo4002.game.exceptions.dtos.ExceptionResponseDto;
 
 public class UnknownExceptionGrabber implements ExceptionMapper<Exception> {
     @Override

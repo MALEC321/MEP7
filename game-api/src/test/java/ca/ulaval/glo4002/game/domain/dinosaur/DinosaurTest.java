@@ -1,10 +1,11 @@
 package ca.ulaval.glo4002.game.domain.dinosaur;
 
-import ca.ulaval.glo4002.game.domain.dinosaur.enums.DietType;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
+import ca.ulaval.glo4002.game.domain.dinosaur.enums.DietType;
 
 class DinosaurTest {
 
@@ -26,13 +27,13 @@ class DinosaurTest {
     @Test
     void whenCreatingDinosaur_shouldCalculateWaterNeeded() {
         Dinosaur dinosaur = new Dinosaur("Will", 1000, "f", "Allosaurus");
-        assertEquals(1200, dinosaur.feedWater());
+        assertEquals(1200, dinosaur.getWaterQuantityNeeded());
     }
 
     @Test
     void whenCreatingDinosaur_shouldCalculateFoodNeeded() {
         Dinosaur dinosaur = new Dinosaur("Cherry", 1000, "f", "Allosaurus");
-        assertEquals(2, dinosaur.feedFood());
+        assertEquals(2, dinosaur.getFoodQuantityNeeded());
     }
 
     @Test
@@ -99,18 +100,18 @@ class DinosaurTest {
     void givenNewlyAdded50kgMaleCarnivore_thenFoodNeedsEquals1() {
         int expectedFoodNeeds = 1;
 
-        assertEquals(expectedFoodNeeds, carnivoreMale.feedFood());
+        assertEquals(expectedFoodNeeds, carnivoreMale.getFoodQuantityNeeded());
     }
 
     @Test
     void givenNewlyAdded1000kgFemaleHerbivore_thenFoodNeedsIsDoubled() {
         int expectedFoodNeeds = 5;
 
-        assertEquals(expectedFoodNeeds, herbivoreFemale.feedFood());
+        assertEquals(expectedFoodNeeds, herbivoreFemale.getFoodQuantityNeeded());
     }
 
     @Test
-    void givenNewlyAdded50000kgFemaleCarnivore_thenFoodNeedsEquals100()  {
+    void givenNewlyAdded50000kgFemaleCarnivore_thenFoodNeedsEquals100() {
         Dinosaur grosPied = new Dinosaur("grosPied", 50001, "f", "Velociraptor");
         int expectedFoodNeeds = 101;
 
@@ -118,7 +119,7 @@ class DinosaurTest {
     }
 
     @Test
-    void givenNotNewlyAdded50000kgFemaleCarnivore_thenFoodNeedsEquals50()  {
+    void givenNotNewlyAdded50000kgFemaleCarnivore_thenFoodNeedsEquals50() {
         Dinosaur grosPied = new Dinosaur("grosPied", 50001, "f", "Velociraptor");
         int expectedFoodNeeds = 51;
         grosPied.setNewlyAdded(false);
@@ -129,9 +130,9 @@ class DinosaurTest {
     @Test
     void givenNotNewlyAdded1000kgFemaleHerbivore_thenFoodNeedsEquals3() {
         int expectedFoodNeeds = 5;
-        herbivoreFemale.feedFood();
+        herbivoreFemale.getFoodQuantityNeeded();
 
-        assertEquals(expectedFoodNeeds, herbivoreFemale.feedFood());
+        assertEquals(expectedFoodNeeds, herbivoreFemale.getFoodQuantityNeeded());
     }
 
     @Test
@@ -139,15 +140,15 @@ class DinosaurTest {
         Dinosaur grosPied = new Dinosaur("grosPied", 50000, "f", "Megalosaurus");
         int expectedFoodNeeds = 100;
 
-        assertEquals(expectedFoodNeeds, grosPied.feedFood());
+        assertEquals(expectedFoodNeeds, grosPied.getFoodQuantityNeeded());
     }
 
     @Test
     void givenNotNewlyAdded50000kgFemaleCarnivore_thenFoodNeedsDoubledEquals50() {
         Dinosaur grosPied = new Dinosaur("grosPied", 50000, "f", "Megalosaurus");
         int expectedFoodNeeds = 100;
-        grosPied.feedFood();
+        grosPied.getFoodQuantityNeeded();
 
-        assertEquals(expectedFoodNeeds, grosPied.feedFood());
+        assertEquals(expectedFoodNeeds, grosPied.getFoodQuantityNeeded());
     }
 }

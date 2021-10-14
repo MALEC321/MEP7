@@ -1,11 +1,11 @@
 package ca.ulaval.glo4002.game.repositories.turn;
 
-import ca.ulaval.glo4002.game.domain.turn.Turn;
-import ca.ulaval.glo4002.game.domain.turn.TurnRepository;
-
 import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
+
+import ca.ulaval.glo4002.game.domain.turn.Turn;
+import ca.ulaval.glo4002.game.domain.turn.TurnRepository;
 
 public class TurnRepositoryInMemory implements TurnRepository {
     private final Map<UUID, Turn> turnsById = new HashMap<>();

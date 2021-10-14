@@ -1,13 +1,16 @@
 package ca.ulaval.glo4002.game.repositories.resources;
 
-import ca.ulaval.glo4002.game.domain.resources.*;
-import ca.ulaval.glo4002.game.domain.resources.ResourceRepository;
-
 import java.util.Arrays;
 import java.util.List;
 
+import ca.ulaval.glo4002.game.domain.resources.Pantry;
+import ca.ulaval.glo4002.game.domain.resources.Resource;
+import ca.ulaval.glo4002.game.domain.resources.ResourceElements;
+import ca.ulaval.glo4002.game.domain.resources.ResourceRepository;
+import ca.ulaval.glo4002.game.domain.resources.ResourceType;
+
 public class ResourceRepositoryInMemory implements ResourceRepository {
-    private final Pantry pantry = new Pantry();
+    private Pantry pantry = new Pantry();
 
     @Override
     public void add(ResourceElements resourceElements) {
@@ -20,23 +23,23 @@ public class ResourceRepositoryInMemory implements ResourceRepository {
     }
 
     @Override
+    public Pantry getPantry() {
+        return pantry;
+    }
+
+    @Override
+    public int getFreshResourceQuantity(ResourceType resourceType) {
+        return pantry.getFreshResourceQuantity(resourceType);
+    }
+
+    @Override
     public void decreaseExpirationDate() {
         pantry.decreaseExpirationDate();
     }
 
     @Override
-    public boolean eatBurger(int quantity) { //900
-        return pantry.eatBurger(quantity);
-    }
-
-    @Override
-    public boolean eatSalad(int quantity) {
-        return pantry.eatSalad(quantity);
-    }
-
-    @Override
-    public boolean drinkWater(int quantity) {
-        return pantry.drinkWater(quantity);
+    public boolean removeResources(ResourceType type, int quantity) {
+        return pantry.removeResource(type, quantity);
     }
 
     @Override

@@ -1,7 +1,5 @@
 package ca.ulaval.glo4002.game.domain.resources;
 
-import ca.ulaval.glo4002.game.domain.resources.ResourceElements;
-
 public class Salad extends ResourceElements {
     private int expiration = 3;
 
@@ -20,5 +18,7 @@ public class Salad extends ResourceElements {
     }
 
     @Override
-    public boolean isExpired() { return expiration == 0; }
+    public boolean isExpired() {
+        return expiration == 0;
+    }
 }
