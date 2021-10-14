@@ -51,7 +51,6 @@ public class BebeSuccessConditionsE2ETest{
         RestAssured.baseURI = "http://localhost";
         RestAssured.defaultParser = Parser.JSON;
 
-        System.out.println("1. Le père doit être un dinosaure mâle et la mère un dinosaure femelle.");
         RestAssured.given()
                 .contentType(ContentType.JSON)
                 .body("")

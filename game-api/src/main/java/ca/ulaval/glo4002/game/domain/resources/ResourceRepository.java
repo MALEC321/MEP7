@@ -5,9 +5,7 @@ import java.util.List;
 public interface ResourceRepository {
     void add(ResourceElements resourceElements);
     void reset();
-    boolean removeBurgers(int quantity);
-    boolean removeSalads(int quantity);
-    boolean removeWater(int quantity);
+    boolean removeResources(ResourceTypesEnum type, int quantity);
     void decreaseExpirationDate();
     List<Resource> findAll();
 }
