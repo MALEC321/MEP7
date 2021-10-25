@@ -106,11 +106,19 @@ public class Dinosaur {
     }
 
     public int getFoodNeed() {
+        BigDecimal bdTotalFoodNeed;
+        BigDecimal totalBurger;
         BigDecimal bdWeight = new BigDecimal(this.weight);
         BigDecimal bdConsiderationByDietType = new BigDecimal(getConsiderationByDietType());
         BigDecimal bdDividend = new BigDecimal(200);
 
-        BigDecimal bdTotalFoodNeed = bdWeight.multiply(bdConsiderationByDietType).divide(bdDividend);
+        BigDecimal foodNeed = bdWeight.multiply(bdConsiderationByDietType).divide(bdDividend);
+        bdTotalFoodNeed = foodNeed;
+
+        if (this.diet == DietType.OMNIVORE){
+            totalBurger = bdWeight.multiply(new BigDecimal("0.2")).divide(bdDividend);
+            bdTotalFoodNeed = foodNeed.add(totalBurger);
+        }
 
         if (this.isNewlyAdded()) {
             BigDecimal bdDoubleResourcesNeeds = new BigDecimal(2);
@@ -122,6 +130,12 @@ public class Dinosaur {
     }
 
     private String getConsiderationByDietType() {
-        return this.diet == DietType.HERBIVORE ? "0.5" : "0.2";
+        switch (this.diet){
+            case OMNIVORE:
+            case HERBIVORE:
+                return "0.5";
+            default:
+                return "0.2";
+        }
     }
 }
