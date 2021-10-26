@@ -107,22 +107,20 @@ public class Dinosaur {
 
     public int getFoodNeed() {
         BigDecimal bdTotalFoodNeed;
-        BigDecimal totalBurger;
         BigDecimal bdWeight = new BigDecimal(this.weight);
         BigDecimal bdConsiderationByDietType = new BigDecimal(getConsiderationByDietType());
         BigDecimal bdDividend = new BigDecimal(200);
 
-        BigDecimal foodNeed = bdWeight.multiply(bdConsiderationByDietType).divide(bdDividend);
-        bdTotalFoodNeed = foodNeed;
+        bdTotalFoodNeed = bdWeight.multiply(bdConsiderationByDietType).divide(bdDividend);
 
-        if (this.diet == DietType.OMNIVORE){
-            totalBurger = bdWeight.multiply(new BigDecimal("0.2")).divide(bdDividend);
-            bdTotalFoodNeed = foodNeed.add(totalBurger);
+        if (diet.equals(DietType.OMNIVORE)){
+            BigDecimal burger = bdWeight.multiply(new BigDecimal("0.2")).divide(bdDividend.multiply(new BigDecimal(2)));
+            BigDecimal salad = bdWeight.multiply(bdConsiderationByDietType).divide(bdDividend.multiply(new BigDecimal(2)));
+            bdTotalFoodNeed = burger.add(salad);
         }
 
         if (this.isNewlyAdded()) {
             BigDecimal bdDoubleResourcesNeeds = new BigDecimal(2);
-
             return bdTotalFoodNeed.multiply(bdDoubleResourcesNeeds).setScale(0, RoundingMode.CEILING).intValue();
         }
 
