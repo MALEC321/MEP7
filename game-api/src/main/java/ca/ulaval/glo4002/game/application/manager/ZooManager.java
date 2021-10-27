@@ -18,8 +18,8 @@ public class ZooManager {
         } else if (dinosaur.isCarnivore()) {
             isStarving = !eatable.removeResource(BURGER, dinosaur.getFoodQuantityNeeded());
         } else if (dinosaur.isOmnivore()) {
-            isStarving = !eatable.removeResource(SALAD, dinosaur.getOmnivoreSaladsNeeds());
-            isStarving = !eatable.removeResource(BURGER, dinosaur.getOmnivoreBurgersNeeds());
+            if (!eatable.removeResource(SALAD, dinosaur.getOmnivoreSaladsNeeds())) isStarving = true;
+            if (!eatable.removeResource(BURGER, dinosaur.getOmnivoreBurgersNeeds())) isStarving = true;
         }
 
         if (!eatable.removeResource(WATER, dinosaur.getWaterQuantityNeeded())) {
