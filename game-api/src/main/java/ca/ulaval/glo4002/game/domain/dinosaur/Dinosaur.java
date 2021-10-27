@@ -60,6 +60,11 @@ public class Dinosaur {
     public boolean isHerbivore() {
         return diet.equals(DietType.HERBIVORE);
     }
+
+    public boolean isCarnivore() {
+        return diet.equals(DietType.CARNIVORE);
+    }
+
     public boolean isOmnivore() {
         return diet.equals(DietType.OMNIVORE);
     }
@@ -67,7 +72,7 @@ public class Dinosaur {
     private int calculateStrength() {
         BigDecimal bdDietMultiplicand = null;
         if (diet != null) {
-            bdDietMultiplicand = (diet.equals(DietType.CARNIVORE)) ? new BigDecimal("1.5") : new BigDecimal("1");
+            bdDietMultiplicand = (diet.equals(DietType.CARNIVORE) || diet.equals(DietType.OMNIVORE)) ? new BigDecimal("1.5") : new BigDecimal("1");
         }
 
         BigDecimal bdSexMultiplicand = null;
@@ -114,8 +119,8 @@ public class Dinosaur {
         bdTotalFoodNeed = bdWeight.multiply(bdConsiderationByDietType).divide(bdDividend);
 
         if (diet.equals(DietType.OMNIVORE)){
-            BigDecimal burger = bdWeight.multiply(new BigDecimal("0.2")).divide(bdDividend.multiply(new BigDecimal(2)));
-            BigDecimal salad = bdWeight.multiply(bdConsiderationByDietType).divide(bdDividend.multiply(new BigDecimal(2)));
+            BigDecimal burger = bdWeight.multiply(new BigDecimal("0.2")).divide(bdDividend).divide(new BigDecimal(2));
+            BigDecimal salad = bdWeight.multiply(new BigDecimal("0.5")).divide(bdDividend).divide(new BigDecimal(2));
             bdTotalFoodNeed = burger.add(salad);
         }
 
@@ -125,6 +130,34 @@ public class Dinosaur {
         }
 
         return bdTotalFoodNeed.setScale(0, RoundingMode.CEILING).intValue();
+    }
+
+    public int getOmnivoreSaladsNeeds() {
+        BigDecimal bdWeight = new BigDecimal(this.weight);
+        BigDecimal bdDividend = new BigDecimal(200);
+
+        BigDecimal salads = bdWeight.multiply(new BigDecimal("0.5")).divide(bdDividend).divide(new BigDecimal(2));
+
+        if (this.isNewlyAdded()) {
+            BigDecimal bdDoubleResourcesNeeds = new BigDecimal(2);
+            return salads.multiply(bdDoubleResourcesNeeds).setScale(0, RoundingMode.CEILING).intValue();
+        }
+
+        return salads.setScale(0, RoundingMode.CEILING).intValue();
+    }
+
+    public int getOmnivoreBurgersNeeds() {
+        BigDecimal bdWeight = new BigDecimal(this.weight);
+        BigDecimal bdDividend = new BigDecimal(200);
+
+        BigDecimal burgers = bdWeight.multiply(new BigDecimal("0.2")).divide(bdDividend).divide(new BigDecimal(2));
+
+        if (this.isNewlyAdded()) {
+            BigDecimal bdDoubleResourcesNeeds = new BigDecimal(2);
+            return burgers.multiply(bdDoubleResourcesNeeds).setScale(0, RoundingMode.CEILING).intValue();
+        }
+
+        return burgers.setScale(0, RoundingMode.CEILING).intValue();
     }
 
     private String getConsiderationByDietType() {

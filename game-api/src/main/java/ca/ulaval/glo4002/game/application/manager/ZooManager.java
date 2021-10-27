@@ -11,14 +11,21 @@ public class ZooManager {
 
     public boolean feedThenCheckIfStarving(Eatable eatable, Dinosaur dinosaur) {
 
-        boolean isStarving = (dinosaur.isHerbivore()) ? !eatable.removeResource(SALAD, dinosaur.getFoodQuantityNeeded())
-                : (dinosaur.isOmnivore()) ? !eatable.removeResource(SALAD, dinosaur.getFoodQuantityNeeded())
-                && !eatable.removeResource(BURGER, dinosaur.getFoodQuantityNeeded())
-                : !eatable.removeResource(BURGER, dinosaur.getFoodQuantityNeeded());
+        boolean isStarving = false;
+
+        if (dinosaur.isHerbivore()) {
+            isStarving = !eatable.removeResource(SALAD, dinosaur.getFoodQuantityNeeded());
+        } else if (dinosaur.isCarnivore()) {
+            isStarving = !eatable.removeResource(BURGER, dinosaur.getFoodQuantityNeeded());
+        } else if (dinosaur.isOmnivore()) {
+            isStarving = !eatable.removeResource(SALAD, dinosaur.getOmnivoreSaladsNeeds())
+                    && !eatable.removeResource(BURGER, dinosaur.getOmnivoreBurgersNeeds());
+        }
 
         if (!eatable.removeResource(WATER, dinosaur.getWaterQuantityNeeded())) {
             isStarving = true;
         }
+
         return isStarving;
     }
 }
