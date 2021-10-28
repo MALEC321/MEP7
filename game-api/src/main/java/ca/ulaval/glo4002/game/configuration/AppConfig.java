@@ -5,6 +5,7 @@ import java.util.Set;
 
 import javax.ws.rs.core.Application;
 
+import ca.ulaval.glo4002.game.exceptions.exceptionMappers.*;
 import org.glassfish.jersey.server.ResourceConfig;
 
 import ca.ulaval.glo4002.game.application.baby.BabyUseCase;
@@ -32,15 +33,6 @@ import ca.ulaval.glo4002.game.domain.resources.ResourceFactory;
 import ca.ulaval.glo4002.game.domain.resources.ResourceRepository;
 import ca.ulaval.glo4002.game.domain.turn.TurnFactory;
 import ca.ulaval.glo4002.game.domain.turn.TurnRepository;
-import ca.ulaval.glo4002.game.exceptions.exceptionMappers.DuplicateNameExceptionMapper;
-import ca.ulaval.glo4002.game.exceptions.exceptionMappers.InvalidFatherExceptionMapper;
-import ca.ulaval.glo4002.game.exceptions.exceptionMappers.InvalidGenderExceptionMapper;
-import ca.ulaval.glo4002.game.exceptions.exceptionMappers.InvalidMotherExceptionMapper;
-import ca.ulaval.glo4002.game.exceptions.exceptionMappers.InvalidResourceExceptionMapper;
-import ca.ulaval.glo4002.game.exceptions.exceptionMappers.InvalidSpeciesExceptionMapper;
-import ca.ulaval.glo4002.game.exceptions.exceptionMappers.InvalidWeightExceptionMapper;
-import ca.ulaval.glo4002.game.exceptions.exceptionMappers.NotExistentNameExceptionMapper;
-import ca.ulaval.glo4002.game.exceptions.exceptionMappers.UnknownExceptionGrabber;
 import ca.ulaval.glo4002.game.repositories.actions.ActionRepositoryInMemory;
 import ca.ulaval.glo4002.game.repositories.dinosaur.DinosaurRepositoryInMemory;
 import ca.ulaval.glo4002.game.repositories.resources.ResourceRepositoryInMemory;
@@ -100,6 +92,9 @@ public class AppConfig {
             resources.add(new DuplicateNameExceptionMapper());
             resources.add(new InvalidMotherExceptionMapper());
             resources.add(new InvalidFatherExceptionMapper());
+            resources.add(new ArmsTooShortExceptionMapper());
+            resources.add(new DinosaurAlreadyParticipatingExceptionMapper());
+            resources.add(new MaxCombatsReachedExceptionMapper());
             return resources;
         }
     });

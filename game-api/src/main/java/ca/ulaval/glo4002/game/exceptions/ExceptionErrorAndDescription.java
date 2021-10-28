@@ -8,7 +8,10 @@ public enum ExceptionErrorAndDescription {
     INVALID_SPECIES("INVALID_SPECIES", "The specified species is not supported."),
     NON_EXISTENT_NAME("NON_EXISTENT_NAME", "The specified name does not exist."),
     INVALID_FATHER("INVALID_FATHER", "Father must be a male."),
-    INVALID_MOTHER("INVALID_MOTHER", "Mother must be a female.");
+    INVALID_MOTHER("INVALID_MOTHER", "Mother must be a female."),
+    DINOSAUR_ALREADY_PARTICIPATING("DINOSAUR_ALREADY_PARTICIPATING", "Dinosaur is already participating."),
+    MAX_COMBATS_REACHED("MAX_COMBATS_REACHED", "Max number of combats has been reached."),
+    ARMS_TOO_SHORT("ARMS_TOO_SHORT", "Tyrannosaurus Rex can't participate." );
 
     private final String error;
     private final String description;
