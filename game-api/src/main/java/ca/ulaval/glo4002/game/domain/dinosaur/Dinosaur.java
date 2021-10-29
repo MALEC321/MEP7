@@ -70,94 +70,61 @@ public class Dinosaur {
     }
 
     private int calculateStrength() {
-        BigDecimal bdDietMultiplicand = null;
-        if (diet != null) {
-            bdDietMultiplicand = (diet.equals(DietType.CARNIVORE) || diet.equals(DietType.OMNIVORE)) ? new BigDecimal("1.5") : new BigDecimal("1");
-        }
+        BigDecimal dietMultiplicand = (diet.equals(DietType.CARNIVORE) || diet.equals(DietType.OMNIVORE)) ? new BigDecimal("1.5") : new BigDecimal("1");
+        BigDecimal sexMultiplicand = (gender.equals("f")) ? new BigDecimal("1.5") : new BigDecimal("1");
 
-        BigDecimal bdSexMultiplicand = null;
-        if (gender != null) {
-            bdSexMultiplicand = (gender.equals("f")) ? new BigDecimal("1.5") : new BigDecimal("1");
-        }
-
-        BigDecimal bdStrength = new BigDecimal(weight).multiply(bdDietMultiplicand).multiply(bdSexMultiplicand);
-        return bdStrength.setScale(0, RoundingMode.CEILING).intValue();
+        BigDecimal strength = new BigDecimal(weight).multiply(dietMultiplicand).multiply(sexMultiplicand);
+        return strength.setScale(0, RoundingMode.CEILING).intValue();
     }
 
-    public int getWaterQuantityNeeded() {
-        int waterNeed = getWaterNeed();
-        this.isNewlyAdded = false;
+    public int getWaterNeeds() {
+        BigDecimal weight = new BigDecimal(this.weight);
+        BigDecimal multiplicand = new BigDecimal("0.6");
 
-        return waterNeed;
+        int waterNeeds = calculateNutritionNeeds(weight.multiply(multiplicand));
+
+        this.isNewlyAdded = false; // Needed here because we finish with feeding dinosaurs water
+
+        return waterNeeds;
     }
 
-    public int getWaterNeed() {
-        BigDecimal bdWeight = new BigDecimal(this.weight);
-        BigDecimal bdMultiplicand = new BigDecimal("0.6");
+    public int getFoodNeeds() {
+        BigDecimal weight = new BigDecimal(this.weight);
+        BigDecimal multiplicand = new BigDecimal(getConsiderationByDietType());
+        BigDecimal dividend = new BigDecimal(200);
 
-        BigDecimal bdWaterNeed = bdWeight.multiply(bdMultiplicand);
+        int foodNeeds = calculateNutritionNeeds(weight.multiply(multiplicand).divide(dividend));
 
-        if (this.isNewlyAdded()) {
-            BigDecimal bdDoubleResourcesNeeds = new BigDecimal(2);
-
-            return bdWaterNeed.multiply(bdDoubleResourcesNeeds).setScale(0, RoundingMode.CEILING).intValue();
-        }
-
-        return bdWaterNeed.setScale(0, RoundingMode.CEILING).intValue();
-    }
-
-    public int getFoodQuantityNeeded() {
-        return getFoodNeed();
-    }
-
-    public int getFoodNeed() {
-        BigDecimal bdTotalFoodNeed;
-        BigDecimal bdWeight = new BigDecimal(this.weight);
-        BigDecimal bdConsiderationByDietType = new BigDecimal(getConsiderationByDietType());
-        BigDecimal bdDividend = new BigDecimal(200);
-
-        bdTotalFoodNeed = bdWeight.multiply(bdConsiderationByDietType).divide(bdDividend);
-
-        if (diet.equals(DietType.OMNIVORE)){
-            BigDecimal burger = bdWeight.multiply(new BigDecimal("0.2")).divide(bdDividend).divide(new BigDecimal(2));
-            BigDecimal salad = bdWeight.multiply(new BigDecimal("0.5")).divide(bdDividend).divide(new BigDecimal(2));
-            bdTotalFoodNeed = burger.add(salad);
-        }
-
-        if (this.isNewlyAdded()) {
-            BigDecimal bdDoubleResourcesNeeds = new BigDecimal(2);
-            return bdTotalFoodNeed.multiply(bdDoubleResourcesNeeds).setScale(0, RoundingMode.CEILING).intValue();
-        }
-
-        return bdTotalFoodNeed.setScale(0, RoundingMode.CEILING).intValue();
+        return foodNeeds;
     }
 
     public int getOmnivoreSaladsNeeds() {
-        BigDecimal bdWeight = new BigDecimal(this.weight);
-        BigDecimal bdDividend = new BigDecimal(200);
+        BigDecimal weight = new BigDecimal(this.weight);
+        BigDecimal multiplicand = new BigDecimal("0.5");
+        BigDecimal dividend = new BigDecimal(200);
 
-        BigDecimal salads = bdWeight.multiply(new BigDecimal("0.5")).divide(bdDividend).divide(new BigDecimal(2));
+        BigDecimal salads = weight.multiply(multiplicand).divide(dividend).divide(new BigDecimal(2));
 
-        if (this.isNewlyAdded()) {
-            BigDecimal bdDoubleResourcesNeeds = new BigDecimal(2);
-            return salads.multiply(bdDoubleResourcesNeeds).setScale(0, RoundingMode.CEILING).intValue();
-        }
-
-        return salads.setScale(0, RoundingMode.CEILING).intValue();
+        return calculateNutritionNeeds(salads);
     }
 
     public int getOmnivoreBurgersNeeds() {
-        BigDecimal bdWeight = new BigDecimal(this.weight);
-        BigDecimal bdDividend = new BigDecimal(200);
+        BigDecimal weight = new BigDecimal(this.weight);
+        BigDecimal multiplicand = new BigDecimal("0.2");
+        BigDecimal dividend = new BigDecimal(200);
 
-        BigDecimal burgers = bdWeight.multiply(new BigDecimal("0.2")).divide(bdDividend).divide(new BigDecimal(2));
+        BigDecimal burgers = weight.multiply(multiplicand).divide(dividend).divide(new BigDecimal(2));
 
+        return calculateNutritionNeeds(burgers);
+    }
+
+    private int calculateNutritionNeeds(BigDecimal nutritionNeeds) {
         if (this.isNewlyAdded()) {
-            BigDecimal bdDoubleResourcesNeeds = new BigDecimal(2);
-            return burgers.multiply(bdDoubleResourcesNeeds).setScale(0, RoundingMode.CEILING).intValue();
+            BigDecimal doubleResourcesNeeds = new BigDecimal(2);
+            return nutritionNeeds.multiply(doubleResourcesNeeds).setScale(0, RoundingMode.CEILING).intValue();
         }
 
-        return burgers.setScale(0, RoundingMode.CEILING).intValue();
+        return nutritionNeeds.setScale(0, RoundingMode.CEILING).intValue();
     }
 
     private String getConsiderationByDietType() {
@@ -165,8 +132,10 @@ public class Dinosaur {
             case OMNIVORE:
             case HERBIVORE:
                 return "0.5";
-            default:
+            case CARNIVORE:
                 return "0.2";
+            default:
+                throw new RuntimeException("unreachable getConsiderationByDietType parameter");
         }
     }
 }

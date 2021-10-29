@@ -14,15 +14,15 @@ public class ZooManager {
         boolean isStarving = false;
 
         if (dinosaur.isHerbivore()) {
-            isStarving = !eatable.removeResource(SALAD, dinosaur.getFoodQuantityNeeded());
+            isStarving = !eatable.removeResource(SALAD, dinosaur.getFoodNeeds());
         } else if (dinosaur.isCarnivore()) {
-            isStarving = !eatable.removeResource(BURGER, dinosaur.getFoodQuantityNeeded());
+            isStarving = !eatable.removeResource(BURGER, dinosaur.getFoodNeeds());
         } else if (dinosaur.isOmnivore()) {
             if (!eatable.removeResource(SALAD, dinosaur.getOmnivoreSaladsNeeds())) isStarving = true;
             if (!eatable.removeResource(BURGER, dinosaur.getOmnivoreBurgersNeeds())) isStarving = true;
         }
 
-        if (!eatable.removeResource(WATER, dinosaur.getWaterQuantityNeeded())) {
+        if (!eatable.removeResource(WATER, dinosaur.getWaterNeeds())) {
             isStarving = true;
         }
 
