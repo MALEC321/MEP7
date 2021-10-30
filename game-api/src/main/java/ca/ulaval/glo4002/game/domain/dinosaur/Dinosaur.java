@@ -13,10 +13,9 @@ public class Dinosaur {
     private final String species;
     private final int strength;
     private boolean hungry;
-
     private boolean starving;
-
     private final DietType diet;
+
     public Dinosaur(String name, int weight, String gender, String species) {
         this.name = name;
         this.weight = weight;
