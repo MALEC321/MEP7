@@ -9,23 +9,9 @@ import static ca.ulaval.glo4002.game.domain.resources.ResourceType.WATER;
 
 public class ZooManager {
 
-    public boolean feedThenCheckIfStarving(Eatable eatable, Dinosaur dinosaur) {
-
-        boolean isStarving = false;
-
-        if (dinosaur.isHerbivore()) {
-            isStarving = !eatable.removeResource(SALAD, dinosaur.getFoodNeeds());
-        } else if (dinosaur.isCarnivore()) {
-            isStarving = !eatable.removeResource(BURGER, dinosaur.getFoodNeeds());
-        } else if (dinosaur.isOmnivore()) {
-            if (!eatable.removeResource(SALAD, dinosaur.getOmnivoreSaladsNeeds())) isStarving = true;
-            if (!eatable.removeResource(BURGER, dinosaur.getOmnivoreBurgersNeeds())) isStarving = true;
-        }
-
-        if (!eatable.removeResource(WATER, dinosaur.getWaterNeeds())) {
-            isStarving = true;
-        }
-
-        return isStarving;
+    public void feedDinosaur(Eatable eatable, Dinosaur dinosaur) {
+        if (!eatable.removeResource(SALAD, dinosaur.getSaladsNeeds())) dinosaur.setStarving(true);
+        if (!eatable.removeResource(BURGER, dinosaur.getBurgersNeeds())) dinosaur.setStarving(true);
+        if (!eatable.removeResource(WATER, dinosaur.getWaterNeeds())) dinosaur.setStarving(true);
     }
 }

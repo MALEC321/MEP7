@@ -74,8 +74,8 @@ public class TurnUseCase {
         boolean isStarving;
 
         for (Dinosaur dinosaur : sortedDinosaursByStrengthThenName) {
-            isStarving = zooManager.feedThenCheckIfStarving(resourceRepository.getPantry(), dinosaur);
-            if (isStarving) {
+            zooManager.feedDinosaur(resourceRepository.getPantry(), dinosaur);
+            if (dinosaur.isStarving()) {
                 dinosaurRepository.remove(dinosaur);
             }
         }

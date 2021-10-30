@@ -33,7 +33,7 @@ class DinosaurTest {
     @Test
     void whenCreatingDinosaur_shouldCalculateFoodNeeded() {
         Dinosaur dinosaur = new Dinosaur("Cherry", 1000, "f", "Allosaurus");
-        assertEquals(2, dinosaur.getFoodNeeds());
+        assertEquals(2, dinosaur.getBurgersNeeds());
     }
 
     @Test
@@ -100,14 +100,14 @@ class DinosaurTest {
     void givenNewlyAdded50kgMaleCarnivore_thenFoodNeedsEquals1() {
         int expectedFoodNeeds = 1;
 
-        assertEquals(expectedFoodNeeds, carnivoreMale.getFoodNeeds());
+        assertEquals(expectedFoodNeeds, carnivoreMale.getBurgersNeeds());
     }
 
     @Test
     void givenNewlyAdded1000kgFemaleHerbivore_thenFoodNeedsIsDoubled() {
         int expectedFoodNeeds = 5;
 
-        assertEquals(expectedFoodNeeds, herbivoreFemale.getFoodNeeds());
+        assertEquals(expectedFoodNeeds, herbivoreFemale.getBurgersNeeds());
     }
 
     @Test
@@ -115,24 +115,24 @@ class DinosaurTest {
         Dinosaur grosPied = new Dinosaur("grosPied", 50001, "f", "Velociraptor");
         int expectedFoodNeeds = 101;
 
-        assertEquals(expectedFoodNeeds, grosPied.getFoodNeeds());
+        assertEquals(expectedFoodNeeds, grosPied.getBurgersNeeds());
     }
 
     @Test
     void givenNotNewlyAdded50000kgFemaleCarnivore_thenFoodNeedsEquals50() {
         Dinosaur grosPied = new Dinosaur("grosPied", 50001, "f", "Velociraptor");
         int expectedFoodNeeds = 51;
-        grosPied.setNewlyAdded(false);
+        grosPied.setHungry(false);
 
-        assertEquals(expectedFoodNeeds, grosPied.getFoodNeeds());
+        assertEquals(expectedFoodNeeds, grosPied.getBurgersNeeds());
     }
 
     @Test
     void givenNotNewlyAdded1000kgFemaleHerbivore_thenFoodNeedsEquals3() {
         int expectedFoodNeeds = 5;
-        herbivoreFemale.getFoodNeeds();
+        herbivoreFemale.getBurgersNeeds();
 
-        assertEquals(expectedFoodNeeds, herbivoreFemale.getFoodNeeds());
+        assertEquals(expectedFoodNeeds, herbivoreFemale.getBurgersNeeds());
     }
 
     @Test
@@ -140,15 +140,15 @@ class DinosaurTest {
         Dinosaur grosPied = new Dinosaur("grosPied", 50000, "f", "Megalosaurus");
         int expectedFoodNeeds = 100;
 
-        assertEquals(expectedFoodNeeds, grosPied.getFoodNeeds());
+        assertEquals(expectedFoodNeeds, grosPied.getBurgersNeeds());
     }
 
     @Test
     void givenNotNewlyAdded50000kgFemaleCarnivore_thenFoodNeedsDoubledEquals50() {
         Dinosaur grosPied = new Dinosaur("grosPied", 50000, "f", "Megalosaurus");
         int expectedFoodNeeds = 100;
-        grosPied.getFoodNeeds();
+        grosPied.getBurgersNeeds();
 
-        assertEquals(expectedFoodNeeds, grosPied.getFoodNeeds());
+        assertEquals(expectedFoodNeeds, grosPied.getBurgersNeeds());
     }
 }
