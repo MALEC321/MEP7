@@ -70,6 +70,7 @@ public class TurnUseCase {
     protected void removeBabyDinosaurs() {
         removeBabyDinosaur(dinosaurRepository.getSortedDinosaursByStrengthThenName());
     }
+
     protected void feedDinosaursByDietType(List<Dinosaur> sortedDinosaursByStrengthThenName) {
         for (Dinosaur dinosaur : sortedDinosaursByStrengthThenName) {
             zooManager.feedDinosaur(resourceRepository.getPantry(), dinosaur);
