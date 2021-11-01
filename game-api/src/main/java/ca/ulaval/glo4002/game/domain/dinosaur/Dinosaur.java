@@ -64,7 +64,7 @@ public class Dinosaur {
     }
 
     public void setHungry(boolean isHungry) {
-        this.hungry = hungry;
+        this.hungry = isHungry;
     }
 
     private int calculateStrength() {

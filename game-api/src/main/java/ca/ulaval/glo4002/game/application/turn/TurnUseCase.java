@@ -71,8 +71,6 @@ public class TurnUseCase {
         removeBabyDinosaur(dinosaurRepository.getSortedDinosaursByStrengthThenName());
     }
     protected void feedDinosaursByDietType(List<Dinosaur> sortedDinosaursByStrengthThenName) {
-        boolean isStarving;
-
         for (Dinosaur dinosaur : sortedDinosaursByStrengthThenName) {
             zooManager.feedDinosaur(resourceRepository.getPantry(), dinosaur);
             if (dinosaur.isStarving()) {
