@@ -10,8 +10,8 @@ import static ca.ulaval.glo4002.game.domain.resources.ResourceType.WATER;
 public class ZooManager {
 
     public void feedDinosaur(Eatable eatable, Dinosaur dinosaur) {
-        if (!eatable.removeResource(SALAD, dinosaur.getSaladsNeeds())) dinosaur.setStarving(true);
-        if (!eatable.removeResource(BURGER, dinosaur.getBurgersNeeds())) dinosaur.setStarving(true);
-        if (!eatable.removeResource(WATER, dinosaur.getWaterNeeds())) dinosaur.setStarving(true);
+        if (!eatable.removeResource(SALAD, dinosaur.calculateSaladsNeeds())) dinosaur.setStarving(true);
+        if (!eatable.removeResource(BURGER, dinosaur.calculateBurgersNeeds())) dinosaur.setStarving(true);
+        if (!eatable.removeResource(WATER, dinosaur.calculateWaterNeeds())) dinosaur.setStarving(true);
     }
 }

@@ -80,7 +80,7 @@ public class Dinosaur {
         return strength.setScale(0, RoundingMode.CEILING).intValue();
     }
 
-    public int getWaterNeeds() {
+    public int calculateWaterNeeds() {
         BigDecimal weight = new BigDecimal(this.weight);
         BigDecimal waterMultiplicand = new BigDecimal("0.6");
 
@@ -95,7 +95,7 @@ public class Dinosaur {
         return waterNeeds.setScale(0, RoundingMode.CEILING).intValue();
     }
 
-    public int getBurgersNeeds() {
+    public int calculateBurgersNeeds() {
         if (this.diet == DietType.HERBIVORE) {
             return 0;
         }
@@ -104,7 +104,7 @@ public class Dinosaur {
         return calculateFoodNeeds(burgersMultiplicand);
     }
 
-    public int getSaladsNeeds() {
+    public int calculateSaladsNeeds() {
         if (this.diet == DietType.CARNIVORE) {
             return 0;
         }
@@ -124,7 +124,7 @@ public class Dinosaur {
             foodNeeds = foodNeeds.divide(two);
         }
 
-        if (this.isHungry()) {
+        if (this.hungry) {
             return calculateFoodNeedsForHungryDino(foodNeeds).setScale(0, RoundingMode.CEILING).intValue();
         }
 
