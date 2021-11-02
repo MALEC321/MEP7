@@ -6,7 +6,7 @@ title __DTOS's Class Diagram__\n
     namespace a.ulaval.glo4002.game {
       namespace exceptions {
         namespace dtos {
-          class ca.ulaval.glo4002.game.exceptions.dtos.ExceptionResponseDto {
+          class ca.ulaval.glo4002.game.exceptions.dtos.ExceptionResponse {
               + description : String
               + error : String
           }

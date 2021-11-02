@@ -3,18 +3,16 @@ package ca.ulaval.glo4002.game.exceptions.exceptionMappers;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.ext.ExceptionMapper;
 
-import ca.ulaval.glo4002.game.exceptions.ExceptionErrorAndDescription;
-import ca.ulaval.glo4002.game.exceptions.ExceptionResponse;
-import ca.ulaval.glo4002.game.exceptions.dtos.ExceptionResponseDto;
+import ca.ulaval.glo4002.game.exceptions.dtos.ExceptionResponse;
 import ca.ulaval.glo4002.game.exceptions.types.InvalidMotherException;
 
-public class InvalidMotherExceptionMapper extends ExceptionResponse implements ExceptionMapper<InvalidMotherException> {
+public class InvalidMotherExceptionMapper extends ca.ulaval.glo4002.game.exceptions.ExceptionMapper implements ExceptionMapper<InvalidMotherException> {
 
     @Override
     public Response toResponse(InvalidMotherException e) {
-        ExceptionResponseDto exceptionResponseDto = new ExceptionResponseDto();
-        exceptionResponseDto.error = ExceptionErrorAndDescription.INVALID_MOTHER.getError();
-        exceptionResponseDto.description = ExceptionErrorAndDescription.INVALID_MOTHER.getDescription();
-        return exceptionResponse(Response.Status.BAD_REQUEST, exceptionResponseDto);
+        ExceptionResponse exceptionResponse = new ExceptionResponse();
+        exceptionResponse.error = "INVALID_MOTHER";
+        exceptionResponse.description = "Mother must be a female.";
+        return exceptionMapper(Response.Status.BAD_REQUEST, exceptionResponse);
     }
 }
