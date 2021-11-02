@@ -1,9 +1,9 @@
 package ca.ulaval.glo4002.game.application.resources.dtos;
 
 public class ResourceDto {
-    private int qtyBurger;
-    private int qtySalad;
-    private int qtyWater;
+    private final int qtyBurger;
+    private final int qtySalad;
+    private final int qtyWater;
 
     public ResourceDto(int qtyBurger, int qtySalad, int qtyWater) {
         this.qtyBurger = qtyBurger;

@@ -1,11 +1,11 @@
 package ca.ulaval.glo4002.game.application.baby.dtos;
 
 public class ExternalApiBabyRequest {
-    private String name;
-    private String fatherName;
-    private String motherName;
-    private String gender;
-    private String species;
+    private final String name;
+    private final String fatherName;
+    private final String motherName;
+    private final String gender;
+    private final String species;
 
     public ExternalApiBabyRequest(String name, String fatherName, String motherName, String gender, String species) {
         this.name = name;

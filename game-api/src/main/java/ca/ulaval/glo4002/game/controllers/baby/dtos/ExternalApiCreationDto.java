@@ -1,8 +1,8 @@
 package ca.ulaval.glo4002.game.controllers.baby.dtos;
 
 public class ExternalApiCreationDto {
-    private String fatherSpecies;
-    private String motherSpecies;
+    private final String fatherSpecies;
+    private final String motherSpecies;
 
     public ExternalApiCreationDto(String fatherSpecies, String motherSpecies) {
         this.fatherSpecies = fatherSpecies;

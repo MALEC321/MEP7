@@ -1,10 +1,10 @@
 package ca.ulaval.glo4002.game.application.dinosaur.dtos;
 
 public class DinosaurDto {
-    private String name;
-    private int weight;
-    private String gender;
-    private String species;
+    private final String name;
+    private final int weight;
+    private final String gender;
+    private final String species;
 
     public DinosaurDto(String name, int weight, String gender, String species) {
         this.name = name;

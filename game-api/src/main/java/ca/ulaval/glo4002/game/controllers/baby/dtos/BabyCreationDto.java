@@ -1,11 +1,11 @@
 package ca.ulaval.glo4002.game.controllers.baby.dtos;
 
 public class BabyCreationDto {
-    private String name;
-    private String fatherName;
-    private String motherName;
-    private String gender;
-    private String species;
+    private final String name;
+    private final String fatherName;
+    private final String motherName;
+    private final String gender;
+    private final String species;
 
     public BabyCreationDto(String name, String fatherName, String motherName, String gender, String species) {
         this.name = name;

@@ -1,9 +1,9 @@
 package ca.ulaval.glo4002.game.controllers.resources.dtos;
 
 public class ResourceCreationDto {
-    private int qtyBurger;
-    private int qtySalad;
-    private int qtyWater;
+    private final int qtyBurger;
+    private final int qtySalad;
+    private final int qtyWater;
 
     public ResourceCreationDto(int qtyBurger, int qtySalad, int qtyWater) {
         this.qtyBurger = qtyBurger;

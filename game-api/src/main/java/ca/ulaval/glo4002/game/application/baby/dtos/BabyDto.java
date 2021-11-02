@@ -1,9 +1,9 @@
 package ca.ulaval.glo4002.game.application.baby.dtos;
 
 public class BabyDto {
-    private String name;
-    private String fatherName;
-    private String motherName;
+    private final String name;
+    private final String fatherName;
+    private final String motherName;
 
     public BabyDto(String name, String fatherName, String motherName) {
         this.name = name;

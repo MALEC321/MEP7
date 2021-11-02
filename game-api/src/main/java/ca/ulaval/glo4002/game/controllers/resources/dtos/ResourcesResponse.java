@@ -1,9 +1,9 @@
 package ca.ulaval.glo4002.game.controllers.resources.dtos;
 
 public class ResourcesResponse {
-    private ResourceResponse fresh;
-    private ResourceResponse expired;
-    private ResourceResponse consumed;
+    private final ResourceResponse fresh;
+    private final ResourceResponse expired;
+    private final ResourceResponse consumed;
 
     public ResourcesResponse(ResourceResponse fresh, ResourceResponse expired, ResourceResponse consumed) {
         this.fresh = fresh;
