@@ -1,11 +1,11 @@
-package ca.ulaval.glo4002.game.controllers.resources.dtos;
+package ca.ulaval.glo4002.game.application.resources.dtos;
 
-public class ResourceResponse {
+public class ResourceDto {
     private final int qtyBurger;
     private final int qtySalad;
     private final int qtyWater;
 
-    public ResourceResponse(int qtyBurger, int qtySalad, int qtyWater) {
+    public ResourceDto(int qtyBurger, int qtySalad, int qtyWater) {
         this.qtyBurger = qtyBurger;
         this.qtySalad = qtySalad;
         this.qtyWater = qtyWater;

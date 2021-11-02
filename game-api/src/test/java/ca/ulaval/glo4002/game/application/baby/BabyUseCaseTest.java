@@ -1,10 +1,5 @@
 package ca.ulaval.glo4002.game.application.baby;
 
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
-
-import static org.junit.jupiter.api.Assertions.assertThrows;
-
 import ca.ulaval.glo4002.game.application.baby.dtos.BabyAssembler;
 import ca.ulaval.glo4002.game.controllers.baby.dtos.BabyCreationDto;
 import ca.ulaval.glo4002.game.domain.actions.ActionFactory;
@@ -15,6 +10,10 @@ import ca.ulaval.glo4002.game.domain.dinosaur.enums.SpeciesDietsCorrespondances;
 import ca.ulaval.glo4002.game.exceptions.types.NotExistentNameException;
 import ca.ulaval.glo4002.game.repositories.actions.ActionRepositoryInMemory;
 import ca.ulaval.glo4002.game.repositories.dinosaur.DinosaurRepositoryInMemory;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 class BabyUseCaseTest {
 
@@ -45,12 +44,8 @@ class BabyUseCaseTest {
 
     @Test
     public void givenBabyDinosaur_whenGetDinosaurNotExistent_shouldThrowsNotExistentNameException() {
-        BabyCreationDto babyCreationDto = new BabyCreationDto();
-        babyCreationDto.name = this.name;
-        babyCreationDto.fatherName = this.fatherName;
-        babyCreationDto.motherName = this.motherName;
-        babyCreationDto.gender = this.gender;
-        babyCreationDto.species = this.species;
+        BabyCreationDto babyCreationDto = new BabyCreationDto(this.name, this.fatherName, this.motherName, this.gender,
+                this.species);
 
         babyUseCase.createBebe(babyCreationDto);
 

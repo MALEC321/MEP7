@@ -1,11 +1,8 @@
 package ca.ulaval.glo4002.game.application.resources;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import ca.ulaval.glo4002.game.controllers.resources.dtos.ResourceAssemblers;
+import ca.ulaval.glo4002.game.application.resources.dtos.ResourceAssemblers;
+import ca.ulaval.glo4002.game.application.resources.dtos.ResourceDto;
 import ca.ulaval.glo4002.game.controllers.resources.dtos.ResourceCreationDto;
-import ca.ulaval.glo4002.game.controllers.resources.dtos.ResourceDto;
 import ca.ulaval.glo4002.game.domain.actions.Action;
 import ca.ulaval.glo4002.game.domain.actions.ActionFactory;
 import ca.ulaval.glo4002.game.domain.actions.ActionRepository;
@@ -13,6 +10,9 @@ import ca.ulaval.glo4002.game.domain.resources.Resource;
 import ca.ulaval.glo4002.game.domain.resources.ResourceElements;
 import ca.ulaval.glo4002.game.domain.resources.ResourceFactory;
 import ca.ulaval.glo4002.game.domain.resources.ResourceRepository;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class ResourceUseCase {
     private final ResourceFactory resourceFactory;
@@ -31,7 +31,8 @@ public class ResourceUseCase {
     }
 
     public ResourceDto createResource(ResourceCreationDto resourceCreationDto) {
-        Resource resources = resourceFactory.create(resourceCreationDto.qtyBurger, resourceCreationDto.qtySalad, resourceCreationDto.qtyWater);
+        Resource resources = resourceFactory.create(resourceCreationDto.getQtyBurger(), resourceCreationDto.getQtySalad(),
+                resourceCreationDto.getQtyWater());
         addResourceToActionWaitingList(resources);
         return resourceAssemblers.toDto(resources);
     }
