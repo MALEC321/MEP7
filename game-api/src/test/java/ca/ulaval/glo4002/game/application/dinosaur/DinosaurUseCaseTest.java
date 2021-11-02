@@ -1,13 +1,8 @@
 package ca.ulaval.glo4002.game.application.dinosaur;
 
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
-
-import static org.junit.jupiter.api.Assertions.assertThrows;
-
+import ca.ulaval.glo4002.game.application.dinosaur.dtos.DinosaurAssembler;
 import ca.ulaval.glo4002.game.application.manager.ZooManager;
 import ca.ulaval.glo4002.game.application.turn.TurnUseCase;
-import ca.ulaval.glo4002.game.controllers.dinosaur.dtos.DinosaurAssembler;
 import ca.ulaval.glo4002.game.controllers.dinosaur.dtos.DinosaurCreationDto;
 import ca.ulaval.glo4002.game.controllers.dinosaur.dtos.DinosaurDtoAssembler;
 import ca.ulaval.glo4002.game.controllers.dinosaur.dtos.DinosaurRequest;
@@ -24,6 +19,10 @@ import ca.ulaval.glo4002.game.repositories.actions.ActionRepositoryInMemory;
 import ca.ulaval.glo4002.game.repositories.dinosaur.DinosaurRepositoryInMemory;
 import ca.ulaval.glo4002.game.repositories.resources.ResourceRepositoryInMemory;
 import ca.ulaval.glo4002.game.repositories.turn.TurnRepositoryInMemory;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 class DinosaurUseCaseTest {
     private DinosaurUseCase dinosaurUseCase;
@@ -51,11 +50,7 @@ class DinosaurUseCaseTest {
 
     @Test
     void whenGetDinosaurNotExistent_shouldThrowsNotExistentNameException() {
-        DinosaurRequest dinosaurRequest = new DinosaurRequest();
-        dinosaurRequest.name = "Will";
-        dinosaurRequest.weight = 1000;
-        dinosaurRequest.gender = "m";
-        dinosaurRequest.species = "Allosaurus";
+        DinosaurRequest dinosaurRequest = new DinosaurRequest("Will", 1000, "m", "Allosaurus");
 
         DinosaurCreationDto dto = dinosaurDtoAssembler.fromRequest(dinosaurRequest);
         dinosaurUseCase.createDinosaur(dto);

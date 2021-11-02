@@ -48,7 +48,7 @@ title __GAME-API's Class Diagram__\n
     namespace ca.ulaval.glo4002.game {
       namespace controllers.dinosaur {
         namespace dtos {
-          class ca.ulaval.glo4002.game.controllers.dinosaur.dtos.DinosaurAssembler {
+          class ca.ulaval.glo4002.game.application.dinosaur.dtos.DinosaurAssembler {
           }
         }
       }
@@ -70,7 +70,7 @@ title __GAME-API's Class Diagram__\n
     namespace ca.ulaval.glo4002.game {
       namespace controllers.dinosaur {
         namespace dtos {
-          class ca.ulaval.glo4002.game.controllers.dinosaur.dtos.DinosaurDto {
+          class ca.ulaval.glo4002.game.application.dinosaur.dtos.DinosaurDto {
           }
         }
       }
@@ -599,7 +599,7 @@ title __GAME-API's Class Diagram__\n
   ca.ulaval.glo4002.game.GameServer .up.|> java.lang.Runnable
   ca.ulaval.glo4002.game.application.dinosaur.DinosaurUseCase o-- ca.ulaval.glo4002.game.domain.actions.ActionFactory : actionFactory
   ca.ulaval.glo4002.game.application.dinosaur.DinosaurUseCase o-- ca.ulaval.glo4002.game.domain.actions.ActionRepository : actionRepository
-  ca.ulaval.glo4002.game.application.dinosaur.DinosaurUseCase o-- ca.ulaval.glo4002.game.controllers.dinosaur.dtos.DinosaurAssembler : dinosaurAssembler
+  ca.ulaval.glo4002.game.application.dinosaur.DinosaurUseCase o-- ca.ulaval.glo4002.game.application.dinosaur.dtos.DinosaurAssembler : dinosaurAssembler
   ca.ulaval.glo4002.game.application.dinosaur.DinosaurUseCase o-- ca.ulaval.glo4002.game.domain.dinosaur.DinosaurFactory : dinosaurFactory
   ca.ulaval.glo4002.game.application.dinosaur.DinosaurUseCase o-- ca.ulaval.glo4002.game.domain.dinosaur.DinosaurRepository : dinosaurRepository
   ca.ulaval.glo4002.game.application.resources.ResourceUseCase o-- ca.ulaval.glo4002.game.domain.actions.ActionFactory : actionFactory
