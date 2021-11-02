@@ -3,10 +3,11 @@ package ca.ulaval.glo4002.game.exceptions.exceptionMappers;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.ext.ExceptionMapper;
 
+import ca.ulaval.glo4002.game.exceptions.ExceptionsMapper;
 import ca.ulaval.glo4002.game.exceptions.dtos.ExceptionResponse;
 import ca.ulaval.glo4002.game.exceptions.types.NotExistentNameException;
 
-public class NotExistentNameExceptionMapper extends ca.ulaval.glo4002.game.exceptions.ExceptionMapper implements ExceptionMapper<NotExistentNameException> {
+public class NotExistentNameExceptionsMapper extends ExceptionsMapper implements ExceptionMapper<NotExistentNameException> {
     @Override
     public Response toResponse(NotExistentNameException e) {
         ExceptionResponse exceptionResponse = new ExceptionResponse();

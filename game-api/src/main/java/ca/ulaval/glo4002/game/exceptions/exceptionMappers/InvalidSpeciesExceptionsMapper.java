@@ -3,10 +3,11 @@ package ca.ulaval.glo4002.game.exceptions.exceptionMappers;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.ext.ExceptionMapper;
 
+import ca.ulaval.glo4002.game.exceptions.ExceptionsMapper;
 import ca.ulaval.glo4002.game.exceptions.dtos.ExceptionResponse;
 import ca.ulaval.glo4002.game.exceptions.types.InvalidSpeciesException;
 
-public class InvalidSpeciesExceptionMapper extends ca.ulaval.glo4002.game.exceptions.ExceptionMapper implements ExceptionMapper<InvalidSpeciesException> {
+public class InvalidSpeciesExceptionsMapper extends ExceptionsMapper implements ExceptionMapper<InvalidSpeciesException> {
     @Override
     public Response toResponse(InvalidSpeciesException e) {
         ExceptionResponse exceptionResponse = new ExceptionResponse();

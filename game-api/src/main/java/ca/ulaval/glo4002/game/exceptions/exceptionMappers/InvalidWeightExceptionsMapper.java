@@ -3,10 +3,11 @@ package ca.ulaval.glo4002.game.exceptions.exceptionMappers;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.ext.ExceptionMapper;
 
+import ca.ulaval.glo4002.game.exceptions.ExceptionsMapper;
 import ca.ulaval.glo4002.game.exceptions.dtos.ExceptionResponse;
 import ca.ulaval.glo4002.game.exceptions.types.InvalidWeightException;
 
-public class InvalidWeightExceptionMapper extends ca.ulaval.glo4002.game.exceptions.ExceptionMapper implements ExceptionMapper<InvalidWeightException> {
+public class InvalidWeightExceptionsMapper extends ExceptionsMapper implements ExceptionMapper<InvalidWeightException> {
     @Override
     public Response toResponse(InvalidWeightException e) {
         ExceptionResponse exceptionResponse = new ExceptionResponse();

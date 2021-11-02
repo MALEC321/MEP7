@@ -3,10 +3,11 @@ package ca.ulaval.glo4002.game.exceptions.exceptionMappers;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.ext.ExceptionMapper;
 
+import ca.ulaval.glo4002.game.exceptions.ExceptionsMapper;
 import ca.ulaval.glo4002.game.exceptions.dtos.ExceptionResponse;
 import ca.ulaval.glo4002.game.exceptions.types.InvalidGenderException;
 
-public class InvalidGenderExceptionMapper extends ca.ulaval.glo4002.game.exceptions.ExceptionMapper implements ExceptionMapper<InvalidGenderException> {
+public class InvalidGenderExceptionsMapper extends ExceptionsMapper implements ExceptionMapper<InvalidGenderException> {
 
     @Override
     public Response toResponse(InvalidGenderException e) {

@@ -2,10 +2,12 @@ package ca.ulaval.glo4002.game.exceptions.exceptionMappers;
 
 import javax.ws.rs.core.Response;
 import javax.ws.rs.ext.ExceptionMapper;
+
+import ca.ulaval.glo4002.game.exceptions.ExceptionsMapper;
 import ca.ulaval.glo4002.game.exceptions.dtos.ExceptionResponse;
 import ca.ulaval.glo4002.game.exceptions.types.InvalidResourceQuantityException;
 
-public class InvalidResourceExceptionMapper extends ca.ulaval.glo4002.game.exceptions.ExceptionMapper implements ExceptionMapper<InvalidResourceQuantityException> {
+public class InvalidResourceExceptionsMapper extends ExceptionsMapper implements ExceptionMapper<InvalidResourceQuantityException> {
     @Override
     public Response toResponse(InvalidResourceQuantityException e) {
         ExceptionResponse exceptionResponse = new ExceptionResponse();
