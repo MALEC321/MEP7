@@ -9,6 +9,9 @@ public class ExternalApiBabyListDto {
         this.gender = gender;
     }
 
+    public ExternalApiBabyListDto() {
+    }
+
     public String getOffspring() {
         return offspring;
     }

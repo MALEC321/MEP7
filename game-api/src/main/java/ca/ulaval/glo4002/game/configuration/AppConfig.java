@@ -19,7 +19,7 @@ import ca.ulaval.glo4002.game.controllers.dinosaur.DinosaurResource;
 import ca.ulaval.glo4002.game.application.dinosaur.dtos.DinosaurAssembler;
 import ca.ulaval.glo4002.game.controllers.dinosaur.dtos.DinosaurDtoAssembler;
 import ca.ulaval.glo4002.game.controllers.resources.ResourceResource;
-import ca.ulaval.glo4002.game.controllers.resources.dtos.ResourceAssemblers;
+import ca.ulaval.glo4002.game.application.resources.dtos.ResourceAssemblers;
 import ca.ulaval.glo4002.game.controllers.resources.dtos.ResourceDtoAssembler;
 import ca.ulaval.glo4002.game.controllers.turn.TurnResource;
 import ca.ulaval.glo4002.game.controllers.turn.dtos.TurnDtoAssembler;

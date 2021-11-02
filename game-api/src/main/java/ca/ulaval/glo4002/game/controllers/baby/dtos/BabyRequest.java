@@ -11,6 +11,9 @@ public class BabyRequest {
         this.motherName = motherName;
     }
 
+    public BabyRequest() {
+    }
+
     public String getName() {
         return name;
     }

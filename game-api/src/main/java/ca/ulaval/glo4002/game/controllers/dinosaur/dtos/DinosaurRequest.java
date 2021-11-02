@@ -13,6 +13,9 @@ public class DinosaurRequest {
         this.species = species;
     }
 
+    public DinosaurRequest() {
+    }
+
     public String getName() {
         return name;
     }
