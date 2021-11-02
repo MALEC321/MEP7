@@ -12,17 +12,19 @@ public class Dinosaur {
     private final String gender;
     private final String species;
     private final int strength;
+    private boolean hungry;
+    private boolean starving;
     private final DietType diet;
-    private boolean isNewlyAdded;
 
     public Dinosaur(String name, int weight, String gender, String species) {
         this.name = name;
         this.weight = weight;
         this.gender = gender;
         this.species = species;
-        this.diet = SpeciesDietsCorrespondances.getDietFromSpecies(species);
-        this.isNewlyAdded = true;
         this.strength = calculateStrength();
+        this.hungry = true;
+        this.starving = false;
+        this.diet = SpeciesDietsCorrespondances.getDietFromSpecies(species);
     }
 
     public String getName() {
@@ -49,76 +51,88 @@ public class Dinosaur {
         return diet;
     }
 
-    public boolean isNewlyAdded() {
-        return isNewlyAdded;
+    public boolean isStarving() {
+        return starving;
     }
 
-    public void setNewlyAdded(boolean isNewlyAdded) {
-        this.isNewlyAdded = isNewlyAdded;
+    public void setStarving(boolean starving) {
+        this.starving = starving;
     }
 
-    public boolean isHerbivore() {
-        return diet.equals(DietType.HERBIVORE);
+    public boolean isHungry() {
+        return hungry;
+    }
+
+    public void setHungry(boolean isHungry) {
+        this.hungry = isHungry;
     }
 
     private int calculateStrength() {
-        BigDecimal bdDietMultiplicand = null;
-        if (diet != null) {
-            bdDietMultiplicand = (diet.equals(DietType.CARNIVORE)) ? new BigDecimal("1.5") : new BigDecimal("1");
+        BigDecimal herbivoreMultiplicand = new BigDecimal("1");
+        BigDecimal meatEaterMultiplicand = new BigDecimal("1.5");
+        BigDecimal dietMultiplicand = diet == DietType.HERBIVORE ? herbivoreMultiplicand : meatEaterMultiplicand;
+
+        BigDecimal femaleMultiplicand = new BigDecimal("1.5");
+        BigDecimal maleMultiplicand = new BigDecimal("1");
+        BigDecimal sexMultiplicand = gender.equals("f") ? femaleMultiplicand : maleMultiplicand;
+
+        BigDecimal strength = new BigDecimal(weight).multiply(dietMultiplicand).multiply(sexMultiplicand);
+        return strength.setScale(0, RoundingMode.CEILING).intValue();
+    }
+
+    public int calculateWaterNeeds() {
+        BigDecimal weight = new BigDecimal(this.weight);
+        BigDecimal waterMultiplicand = new BigDecimal("0.6");
+
+        BigDecimal waterNeeds = weight.multiply(waterMultiplicand);
+
+        if (this.isHungry()) {
+            waterNeeds = calculateFoodNeedsForHungryDino(waterNeeds);
         }
 
-        BigDecimal bdSexMultiplicand = null;
-        if (gender != null) {
-            bdSexMultiplicand = (gender.equals("f")) ? new BigDecimal("1.5") : new BigDecimal("1");
+        this.hungry = false; // Needed here because we finish with feeding dinosaurs with water
+
+        return waterNeeds.setScale(0, RoundingMode.CEILING).intValue();
+    }
+
+    public int calculateBurgersNeeds() {
+        if (this.diet == DietType.HERBIVORE) {
+            return 0;
         }
 
-        BigDecimal bdStrength = new BigDecimal(weight).multiply(bdDietMultiplicand).multiply(bdSexMultiplicand);
-        return bdStrength.setScale(0, RoundingMode.CEILING).intValue();
+        BigDecimal burgersMultiplicand = new BigDecimal("0.2");
+        return calculateFoodNeeds(burgersMultiplicand);
     }
 
-    public int getWaterQuantityNeeded() {
-        int waterNeed = getWaterNeed();
-        this.isNewlyAdded = false;
-
-        return waterNeed;
-    }
-
-    public int getWaterNeed() {
-        BigDecimal bdWeight = new BigDecimal(this.weight);
-        BigDecimal bdMultiplicand = new BigDecimal("0.6");
-
-        BigDecimal bdWaterNeed = bdWeight.multiply(bdMultiplicand);
-
-        if (this.isNewlyAdded()) {
-            BigDecimal bdDoubleResourcesNeeds = new BigDecimal(2);
-
-            return bdWaterNeed.multiply(bdDoubleResourcesNeeds).setScale(0, RoundingMode.CEILING).intValue();
+    public int calculateSaladsNeeds() {
+        if (this.diet == DietType.CARNIVORE) {
+            return 0;
         }
 
-        return bdWaterNeed.setScale(0, RoundingMode.CEILING).intValue();
+        BigDecimal saladsMultiplicand = new BigDecimal("0.5");
+        return calculateFoodNeeds(saladsMultiplicand);
     }
 
-    public int getFoodQuantityNeeded() {
-        return getFoodNeed();
-    }
+    private int calculateFoodNeeds(BigDecimal foodMultiplicand) {
+        BigDecimal weight = new BigDecimal(this.weight);
+        BigDecimal dividend = new BigDecimal(200);
 
-    public int getFoodNeed() {
-        BigDecimal bdWeight = new BigDecimal(this.weight);
-        BigDecimal bdConsiderationByDietType = new BigDecimal(getConsiderationByDietType());
-        BigDecimal bdDividend = new BigDecimal(200);
+        BigDecimal foodNeeds = weight.multiply(foodMultiplicand).divide(dividend);
 
-        BigDecimal bdTotalFoodNeed = bdWeight.multiply(bdConsiderationByDietType).divide(bdDividend);
-
-        if (this.isNewlyAdded()) {
-            BigDecimal bdDoubleResourcesNeeds = new BigDecimal(2);
-
-            return bdTotalFoodNeed.multiply(bdDoubleResourcesNeeds).setScale(0, RoundingMode.CEILING).intValue();
+        if (this.diet == DietType.OMNIVORE) {
+            BigDecimal two = new BigDecimal("2");
+            foodNeeds = foodNeeds.divide(two);
         }
 
-        return bdTotalFoodNeed.setScale(0, RoundingMode.CEILING).intValue();
+        if (this.hungry) {
+            return calculateFoodNeedsForHungryDino(foodNeeds).setScale(0, RoundingMode.CEILING).intValue();
+        }
+
+        return foodNeeds.setScale(0, RoundingMode.CEILING).intValue();
     }
 
-    private String getConsiderationByDietType() {
-        return this.diet == DietType.HERBIVORE ? "0.5" : "0.2";
+    private BigDecimal calculateFoodNeedsForHungryDino(BigDecimal foodNeeds) {
+        BigDecimal doubleResourcesNeeds = new BigDecimal(2);
+        return foodNeeds.multiply(doubleResourcesNeeds);
     }
 }

@@ -70,12 +70,11 @@ public class TurnUseCase {
     protected void removeBabyDinosaurs() {
         removeBabyDinosaur(dinosaurRepository.getSortedDinosaursByStrengthThenName());
     }
-    protected void feedDinosaursByDietType(List<Dinosaur> sortedDinosaursByStrengthThenName) {
-        boolean isStarving;
 
+    protected void feedDinosaursByDietType(List<Dinosaur> sortedDinosaursByStrengthThenName) {
         for (Dinosaur dinosaur : sortedDinosaursByStrengthThenName) {
-            isStarving = zooManager.feedThenCheckIfStarving(resourceRepository.getPantry(), dinosaur);
-            if (isStarving) {
+            zooManager.feedDinosaur(resourceRepository.getPantry(), dinosaur);
+            if (dinosaur.isStarving()) {
                 dinosaurRepository.remove(dinosaur);
             }
         }
