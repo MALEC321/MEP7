@@ -41,7 +41,7 @@ public class TurnUseCase {
         this.zooManager = zooManager;
     }
 
-    public TurnDto createTurn() {
+    public void executeTurn() {
         List<Action> actions = actionRepository.getWaitingActions();
         cookIt();
 
@@ -51,7 +51,7 @@ public class TurnUseCase {
         Turn turn = turnFactory.create(actions);
         turnRepository.save(turn);
 
-        return new TurnDto(Turn.number);
+        new TurnDto(Turn.number);
     }
 
     protected void cookIt() {

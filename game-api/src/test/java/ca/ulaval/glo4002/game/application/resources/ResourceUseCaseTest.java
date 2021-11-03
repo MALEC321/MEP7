@@ -69,7 +69,7 @@ class ResourceUseCaseTest {
     @Test
     public void givenResource_OneTurn_ResourceRepoNotEmpty() {
         ResourceRepository resourceRepository = new ResourceRepositoryInMemory();
-        turnUseCase.createTurn();
+        turnUseCase.executeTurn();
 
         List<Resource> resources = resourceRepository.findAll();
 
