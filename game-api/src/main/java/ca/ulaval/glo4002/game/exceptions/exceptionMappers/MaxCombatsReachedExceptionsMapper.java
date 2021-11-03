@@ -1,18 +1,19 @@
 package ca.ulaval.glo4002.game.exceptions.exceptionMappers;
 
-import ca.ulaval.glo4002.game.exceptions.ExceptionsMapper;
 import ca.ulaval.glo4002.game.exceptions.dtos.ExceptionResponse;
 import ca.ulaval.glo4002.game.exceptions.types.MaxCombatsReachedException;
 
+import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.ext.ExceptionMapper;
 
-public class MaxCombatsReachedExceptionsMapper extends ExceptionsMapper implements ExceptionMapper<MaxCombatsReachedException> {
+public class MaxCombatsReachedExceptionsMapper implements ExceptionMapper<MaxCombatsReachedException> {
 	@Override
 	public Response toResponse(MaxCombatsReachedException e) {
 		ExceptionResponse exceptionResponse = new ExceptionResponse();
 		exceptionResponse.error = "MAX_COMBATS_REACHED";
 		exceptionResponse.description = "Max number of combats has been reached.";
-		return exceptionMapper(Response.Status.BAD_REQUEST, exceptionResponse);
+
+		return Response.status(Response.Status.BAD_REQUEST).entity(exceptionResponse).type(MediaType.APPLICATION_JSON).build();
 	}
 }
