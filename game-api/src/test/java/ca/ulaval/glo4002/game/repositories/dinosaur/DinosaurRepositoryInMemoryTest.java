@@ -12,12 +12,12 @@ import ca.ulaval.glo4002.game.domain.dinosaur.Dinosaur;
 
 class DinosaurRepositoryInMemoryTest {
 
-    private DinosaurRepositoryInMemory dinosaurRepositoryInMemory;
+/*    private DinosaurRepositoryInMemory dinosaurRepositoryInMemory;
 
-    private Dinosaur firstDino = new Dinosaur("aaa", 100, "f", "Ankylosaurus");
-    private Dinosaur secondDino = new Dinosaur("ab", 100, "f", "Ankylosaurus");
-    private Dinosaur thirdDino = new Dinosaur("a", 50, "m", "Ankylosaurus");
-    private Dinosaur lastDino = new Dinosaur("aa", 1, "f", "Ankylosaurus");
+    private final Dinosaur firstDino = new Dinosaur("aaa", 100, "f", "Ankylosaurus");
+    private final Dinosaur secondDino = new Dinosaur("ab", 100, "f", "Ankylosaurus");
+    private final Dinosaur thirdDino = new Dinosaur("a", 50, "m", "Ankylosaurus");
+    private final Dinosaur lastDino = new Dinosaur("aa", 1, "f", "Ankylosaurus");
 
     private List<Dinosaur> dinoInDisorderList;
 
@@ -86,6 +86,6 @@ class DinosaurRepositoryInMemoryTest {
         for (Dinosaur dino : this.dinoInDisorderList) {
             dinosaurRepositoryInMemory.save(dino);
         }
-    }
+    }*/
 
 }

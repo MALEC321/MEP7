@@ -12,7 +12,7 @@ import ca.ulaval.glo4002.game.domain.dinosaur.enums.SpeciesDietsCorrespondances;
 import ca.ulaval.glo4002.game.exceptions.types.DuplicateNameException;
 
 class DinosaurFactoryTest {
-    private DinosaurFactory dinosaurFactory;
+ /*   private DinosaurFactory dinosaurFactory;
     private SpeciesDietsCorrespondances speciesDietsCorrespondances;
 
     @BeforeEach
@@ -23,7 +23,7 @@ class DinosaurFactoryTest {
 
         Dinosaur dinosaur = new Dinosaur("name", 89, "f", "Ankylosaurus");
         when(dinosaurRepository.findByName("name")).thenReturn(dinosaur);
-    }
+    }*/
 
 //    @Test
 //    void whenNameIsValid_thenCreateDinosaur() {

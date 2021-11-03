@@ -10,6 +10,7 @@ import ca.ulaval.glo4002.game.domain.actions.ActionRepository;
 import ca.ulaval.glo4002.game.domain.dinosaur.Dinosaur;
 import ca.ulaval.glo4002.game.domain.dinosaur.DinosaurFactory;
 import ca.ulaval.glo4002.game.domain.dinosaur.DinosaurRepository;
+import ca.ulaval.glo4002.game.domain.dinosaur.Herd;
 import ca.ulaval.glo4002.game.exceptions.types.NotExistentNameException;
 
 public class DinosaurUseCase {
@@ -31,6 +32,8 @@ public class DinosaurUseCase {
         this.dinosaurAssembler = dinosaurAssembler;
         this.actionRepository = actionRepository;
         this.actionFactory = actionFactory;
+
+        this.dinosaurRepository.add(new Herd());
     }
 
     public void createDinosaur(DinosaurCreationDto dto) {
@@ -39,15 +42,17 @@ public class DinosaurUseCase {
     }
 
     public List<DinosaurDto> getAllDinosaurs() {
-        List<Dinosaur> dinosaurs = dinosaurRepository.findAll();
+        Herd herd = dinosaurRepository.findHerd();
+        List<Dinosaur> dinosaurs = herd.findAll();
         return dinosaurAssembler.toDtos(dinosaurs);
     }
 
     public DinosaurDto getDinosaur(String name) throws NotExistentNameException {
-        if (dinosaurRepository.findByName(name) == null) {
+        Herd herd = dinosaurRepository.findHerd();
+        if (herd.findByName(name) == null) {
             throw new NotExistentNameException();
         }
-        Dinosaur dinosaur = dinosaurRepository.findByName(name);
+        Dinosaur dinosaur = herd.findByName(name);
         return dinosaurAssembler.toDto(dinosaur);
     }
 }

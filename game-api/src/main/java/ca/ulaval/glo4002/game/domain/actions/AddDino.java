@@ -12,6 +12,6 @@ public class AddDino extends Action {
 
     @Override
     public void execute() {
-        ((DinosaurRepository) getObjectRepository()).save((Dinosaur) getObject());
+        ((DinosaurRepository) getObjectRepository()).findHerd().add((Dinosaur) getObject());
     }
 }

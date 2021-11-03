@@ -10,6 +10,7 @@ import ca.ulaval.glo4002.game.domain.actions.ActionRepository;
 import ca.ulaval.glo4002.game.domain.dinosaur.Dinosaur;
 import ca.ulaval.glo4002.game.domain.dinosaur.DinosaurFactory;
 import ca.ulaval.glo4002.game.domain.dinosaur.DinosaurRepository;
+import ca.ulaval.glo4002.game.domain.dinosaur.Herd;
 import ca.ulaval.glo4002.game.exceptions.types.InvalidFatherException;
 import ca.ulaval.glo4002.game.exceptions.types.InvalidMotherException;
 import ca.ulaval.glo4002.game.exceptions.types.NotExistentNameException;
@@ -37,29 +38,31 @@ public class BabyUseCase {
     }
 
     public ExternalApiCreationDto getParentsSpecies(String fatherName, String motherName) {
+        Herd herd = dinosaurRepository.findHerd();
+
         String fatherSpecies;
         String motherSpecies;
 
-        if (dinosaurRepository.findByName(fatherName) == null) {
+        if (herd.findByName(fatherName) == null) {
             throw new NotExistentNameException();
         }
 
-        if (dinosaurRepository.findByName(motherName) == null) {
+        if (herd.findByName(motherName) == null) {
             throw new NotExistentNameException();
         }
 
-        if (!Objects.equals(dinosaurRepository.findByName(fatherName).getGender(), "m")) {
+        if (!Objects.equals(herd.findByName(fatherName).getGender(), "m")) {
             throw new InvalidFatherException();
         }
 
-        if (!Objects.equals(dinosaurRepository.findByName(motherName).getGender(), "f")) {
+        if (!Objects.equals(herd.findByName(motherName).getGender(), "f")) {
             throw new InvalidMotherException();
         }
 
-        Dinosaur dinosaurFather = dinosaurRepository.findByName(fatherName);
+        Dinosaur dinosaurFather = herd.findByName(fatherName);
         fatherSpecies = dinosaurFather.getSpecies();
 
-        Dinosaur dinosaurMother = dinosaurRepository.findByName(motherName);
+        Dinosaur dinosaurMother = herd.findByName(motherName);
         motherSpecies = dinosaurMother.getSpecies();
 
         return babyAssembler.toExternalDto(fatherSpecies, motherSpecies);

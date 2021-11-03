@@ -8,6 +8,7 @@ import ca.ulaval.glo4002.game.domain.actions.ActionRepository;
 import ca.ulaval.glo4002.game.domain.dinosaur.Dinosaur;
 import ca.ulaval.glo4002.game.domain.dinosaur.DinosaurBaby;
 import ca.ulaval.glo4002.game.domain.dinosaur.DinosaurRepository;
+import ca.ulaval.glo4002.game.domain.dinosaur.Herd;
 import ca.ulaval.glo4002.game.domain.resources.Burger;
 import ca.ulaval.glo4002.game.domain.resources.ResourceRepository;
 import ca.ulaval.glo4002.game.domain.resources.Salad;
@@ -64,26 +65,30 @@ public class TurnUseCase {
     }
 
     protected void feedDinosaurs() {
-        feedDinosaursByDietType(dinosaurRepository.getSortedDinosaursByStrengthThenName());
+        Herd herd = dinosaurRepository.findHerd();
+        feedDinosaursByDietType(herd.getSortedDinosaursByStrengthThenName());
     }
 
     protected void removeBabyDinosaurs() {
-        removeBabyDinosaur(dinosaurRepository.getSortedDinosaursByStrengthThenName());
+        Herd herd = dinosaurRepository.findHerd();
+        removeBabyDinosaur(herd.getSortedDinosaursByStrengthThenName());
     }
 
     protected void feedDinosaursByDietType(List<Dinosaur> sortedDinosaursByStrengthThenName) {
+        Herd herd = dinosaurRepository.findHerd();
         for (Dinosaur dinosaur : sortedDinosaursByStrengthThenName) {
             zooManager.feedDinosaur(resourceRepository.getPantry(), dinosaur);
             if (dinosaur.isStarving()) {
-                dinosaurRepository.remove(dinosaur);
+                herd.remove(dinosaur);
             }
         }
     }
 
     private void removeBabyDinosaur(List<Dinosaur> sortedDinosaursByStrengthThenName) {
+        Herd herd = dinosaurRepository.findHerd();
         for (Dinosaur dinosaur : sortedDinosaursByStrengthThenName) {
-            if (dinosaur instanceof DinosaurBaby && dinosaurRepository.areBothParentsDead(dinosaur)) {
-                dinosaurRepository.remove(dinosaur);
+            if (dinosaur instanceof DinosaurBaby && herd.areBothParentsDead(dinosaur)) {
+                herd.remove(dinosaur);
             }
         }
     }
