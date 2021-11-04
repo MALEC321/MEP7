@@ -50,8 +50,6 @@ public class TurnUseCase {
 
         Turn turn = turnFactory.create(actions);
         turnRepository.save(turn);
-
-        new TurnDto(Turn.number);
     }
 
     protected void cookIt() {
