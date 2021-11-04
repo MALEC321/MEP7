@@ -4,10 +4,8 @@ import ca.ulaval.glo4002.game.application.baby.dtos.BabyDto;
 
 public class BabyDtoAssembler {
 
-    public BabyCreationDto fromRequest(BabyRequest request, ExternalApiBabyListDto externalApiBabyListDto) {
-        return new BabyCreationDto(request.getName(), request.getFatherName(), request.getMotherName(),
-                externalApiBabyListDto.getGender(), externalApiBabyListDto.getOffspring()
-        );
+    public BabyCreationDto fromRequest(BabyRequest request) {
+        return new BabyCreationDto(request.getName(), request.getFatherName(), request.getMotherName());
     }
 
     public BabyResponse toResponse(BabyDto babyDto) {

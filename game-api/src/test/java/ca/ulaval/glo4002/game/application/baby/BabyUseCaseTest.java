@@ -1,6 +1,7 @@
 package ca.ulaval.glo4002.game.application.baby;
 
 import ca.ulaval.glo4002.game.application.baby.dtos.BabyAssembler;
+import ca.ulaval.glo4002.game.application.baby.breed.BabyCreationClient;
 import ca.ulaval.glo4002.game.controllers.baby.dtos.BabyCreationDto;
 import ca.ulaval.glo4002.game.domain.actions.ActionFactory;
 import ca.ulaval.glo4002.game.domain.actions.ActionRepository;
@@ -8,6 +9,7 @@ import ca.ulaval.glo4002.game.domain.dinosaur.DinosaurFactory;
 import ca.ulaval.glo4002.game.domain.dinosaur.DinosaurRepository;
 import ca.ulaval.glo4002.game.domain.dinosaur.enums.SpeciesDietsCorrespondances;
 import ca.ulaval.glo4002.game.exceptions.types.NotExistentNameException;
+import ca.ulaval.glo4002.game.repositories.client.BabyCreationClientImp;
 import ca.ulaval.glo4002.game.repositories.actions.ActionRepositoryInMemory;
 import ca.ulaval.glo4002.game.repositories.dinosaur.DinosaurRepositoryInMemory;
 import org.junit.jupiter.api.BeforeEach;
@@ -38,20 +40,17 @@ class BabyUseCaseTest {
         ActionFactory actionFactory = new ActionFactory();
         SpeciesDietsCorrespondances speciesDietsCorrespondances = new SpeciesDietsCorrespondances();
         DinosaurFactory dinosaurFactory = new DinosaurFactory(dinosaurRepository, speciesDietsCorrespondances);
+        BabyCreationClient babyCreationClient = new BabyCreationClientImp();
 
-        babyUseCase = new BabyUseCase(dinosaurRepository, babyAssembler, actionRepository, actionFactory, dinosaurFactory);
+        babyUseCase = new BabyUseCase(dinosaurRepository, babyAssembler, actionRepository, actionFactory,
+                dinosaurFactory, babyCreationClient);
     }
 
     @Test
     public void givenBabyDinosaur_whenGetDinosaurNotExistent_shouldThrowsNotExistentNameException() {
-        BabyCreationDto babyCreationDto = new BabyCreationDto(this.name, this.fatherName, this.motherName, this.gender,
-                this.species);
-
-        babyUseCase.createBebe(babyCreationDto);
-
+        BabyCreationDto babyCreationDto = new BabyCreationDto(this.name, this.fatherName, this.motherName);
         assertThrows(NotExistentNameException.class, () ->
-            babyUseCase.getParentsSpecies(fatherName, motherName));
-
+                babyUseCase.createBebe(babyCreationDto));
     }
 
 }

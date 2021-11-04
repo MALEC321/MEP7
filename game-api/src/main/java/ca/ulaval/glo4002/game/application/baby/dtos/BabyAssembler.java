@@ -1,7 +1,7 @@
 package ca.ulaval.glo4002.game.application.baby.dtos;
 
-import ca.ulaval.glo4002.game.controllers.baby.dtos.ExternalApiCreationDto;
 import ca.ulaval.glo4002.game.domain.dinosaur.DinosaurBaby;
+import ca.ulaval.glo4002.game.repositories.client.dto.RequestBreed;
 
 public class BabyAssembler {
 
@@ -9,7 +9,7 @@ public class BabyAssembler {
         return new BabyDto(bebe.getName(), bebe.getFatherName(), bebe.getMotherName());
     }
 
-    public ExternalApiCreationDto toExternalDto(String fatherSpecies, String motherSpecies) {
-        return new ExternalApiCreationDto(fatherSpecies, motherSpecies);
+    public RequestBreed toExternalDto(String fatherSpecies, String motherSpecies) {
+        return new RequestBreed(fatherSpecies, motherSpecies);
     }
 }
