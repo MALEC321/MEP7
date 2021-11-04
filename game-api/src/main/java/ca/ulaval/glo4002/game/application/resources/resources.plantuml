@@ -16,8 +16,8 @@ title __RESOURCES's Class Diagram__\n
 
   ca.ulaval.glo4002.game.application.resources.ResourceUseCase o-- ca.ulaval.glo4002.game.domain.actions.ActionFactory : actionFactory
   ca.ulaval.glo4002.game.application.resources.ResourceUseCase o-- ca.ulaval.glo4002.game.domain.actions.ActionRepository : actionRepository
-  ca.ulaval.glo4002.game.application.resources.ResourceUseCase o-- ca.ulaval.glo4002.game.controllers.resources.dtos.ResourceAssemblers : resourceAssemblers
-  ca.ulaval.glo4002.game.application.resources.ResourceUseCase o-- ca.ulaval.glo4002.game.domain.resources.ResourceFactory : resourceFactory
+  ca.ulaval.glo4002.game.application.resources.ResourceUseCase o-- ca.ulaval.glo4002.game.controllers.resources.dtos.ResourceAssembler : resourceAssembler
+  ca.ulaval.glo4002.game.application.resources.ResourceUseCase o-- ca.ulaval.glo4002.game.domain.resources.ResourcesFactory : resourcesFactory
   ca.ulaval.glo4002.game.application.resources.ResourceUseCase o-- ca.ulaval.glo4002.game.domain.resources.ResourceRepository : resourceRepository
 
 

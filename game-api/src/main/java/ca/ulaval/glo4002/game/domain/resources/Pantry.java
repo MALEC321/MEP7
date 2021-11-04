@@ -29,13 +29,13 @@ public class Pantry implements Eatable {
     }
 
     public Resources findFreshResource() {
-        Resources resource = new Resources();
+        Resources foundResource = new Resources();
         for (Map.Entry<ResourceType, Object> entry : mapResourceQueue.entrySet()) {
-            for (Resource resourceElement : (Queue<Resource>) entry.getValue()) {
-                resource.addResource(entry.getKey(), resourceElement.getQuantity());
+            for (Resource resource : (Queue<Resource>) entry.getValue()) {
+                foundResource.addResource(entry.getKey(), resource.getQuantity());
             }
         }
-        return resource;
+        return foundResource;
     }
 
     public void add(Resource resource) {
@@ -52,13 +52,12 @@ public class Pantry implements Eatable {
         }
     }
 
-    @SuppressWarnings("checkstyle:ParameterAssignment")
     @Override
     public boolean removeResource(ResourceType typeResource, int quantity) {
-        for (Resource resourceElement : (Queue<Resource>) mapResourceQueue.get(typeResource)) {
-            int actualQuantity = resourceElement.getQuantity();
+        for (Resource resource : (Queue<Resource>) mapResourceQueue.get(typeResource)) {
+            int actualQuantity = resource.getQuantity();
 
-            boolean enoughQuantity = resourceElement.removeElement(quantity);
+            boolean enoughQuantity = resource.removeElement(quantity);
             if (enoughQuantity) {
                 consumedResources.addResource(typeResource, quantity);
                 return true;
@@ -94,8 +93,8 @@ public class Pantry implements Eatable {
         removeAllEmptyResources();
         removeAllExpiredResources();
         for (Map.Entry<ResourceType, Object> entry : mapResourceQueue.entrySet()) {
-            for (Resource resourceElement : (Queue<Resource>) entry.getValue()) {
-                resourceElement.decreaseExpirationDate();
+            for (Resource resource : (Queue<Resource>) entry.getValue()) {
+                resource.decreaseExpirationDate();
             }
         }
     }

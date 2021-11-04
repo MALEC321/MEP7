@@ -1,14 +1,14 @@
 package ca.ulaval.glo4002.game.domain.resources;
 
-public abstract class Resource {
+public class Resource {
+    private ResourceType resourceType;
     private int quantity;
+    private int expiration;
 
-    public Resource() {
-        this(0);
-    }
-
-    public Resource(int quantity) {
+    public Resource(ResourceType resourceType, int quantity, int expiration) {
+        this.resourceType = resourceType;
         this.quantity = quantity;
+        this.expiration = expiration;
     }
 
     public int getQuantity() {
@@ -38,9 +38,15 @@ public abstract class Resource {
         this.quantity += quantity;
     }
 
-    public abstract int getDaysLeft();
+    public int getDaysLeft() {
+        return expiration;
+    }
 
-    public abstract void decreaseExpirationDate();
+    public void decreaseExpirationDate() {
+        expiration--;
+    }
 
-    public abstract boolean isExpired();
+    public boolean isExpired() {
+        return expiration == 0;
+    }
 }

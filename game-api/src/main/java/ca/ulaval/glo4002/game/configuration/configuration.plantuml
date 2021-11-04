@@ -15,9 +15,9 @@ title __CONFIGURATION's Class Diagram__\n
             {static} ~ dinosaurResource : DinosaurResource
             {static} ~ dinosaurUseCase : DinosaurUseCase
             {static} ~ heartbeatResource : HeartbeatResource
-            {static} ~ resourceAssemblers : ResourceAssemblers
+            {static} ~ resourceAssembler : ResourceAssemblers
             {static} ~ resourceDtoAssembler : ResourceDtoAssembler
-            {static} ~ resourceFactory : ResourceFactory
+            {static} ~ resourcesFactory : ResourceFactory
             {static} ~ resourceRepository : ResourceRepository
             {static} ~ resourceResource : ResourceResource
             {static} ~ resourceUseCase : ResourceUseCase

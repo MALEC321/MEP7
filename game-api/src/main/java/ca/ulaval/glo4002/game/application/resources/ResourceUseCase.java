@@ -1,44 +1,45 @@
 package ca.ulaval.glo4002.game.application.resources;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import ca.ulaval.glo4002.game.controllers.resources.dtos.ResourceAssemblers;
+import ca.ulaval.glo4002.game.controllers.resources.dtos.ResourceAssembler;
 import ca.ulaval.glo4002.game.controllers.resources.dtos.ResourceCreationDto;
 import ca.ulaval.glo4002.game.controllers.resources.dtos.ResourceDto;
 import ca.ulaval.glo4002.game.domain.actions.Action;
 import ca.ulaval.glo4002.game.domain.actions.ActionFactory;
 import ca.ulaval.glo4002.game.domain.actions.ActionRepository;
-import ca.ulaval.glo4002.game.domain.resources.Resources;
 import ca.ulaval.glo4002.game.domain.resources.Resource;
 import ca.ulaval.glo4002.game.domain.resources.ResourceFactory;
 import ca.ulaval.glo4002.game.domain.resources.ResourceRepository;
+import ca.ulaval.glo4002.game.domain.resources.Resources;
+import ca.ulaval.glo4002.game.domain.resources.ResourcesFactory;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class ResourceUseCase {
-    private final ResourceFactory resourceFactory;
+    private final ResourcesFactory resourcesFactory;
     private final ResourceRepository resourceRepository;
-    private final ResourceAssemblers resourceAssemblers;
+    private final ResourceAssembler resourceAssembler;
     private final ActionRepository actionRepository;
     private final ActionFactory actionFactory;
 
-    public ResourceUseCase(ResourceFactory resourceFactory, ResourceRepository resourceRepository, ResourceAssemblers resourceAssemblers,
+    public ResourceUseCase(ResourcesFactory resourcesFactory, ResourceRepository resourceRepository, ResourceAssembler resourceAssembler,
                            ActionRepository actionRepository, ActionFactory actionFactory) {
-        this.resourceFactory = resourceFactory;
+        this.resourcesFactory = resourcesFactory;
         this.resourceRepository = resourceRepository;
-        this.resourceAssemblers = resourceAssemblers;
+        this.resourceAssembler = resourceAssembler;
         this.actionRepository = actionRepository;
         this.actionFactory = actionFactory;
     }
 
     public ResourceDto createResource(ResourceCreationDto resourceCreationDto) {
-        Resources resources = resourceFactory.create(resourceCreationDto.qtyBurger, resourceCreationDto.qtySalad, resourceCreationDto.qtyWater);
+        Resources resources = resourcesFactory.create(resourceCreationDto.qtyBurger, resourceCreationDto.qtySalad, resourceCreationDto.qtyWater);
         addResourceToActionWaitingList(resources);
-        return resourceAssemblers.toDto(resources);
+        return resourceAssembler.toDto(resources);
     }
 
     public List<ResourceDto> getAllResources() {
         List<Resources> resources = resourceRepository.findAll();
-        return resourceAssemblers.toDtos(resources);
+        return resourceAssembler.toDtos(resources);
     }
 
     private void addResourceToActionWaitingList(Resources resources) {

@@ -1,13 +1,13 @@
 package ca.ulaval.glo4002.game.controllers.resources.dtos;
 
+import ca.ulaval.glo4002.game.domain.resources.Resources;
+
 import java.util.List;
 import java.util.stream.Collectors;
 
-import ca.ulaval.glo4002.game.domain.resources.Resources;
-
 import static ca.ulaval.glo4002.game.domain.resources.ResourceType.*;
 
-public class ResourceAssemblers {
+public class ResourceAssembler {
 
     public ResourceDto toDto(Resources resource) {
         ResourceDto dto = new ResourceDto();

@@ -2,12 +2,20 @@ package ca.ulaval.glo4002.game.domain.resources;
 
 import ca.ulaval.glo4002.game.exceptions.types.InvalidResourceQuantityException;
 
+import static ca.ulaval.glo4002.game.domain.resources.ResourceType.*;
+
 public class ResourceFactory {
-    public Resources create(int qtyBurger, int qtySalad, int qtyWater) {
-        if (qtyBurger < 0 || qtySalad < 0 || qtyWater < 0) {
+    public Resource create(ResourceType resourceType, int quantity) throws Exception {
+        if (quantity < 0) {
             throw new InvalidResourceQuantityException();
         }
-
-        return new Resources(new Burger(qtyBurger), new Salad(qtySalad), new Water(qtyWater));
+        else if (resourceType.equals(BURGER))
+            return new Resource(BURGER, quantity, 4);
+        else if (resourceType.equals(SALAD))
+            return new Resource(SALAD, quantity, 3);
+        else if (resourceType.equals(WATER))
+            return new Resource(SALAD, quantity, 10);
+        else
+            throw new Exception(); //Remplacer par InvalidResourceTypeException()
     }
 }

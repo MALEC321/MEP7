@@ -1,30 +1,29 @@
 package ca.ulaval.glo4002.game.application.resources;
 
-import java.util.List;
-
-import ca.ulaval.glo4002.game.domain.resources.Resources;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
-
-import static org.junit.jupiter.api.Assertions.assertFalse;
-
 import ca.ulaval.glo4002.game.application.manager.ZooManager;
 import ca.ulaval.glo4002.game.application.turn.TurnUseCase;
-import ca.ulaval.glo4002.game.controllers.resources.dtos.ResourceAssemblers;
+import ca.ulaval.glo4002.game.controllers.resources.dtos.ResourceAssembler;
 import ca.ulaval.glo4002.game.controllers.resources.dtos.ResourceCreationDto;
 import ca.ulaval.glo4002.game.controllers.resources.dtos.ResourceDto;
 import ca.ulaval.glo4002.game.controllers.turn.dtos.TurnAssembler;
 import ca.ulaval.glo4002.game.domain.actions.ActionFactory;
 import ca.ulaval.glo4002.game.domain.actions.ActionRepository;
 import ca.ulaval.glo4002.game.domain.dinosaur.DinosaurRepository;
-import ca.ulaval.glo4002.game.domain.resources.ResourceFactory;
+import ca.ulaval.glo4002.game.domain.resources.ResourcesFactory;
 import ca.ulaval.glo4002.game.domain.resources.ResourceRepository;
+import ca.ulaval.glo4002.game.domain.resources.Resources;
 import ca.ulaval.glo4002.game.domain.turn.TurnFactory;
 import ca.ulaval.glo4002.game.domain.turn.TurnRepository;
 import ca.ulaval.glo4002.game.repositories.actions.ActionRepositoryInMemory;
 import ca.ulaval.glo4002.game.repositories.dinosaur.DinosaurRepositoryInMemory;
 import ca.ulaval.glo4002.game.repositories.resources.ResourceRepositoryInMemory;
 import ca.ulaval.glo4002.game.repositories.turn.TurnRepositoryInMemory;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+
+import java.util.List;
+
+import static org.junit.jupiter.api.Assertions.assertFalse;
 
 class ResourceUseCaseTest {
 
@@ -36,8 +35,8 @@ class ResourceUseCaseTest {
 
     @BeforeEach
     void setUp() {
-        ResourceFactory resourceFactory = new ResourceFactory();
-        ResourceAssemblers resourceAssemblers = new ResourceAssemblers();
+        ResourcesFactory resourcesFactory = new ResourcesFactory();
+        ResourceAssembler resourceAssembler = new ResourceAssembler();
         ResourceRepository resourceRepository = new ResourceRepositoryInMemory();
         ActionRepository actionRepository = new ActionRepositoryInMemory();
         ZooManager zooManager = new ZooManager();
@@ -49,7 +48,7 @@ class ResourceUseCaseTest {
         DinosaurRepository dinosaurRepository = new DinosaurRepositoryInMemory();
 
         turnUseCase = new TurnUseCase(turnFactory, turnRepository, resourceRepository, dinosaurRepository, actionRepository, zooManager);
-        resourceUseCase = new ResourceUseCase(resourceFactory, resourceRepository, resourceAssemblers, actionRepository, actionFactory);
+        resourceUseCase = new ResourceUseCase(resourcesFactory, resourceRepository, resourceAssembler, actionRepository, actionFactory);
     }
 
     @Test

@@ -1,12 +1,5 @@
 package ca.ulaval.glo4002.game.configuration;
 
-import java.util.HashSet;
-import java.util.Set;
-
-import javax.ws.rs.core.Application;
-
-import org.glassfish.jersey.server.ResourceConfig;
-
 import ca.ulaval.glo4002.game.application.baby.BabyUseCase;
 import ca.ulaval.glo4002.game.application.baby.dtos.BabyAssembler;
 import ca.ulaval.glo4002.game.application.dinosaur.DinosaurUseCase;
@@ -19,7 +12,7 @@ import ca.ulaval.glo4002.game.controllers.dinosaur.DinosaurResource;
 import ca.ulaval.glo4002.game.controllers.dinosaur.dtos.DinosaurAssembler;
 import ca.ulaval.glo4002.game.controllers.dinosaur.dtos.DinosaurDtoAssembler;
 import ca.ulaval.glo4002.game.controllers.resources.ResourceResource;
-import ca.ulaval.glo4002.game.controllers.resources.dtos.ResourceAssemblers;
+import ca.ulaval.glo4002.game.controllers.resources.dtos.ResourceAssembler;
 import ca.ulaval.glo4002.game.controllers.resources.dtos.ResourceDtoAssembler;
 import ca.ulaval.glo4002.game.controllers.turn.TurnResource;
 import ca.ulaval.glo4002.game.controllers.turn.dtos.TurnDtoAssembler;
@@ -28,23 +21,20 @@ import ca.ulaval.glo4002.game.domain.actions.ActionRepository;
 import ca.ulaval.glo4002.game.domain.dinosaur.DinosaurFactory;
 import ca.ulaval.glo4002.game.domain.dinosaur.DinosaurRepository;
 import ca.ulaval.glo4002.game.domain.dinosaur.enums.SpeciesDietsCorrespondances;
-import ca.ulaval.glo4002.game.domain.resources.ResourceFactory;
+import ca.ulaval.glo4002.game.domain.resources.ResourcesFactory;
 import ca.ulaval.glo4002.game.domain.resources.ResourceRepository;
 import ca.ulaval.glo4002.game.domain.turn.TurnFactory;
 import ca.ulaval.glo4002.game.domain.turn.TurnRepository;
-import ca.ulaval.glo4002.game.exceptions.exceptionMappers.DuplicateNameExceptionMapper;
-import ca.ulaval.glo4002.game.exceptions.exceptionMappers.InvalidFatherExceptionMapper;
-import ca.ulaval.glo4002.game.exceptions.exceptionMappers.InvalidGenderExceptionMapper;
-import ca.ulaval.glo4002.game.exceptions.exceptionMappers.InvalidMotherExceptionMapper;
-import ca.ulaval.glo4002.game.exceptions.exceptionMappers.InvalidResourceExceptionMapper;
-import ca.ulaval.glo4002.game.exceptions.exceptionMappers.InvalidSpeciesExceptionMapper;
-import ca.ulaval.glo4002.game.exceptions.exceptionMappers.InvalidWeightExceptionMapper;
-import ca.ulaval.glo4002.game.exceptions.exceptionMappers.NotExistentNameExceptionMapper;
-import ca.ulaval.glo4002.game.exceptions.exceptionMappers.UnknownExceptionGrabber;
+import ca.ulaval.glo4002.game.exceptions.exceptionMappers.*;
 import ca.ulaval.glo4002.game.repositories.actions.ActionRepositoryInMemory;
 import ca.ulaval.glo4002.game.repositories.dinosaur.DinosaurRepositoryInMemory;
 import ca.ulaval.glo4002.game.repositories.resources.ResourceRepositoryInMemory;
 import ca.ulaval.glo4002.game.repositories.turn.TurnRepositoryInMemory;
+import org.glassfish.jersey.server.ResourceConfig;
+
+import javax.ws.rs.core.Application;
+import java.util.HashSet;
+import java.util.Set;
 
 public class AppConfig {
     // Turn
@@ -70,9 +60,9 @@ public class AppConfig {
     static TurnDtoAssembler turnDtoAssembler = new TurnDtoAssembler();
     static TurnResource turnResource = new TurnResource(turnUseCase, turnDtoAssembler);
 
-    static ResourceFactory resourceFactory = new ResourceFactory();
-    static ResourceAssemblers resourceAssemblers = new ResourceAssemblers();
-    static ResourceUseCase resourceUseCase = new ResourceUseCase(resourceFactory, resourceRepository, resourceAssemblers, actionRepository, actionFactory);
+    static ResourcesFactory resourcesFactory = new ResourcesFactory();
+    static ResourceAssembler resourceAssembler = new ResourceAssembler();
+    static ResourceUseCase resourceUseCase = new ResourceUseCase(resourcesFactory, resourceRepository, resourceAssembler, actionRepository, actionFactory);
     static ResourceDtoAssembler resourceDtoAssembler = new ResourceDtoAssembler();
     static ResourceResource resourceResource = new ResourceResource(resourceUseCase, resourceDtoAssembler);
 

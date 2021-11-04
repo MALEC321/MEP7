@@ -122,7 +122,7 @@ title __GAME-API's Class Diagram__\n
     namespace ca.ulaval.glo4002.game {
       namespace controllers.resources {
         namespace dtos {
-          class ca.ulaval.glo4002.game.controllers.resources.dtos.ResourceAssemblers {
+          class ca.ulaval.glo4002.game.controllers.resources.dtos.ResourceAssembler {
           }
         }
       }
@@ -329,7 +329,7 @@ title __GAME-API's Class Diagram__\n
   
     namespace ca.ulaval.glo4002.game {
       namespace domain.resources {
-        class ca.ulaval.glo4002.game.domain.resources.ResourceFactory {
+        class ca.ulaval.glo4002.game.domain.resources.ResourcesFactory {
         }
       }
     }
@@ -604,8 +604,8 @@ title __GAME-API's Class Diagram__\n
   ca.ulaval.glo4002.game.application.dinosaur.DinosaurUseCase o-- ca.ulaval.glo4002.game.domain.dinosaur.DinosaurRepository : dinosaurRepository
   ca.ulaval.glo4002.game.application.resources.ResourceUseCase o-- ca.ulaval.glo4002.game.domain.actions.ActionFactory : actionFactory
   ca.ulaval.glo4002.game.application.resources.ResourceUseCase o-- ca.ulaval.glo4002.game.domain.actions.ActionRepository : actionRepository
-  ca.ulaval.glo4002.game.application.resources.ResourceUseCase o-- ca.ulaval.glo4002.game.controllers.resources.dtos.ResourceAssemblers : resourceAssemblers
-  ca.ulaval.glo4002.game.application.resources.ResourceUseCase o-- ca.ulaval.glo4002.game.domain.resources.ResourceFactory : resourceFactory
+  ca.ulaval.glo4002.game.application.resources.ResourceUseCase o-- ca.ulaval.glo4002.game.controllers.resources.dtos.ResourceAssembler : resourceAssembler
+  ca.ulaval.glo4002.game.application.resources.ResourceUseCase o-- ca.ulaval.glo4002.game.domain.resources.ResourcesFactory : resourcesFactory
   ca.ulaval.glo4002.game.application.resources.ResourceUseCase o-- ca.ulaval.glo4002.game.domain.resources.ResourceRepository : resourceRepository
   ca.ulaval.glo4002.game.application.turn.TurnUseCase o-- ca.ulaval.glo4002.game.domain.actions.ActionRepository : actionRepository
   ca.ulaval.glo4002.game.application.turn.TurnUseCase o-- ca.ulaval.glo4002.game.domain.dinosaur.DinosaurRepository : dinosaurRepository
