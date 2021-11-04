@@ -54,7 +54,7 @@ class DinosaurUseCaseTest {
 
         DinosaurCreationDto dto = dinosaurDtoAssembler.fromRequest(dinosaurRequest);
         dinosaurUseCase.createDinosaur(dto);
-        turnUseCase.createTurn();
+        turnUseCase.executeTurn();
 
         assertThrows(NotExistentNameException.class, () ->
             dinosaurUseCase.getDinosaur("Willl"));
