@@ -27,8 +27,8 @@ title __RESOURCES's Class Diagram__\n
   
 
   ca.ulaval.glo4002.game.repositories.resources.ResourceRepositoryInMemory .up.|> ca.ulaval.glo4002.game.domain.resources.ResourceRepository
-  ca.ulaval.glo4002.game.repositories.resources.ResourceRepositoryInMemory o-- ca.ulaval.glo4002.game.domain.resources.Resource : consumedResources
-  ca.ulaval.glo4002.game.repositories.resources.ResourceRepositoryInMemory o-- ca.ulaval.glo4002.game.domain.resources.Resource : expiredResources
+  ca.ulaval.glo4002.game.repositories.resources.ResourceRepositoryInMemory o-- ca.ulaval.glo4002.game.domain.resources.Resources : consumedResources
+  ca.ulaval.glo4002.game.repositories.resources.ResourceRepositoryInMemory o-- ca.ulaval.glo4002.game.domain.resources.Resources : expiredResources
 
 
 right footer

@@ -1,6 +1,6 @@
 package ca.ulaval.glo4002.game.domain.resources;
 
-public class Water extends ResourceElements {
+public class Water extends Resource {
     private int expiration = 10;
 
     public Water(int quantity) {

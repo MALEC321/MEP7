@@ -12,50 +12,50 @@ public class Pantry implements Eatable {
 
     private final HashMap<ResourceType, Object> mapResourceQueue;
 
-    private final Resource consumedResources;
-    private final Resource expiredResources;
+    private final Resources consumedResources;
+    private final Resources expiredResources;
 
     public Pantry() {
         Queue<Burger> burgerQueue = new LinkedList<>();
         Queue<Salad> saladQueue = new LinkedList<>();
         Queue<Water> waterQueue = new LinkedList<>();
         mapResourceQueue = new HashMap<>();
-        consumedResources = new Resource();
-        expiredResources = new Resource();
+        consumedResources = new Resources();
+        expiredResources = new Resources();
 
         mapResourceQueue.put(BURGER, burgerQueue);
         mapResourceQueue.put(SALAD, saladQueue);
         mapResourceQueue.put(WATER, waterQueue);
     }
 
-    public Resource findFreshResource() {
-        Resource resource = new Resource();
+    public Resources findFreshResource() {
+        Resources resource = new Resources();
         for (Map.Entry<ResourceType, Object> entry : mapResourceQueue.entrySet()) {
-            for (ResourceElements resourceElement : (Queue<ResourceElements>) entry.getValue()) {
+            for (Resource resourceElement : (Queue<Resource>) entry.getValue()) {
                 resource.addResource(entry.getKey(), resourceElement.getQuantity());
             }
         }
         return resource;
     }
 
-    public void add(ResourceElements resourceElements) {
-        Queue<ResourceElements> burgerQueue = (Queue<ResourceElements>) mapResourceQueue.get(BURGER);
-        Queue<ResourceElements> saladQueue = (Queue<ResourceElements>) mapResourceQueue.get(SALAD);
-        Queue<ResourceElements> waterQueue = (Queue<ResourceElements>) mapResourceQueue.get(WATER);
+    public void add(Resource resource) {
+        Queue<Resource> burgerQueue = (Queue<Resource>) mapResourceQueue.get(BURGER);
+        Queue<Resource> saladQueue = (Queue<Resource>) mapResourceQueue.get(SALAD);
+        Queue<Resource> waterQueue = (Queue<Resource>) mapResourceQueue.get(WATER);
 
-        if (resourceElements instanceof Burger) {
-            burgerQueue.add(resourceElements);
-        } else if (resourceElements instanceof Salad) {
-            saladQueue.add(resourceElements);
-        } else if (resourceElements instanceof Water) {
-            waterQueue.add(resourceElements);
+        if (resource instanceof Burger) {
+            burgerQueue.add(resource);
+        } else if (resource instanceof Salad) {
+            saladQueue.add(resource);
+        } else if (resource instanceof Water) {
+            waterQueue.add(resource);
         }
     }
 
     @SuppressWarnings("checkstyle:ParameterAssignment")
     @Override
     public boolean removeResource(ResourceType typeResource, int quantity) {
-        for (ResourceElements resourceElement : (Queue<ResourceElements>) mapResourceQueue.get(typeResource)) {
+        for (Resource resourceElement : (Queue<Resource>) mapResourceQueue.get(typeResource)) {
             int actualQuantity = resourceElement.getQuantity();
 
             boolean enoughQuantity = resourceElement.removeElement(quantity);
@@ -72,7 +72,7 @@ public class Pantry implements Eatable {
 
     public void removeAllEmptyResources() {
         for (Map.Entry<ResourceType, Object> entry : mapResourceQueue.entrySet()) {
-            Queue<ResourceElements> resourceQueue = (Queue<ResourceElements>) entry.getValue();
+            Queue<Resource> resourceQueue = (Queue<Resource>) entry.getValue();
             while (resourceQueue.peek() != null && resourceQueue.peek().isEmpty()) {
                 resourceQueue.poll();
             }
@@ -81,7 +81,7 @@ public class Pantry implements Eatable {
 
     public void removeAllExpiredResources() {
         for (Map.Entry<ResourceType, Object> entry : mapResourceQueue.entrySet()) {
-            Queue<ResourceElements> resourceQueue = (Queue<ResourceElements>) entry.getValue();
+            Queue<Resource> resourceQueue = (Queue<Resource>) entry.getValue();
             while (resourceQueue.peek() != null && resourceQueue.peek().isExpired()) {
                 assert resourceQueue.peek() != null;
                 expiredResources.addResource(entry.getKey(), resourceQueue.peek().getQuantity());
@@ -94,27 +94,27 @@ public class Pantry implements Eatable {
         removeAllEmptyResources();
         removeAllExpiredResources();
         for (Map.Entry<ResourceType, Object> entry : mapResourceQueue.entrySet()) {
-            for (ResourceElements resourceElement : (Queue<ResourceElements>) entry.getValue()) {
+            for (Resource resourceElement : (Queue<Resource>) entry.getValue()) {
                 resourceElement.decreaseExpirationDate();
             }
         }
     }
 
-    public Resource getConsumedResources() {
+    public Resources getConsumedResources() {
         return consumedResources;
     }
 
-    public Resource getExpiredResources() {
+    public Resources getExpiredResources() {
         return expiredResources;
     }
 
     public int getFreshResourceQuantity(ResourceType resourceType) {
-        return ((Queue<ResourceElements>) mapResourceQueue.get(resourceType)).size();
+        return ((Queue<Resource>) mapResourceQueue.get(resourceType)).size();
     }
 
     public void clear() {
         for (Map.Entry<ResourceType, Object> entry : mapResourceQueue.entrySet()) {
-            Queue<ResourceElements> resourceQueue = (Queue<ResourceElements>) entry.getValue();
+            Queue<Resource> resourceQueue = (Queue<Resource>) entry.getValue();
             resourceQueue.clear();
         }
 

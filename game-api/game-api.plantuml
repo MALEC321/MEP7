@@ -315,14 +315,14 @@ title __GAME-API's Class Diagram__\n
   
     namespace ca.ulaval.glo4002.game {
       namespace domain.resources {
-        class ca.ulaval.glo4002.game.domain.resources.Resource {
+        class ca.ulaval.glo4002.game.domain.resources.Resources {
         }
       }
     }
   
     namespace ca.ulaval.glo4002.game {
       namespace domain.resources {
-        abstract class ca.ulaval.glo4002.game.domain.resources.ResourceElements {
+        abstract class ca.ulaval.glo4002.game.domain.resources.Resource {
         }
       }
     }
@@ -629,9 +629,9 @@ title __GAME-API's Class Diagram__\n
   ca.ulaval.glo4002.game.domain.dinosaur.Dinosaur o-- ca.ulaval.glo4002.game.domain.dinosaur.enums.DietType : diet
   ca.ulaval.glo4002.game.domain.dinosaur.DinosaurFactory o-- ca.ulaval.glo4002.game.domain.dinosaur.DinosaurRepository : dinosaurRepository
   ca.ulaval.glo4002.game.domain.dinosaur.DinosaurFactory o-- ca.ulaval.glo4002.game.domain.dinosaur.enums.SpeciesDietsCorrespondances : speciesDietsCorrespondances
-  ca.ulaval.glo4002.game.domain.resources.Burger -up-|> ca.ulaval.glo4002.game.domain.resources.ResourceElements
-  ca.ulaval.glo4002.game.domain.resources.Salad -up-|> ca.ulaval.glo4002.game.domain.resources.ResourceElements
-  ca.ulaval.glo4002.game.domain.resources.Water -up-|> ca.ulaval.glo4002.game.domain.resources.ResourceElements
+  ca.ulaval.glo4002.game.domain.resources.Burger -up-|> ca.ulaval.glo4002.game.domain.resources.Resource
+  ca.ulaval.glo4002.game.domain.resources.Salad -up-|> ca.ulaval.glo4002.game.domain.resources.Resource
+  ca.ulaval.glo4002.game.domain.resources.Water -up-|> ca.ulaval.glo4002.game.domain.resources.Resource
   ca.ulaval.glo4002.game.exceptions.exceptionMappers.DuplicateNameExceptionMapper .up.|> javax.ws.rs.ext.ExceptionMapper
   ca.ulaval.glo4002.game.exceptions.exceptionMappers.DuplicateNameExceptionMapper -up-|> ca.ulaval.glo4002.game.exceptions.ExceptionResponse
   ca.ulaval.glo4002.game.exceptions.exceptionMappers.InvalidFatherExceptionMapper .up.|> javax.ws.rs.ext.ExceptionMapper
@@ -652,8 +652,8 @@ title __GAME-API's Class Diagram__\n
   ca.ulaval.glo4002.game.repositories.actions.ActionRepositoryInMemory .up.|> ca.ulaval.glo4002.game.domain.actions.ActionRepository
   ca.ulaval.glo4002.game.repositories.dinosaur.DinosaurRepositoryInMemory .up.|> ca.ulaval.glo4002.game.domain.dinosaur.DinosaurRepository
   ca.ulaval.glo4002.game.repositories.resources.ResourceRepositoryInMemory .up.|> ca.ulaval.glo4002.game.domain.resources.ResourceRepository
-  ca.ulaval.glo4002.game.repositories.resources.ResourceRepositoryInMemory o-- ca.ulaval.glo4002.game.domain.resources.Resource : consumedResources
-  ca.ulaval.glo4002.game.repositories.resources.ResourceRepositoryInMemory o-- ca.ulaval.glo4002.game.domain.resources.Resource : expiredResources
+  ca.ulaval.glo4002.game.repositories.resources.ResourceRepositoryInMemory o-- ca.ulaval.glo4002.game.domain.resources.Resources : consumedResources
+  ca.ulaval.glo4002.game.repositories.resources.ResourceRepositoryInMemory o-- ca.ulaval.glo4002.game.domain.resources.Resources : expiredResources
   ca.ulaval.glo4002.game.repositories.turn.TurnRepositoryInMemory .up.|> ca.ulaval.glo4002.game.domain.turn.TurnRepository
 
 

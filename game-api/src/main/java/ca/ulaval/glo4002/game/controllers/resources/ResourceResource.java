@@ -1,21 +1,12 @@
 package ca.ulaval.glo4002.game.controllers.resources;
 
-import java.util.List;
+import ca.ulaval.glo4002.game.application.resources.ResourceUseCase;
+import ca.ulaval.glo4002.game.controllers.resources.dtos.*;
 
-import javax.ws.rs.Consumes;
-import javax.ws.rs.GET;
-import javax.ws.rs.POST;
-import javax.ws.rs.Path;
-import javax.ws.rs.Produces;
+import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
-
-import ca.ulaval.glo4002.game.application.resources.ResourceUseCase;
-import ca.ulaval.glo4002.game.controllers.resources.dtos.ResourceCreationDto;
-import ca.ulaval.glo4002.game.controllers.resources.dtos.ResourceDto;
-import ca.ulaval.glo4002.game.controllers.resources.dtos.ResourceDtoAssembler;
-import ca.ulaval.glo4002.game.controllers.resources.dtos.ResourceRequest;
-import ca.ulaval.glo4002.game.controllers.resources.dtos.ResourcesResponse;
+import java.util.List;
 
 @Path("/resources")
 public class ResourceResource {
@@ -32,7 +23,6 @@ public class ResourceResource {
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
     public Response createResource(ResourceRequest resourceRequest) {
-
         ResourceCreationDto dto = resourceDtoAssembler.fromRequest(resourceRequest);
         resourceUseCase.createResource(dto);
         return Response.status(Response.Status.OK).build();
@@ -43,8 +33,6 @@ public class ResourceResource {
     public Response getAllResources() {
         List<ResourceDto> resources = resourceUseCase.getAllResources();
         ResourcesResponse response = resourceDtoAssembler.toResponse(resources);
-
         return Response.status(Response.Status.OK).entity(response).build();
     }
-
 }

@@ -9,8 +9,8 @@ import ca.ulaval.glo4002.game.controllers.resources.dtos.ResourceDto;
 import ca.ulaval.glo4002.game.domain.actions.Action;
 import ca.ulaval.glo4002.game.domain.actions.ActionFactory;
 import ca.ulaval.glo4002.game.domain.actions.ActionRepository;
+import ca.ulaval.glo4002.game.domain.resources.Resources;
 import ca.ulaval.glo4002.game.domain.resources.Resource;
-import ca.ulaval.glo4002.game.domain.resources.ResourceElements;
 import ca.ulaval.glo4002.game.domain.resources.ResourceFactory;
 import ca.ulaval.glo4002.game.domain.resources.ResourceRepository;
 
@@ -31,18 +31,18 @@ public class ResourceUseCase {
     }
 
     public ResourceDto createResource(ResourceCreationDto resourceCreationDto) {
-        Resource resources = resourceFactory.create(resourceCreationDto.qtyBurger, resourceCreationDto.qtySalad, resourceCreationDto.qtyWater);
+        Resources resources = resourceFactory.create(resourceCreationDto.qtyBurger, resourceCreationDto.qtySalad, resourceCreationDto.qtyWater);
         addResourceToActionWaitingList(resources);
         return resourceAssemblers.toDto(resources);
     }
 
     public List<ResourceDto> getAllResources() {
-        List<Resource> resources = resourceRepository.findAll();
+        List<Resources> resources = resourceRepository.findAll();
         return resourceAssemblers.toDtos(resources);
     }
 
-    private void addResourceToActionWaitingList(Resource resources) {
-        for (ResourceElements resource : new ArrayList<>(resources.getResources().values())) {
+    private void addResourceToActionWaitingList(Resources resources) {
+        for (Resource resource : new ArrayList<>(resources.getResources().values())) {
             if (resource.isEmpty()) {
                 continue;
             }

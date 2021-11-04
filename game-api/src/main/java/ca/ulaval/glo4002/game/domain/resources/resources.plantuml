@@ -19,7 +19,7 @@ title __RESOURCES's Class Diagram__\n
   namespace  {
     namespace a.ulaval.glo4002.game {
       namespace domain.resources {
-        class ca.ulaval.glo4002.game.domain.resources.Resource {
+        class ca.ulaval.glo4002.game.domain.resources.Resources {
             - resources : Map<String, ResourceElements>
             + Resource()
             + addBurger()
@@ -39,7 +39,7 @@ title __RESOURCES's Class Diagram__\n
   namespace  {
     namespace a.ulaval.glo4002.game {
       namespace domain.resources {
-        abstract class ca.ulaval.glo4002.game.domain.resources.ResourceElements {
+        abstract class ca.ulaval.glo4002.game.domain.resources.Resource {
             - quantity : int
             + ResourceElements()
             + addQuantity()
@@ -115,9 +115,9 @@ title __RESOURCES's Class Diagram__\n
   }
   
 
-  ca.ulaval.glo4002.game.domain.resources.Burger -up-|> ca.ulaval.glo4002.game.domain.resources.ResourceElements
-  ca.ulaval.glo4002.game.domain.resources.Salad -up-|> ca.ulaval.glo4002.game.domain.resources.ResourceElements
-  ca.ulaval.glo4002.game.domain.resources.Water -up-|> ca.ulaval.glo4002.game.domain.resources.ResourceElements
+  ca.ulaval.glo4002.game.domain.resources.Burger -up-|> ca.ulaval.glo4002.game.domain.resources.Resource
+  ca.ulaval.glo4002.game.domain.resources.Salad -up-|> ca.ulaval.glo4002.game.domain.resources.Resource
+  ca.ulaval.glo4002.game.domain.resources.Water -up-|> ca.ulaval.glo4002.game.domain.resources.Resource
 
 
 right footer

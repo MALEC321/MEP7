@@ -2,6 +2,7 @@ package ca.ulaval.glo4002.game.application.resources;
 
 import java.util.List;
 
+import ca.ulaval.glo4002.game.domain.resources.Resources;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -16,7 +17,6 @@ import ca.ulaval.glo4002.game.controllers.turn.dtos.TurnAssembler;
 import ca.ulaval.glo4002.game.domain.actions.ActionFactory;
 import ca.ulaval.glo4002.game.domain.actions.ActionRepository;
 import ca.ulaval.glo4002.game.domain.dinosaur.DinosaurRepository;
-import ca.ulaval.glo4002.game.domain.resources.Resource;
 import ca.ulaval.glo4002.game.domain.resources.ResourceFactory;
 import ca.ulaval.glo4002.game.domain.resources.ResourceRepository;
 import ca.ulaval.glo4002.game.domain.turn.TurnFactory;
@@ -77,7 +77,7 @@ class ResourceUseCaseTest {
         ResourceRepository resourceRepository = new ResourceRepositoryInMemory();
         turnUseCase.createTurn();
 
-        List<Resource> resources = resourceRepository.findAll();
+        List<Resources> resources = resourceRepository.findAll();
 
         assertFalse(resources.isEmpty());
     }

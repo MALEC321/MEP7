@@ -1,24 +1,20 @@
 package ca.ulaval.glo4002.game.repositories.resources;
 
+import ca.ulaval.glo4002.game.domain.resources.*;
+
 import java.util.Arrays;
 import java.util.List;
-
-import ca.ulaval.glo4002.game.domain.resources.Pantry;
-import ca.ulaval.glo4002.game.domain.resources.Resource;
-import ca.ulaval.glo4002.game.domain.resources.ResourceElements;
-import ca.ulaval.glo4002.game.domain.resources.ResourceRepository;
-import ca.ulaval.glo4002.game.domain.resources.ResourceType;
 
 public class ResourceRepositoryInMemory implements ResourceRepository {
     private Pantry pantry = new Pantry();
 
     @Override
-    public void add(ResourceElements resourceElements) {
-        pantry.add(resourceElements);
+    public void add(Resource resource) {
+        pantry.add(resource);
     }
 
     @Override
-    public List<Resource> findAll() {
+    public List<Resources> findAll() {
         return Arrays.asList(pantry.findFreshResource(), pantry.getExpiredResources(), pantry.getConsumedResources());
     }
 

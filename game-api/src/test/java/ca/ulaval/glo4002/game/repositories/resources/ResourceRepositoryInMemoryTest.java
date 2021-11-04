@@ -1,5 +1,6 @@
 package ca.ulaval.glo4002.game.repositories.resources;
 
+import ca.ulaval.glo4002.game.domain.resources.Resource;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
@@ -13,7 +14,6 @@ import static org.mockito.Mockito.verify;
 
 import ca.ulaval.glo4002.game.domain.resources.Burger;
 import ca.ulaval.glo4002.game.domain.resources.Pantry;
-import ca.ulaval.glo4002.game.domain.resources.ResourceElements;
 import ca.ulaval.glo4002.game.domain.resources.Water;
 
 class ResourceRepositoryInMemoryTest {
@@ -31,27 +31,27 @@ class ResourceRepositoryInMemoryTest {
 
     @Test
     void whenAddResource_thenResourceIsAddedToPantry() {
-        ResourceElements resourceElements = Mockito.mock(ResourceElements.class);
+        Resource resource = Mockito.mock(Resource.class);
 
-        this.resourceRepositoryInMemory.add(resourceElements);
+        this.resourceRepositoryInMemory.add(resource);
 
-        verify(this.pantry, times(1)).add(resourceElements);
+        verify(this.pantry, times(1)).add(resource);
     }
 
     @Test
     void reposWithBurger_whenFindAllResource_thenRepoIsNotEmpty() {
-        ResourceElements resourceElements = new Burger(1);
+        Resource resource = new Burger(1);
 
-        this.resourceRepositoryInMemory.add(resourceElements);
+        this.resourceRepositoryInMemory.add(resource);
 
         assertFalse(this.resourceRepositoryInMemory.findAll().isEmpty());
     }
 
     @Test
     void repoWithResource_whenDecreaseExpirationDateResource_thenResourceAreDecreased() {
-        ResourceElements resourceElements = new Burger(1);
+        Resource resource = new Burger(1);
 
-        this.resourceRepositoryInMemory.add(resourceElements);
+        this.resourceRepositoryInMemory.add(resource);
         this.resourceRepositoryInMemory.decreaseExpirationDate();
 
         verify(this.pantry, times(1)).decreaseExpirationDate();
@@ -59,9 +59,9 @@ class ResourceRepositoryInMemoryTest {
 
     @Test
     void reposWithResource_whenResetResource_thenResourceAreReset() {
-        ResourceElements resourceElements = new Water(10000);
+        Resource resource = new Water(10000);
 
-        this.resourceRepositoryInMemory.add(resourceElements);
+        this.resourceRepositoryInMemory.add(resource);
         this.resourceRepositoryInMemory.reset();
 
         verify(this.pantry, times(1)).clear();

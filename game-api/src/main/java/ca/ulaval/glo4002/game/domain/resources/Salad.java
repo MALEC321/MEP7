@@ -1,6 +1,6 @@
 package ca.ulaval.glo4002.game.domain.resources;
 
-public class Salad extends ResourceElements {
+public class Salad extends Resource {
     private int expiration = 3;
 
     public Salad(int quantity) {

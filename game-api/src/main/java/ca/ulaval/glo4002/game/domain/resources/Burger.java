@@ -1,6 +1,6 @@
 package ca.ulaval.glo4002.game.domain.resources;
 
-public class Burger extends ResourceElements {
+public class Burger extends Resource {
     private int expiration = 4;
 
     public Burger(int quantity) {
