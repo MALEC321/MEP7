@@ -1,4 +1,4 @@
-package ca.ulaval.glo4002.game.repositories.resources;
+package ca.ulaval.glo4002.game.infrastructure.persistence.resources;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

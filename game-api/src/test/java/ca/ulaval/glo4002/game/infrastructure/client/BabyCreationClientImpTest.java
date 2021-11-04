@@ -1,7 +1,7 @@
-package ca.ulaval.glo4002.game.repositories.client;
+package ca.ulaval.glo4002.game.infrastructure.client;
 
-import ca.ulaval.glo4002.game.repositories.client.dto.RequestBreed;
-import ca.ulaval.glo4002.game.repositories.client.dto.ResponseBreed;
+import ca.ulaval.glo4002.game.infrastructure.client.dto.RequestBreed;
+import ca.ulaval.glo4002.game.infrastructure.client.dto.ResponseBreed;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;

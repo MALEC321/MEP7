@@ -4,7 +4,7 @@ title __ACTIONS's Class Diagram__\n
 
     namespace ca.ulaval.glo4002.game {
       namespace repositories.actions {
-        class ca.ulaval.glo4002.game.repositories.actions.ActionRepositoryInMemory {
+        class ca.ulaval.glo4002.game.infrastructure.persistence.actions.ActionRepositoryInMemory {
             - waitingActions : List<Action>
             + execute()
             + getWaitingActions()
@@ -15,7 +15,7 @@ title __ACTIONS's Class Diagram__\n
     }
   
 
-  ca.ulaval.glo4002.game.repositories.actions.ActionRepositoryInMemory .up.|> ca.ulaval.glo4002.game.domain.actions.ActionRepository
+  ca.ulaval.glo4002.game.infrastructure.persistence.actions.ActionRepositoryInMemory .up.|> ca.ulaval.glo4002.game.domain.actions.ActionRepository
 
 
 right footer

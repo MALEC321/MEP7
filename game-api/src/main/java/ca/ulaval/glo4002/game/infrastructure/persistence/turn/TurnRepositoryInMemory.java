@@ -1,4 +1,4 @@
-package ca.ulaval.glo4002.game.repositories.turn;
+package ca.ulaval.glo4002.game.infrastructure.persistence.turn;
 
 import java.util.HashMap;
 import java.util.Map;

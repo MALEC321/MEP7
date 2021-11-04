@@ -9,9 +9,9 @@ import ca.ulaval.glo4002.game.domain.dinosaur.DinosaurFactory;
 import ca.ulaval.glo4002.game.domain.dinosaur.DinosaurRepository;
 import ca.ulaval.glo4002.game.domain.dinosaur.enums.SpeciesDietsCorrespondances;
 import ca.ulaval.glo4002.game.exceptions.types.NotExistentNameException;
-import ca.ulaval.glo4002.game.repositories.client.BabyCreationClientImp;
-import ca.ulaval.glo4002.game.repositories.actions.ActionRepositoryInMemory;
-import ca.ulaval.glo4002.game.repositories.dinosaur.DinosaurRepositoryInMemory;
+import ca.ulaval.glo4002.game.infrastructure.client.BabyCreationClientImp;
+import ca.ulaval.glo4002.game.infrastructure.persistence.actions.ActionRepositoryInMemory;
+import ca.ulaval.glo4002.game.infrastructure.persistence.dinosaur.DinosaurRepositoryInMemory;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 

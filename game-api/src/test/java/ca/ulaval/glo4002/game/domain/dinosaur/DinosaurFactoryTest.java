@@ -11,7 +11,7 @@ import ca.ulaval.glo4002.game.exceptions.types.DuplicateNameException;
 import ca.ulaval.glo4002.game.exceptions.types.InvalidGenderException;
 import ca.ulaval.glo4002.game.exceptions.types.InvalidSpeciesException;
 import ca.ulaval.glo4002.game.exceptions.types.InvalidWeightException;
-import ca.ulaval.glo4002.game.repositories.dinosaur.DinosaurRepositoryInMemory;
+import ca.ulaval.glo4002.game.infrastructure.persistence.dinosaur.DinosaurRepositoryInMemory;
 
 class DinosaurFactoryTest {
 

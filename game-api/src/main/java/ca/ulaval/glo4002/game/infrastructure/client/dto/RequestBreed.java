@@ -1,4 +1,4 @@
-package ca.ulaval.glo4002.game.repositories.client.dto;
+package ca.ulaval.glo4002.game.infrastructure.client.dto;
 
 public class RequestBreed {
     private final String fatherSpecies;
