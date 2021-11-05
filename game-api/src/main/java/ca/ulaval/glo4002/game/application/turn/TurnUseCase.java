@@ -58,7 +58,7 @@ public class TurnUseCase {
     protected void cookIt() {
         resourceRepository.add(resourceFactory.create(BURGER, 100));
         resourceRepository.add(resourceFactory.create(SALAD, 250));
-        resourceRepository.add(resourceFactory.create(WATER, 1000));
+        resourceRepository.add(resourceFactory.create(WATER, 10000));
     }
 
     private void postAction() {
