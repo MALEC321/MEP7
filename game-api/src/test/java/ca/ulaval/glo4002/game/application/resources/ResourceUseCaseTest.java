@@ -26,7 +26,7 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
 
-class ResourceUseCaseTest {
+public class ResourceUseCaseTest {
 
     private static final int QYT_BURGER = 4;
     private static final int QYT_SALAD = 5;

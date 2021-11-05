@@ -6,7 +6,6 @@ import java.util.stream.Collectors;
 public class ResourceDtoAssembler {
     public ResourceCreationDto fromRequest(ResourceRequest request) {
         ResourceCreationDto dto = new ResourceCreationDto();
-
         dto.qtyBurger = request.qtyBurger;
         dto.qtySalad = request.qtySalad;
         dto.qtyWater = request.qtyWater;
