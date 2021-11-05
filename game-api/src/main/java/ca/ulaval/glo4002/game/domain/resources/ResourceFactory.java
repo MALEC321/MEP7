@@ -15,7 +15,7 @@ public class ResourceFactory {
         else if (resourceType.equals(SALAD))
             return new Resource(SALAD, quantity, 3);
         else if (resourceType.equals(WATER))
-            return new Resource(SALAD, quantity, 10);
+            return new Resource(WATER, quantity, 10);
         else
             throw new InvalidResourceTypeException();
     }
