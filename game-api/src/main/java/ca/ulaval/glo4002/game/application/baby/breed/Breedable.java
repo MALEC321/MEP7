@@ -5,6 +5,6 @@ import ca.ulaval.glo4002.game.infrastructure.client.dto.RequestBreed;
 
 import java.util.Optional;
 
-public interface BabyCreationClient {
+public interface Breedable {
     Optional<ResponseBreed> createBaby(RequestBreed parentDto);
 }

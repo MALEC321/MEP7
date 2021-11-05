@@ -15,20 +15,20 @@ import javax.ws.rs.core.Response;
 @Path("/breed")
 public class BabyResource {
 
-    private final BabyUseCase bebeUseCase;
+    private final BabyUseCase babyUseCase;
     private final BabyDtoAssembler babyDtoAssembler;
 
-    public BabyResource(BabyUseCase bebeUseCase, BabyDtoAssembler babyDtoAssembler) {
-        this.bebeUseCase = bebeUseCase;
+    public BabyResource(BabyUseCase babyUseCase, BabyDtoAssembler babyDtoAssembler) {
+        this.babyUseCase = babyUseCase;
         this.babyDtoAssembler = babyDtoAssembler;
     }
 
     @POST
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
-    public Response createBebe(BabyRequest babyRequest) {
+    public Response createBaby(BabyRequest babyRequest) {
         BabyCreationDto dto = babyDtoAssembler.fromRequest(babyRequest);
-        bebeUseCase.createBebe(dto);
+        babyUseCase.createBaby(dto);
         return Response.status(Response.Status.OK).build();
     }
 }

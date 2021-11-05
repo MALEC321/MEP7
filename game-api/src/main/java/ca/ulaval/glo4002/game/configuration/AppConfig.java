@@ -1,6 +1,6 @@
 package ca.ulaval.glo4002.game.configuration;
 
-import ca.ulaval.glo4002.game.application.baby.breed.BabyCreationClient;
+import ca.ulaval.glo4002.game.application.baby.breed.Breedable;
 import ca.ulaval.glo4002.game.application.baby.BabyUseCase;
 import ca.ulaval.glo4002.game.application.baby.dtos.BabyAssembler;
 import ca.ulaval.glo4002.game.application.dinosaur.DinosaurUseCase;
@@ -27,7 +27,7 @@ import ca.ulaval.glo4002.game.domain.resources.ResourceRepository;
 import ca.ulaval.glo4002.game.domain.turn.TurnFactory;
 import ca.ulaval.glo4002.game.domain.turn.TurnRepository;
 import ca.ulaval.glo4002.game.exceptions.exceptionMappers.*;
-import ca.ulaval.glo4002.game.infrastructure.client.BabyCreationClientImp;
+import ca.ulaval.glo4002.game.infrastructure.client.BabyBreedableClient;
 import ca.ulaval.glo4002.game.infrastructure.persistence.actions.ActionRepositoryInMemory;
 import ca.ulaval.glo4002.game.infrastructure.persistence.dinosaur.DinosaurRepositoryInMemory;
 import ca.ulaval.glo4002.game.infrastructure.persistence.resources.ResourceRepositoryInMemory;
@@ -68,13 +68,13 @@ public class AppConfig {
     static ResourceDtoAssembler resourceDtoAssembler = new ResourceDtoAssembler();
     static ResourceResource resourceResource = new ResourceResource(resourceUseCase, resourceDtoAssembler);
 
-    // Bebe
+    // Baby
     static BabyAssembler babyAssembler = new BabyAssembler();
-    static BabyCreationClient babyCreationClient = new BabyCreationClientImp();
-    static BabyUseCase bebeUseCase = new BabyUseCase(dinosaurRepository, babyAssembler, actionRepository, actionFactory, dinosaurFactory, babyCreationClient);
+    static Breedable breedable = new BabyBreedableClient();
+    static BabyUseCase babyUseCase = new BabyUseCase(dinosaurRepository, babyAssembler, actionRepository, actionFactory, dinosaurFactory, breedable);
 
     static BabyDtoAssembler babyDtoAssembler = new BabyDtoAssembler();
-    static BabyResource babyResource = new BabyResource(bebeUseCase, babyDtoAssembler);
+    static BabyResource babyResource = new BabyResource(babyUseCase, babyDtoAssembler);
 
     public static ResourceConfig packageConfig = ResourceConfig.forApplication(new Application() {
         @Override

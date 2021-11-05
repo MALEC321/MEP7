@@ -1,7 +1,7 @@
 package ca.ulaval.glo4002.game.application.baby;
 
 import ca.ulaval.glo4002.game.application.baby.dtos.BabyAssembler;
-import ca.ulaval.glo4002.game.application.baby.breed.BabyCreationClient;
+import ca.ulaval.glo4002.game.application.baby.breed.Breedable;
 import ca.ulaval.glo4002.game.controllers.baby.dtos.BabyCreationDto;
 import ca.ulaval.glo4002.game.infrastructure.client.dto.ResponseBreed;
 import ca.ulaval.glo4002.game.infrastructure.client.dto.RequestBreed;
@@ -24,26 +24,35 @@ public class BabyUseCase {
     private final ActionRepository actionRepository;
     private final ActionFactory actionFactory;
     private final DinosaurFactory dinosaurFactory;
-    private final BabyCreationClient babyCreationClient;
+    private final Breedable breedable;
 
     public BabyUseCase(DinosaurRepository dinosaurRepository, BabyAssembler babyAssembler, ActionRepository actionRepository, ActionFactory actionFactory,
-                       DinosaurFactory dinosaurFactory, BabyCreationClient babyCreationClient) {
+                       DinosaurFactory dinosaurFactory, Breedable breedable) {
         this.dinosaurRepository = dinosaurRepository;
         this.babyAssembler = babyAssembler;
         this.actionRepository = actionRepository;
         this.actionFactory = actionFactory;
         this.dinosaurFactory = dinosaurFactory;
-        this.babyCreationClient = babyCreationClient;
+        this.breedable = breedable;
     }
 
-    public void createBebe(BabyCreationDto dto) {
-        RequestBreed requestBreed = getParentsSpecies(dto.getFatherName(), dto.getMotherName());
-        Optional<ResponseBreed> bebeDto = babyCreationClient.createBaby(requestBreed);
-        if(bebeDto.isPresent()) {
+    public void createBaby(BabyCreationDto dto) {
+        Optional<ResponseBreed> babyDto = tryToGiveBirthToBaby(dto);
+        saveBabyInformationIfBabyAlived(dto, babyDto);
+    }
+
+    private void saveBabyInformationIfBabyAlived(BabyCreationDto dto, Optional<ResponseBreed> babyDto) {
+        if(babyDto.isPresent()) {
             Dinosaur baby = dinosaurFactory.create(dto.getName(), dto.getFatherName(), dto.getMotherName(),
-                    bebeDto.get().getGender(), bebeDto.get().getOffspring());
+                    babyDto.get().getGender(), babyDto.get().getOffspring());
             actionRepository.save(actionFactory.create(baby, dinosaurRepository));
         }
+    }
+
+    private Optional<ResponseBreed> tryToGiveBirthToBaby(BabyCreationDto dto) {
+        RequestBreed requestBreed = getParentsSpecies(dto.getFatherName(), dto.getMotherName());
+        Optional<ResponseBreed> babyDto = breedable.createBaby(requestBreed);
+        return babyDto;
     }
 
     private RequestBreed getParentsSpecies(String fatherName, String motherName) {

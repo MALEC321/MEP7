@@ -25,7 +25,7 @@ class BabyCreationClientImpTest {
     private static final String FATHER_SPECIE = "fatherSpecie";
     private static final String MOTHER_SPECIE = "motherSpecie";
     @InjectMocks
-    BabyCreationClientImp babyCreationClient;
+    BabyBreedableClient babyCreationClient;
 
     @Mock
     Client clientMock;

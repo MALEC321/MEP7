@@ -5,8 +5,8 @@ import ca.ulaval.glo4002.game.infrastructure.client.dto.RequestBreed;
 
 public class BabyAssembler {
 
-    public BabyDto toDto(DinosaurBaby bebe) {
-        return new BabyDto(bebe.getName(), bebe.getFatherName(), bebe.getMotherName());
+    public BabyDto toDto(DinosaurBaby baby) {
+        return new BabyDto(baby.getName(), baby.getFatherName(), baby.getMotherName());
     }
 
     public RequestBreed toExternalDto(String fatherSpecies, String motherSpecies) {
