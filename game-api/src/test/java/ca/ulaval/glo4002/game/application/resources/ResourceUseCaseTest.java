@@ -2,6 +2,7 @@ package ca.ulaval.glo4002.game.application.resources;
 
 import java.util.List;
 
+import ca.ulaval.glo4002.game.repositories.dinosaur.HerdRepositoryInMemory;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -15,14 +16,13 @@ import ca.ulaval.glo4002.game.controllers.resources.dtos.ResourceDto;
 import ca.ulaval.glo4002.game.controllers.turn.dtos.TurnAssembler;
 import ca.ulaval.glo4002.game.domain.actions.ActionFactory;
 import ca.ulaval.glo4002.game.domain.actions.ActionRepository;
-import ca.ulaval.glo4002.game.domain.dinosaur.DinosaurRepository;
+import ca.ulaval.glo4002.game.domain.dinosaur.HerdRepository;
 import ca.ulaval.glo4002.game.domain.resources.Resource;
 import ca.ulaval.glo4002.game.domain.resources.ResourceFactory;
 import ca.ulaval.glo4002.game.domain.resources.ResourceRepository;
 import ca.ulaval.glo4002.game.domain.turn.TurnFactory;
 import ca.ulaval.glo4002.game.domain.turn.TurnRepository;
 import ca.ulaval.glo4002.game.repositories.actions.ActionRepositoryInMemory;
-import ca.ulaval.glo4002.game.repositories.dinosaur.DinosaurRepositoryInMemory;
 import ca.ulaval.glo4002.game.repositories.resources.ResourceRepositoryInMemory;
 import ca.ulaval.glo4002.game.repositories.turn.TurnRepositoryInMemory;
 
@@ -46,9 +46,9 @@ class ResourceUseCaseTest {
         TurnFactory turnFactory = new TurnFactory();
         TurnRepository turnRepository = new TurnRepositoryInMemory();
         TurnAssembler turnAssembler = new TurnAssembler();
-        DinosaurRepository dinosaurRepository = new DinosaurRepositoryInMemory();
+        HerdRepository herdRepository = new HerdRepositoryInMemory();
 
-        turnUseCase = new TurnUseCase(turnFactory, turnRepository, resourceRepository, dinosaurRepository, actionRepository, zooManager);
+        turnUseCase = new TurnUseCase(turnFactory, turnRepository, resourceRepository, herdRepository, actionRepository, zooManager);
         resourceUseCase = new ResourceUseCase(resourceFactory, resourceRepository, resourceAssemblers, actionRepository, actionFactory);
     }
 

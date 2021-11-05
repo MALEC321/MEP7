@@ -5,6 +5,8 @@ import java.util.Set;
 
 import javax.ws.rs.core.Application;
 
+import ca.ulaval.glo4002.game.domain.dinosaur.HerdRepository;
+import ca.ulaval.glo4002.game.repositories.dinosaur.HerdRepositoryInMemory;
 import org.glassfish.jersey.server.ResourceConfig;
 
 import ca.ulaval.glo4002.game.application.baby.BabyUseCase;
@@ -26,7 +28,6 @@ import ca.ulaval.glo4002.game.controllers.turn.dtos.TurnDtoAssembler;
 import ca.ulaval.glo4002.game.domain.actions.ActionFactory;
 import ca.ulaval.glo4002.game.domain.actions.ActionRepository;
 import ca.ulaval.glo4002.game.domain.dinosaur.DinosaurFactory;
-import ca.ulaval.glo4002.game.domain.dinosaur.DinosaurRepository;
 import ca.ulaval.glo4002.game.domain.dinosaur.enums.SpeciesDietsCorrespondances;
 import ca.ulaval.glo4002.game.domain.resources.ResourceFactory;
 import ca.ulaval.glo4002.game.domain.resources.ResourceRepository;
@@ -42,7 +43,6 @@ import ca.ulaval.glo4002.game.exceptions.exceptionMappers.InvalidWeightException
 import ca.ulaval.glo4002.game.exceptions.exceptionMappers.NotExistentNameExceptionMapper;
 import ca.ulaval.glo4002.game.exceptions.exceptionMappers.UnknownExceptionGrabber;
 import ca.ulaval.glo4002.game.repositories.actions.ActionRepositoryInMemory;
-import ca.ulaval.glo4002.game.repositories.dinosaur.DinosaurRepositoryInMemory;
 import ca.ulaval.glo4002.game.repositories.resources.ResourceRepositoryInMemory;
 import ca.ulaval.glo4002.game.repositories.turn.TurnRepositoryInMemory;
 
@@ -57,15 +57,15 @@ public class AppConfig {
     static ZooManager zooManager = new ZooManager();
 
     // Dinosaur
-    static DinosaurRepository dinosaurRepository = new DinosaurRepositoryInMemory();
-    static DinosaurFactory dinosaurFactory = new DinosaurFactory(dinosaurRepository, speciesDietsCorrespondances);
+    static HerdRepository herdRepository = new HerdRepositoryInMemory();
+    static DinosaurFactory dinosaurFactory = new DinosaurFactory(herdRepository, speciesDietsCorrespondances);
     static DinosaurAssembler dinosaurAssembler = new DinosaurAssembler();
-    static DinosaurUseCase dinosaurUseCase = new DinosaurUseCase(dinosaurFactory, dinosaurRepository, dinosaurAssembler, actionRepository, actionFactory);
+    static DinosaurUseCase dinosaurUseCase = new DinosaurUseCase(dinosaurFactory, herdRepository, dinosaurAssembler, actionRepository, actionFactory);
 
     static DinosaurDtoAssembler dinosaurDtoAssembler = new DinosaurDtoAssembler();
     static DinosaurResource dinosaurResource = new DinosaurResource(dinosaurUseCase, dinosaurDtoAssembler);
 
-    static TurnUseCase turnUseCase = new TurnUseCase(turnFactory, turnRepository, resourceRepository, dinosaurRepository, actionRepository, zooManager);
+    static TurnUseCase turnUseCase = new TurnUseCase(turnFactory, turnRepository, resourceRepository, herdRepository, actionRepository, zooManager);
 
     static TurnDtoAssembler turnDtoAssembler = new TurnDtoAssembler();
     static TurnResource turnResource = new TurnResource(turnUseCase, turnDtoAssembler);
@@ -78,7 +78,7 @@ public class AppConfig {
 
     // Bebe
     static BabyAssembler babyAssembler = new BabyAssembler();
-    static BabyUseCase bebeUseCase = new BabyUseCase(dinosaurRepository, babyAssembler, actionRepository, actionFactory, dinosaurFactory);
+    static BabyUseCase bebeUseCase = new BabyUseCase(herdRepository, babyAssembler, actionRepository, actionFactory, dinosaurFactory);
 
     static BabyDtoAssembler babyDtoAssembler = new BabyDtoAssembler();
     static BabyResource babyResource = new BabyResource(bebeUseCase, babyDtoAssembler);

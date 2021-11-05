@@ -9,7 +9,7 @@ import ca.ulaval.glo4002.game.domain.actions.ActionFactory;
 import ca.ulaval.glo4002.game.domain.actions.ActionRepository;
 import ca.ulaval.glo4002.game.domain.dinosaur.Dinosaur;
 import ca.ulaval.glo4002.game.domain.dinosaur.DinosaurFactory;
-import ca.ulaval.glo4002.game.domain.dinosaur.DinosaurRepository;
+import ca.ulaval.glo4002.game.domain.dinosaur.HerdRepository;
 import ca.ulaval.glo4002.game.domain.dinosaur.Herd;
 import ca.ulaval.glo4002.game.exceptions.types.InvalidFatherException;
 import ca.ulaval.glo4002.game.exceptions.types.InvalidMotherException;
@@ -17,15 +17,15 @@ import ca.ulaval.glo4002.game.exceptions.types.NotExistentNameException;
 
 public class BabyUseCase {
 
-    private final DinosaurRepository dinosaurRepository;
+    private final HerdRepository herdRepository;
     private final BabyAssembler babyAssembler;
     private final ActionRepository actionRepository;
     private final ActionFactory actionFactory;
     private final DinosaurFactory dinosaurFactory;
 
-    public BabyUseCase(DinosaurRepository dinosaurRepository, BabyAssembler babyAssembler, ActionRepository actionRepository, ActionFactory actionFactory,
+    public BabyUseCase(HerdRepository herdRepository, BabyAssembler babyAssembler, ActionRepository actionRepository, ActionFactory actionFactory,
                        DinosaurFactory dinosaurFactory) {
-        this.dinosaurRepository = dinosaurRepository;
+        this.herdRepository = herdRepository;
         this.babyAssembler = babyAssembler;
         this.actionRepository = actionRepository;
         this.actionFactory = actionFactory;
@@ -34,11 +34,11 @@ public class BabyUseCase {
 
     public void createBebe(BabyCreationDto dto) {
         Dinosaur baby = dinosaurFactory.create(dto.name, dto.fatherName, dto.motherName, dto.gender, dto.species);
-        actionRepository.save(actionFactory.create(baby, dinosaurRepository));
+        actionRepository.save(actionFactory.create(baby, herdRepository));
     }
 
     public ExternalApiCreationDto getParentsSpecies(String fatherName, String motherName) {
-        Herd herd = dinosaurRepository.findHerd();
+        Herd herd = herdRepository.findHerd();
 
         String fatherSpecies;
         String motherSpecies;

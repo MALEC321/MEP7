@@ -1,9 +1,9 @@
 package ca.ulaval.glo4002.game.repositories.dinosaur;
 
-import ca.ulaval.glo4002.game.domain.dinosaur.DinosaurRepository;
+import ca.ulaval.glo4002.game.domain.dinosaur.HerdRepository;
 import ca.ulaval.glo4002.game.domain.dinosaur.Herd;
 
-public class DinosaurRepositoryInMemory implements DinosaurRepository {
+public class HerdRepositoryInMemory implements HerdRepository {
     private Herd herd;
 
     @Override

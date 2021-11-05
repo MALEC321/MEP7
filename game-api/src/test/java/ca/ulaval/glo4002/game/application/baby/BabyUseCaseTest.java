@@ -1,5 +1,6 @@
 package ca.ulaval.glo4002.game.application.baby;
 
+import ca.ulaval.glo4002.game.repositories.dinosaur.HerdRepositoryInMemory;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -10,11 +11,10 @@ import ca.ulaval.glo4002.game.controllers.baby.dtos.BabyCreationDto;
 import ca.ulaval.glo4002.game.domain.actions.ActionFactory;
 import ca.ulaval.glo4002.game.domain.actions.ActionRepository;
 import ca.ulaval.glo4002.game.domain.dinosaur.DinosaurFactory;
-import ca.ulaval.glo4002.game.domain.dinosaur.DinosaurRepository;
+import ca.ulaval.glo4002.game.domain.dinosaur.HerdRepository;
 import ca.ulaval.glo4002.game.domain.dinosaur.enums.SpeciesDietsCorrespondances;
 import ca.ulaval.glo4002.game.exceptions.types.NotExistentNameException;
 import ca.ulaval.glo4002.game.repositories.actions.ActionRepositoryInMemory;
-import ca.ulaval.glo4002.game.repositories.dinosaur.DinosaurRepositoryInMemory;
 
 class BabyUseCaseTest {
 
@@ -33,14 +33,14 @@ class BabyUseCaseTest {
         this.gender = "f";
         this.species = "Ankylosaurus";
 
-        DinosaurRepository dinosaurRepository = new DinosaurRepositoryInMemory();
+        HerdRepository herdRepository = new HerdRepositoryInMemory();
         BabyAssembler babyAssembler = new BabyAssembler();
         ActionRepository actionRepository = new ActionRepositoryInMemory();
         ActionFactory actionFactory = new ActionFactory();
         SpeciesDietsCorrespondances speciesDietsCorrespondances = new SpeciesDietsCorrespondances();
-        DinosaurFactory dinosaurFactory = new DinosaurFactory(dinosaurRepository, speciesDietsCorrespondances);
+        DinosaurFactory dinosaurFactory = new DinosaurFactory(herdRepository, speciesDietsCorrespondances);
 
-        babyUseCase = new BabyUseCase(dinosaurRepository, babyAssembler, actionRepository, actionFactory, dinosaurFactory);
+        babyUseCase = new BabyUseCase(herdRepository, babyAssembler, actionRepository, actionFactory, dinosaurFactory);
     }
 
     @Test

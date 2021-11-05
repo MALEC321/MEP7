@@ -9,46 +9,46 @@ import ca.ulaval.glo4002.game.domain.actions.ActionFactory;
 import ca.ulaval.glo4002.game.domain.actions.ActionRepository;
 import ca.ulaval.glo4002.game.domain.dinosaur.Dinosaur;
 import ca.ulaval.glo4002.game.domain.dinosaur.DinosaurFactory;
-import ca.ulaval.glo4002.game.domain.dinosaur.DinosaurRepository;
+import ca.ulaval.glo4002.game.domain.dinosaur.HerdRepository;
 import ca.ulaval.glo4002.game.domain.dinosaur.Herd;
 import ca.ulaval.glo4002.game.exceptions.types.NotExistentNameException;
 
 public class DinosaurUseCase {
 
     private final DinosaurFactory dinosaurFactory;
-    private final DinosaurRepository dinosaurRepository;
+    private final HerdRepository herdRepository;
     private final DinosaurAssembler dinosaurAssembler;
     private final ActionRepository actionRepository;
     private final ActionFactory actionFactory;
 
     public DinosaurUseCase(
         DinosaurFactory dinosaurFactory,
-        DinosaurRepository dinosaurRepository,
+        HerdRepository herdRepository,
         DinosaurAssembler dinosaurAssembler,
         ActionRepository actionRepository,
         ActionFactory actionFactory) {
         this.dinosaurFactory = dinosaurFactory;
-        this.dinosaurRepository = dinosaurRepository;
+        this.herdRepository = herdRepository;
         this.dinosaurAssembler = dinosaurAssembler;
         this.actionRepository = actionRepository;
         this.actionFactory = actionFactory;
 
-        this.dinosaurRepository.add(new Herd());
+        this.herdRepository.add(new Herd());
     }
 
     public void createDinosaur(DinosaurCreationDto dto) {
         Dinosaur dinosaur = dinosaurFactory.create(dto.name, dto.weight, dto.gender, dto.species);
-        actionRepository.save(actionFactory.create(dinosaur, dinosaurRepository));
+        actionRepository.save(actionFactory.create(dinosaur, herdRepository));
     }
 
     public List<DinosaurDto> getAllDinosaurs() {
-        Herd herd = dinosaurRepository.findHerd();
+        Herd herd = herdRepository.findHerd();
         List<Dinosaur> dinosaurs = herd.findAll();
         return dinosaurAssembler.toDtos(dinosaurs);
     }
 
     public DinosaurDto getDinosaur(String name) throws NotExistentNameException {
-        Herd herd = dinosaurRepository.findHerd();
+        Herd herd = herdRepository.findHerd();
         if (herd.findByName(name) == null) {
             throw new NotExistentNameException();
         }

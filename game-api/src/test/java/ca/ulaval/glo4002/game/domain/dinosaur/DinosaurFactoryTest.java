@@ -1,5 +1,6 @@
 package ca.ulaval.glo4002.game.domain.dinosaur;
 
+import ca.ulaval.glo4002.game.repositories.dinosaur.HerdRepositoryInMemory;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -7,23 +8,21 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import ca.ulaval.glo4002.game.domain.dinosaur.enums.SpeciesDietsCorrespondances;
-import ca.ulaval.glo4002.game.exceptions.types.DuplicateNameException;
 import ca.ulaval.glo4002.game.exceptions.types.InvalidGenderException;
 import ca.ulaval.glo4002.game.exceptions.types.InvalidSpeciesException;
 import ca.ulaval.glo4002.game.exceptions.types.InvalidWeightException;
-import ca.ulaval.glo4002.game.repositories.dinosaur.DinosaurRepositoryInMemory;
 
 class DinosaurFactoryTest {
 
     private DinosaurFactory dinosaurFactory;
-    private DinosaurRepository dinosaurRepository;
+    private HerdRepository herdRepository;
     private static final int BABY_WEIGHT = 1;
 
     @BeforeEach
     void setUp() {
         SpeciesDietsCorrespondances speciesDietsCorrespondances = new SpeciesDietsCorrespondances();
-        dinosaurRepository = new DinosaurRepositoryInMemory();
-        dinosaurFactory = new DinosaurFactory(dinosaurRepository, speciesDietsCorrespondances);
+        herdRepository = new HerdRepositoryInMemory();
+        dinosaurFactory = new DinosaurFactory(herdRepository, speciesDietsCorrespondances);
     }
 
     //Test Dinosaur Adult
