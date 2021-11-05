@@ -1,10 +1,10 @@
-package ca.ulaval.glo4002.game.controllers.baby.dtos;
+package ca.ulaval.glo4002.game.infrastructure.client.dto;
 
-public class ExternalApiCreationDto {
+public class RequestBreed {
     private final String fatherSpecies;
     private final String motherSpecies;
 
-    public ExternalApiCreationDto(String fatherSpecies, String motherSpecies) {
+    public RequestBreed(String fatherSpecies, String motherSpecies) {
         this.fatherSpecies = fatherSpecies;
         this.motherSpecies = motherSpecies;
     }

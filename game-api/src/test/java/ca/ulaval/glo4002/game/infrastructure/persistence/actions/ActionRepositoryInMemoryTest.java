@@ -1,4 +1,4 @@
-package ca.ulaval.glo4002.game.repositories.actions;
+package ca.ulaval.glo4002.game.infrastructure.persistence.actions;
 
 import java.util.ArrayList;
 import java.util.List;

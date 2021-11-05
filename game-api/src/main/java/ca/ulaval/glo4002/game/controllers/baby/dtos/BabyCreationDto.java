@@ -4,15 +4,11 @@ public class BabyCreationDto {
     private final String name;
     private final String fatherName;
     private final String motherName;
-    private final String gender;
-    private final String species;
 
-    public BabyCreationDto(String name, String fatherName, String motherName, String gender, String species) {
+    public BabyCreationDto(String name, String fatherName, String motherName) {
         this.name = name;
         this.fatherName = fatherName;
         this.motherName = motherName;
-        this.gender = gender;
-        this.species = species;
     }
 
     public String getName() {
@@ -27,12 +23,5 @@ public class BabyCreationDto {
         return motherName;
     }
 
-    public String getGender() {
-        return gender;
-    }
-
-    public String getSpecies() {
-        return species;
-    }
 
 }

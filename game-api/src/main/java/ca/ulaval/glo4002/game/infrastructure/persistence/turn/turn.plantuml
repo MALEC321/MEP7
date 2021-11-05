@@ -5,7 +5,7 @@ title __TURN's Class Diagram__\n
   namespace  {
     namespace a.ulaval.glo4002.game {
       namespace repositories.turn {
-        class ca.ulaval.glo4002.game.repositories.turn.TurnRepositoryInMemory {
+        class ca.ulaval.glo4002.game.infrastructure.persistence.turn.TurnRepositoryInMemory {
             - turnsById : Map<UUID, Turn>
             + findById()
             + reset()
@@ -16,7 +16,7 @@ title __TURN's Class Diagram__\n
   }
   
 
-  ca.ulaval.glo4002.game.repositories.turn.TurnRepositoryInMemory .up.|> ca.ulaval.glo4002.game.domain.turn.TurnRepository
+  ca.ulaval.glo4002.game.infrastructure.persistence.turn.TurnRepositoryInMemory .up.|> ca.ulaval.glo4002.game.domain.turn.TurnRepository
 
 
 right footer

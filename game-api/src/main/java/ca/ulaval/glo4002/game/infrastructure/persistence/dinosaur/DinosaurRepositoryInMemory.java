@@ -1,4 +1,4 @@
-package ca.ulaval.glo4002.game.repositories.dinosaur;
+package ca.ulaval.glo4002.game.infrastructure.persistence.dinosaur;
 
 import java.util.ArrayList;
 import java.util.Comparator;

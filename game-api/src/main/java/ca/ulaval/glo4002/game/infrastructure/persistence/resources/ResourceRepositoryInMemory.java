@@ -1,4 +1,4 @@
-package ca.ulaval.glo4002.game.repositories.resources;
+package ca.ulaval.glo4002.game.infrastructure.persistence.resources;
 
 import java.util.Arrays;
 import java.util.List;
