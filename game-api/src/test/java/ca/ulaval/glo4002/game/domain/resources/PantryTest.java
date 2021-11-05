@@ -7,14 +7,15 @@ import static ca.ulaval.glo4002.game.domain.resources.ResourceType.*;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class PantryTest {
+    ResourceFactory resourceFactory = new ResourceFactory();
     Pantry pantry;
 
     @BeforeEach
     void createPantry() {
         pantry = new Pantry();
-        pantry.add(new Burger(50));
-        pantry.add(new Salad(400));
-        pantry.add(new Water(1000));
+        pantry.add(resourceFactory.create(BURGER, 50));
+        pantry.add(resourceFactory.create(SALAD, 400));
+        pantry.add(resourceFactory.create(WATER, 1000));
     }
 
     @Test
@@ -24,7 +25,7 @@ public class PantryTest {
 
     @Test
     void whenAddingTwoResourceToPantry_shouldIncrementQueue() {
-        pantry.add(new Salad(50));
+        pantry.add(resourceFactory.create(SALAD, 50));
         assertEquals(450, pantry.findFreshResource().getResourceQuantity(SALAD));
 
     }

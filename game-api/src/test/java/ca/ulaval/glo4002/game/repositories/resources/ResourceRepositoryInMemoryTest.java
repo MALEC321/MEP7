@@ -1,6 +1,6 @@
 package ca.ulaval.glo4002.game.repositories.resources;
 
-import ca.ulaval.glo4002.game.domain.resources.Resource;
+import ca.ulaval.glo4002.game.domain.resources.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
@@ -8,15 +8,13 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 
+import static ca.ulaval.glo4002.game.domain.resources.ResourceType.*;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 
-import ca.ulaval.glo4002.game.domain.resources.Burger;
-import ca.ulaval.glo4002.game.domain.resources.Pantry;
-import ca.ulaval.glo4002.game.domain.resources.Water;
-
 class ResourceRepositoryInMemoryTest {
+    ResourceFactory resourceFactory = new ResourceFactory();
 
     @InjectMocks
     private ResourceRepositoryInMemory resourceRepositoryInMemory;
@@ -40,7 +38,7 @@ class ResourceRepositoryInMemoryTest {
 
     @Test
     void reposWithBurger_whenFindAllResource_thenRepoIsNotEmpty() {
-        Resource resource = new Burger(1);
+        Resource resource = resourceFactory.create(BURGER, 1);
 
         this.resourceRepositoryInMemory.add(resource);
 
@@ -49,7 +47,7 @@ class ResourceRepositoryInMemoryTest {
 
     @Test
     void repoWithResource_whenDecreaseExpirationDateResource_thenResourceAreDecreased() {
-        Resource resource = new Burger(1);
+        Resource resource = resourceFactory.create(BURGER, 1);
 
         this.resourceRepositoryInMemory.add(resource);
         this.resourceRepositoryInMemory.decreaseExpirationDate();
@@ -59,7 +57,7 @@ class ResourceRepositoryInMemoryTest {
 
     @Test
     void reposWithResource_whenResetResource_thenResourceAreReset() {
-        Resource resource = new Water(10000);
+        Resource resource = resourceFactory.create(WATER, 10000);
 
         this.resourceRepositoryInMemory.add(resource);
         this.resourceRepositoryInMemory.reset();

@@ -3,18 +3,21 @@ package ca.ulaval.glo4002.game.domain.resources;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import static ca.ulaval.glo4002.game.domain.resources.ResourceType.*;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class ResourceTest {
-    private Burger burger;
-    private Salad salad;
-    private Water water;
+    private ResourceFactory resourceFactory;
+    private Resource burger;
+    private Resource salad;
+    private Resource water;
 
     @BeforeEach
     void setUp() {
-        burger = new Burger(50);
-        salad = new Salad(30);
-        water = new Water(100);
+        resourceFactory = new ResourceFactory();
+        burger = resourceFactory.create(BURGER, 50);
+        salad = resourceFactory.create(SALAD, 30);
+        water = resourceFactory.create(WATER, 100);
     }
 
     @Test
