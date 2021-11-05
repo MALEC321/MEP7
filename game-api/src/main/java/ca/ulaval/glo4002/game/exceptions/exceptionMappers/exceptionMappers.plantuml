@@ -58,7 +58,7 @@ title __EXCEPTIONMAPPERS's Class Diagram__\n
     namespace a.ulaval.glo4002.game {
       namespace exceptions {
         namespace exceptionMappers {
-          class ca.ulaval.glo4002.game.exceptions.exceptionMappers.InvalidResourceExceptionMapper {
+          class ca.ulaval.glo4002.game.exceptions.exceptionMappers.InvalidResourceQuantityExceptionMapper {
               + toResponse()
           }
         }
@@ -127,8 +127,8 @@ title __EXCEPTIONMAPPERS's Class Diagram__\n
   ca.ulaval.glo4002.game.exceptions.exceptionMappers.InvalidGenderExceptionMapper -up-|> ca.ulaval.glo4002.game.exceptions.ExceptionResponse
   ca.ulaval.glo4002.game.exceptions.exceptionMappers.InvalidMotherExceptionMapper .up.|> javax.ws.rs.ext.ExceptionMapper
   ca.ulaval.glo4002.game.exceptions.exceptionMappers.InvalidMotherExceptionMapper -up-|> ca.ulaval.glo4002.game.exceptions.ExceptionResponse
-  ca.ulaval.glo4002.game.exceptions.exceptionMappers.InvalidResourceExceptionMapper .up.|> javax.ws.rs.ext.ExceptionMapper
-  ca.ulaval.glo4002.game.exceptions.exceptionMappers.InvalidResourceExceptionMapper -up-|> ca.ulaval.glo4002.game.exceptions.ExceptionResponse
+  ca.ulaval.glo4002.game.exceptions.exceptionMappers.InvalidResourceQuantityExceptionMapper .up.|> javax.ws.rs.ext.ExceptionMapper
+  ca.ulaval.glo4002.game.exceptions.exceptionMappers.InvalidResourceQuantityExceptionMapper -up-|> ca.ulaval.glo4002.game.exceptions.ExceptionResponse
   ca.ulaval.glo4002.game.exceptions.exceptionMappers.InvalidSpeciesExceptionMapper .up.|> javax.ws.rs.ext.ExceptionMapper
   ca.ulaval.glo4002.game.exceptions.exceptionMappers.InvalidSpeciesExceptionMapper -up-|> ca.ulaval.glo4002.game.exceptions.ExceptionResponse
   ca.ulaval.glo4002.game.exceptions.exceptionMappers.InvalidWeightExceptionMapper .up.|> javax.ws.rs.ext.ExceptionMapper

@@ -7,24 +7,23 @@ import ca.ulaval.glo4002.game.domain.actions.Action;
 import ca.ulaval.glo4002.game.domain.actions.ActionFactory;
 import ca.ulaval.glo4002.game.domain.actions.ActionRepository;
 import ca.ulaval.glo4002.game.domain.resources.Resource;
-import ca.ulaval.glo4002.game.domain.resources.ResourceFactory;
+import ca.ulaval.glo4002.game.domain.resources.ResourceGroup;
+import ca.ulaval.glo4002.game.domain.resources.ResourceGroupFactory;
 import ca.ulaval.glo4002.game.domain.resources.ResourceRepository;
-import ca.ulaval.glo4002.game.domain.resources.Resources;
-import ca.ulaval.glo4002.game.domain.resources.ResourcesFactory;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class ResourceUseCase {
-    private final ResourcesFactory resourcesFactory;
+    private final ResourceGroupFactory resourceGroupFactory;
     private final ResourceRepository resourceRepository;
     private final ResourceAssembler resourceAssembler;
     private final ActionRepository actionRepository;
     private final ActionFactory actionFactory;
 
-    public ResourceUseCase(ResourcesFactory resourcesFactory, ResourceRepository resourceRepository, ResourceAssembler resourceAssembler,
+    public ResourceUseCase(ResourceGroupFactory resourceGroupFactory, ResourceRepository resourceRepository, ResourceAssembler resourceAssembler,
                            ActionRepository actionRepository, ActionFactory actionFactory) {
-        this.resourcesFactory = resourcesFactory;
+        this.resourceGroupFactory = resourceGroupFactory;
         this.resourceRepository = resourceRepository;
         this.resourceAssembler = resourceAssembler;
         this.actionRepository = actionRepository;
@@ -32,18 +31,18 @@ public class ResourceUseCase {
     }
 
     public ResourceDto createResource(ResourceCreationDto resourceCreationDto) {
-        Resources resources = resourcesFactory.create(resourceCreationDto.qtyBurger, resourceCreationDto.qtySalad, resourceCreationDto.qtyWater);
-        addResourceToActionWaitingList(resources);
-        return resourceAssembler.toDto(resources);
+        ResourceGroup resourceGroup = resourceGroupFactory.create(resourceCreationDto.qtyBurger, resourceCreationDto.qtySalad, resourceCreationDto.qtyWater);
+        addResourceToActionWaitingList(resourceGroup);
+        return resourceAssembler.toDto(resourceGroup);
     }
 
     public List<ResourceDto> getAllResources() {
-        List<Resources> resources = resourceRepository.findAll();
+        List<ResourceGroup> resources = resourceRepository.findAll();
         return resourceAssembler.toDtos(resources);
     }
 
-    private void addResourceToActionWaitingList(Resources resources) {
-        for (Resource resource : new ArrayList<>(resources.getResources().values())) {
+    private void addResourceToActionWaitingList(ResourceGroup resourceGroup) {
+        for (Resource resource : new ArrayList<>(resourceGroup.getResources().values())) {
             if (resource.isEmpty()) {
                 continue;
             }

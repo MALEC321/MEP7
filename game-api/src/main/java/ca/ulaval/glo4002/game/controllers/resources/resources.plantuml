@@ -3,8 +3,8 @@
 title __RESOURCES's Class Diagram__\n
 
     namespace ca.ulaval.glo4002.game {
-      namespace controllers.resources {
-        class ca.ulaval.glo4002.game.controllers.resources.ResourceResource {
+      namespace controllers.resourceGroup {
+        class ca.ulaval.glo4002.game.controllers.resourceGroup.ResourceResource {
             + ResourceResource()
             + createResource()
             + getAllResources()
@@ -13,8 +13,8 @@ title __RESOURCES's Class Diagram__\n
     }
   
 
-  ca.ulaval.glo4002.game.controllers.resources.ResourceResource o-- ca.ulaval.glo4002.game.controllers.resources.dtos.ResourceDtoAssembler : resourceDtoAssembler
-  ca.ulaval.glo4002.game.controllers.resources.ResourceResource o-- ca.ulaval.glo4002.game.application.resources.ResourceUseCase : resourceUseCase
+  ca.ulaval.glo4002.game.controllers.resourceGroup.ResourceResource o-- ca.ulaval.glo4002.game.controllers.resourceGroup.dtos.ResourceDtoAssembler : resourceDtoAssembler
+  ca.ulaval.glo4002.game.controllers.resourceGroup.ResourceResource o-- ca.ulaval.glo4002.game.application.resourceGroup.ResourceUseCase : resourceUseCase
 
 
 right footer

@@ -1,20 +1,20 @@
 package ca.ulaval.glo4002.game.application.turn;
 
-import java.util.List;
-
 import ca.ulaval.glo4002.game.application.manager.ZooManager;
 import ca.ulaval.glo4002.game.domain.actions.Action;
 import ca.ulaval.glo4002.game.domain.actions.ActionRepository;
 import ca.ulaval.glo4002.game.domain.dinosaur.Dinosaur;
 import ca.ulaval.glo4002.game.domain.dinosaur.DinosaurBaby;
 import ca.ulaval.glo4002.game.domain.dinosaur.DinosaurRepository;
-import ca.ulaval.glo4002.game.domain.resources.Burger;
+import ca.ulaval.glo4002.game.domain.resources.ResourceFactory;
 import ca.ulaval.glo4002.game.domain.resources.ResourceRepository;
-import ca.ulaval.glo4002.game.domain.resources.Salad;
-import ca.ulaval.glo4002.game.domain.resources.Water;
 import ca.ulaval.glo4002.game.domain.turn.Turn;
 import ca.ulaval.glo4002.game.domain.turn.TurnFactory;
 import ca.ulaval.glo4002.game.domain.turn.TurnRepository;
+
+import java.util.List;
+
+import static ca.ulaval.glo4002.game.domain.resources.ResourceType.*;
 
 public class TurnUseCase {
 
@@ -24,6 +24,8 @@ public class TurnUseCase {
     private final ActionRepository actionRepository;
     private final DinosaurRepository dinosaurRepository;
     private final ZooManager zooManager;
+    private final ResourceFactory resourceFactory;
+
 
     public TurnUseCase(
         TurnFactory turnFactory,
@@ -31,13 +33,15 @@ public class TurnUseCase {
         ResourceRepository resourceRepository,
         DinosaurRepository dinosaurRepository,
         ActionRepository actionRepository,
-        ZooManager zooManager) {
+        ZooManager zooManager,
+        ResourceFactory resourceFactory) {
         this.turnFactory = turnFactory;
         this.turnRepository = turnRepository;
         this.resourceRepository = resourceRepository;
         this.dinosaurRepository = dinosaurRepository;
         this.actionRepository = actionRepository;
         this.zooManager = zooManager;
+        this.resourceFactory = resourceFactory;
     }
 
     public void createTurn() {
@@ -52,9 +56,9 @@ public class TurnUseCase {
     }
 
     protected void cookIt() {
-        resourceRepository.add(new Burger(100));
-        resourceRepository.add(new Salad(250));
-        resourceRepository.add(new Water(10000));
+        resourceRepository.add(resourceFactory.create(BURGER, 100));
+        resourceRepository.add(resourceFactory.create(SALAD, 250));
+        resourceRepository.add(resourceFactory.create(WATER, 1000));
     }
 
     private void postAction() {

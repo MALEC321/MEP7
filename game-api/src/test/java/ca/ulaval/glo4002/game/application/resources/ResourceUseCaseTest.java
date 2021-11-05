@@ -9,9 +9,10 @@ import ca.ulaval.glo4002.game.controllers.turn.dtos.TurnAssembler;
 import ca.ulaval.glo4002.game.domain.actions.ActionFactory;
 import ca.ulaval.glo4002.game.domain.actions.ActionRepository;
 import ca.ulaval.glo4002.game.domain.dinosaur.DinosaurRepository;
-import ca.ulaval.glo4002.game.domain.resources.ResourcesFactory;
+import ca.ulaval.glo4002.game.domain.resources.ResourceFactory;
+import ca.ulaval.glo4002.game.domain.resources.ResourceGroup;
+import ca.ulaval.glo4002.game.domain.resources.ResourceGroupFactory;
 import ca.ulaval.glo4002.game.domain.resources.ResourceRepository;
-import ca.ulaval.glo4002.game.domain.resources.Resources;
 import ca.ulaval.glo4002.game.domain.turn.TurnFactory;
 import ca.ulaval.glo4002.game.domain.turn.TurnRepository;
 import ca.ulaval.glo4002.game.repositories.actions.ActionRepositoryInMemory;
@@ -35,20 +36,21 @@ class ResourceUseCaseTest {
 
     @BeforeEach
     void setUp() {
-        ResourcesFactory resourcesFactory = new ResourcesFactory();
+        ResourceGroupFactory resourceGroupFactory = new ResourceGroupFactory();
         ResourceAssembler resourceAssembler = new ResourceAssembler();
         ResourceRepository resourceRepository = new ResourceRepositoryInMemory();
         ActionRepository actionRepository = new ActionRepositoryInMemory();
         ZooManager zooManager = new ZooManager();
         ActionFactory actionFactory = new ActionFactory();
+        ResourceFactory resourceFactory = new ResourceFactory();
 
         TurnFactory turnFactory = new TurnFactory();
         TurnRepository turnRepository = new TurnRepositoryInMemory();
         TurnAssembler turnAssembler = new TurnAssembler();
         DinosaurRepository dinosaurRepository = new DinosaurRepositoryInMemory();
 
-        turnUseCase = new TurnUseCase(turnFactory, turnRepository, resourceRepository, dinosaurRepository, actionRepository, zooManager);
-        resourceUseCase = new ResourceUseCase(resourcesFactory, resourceRepository, resourceAssembler, actionRepository, actionFactory);
+        turnUseCase = new TurnUseCase(turnFactory, turnRepository, resourceRepository, dinosaurRepository, actionRepository, zooManager, resourceFactory);
+        resourceUseCase = new ResourceUseCase(resourceGroupFactory, resourceRepository, resourceAssembler, actionRepository, actionFactory);
     }
 
     @Test
@@ -76,7 +78,7 @@ class ResourceUseCaseTest {
         ResourceRepository resourceRepository = new ResourceRepositoryInMemory();
         turnUseCase.createTurn();
 
-        List<Resources> resources = resourceRepository.findAll();
+        List<ResourceGroup> resources = resourceRepository.findAll();
 
         assertFalse(resources.isEmpty());
     }

@@ -21,7 +21,8 @@ import ca.ulaval.glo4002.game.domain.actions.ActionRepository;
 import ca.ulaval.glo4002.game.domain.dinosaur.DinosaurFactory;
 import ca.ulaval.glo4002.game.domain.dinosaur.DinosaurRepository;
 import ca.ulaval.glo4002.game.domain.dinosaur.enums.SpeciesDietsCorrespondances;
-import ca.ulaval.glo4002.game.domain.resources.ResourcesFactory;
+import ca.ulaval.glo4002.game.domain.resources.ResourceFactory;
+import ca.ulaval.glo4002.game.domain.resources.ResourceGroupFactory;
 import ca.ulaval.glo4002.game.domain.resources.ResourceRepository;
 import ca.ulaval.glo4002.game.domain.turn.TurnFactory;
 import ca.ulaval.glo4002.game.domain.turn.TurnRepository;
@@ -45,6 +46,8 @@ public class AppConfig {
     static ActionFactory actionFactory = new ActionFactory();
     static SpeciesDietsCorrespondances speciesDietsCorrespondances = new SpeciesDietsCorrespondances();
     static ZooManager zooManager = new ZooManager();
+    static ResourceFactory resourceFactory = new ResourceFactory();
+
 
     // Dinosaur
     static DinosaurRepository dinosaurRepository = new DinosaurRepositoryInMemory();
@@ -55,14 +58,14 @@ public class AppConfig {
     static DinosaurDtoAssembler dinosaurDtoAssembler = new DinosaurDtoAssembler();
     static DinosaurResource dinosaurResource = new DinosaurResource(dinosaurUseCase, dinosaurDtoAssembler);
 
-    static TurnUseCase turnUseCase = new TurnUseCase(turnFactory, turnRepository, resourceRepository, dinosaurRepository, actionRepository, zooManager);
+    static TurnUseCase turnUseCase = new TurnUseCase(turnFactory, turnRepository, resourceRepository, dinosaurRepository, actionRepository, zooManager, resourceFactory);
 
     static TurnDtoAssembler turnDtoAssembler = new TurnDtoAssembler();
     static TurnResource turnResource = new TurnResource(turnUseCase, turnDtoAssembler);
 
-    static ResourcesFactory resourcesFactory = new ResourcesFactory();
+    static ResourceGroupFactory resourceGroupFactory = new ResourceGroupFactory();
     static ResourceAssembler resourceAssembler = new ResourceAssembler();
-    static ResourceUseCase resourceUseCase = new ResourceUseCase(resourcesFactory, resourceRepository, resourceAssembler, actionRepository, actionFactory);
+    static ResourceUseCase resourceUseCase = new ResourceUseCase(resourceGroupFactory, resourceRepository, resourceAssembler, actionRepository, actionFactory);
     static ResourceDtoAssembler resourceDtoAssembler = new ResourceDtoAssembler();
     static ResourceResource resourceResource = new ResourceResource(resourceUseCase, resourceDtoAssembler);
 
@@ -81,7 +84,7 @@ public class AppConfig {
             resources.add(turnResource);
             resources.add(dinosaurResource);
             resources.add(babyResource);
-            resources.add(new InvalidResourceExceptionMapper());
+            resources.add(new InvalidResourceQuantityExceptionMapper());
             resources.add(new UnknownExceptionGrabber());
             resources.add(new NotExistentNameExceptionMapper());
             resources.add(new InvalidGenderExceptionMapper());

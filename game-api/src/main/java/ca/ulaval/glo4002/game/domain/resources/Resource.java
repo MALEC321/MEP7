@@ -11,6 +11,10 @@ public class Resource {
         this.expiration = expiration;
     }
 
+    public ResourceType getResourceType() {
+        return resourceType;
+    }
+
     public int getQuantity() {
         return quantity;
     }

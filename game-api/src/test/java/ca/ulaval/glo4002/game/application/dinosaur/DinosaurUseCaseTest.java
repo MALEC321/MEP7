@@ -1,10 +1,5 @@
 package ca.ulaval.glo4002.game.application.dinosaur;
 
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
-
-import static org.junit.jupiter.api.Assertions.assertThrows;
-
 import ca.ulaval.glo4002.game.application.manager.ZooManager;
 import ca.ulaval.glo4002.game.application.turn.TurnUseCase;
 import ca.ulaval.glo4002.game.controllers.dinosaur.dtos.DinosaurAssembler;
@@ -16,6 +11,7 @@ import ca.ulaval.glo4002.game.domain.actions.ActionRepository;
 import ca.ulaval.glo4002.game.domain.dinosaur.DinosaurFactory;
 import ca.ulaval.glo4002.game.domain.dinosaur.DinosaurRepository;
 import ca.ulaval.glo4002.game.domain.dinosaur.enums.SpeciesDietsCorrespondances;
+import ca.ulaval.glo4002.game.domain.resources.ResourceFactory;
 import ca.ulaval.glo4002.game.domain.resources.ResourceRepository;
 import ca.ulaval.glo4002.game.domain.turn.TurnFactory;
 import ca.ulaval.glo4002.game.domain.turn.TurnRepository;
@@ -24,6 +20,10 @@ import ca.ulaval.glo4002.game.repositories.actions.ActionRepositoryInMemory;
 import ca.ulaval.glo4002.game.repositories.dinosaur.DinosaurRepositoryInMemory;
 import ca.ulaval.glo4002.game.repositories.resources.ResourceRepositoryInMemory;
 import ca.ulaval.glo4002.game.repositories.turn.TurnRepositoryInMemory;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 class DinosaurUseCaseTest {
     private DinosaurUseCase dinosaurUseCase;
@@ -36,6 +36,7 @@ class DinosaurUseCaseTest {
         ActionRepository actionRepository = new ActionRepositoryInMemory();
         ZooManager zooManager = new ZooManager();
         ActionFactory actionFactory = new ActionFactory();
+        ResourceFactory resourceFactory = new ResourceFactory();
 
         DinosaurRepository dinosaurRepository = new DinosaurRepositoryInMemory();
         DinosaurFactory dinosaurFactory = new DinosaurFactory(dinosaurRepository, speciesDietsCorrespondances);
@@ -46,7 +47,9 @@ class DinosaurUseCaseTest {
         TurnFactory turnFactory = new TurnFactory();
         TurnRepository turnRepository = new TurnRepositoryInMemory();
         ResourceRepository resourceRepository = new ResourceRepositoryInMemory();
-        turnUseCase = new TurnUseCase(turnFactory, turnRepository, resourceRepository, dinosaurRepository, actionRepository, zooManager);
+
+
+        turnUseCase = new TurnUseCase(turnFactory, turnRepository, resourceRepository, dinosaurRepository, actionRepository, zooManager, resourceFactory);
     }
 
     @Test

@@ -18,7 +18,7 @@ Thumbs.db
 
 # compiled output
 **/target
-**/src/main/frontend-resources
+**/src/main/frontend-resourceGroup
 **/src/main/generated-www
 dependency-reduced-pom.xml
 

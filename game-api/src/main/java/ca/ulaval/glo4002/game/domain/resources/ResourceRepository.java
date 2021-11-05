@@ -15,5 +15,5 @@ public interface ResourceRepository {
 
     void decreaseExpirationDate();
 
-    List<Resources> findAll();
+    List<ResourceGroup> findAll();
 }

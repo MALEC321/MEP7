@@ -14,7 +14,7 @@ public class ResourceRepositoryInMemory implements ResourceRepository {
     }
 
     @Override
-    public List<Resources> findAll() {
+    public List<ResourceGroup> findAll() {
         return Arrays.asList(pantry.findFreshResource(), pantry.getExpiredResources(), pantry.getConsumedResources());
     }
 

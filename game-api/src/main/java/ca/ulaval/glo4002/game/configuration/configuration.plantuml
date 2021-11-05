@@ -17,7 +17,7 @@ title __CONFIGURATION's Class Diagram__\n
             {static} ~ heartbeatResource : HeartbeatResource
             {static} ~ resourceAssembler : ResourceAssemblers
             {static} ~ resourceDtoAssembler : ResourceDtoAssembler
-            {static} ~ resourcesFactory : ResourceFactory
+            {static} ~ resourceGroupFactory : ResourceFactory
             {static} ~ resourceRepository : ResourceRepository
             {static} ~ resourceResource : ResourceResource
             {static} ~ resourceUseCase : ResourceUseCase

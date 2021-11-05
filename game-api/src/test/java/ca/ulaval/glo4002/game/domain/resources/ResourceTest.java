@@ -17,8 +17,6 @@ public class ResourceTest {
         water = new Water(100);
     }
 
-    /************************ TESTING RESOURCEELEMENTS IMPLEMENTATIONS ************************/
-
     @Test
     void whenCreatingBurger_shouldExpireIn4() {
         assertEquals(4, burger.getDaysLeft());
