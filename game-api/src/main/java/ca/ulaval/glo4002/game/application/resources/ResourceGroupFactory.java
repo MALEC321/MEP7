@@ -1,5 +1,6 @@
-package ca.ulaval.glo4002.game.domain.resources;
+package ca.ulaval.glo4002.game.application.resources;
 
+import ca.ulaval.glo4002.game.domain.resources.ResourceGroup;
 import ca.ulaval.glo4002.game.exceptions.types.InvalidResourceQuantityException;
 
 public class ResourceGroupFactory {

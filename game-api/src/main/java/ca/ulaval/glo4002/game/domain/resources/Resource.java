@@ -1,18 +1,18 @@
 package ca.ulaval.glo4002.game.domain.resources;
 
 public class Resource {
-    private ResourceType resourceType;
+    private ResourceType type;
     private int quantity;
     private int expiration;
 
-    public Resource(ResourceType resourceType, int quantity, int expiration) {
-        this.resourceType = resourceType;
+    public Resource(ResourceType type, int quantity, int expiration) {
+        this.type = type;
         this.quantity = quantity;
         this.expiration = expiration;
     }
 
-    public ResourceType getResourceType() {
-        return resourceType;
+    public ResourceType getType() {
+        return type;
     }
 
     public int getQuantity() {

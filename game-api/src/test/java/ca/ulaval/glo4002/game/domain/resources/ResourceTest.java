@@ -1,5 +1,6 @@
 package ca.ulaval.glo4002.game.domain.resources;
 
+import ca.ulaval.glo4002.game.application.resources.ResourceFactory;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 

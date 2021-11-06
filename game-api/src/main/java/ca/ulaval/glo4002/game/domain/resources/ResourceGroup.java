@@ -1,5 +1,7 @@
 package ca.ulaval.glo4002.game.domain.resources;
 
+import ca.ulaval.glo4002.game.application.resources.ResourceFactory;
+
 import java.util.HashMap;
 import java.util.Map;
 

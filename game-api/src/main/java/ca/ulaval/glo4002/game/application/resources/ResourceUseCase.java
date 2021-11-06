@@ -8,7 +8,6 @@ import ca.ulaval.glo4002.game.domain.actions.ActionFactory;
 import ca.ulaval.glo4002.game.domain.actions.ActionRepository;
 import ca.ulaval.glo4002.game.domain.resources.Resource;
 import ca.ulaval.glo4002.game.domain.resources.ResourceGroup;
-import ca.ulaval.glo4002.game.domain.resources.ResourceGroupFactory;
 import ca.ulaval.glo4002.game.domain.resources.ResourceRepository;
 
 import java.util.ArrayList;

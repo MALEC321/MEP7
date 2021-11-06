@@ -41,11 +41,11 @@ public class Pantry implements Eatable {
         Queue<Resource> saladQueue = mapResourceQueue.get(SALAD);
         Queue<Resource> waterQueue = mapResourceQueue.get(WATER);
 
-        if (resource.getResourceType().equals(BURGER)) {
+        if (resource.getType().equals(BURGER)) {
             burgerQueue.add(resource);
-        } else if (resource.getResourceType().equals(SALAD)) {
+        } else if (resource.getType().equals(SALAD)) {
             saladQueue.add(resource);
-        } else if (resource.getResourceType().equals(WATER)) {
+        } else if (resource.getType().equals(WATER)) {
             waterQueue.add(resource);
         }
     }

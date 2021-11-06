@@ -1,5 +1,7 @@
-package ca.ulaval.glo4002.game.domain.resources;
+package ca.ulaval.glo4002.game.application.resources;
 
+import ca.ulaval.glo4002.game.domain.resources.Resource;
+import ca.ulaval.glo4002.game.domain.resources.ResourceType;
 import ca.ulaval.glo4002.game.exceptions.types.InvalidResourceQuantityException;
 import ca.ulaval.glo4002.game.exceptions.types.InvalidResourceTypeException;
 
