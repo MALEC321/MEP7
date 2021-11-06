@@ -18,7 +18,6 @@ import ca.ulaval.glo4002.game.domain.turn.TurnFactory;
 import ca.ulaval.glo4002.game.domain.turn.TurnRepository;
 
 public class TurnUseCase {
-
     private final TurnFactory turnFactory;
     private final TurnRepository turnRepository;
     private final ResourceRepository resourceRepository;

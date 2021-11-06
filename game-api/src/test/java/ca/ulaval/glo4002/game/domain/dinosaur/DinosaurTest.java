@@ -8,7 +8,6 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import ca.ulaval.glo4002.game.domain.dinosaur.enums.DietType;
 
 class DinosaurTest {
-
     private Dinosaur herbivoreFemale;
     private Dinosaur carnivoreMale;
 

@@ -9,12 +9,11 @@ import ca.ulaval.glo4002.game.domain.actions.ActionFactory;
 import ca.ulaval.glo4002.game.domain.actions.ActionRepository;
 import ca.ulaval.glo4002.game.domain.dinosaur.Dinosaur;
 import ca.ulaval.glo4002.game.domain.dinosaur.DinosaurFactory;
-import ca.ulaval.glo4002.game.domain.dinosaur.HerdRepository;
 import ca.ulaval.glo4002.game.domain.dinosaur.Herd;
+import ca.ulaval.glo4002.game.domain.dinosaur.HerdRepository;
 import ca.ulaval.glo4002.game.exceptions.types.NotExistentNameException;
 
 public class DinosaurUseCase {
-
     private final DinosaurFactory dinosaurFactory;
     private final HerdRepository herdRepository;
     private final DinosaurAssembler dinosaurAssembler;
@@ -22,11 +21,11 @@ public class DinosaurUseCase {
     private final ActionFactory actionFactory;
 
     public DinosaurUseCase(
-        DinosaurFactory dinosaurFactory,
-        HerdRepository herdRepository,
-        DinosaurAssembler dinosaurAssembler,
-        ActionRepository actionRepository,
-        ActionFactory actionFactory) {
+            DinosaurFactory dinosaurFactory,
+            HerdRepository herdRepository,
+            DinosaurAssembler dinosaurAssembler,
+            ActionRepository actionRepository,
+            ActionFactory actionFactory) {
         this.dinosaurFactory = dinosaurFactory;
         this.herdRepository = herdRepository;
         this.dinosaurAssembler = dinosaurAssembler;

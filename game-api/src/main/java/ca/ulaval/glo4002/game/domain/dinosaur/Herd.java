@@ -3,7 +3,6 @@ package ca.ulaval.glo4002.game.domain.dinosaur;
 import java.util.*;
 
 public class Herd {
-
     private final Map<String, Dinosaur> dinosaursByName = new HashMap<>();
 
     public List<Dinosaur> findAll() {
@@ -38,5 +37,4 @@ public class Herd {
     public void reset() {
         dinosaursByName.clear();
     }
-
 }

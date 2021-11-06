@@ -16,7 +16,6 @@ import ca.ulaval.glo4002.game.exceptions.types.InvalidMotherException;
 import ca.ulaval.glo4002.game.exceptions.types.NotExistentNameException;
 
 public class BabyUseCase {
-
     private final HerdRepository herdRepository;
     private final BabyAssembler babyAssembler;
     private final ActionRepository actionRepository;
