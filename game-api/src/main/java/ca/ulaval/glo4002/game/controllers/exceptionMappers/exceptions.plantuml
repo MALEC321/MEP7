@@ -25,7 +25,7 @@ title __EXCEPTIONS's Class Diagram__\n
   namespace  {
     namespace a.ulaval.glo4002.game {
       namespace exceptions {
-        abstract class ca.ulaval.glo4002.game.exceptions.ExceptionsMapper {
+        abstract class ca.ulaval.glo4002.game.controllers.exceptions.ExceptionsMapper {
             + exceptionResponse()
         }
       }

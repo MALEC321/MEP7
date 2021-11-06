@@ -1,11 +1,11 @@
-package ca.ulaval.glo4002.game.exceptions.exceptionMappers;
+package ca.ulaval.glo4002.game.controllers.exceptionMappers;
 
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.ext.ExceptionMapper;
 
-import ca.ulaval.glo4002.game.exceptions.dtos.ExceptionResponse;
-import ca.ulaval.glo4002.game.exceptions.types.InvalidGenderException;
+import ca.ulaval.glo4002.game.controllers.exceptionMappers.dtos.ExceptionResponse;
+import ca.ulaval.glo4002.game.domain.exceptions.InvalidGenderException;
 
 public class InvalidGenderExceptionsMapper implements ExceptionMapper<InvalidGenderException> {
 

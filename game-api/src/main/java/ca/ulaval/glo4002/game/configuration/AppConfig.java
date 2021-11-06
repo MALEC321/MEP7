@@ -5,7 +5,7 @@ import java.util.Set;
 
 import javax.ws.rs.core.Application;
 
-import ca.ulaval.glo4002.game.exceptions.exceptionMappers.*;
+import ca.ulaval.glo4002.game.controllers.exceptionMappers.*;
 import org.glassfish.jersey.server.ResourceConfig;
 
 import ca.ulaval.glo4002.game.application.baby.BabyUseCase;

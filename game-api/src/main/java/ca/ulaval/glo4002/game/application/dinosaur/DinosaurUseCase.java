@@ -10,7 +10,7 @@ import ca.ulaval.glo4002.game.domain.actions.ActionRepository;
 import ca.ulaval.glo4002.game.domain.dinosaur.Dinosaur;
 import ca.ulaval.glo4002.game.domain.dinosaur.DinosaurFactory;
 import ca.ulaval.glo4002.game.domain.dinosaur.DinosaurRepository;
-import ca.ulaval.glo4002.game.exceptions.types.NotExistentNameException;
+import ca.ulaval.glo4002.game.domain.exceptions.NotExistentNameException;
 
 public class DinosaurUseCase {
 

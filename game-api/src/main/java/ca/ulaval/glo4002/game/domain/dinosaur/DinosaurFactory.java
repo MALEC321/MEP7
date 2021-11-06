@@ -1,10 +1,10 @@
 package ca.ulaval.glo4002.game.domain.dinosaur;
 
 import ca.ulaval.glo4002.game.domain.dinosaur.enums.SpeciesDietsCorrespondances;
-import ca.ulaval.glo4002.game.exceptions.types.DuplicateNameException;
-import ca.ulaval.glo4002.game.exceptions.types.InvalidGenderException;
-import ca.ulaval.glo4002.game.exceptions.types.InvalidSpeciesException;
-import ca.ulaval.glo4002.game.exceptions.types.InvalidWeightException;
+import ca.ulaval.glo4002.game.domain.exceptions.DuplicateNameException;
+import ca.ulaval.glo4002.game.domain.exceptions.InvalidGenderException;
+import ca.ulaval.glo4002.game.domain.exceptions.InvalidSpeciesException;
+import ca.ulaval.glo4002.game.domain.exceptions.InvalidWeightException;
 
 public class DinosaurFactory {
     public static final int MIN_WEIGHT = 0;

@@ -385,7 +385,7 @@ title __GAME-API's Class Diagram__\n
   
     namespace ca.ulaval.glo4002.game {
       namespace exceptions {
-        abstract class ca.ulaval.glo4002.game.exceptions.ExceptionsMapper {
+        abstract class ca.ulaval.glo4002.game.controllers.exceptions.ExceptionsMapper {
         }
       }
     }
@@ -393,7 +393,7 @@ title __GAME-API's Class Diagram__\n
     namespace ca.ulaval.glo4002.game {
       namespace exceptions {
         namespace dtos {
-          class ca.ulaval.glo4002.game.exceptions.dtos.ExceptionResponse {
+          class ca.ulaval.glo4002.game.controllers.exceptionMappers.dtos.ExceptionResponse {
           }
         }
       }
@@ -402,7 +402,7 @@ title __GAME-API's Class Diagram__\n
     namespace ca.ulaval.glo4002.game {
       namespace exceptions {
         namespace exceptionMappers {
-          class ca.ulaval.glo4002.game.exceptions.exceptionMappers.DuplicateNameExceptionsMapper {
+          class ca.ulaval.glo4002.game.controllers.exceptionMappers.DuplicateNameExceptionsMapper {
           }
         }
       }
@@ -411,7 +411,7 @@ title __GAME-API's Class Diagram__\n
     namespace ca.ulaval.glo4002.game {
       namespace exceptions {
         namespace exceptionMappers {
-          class ca.ulaval.glo4002.game.exceptions.exceptionMappers.InvalidFatherExceptionsMapper {
+          class ca.ulaval.glo4002.game.controllers.exceptionMappers.InvalidFatherExceptionsMapper {
           }
         }
       }
@@ -420,7 +420,7 @@ title __GAME-API's Class Diagram__\n
     namespace ca.ulaval.glo4002.game {
       namespace exceptions {
         namespace exceptionMappers {
-          class ca.ulaval.glo4002.game.exceptions.exceptionMappers.InvalidGenderExceptionsMapper {
+          class ca.ulaval.glo4002.game.controllers.exceptionMappers.InvalidGenderExceptionsMapper {
           }
         }
       }
@@ -429,7 +429,7 @@ title __GAME-API's Class Diagram__\n
     namespace ca.ulaval.glo4002.game {
       namespace exceptions {
         namespace exceptionMappers {
-          class ca.ulaval.glo4002.game.exceptions.exceptionMappers.InvalidMotherExceptionsMapper {
+          class ca.ulaval.glo4002.game.controllers.exceptionMappers.InvalidMotherExceptionsMapper {
           }
         }
       }
@@ -438,7 +438,7 @@ title __GAME-API's Class Diagram__\n
     namespace ca.ulaval.glo4002.game {
       namespace exceptions {
         namespace exceptionMappers {
-          class ca.ulaval.glo4002.game.exceptions.exceptionMappers.InvalidResourceExceptionsMapper {
+          class ca.ulaval.glo4002.game.controllers.exceptionMappers.InvalidResourceExceptionsMapper {
           }
         }
       }
@@ -447,7 +447,7 @@ title __GAME-API's Class Diagram__\n
     namespace ca.ulaval.glo4002.game {
       namespace exceptions {
         namespace exceptionMappers {
-          class ca.ulaval.glo4002.game.exceptions.exceptionMappers.InvalidSpeciesExceptionsMapper {
+          class ca.ulaval.glo4002.game.controllers.exceptionMappers.InvalidSpeciesExceptionsMapper {
           }
         }
       }
@@ -456,7 +456,7 @@ title __GAME-API's Class Diagram__\n
     namespace ca.ulaval.glo4002.game {
       namespace exceptions {
         namespace exceptionMappers {
-          class ca.ulaval.glo4002.game.exceptions.exceptionMappers.InvalidWeightExceptionsMapper {
+          class ca.ulaval.glo4002.game.controllers.exceptionMappers.InvalidWeightExceptionsMapper {
           }
         }
       }
@@ -465,7 +465,7 @@ title __GAME-API's Class Diagram__\n
     namespace ca.ulaval.glo4002.game {
       namespace exceptions {
         namespace exceptionMappers {
-          class ca.ulaval.glo4002.game.exceptions.exceptionMappers.NotExistentNameExceptionsMapper {
+          class ca.ulaval.glo4002.game.controllers.exceptionMappers.NotExistentNameExceptionsMapper {
           }
         }
       }
@@ -474,7 +474,7 @@ title __GAME-API's Class Diagram__\n
     namespace ca.ulaval.glo4002.game {
       namespace exceptions {
         namespace exceptionMappers {
-          class ca.ulaval.glo4002.game.exceptions.exceptionMappers.UnknownExceptionGrabber {
+          class ca.ulaval.glo4002.game.controllers.exceptionMappers.UnknownExceptionGrabber {
           }
         }
       }
@@ -483,7 +483,7 @@ title __GAME-API's Class Diagram__\n
     namespace ca.ulaval.glo4002.game {
       namespace exceptions {
         namespace types {
-          class ca.ulaval.glo4002.game.exceptions.types.DuplicateNameException {
+          class ca.ulaval.glo4002.game.domain.exceptions.DuplicateNameException {
           }
         }
       }
@@ -501,7 +501,7 @@ title __GAME-API's Class Diagram__\n
     namespace ca.ulaval.glo4002.game {
       namespace exceptions {
         namespace types {
-          class ca.ulaval.glo4002.game.exceptions.types.InvalidGenderException {
+          class ca.ulaval.glo4002.game.domain.exceptions.InvalidGenderException {
           }
         }
       }
@@ -528,7 +528,7 @@ title __GAME-API's Class Diagram__\n
     namespace ca.ulaval.glo4002.game {
       namespace exceptions {
         namespace types {
-          class ca.ulaval.glo4002.game.exceptions.types.InvalidSpeciesException {
+          class ca.ulaval.glo4002.game.domain.exceptions.InvalidSpeciesException {
           }
         }
       }
@@ -537,7 +537,7 @@ title __GAME-API's Class Diagram__\n
     namespace ca.ulaval.glo4002.game {
       namespace exceptions {
         namespace types {
-          class ca.ulaval.glo4002.game.exceptions.types.InvalidWeightException {
+          class ca.ulaval.glo4002.game.domain.exceptions.InvalidWeightException {
           }
         }
       }
@@ -546,7 +546,7 @@ title __GAME-API's Class Diagram__\n
     namespace ca.ulaval.glo4002.game {
       namespace exceptions {
         namespace types {
-          class ca.ulaval.glo4002.game.exceptions.types.NotExistentNameException {
+          class ca.ulaval.glo4002.game.domain.exceptions.NotExistentNameException {
           }
         }
       }
@@ -632,23 +632,23 @@ title __GAME-API's Class Diagram__\n
   ca.ulaval.glo4002.game.domain.resources.Burger -up-|> ca.ulaval.glo4002.game.domain.resources.ResourceElements
   ca.ulaval.glo4002.game.domain.resources.Salad -up-|> ca.ulaval.glo4002.game.domain.resources.ResourceElements
   ca.ulaval.glo4002.game.domain.resources.Water -up-|> ca.ulaval.glo4002.game.domain.resources.ResourceElements
-  ca.ulaval.glo4002.game.exceptions.exceptionMappers.DuplicateNameExceptionsMapper .up.|> javax.ws.rs.ext.ExceptionMapper
-  ca.ulaval.glo4002.game.exceptions.exceptionMappers.DuplicateNameExceptionsMapper -up-|> ca.ulaval.glo4002.game.exceptions.ExceptionsMapper
-  ca.ulaval.glo4002.game.exceptions.exceptionMappers.InvalidFatherExceptionsMapper .up.|> javax.ws.rs.ext.ExceptionMapper
-  ca.ulaval.glo4002.game.exceptions.exceptionMappers.InvalidFatherExceptionsMapper -up-|> ca.ulaval.glo4002.game.exceptions.ExceptionsMapper
-  ca.ulaval.glo4002.game.exceptions.exceptionMappers.InvalidGenderExceptionsMapper .up.|> javax.ws.rs.ext.ExceptionMapper
-  ca.ulaval.glo4002.game.exceptions.exceptionMappers.InvalidGenderExceptionsMapper -up-|> ca.ulaval.glo4002.game.exceptions.ExceptionsMapper
-  ca.ulaval.glo4002.game.exceptions.exceptionMappers.InvalidMotherExceptionsMapper .up.|> javax.ws.rs.ext.ExceptionMapper
-  ca.ulaval.glo4002.game.exceptions.exceptionMappers.InvalidMotherExceptionsMapper -up-|> ca.ulaval.glo4002.game.exceptions.ExceptionsMapper
-  ca.ulaval.glo4002.game.exceptions.exceptionMappers.InvalidResourceExceptionsMapper .up.|> javax.ws.rs.ext.ExceptionMapper
-  ca.ulaval.glo4002.game.exceptions.exceptionMappers.InvalidResourceExceptionsMapper -up-|> ca.ulaval.glo4002.game.exceptions.ExceptionsMapper
-  ca.ulaval.glo4002.game.exceptions.exceptionMappers.InvalidSpeciesExceptionsMapper .up.|> javax.ws.rs.ext.ExceptionMapper
-  ca.ulaval.glo4002.game.exceptions.exceptionMappers.InvalidSpeciesExceptionsMapper -up-|> ca.ulaval.glo4002.game.exceptions.ExceptionsMapper
-  ca.ulaval.glo4002.game.exceptions.exceptionMappers.InvalidWeightExceptionsMapper .up.|> javax.ws.rs.ext.ExceptionMapper
-  ca.ulaval.glo4002.game.exceptions.exceptionMappers.InvalidWeightExceptionsMapper -up-|> ca.ulaval.glo4002.game.exceptions.ExceptionsMapper
-  ca.ulaval.glo4002.game.exceptions.exceptionMappers.NotExistentNameExceptionsMapper .up.|> javax.ws.rs.ext.ExceptionMapper
-  ca.ulaval.glo4002.game.exceptions.exceptionMappers.NotExistentNameExceptionsMapper -up-|> ca.ulaval.glo4002.game.exceptions.ExceptionsMapper
-  ca.ulaval.glo4002.game.exceptions.exceptionMappers.UnknownExceptionGrabber .up.|> javax.ws.rs.ext.ExceptionMapper
+  ca.ulaval.glo4002.game.controllers.exceptionMappers.DuplicateNameExceptionsMapper .up.|> javax.ws.rs.ext.ExceptionMapper
+  ca.ulaval.glo4002.game.controllers.exceptionMappers.DuplicateNameExceptionsMapper -up-|> ca.ulaval.glo4002.game.controllers.exceptions.ExceptionsMapper
+  ca.ulaval.glo4002.game.controllers.exceptionMappers.InvalidFatherExceptionsMapper .up.|> javax.ws.rs.ext.ExceptionMapper
+  ca.ulaval.glo4002.game.controllers.exceptionMappers.InvalidFatherExceptionsMapper -up-|> ca.ulaval.glo4002.game.controllers.exceptions.ExceptionsMapper
+  ca.ulaval.glo4002.game.controllers.exceptionMappers.InvalidGenderExceptionsMapper .up.|> javax.ws.rs.ext.ExceptionMapper
+  ca.ulaval.glo4002.game.controllers.exceptionMappers.InvalidGenderExceptionsMapper -up-|> ca.ulaval.glo4002.game.controllers.exceptions.ExceptionsMapper
+  ca.ulaval.glo4002.game.controllers.exceptionMappers.InvalidMotherExceptionsMapper .up.|> javax.ws.rs.ext.ExceptionMapper
+  ca.ulaval.glo4002.game.controllers.exceptionMappers.InvalidMotherExceptionsMapper -up-|> ca.ulaval.glo4002.game.controllers.exceptions.ExceptionsMapper
+  ca.ulaval.glo4002.game.controllers.exceptionMappers.InvalidResourceExceptionsMapper .up.|> javax.ws.rs.ext.ExceptionMapper
+  ca.ulaval.glo4002.game.controllers.exceptionMappers.InvalidResourceExceptionsMapper -up-|> ca.ulaval.glo4002.game.controllers.exceptions.ExceptionsMapper
+  ca.ulaval.glo4002.game.controllers.exceptionMappers.InvalidSpeciesExceptionsMapper .up.|> javax.ws.rs.ext.ExceptionMapper
+  ca.ulaval.glo4002.game.controllers.exceptionMappers.InvalidSpeciesExceptionsMapper -up-|> ca.ulaval.glo4002.game.controllers.exceptions.ExceptionsMapper
+  ca.ulaval.glo4002.game.controllers.exceptionMappers.InvalidWeightExceptionsMapper .up.|> javax.ws.rs.ext.ExceptionMapper
+  ca.ulaval.glo4002.game.controllers.exceptionMappers.InvalidWeightExceptionsMapper -up-|> ca.ulaval.glo4002.game.controllers.exceptions.ExceptionsMapper
+  ca.ulaval.glo4002.game.controllers.exceptionMappers.NotExistentNameExceptionsMapper .up.|> javax.ws.rs.ext.ExceptionMapper
+  ca.ulaval.glo4002.game.controllers.exceptionMappers.NotExistentNameExceptionsMapper -up-|> ca.ulaval.glo4002.game.controllers.exceptions.ExceptionsMapper
+  ca.ulaval.glo4002.game.controllers.exceptionMappers.UnknownExceptionGrabber .up.|> javax.ws.rs.ext.ExceptionMapper
   ca.ulaval.glo4002.game.repositories.actions.ActionRepositoryInMemory .up.|> ca.ulaval.glo4002.game.domain.actions.ActionRepository
   ca.ulaval.glo4002.game.repositories.dinosaur.DinosaurRepositoryInMemory .up.|> ca.ulaval.glo4002.game.domain.dinosaur.DinosaurRepository
   ca.ulaval.glo4002.game.repositories.resources.ResourceRepositoryInMemory .up.|> ca.ulaval.glo4002.game.domain.resources.ResourceRepository

@@ -1,4 +1,4 @@
-package ca.ulaval.glo4002.game.exceptions.dtos;
+package ca.ulaval.glo4002.game.controllers.exceptionMappers.dtos;
 
 public class ExceptionResponse {
     public String error;

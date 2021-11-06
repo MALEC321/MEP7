@@ -6,7 +6,7 @@ title __TYPES's Class Diagram__\n
     namespace a.ulaval.glo4002.game {
       namespace exceptions {
         namespace types {
-          class ca.ulaval.glo4002.game.exceptions.types.DuplicateNameException {
+          class ca.ulaval.glo4002.game.domain.exceptions.DuplicateNameException {
           }
         }
       }
@@ -30,7 +30,7 @@ title __TYPES's Class Diagram__\n
     namespace a.ulaval.glo4002.game {
       namespace exceptions {
         namespace types {
-          class ca.ulaval.glo4002.game.exceptions.types.InvalidGenderException {
+          class ca.ulaval.glo4002.game.domain.exceptions.InvalidGenderException {
           }
         }
       }
@@ -66,7 +66,7 @@ title __TYPES's Class Diagram__\n
     namespace a.ulaval.glo4002.game {
       namespace exceptions {
         namespace types {
-          class ca.ulaval.glo4002.game.exceptions.types.InvalidSpeciesException {
+          class ca.ulaval.glo4002.game.domain.exceptions.InvalidSpeciesException {
           }
         }
       }
@@ -78,7 +78,7 @@ title __TYPES's Class Diagram__\n
     namespace a.ulaval.glo4002.game {
       namespace exceptions {
         namespace types {
-          class ca.ulaval.glo4002.game.exceptions.types.InvalidWeightException {
+          class ca.ulaval.glo4002.game.domain.exceptions.InvalidWeightException {
           }
         }
       }
@@ -90,7 +90,7 @@ title __TYPES's Class Diagram__\n
     namespace a.ulaval.glo4002.game {
       namespace exceptions {
         namespace types {
-          class ca.ulaval.glo4002.game.exceptions.types.NotExistentNameException {
+          class ca.ulaval.glo4002.game.domain.exceptions.NotExistentNameException {
           }
         }
       }
