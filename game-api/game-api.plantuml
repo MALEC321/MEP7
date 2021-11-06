@@ -492,7 +492,7 @@ title __GAME-API's Class Diagram__\n
     namespace ca.ulaval.glo4002.game {
       namespace exceptions {
         namespace types {
-          class ca.ulaval.glo4002.game.exceptions.types.InvalidFatherException {
+          class ca.ulaval.glo4002.game.domain.dinosaur.InvalidFatherException {
           }
         }
       }
@@ -510,7 +510,7 @@ title __GAME-API's Class Diagram__\n
     namespace ca.ulaval.glo4002.game {
       namespace exceptions {
         namespace types {
-          class ca.ulaval.glo4002.game.exceptions.types.InvalidMotherException {
+          class ca.ulaval.glo4002.game.domain.dinosaur.InvalidMotherException {
           }
         }
       }
@@ -519,7 +519,7 @@ title __GAME-API's Class Diagram__\n
     namespace ca.ulaval.glo4002.game {
       namespace exceptions {
         namespace types {
-          class ca.ulaval.glo4002.game.exceptions.types.InvalidResourceQuantityException {
+          class ca.ulaval.glo4002.game.domain.resources.InvalidResourceQuantityException {
           }
         }
       }

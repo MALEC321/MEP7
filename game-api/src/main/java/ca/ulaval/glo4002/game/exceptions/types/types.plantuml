@@ -18,7 +18,7 @@ title __TYPES's Class Diagram__\n
     namespace a.ulaval.glo4002.game {
       namespace exceptions {
         namespace types {
-          class ca.ulaval.glo4002.game.exceptions.types.InvalidFatherException {
+          class ca.ulaval.glo4002.game.domain.dinosaur.InvalidFatherException {
           }
         }
       }
@@ -42,7 +42,7 @@ title __TYPES's Class Diagram__\n
     namespace a.ulaval.glo4002.game {
       namespace exceptions {
         namespace types {
-          class ca.ulaval.glo4002.game.exceptions.types.InvalidMotherException {
+          class ca.ulaval.glo4002.game.domain.dinosaur.InvalidMotherException {
           }
         }
       }
@@ -54,7 +54,7 @@ title __TYPES's Class Diagram__\n
     namespace a.ulaval.glo4002.game {
       namespace exceptions {
         namespace types {
-          class ca.ulaval.glo4002.game.exceptions.types.InvalidResourceQuantityException {
+          class ca.ulaval.glo4002.game.domain.resources.InvalidResourceQuantityException {
           }
         }
       }

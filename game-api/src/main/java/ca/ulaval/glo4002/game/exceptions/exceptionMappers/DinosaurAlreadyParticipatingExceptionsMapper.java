@@ -1,7 +1,7 @@
 package ca.ulaval.glo4002.game.exceptions.exceptionMappers;
 
 import ca.ulaval.glo4002.game.exceptions.dtos.ExceptionResponse;
-import ca.ulaval.glo4002.game.exceptions.types.DinosaurAlreadyParticipatingException;
+import ca.ulaval.glo4002.game.domain.dinosaur.DinosaurAlreadyParticipatingException;
 
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;

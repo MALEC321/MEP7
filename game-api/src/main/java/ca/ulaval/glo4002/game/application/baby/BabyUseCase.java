@@ -10,8 +10,8 @@ import ca.ulaval.glo4002.game.domain.actions.ActionRepository;
 import ca.ulaval.glo4002.game.domain.dinosaur.Dinosaur;
 import ca.ulaval.glo4002.game.domain.dinosaur.DinosaurFactory;
 import ca.ulaval.glo4002.game.domain.dinosaur.DinosaurRepository;
-import ca.ulaval.glo4002.game.exceptions.types.InvalidFatherException;
-import ca.ulaval.glo4002.game.exceptions.types.InvalidMotherException;
+import ca.ulaval.glo4002.game.domain.dinosaur.InvalidFatherException;
+import ca.ulaval.glo4002.game.domain.dinosaur.InvalidMotherException;
 import ca.ulaval.glo4002.game.exceptions.types.NotExistentNameException;
 
 public class BabyUseCase {

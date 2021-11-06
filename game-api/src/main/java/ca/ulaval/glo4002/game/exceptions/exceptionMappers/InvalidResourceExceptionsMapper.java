@@ -5,7 +5,7 @@ import javax.ws.rs.core.Response;
 import javax.ws.rs.ext.ExceptionMapper;
 
 import ca.ulaval.glo4002.game.exceptions.dtos.ExceptionResponse;
-import ca.ulaval.glo4002.game.exceptions.types.InvalidResourceQuantityException;
+import ca.ulaval.glo4002.game.domain.resources.InvalidResourceQuantityException;
 
 public class InvalidResourceExceptionsMapper implements ExceptionMapper<InvalidResourceQuantityException> {
     @Override

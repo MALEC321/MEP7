@@ -5,7 +5,7 @@ import javax.ws.rs.core.Response;
 import javax.ws.rs.ext.ExceptionMapper;
 
 import ca.ulaval.glo4002.game.exceptions.dtos.ExceptionResponse;
-import ca.ulaval.glo4002.game.exceptions.types.InvalidMotherException;
+import ca.ulaval.glo4002.game.domain.dinosaur.InvalidMotherException;
 
 public class InvalidMotherExceptionsMapper implements ExceptionMapper<InvalidMotherException> {
 
