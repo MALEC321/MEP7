@@ -568,28 +568,28 @@ title __GAME-API's Class Diagram__\n
   
     namespace ca.ulaval.glo4002.game {
       namespace repositories.actions {
-        class ca.ulaval.glo4002.game.repositories.actions.ActionRepositoryInMemory {
+        class ca.ulaval.glo4002.game.infrastructure.persistence.actions.ActionRepositoryInMemory {
         }
       }
     }
   
     namespace ca.ulaval.glo4002.game {
       namespace repositories.dinosaur {
-        class ca.ulaval.glo4002.game.repositories.dinosaur.DinosaurRepositoryInMemory {
+        class ca.ulaval.glo4002.game.infrastructure.persistence.dinosaur.DinosaurRepositoryInMemory {
         }
       }
     }
   
     namespace ca.ulaval.glo4002.game {
       namespace repositories.resources {
-        class ca.ulaval.glo4002.game.repositories.resources.ResourceRepositoryInMemory {
+        class ca.ulaval.glo4002.game.infrastructure.persistence.resources.ResourceRepositoryInMemory {
         }
       }
     }
   
     namespace ca.ulaval.glo4002.game {
       namespace repositories.turn {
-        class ca.ulaval.glo4002.game.repositories.turn.TurnRepositoryInMemory {
+        class ca.ulaval.glo4002.game.infrastructure.persistence.turn.TurnRepositoryInMemory {
         }
       }
     }
@@ -649,12 +649,12 @@ title __GAME-API's Class Diagram__\n
   ca.ulaval.glo4002.game.exceptions.exceptionMappers.NotExistentNameExceptionMapper .up.|> javax.ws.rs.ext.ExceptionMapper
   ca.ulaval.glo4002.game.exceptions.exceptionMappers.NotExistentNameExceptionMapper -up-|> ca.ulaval.glo4002.game.exceptions.ExceptionResponse
   ca.ulaval.glo4002.game.exceptions.exceptionMappers.UnknownExceptionGrabber .up.|> javax.ws.rs.ext.ExceptionMapper
-  ca.ulaval.glo4002.game.repositories.actions.ActionRepositoryInMemory .up.|> ca.ulaval.glo4002.game.domain.actions.ActionRepository
-  ca.ulaval.glo4002.game.repositories.dinosaur.DinosaurRepositoryInMemory .up.|> ca.ulaval.glo4002.game.domain.dinosaur.DinosaurRepository
-  ca.ulaval.glo4002.game.repositories.resources.ResourceRepositoryInMemory .up.|> ca.ulaval.glo4002.game.domain.resources.ResourceRepository
-  ca.ulaval.glo4002.game.repositories.resources.ResourceRepositoryInMemory o-- ca.ulaval.glo4002.game.domain.resources.Resource : consumedResources
-  ca.ulaval.glo4002.game.repositories.resources.ResourceRepositoryInMemory o-- ca.ulaval.glo4002.game.domain.resources.Resource : expiredResources
-  ca.ulaval.glo4002.game.repositories.turn.TurnRepositoryInMemory .up.|> ca.ulaval.glo4002.game.domain.turn.TurnRepository
+  ca.ulaval.glo4002.game.infrastructure.persistence.actions.ActionRepositoryInMemory .up.|> ca.ulaval.glo4002.game.domain.actions.ActionRepository
+  ca.ulaval.glo4002.game.infrastructure.persistence.dinosaur.DinosaurRepositoryInMemory .up.|> ca.ulaval.glo4002.game.domain.dinosaur.DinosaurRepository
+  ca.ulaval.glo4002.game.infrastructure.persistence.resources.ResourceRepositoryInMemory .up.|> ca.ulaval.glo4002.game.domain.resources.ResourceRepository
+  ca.ulaval.glo4002.game.infrastructure.persistence.resources.ResourceRepositoryInMemory o-- ca.ulaval.glo4002.game.domain.resources.Resource : consumedResources
+  ca.ulaval.glo4002.game.infrastructure.persistence.resources.ResourceRepositoryInMemory o-- ca.ulaval.glo4002.game.domain.resources.Resource : expiredResources
+  ca.ulaval.glo4002.game.infrastructure.persistence.turn.TurnRepositoryInMemory .up.|> ca.ulaval.glo4002.game.domain.turn.TurnRepository
 
 
 right footer
