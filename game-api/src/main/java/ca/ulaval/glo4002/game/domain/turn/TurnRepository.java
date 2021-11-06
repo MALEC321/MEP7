@@ -1,11 +1,17 @@
 package ca.ulaval.glo4002.game.domain.turn;
 
+import ca.ulaval.glo4002.game.domain.turn.aggregate.TurnId;
+
 import java.util.UUID;
 
 public interface TurnRepository {
-    Turn findById(UUID id);
+    TurnId findById(String turnId);
 
     void reset();
 
-    void save(Turn turn);
+    void save(TurnId turnId);
+
+    String nextTurnId();
+
+    int numberOfTurns();
 }

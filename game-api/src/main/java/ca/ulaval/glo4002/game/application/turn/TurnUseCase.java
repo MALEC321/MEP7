@@ -1,7 +1,6 @@
 package ca.ulaval.glo4002.game.application.turn;
 
 import ca.ulaval.glo4002.game.application.manager.ZooManager;
-import ca.ulaval.glo4002.game.controllers.turn.dtos.TurnDto;
 import ca.ulaval.glo4002.game.domain.actions.Action;
 import ca.ulaval.glo4002.game.domain.actions.ActionRepository;
 import ca.ulaval.glo4002.game.domain.dinosaur.Dinosaur;
@@ -11,9 +10,9 @@ import ca.ulaval.glo4002.game.domain.resources.Burger;
 import ca.ulaval.glo4002.game.domain.resources.ResourceRepository;
 import ca.ulaval.glo4002.game.domain.resources.Salad;
 import ca.ulaval.glo4002.game.domain.resources.Water;
-import ca.ulaval.glo4002.game.domain.turn.Turn;
 import ca.ulaval.glo4002.game.domain.turn.TurnFactory;
 import ca.ulaval.glo4002.game.domain.turn.TurnRepository;
+import ca.ulaval.glo4002.game.domain.turn.aggregate.TurnId;
 
 import java.util.List;
 
@@ -48,7 +47,7 @@ public class TurnUseCase {
         actionRepository.execute();
         postAction();
 
-        Turn turn = turnFactory.create(actions);
+        TurnId turn = turnFactory.create(turnRepository.nextTurnId(), actions);
         turnRepository.save(turn);
     }
 
@@ -87,6 +86,10 @@ public class TurnUseCase {
                 dinosaurRepository.remove(dinosaur);
             }
         }
+    }
+
+    public int getTurnNumber() {
+        return turnRepository.numberOfTurns();
     }
 
     public void reset() {

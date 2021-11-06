@@ -4,7 +4,6 @@ import ca.ulaval.glo4002.game.application.turn.TurnUseCase;
 import ca.ulaval.glo4002.game.controllers.turn.dtos.TurnDto;
 import ca.ulaval.glo4002.game.controllers.turn.dtos.TurnDtoAssembler;
 import ca.ulaval.glo4002.game.controllers.turn.dtos.TurnResponse;
-import ca.ulaval.glo4002.game.domain.turn.Turn;
 
 import javax.ws.rs.Consumes;
 import javax.ws.rs.POST;
@@ -32,7 +31,7 @@ public class TurnResource {
     public Response runTurn() {
         turnUseCase.executeTurn();
 
-        TurnDto turnDto = new TurnDto(Turn.number);
+        TurnDto turnDto = new TurnDto(turnUseCase.getTurnNumber());
         TurnResponse response = turnDtoAssembler.toResponse(turnDto);
 
         return Response.status(Response.Status.OK).entity(response).build();
@@ -43,7 +42,6 @@ public class TurnResource {
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
     public Response reset() {
-        Turn.number = 0;
         turnUseCase.reset();
 
         return Response.status(Response.Status.OK).build();
