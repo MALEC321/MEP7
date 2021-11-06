@@ -1,4 +1,4 @@
-package ca.ulaval.glo4002.game.configuration;
+package ca.ulaval.glo4002.game.application.configuration;
 
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
