@@ -18,7 +18,7 @@ public class GameServer implements Runnable {
         Server server = new Server(PORT);
         AppConfig appConfig = new AppConfig();
         ServletContextHandler contextHandler = new ServletContextHandler(server, "/");
-        ServletContainer container = new ServletContainer(appConfig.config);
+        ServletContainer container = new ServletContainer(appConfig.getConfig());
         ServletHolder servletHolder = new ServletHolder(container);
 
         contextHandler.addServlet(servletHolder, "/*");

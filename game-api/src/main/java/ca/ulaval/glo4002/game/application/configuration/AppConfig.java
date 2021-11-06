@@ -74,7 +74,11 @@ public class AppConfig {
 
     private static final BabyDtoAssembler babyDtoAssembler = new BabyDtoAssembler();
     private static final BabyResource createBabyResource = new BabyResource(babyUseCase, babyDtoAssembler);
+    private final ResourceConfig config;
 
+    public AppConfig(){
+        this.config = new ResourceConfig();
+    }
     private Set<Object> instances() {
         Set<Object> resources = new HashSet<>();
         resources.add(manageResources);
@@ -93,5 +97,7 @@ public class AppConfig {
         return resources;
     }
 
-    public ResourceConfig config = new ResourceConfig().registerInstances(instances());
+    public ResourceConfig getConfig () {
+        return this.config.registerInstances(instances());
+    }
 }
