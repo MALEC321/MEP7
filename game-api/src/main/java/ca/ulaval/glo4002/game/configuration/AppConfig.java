@@ -10,7 +10,7 @@ import org.glassfish.jersey.server.ResourceConfig;
 import ca.ulaval.glo4002.game.application.baby.BabyUseCase;
 import ca.ulaval.glo4002.game.application.baby.dtos.BabyAssembler;
 import ca.ulaval.glo4002.game.application.dinosaur.DinosaurUseCase;
-import ca.ulaval.glo4002.game.domain.resources.FoodDistributor;
+import ca.ulaval.glo4002.game.domain.resources.ResourcesDistributor;
 import ca.ulaval.glo4002.game.application.resources.ResourceUseCase;
 import ca.ulaval.glo4002.game.application.turn.TurnUseCase;
 import ca.ulaval.glo4002.game.controllers.baby.BabyResource;
@@ -54,7 +54,7 @@ public class AppConfig {
     static ActionRepository actionRepository = new ActionRepositoryInMemory();
     static ActionFactory actionFactory = new ActionFactory();
     static SpeciesDietsCorrespondances speciesDietsCorrespondances = new SpeciesDietsCorrespondances();
-    static FoodDistributor foodDistributor = new FoodDistributor();
+    static ResourcesDistributor resourcesDistributor = new ResourcesDistributor();
 
     // Dinosaur
     static DinosaurRepository dinosaurRepository = new DinosaurRepositoryInMemory();
@@ -65,7 +65,7 @@ public class AppConfig {
     static DinosaurDtoAssembler dinosaurDtoAssembler = new DinosaurDtoAssembler();
     static DinosaurResource dinosaurResource = new DinosaurResource(dinosaurUseCase, dinosaurDtoAssembler);
 
-    static TurnUseCase turnUseCase = new TurnUseCase(turnFactory, turnRepository, resourceRepository, dinosaurRepository, actionRepository, foodDistributor);
+    static TurnUseCase turnUseCase = new TurnUseCase(turnFactory, turnRepository, resourceRepository, dinosaurRepository, actionRepository, resourcesDistributor);
 
     static TurnDtoAssembler turnDtoAssembler = new TurnDtoAssembler();
     static TurnResource turnResource = new TurnResource(turnUseCase, turnDtoAssembler);

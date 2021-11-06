@@ -7,7 +7,7 @@ import org.mockito.MockitoAnnotations;
 
 import static org.mockito.Mockito.*;
 
-import ca.ulaval.glo4002.game.domain.resources.FoodDistributor;
+import ca.ulaval.glo4002.game.domain.resources.ResourcesDistributor;
 import ca.ulaval.glo4002.game.domain.dinosaur.Dinosaur;
 import ca.ulaval.glo4002.game.domain.dinosaur.DinosaurRepository;
 import ca.ulaval.glo4002.game.domain.resources.Pantry;
@@ -20,7 +20,7 @@ class TurnUseCaseTest {
     @Mock
     private DinosaurRepository dinosaurRepository;
     @Mock
-    private FoodDistributor foodDistributor;
+    private ResourcesDistributor resourcesDistributor;
     @Mock
     private Pantry pantry;
 

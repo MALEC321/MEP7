@@ -2,7 +2,7 @@ package ca.ulaval.glo4002.game.application.turn;
 
 import java.util.List;
 
-import ca.ulaval.glo4002.game.domain.resources.FoodDistributor;
+import ca.ulaval.glo4002.game.domain.resources.ResourcesDistributor;
 import ca.ulaval.glo4002.game.domain.actions.Action;
 import ca.ulaval.glo4002.game.domain.actions.ActionRepository;
 import ca.ulaval.glo4002.game.domain.dinosaur.Dinosaur;
@@ -23,7 +23,7 @@ public class TurnUseCase {
     private final ResourceRepository resourceRepository;
     private final ActionRepository actionRepository;
     private final DinosaurRepository dinosaurRepository;
-    private final FoodDistributor foodDistributor;
+    private final ResourcesDistributor resourcesDistributor;
 
     public TurnUseCase(
         TurnFactory turnFactory,
@@ -31,13 +31,13 @@ public class TurnUseCase {
         ResourceRepository resourceRepository,
         DinosaurRepository dinosaurRepository,
         ActionRepository actionRepository,
-        FoodDistributor foodDistributor) {
+        ResourcesDistributor resourcesDistributor) {
         this.turnFactory = turnFactory;
         this.turnRepository = turnRepository;
         this.resourceRepository = resourceRepository;
         this.dinosaurRepository = dinosaurRepository;
         this.actionRepository = actionRepository;
-        this.foodDistributor = foodDistributor;
+        this.resourcesDistributor = resourcesDistributor;
     }
 
     public void createTurn() {
@@ -73,7 +73,7 @@ public class TurnUseCase {
 
     protected void feedDinosaursByDietType(List<Dinosaur> sortedDinosaursByStrengthThenName) {
         for (Dinosaur dinosaur : sortedDinosaursByStrengthThenName) {
-            foodDistributor.feedDinosaur(resourceRepository.getPantry(), dinosaur);
+            resourcesDistributor.feedDinosaur(resourceRepository.getPantry(), dinosaur);
             if (dinosaur.isStarving()) {
                 dinosaurRepository.remove(dinosaur);
             }
