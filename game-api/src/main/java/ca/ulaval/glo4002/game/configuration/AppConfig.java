@@ -10,7 +10,7 @@ import org.glassfish.jersey.server.ResourceConfig;
 import ca.ulaval.glo4002.game.application.baby.BabyUseCase;
 import ca.ulaval.glo4002.game.application.baby.dtos.BabyAssembler;
 import ca.ulaval.glo4002.game.application.dinosaur.DinosaurUseCase;
-import ca.ulaval.glo4002.game.application.manager.ZooManager;
+import ca.ulaval.glo4002.game.domain.resources.FoodDistributor;
 import ca.ulaval.glo4002.game.application.resources.ResourceUseCase;
 import ca.ulaval.glo4002.game.application.turn.TurnUseCase;
 import ca.ulaval.glo4002.game.controllers.baby.BabyResource;
@@ -54,7 +54,7 @@ public class AppConfig {
     static ActionRepository actionRepository = new ActionRepositoryInMemory();
     static ActionFactory actionFactory = new ActionFactory();
     static SpeciesDietsCorrespondances speciesDietsCorrespondances = new SpeciesDietsCorrespondances();
-    static ZooManager zooManager = new ZooManager();
+    static FoodDistributor zooManager = new FoodDistributor();
 
     // Dinosaur
     static DinosaurRepository dinosaurRepository = new DinosaurRepositoryInMemory();

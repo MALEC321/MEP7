@@ -2,7 +2,7 @@ package ca.ulaval.glo4002.game.application.turn;
 
 import java.util.List;
 
-import ca.ulaval.glo4002.game.application.manager.ZooManager;
+import ca.ulaval.glo4002.game.domain.resources.FoodDistributor;
 import ca.ulaval.glo4002.game.domain.actions.Action;
 import ca.ulaval.glo4002.game.domain.actions.ActionRepository;
 import ca.ulaval.glo4002.game.domain.dinosaur.Dinosaur;
@@ -23,7 +23,7 @@ public class TurnUseCase {
     private final ResourceRepository resourceRepository;
     private final ActionRepository actionRepository;
     private final DinosaurRepository dinosaurRepository;
-    private final ZooManager zooManager;
+    private final FoodDistributor zooManager;
 
     public TurnUseCase(
         TurnFactory turnFactory,
@@ -31,7 +31,7 @@ public class TurnUseCase {
         ResourceRepository resourceRepository,
         DinosaurRepository dinosaurRepository,
         ActionRepository actionRepository,
-        ZooManager zooManager) {
+        FoodDistributor zooManager) {
         this.turnFactory = turnFactory;
         this.turnRepository = turnRepository;
         this.resourceRepository = resourceRepository;

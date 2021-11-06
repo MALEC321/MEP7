@@ -5,7 +5,7 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
-import ca.ulaval.glo4002.game.application.manager.ZooManager;
+import ca.ulaval.glo4002.game.domain.resources.FoodDistributor;
 import ca.ulaval.glo4002.game.application.turn.TurnUseCase;
 import ca.ulaval.glo4002.game.controllers.dinosaur.dtos.DinosaurAssembler;
 import ca.ulaval.glo4002.game.controllers.dinosaur.dtos.DinosaurCreationDto;
@@ -34,7 +34,7 @@ class DinosaurUseCaseTest {
     void setUp() {
         SpeciesDietsCorrespondances speciesDietsCorrespondances = new SpeciesDietsCorrespondances();
         ActionRepository actionRepository = new ActionRepositoryInMemory();
-        ZooManager zooManager = new ZooManager();
+        FoodDistributor zooManager = new FoodDistributor();
         ActionFactory actionFactory = new ActionFactory();
 
         DinosaurRepository dinosaurRepository = new DinosaurRepositoryInMemory();
