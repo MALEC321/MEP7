@@ -23,7 +23,7 @@ public class TurnUseCase {
     private final ResourceRepository resourceRepository;
     private final ActionRepository actionRepository;
     private final DinosaurRepository dinosaurRepository;
-    private final FoodDistributor zooManager;
+    private final FoodDistributor foodDistributor;
 
     public TurnUseCase(
         TurnFactory turnFactory,
@@ -31,13 +31,13 @@ public class TurnUseCase {
         ResourceRepository resourceRepository,
         DinosaurRepository dinosaurRepository,
         ActionRepository actionRepository,
-        FoodDistributor zooManager) {
+        FoodDistributor foodDistributor) {
         this.turnFactory = turnFactory;
         this.turnRepository = turnRepository;
         this.resourceRepository = resourceRepository;
         this.dinosaurRepository = dinosaurRepository;
         this.actionRepository = actionRepository;
-        this.zooManager = zooManager;
+        this.foodDistributor = foodDistributor;
     }
 
     public void createTurn() {
@@ -73,7 +73,7 @@ public class TurnUseCase {
 
     protected void feedDinosaursByDietType(List<Dinosaur> sortedDinosaursByStrengthThenName) {
         for (Dinosaur dinosaur : sortedDinosaursByStrengthThenName) {
-            zooManager.feedDinosaur(resourceRepository.getPantry(), dinosaur);
+            foodDistributor.feedDinosaur(resourceRepository.getPantry(), dinosaur);
             if (dinosaur.isStarving()) {
                 dinosaurRepository.remove(dinosaur);
             }

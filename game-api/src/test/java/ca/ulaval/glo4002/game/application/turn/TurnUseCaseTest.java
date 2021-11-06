@@ -20,7 +20,7 @@ class TurnUseCaseTest {
     @Mock
     private DinosaurRepository dinosaurRepository;
     @Mock
-    private FoodDistributor zooManager;
+    private FoodDistributor foodDistributor;
     @Mock
     private Pantry pantry;
 

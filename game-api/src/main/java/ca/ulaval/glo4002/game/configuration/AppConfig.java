@@ -54,7 +54,7 @@ public class AppConfig {
     static ActionRepository actionRepository = new ActionRepositoryInMemory();
     static ActionFactory actionFactory = new ActionFactory();
     static SpeciesDietsCorrespondances speciesDietsCorrespondances = new SpeciesDietsCorrespondances();
-    static FoodDistributor zooManager = new FoodDistributor();
+    static FoodDistributor foodDistributor = new FoodDistributor();
 
     // Dinosaur
     static DinosaurRepository dinosaurRepository = new DinosaurRepositoryInMemory();
@@ -65,7 +65,7 @@ public class AppConfig {
     static DinosaurDtoAssembler dinosaurDtoAssembler = new DinosaurDtoAssembler();
     static DinosaurResource dinosaurResource = new DinosaurResource(dinosaurUseCase, dinosaurDtoAssembler);
 
-    static TurnUseCase turnUseCase = new TurnUseCase(turnFactory, turnRepository, resourceRepository, dinosaurRepository, actionRepository, zooManager);
+    static TurnUseCase turnUseCase = new TurnUseCase(turnFactory, turnRepository, resourceRepository, dinosaurRepository, actionRepository, foodDistributor);
 
     static TurnDtoAssembler turnDtoAssembler = new TurnDtoAssembler();
     static TurnResource turnResource = new TurnResource(turnUseCase, turnDtoAssembler);

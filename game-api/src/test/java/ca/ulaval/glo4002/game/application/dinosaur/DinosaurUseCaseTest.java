@@ -34,7 +34,7 @@ class DinosaurUseCaseTest {
     void setUp() {
         SpeciesDietsCorrespondances speciesDietsCorrespondances = new SpeciesDietsCorrespondances();
         ActionRepository actionRepository = new ActionRepositoryInMemory();
-        FoodDistributor zooManager = new FoodDistributor();
+        FoodDistributor foodDistributor = new FoodDistributor();
         ActionFactory actionFactory = new ActionFactory();
 
         DinosaurRepository dinosaurRepository = new DinosaurRepositoryInMemory();
@@ -46,7 +46,7 @@ class DinosaurUseCaseTest {
         TurnFactory turnFactory = new TurnFactory();
         TurnRepository turnRepository = new TurnRepositoryInMemory();
         ResourceRepository resourceRepository = new ResourceRepositoryInMemory();
-        turnUseCase = new TurnUseCase(turnFactory, turnRepository, resourceRepository, dinosaurRepository, actionRepository, zooManager);
+        turnUseCase = new TurnUseCase(turnFactory, turnRepository, resourceRepository, dinosaurRepository, actionRepository, foodDistributor);
     }
 
     @Test

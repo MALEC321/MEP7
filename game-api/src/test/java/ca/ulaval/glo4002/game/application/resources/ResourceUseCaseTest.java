@@ -40,7 +40,7 @@ class ResourceUseCaseTest {
         ResourceAssemblers resourceAssemblers = new ResourceAssemblers();
         ResourceRepository resourceRepository = new ResourceRepositoryInMemory();
         ActionRepository actionRepository = new ActionRepositoryInMemory();
-        FoodDistributor zooManager = new FoodDistributor();
+        FoodDistributor foodDistributor = new FoodDistributor();
         ActionFactory actionFactory = new ActionFactory();
 
         TurnFactory turnFactory = new TurnFactory();
@@ -48,7 +48,7 @@ class ResourceUseCaseTest {
         TurnAssembler turnAssembler = new TurnAssembler();
         DinosaurRepository dinosaurRepository = new DinosaurRepositoryInMemory();
 
-        turnUseCase = new TurnUseCase(turnFactory, turnRepository, resourceRepository, dinosaurRepository, actionRepository, zooManager);
+        turnUseCase = new TurnUseCase(turnFactory, turnRepository, resourceRepository, dinosaurRepository, actionRepository, foodDistributor);
         resourceUseCase = new ResourceUseCase(resourceFactory, resourceRepository, resourceAssemblers, actionRepository, actionFactory);
     }
 
