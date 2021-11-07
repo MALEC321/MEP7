@@ -13,7 +13,7 @@ import ca.ulaval.glo4002.game.domain.exceptions.InvalidSpeciesException;
 import ca.ulaval.glo4002.game.domain.exceptions.InvalidWeightException;
 import ca.ulaval.glo4002.game.repositories.dinosaur.DinosaurRepositoryInMemory;
 
-class DinosaurFactoryTest {
+public class DinosaurFactoryTest {
 
     private DinosaurFactory dinosaurFactory;
     private DinosaurRepository dinosaurRepository;

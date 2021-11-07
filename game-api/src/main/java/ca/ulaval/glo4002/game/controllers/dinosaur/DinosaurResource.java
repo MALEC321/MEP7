@@ -1,3 +1,4 @@
+
 package ca.ulaval.glo4002.game.controllers.dinosaur;
 
 import java.util.List;
