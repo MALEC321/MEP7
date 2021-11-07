@@ -1,7 +1,7 @@
 package ca.ulaval.glo4002.game.controllers.exceptionMappers;
 
 import ca.ulaval.glo4002.game.controllers.exceptionMappers.dtos.ExceptionResponse;
-import ca.ulaval.glo4002.game.domain.exceptions.MaxCombatsReachedException;
+import ca.ulaval.glo4002.game.application.exceptions.MaxCombatsReachedException;
 
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;

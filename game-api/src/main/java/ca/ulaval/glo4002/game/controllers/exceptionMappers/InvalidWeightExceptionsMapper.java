@@ -5,7 +5,7 @@ import javax.ws.rs.core.Response;
 import javax.ws.rs.ext.ExceptionMapper;
 
 import ca.ulaval.glo4002.game.controllers.exceptionMappers.dtos.ExceptionResponse;
-import ca.ulaval.glo4002.game.domain.exceptions.InvalidWeightException;
+import ca.ulaval.glo4002.game.application.exceptions.InvalidWeightException;
 
 public class InvalidWeightExceptionsMapper implements ExceptionMapper<InvalidWeightException> {
     @Override
