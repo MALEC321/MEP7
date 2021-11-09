@@ -9,11 +9,11 @@ import ca.ulaval.glo4002.game.application.exceptions.InvalidWeightException;
 public class DinosaurFactory {
     public static final int MIN_WEIGHT = 0;
     public static final int BABY_WEIGHT = 1;
-    private final DinosaurRepository dinosaurRepository;
+    private final HerdRepository herdRepository;
     private final SpeciesDietsCorrespondances speciesDietsCorrespondances;
 
-    public DinosaurFactory(DinosaurRepository dinosaurRepository, SpeciesDietsCorrespondances speciesDietsCorrespondances) {
-        this.dinosaurRepository = dinosaurRepository;
+    public DinosaurFactory(HerdRepository herdRepository, SpeciesDietsCorrespondances speciesDietsCorrespondances) {
+        this.herdRepository = herdRepository;
         this.speciesDietsCorrespondances = speciesDietsCorrespondances;
     }
 
@@ -40,7 +40,8 @@ public class DinosaurFactory {
     }
 
     public void validateName(String name) {
-        if (dinosaurRepository.findByName(name) != null) {
+        Herd herd = herdRepository.findHerd();
+        if (herd.findDinosaurByName(name) != null) {
             throw new DuplicateNameException();
         }
     }

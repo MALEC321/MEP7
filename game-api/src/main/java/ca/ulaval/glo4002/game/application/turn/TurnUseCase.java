@@ -1,13 +1,11 @@
 package ca.ulaval.glo4002.game.application.turn;
 
-import java.util.List;
-
 import ca.ulaval.glo4002.game.application.manager.ZooManager;
+import ca.ulaval.glo4002.game.controllers.turn.dtos.TurnDto;
 import ca.ulaval.glo4002.game.domain.actions.Action;
 import ca.ulaval.glo4002.game.domain.actions.ActionRepository;
-import ca.ulaval.glo4002.game.domain.dinosaur.Dinosaur;
-import ca.ulaval.glo4002.game.domain.dinosaur.DinosaurBaby;
-import ca.ulaval.glo4002.game.domain.dinosaur.DinosaurRepository;
+import ca.ulaval.glo4002.game.domain.dinosaur.HerdRepository;
+import ca.ulaval.glo4002.game.domain.dinosaur.Herd;
 import ca.ulaval.glo4002.game.domain.resources.Burger;
 import ca.ulaval.glo4002.game.domain.resources.ResourceRepository;
 import ca.ulaval.glo4002.game.domain.resources.Salad;
@@ -16,31 +14,32 @@ import ca.ulaval.glo4002.game.domain.turn.Turn;
 import ca.ulaval.glo4002.game.domain.turn.TurnFactory;
 import ca.ulaval.glo4002.game.domain.turn.TurnRepository;
 
-public class TurnUseCase {
+import java.util.List;
 
+public class TurnUseCase {
     private final TurnFactory turnFactory;
     private final TurnRepository turnRepository;
     private final ResourceRepository resourceRepository;
     private final ActionRepository actionRepository;
-    private final DinosaurRepository dinosaurRepository;
+    private final HerdRepository herdRepository;
     private final ZooManager zooManager;
 
     public TurnUseCase(
         TurnFactory turnFactory,
         TurnRepository turnRepository,
         ResourceRepository resourceRepository,
-        DinosaurRepository dinosaurRepository,
+        HerdRepository herdRepository,
         ActionRepository actionRepository,
         ZooManager zooManager) {
         this.turnFactory = turnFactory;
         this.turnRepository = turnRepository;
         this.resourceRepository = resourceRepository;
-        this.dinosaurRepository = dinosaurRepository;
+        this.herdRepository = herdRepository;
         this.actionRepository = actionRepository;
         this.zooManager = zooManager;
     }
 
-    public void createTurn() {
+    public void executeTurn() {
         List<Action> actions = actionRepository.getWaitingActions();
         cookIt();
 
@@ -57,6 +56,7 @@ public class TurnUseCase {
         resourceRepository.add(new Water(10000));
     }
 
+    // TODO: Should be end turn Actions
     private void postAction() {
         resourceRepository.decreaseExpirationDate();
         feedDinosaurs();
@@ -64,35 +64,18 @@ public class TurnUseCase {
     }
 
     protected void feedDinosaurs() {
-        feedDinosaursByDietType(dinosaurRepository.getSortedDinosaursByStrengthThenName());
+        zooManager.feedDinosaurs(resourceRepository.getPantry(), herdRepository.findHerd());
     }
 
     protected void removeBabyDinosaurs() {
-        removeBabyDinosaur(dinosaurRepository.getSortedDinosaursByStrengthThenName());
-    }
-    protected void feedDinosaursByDietType(List<Dinosaur> sortedDinosaursByStrengthThenName) {
-        boolean isStarving;
-
-        for (Dinosaur dinosaur : sortedDinosaursByStrengthThenName) {
-            isStarving = zooManager.feedThenCheckIfStarving(resourceRepository.getPantry(), dinosaur);
-            if (isStarving) {
-                dinosaurRepository.remove(dinosaur);
-            }
-        }
-    }
-
-    private void removeBabyDinosaur(List<Dinosaur> sortedDinosaursByStrengthThenName) {
-        for (Dinosaur dinosaur : sortedDinosaursByStrengthThenName) {
-            if (dinosaur instanceof DinosaurBaby && dinosaurRepository.areBothParentsDead(dinosaur)) {
-                dinosaurRepository.remove(dinosaur);
-            }
-        }
+        Herd herd = herdRepository.findHerd();
+        herd.removeOrphanedBabyDinosaurs();
     }
 
     public void reset() {
         turnRepository.reset();
         resourceRepository.reset();
-        dinosaurRepository.reset();
+        herdRepository.reset();
         actionRepository.reset();
     }
 }

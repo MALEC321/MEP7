@@ -8,7 +8,7 @@ import java.util.Queue;
 import static ca.ulaval.glo4002.game.domain.resources.ResourceType.*;
 
 @SuppressWarnings("unchecked")
-public class Pantry implements Eatable {
+public class Pantry implements FoodContainer {
 
     private final HashMap<ResourceType, Object> mapResourceQueue;
 

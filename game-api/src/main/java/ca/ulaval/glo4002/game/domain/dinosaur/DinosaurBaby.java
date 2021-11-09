@@ -1,7 +1,6 @@
 package ca.ulaval.glo4002.game.domain.dinosaur;
 
 public class DinosaurBaby extends Dinosaur {
-
     private final String fatherName;
     private final String motherName;
 
