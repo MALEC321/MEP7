@@ -1,6 +1,6 @@
 package ca.ulaval.glo4002.game.application.resources;
 
-import ca.ulaval.glo4002.game.application.manager.ZooManager;
+import ca.ulaval.glo4002.game.domain.resources.ResourcesDistributor;
 import ca.ulaval.glo4002.game.application.resources.dtos.ResourceAssemblers;
 import ca.ulaval.glo4002.game.application.resources.dtos.ResourceDto;
 import ca.ulaval.glo4002.game.application.turn.TurnUseCase;
@@ -38,14 +38,14 @@ class ResourceUseCaseTest {
         ResourceAssemblers resourceAssemblers = new ResourceAssemblers();
         ResourceRepository resourceRepository = new ResourceRepositoryInMemory();
         ActionRepository actionRepository = new ActionRepositoryInMemory();
-        ZooManager zooManager = new ZooManager();
+        ResourcesDistributor resourcesDistributor = new ResourcesDistributor();
         ActionFactory actionFactory = new ActionFactory();
 
         TurnFactory turnFactory = new TurnFactory();
         TurnRepository turnRepository = new TurnRepositoryInMemory();
         HerdRepository herdRepository = new HerdRepositoryInMemory();
 
-        turnUseCase = new TurnUseCase(turnFactory, turnRepository, resourceRepository, herdRepository, actionRepository, zooManager);
+        turnUseCase = new TurnUseCase(turnFactory, turnRepository, resourceRepository, herdRepository, actionRepository, resourcesDistributor);
         resourceUseCase = new ResourceUseCase(resourceFactory, resourceRepository, resourceAssemblers, actionRepository, actionFactory);
     }
 

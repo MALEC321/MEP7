@@ -5,7 +5,6 @@ import ca.ulaval.glo4002.game.application.baby.breed.Breedable;
 import ca.ulaval.glo4002.game.application.baby.dtos.BabyAssembler;
 import ca.ulaval.glo4002.game.application.dinosaur.DinosaurUseCase;
 import ca.ulaval.glo4002.game.application.dinosaur.dtos.DinosaurAssembler;
-import ca.ulaval.glo4002.game.application.manager.ZooManager;
 import ca.ulaval.glo4002.game.application.resources.ResourceUseCase;
 import ca.ulaval.glo4002.game.application.resources.dtos.ResourceAssemblers;
 import ca.ulaval.glo4002.game.application.turn.TurnUseCase;
@@ -25,6 +24,7 @@ import ca.ulaval.glo4002.game.domain.dinosaur.HerdRepository;
 import ca.ulaval.glo4002.game.domain.dinosaur.enums.SpeciesDietsCorrespondances;
 import ca.ulaval.glo4002.game.domain.resources.ResourceFactory;
 import ca.ulaval.glo4002.game.domain.resources.ResourceRepository;
+import ca.ulaval.glo4002.game.domain.resources.ResourcesDistributor;
 import ca.ulaval.glo4002.game.domain.turn.TurnFactory;
 import ca.ulaval.glo4002.game.domain.turn.TurnRepository;
 import ca.ulaval.glo4002.game.infrastructure.client.BabyBreedableClient;
@@ -45,7 +45,7 @@ public class AppConfig {
     private static final ActionRepository actionRepository = new ActionRepositoryInMemory();
     private static final ActionFactory actionFactory = new ActionFactory();
     private static final SpeciesDietsCorrespondances speciesDietsCorrespondances = new SpeciesDietsCorrespondances();
-    private static final ZooManager zooManager = new ZooManager();
+    private static final ResourcesDistributor resourcesDistributor = new ResourcesDistributor();
 
     // Dinosaur
     private static final HerdRepository herdRepository = new HerdRepositoryInMemory();
@@ -56,7 +56,7 @@ public class AppConfig {
     private static final DinosaurDtoAssembler dinosaurDtoAssembler = new DinosaurDtoAssembler();
     private static final DinosaurResource manageDinosaurResource = new DinosaurResource(dinosaurUseCase, dinosaurDtoAssembler);
 
-    private static final TurnUseCase turnUseCase = new TurnUseCase(turnFactory, turnRepository, resourceRepository, herdRepository, actionRepository, zooManager);
+    private static final TurnUseCase turnUseCase = new TurnUseCase(turnFactory, turnRepository, resourceRepository, herdRepository, actionRepository, resourcesDistributor);
 
     private static final TurnDtoAssembler turnDtoAssembler = new TurnDtoAssembler();
     private static final TurnResource executeTurnResource = new TurnResource(turnUseCase, turnDtoAssembler);

@@ -1,6 +1,6 @@
 package ca.ulaval.glo4002.game.application.turn;
 
-import ca.ulaval.glo4002.game.application.manager.ZooManager;
+import ca.ulaval.glo4002.game.domain.resources.ResourcesDistributor;
 import ca.ulaval.glo4002.game.domain.dinosaur.Dinosaur;
 import ca.ulaval.glo4002.game.domain.dinosaur.HerdRepository;
 import ca.ulaval.glo4002.game.domain.resources.Pantry;
@@ -19,7 +19,7 @@ public class TurnUseCaseTest {
     @Mock
     private HerdRepository herdRepository;
     @Mock
-    private ZooManager zooManager;
+    private ResourcesDistributor resourcesDistributor;
     @Mock
     private Pantry pantry;
 

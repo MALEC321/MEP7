@@ -1,6 +1,6 @@
 package ca.ulaval.glo4002.game.application.turn;
 
-import ca.ulaval.glo4002.game.application.manager.ZooManager;
+import ca.ulaval.glo4002.game.domain.resources.ResourcesDistributor;
 import ca.ulaval.glo4002.game.controllers.turn.dtos.TurnDto;
 import ca.ulaval.glo4002.game.domain.actions.Action;
 import ca.ulaval.glo4002.game.domain.actions.ActionRepository;
@@ -17,12 +17,13 @@ import ca.ulaval.glo4002.game.domain.turn.TurnRepository;
 import java.util.List;
 
 public class TurnUseCase {
+
     private final TurnFactory turnFactory;
     private final TurnRepository turnRepository;
     private final ResourceRepository resourceRepository;
     private final ActionRepository actionRepository;
     private final HerdRepository herdRepository;
-    private final ZooManager zooManager;
+    private final ResourcesDistributor resourcesDistributor;
 
     public TurnUseCase(
         TurnFactory turnFactory,
@@ -30,13 +31,13 @@ public class TurnUseCase {
         ResourceRepository resourceRepository,
         HerdRepository herdRepository,
         ActionRepository actionRepository,
-        ZooManager zooManager) {
+        ResourcesDistributor resourcesDistributor) {
         this.turnFactory = turnFactory;
         this.turnRepository = turnRepository;
         this.resourceRepository = resourceRepository;
         this.herdRepository = herdRepository;
         this.actionRepository = actionRepository;
-        this.zooManager = zooManager;
+        this.resourcesDistributor = resourcesDistributor;
     }
 
     public void executeTurn() {
@@ -64,7 +65,7 @@ public class TurnUseCase {
     }
 
     protected void feedDinosaurs() {
-        zooManager.feedDinosaurs(resourceRepository.getPantry(), herdRepository.findHerd());
+        resourcesDistributor.feedDinosaurs(resourceRepository.getPantry(), herdRepository.findHerd());
     }
 
     protected void removeBabyDinosaurs() {
