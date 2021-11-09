@@ -1,6 +1,7 @@
 package ca.ulaval.glo4002.game.application.turn;
 
 import ca.ulaval.glo4002.game.application.manager.ZooManager;
+import ca.ulaval.glo4002.game.controllers.turn.dtos.TurnDto;
 import ca.ulaval.glo4002.game.domain.actions.Action;
 import ca.ulaval.glo4002.game.domain.actions.ActionRepository;
 import ca.ulaval.glo4002.game.domain.dinosaur.Dinosaur;
@@ -41,10 +42,10 @@ public class TurnUseCase {
     }
 
     public void executeTurn() {
-        List<Action> actions = actionRepository.getActionList();
+        List<Action> actions = actionRepository.getWaitingActions();
         cookIt();
 
-        actionRepository.executeActions();
+        actionRepository.execute();
         postAction();
 
         Turn turn = turnFactory.create(actions);

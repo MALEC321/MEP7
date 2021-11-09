@@ -52,7 +52,7 @@ class ActionRepositoryInMemoryTest {
 
         setActionsRepository();
 
-        this.actionRepositoryInMemory.executeActions();
+        this.actionRepositoryInMemory.execute();
 
         InOrder inOrderActionTurn = Mockito.inOrder(this.actionTurn);
         InOrder inOrderActionDino = Mockito.inOrder(this.actionDino);
