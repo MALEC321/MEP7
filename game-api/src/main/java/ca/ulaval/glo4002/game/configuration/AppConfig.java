@@ -1,50 +1,42 @@
 package ca.ulaval.glo4002.game.configuration;
 
-import java.util.HashSet;
-import java.util.Set;
-
-import javax.ws.rs.core.Application;
-
-import ca.ulaval.glo4002.game.domain.dinosaur.HerdRepository;
-import ca.ulaval.glo4002.game.repositories.dinosaur.HerdRepositoryInMemory;
-import org.glassfish.jersey.server.ResourceConfig;
-
 import ca.ulaval.glo4002.game.application.baby.BabyUseCase;
+import ca.ulaval.glo4002.game.application.baby.breed.Breedable;
 import ca.ulaval.glo4002.game.application.baby.dtos.BabyAssembler;
 import ca.ulaval.glo4002.game.application.dinosaur.DinosaurUseCase;
+import ca.ulaval.glo4002.game.application.dinosaur.dtos.DinosaurAssembler;
 import ca.ulaval.glo4002.game.application.manager.ZooManager;
 import ca.ulaval.glo4002.game.application.resources.ResourceUseCase;
+import ca.ulaval.glo4002.game.application.resources.dtos.ResourceAssemblers;
 import ca.ulaval.glo4002.game.application.turn.TurnUseCase;
 import ca.ulaval.glo4002.game.controllers.baby.BabyResource;
 import ca.ulaval.glo4002.game.controllers.baby.dtos.BabyDtoAssembler;
 import ca.ulaval.glo4002.game.controllers.dinosaur.DinosaurResource;
-import ca.ulaval.glo4002.game.controllers.dinosaur.dtos.DinosaurAssembler;
 import ca.ulaval.glo4002.game.controllers.dinosaur.dtos.DinosaurDtoAssembler;
 import ca.ulaval.glo4002.game.controllers.resources.ResourceResource;
-import ca.ulaval.glo4002.game.controllers.resources.dtos.ResourceAssemblers;
 import ca.ulaval.glo4002.game.controllers.resources.dtos.ResourceDtoAssembler;
 import ca.ulaval.glo4002.game.controllers.turn.TurnResource;
 import ca.ulaval.glo4002.game.controllers.turn.dtos.TurnDtoAssembler;
 import ca.ulaval.glo4002.game.domain.actions.ActionFactory;
 import ca.ulaval.glo4002.game.domain.actions.ActionRepository;
 import ca.ulaval.glo4002.game.domain.dinosaur.DinosaurFactory;
+import ca.ulaval.glo4002.game.domain.dinosaur.HerdRepository;
 import ca.ulaval.glo4002.game.domain.dinosaur.enums.SpeciesDietsCorrespondances;
 import ca.ulaval.glo4002.game.domain.resources.ResourceFactory;
 import ca.ulaval.glo4002.game.domain.resources.ResourceRepository;
 import ca.ulaval.glo4002.game.domain.turn.TurnFactory;
 import ca.ulaval.glo4002.game.domain.turn.TurnRepository;
-import ca.ulaval.glo4002.game.exceptions.exceptionMappers.DuplicateNameExceptionMapper;
-import ca.ulaval.glo4002.game.exceptions.exceptionMappers.InvalidFatherExceptionMapper;
-import ca.ulaval.glo4002.game.exceptions.exceptionMappers.InvalidGenderExceptionMapper;
-import ca.ulaval.glo4002.game.exceptions.exceptionMappers.InvalidMotherExceptionMapper;
-import ca.ulaval.glo4002.game.exceptions.exceptionMappers.InvalidResourceExceptionMapper;
-import ca.ulaval.glo4002.game.exceptions.exceptionMappers.InvalidSpeciesExceptionMapper;
-import ca.ulaval.glo4002.game.exceptions.exceptionMappers.InvalidWeightExceptionMapper;
-import ca.ulaval.glo4002.game.exceptions.exceptionMappers.NotExistentNameExceptionMapper;
-import ca.ulaval.glo4002.game.exceptions.exceptionMappers.UnknownExceptionGrabber;
-import ca.ulaval.glo4002.game.repositories.actions.ActionRepositoryInMemory;
-import ca.ulaval.glo4002.game.repositories.resources.ResourceRepositoryInMemory;
-import ca.ulaval.glo4002.game.repositories.turn.TurnRepositoryInMemory;
+import ca.ulaval.glo4002.game.exceptions.exceptionMappers.*;
+import ca.ulaval.glo4002.game.infrastructure.client.BabyBreedableClient;
+import ca.ulaval.glo4002.game.infrastructure.persistence.actions.ActionRepositoryInMemory;
+import ca.ulaval.glo4002.game.infrastructure.persistence.dinosaur.HerdRepositoryInMemory;
+import ca.ulaval.glo4002.game.infrastructure.persistence.resources.ResourceRepositoryInMemory;
+import ca.ulaval.glo4002.game.infrastructure.persistence.turn.TurnRepositoryInMemory;
+import org.glassfish.jersey.server.ResourceConfig;
+
+import javax.ws.rs.core.Application;
+import java.util.HashSet;
+import java.util.Set;
 
 public class AppConfig {
     // Turn
@@ -78,7 +70,8 @@ public class AppConfig {
 
     // Bebe
     static BabyAssembler babyAssembler = new BabyAssembler();
-    static BabyUseCase bebeUseCase = new BabyUseCase(herdRepository, babyAssembler, actionRepository, actionFactory, dinosaurFactory);
+    static Breedable breedable = new BabyBreedableClient();
+    static BabyUseCase bebeUseCase = new BabyUseCase(herdRepository, babyAssembler, actionRepository, actionFactory, dinosaurFactory,breedable);
 
     static BabyDtoAssembler babyDtoAssembler = new BabyDtoAssembler();
     static BabyResource babyResource = new BabyResource(bebeUseCase, babyDtoAssembler);
