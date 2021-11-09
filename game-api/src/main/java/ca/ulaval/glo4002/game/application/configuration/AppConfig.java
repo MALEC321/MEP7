@@ -95,6 +95,12 @@ public class AppConfig {
         resources.add(new DuplicateNameExceptionsMapper());
         resources.add(new InvalidMotherExceptionsMapper());
         resources.add(new InvalidFatherExceptionsMapper());
+        resources.add(new ArmsTooShortExceptionsMapper());
+        resources.add(new DinosaurAlreadyParticipatingExceptionsMapper());
+        resources.add(new MaxCombatsReachedExceptionsMapper());
+        resources.add(new InvalidBabyWeightChangeExceptionMapper());
+        resources.add(new GrowInvalidWeightExceptionMapper());
+        resources.add(new InvalidWeightChangeExceptionMapper());
         return resources;
     }
 
