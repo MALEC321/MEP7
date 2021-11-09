@@ -7,28 +7,33 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ActionRepositoryInMemory implements ActionRepository {
-    private final List<Action> actionList = new ArrayList<>();
+    private final List<Action> waitingActions = new ArrayList<>();
 
     @Override
     public void save(Action action) {
-        actionList.add(action);
+        waitingActions.add(action);
     }
 
     @Override
-    public List<Action> getActionList() {
-        return actionList;
+    public List<Action> getWaitingActions() {
+        return waitingActions;
     }
 
     @Override
-    public void executeActions() {
-        for (Action action : actionList) {
+    public void execute() {
+        for (Action action : waitingActions) {
             action.execute();
         }
-        actionList.clear();
+
+        waitingActions.clear();
+    }
+
+    @Override
+    public void addElementToActionWaitingList(Object element) {
     }
 
     @Override
     public void reset() {
-        actionList.clear();
+        waitingActions.clear();
     }
 }
