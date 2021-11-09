@@ -8,7 +8,6 @@ import ca.ulaval.glo4002.game.controllers.exceptionMappers.dtos.ExceptionRespons
 import ca.ulaval.glo4002.game.application.exceptions.InvalidGenderException;
 
 public class InvalidGenderExceptionsMapper implements ExceptionMapper<InvalidGenderException> {
-
     @Override
     public Response toResponse(InvalidGenderException e) {
         ExceptionResponse exceptionResponse = new ExceptionResponse();

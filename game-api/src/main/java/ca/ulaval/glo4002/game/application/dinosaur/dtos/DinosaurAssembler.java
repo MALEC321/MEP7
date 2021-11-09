@@ -6,7 +6,6 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class DinosaurAssembler {
-
     public DinosaurDto toDto(Dinosaur dinosaur) {
         return new DinosaurDto(dinosaur.getName(), dinosaur.getWeight(), dinosaur.getGender(),
                 dinosaur.getSpecies());

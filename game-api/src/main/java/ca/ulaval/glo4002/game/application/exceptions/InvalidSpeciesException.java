@@ -1,4 +1,3 @@
 package ca.ulaval.glo4002.game.application.exceptions;
 
-public class InvalidSpeciesException extends RuntimeException {
-}
+public class InvalidSpeciesException extends RuntimeException { }

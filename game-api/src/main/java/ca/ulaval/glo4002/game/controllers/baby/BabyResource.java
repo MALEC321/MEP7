@@ -14,7 +14,6 @@ import javax.ws.rs.core.Response;
 
 @Path("/breed")
 public class BabyResource {
-
     private final BabyUseCase babyUseCase;
     private final BabyDtoAssembler babyDtoAssembler;
 

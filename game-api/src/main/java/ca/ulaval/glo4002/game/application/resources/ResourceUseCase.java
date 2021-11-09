@@ -30,11 +30,10 @@ public class ResourceUseCase {
         this.actionFactory = actionFactory;
     }
 
-    public ResourceDto createResource(ResourceCreationDto resourceCreationDto) {
+    public void createResource(ResourceCreationDto resourceCreationDto) {
         Resource resources = resourceFactory.create(resourceCreationDto.getQtyBurger(), resourceCreationDto.getQtySalad(),
                 resourceCreationDto.getQtyWater());
         addResourceToActionWaitingList(resources);
-        return resourceAssemblers.toDto(resources);
     }
 
     public List<ResourceDto> getAllResources() {

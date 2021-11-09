@@ -22,6 +22,4 @@ public class BabyCreationDto {
     public String getMotherName() {
         return motherName;
     }
-
-
 }

@@ -8,7 +8,6 @@ import ca.ulaval.glo4002.game.controllers.exceptionMappers.dtos.ExceptionRespons
 import ca.ulaval.glo4002.game.application.exceptions.InvalidFatherException;
 
 public class InvalidFatherExceptionsMapper implements ExceptionMapper<InvalidFatherException> {
-
     @Override
     public Response toResponse(InvalidFatherException e) {
         ExceptionResponse exceptionResponse = new ExceptionResponse();

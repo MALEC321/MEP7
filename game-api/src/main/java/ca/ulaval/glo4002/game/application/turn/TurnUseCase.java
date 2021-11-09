@@ -1,13 +1,12 @@
 package ca.ulaval.glo4002.game.application.turn;
 
-import ca.ulaval.glo4002.game.domain.resources.ResourcesDistributor;
-import ca.ulaval.glo4002.game.controllers.turn.dtos.TurnDto;
 import ca.ulaval.glo4002.game.domain.actions.Action;
 import ca.ulaval.glo4002.game.domain.actions.ActionRepository;
-import ca.ulaval.glo4002.game.domain.dinosaur.HerdRepository;
 import ca.ulaval.glo4002.game.domain.dinosaur.Herd;
+import ca.ulaval.glo4002.game.domain.dinosaur.HerdRepository;
 import ca.ulaval.glo4002.game.domain.resources.Burger;
 import ca.ulaval.glo4002.game.domain.resources.ResourceRepository;
+import ca.ulaval.glo4002.game.domain.resources.ResourcesDistributor;
 import ca.ulaval.glo4002.game.domain.resources.Salad;
 import ca.ulaval.glo4002.game.domain.resources.Water;
 import ca.ulaval.glo4002.game.domain.turn.Turn;
@@ -17,7 +16,6 @@ import ca.ulaval.glo4002.game.domain.turn.TurnRepository;
 import java.util.List;
 
 public class TurnUseCase {
-
     private final TurnFactory turnFactory;
     private final TurnRepository turnRepository;
     private final ResourceRepository resourceRepository;
