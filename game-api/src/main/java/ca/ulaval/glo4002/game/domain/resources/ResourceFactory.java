@@ -1,6 +1,6 @@
 package ca.ulaval.glo4002.game.domain.resources;
 
-import ca.ulaval.glo4002.game.exceptions.types.InvalidResourceQuantityException;
+import ca.ulaval.glo4002.game.application.exceptions.InvalidResourceQuantityException;
 
 public class ResourceFactory {
     public Resource create(int qtyBurger, int qtySalad, int qtyWater) {

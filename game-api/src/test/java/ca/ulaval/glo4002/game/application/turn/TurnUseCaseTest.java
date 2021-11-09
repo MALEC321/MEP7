@@ -1,24 +1,23 @@
 package ca.ulaval.glo4002.game.application.turn;
 
+import ca.ulaval.glo4002.game.domain.resources.ResourcesDistributor;
+import ca.ulaval.glo4002.game.domain.dinosaur.Dinosaur;
+import ca.ulaval.glo4002.game.domain.dinosaur.HerdRepository;
+import ca.ulaval.glo4002.game.domain.resources.Pantry;
+import ca.ulaval.glo4002.game.domain.resources.ResourceRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
-import static org.mockito.Mockito.*;
+import static org.mockito.Mockito.when;
 
-import ca.ulaval.glo4002.game.domain.resources.ResourcesDistributor;
-import ca.ulaval.glo4002.game.domain.dinosaur.Dinosaur;
-import ca.ulaval.glo4002.game.domain.dinosaur.DinosaurRepository;
-import ca.ulaval.glo4002.game.domain.resources.Pantry;
-import ca.ulaval.glo4002.game.domain.resources.ResourceRepository;
-
-class TurnUseCaseTest {
+public class TurnUseCaseTest {
 
     @Mock
     private ResourceRepository resourceRepository;
     @Mock
-    private DinosaurRepository dinosaurRepository;
+    private HerdRepository herdRepository;
     @Mock
     private ResourcesDistributor resourcesDistributor;
     @Mock
@@ -35,7 +34,7 @@ class TurnUseCaseTest {
         when(resourceRepository.getPantry()).thenReturn(pantry);
     }
 
-/*    @Test
+    /*    @Test
     void whenDinosaurIsStarving_ThenDinosaurShouldBeRemove() {
         List<Dinosaur> dinosaurs = new ArrayList<>(List.of(dinosaurTest));
         //when(zooManager.feedDinosaur(pantry, dinosaurTest));
