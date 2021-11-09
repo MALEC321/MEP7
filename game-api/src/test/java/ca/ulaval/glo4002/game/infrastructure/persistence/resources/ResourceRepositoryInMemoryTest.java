@@ -16,8 +16,7 @@ import ca.ulaval.glo4002.game.domain.resources.Pantry;
 import ca.ulaval.glo4002.game.domain.resources.ResourceElements;
 import ca.ulaval.glo4002.game.domain.resources.Water;
 
-class ResourceRepositoryInMemoryTest {
-
+public class ResourceRepositoryInMemoryTest {
     @InjectMocks
     private ResourceRepositoryInMemory resourceRepositoryInMemory;
 

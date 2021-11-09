@@ -5,7 +5,7 @@ title __DINOSAUR's Class Diagram__\n
   namespace  {
     namespace a.ulaval.glo4002.game {
       namespace repositories.dinosaur {
-        class ca.ulaval.glo4002.game.infrastructure.persistence.dinosaur.DinosaurRepositoryInMemory {
+        class ca.ulaval.glo4002.game.repositories.dinosaur.HerdRepositoryInMemory {
             - dinosaursByName : Map<String, Dinosaur>
             + findAll()
             + findByName()
@@ -19,7 +19,7 @@ title __DINOSAUR's Class Diagram__\n
   }
   
 
-  ca.ulaval.glo4002.game.infrastructure.persistence.dinosaur.DinosaurRepositoryInMemory .up.|> ca.ulaval.glo4002.game.domain.dinosaur.DinosaurRepository
+  ca.ulaval.glo4002.game.repositories.dinosaur.HerdRepositoryInMemory .up.|> ca.ulaval.glo4002.game.domain.dinosaur.HerdRepository
 
 
 right footer

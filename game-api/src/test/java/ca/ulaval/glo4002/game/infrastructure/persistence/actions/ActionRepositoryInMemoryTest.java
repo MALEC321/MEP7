@@ -17,8 +17,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import ca.ulaval.glo4002.game.domain.actions.Action;
 
-class ActionRepositoryInMemoryTest {
-
+public class ActionRepositoryInMemoryTest {
     @InjectMocks
     private ActionRepositoryInMemory actionRepositoryInMemory;
 
