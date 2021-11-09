@@ -33,19 +33,19 @@ public class PantryTest {
 
     @Test
     void whenDrinkingWater_shouldDecrementFreshQueue() {
-        pantry.removeResource(WATER, 100);
+        pantry.removeResourceQty(WATER, 100);
         assertEquals(900, pantry.findFreshResource().getResourceQuantity(WATER));
     }
 
     @Test
     void whenEatingTooMuchBurger_shouldDecrementBurgerQueueToZero() {
-        pantry.removeResource(BURGER, 100);
+        pantry.removeResourceQty(BURGER, 100);
         assertEquals(0, pantry.findFreshResource().getResourceQuantity(BURGER));
     }
 
     @Test
     void whenEatingSalad_shouldIncrementConsumedResources() {
-        pantry.removeResource(SALAD, 70);
+        pantry.removeResourceQty(SALAD, 70);
         assertEquals(70, pantry.getConsumedResources().getResourceQuantity(SALAD));
     }
 }

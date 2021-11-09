@@ -10,7 +10,6 @@ import ca.ulaval.glo4002.game.domain.resources.Resource;
 import ca.ulaval.glo4002.game.domain.resources.ResourceGroup;
 import ca.ulaval.glo4002.game.domain.resources.ResourceRepository;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class ResourceUseCase {
@@ -41,7 +40,7 @@ public class ResourceUseCase {
     }
 
     private void addResourceToActionWaitingList(ResourceGroup resourceGroup) {
-        for (Resource resource : new ArrayList<>(resourceGroup.getResources().values())) {
+        for (Resource resource : resourceGroup.getResources().values()) {
             if (resource.isEmpty()) {
                 continue;
             }
