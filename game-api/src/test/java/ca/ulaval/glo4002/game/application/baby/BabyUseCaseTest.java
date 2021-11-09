@@ -52,7 +52,7 @@ class BabyUseCaseTest {
         babyCreationDto.gender = this.gender;
         babyCreationDto.species = this.species;
 
-        babyUseCase.createBebe(babyCreationDto);
+        babyUseCase.createBaby(babyCreationDto);
 
         assertThrows(NotExistentNameException.class, () ->
             babyUseCase.getParentsSpecies(fatherName, motherName));

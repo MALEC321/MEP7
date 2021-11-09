@@ -10,7 +10,7 @@ import static ca.ulaval.glo4002.game.domain.resources.ResourceType.WATER;
 
 public class ZooManager {
     public void feedDinosaurs(Eatable eatable, Herd herd) {
-        for (Dinosaur dinosaur: herd.getSortedDinosaursByStrengthThenName()) {
+        for (Dinosaur dinosaur: herd.findSortedDinosaursByStrengthThenName()) {
             if (!eatable.removeResource(SALAD, dinosaur.calculateSaladsNeeds())) {
                 dinosaur.setStarving(true);
             }
@@ -22,7 +22,7 @@ public class ZooManager {
             }
 
             if (dinosaur.isStarving()) {
-                herd.remove(dinosaur);
+                herd.removeDinosaur(dinosaur);
             }
         }
     }

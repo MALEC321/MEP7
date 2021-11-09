@@ -10,9 +10,8 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import ca.ulaval.glo4002.game.domain.dinosaur.Dinosaur;
 
-class DinosaurRepositoryInMemoryTest {
-
-/*    private DinosaurRepositoryInMemory dinosaurRepositoryInMemory;
+public class HerdRepositoryInMemoryTest {
+    private HerdRepositoryInMemory herdRepositoryInMemory;
 
     private final Dinosaur firstDino = new Dinosaur("aaa", 100, "f", "Ankylosaurus");
     private final Dinosaur secondDino = new Dinosaur("ab", 100, "f", "Ankylosaurus");
@@ -23,53 +22,40 @@ class DinosaurRepositoryInMemoryTest {
 
     @BeforeEach
     void setup() {
-        dinosaurRepositoryInMemory = new DinosaurRepositoryInMemory();
+        herdRepositoryInMemory = new HerdRepositoryInMemory();
     }
 
-    @Test
-    void whenSortingDinosaurs_thenCorrectlySortByStrengthThenName() {
-        this.dinoInDisorderList = createDinoInDisorderList();
-        List<Dinosaur> dinoInStrengthOrderList = createDinoInStrengthOrderList();
-        for (Dinosaur dino : this.dinoInDisorderList) {
-            dinosaurRepositoryInMemory.save(dino);
-        }
-
-        List<Dinosaur> sortedDinosaurs = dinosaurRepositoryInMemory.getSortedDinosaursByStrengthThenName();
-
-        assertArrayEquals(dinoInStrengthOrderList.toArray(), sortedDinosaurs.toArray());
-    }
-
-    @Test
+/*    @Test
     void repoContainingDinos_whenResetRepo_thenRepoIsEmpty() {
         setRepoWithDinos();
 
-        dinosaurRepositoryInMemory.reset();
+        herdRepositoryInMemory.reset();
 
-        assertTrue(dinosaurRepositoryInMemory.findAll().isEmpty());
+        assertTrue(herdRepositoryInMemory.findAll().isEmpty());
     }
 
     @Test
     void whenFindAll_thenGetAllDinosInRepo() {
         setRepoWithDinos();
 
-        assertEquals(dinoInDisorderList.size(), dinosaurRepositoryInMemory.findAll().size());
+        assertEquals(dinoInDisorderList.size(), herdRepositoryInMemory.findAll().size());
     }
 
     @Test
     void whenFindByName_thenGetDinoWithTheRightName() {
         setRepoWithDinos();
 
-        assertEquals(lastDino, dinosaurRepositoryInMemory.findByName(lastDino.getName()));
+        assertEquals(lastDino, herdRepositoryInMemory.findByName(lastDino.getName()));
     }
 
     @Test
     void dinoHasBeenRemoved_whenFindByName_thenCanNotGetDino() {
         setRepoWithDinos();
 
-        dinosaurRepositoryInMemory.remove(firstDino);
+        herdRepositoryInMemory.remove(firstDino);
 
-        assertNull(dinosaurRepositoryInMemory.findByName(firstDino.getName()));
-        assertNotEquals(firstDino, dinosaurRepositoryInMemory.findByName(firstDino.getName()));
+        assertNull(herdRepositoryInMemory.findByName(firstDino.getName()));
+        assertNotEquals(firstDino, herdRepositoryInMemory.findByName(firstDino.getName()));
     }
 
     private List<Dinosaur> createDinoInStrengthOrderList() {
@@ -84,8 +70,7 @@ class DinosaurRepositoryInMemoryTest {
         this.dinoInDisorderList = createDinoInDisorderList();
 
         for (Dinosaur dino : this.dinoInDisorderList) {
-            dinosaurRepositoryInMemory.save(dino);
+            herdRepositoryInMemory.save(dino);
         }
     }*/
-
 }

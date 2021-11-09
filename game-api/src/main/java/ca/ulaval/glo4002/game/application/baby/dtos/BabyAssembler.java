@@ -4,7 +4,6 @@ import ca.ulaval.glo4002.game.controllers.baby.dtos.ExternalApiCreationDto;
 import ca.ulaval.glo4002.game.domain.dinosaur.DinosaurBaby;
 
 public class BabyAssembler {
-
     public BabyDto toDto(DinosaurBaby bebe) {
         BabyDto dto = new BabyDto();
         dto.name = bebe.getName();

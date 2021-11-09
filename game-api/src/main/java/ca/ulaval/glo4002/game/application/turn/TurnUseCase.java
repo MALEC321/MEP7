@@ -5,8 +5,6 @@ import java.util.List;
 import ca.ulaval.glo4002.game.application.manager.ZooManager;
 import ca.ulaval.glo4002.game.domain.actions.Action;
 import ca.ulaval.glo4002.game.domain.actions.ActionRepository;
-import ca.ulaval.glo4002.game.domain.dinosaur.Dinosaur;
-import ca.ulaval.glo4002.game.domain.dinosaur.DinosaurBaby;
 import ca.ulaval.glo4002.game.domain.dinosaur.HerdRepository;
 import ca.ulaval.glo4002.game.domain.dinosaur.Herd;
 import ca.ulaval.glo4002.game.domain.resources.Burger;
@@ -57,6 +55,7 @@ public class TurnUseCase {
         resourceRepository.add(new Water(10000));
     }
 
+    // TODO: Should be end turn Actions
     private void postAction() {
         resourceRepository.decreaseExpirationDate();
         feedDinosaurs();
@@ -69,16 +68,7 @@ public class TurnUseCase {
 
     protected void removeBabyDinosaurs() {
         Herd herd = herdRepository.findHerd();
-        removeBabyDinosaur(herd.getSortedDinosaursByStrengthThenName());
-    }
-
-    private void removeBabyDinosaur(List<Dinosaur> sortedDinosaursByStrengthThenName) {
-        Herd herd = herdRepository.findHerd();
-        for (Dinosaur dinosaur : sortedDinosaursByStrengthThenName) {
-            if (dinosaur instanceof DinosaurBaby && herd.areBothParentsDead(dinosaur)) {
-                herd.remove(dinosaur);
-            }
-        }
+        herd.removeOrphanedBabyDinosaurs();
     }
 
     public void reset() {

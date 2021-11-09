@@ -41,7 +41,7 @@ public class DinosaurFactory {
 
     public void validateName(String name) {
         Herd herd = herdRepository.findHerd();
-        if (herd.findByName(name) != null) {
+        if (herd.findDinosaurByName(name) != null) {
             throw new DuplicateNameException();
         }
     }

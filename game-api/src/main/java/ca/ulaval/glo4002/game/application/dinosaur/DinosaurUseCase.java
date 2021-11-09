@@ -31,8 +31,6 @@ public class DinosaurUseCase {
         this.dinosaurAssembler = dinosaurAssembler;
         this.actionRepository = actionRepository;
         this.actionFactory = actionFactory;
-
-        this.herdRepository.add(new Herd());
     }
 
     public void createDinosaur(DinosaurCreationDto dto) {
@@ -42,16 +40,16 @@ public class DinosaurUseCase {
 
     public List<DinosaurDto> getAllDinosaurs() {
         Herd herd = herdRepository.findHerd();
-        List<Dinosaur> dinosaurs = herd.findAll();
+        List<Dinosaur> dinosaurs = herd.findAllDinosaurs();
         return dinosaurAssembler.toDtos(dinosaurs);
     }
 
     public DinosaurDto getDinosaur(String name) throws NotExistentNameException {
         Herd herd = herdRepository.findHerd();
-        if (herd.findByName(name) == null) {
+        if (herd.findDinosaurByName(name) == null) {
             throw new NotExistentNameException();
         }
-        Dinosaur dinosaur = herd.findByName(name);
+        Dinosaur dinosaur = herd.findDinosaurByName(name);
         return dinosaurAssembler.toDto(dinosaur);
     }
 }

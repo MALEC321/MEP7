@@ -5,7 +5,7 @@ import java.util.List;
 public interface HerdRepository {
     Herd findHerd();
 
-    void add(Herd herd);
+    void save(Herd herd);
 
     void reset();
 }

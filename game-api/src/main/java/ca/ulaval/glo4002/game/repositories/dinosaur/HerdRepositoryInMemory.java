@@ -6,18 +6,22 @@ import ca.ulaval.glo4002.game.domain.dinosaur.Herd;
 public class HerdRepositoryInMemory implements HerdRepository {
     private Herd herd;
 
+    public HerdRepositoryInMemory() {
+        this.herd = new Herd();
+    }
+
     @Override
     public Herd findHerd() {
         return this.herd;
     }
 
     @Override
-    public void add(Herd herd) {
+    public void save(Herd herd) {
         this.herd = herd;
     }
 
     @Override
     public void reset() {
-        herd.reset();
+        herd = new Herd();
     }
 }

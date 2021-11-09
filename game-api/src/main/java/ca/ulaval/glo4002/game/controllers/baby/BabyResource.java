@@ -43,7 +43,7 @@ public class BabyResource {
         if (response.getStatusInfo().getFamily().name().equals("SUCCESSFUL")) {
             ExternalApiBebeListDto externalApiBebeListDto = response.readEntity(ExternalApiBebeListDto.class);
             BabyCreationDto dto = babyDtoAssembler.fromRequest(babyRequest, externalApiBebeListDto);
-            bebeUseCase.createBebe(dto);
+            bebeUseCase.createBaby(dto);
         }
 
         return Response.status(Response.Status.OK).build();

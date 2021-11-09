@@ -31,7 +31,7 @@ public class BabyUseCase {
         this.dinosaurFactory = dinosaurFactory;
     }
 
-    public void createBebe(BabyCreationDto dto) {
+    public void createBaby(BabyCreationDto dto) {
         Dinosaur baby = dinosaurFactory.create(dto.name, dto.fatherName, dto.motherName, dto.gender, dto.species);
         actionRepository.save(actionFactory.create(baby, herdRepository));
     }
@@ -42,26 +42,26 @@ public class BabyUseCase {
         String fatherSpecies;
         String motherSpecies;
 
-        if (herd.findByName(fatherName) == null) {
+        if (herd.findDinosaurByName(fatherName) == null) {
             throw new NotExistentNameException();
         }
 
-        if (herd.findByName(motherName) == null) {
+        if (herd.findDinosaurByName(motherName) == null) {
             throw new NotExistentNameException();
         }
 
-        if (!Objects.equals(herd.findByName(fatherName).getGender(), "m")) {
+        if (!Objects.equals(herd.findDinosaurByName(fatherName).getGender(), "m")) {
             throw new InvalidFatherException();
         }
 
-        if (!Objects.equals(herd.findByName(motherName).getGender(), "f")) {
+        if (!Objects.equals(herd.findDinosaurByName(motherName).getGender(), "f")) {
             throw new InvalidMotherException();
         }
 
-        Dinosaur dinosaurFather = herd.findByName(fatherName);
+        Dinosaur dinosaurFather = herd.findDinosaurByName(fatherName);
         fatherSpecies = dinosaurFather.getSpecies();
 
-        Dinosaur dinosaurMother = herd.findByName(motherName);
+        Dinosaur dinosaurMother = herd.findDinosaurByName(motherName);
         motherSpecies = dinosaurMother.getSpecies();
 
         return babyAssembler.toExternalDto(fatherSpecies, motherSpecies);
