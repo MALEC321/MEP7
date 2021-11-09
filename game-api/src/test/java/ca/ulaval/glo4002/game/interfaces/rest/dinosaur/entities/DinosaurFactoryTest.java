@@ -2,7 +2,7 @@ package ca.ulaval.glo4002.game.interfaces.rest.dinosaur.entities;
 
 import static org.mockito.Mockito.mock;
 
-class DinosaurFactoryTest {
+public class DinosaurFactoryTest {
  /*   private DinosaurFactory dinosaurFactory;
     private SpeciesDietsCorrespondances speciesDietsCorrespondances;
 

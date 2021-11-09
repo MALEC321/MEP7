@@ -46,10 +46,12 @@ public class DinosaurUseCase {
 
     public DinosaurDto getDinosaur(String name) throws NotExistentNameException {
         Herd herd = herdRepository.findHerd();
-        if (herd.findDinosaurByName(name) == null) {
+
+        Dinosaur dinosaur = herd.findDinosaurByName(name);
+        if (dinosaur == null) {
             throw new NotExistentNameException();
         }
-        Dinosaur dinosaur = herd.findDinosaurByName(name);
+
         return dinosaurAssembler.toDto(dinosaur);
     }
 }

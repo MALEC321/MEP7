@@ -13,8 +13,7 @@ import static org.junit.jupiter.api.Assertions.*;
 import ca.ulaval.glo4002.game.domain.turn.Turn;
 import ca.ulaval.glo4002.game.domain.turn.TurnRepository;
 
-class TurnRepositoryInMemoryTest {
-
+public class TurnRepositoryInMemoryTest {
     private TurnRepository turnRepository;
     private UUID fakeTurnId = UUID.fromString("4321-34-56-78-987654");
 

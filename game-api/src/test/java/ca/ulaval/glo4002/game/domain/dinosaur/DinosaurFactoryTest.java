@@ -12,7 +12,7 @@ import ca.ulaval.glo4002.game.exceptions.types.InvalidGenderException;
 import ca.ulaval.glo4002.game.exceptions.types.InvalidSpeciesException;
 import ca.ulaval.glo4002.game.exceptions.types.InvalidWeightException;
 
-class DinosaurFactoryTest {
+public class DinosaurFactoryTest {
     private DinosaurFactory dinosaurFactory;
     private HerdRepository herdRepository;
     private static final int BABY_WEIGHT = 1;
