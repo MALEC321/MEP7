@@ -6,10 +6,9 @@ import ca.ulaval.glo4002.game.controllers.resources.dtos.ResourceDto;
 import ca.ulaval.glo4002.game.domain.actions.Action;
 import ca.ulaval.glo4002.game.domain.actions.ActionFactory;
 import ca.ulaval.glo4002.game.domain.actions.ActionRepository;
-import ca.ulaval.glo4002.game.domain.resources.Resource;
-import ca.ulaval.glo4002.game.domain.resources.ResourceGroup;
 import ca.ulaval.glo4002.game.domain.resources.ResourceRepository;
-
+import ca.ulaval.glo4002.game.domain.resources.Resources;
+import ca.ulaval.glo4002.game.domain.resources.ResourcesGroup;
 import java.util.List;
 
 public class ResourceUseCase {
@@ -28,25 +27,23 @@ public class ResourceUseCase {
         this.actionFactory = actionFactory;
     }
 
-    public ResourceDto createResource(ResourceCreationDto resourceCreationDto) {
-        ResourceGroup resourceGroup = resourceGroupFactory.create(resourceCreationDto.qtyBurger, resourceCreationDto.qtySalad, resourceCreationDto.qtyWater);
-        addResourceToActionWaitingList(resourceGroup);
-        return resourceAssembler.toDto(resourceGroup);
+    public void createResource(ResourceCreationDto resourceCreationDto) {
+        ResourcesGroup addResources = resourceGroupFactory.create(resourceCreationDto.qtyBurger, resourceCreationDto.qtySalad, resourceCreationDto.qtyWater);
+        addResourceToActionWaitingList(addResources);
+        resourceAssembler.toDto(addResources);
     }
 
     public List<ResourceDto> getAllResources() {
-        List<ResourceGroup> resources = resourceRepository.findAll();
+        List<ResourcesGroup> resources = resourceRepository.findAll();
         return resourceAssembler.toDtos(resources);
     }
 
-    private void addResourceToActionWaitingList(ResourceGroup resourceGroup) {
-        for (Resource resource : resourceGroup.getResources().values()) {
-            if (resource.isEmpty()) {
-                continue;
+    private void addResourceToActionWaitingList(ResourcesGroup resourcesGroup) {
+        for (Resources resources : resourcesGroup.getResources().values()) {
+            if (!resources.isEmpty()) {
+                Action addResources = actionFactory.create(resources, resourceRepository);
+                actionRepository.save(addResources);
             }
-
-            Action addResources = actionFactory.create(resource, resourceRepository);
-            actionRepository.save(addResources);
         }
     }
 }

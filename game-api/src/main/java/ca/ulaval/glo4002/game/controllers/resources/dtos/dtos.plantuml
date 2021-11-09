@@ -3,9 +3,9 @@
 title __DTOS's Class Diagram__\n
 
     namespace ca.ulaval.glo4002.game {
-      namespace controllers.resourceGroup {
+      namespace controllers.resourcesGroup {
         namespace dtos {
-          class ca.ulaval.glo4002.game.controllers.resourceGroup.dtos.ResourceAssembler {
+          class ca.ulaval.glo4002.game.controllers.resourcesGroup.dtos.ResourceAssembler {
               + toDto()
               + toDtos()
           }
@@ -15,9 +15,9 @@ title __DTOS's Class Diagram__\n
   
 
     namespace ca.ulaval.glo4002.game {
-      namespace controllers.resourceGroup {
+      namespace controllers.resourcesGroup {
         namespace dtos {
-          class ca.ulaval.glo4002.game.controllers.resourceGroup.dtos.ResourceCreationDto {
+          class ca.ulaval.glo4002.game.controllers.resourcesGroup.dtos.ResourceCreationDto {
               + qtyBurger : int
               + qtySalad : int
               + qtyWater : int
@@ -28,9 +28,9 @@ title __DTOS's Class Diagram__\n
   
 
     namespace ca.ulaval.glo4002.game {
-      namespace controllers.resourceGroup {
+      namespace controllers.resourcesGroup {
         namespace dtos {
-          class ca.ulaval.glo4002.game.controllers.resourceGroup.dtos.ResourceDto {
+          class ca.ulaval.glo4002.game.controllers.resourcesGroup.dtos.ResourceDto {
               + qtyBurger : int
               + qtySalad : int
               + qtyWater : int
@@ -41,9 +41,9 @@ title __DTOS's Class Diagram__\n
   
 
     namespace ca.ulaval.glo4002.game {
-      namespace controllers.resourceGroup {
+      namespace controllers.resourcesGroup {
         namespace dtos {
-          class ca.ulaval.glo4002.game.controllers.resourceGroup.dtos.ResourceDtoAssembler {
+          class ca.ulaval.glo4002.game.controllers.resourcesGroup.dtos.ResourceDtoAssembler {
               + fromRequest()
               + toResponse()
               + toResponse()
@@ -54,9 +54,9 @@ title __DTOS's Class Diagram__\n
   
 
     namespace ca.ulaval.glo4002.game {
-      namespace controllers.resourceGroup {
+      namespace controllers.resourcesGroup {
         namespace dtos {
-          class ca.ulaval.glo4002.game.controllers.resourceGroup.dtos.ResourceRequest {
+          class ca.ulaval.glo4002.game.controllers.resourcesGroup.dtos.ResourceRequest {
               + qtyBurger : int
               + qtySalad : int
               + qtyWater : int
@@ -67,9 +67,9 @@ title __DTOS's Class Diagram__\n
   
 
     namespace ca.ulaval.glo4002.game {
-      namespace controllers.resourceGroup {
+      namespace controllers.resourcesGroup {
         namespace dtos {
-          class ca.ulaval.glo4002.game.controllers.resourceGroup.dtos.ResourceResponse {
+          class ca.ulaval.glo4002.game.controllers.resourcesGroup.dtos.ResourceResponse {
               + qtyBurger : int
               + qtySalad : int
               + qtyWater : int
@@ -80,18 +80,18 @@ title __DTOS's Class Diagram__\n
   
 
     namespace ca.ulaval.glo4002.game {
-      namespace controllers.resourceGroup {
+      namespace controllers.resourcesGroup {
         namespace dtos {
-          class ca.ulaval.glo4002.game.controllers.resourceGroup.dtos.ResourcesResponse {
+          class ca.ulaval.glo4002.game.controllers.resourcesGroup.dtos.ResourcesResponse {
           }
         }
       }
     }
   
 
-  ca.ulaval.glo4002.game.controllers.resourceGroup.dtos.ResourcesResponse o-- ca.ulaval.glo4002.game.controllers.resourceGroup.dtos.ResourceResponse : consumed
-  ca.ulaval.glo4002.game.controllers.resourceGroup.dtos.ResourcesResponse o-- ca.ulaval.glo4002.game.controllers.resourceGroup.dtos.ResourceResponse : expired
-  ca.ulaval.glo4002.game.controllers.resourceGroup.dtos.ResourcesResponse o-- ca.ulaval.glo4002.game.controllers.resourceGroup.dtos.ResourceResponse : fresh
+  ca.ulaval.glo4002.game.controllers.resourcesGroup.dtos.ResourcesResponse o-- ca.ulaval.glo4002.game.controllers.resourcesGroup.dtos.ResourceResponse : consumed
+  ca.ulaval.glo4002.game.controllers.resourcesGroup.dtos.ResourcesResponse o-- ca.ulaval.glo4002.game.controllers.resourcesGroup.dtos.ResourceResponse : expired
+  ca.ulaval.glo4002.game.controllers.resourcesGroup.dtos.ResourcesResponse o-- ca.ulaval.glo4002.game.controllers.resourcesGroup.dtos.ResourceResponse : fresh
 
 
 right footer

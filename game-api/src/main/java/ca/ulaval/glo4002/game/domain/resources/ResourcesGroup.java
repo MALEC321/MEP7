@@ -1,32 +1,32 @@
 package ca.ulaval.glo4002.game.domain.resources;
 
-import ca.ulaval.glo4002.game.application.resources.ResourceFactory;
+import ca.ulaval.glo4002.game.application.resources.ResourcesFactory;
 
 import java.util.HashMap;
 import java.util.Map;
 
 import static ca.ulaval.glo4002.game.domain.resources.ResourceType.*;
 
-public class ResourceGroup {
-    private ResourceFactory resourceFactory = new ResourceFactory();
-    private final Map<ResourceType, Resource> resources = new HashMap<>(3) {{
-            put(BURGER, resourceFactory.create(BURGER, 0));
-            put(SALAD, resourceFactory.create(SALAD, 0));
-            put(WATER, resourceFactory.create(WATER, 0));
-        }};
+public class ResourcesGroup {
+    private final ResourcesFactory resourcesFactory = new ResourcesFactory();
+    private final Map<ResourceType, Resources> resources;
 
-    public ResourceGroup() {
-        this(0, 0, 0);
+    public ResourcesGroup() {
+        resources = new HashMap<>(3) {{
+                put(BURGER, resourcesFactory.create(BURGER, 0));
+                put(SALAD, resourcesFactory.create(SALAD, 0));
+                put(WATER, resourcesFactory.create(WATER, 0));
+            }};
     }
 
-    public ResourceGroup(int qtyBurger, int qtySalad, int qtyWater) {
-        resources.replace(BURGER, resourceFactory.create(BURGER, qtyBurger));
-        resources.replace(SALAD, resourceFactory.create(SALAD, qtySalad));
-        resources.replace(WATER, resourceFactory.create(WATER, qtyWater));
-
+    public ResourcesGroup(Resources burger, Resources salad, Resources water) {
+        this();
+        resources.replace(BURGER, burger);
+        resources.replace(SALAD, salad);
+        resources.replace(WATER, water);
     }
 
-    public Map<ResourceType, Resource> getResources() {
+    public Map<ResourceType, Resources> getResources() {
         return resources;
     }
 
@@ -39,8 +39,8 @@ public class ResourceGroup {
     }
 
     public void clear() {
-        for (Resource resource : resources.values()) {
-            resource.reset();
+        for (Resources resources : this.resources.values()) {
+            resources.reset();
         }
     }
 }

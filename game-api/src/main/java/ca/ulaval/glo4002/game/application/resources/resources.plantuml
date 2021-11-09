@@ -3,8 +3,8 @@
 title __RESOURCES's Class Diagram__\n
 
     namespace ca.ulaval.glo4002.game {
-      namespace application.resourceGroup {
-        class ca.ulaval.glo4002.game.application.resourceGroup.ResourceUseCase {
+      namespace application.resourcesGroup {
+        class ca.ulaval.glo4002.game.application.resourcesGroup.ResourceUseCase {
             + ResourceUseCase()
             + createResource()
             + getAllResources()
@@ -14,11 +14,11 @@ title __RESOURCES's Class Diagram__\n
     }
   
 
-  ca.ulaval.glo4002.game.application.resourceGroup.ResourceUseCase o-- ca.ulaval.glo4002.game.domain.actions.ActionFactory : actionFactory
-  ca.ulaval.glo4002.game.application.resourceGroup.ResourceUseCase o-- ca.ulaval.glo4002.game.domain.actions.ActionRepository : actionRepository
-  ca.ulaval.glo4002.game.application.resourceGroup.ResourceUseCase o-- ca.ulaval.glo4002.game.controllers.resourceGroup.dtos.ResourceAssembler : resourceAssembler
-  ca.ulaval.glo4002.game.application.resourceGroup.ResourceUseCase o-- ca.ulaval.glo4002.game.domain.resourceGroup.ResourcesFactory : resourceGroupFactory
-  ca.ulaval.glo4002.game.application.resourceGroup.ResourceUseCase o-- ca.ulaval.glo4002.game.domain.resourceGroup.ResourceRepository : resourceRepository
+  ca.ulaval.glo4002.game.application.resourcesGroup.ResourceUseCase o-- ca.ulaval.glo4002.game.domain.actions.ActionFactory : actionFactory
+  ca.ulaval.glo4002.game.application.resourcesGroup.ResourceUseCase o-- ca.ulaval.glo4002.game.domain.actions.ActionRepository : actionRepository
+  ca.ulaval.glo4002.game.application.resourcesGroup.ResourceUseCase o-- ca.ulaval.glo4002.game.controllers.resourcesGroup.dtos.ResourceAssembler : resourceAssembler
+  ca.ulaval.glo4002.game.application.resourcesGroup.ResourceUseCase o-- ca.ulaval.glo4002.game.domain.resourcesGroup.ResourcesFactory : resourceGroupFactory
+  ca.ulaval.glo4002.game.application.resourcesGroup.ResourceUseCase o-- ca.ulaval.glo4002.game.domain.resourcesGroup.ResourceRepository : resourceRepository
 
 
 right footer

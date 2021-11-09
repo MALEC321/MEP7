@@ -1,14 +1,19 @@
 package ca.ulaval.glo4002.game.application.resources;
 
-import ca.ulaval.glo4002.game.domain.resources.ResourceGroup;
-import ca.ulaval.glo4002.game.exceptions.types.InvalidResourceQuantityException;
+import ca.ulaval.glo4002.game.domain.resources.Resources;
+import ca.ulaval.glo4002.game.domain.resources.ResourcesGroup;
+
+import static ca.ulaval.glo4002.game.domain.resources.ResourceType.*;
 
 public class ResourceGroupFactory {
-    public ResourceGroup create(int qtyBurger, int qtySalad, int qtyWater) {
-        if (qtyBurger < 0 || qtySalad < 0 || qtyWater < 0) {
-            throw new InvalidResourceQuantityException();
-        }
+    public ResourcesGroup create(int qtyBurger, int qtySalad, int qtyWater) {
+        ResourcesFactory resourcesFactory = new ResourcesFactory();
+        Resources burger, salad, water;
+        burger = resourcesFactory.create(BURGER, qtyBurger);
+        salad = resourcesFactory.create(SALAD, qtySalad);
+        water = resourcesFactory.create(WATER, qtyWater);
 
-        return new ResourceGroup(qtyBurger, qtySalad, qtyWater);
+
+        return new ResourcesGroup(burger, salad, water);
     }
 }

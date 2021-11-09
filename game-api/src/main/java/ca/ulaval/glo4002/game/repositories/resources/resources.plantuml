@@ -4,9 +4,9 @@ title __RESOURCES's Class Diagram__\n
 
   namespace  {
     namespace a.ulaval.glo4002.game {
-      namespace repositories.resourceGroup {
-        class ca.ulaval.glo4002.game.repositories.resourceGroup.ResourceRepositoryInMemory {
-            - resourceGroup : Triplet<Queue<Burger>, Queue<Salad>, Queue<Water>>
+      namespace repositories.resourcesGroup {
+        class ca.ulaval.glo4002.game.repositories.resourcesGroup.ResourceRepositoryInMemory {
+            - resourcesGroup : Triplet<Queue<Burger>, Queue<Salad>, Queue<Water>>
             + add()
             + decreaseExpirationDate()
             + drinkWater()
@@ -26,9 +26,9 @@ title __RESOURCES's Class Diagram__\n
   }
   
 
-  ca.ulaval.glo4002.game.repositories.resourceGroup.ResourceRepositoryInMemory .up.|> ca.ulaval.glo4002.game.domain.resourceGroup.ResourceRepository
-  ca.ulaval.glo4002.game.repositories.resourceGroup.ResourceRepositoryInMemory o-- ca.ulaval.glo4002.game.domain.resources.ResourceGrouprces : consumedResources
-  ca.ulaval.glo4002.game.repositories.resourceGroup.ResourceRepositoryInMemory o-- ca.ulaval.glo4002.game.domain.resources.ResourceGrouprces : expiredResources
+  ca.ulaval.glo4002.game.repositories.resourcesGroup.ResourceRepositoryInMemory .up.|> ca.ulaval.glo4002.game.domain.resourcesGroup.ResourceRepository
+  ca.ulaval.glo4002.game.repositories.resourcesGroup.ResourceRepositoryInMemory o-- ca.ulaval.glo4002.game.domain.resources.ResourceGrouprces : consumedResources
+  ca.ulaval.glo4002.game.repositories.resourcesGroup.ResourceRepositoryInMemory o-- ca.ulaval.glo4002.game.domain.resources.ResourceGrouprces : expiredResources
 
 
 right footer

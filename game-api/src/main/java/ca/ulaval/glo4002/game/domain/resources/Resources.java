@@ -1,11 +1,11 @@
 package ca.ulaval.glo4002.game.domain.resources;
 
-public class Resource {
-    private ResourceType type;
+public class Resources {
+    private final ResourceType type;
     private int quantity;
     private int expiration;
 
-    public Resource(ResourceType type, int quantity, int expiration) {
+    public Resources(ResourceType type, int quantity, int expiration) {
         this.type = type;
         this.quantity = quantity;
         this.expiration = expiration;

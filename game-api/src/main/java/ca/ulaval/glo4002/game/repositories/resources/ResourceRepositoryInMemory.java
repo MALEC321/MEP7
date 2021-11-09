@@ -9,12 +9,12 @@ public class ResourceRepositoryInMemory implements ResourceRepository {
     private Pantry pantry = new Pantry();
 
     @Override
-    public void add(Resource resource) {
-        pantry.add(resource);
+    public void add(Resources resources) {
+        pantry.add(resources);
     }
 
     @Override
-    public List<ResourceGroup> findAll() {
+    public List<ResourcesGroup> findAll() {
         return Arrays.asList(pantry.findFreshResource(), pantry.getExpiredResources(), pantry.getConsumedResources());
     }
 

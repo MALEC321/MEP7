@@ -11,7 +11,7 @@ import ca.ulaval.glo4002.game.domain.actions.ActionRepository;
 import ca.ulaval.glo4002.game.domain.dinosaur.DinosaurFactory;
 import ca.ulaval.glo4002.game.domain.dinosaur.DinosaurRepository;
 import ca.ulaval.glo4002.game.domain.dinosaur.enums.SpeciesDietsCorrespondances;
-import ca.ulaval.glo4002.game.application.resources.ResourceFactory;
+import ca.ulaval.glo4002.game.application.resources.ResourcesFactory;
 import ca.ulaval.glo4002.game.domain.resources.ResourceRepository;
 import ca.ulaval.glo4002.game.domain.turn.TurnFactory;
 import ca.ulaval.glo4002.game.domain.turn.TurnRepository;
@@ -36,7 +36,7 @@ class DinosaurUseCaseTest {
         ActionRepository actionRepository = new ActionRepositoryInMemory();
         ZooManager zooManager = new ZooManager();
         ActionFactory actionFactory = new ActionFactory();
-        ResourceFactory resourceFactory = new ResourceFactory();
+        ResourcesFactory resourcesFactory = new ResourcesFactory();
 
         DinosaurRepository dinosaurRepository = new DinosaurRepositoryInMemory();
         DinosaurFactory dinosaurFactory = new DinosaurFactory(dinosaurRepository, speciesDietsCorrespondances);
@@ -49,7 +49,7 @@ class DinosaurUseCaseTest {
         ResourceRepository resourceRepository = new ResourceRepositoryInMemory();
 
 
-        turnUseCase = new TurnUseCase(turnFactory, turnRepository, resourceRepository, dinosaurRepository, actionRepository, zooManager, resourceFactory);
+        turnUseCase = new TurnUseCase(turnFactory, turnRepository, resourceRepository, dinosaurRepository, actionRepository, zooManager, resourcesFactory);
     }
 
     @Test

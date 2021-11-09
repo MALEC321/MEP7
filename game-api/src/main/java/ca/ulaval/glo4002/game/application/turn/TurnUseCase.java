@@ -6,7 +6,7 @@ import ca.ulaval.glo4002.game.domain.actions.ActionRepository;
 import ca.ulaval.glo4002.game.domain.dinosaur.Dinosaur;
 import ca.ulaval.glo4002.game.domain.dinosaur.DinosaurBaby;
 import ca.ulaval.glo4002.game.domain.dinosaur.DinosaurRepository;
-import ca.ulaval.glo4002.game.application.resources.ResourceFactory;
+import ca.ulaval.glo4002.game.application.resources.ResourcesFactory;
 import ca.ulaval.glo4002.game.domain.resources.ResourceRepository;
 import ca.ulaval.glo4002.game.domain.turn.Turn;
 import ca.ulaval.glo4002.game.domain.turn.TurnFactory;
@@ -24,7 +24,7 @@ public class TurnUseCase {
     private final ActionRepository actionRepository;
     private final DinosaurRepository dinosaurRepository;
     private final ZooManager zooManager;
-    private final ResourceFactory resourceFactory;
+    private final ResourcesFactory resourcesFactory;
 
 
     public TurnUseCase(
@@ -34,14 +34,14 @@ public class TurnUseCase {
         DinosaurRepository dinosaurRepository,
         ActionRepository actionRepository,
         ZooManager zooManager,
-        ResourceFactory resourceFactory) {
+        ResourcesFactory resourcesFactory) {
         this.turnFactory = turnFactory;
         this.turnRepository = turnRepository;
         this.resourceRepository = resourceRepository;
         this.dinosaurRepository = dinosaurRepository;
         this.actionRepository = actionRepository;
         this.zooManager = zooManager;
-        this.resourceFactory = resourceFactory;
+        this.resourcesFactory = resourcesFactory;
     }
 
     public void createTurn() {
@@ -56,9 +56,9 @@ public class TurnUseCase {
     }
 
     protected void cookIt() {
-        resourceRepository.add(resourceFactory.create(BURGER, 100));
-        resourceRepository.add(resourceFactory.create(SALAD, 250));
-        resourceRepository.add(resourceFactory.create(WATER, 10000));
+        resourceRepository.add(resourcesFactory.create(BURGER, 100));
+        resourceRepository.add(resourcesFactory.create(SALAD, 250));
+        resourceRepository.add(resourcesFactory.create(WATER, 10000));
     }
 
     private void postAction() {

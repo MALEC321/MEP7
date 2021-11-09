@@ -3,7 +3,7 @@ package ca.ulaval.glo4002.game.domain.resources;
 import java.util.List;
 
 public interface ResourceRepository {
-    void add(Resource resource);
+    void add(Resources resources);
 
     void reset();
 
@@ -15,5 +15,5 @@ public interface ResourceRepository {
 
     void decreaseExpirationDate();
 
-    List<ResourceGroup> findAll();
+    List<ResourcesGroup> findAll();
 }

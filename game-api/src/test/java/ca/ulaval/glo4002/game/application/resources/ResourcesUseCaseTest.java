@@ -9,7 +9,7 @@ import ca.ulaval.glo4002.game.controllers.turn.dtos.TurnAssembler;
 import ca.ulaval.glo4002.game.domain.actions.ActionFactory;
 import ca.ulaval.glo4002.game.domain.actions.ActionRepository;
 import ca.ulaval.glo4002.game.domain.dinosaur.DinosaurRepository;
-import ca.ulaval.glo4002.game.domain.resources.ResourceGroup;
+import ca.ulaval.glo4002.game.domain.resources.ResourcesGroup;
 import ca.ulaval.glo4002.game.domain.resources.ResourceRepository;
 import ca.ulaval.glo4002.game.domain.turn.TurnFactory;
 import ca.ulaval.glo4002.game.domain.turn.TurnRepository;
@@ -24,7 +24,7 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
 
-public class ResourceUseCaseTest {
+public class ResourcesUseCaseTest {
 
     private static final int QYT_BURGER = 4;
     private static final int QYT_SALAD = 5;
@@ -40,14 +40,14 @@ public class ResourceUseCaseTest {
         ActionRepository actionRepository = new ActionRepositoryInMemory();
         ZooManager zooManager = new ZooManager();
         ActionFactory actionFactory = new ActionFactory();
-        ResourceFactory resourceFactory = new ResourceFactory();
+        ResourcesFactory resourcesFactory = new ResourcesFactory();
 
         TurnFactory turnFactory = new TurnFactory();
         TurnRepository turnRepository = new TurnRepositoryInMemory();
         TurnAssembler turnAssembler = new TurnAssembler();
         DinosaurRepository dinosaurRepository = new DinosaurRepositoryInMemory();
 
-        turnUseCase = new TurnUseCase(turnFactory, turnRepository, resourceRepository, dinosaurRepository, actionRepository, zooManager, resourceFactory);
+        turnUseCase = new TurnUseCase(turnFactory, turnRepository, resourceRepository, dinosaurRepository, actionRepository, zooManager, resourcesFactory);
         resourceUseCase = new ResourceUseCase(resourceGroupFactory, resourceRepository, resourceAssembler, actionRepository, actionFactory);
     }
 
@@ -76,7 +76,7 @@ public class ResourceUseCaseTest {
         ResourceRepository resourceRepository = new ResourceRepositoryInMemory();
         turnUseCase.createTurn();
 
-        List<ResourceGroup> resources = resourceRepository.findAll();
+        List<ResourcesGroup> resources = resourceRepository.findAll();
 
         assertFalse(resources.isEmpty());
     }
