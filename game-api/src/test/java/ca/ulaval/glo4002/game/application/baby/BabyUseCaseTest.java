@@ -1,20 +1,21 @@
 package ca.ulaval.glo4002.game.application.baby;
 
-import ca.ulaval.glo4002.game.repositories.dinosaur.HerdRepositoryInMemory;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
-
-import static org.junit.jupiter.api.Assertions.assertThrows;
-
 import ca.ulaval.glo4002.game.application.baby.dtos.BabyAssembler;
+import ca.ulaval.glo4002.game.application.baby.breed.Breedable;
 import ca.ulaval.glo4002.game.controllers.baby.dtos.BabyCreationDto;
 import ca.ulaval.glo4002.game.domain.actions.ActionFactory;
 import ca.ulaval.glo4002.game.domain.actions.ActionRepository;
 import ca.ulaval.glo4002.game.domain.dinosaur.DinosaurFactory;
-import ca.ulaval.glo4002.game.domain.dinosaur.HerdRepository;
+import ca.ulaval.glo4002.game.domain.dinosaur.DinosaurRepository;
 import ca.ulaval.glo4002.game.domain.dinosaur.enums.SpeciesDietsCorrespondances;
 import ca.ulaval.glo4002.game.exceptions.types.NotExistentNameException;
-import ca.ulaval.glo4002.game.repositories.actions.ActionRepositoryInMemory;
+import ca.ulaval.glo4002.game.infrastructure.client.BabyBreedableClient;
+import ca.ulaval.glo4002.game.infrastructure.persistence.actions.ActionRepositoryInMemory;
+import ca.ulaval.glo4002.game.infrastructure.persistence.dinosaur.DinosaurRepositoryInMemory;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 class BabyUseCaseTest {
 
@@ -33,30 +34,23 @@ class BabyUseCaseTest {
         this.gender = "f";
         this.species = "Ankylosaurus";
 
-        HerdRepository herdRepository = new HerdRepositoryInMemory();
+        DinosaurRepository dinosaurRepository = new DinosaurRepositoryInMemory();
         BabyAssembler babyAssembler = new BabyAssembler();
         ActionRepository actionRepository = new ActionRepositoryInMemory();
         ActionFactory actionFactory = new ActionFactory();
         SpeciesDietsCorrespondances speciesDietsCorrespondances = new SpeciesDietsCorrespondances();
-        DinosaurFactory dinosaurFactory = new DinosaurFactory(herdRepository, speciesDietsCorrespondances);
+        DinosaurFactory dinosaurFactory = new DinosaurFactory(dinosaurRepository, speciesDietsCorrespondances);
+        Breedable breedable = new BabyBreedableClient();
 
-        babyUseCase = new BabyUseCase(herdRepository, babyAssembler, actionRepository, actionFactory, dinosaurFactory);
+        babyUseCase = new BabyUseCase(dinosaurRepository, babyAssembler, actionRepository, actionFactory,
+                dinosaurFactory, breedable);
     }
 
     @Test
     public void givenBabyDinosaur_whenGetDinosaurNotExistent_shouldThrowsNotExistentNameException() {
-        BabyCreationDto babyCreationDto = new BabyCreationDto();
-        babyCreationDto.name = this.name;
-        babyCreationDto.fatherName = this.fatherName;
-        babyCreationDto.motherName = this.motherName;
-        babyCreationDto.gender = this.gender;
-        babyCreationDto.species = this.species;
-
-        babyUseCase.createBaby(babyCreationDto);
-
+        BabyCreationDto babyCreationDto = new BabyCreationDto(this.name, this.fatherName, this.motherName);
         assertThrows(NotExistentNameException.class, () ->
-            babyUseCase.getParentsSpecies(fatherName, motherName));
-
+                babyUseCase.createBaby(babyCreationDto));
     }
 
 }
