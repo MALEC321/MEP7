@@ -39,7 +39,7 @@ import java.util.Set;
 
 public class AppConfig {
     // Turn
-    private final static TurnFactory turnFactory = new TurnFactory();
+    private static final TurnFactory turnFactory = new TurnFactory();
     private static final TurnRepository turnRepository = new TurnRepositoryInMemory();
     private static final ResourceRepository resourceRepository = new ResourceRepositoryInMemory();
     private static final ActionRepository actionRepository = new ActionRepositoryInMemory();
@@ -76,9 +76,10 @@ public class AppConfig {
     private static final BabyResource createBabyResource = new BabyResource(babyUseCase, babyDtoAssembler);
     private final ResourceConfig config;
 
-    public AppConfig(){
+    public AppConfig() {
         this.config = new ResourceConfig();
     }
+
     private Set<Object> instances() {
         Set<Object> resources = new HashSet<>();
         resources.add(manageResources);
@@ -97,7 +98,7 @@ public class AppConfig {
         return resources;
     }
 
-    public ResourceConfig getConfig () {
+    public ResourceConfig getConfig() {
         return this.config.registerInstances(instances());
     }
 }
