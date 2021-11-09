@@ -50,7 +50,7 @@ title __DINOSAUR's Class Diagram__\n
   namespace  {
     namespace a.ulaval.glo4002.game {
       namespace domain.dinosaur {
-        interface ca.ulaval.glo4002.game.domain.dinosaur.DinosaurRepository {
+        interface ca.ulaval.glo4002.game.domain.dinosaur.HerdRepository {
             {abstract} + findAll()
             {abstract} + findByName()
             {abstract} + getSortedDinosaursByStrengthThenName()
@@ -64,7 +64,7 @@ title __DINOSAUR's Class Diagram__\n
   
 
   ca.ulaval.glo4002.game.domain.dinosaur.Dinosaur o-- ca.ulaval.glo4002.game.domain.dinosaur.enums.DietType : diet
-  ca.ulaval.glo4002.game.domain.dinosaur.DinosaurFactory o-- ca.ulaval.glo4002.game.domain.dinosaur.DinosaurRepository : dinosaurRepository
+  ca.ulaval.glo4002.game.domain.dinosaur.DinosaurFactory o-- ca.ulaval.glo4002.game.domain.dinosaur.HerdRepository : herdRepository
   ca.ulaval.glo4002.game.domain.dinosaur.DinosaurFactory o-- ca.ulaval.glo4002.game.domain.dinosaur.enums.SpeciesDietsCorrespondances : speciesDietsCorrespondances
 
 

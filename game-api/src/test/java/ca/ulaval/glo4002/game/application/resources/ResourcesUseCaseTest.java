@@ -1,22 +1,21 @@
 package ca.ulaval.glo4002.game.application.resources;
 
-import ca.ulaval.glo4002.game.application.manager.ZooManager;
+import ca.ulaval.glo4002.game.application.resources.dtos.ResourceDto;
 import ca.ulaval.glo4002.game.application.turn.TurnUseCase;
 import ca.ulaval.glo4002.game.controllers.resources.dtos.ResourceAssembler;
 import ca.ulaval.glo4002.game.controllers.resources.dtos.ResourceCreationDto;
-import ca.ulaval.glo4002.game.controllers.resources.dtos.ResourceDto;
-import ca.ulaval.glo4002.game.controllers.turn.dtos.TurnAssembler;
 import ca.ulaval.glo4002.game.domain.actions.ActionFactory;
 import ca.ulaval.glo4002.game.domain.actions.ActionRepository;
-import ca.ulaval.glo4002.game.domain.dinosaur.DinosaurRepository;
-import ca.ulaval.glo4002.game.domain.resources.ResourcesGroup;
+import ca.ulaval.glo4002.game.domain.dinosaur.HerdRepository;
 import ca.ulaval.glo4002.game.domain.resources.ResourceRepository;
+import ca.ulaval.glo4002.game.domain.resources.ResourcesDistributor;
+import ca.ulaval.glo4002.game.domain.resources.ResourcesGroup;
 import ca.ulaval.glo4002.game.domain.turn.TurnFactory;
 import ca.ulaval.glo4002.game.domain.turn.TurnRepository;
-import ca.ulaval.glo4002.game.repositories.actions.ActionRepositoryInMemory;
-import ca.ulaval.glo4002.game.repositories.dinosaur.DinosaurRepositoryInMemory;
-import ca.ulaval.glo4002.game.repositories.resources.ResourceRepositoryInMemory;
-import ca.ulaval.glo4002.game.repositories.turn.TurnRepositoryInMemory;
+import ca.ulaval.glo4002.game.infrastructure.persistence.actions.ActionRepositoryInMemory;
+import ca.ulaval.glo4002.game.infrastructure.persistence.dinosaur.HerdRepositoryInMemory;
+import ca.ulaval.glo4002.game.infrastructure.persistence.resources.ResourceRepositoryInMemory;
+import ca.ulaval.glo4002.game.infrastructure.persistence.turn.TurnRepositoryInMemory;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -38,25 +37,21 @@ public class ResourcesUseCaseTest {
         ResourceAssembler resourceAssembler = new ResourceAssembler();
         ResourceRepository resourceRepository = new ResourceRepositoryInMemory();
         ActionRepository actionRepository = new ActionRepositoryInMemory();
-        ZooManager zooManager = new ZooManager();
+        ResourcesDistributor resourcesDistributor = new ResourcesDistributor();
         ActionFactory actionFactory = new ActionFactory();
         ResourcesFactory resourcesFactory = new ResourcesFactory();
 
         TurnFactory turnFactory = new TurnFactory();
         TurnRepository turnRepository = new TurnRepositoryInMemory();
-        TurnAssembler turnAssembler = new TurnAssembler();
-        DinosaurRepository dinosaurRepository = new DinosaurRepositoryInMemory();
+        HerdRepository herdRepository = new HerdRepositoryInMemory();
 
-        turnUseCase = new TurnUseCase(turnFactory, turnRepository, resourceRepository, dinosaurRepository, actionRepository, zooManager, resourcesFactory);
+        turnUseCase = new TurnUseCase(turnFactory, turnRepository, resourceRepository, herdRepository, actionRepository, resourcesDistributor, resourcesFactory);
         resourceUseCase = new ResourceUseCase(resourceGroupFactory, resourceRepository, resourceAssembler, actionRepository, actionFactory);
     }
 
     @Test
     public void givenResource_whenCreateOne_ActionsListNotEmpty() {
-        ResourceCreationDto resourceCreationDto = new ResourceCreationDto();
-        resourceCreationDto.qtyBurger = QYT_BURGER;
-        resourceCreationDto.qtySalad = QYT_SALAD;
-        resourceCreationDto.qtyWater = QYT_WATER;
+        ResourceCreationDto resourceCreationDto = new ResourceCreationDto(QYT_BURGER, QYT_SALAD, QYT_WATER);
 
         resourceUseCase.createResource(resourceCreationDto);
         List<ResourceDto> actionList = resourceUseCase.getAllResources();
@@ -74,7 +69,7 @@ public class ResourcesUseCaseTest {
     @Test
     public void givenResource_OneTurn_ResourceRepoNotEmpty() {
         ResourceRepository resourceRepository = new ResourceRepositoryInMemory();
-        turnUseCase.createTurn();
+        turnUseCase.executeTurn();
 
         List<ResourcesGroup> resources = resourceRepository.findAll();
 

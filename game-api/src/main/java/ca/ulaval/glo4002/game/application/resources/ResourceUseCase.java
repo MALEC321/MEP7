@@ -1,14 +1,15 @@
 package ca.ulaval.glo4002.game.application.resources;
 
+import ca.ulaval.glo4002.game.application.resources.dtos.ResourceDto;
 import ca.ulaval.glo4002.game.controllers.resources.dtos.ResourceAssembler;
 import ca.ulaval.glo4002.game.controllers.resources.dtos.ResourceCreationDto;
-import ca.ulaval.glo4002.game.controllers.resources.dtos.ResourceDto;
 import ca.ulaval.glo4002.game.domain.actions.Action;
 import ca.ulaval.glo4002.game.domain.actions.ActionFactory;
 import ca.ulaval.glo4002.game.domain.actions.ActionRepository;
 import ca.ulaval.glo4002.game.domain.resources.ResourceRepository;
 import ca.ulaval.glo4002.game.domain.resources.Resources;
 import ca.ulaval.glo4002.game.domain.resources.ResourcesGroup;
+
 import java.util.List;
 
 public class ResourceUseCase {
@@ -28,7 +29,7 @@ public class ResourceUseCase {
     }
 
     public void createResource(ResourceCreationDto resourceCreationDto) {
-        ResourcesGroup addResources = resourceGroupFactory.create(resourceCreationDto.qtyBurger, resourceCreationDto.qtySalad, resourceCreationDto.qtyWater);
+        ResourcesGroup addResources = resourceGroupFactory.create(resourceCreationDto.getQtyBurger(), resourceCreationDto.getQtySalad(), resourceCreationDto.getQtyWater());
         addResourceToActionWaitingList(addResources);
         resourceAssembler.toDto(addResources);
     }

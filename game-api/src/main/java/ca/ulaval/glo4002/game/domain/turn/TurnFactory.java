@@ -7,11 +7,7 @@ import ca.ulaval.glo4002.game.domain.actions.Action;
 
 public class TurnFactory {
 
-    public TurnFactory() {
-    }
-
     public Turn create(List<Action> actions) {
-
         return new Turn(UUID.randomUUID(), actions);
     }
 }

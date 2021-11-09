@@ -1,5 +1,0 @@
-package ca.ulaval.glo4002.game.domain.resources;
-
-public interface Eatable {
-    boolean removeResourceQty(ResourceType resourceType, int quantity);
-}

@@ -5,7 +5,11 @@ title __DTOS's Class Diagram__\n
     namespace ca.ulaval.glo4002.game {
       namespace controllers.resourcesGroup {
         namespace dtos {
+<<<<<<< HEAD
           class ca.ulaval.glo4002.game.controllers.resourcesGroup.dtos.ResourceAssembler {
+=======
+          class ca.ulaval.glo4002.game.application.resources.dtos.ResourceAssemblers {
+>>>>>>> develop
               + toDto()
               + toDtos()
           }
@@ -30,7 +34,11 @@ title __DTOS's Class Diagram__\n
     namespace ca.ulaval.glo4002.game {
       namespace controllers.resourcesGroup {
         namespace dtos {
+<<<<<<< HEAD
           class ca.ulaval.glo4002.game.controllers.resourcesGroup.dtos.ResourceDto {
+=======
+          class ca.ulaval.glo4002.game.application.resources.dtos.ResourceDto {
+>>>>>>> develop
               + qtyBurger : int
               + qtySalad : int
               + qtyWater : int

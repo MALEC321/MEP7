@@ -1,23 +1,14 @@
+
 package ca.ulaval.glo4002.game.controllers.dinosaur;
 
-import java.util.List;
+import ca.ulaval.glo4002.game.application.dinosaur.DinosaurUseCase;
+import ca.ulaval.glo4002.game.application.dinosaur.dtos.DinosaurDto;
+import ca.ulaval.glo4002.game.controllers.dinosaur.dtos.*;
 
-import javax.ws.rs.Consumes;
-import javax.ws.rs.GET;
-import javax.ws.rs.POST;
-import javax.ws.rs.Path;
-import javax.ws.rs.PathParam;
-import javax.ws.rs.Produces;
+import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
-
-import ca.ulaval.glo4002.game.application.dinosaur.DinosaurUseCase;
-import ca.ulaval.glo4002.game.controllers.dinosaur.dtos.DinosaurCreationDto;
-import ca.ulaval.glo4002.game.controllers.dinosaur.dtos.DinosaurDto;
-import ca.ulaval.glo4002.game.controllers.dinosaur.dtos.DinosaurDtoAssembler;
-import ca.ulaval.glo4002.game.controllers.dinosaur.dtos.DinosaurRequest;
-import ca.ulaval.glo4002.game.controllers.dinosaur.dtos.DinosaurResponseItem;
-import ca.ulaval.glo4002.game.controllers.dinosaur.dtos.DinosaursResponse;
+import java.util.List;
 
 @Path("/dinosaurs")
 public class DinosaurResource {
@@ -45,7 +36,7 @@ public class DinosaurResource {
     public Response getAllDinosaurs() {
         List<DinosaurDto> dinosaurs = dinosaurUseCase.getAllDinosaurs();
         DinosaursResponse response = dinosaurDtoAssembler.toResponse(dinosaurs);
-        return Response.ok().entity(response.items).build();
+        return Response.ok().entity(response.getItems()).build();
     }
 
     @Path("{name}")

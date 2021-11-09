@@ -1,7 +1,11 @@
 package ca.ulaval.glo4002.game.controllers.resources;
 
 import ca.ulaval.glo4002.game.application.resources.ResourceUseCase;
-import ca.ulaval.glo4002.game.controllers.resources.dtos.*;
+import ca.ulaval.glo4002.game.application.resources.dtos.ResourceDto;
+import ca.ulaval.glo4002.game.controllers.resources.dtos.ResourceCreationDto;
+import ca.ulaval.glo4002.game.controllers.resources.dtos.ResourceDtoAssembler;
+import ca.ulaval.glo4002.game.controllers.resources.dtos.ResourceRequest;
+import ca.ulaval.glo4002.game.controllers.resources.dtos.ResourcesResponse;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
