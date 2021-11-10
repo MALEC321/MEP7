@@ -37,7 +37,7 @@ public class DinosaurUseCase {
 
     public void createDinosaur(DinosaurCreationDto dto) {
         Dinosaur dinosaur = dinosaurFactory.create(dto.getName(), dto.getWeight(), dto.getGender(), dto.getSpecies());
-        actionRepository.save(actionFactory.create(dinosaur, herdRepository));
+        actionRepository.save(actionFactory.create(dinosaur, herdRepository.findHerd()));
     }
 
     public List<DinosaurDto> getAllDinosaurs() {

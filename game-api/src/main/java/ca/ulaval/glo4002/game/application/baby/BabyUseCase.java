@@ -45,7 +45,7 @@ public class BabyUseCase {
         if(babyDto.isPresent()) {
             Dinosaur baby = dinosaurFactory.create(dto.getName(), dto.getFatherName(), dto.getMotherName(),
                     babyDto.get().getGender(), babyDto.get().getOffspring());
-            actionRepository.save(actionFactory.create(baby, herdRepository));
+            actionRepository.save(actionFactory.create(baby, herdRepository.findHerd()));
         }
     }
 
