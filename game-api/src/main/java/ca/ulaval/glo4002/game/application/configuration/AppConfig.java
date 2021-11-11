@@ -5,8 +5,8 @@ import ca.ulaval.glo4002.game.application.baby.breed.Breedable;
 import ca.ulaval.glo4002.game.application.baby.dtos.BabyAssembler;
 import ca.ulaval.glo4002.game.application.dinosaur.DinosaurUseCase;
 import ca.ulaval.glo4002.game.application.dinosaur.dtos.DinosaurAssembler;
-import ca.ulaval.glo4002.game.application.resources.ResourceGroupFactory;
-import ca.ulaval.glo4002.game.application.resources.ResourceUseCase;
+import ca.ulaval.glo4002.game.application.resources.ResourcesGroupFactory;
+import ca.ulaval.glo4002.game.application.resources.ResourcesUseCase;
 import ca.ulaval.glo4002.game.application.resources.ResourcesFactory;
 import ca.ulaval.glo4002.game.application.turn.TurnUseCase;
 import ca.ulaval.glo4002.game.controllers.baby.BabyResource;
@@ -14,8 +14,8 @@ import ca.ulaval.glo4002.game.controllers.baby.dtos.BabyDtoAssembler;
 import ca.ulaval.glo4002.game.controllers.dinosaur.DinosaurResource;
 import ca.ulaval.glo4002.game.controllers.dinosaur.dtos.DinosaurDtoAssembler;
 import ca.ulaval.glo4002.game.controllers.exceptionMappers.*;
-import ca.ulaval.glo4002.game.controllers.resources.ResourceResource;
-import ca.ulaval.glo4002.game.controllers.resources.dtos.ResourceAssembler;
+import ca.ulaval.glo4002.game.controllers.resources.ResourcesResource;
+import ca.ulaval.glo4002.game.controllers.resources.dtos.ResourcesAssembler;
 import ca.ulaval.glo4002.game.controllers.resources.dtos.ResourceDtoAssembler;
 import ca.ulaval.glo4002.game.controllers.turn.TurnResource;
 import ca.ulaval.glo4002.game.controllers.turn.dtos.TurnDtoAssembler;
@@ -24,14 +24,14 @@ import ca.ulaval.glo4002.game.domain.actions.ActionRepository;
 import ca.ulaval.glo4002.game.domain.dinosaur.DinosaurFactory;
 import ca.ulaval.glo4002.game.domain.dinosaur.HerdRepository;
 import ca.ulaval.glo4002.game.domain.dinosaur.enums.SpeciesDietsCorrespondances;
-import ca.ulaval.glo4002.game.domain.resources.ResourceRepository;
+import ca.ulaval.glo4002.game.domain.resources.PantryRepository;
 import ca.ulaval.glo4002.game.domain.resources.ResourcesDistributor;
 import ca.ulaval.glo4002.game.domain.turn.TurnFactory;
 import ca.ulaval.glo4002.game.domain.turn.TurnRepository;
 import ca.ulaval.glo4002.game.infrastructure.client.BabyBreedableClient;
 import ca.ulaval.glo4002.game.infrastructure.persistence.actions.ActionRepositoryInMemory;
 import ca.ulaval.glo4002.game.infrastructure.persistence.dinosaur.HerdRepositoryInMemory;
-import ca.ulaval.glo4002.game.infrastructure.persistence.resources.ResourceRepositoryInMemory;
+import ca.ulaval.glo4002.game.infrastructure.persistence.resources.PantryRepositoryInMemory;
 import ca.ulaval.glo4002.game.infrastructure.persistence.turn.TurnRepositoryInMemory;
 import org.glassfish.jersey.server.ResourceConfig;
 
@@ -42,14 +42,14 @@ public class AppConfig {
     // Turn
     private static final TurnFactory turnFactory = new TurnFactory();
     private static final TurnRepository turnRepository = new TurnRepositoryInMemory();
-    private static final ResourceRepository resourceRepository = new ResourceRepositoryInMemory();
+    private static final PantryRepository resourceRepository = new PantryRepositoryInMemory();
     private static final ActionRepository actionRepository = new ActionRepositoryInMemory();
     private static final ActionFactory actionFactory = new ActionFactory();
     private static final SpeciesDietsCorrespondances speciesDietsCorrespondances = new SpeciesDietsCorrespondances();
     private static final ResourcesDistributor resourcesDistributor = new ResourcesDistributor();
 
     private static final ResourcesFactory resourcesFactory = new ResourcesFactory();
-    private static final ResourceGroupFactory resourceGroupFactory = new ResourceGroupFactory();
+    private static final ResourcesGroupFactory RESOURCES_GROUP_FACTORY = new ResourcesGroupFactory();
 
 
     // Dinosaur
@@ -66,10 +66,11 @@ public class AppConfig {
     private static final TurnDtoAssembler turnDtoAssembler = new TurnDtoAssembler();
     private static final TurnResource executeTurnResource = new TurnResource(turnUseCase, turnDtoAssembler);
 
-    private static final ResourceAssembler resourceAssemblers = new ResourceAssembler();
-    private static final ResourceUseCase resourceUseCase = new ResourceUseCase(resourceGroupFactory, resourceRepository, resourceAssemblers, actionRepository, actionFactory);
+    private static final ResourcesAssembler RESOURCES_ASSEMBLERS = new ResourcesAssembler();
+    private static final ResourcesUseCase
+        RESOURCES_USE_CASE = new ResourcesUseCase(RESOURCES_GROUP_FACTORY, resourceRepository, RESOURCES_ASSEMBLERS, actionRepository, actionFactory);
     private static final ResourceDtoAssembler resourceDtoAssembler = new ResourceDtoAssembler();
-    private static final ResourceResource manageResources = new ResourceResource(resourceUseCase, resourceDtoAssembler);
+    private static final ResourcesResource manageResources = new ResourcesResource(RESOURCES_USE_CASE, resourceDtoAssembler);
 
     // Baby
     private static final BabyAssembler babyAssembler = new BabyAssembler();

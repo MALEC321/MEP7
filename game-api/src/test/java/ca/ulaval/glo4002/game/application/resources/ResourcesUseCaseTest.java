@@ -1,20 +1,20 @@
 package ca.ulaval.glo4002.game.application.resources;
 
-import ca.ulaval.glo4002.game.application.resources.dtos.ResourceDto;
+import ca.ulaval.glo4002.game.application.resources.dtos.ResourcesDto;
 import ca.ulaval.glo4002.game.application.turn.TurnUseCase;
-import ca.ulaval.glo4002.game.controllers.resources.dtos.ResourceAssembler;
+import ca.ulaval.glo4002.game.controllers.resources.dtos.ResourcesAssembler;
 import ca.ulaval.glo4002.game.controllers.resources.dtos.ResourceCreationDto;
 import ca.ulaval.glo4002.game.domain.actions.ActionFactory;
 import ca.ulaval.glo4002.game.domain.actions.ActionRepository;
 import ca.ulaval.glo4002.game.domain.dinosaur.HerdRepository;
-import ca.ulaval.glo4002.game.domain.resources.ResourceRepository;
+import ca.ulaval.glo4002.game.domain.resources.PantryRepository;
 import ca.ulaval.glo4002.game.domain.resources.ResourcesDistributor;
 import ca.ulaval.glo4002.game.domain.resources.ResourcesGroup;
 import ca.ulaval.glo4002.game.domain.turn.TurnFactory;
 import ca.ulaval.glo4002.game.domain.turn.TurnRepository;
 import ca.ulaval.glo4002.game.infrastructure.persistence.actions.ActionRepositoryInMemory;
 import ca.ulaval.glo4002.game.infrastructure.persistence.dinosaur.HerdRepositoryInMemory;
-import ca.ulaval.glo4002.game.infrastructure.persistence.resources.ResourceRepositoryInMemory;
+import ca.ulaval.glo4002.game.infrastructure.persistence.resources.PantryRepositoryInMemory;
 import ca.ulaval.glo4002.game.infrastructure.persistence.turn.TurnRepositoryInMemory;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -28,14 +28,14 @@ public class ResourcesUseCaseTest {
     private static final int QYT_BURGER = 4;
     private static final int QYT_SALAD = 5;
     private static final int QYT_WATER = 6;
-    private ResourceUseCase resourceUseCase;
+    private ResourcesUseCase resourcesUseCase;
     private TurnUseCase turnUseCase;
 
     @BeforeEach
     void setUp() {
-        ResourceGroupFactory resourceGroupFactory = new ResourceGroupFactory();
-        ResourceAssembler resourceAssembler = new ResourceAssembler();
-        ResourceRepository resourceRepository = new ResourceRepositoryInMemory();
+        ResourcesGroupFactory resourcesGroupFactory = new ResourcesGroupFactory();
+        ResourcesAssembler resourcesAssembler = new ResourcesAssembler();
+        PantryRepository resourceRepository = new PantryRepositoryInMemory();
         ActionRepository actionRepository = new ActionRepositoryInMemory();
         ResourcesDistributor resourcesDistributor = new ResourcesDistributor();
         ActionFactory actionFactory = new ActionFactory();
@@ -46,32 +46,32 @@ public class ResourcesUseCaseTest {
         HerdRepository herdRepository = new HerdRepositoryInMemory();
 
         turnUseCase = new TurnUseCase(turnFactory, turnRepository, resourceRepository, herdRepository, actionRepository, resourcesDistributor, resourcesFactory);
-        resourceUseCase = new ResourceUseCase(resourceGroupFactory, resourceRepository, resourceAssembler, actionRepository, actionFactory);
+        resourcesUseCase = new ResourcesUseCase(resourcesGroupFactory, resourceRepository, resourcesAssembler, actionRepository, actionFactory);
     }
 
     @Test
     public void givenResource_whenCreateOne_ActionsListNotEmpty() {
         ResourceCreationDto resourceCreationDto = new ResourceCreationDto(QYT_BURGER, QYT_SALAD, QYT_WATER);
 
-        resourceUseCase.createResource(resourceCreationDto);
-        List<ResourceDto> actionList = resourceUseCase.getAllResources();
+        resourcesUseCase.createResources(resourceCreationDto);
+        List<ResourcesDto> actionList = resourcesUseCase.getAllResources();
 
         assertFalse(actionList.isEmpty());
     }
 
     @Test
     public void givenResource_ZeroCreated_ActionsListIsEmpty() {
-        List<ResourceDto> actionList = resourceUseCase.getAllResources();
+        List<ResourcesDto> actionList = resourcesUseCase.getAllResources();
 
         assertFalse(actionList.isEmpty());
     }
 
     @Test
     public void givenResource_OneTurn_ResourceRepoNotEmpty() {
-        ResourceRepository resourceRepository = new ResourceRepositoryInMemory();
+        PantryRepository resourceRepository = new PantryRepositoryInMemory();
         turnUseCase.executeTurn();
 
-        List<ResourcesGroup> resources = resourceRepository.findAll();
+        List<ResourcesGroup> resources = resourceRepository.findPantry().findAll();
 
         assertFalse(resources.isEmpty());
     }

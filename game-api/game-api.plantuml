@@ -147,7 +147,7 @@ title __GAME-API's Class Diagram__\n
 <<<<<<< HEAD
           class ca.ulaval.glo4002.game.controllers.resourcesGroup.dtos.ResourceDto {
 =======
-          class ca.ulaval.glo4002.game.application.resources.dtos.ResourceDto {
+          class ca.ulaval.glo4002.game.application.resources.dtos.ResourcesDto {
 >>>>>>> develop
           }
         }
@@ -598,7 +598,7 @@ title __GAME-API's Class Diagram__\n
         class ca.ulaval.glo4002.game.repositories.resourcesGroup.ResourceRepositoryInMemory {
 =======
       namespace repositories.resources {
-        class ca.ulaval.glo4002.game.infrastructure.persistence.resources.ResourceRepositoryInMemory {
+        class ca.ulaval.glo4002.game.infrastructure.persistence.resources.PantryRepositoryInMemory {
 >>>>>>> develop
         }
       }
@@ -622,19 +622,19 @@ title __GAME-API's Class Diagram__\n
 <<<<<<< HEAD
   ca.ulaval.glo4002.game.application.resourcesGroup.ResourceUseCase o-- ca.ulaval.glo4002.game.domain.actions.ActionFactory : actionFactory
   ca.ulaval.glo4002.game.application.resourcesGroup.ResourceUseCase o-- ca.ulaval.glo4002.game.domain.actions.ActionRepository : actionRepository
-  ca.ulaval.glo4002.game.application.resourcesGroup.ResourceUseCase o-- ca.ulaval.glo4002.game.controllers.resourcesGroup.dtos.ResourceAssembler : resourceAssembler
-  ca.ulaval.glo4002.game.application.resourcesGroup.ResourceUseCase o-- ca.ulaval.glo4002.game.domain.resourcesGroup.ResourcesFactory : resourceGroupFactory
-  ca.ulaval.glo4002.game.application.resourcesGroup.ResourceUseCase o-- ca.ulaval.glo4002.game.domain.resourcesGroup.ResourceRepository : resourceRepository
+  ca.ulaval.glo4002.game.application.resourcesGroup.ResourceUseCase o-- ca.ulaval.glo4002.game.controllers.resourcesGroup.dtos.ResourceAssembler : resourcesAssembler
+  ca.ulaval.glo4002.game.application.resourcesGroup.ResourceUseCase o-- ca.ulaval.glo4002.game.domain.resourcesGroup.ResourcesFactory : resourcesGroupFactory
+  ca.ulaval.glo4002.game.application.resourcesGroup.ResourceUseCase o-- ca.ulaval.glo4002.game.domain.resourcesGroup.ResourceRepository : pantryRepository
 =======
-  ca.ulaval.glo4002.game.application.resources.ResourceUseCase o-- ca.ulaval.glo4002.game.domain.actions.ActionFactory : actionFactory
-  ca.ulaval.glo4002.game.application.resources.ResourceUseCase o-- ca.ulaval.glo4002.game.domain.actions.ActionRepository : actionRepository
-  ca.ulaval.glo4002.game.application.resources.ResourceUseCase o-- ca.ulaval.glo4002.game.application.resources.dtos.ResourceAssemblers : resourceAssemblers
-  ca.ulaval.glo4002.game.application.resources.ResourceUseCase o-- ca.ulaval.glo4002.game.domain.resources.ResourceFactory : resourceFactory
-  ca.ulaval.glo4002.game.application.resources.ResourceUseCase o-- ca.ulaval.glo4002.game.domain.resources.ResourceRepository : resourceRepository
+  ca.ulaval.glo4002.game.application.resources.ResourcesUseCase o-- ca.ulaval.glo4002.game.domain.actions.ActionFactory : actionFactory
+  ca.ulaval.glo4002.game.application.resources.ResourcesUseCase o-- ca.ulaval.glo4002.game.domain.actions.ActionRepository : actionRepository
+  ca.ulaval.glo4002.game.application.resources.ResourcesUseCase o-- ca.ulaval.glo4002.game.application.resources.dtos.ResourceAssemblers : resourceAssemblers
+  ca.ulaval.glo4002.game.application.resources.ResourcesUseCase o-- ca.ulaval.glo4002.game.domain.resources.ResourceFactory : resourceFactory
+  ca.ulaval.glo4002.game.application.resources.ResourcesUseCase o-- ca.ulaval.glo4002.game.domain.resources.PantryRepository : pantryRepository
 >>>>>>> develop
   ca.ulaval.glo4002.game.application.turn.TurnUseCase o-- ca.ulaval.glo4002.game.domain.actions.ActionRepository : actionRepository
   ca.ulaval.glo4002.game.application.turn.TurnUseCase o-- ca.ulaval.glo4002.game.domain.dinosaur.DinosaurRepository : dinosaurRepository
-  ca.ulaval.glo4002.game.application.turn.TurnUseCase o-- ca.ulaval.glo4002.game.domain.resourcesGroup.ResourceRepository : resourceRepository
+  ca.ulaval.glo4002.game.application.turn.TurnUseCase o-- ca.ulaval.glo4002.game.domain.resourcesGroup.ResourceRepository : pantryRepository
   ca.ulaval.glo4002.game.application.turn.TurnUseCase o-- ca.ulaval.glo4002.game.controllers.turn.dtos.TurnAssembler : turnAssembler
   ca.ulaval.glo4002.game.application.turn.TurnUseCase o-- ca.ulaval.glo4002.game.domain.turn.TurnFactory : turnFactory
   ca.ulaval.glo4002.game.application.turn.TurnUseCase o-- ca.ulaval.glo4002.game.domain.turn.TurnRepository : turnRepository
@@ -643,7 +643,7 @@ title __GAME-API's Class Diagram__\n
   ca.ulaval.glo4002.game.controllers.dinosaur.DinosaurResource o-- ca.ulaval.glo4002.game.application.dinosaur.DinosaurUseCase : dinosaurUseCase
   ca.ulaval.glo4002.game.controllers.dinosaur.dtos.DinosaurDtoAssembler o-- ca.ulaval.glo4002.game.domain.dinosaur.DinosaurFactory : dinosaurFactory
   ca.ulaval.glo4002.game.controllers.resourcesGroup.ResourceResource o-- ca.ulaval.glo4002.game.controllers.resourcesGroup.dtos.ResourceDtoAssembler : resourceDtoAssembler
-  ca.ulaval.glo4002.game.controllers.resourcesGroup.ResourceResource o-- ca.ulaval.glo4002.game.application.resourcesGroup.ResourceUseCase : resourceUseCase
+  ca.ulaval.glo4002.game.controllers.resourcesGroup.ResourceResource o-- ca.ulaval.glo4002.game.application.resourcesGroup.ResourceUseCase : resourcesUseCase
   ca.ulaval.glo4002.game.controllers.resourcesGroup.dtos.ResourcesResponse o-- ca.ulaval.glo4002.game.controllers.resourcesGroup.dtos.ResourceResponse : consumed
   ca.ulaval.glo4002.game.controllers.resourcesGroup.dtos.ResourcesResponse o-- ca.ulaval.glo4002.game.controllers.resourcesGroup.dtos.ResourceResponse : expired
   ca.ulaval.glo4002.game.controllers.resourcesGroup.dtos.ResourcesResponse o-- ca.ulaval.glo4002.game.controllers.resourcesGroup.dtos.ResourceResponse : fresh
@@ -682,7 +682,7 @@ title __GAME-API's Class Diagram__\n
   ca.ulaval.glo4002.game.controllers.exceptionMappers.UnknownExceptionGrabber .up.|> javax.ws.rs.ext.ExceptionMapper
   ca.ulaval.glo4002.game.repositories.actions.ActionRepositoryInMemory .up.|> ca.ulaval.glo4002.game.domain.actions.ActionRepository
   ca.ulaval.glo4002.game.repositories.dinosaur.DinosaurRepositoryInMemory .up.|> ca.ulaval.glo4002.game.domain.dinosaur.DinosaurRepository
-  ca.ulaval.glo4002.game.repositories.resources.ResourceRepositoryInMemory .up.|> ca.ulaval.glo4002.game.domain.resources.ResourceRepository
+  ca.ulaval.glo4002.game.repositories.resources.ResourceRepositoryInMemory .up.|> ca.ulaval.glo4002.game.domain.resources.PantryRepository
   ca.ulaval.glo4002.game.repositories.resources.ResourceRepositoryInMemory o-- ca.ulaval.glo4002.game.domain.resources.Resource : consumedResources
   ca.ulaval.glo4002.game.repositories.resources.ResourceRepositoryInMemory o-- ca.ulaval.glo4002.game.domain.resources.Resource : expiredResources
   ca.ulaval.glo4002.game.repositories.turn.TurnRepositoryInMemory .up.|> ca.ulaval.glo4002.game.domain.turn.TurnRepository
@@ -715,9 +715,9 @@ title __GAME-API's Class Diagram__\n
 =======
   ca.ulaval.glo4002.game.infrastructure.persistence.actions.ActionRepositoryInMemory .up.|> ca.ulaval.glo4002.game.domain.actions.ActionRepository
   ca.ulaval.glo4002.game.infrastructure.persistence.dinosaur.DinosaurRepositoryInMemory .up.|> ca.ulaval.glo4002.game.domain.dinosaur.DinosaurRepository
-  ca.ulaval.glo4002.game.infrastructure.persistence.resources.ResourceRepositoryInMemory .up.|> ca.ulaval.glo4002.game.domain.resources.ResourceRepository
-  ca.ulaval.glo4002.game.infrastructure.persistence.resources.ResourceRepositoryInMemory o-- ca.ulaval.glo4002.game.domain.resources.Resource : consumedResources
-  ca.ulaval.glo4002.game.infrastructure.persistence.resources.ResourceRepositoryInMemory o-- ca.ulaval.glo4002.game.domain.resources.Resource : expiredResources
+  ca.ulaval.glo4002.game.infrastructure.persistence.resources.PantryRepositoryInMemory .up.|> ca.ulaval.glo4002.game.domain.resources.PantryRepository
+  ca.ulaval.glo4002.game.infrastructure.persistence.resources.PantryRepositoryInMemory o-- ca.ulaval.glo4002.game.domain.resources.Resource : consumedResources
+  ca.ulaval.glo4002.game.infrastructure.persistence.resources.PantryRepositoryInMemory o-- ca.ulaval.glo4002.game.domain.resources.Resource : expiredResources
   ca.ulaval.glo4002.game.infrastructure.persistence.turn.TurnRepositoryInMemory .up.|> ca.ulaval.glo4002.game.domain.turn.TurnRepository
 >>>>>>> develop
 >>>>>>> develop

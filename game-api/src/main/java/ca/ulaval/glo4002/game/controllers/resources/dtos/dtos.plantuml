@@ -37,7 +37,7 @@ title __DTOS's Class Diagram__\n
 <<<<<<< HEAD
           class ca.ulaval.glo4002.game.controllers.resourcesGroup.dtos.ResourceDto {
 =======
-          class ca.ulaval.glo4002.game.application.resources.dtos.ResourceDto {
+          class ca.ulaval.glo4002.game.application.resources.dtos.ResourcesDto {
 >>>>>>> develop
               + qtyBurger : int
               + qtySalad : int

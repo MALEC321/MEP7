@@ -7,13 +7,11 @@ public enum ResourceType {
 
     private final int expiration;
 
-    private ResourceType(int expiration) {
+    ResourceType(int expiration) {
         this.expiration = expiration;
     }
 
     public int getExpiration() {
         return this.expiration;
     }
-
-
 }

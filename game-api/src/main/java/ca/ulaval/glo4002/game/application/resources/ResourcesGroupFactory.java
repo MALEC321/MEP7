@@ -5,7 +5,7 @@ import ca.ulaval.glo4002.game.domain.resources.ResourcesGroup;
 
 import static ca.ulaval.glo4002.game.domain.resources.ResourceType.*;
 
-public class ResourceGroupFactory {
+public class ResourcesGroupFactory {
     public ResourcesGroup create(int qtyBurger, int qtySalad, int qtyWater) {
         ResourcesFactory resourcesFactory = new ResourcesFactory();
         Resources burger, salad, water;
