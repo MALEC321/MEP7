@@ -29,7 +29,7 @@ public class PantryRepositoryInMemoryTest {
     }
 
     @Test
-    void repoCreated_whenResetResource_thenNoLeftResourcesInRepo() {
+    void repoCreated_whenResetResource_thenPantryIsCleared() {
         this.resourceRepositoryInMemory.reset();
 
         verify(this.pantry, times(1)).clear();
