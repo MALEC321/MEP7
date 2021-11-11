@@ -1,23 +1,25 @@
 package ca.ulaval.glo4002.game.domain.resources;
 
+import ca.ulaval.glo4002.game.application.resources.ResourcesFactory;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import static ca.ulaval.glo4002.game.domain.resources.ResourceType.*;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-public class ResourceTest {
-    private Burger burger;
-    private Salad salad;
-    private Water water;
+public class ResourcesTest {
+    private ResourcesFactory resourcesFactory;
+    private Resources burger;
+    private Resources salad;
+    private Resources water;
 
     @BeforeEach
     void setUp() {
-        burger = new Burger(50);
-        salad = new Salad(30);
-        water = new Water(100);
+        resourcesFactory = new ResourcesFactory();
+        burger = resourcesFactory.create(BURGER, 50);
+        salad = resourcesFactory.create(SALAD, 30);
+        water = resourcesFactory.create(WATER, 100);
     }
-
-    /************************ TESTING RESOURCEELEMENTS IMPLEMENTATIONS ************************/
 
     @Test
     void whenCreatingBurger_shouldExpireIn4() {

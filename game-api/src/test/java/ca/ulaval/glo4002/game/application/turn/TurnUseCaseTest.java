@@ -4,7 +4,7 @@ import ca.ulaval.glo4002.game.domain.resources.ResourcesDistributor;
 import ca.ulaval.glo4002.game.domain.dinosaur.Dinosaur;
 import ca.ulaval.glo4002.game.domain.dinosaur.HerdRepository;
 import ca.ulaval.glo4002.game.domain.resources.Pantry;
-import ca.ulaval.glo4002.game.domain.resources.ResourceRepository;
+import ca.ulaval.glo4002.game.domain.resources.PantryRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
@@ -15,7 +15,7 @@ import static org.mockito.Mockito.when;
 public class TurnUseCaseTest {
 
     @Mock
-    private ResourceRepository resourceRepository;
+    private PantryRepository resourceRepository;
     @Mock
     private HerdRepository herdRepository;
     @Mock
@@ -31,7 +31,7 @@ public class TurnUseCaseTest {
     @BeforeEach
     void setUp() {
         MockitoAnnotations.initMocks(this);
-        when(resourceRepository.getPantry()).thenReturn(pantry);
+        when(resourceRepository.findPantry()).thenReturn(pantry);
     }
 
     /*    @Test
