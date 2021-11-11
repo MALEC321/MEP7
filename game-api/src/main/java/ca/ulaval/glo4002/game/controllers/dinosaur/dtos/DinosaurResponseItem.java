@@ -1,4 +1,3 @@
-
 package ca.ulaval.glo4002.game.controllers.dinosaur.dtos;
 
 public class DinosaurResponseItem {

@@ -1,4 +1,3 @@
-
 package ca.ulaval.glo4002.game.controllers.dinosaur;
 
 import ca.ulaval.glo4002.game.application.dinosaur.DinosaurUseCase;
@@ -12,7 +11,6 @@ import java.util.List;
 
 @Path("/dinosaurs")
 public class DinosaurResource {
-
     private final DinosaurUseCase dinosaurUseCase;
     private final DinosaurDtoAssembler dinosaurDtoAssembler;
 

@@ -45,7 +45,7 @@ public class ResourcesUseCase {
     private void addResourcesToActionWaitingList(ResourcesGroup resourcesGroup) {
         for (Resources resources : resourcesGroup.getResources().values()) {
             if (!resources.isEmpty()) {
-                Action addResources = actionFactory.create(resources, pantryRepository);
+                Action addResources = actionFactory.create(resources, pantryRepository.findPantry());
                 actionRepository.save(addResources);
             }
         }

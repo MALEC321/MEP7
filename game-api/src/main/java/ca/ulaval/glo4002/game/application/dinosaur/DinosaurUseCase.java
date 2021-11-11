@@ -14,7 +14,6 @@ import ca.ulaval.glo4002.game.domain.dinosaur.Herd;
 import ca.ulaval.glo4002.game.domain.dinosaur.HerdRepository;
 
 public class DinosaurUseCase {
-
     private final DinosaurFactory dinosaurFactory;
     private final HerdRepository herdRepository;
     private final DinosaurAssembler dinosaurAssembler;
@@ -36,7 +35,7 @@ public class DinosaurUseCase {
 
     public void createDinosaur(DinosaurCreationDto dto) {
         Dinosaur dinosaur = dinosaurFactory.create(dto.getName(), dto.getWeight(), dto.getGender(), dto.getSpecies());
-        actionRepository.save(actionFactory.create(dinosaur, herdRepository));
+        actionRepository.save(actionFactory.create(dinosaur, herdRepository.findHerd()));
     }
 
     public List<DinosaurDto> getAllDinosaurs() {

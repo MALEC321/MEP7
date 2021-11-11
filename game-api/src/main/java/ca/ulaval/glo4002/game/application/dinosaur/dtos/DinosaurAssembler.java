@@ -6,7 +6,6 @@ import java.util.stream.Collectors;
 import ca.ulaval.glo4002.game.domain.dinosaur.Dinosaur;
 
 public class DinosaurAssembler {
-
     public DinosaurDto toDto(Dinosaur dinosaur) {
         return new DinosaurDto(dinosaur.getName(), dinosaur.getWeight(), dinosaur.getGender(),
             dinosaur.getSpecies());

@@ -1,4 +1,3 @@
-
 package ca.ulaval.glo4002.game.controllers.dinosaur.dtos;
 
 import ca.ulaval.glo4002.game.application.dinosaur.dtos.DinosaurDto;
@@ -7,7 +6,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class DinosaurDtoAssembler {
-
     public DinosaurCreationDto fromRequest(DinosaurRequest request) {
         return new DinosaurCreationDto(request.getName(), request.getWeight(), request.getGender(), request.getSpecies());
     }

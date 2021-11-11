@@ -44,15 +44,14 @@ public class BabyUseCase {
     private void saveBabyInformationIfBabyAlived(BabyCreationDto dto, Optional<ResponseBreed> babyDto) {
         if (babyDto.isPresent()) {
             Dinosaur baby = dinosaurFactory.create(dto.getName(), dto.getFatherName(), dto.getMotherName(),
-                babyDto.get().getGender(), babyDto.get().getOffspring());
-            actionRepository.save(actionFactory.create(baby, herdRepository));
+                    babyDto.get().getGender(), babyDto.get().getOffspring());
+            actionRepository.save(actionFactory.create(baby, herdRepository.findHerd()));
         }
     }
 
     private Optional<ResponseBreed> tryToGiveBirthToBaby(BabyCreationDto dto) {
         RequestBreed requestBreed = getParentsSpecies(dto.getFatherName(), dto.getMotherName());
-        Optional<ResponseBreed> babyDto = breedable.createBaby(requestBreed);
-        return babyDto;
+        return breedable.createBaby(requestBreed);
     }
 
     public RequestBreed getParentsSpecies(String fatherName, String motherName) {

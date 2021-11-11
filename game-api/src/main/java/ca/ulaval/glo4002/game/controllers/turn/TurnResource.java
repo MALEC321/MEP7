@@ -14,7 +14,6 @@ import javax.ws.rs.core.Response;
 
 @Path("/")
 public class TurnResource {
-
     private final TurnUseCase turnUseCase;
     private final TurnDtoAssembler turnDtoAssembler;
 
