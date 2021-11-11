@@ -49,7 +49,7 @@ public class AppConfig {
     private static final ResourcesDistributor resourcesDistributor = new ResourcesDistributor();
 
     private static final ResourcesFactory resourcesFactory = new ResourcesFactory();
-    private static final ResourcesGroupFactory RESOURCES_GROUP_FACTORY = new ResourcesGroupFactory();
+    private static final ResourcesGroupFactory resourcesGroupFactory = new ResourcesGroupFactory();
 
 
     // Dinosaur
@@ -66,11 +66,11 @@ public class AppConfig {
     private static final TurnDtoAssembler turnDtoAssembler = new TurnDtoAssembler();
     private static final TurnResource executeTurnResource = new TurnResource(turnUseCase, turnDtoAssembler);
 
-    private static final ResourcesAssembler RESOURCES_ASSEMBLERS = new ResourcesAssembler();
+    private static final ResourcesAssembler resourcesAssembler = new ResourcesAssembler();
     private static final ResourcesUseCase
-        RESOURCES_USE_CASE = new ResourcesUseCase(RESOURCES_GROUP_FACTORY, resourceRepository, RESOURCES_ASSEMBLERS, actionRepository, actionFactory);
+            resourcesUseCase = new ResourcesUseCase(resourcesGroupFactory, resourceRepository, resourcesAssembler, actionRepository, actionFactory);
     private static final ResourceDtoAssembler resourceDtoAssembler = new ResourceDtoAssembler();
-    private static final ResourcesResource manageResources = new ResourcesResource(RESOURCES_USE_CASE, resourceDtoAssembler);
+    private static final ResourcesResource manageResources = new ResourcesResource(resourcesUseCase, resourceDtoAssembler);
 
     // Baby
     private static final BabyAssembler babyAssembler = new BabyAssembler();

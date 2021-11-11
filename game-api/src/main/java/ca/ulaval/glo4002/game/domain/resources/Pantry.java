@@ -89,6 +89,16 @@ public class Pantry implements FoodContainer {
         }
     }
 
+    public void clear() {
+        for (Map.Entry<ResourceType, Queue<Resources>> entry : freshResources.entrySet()) {
+            Queue<Resources> resourceQueue = entry.getValue();
+            resourceQueue.clear();
+        }
+
+        consumedResourcesGroup.clear();
+        expiredResourcesGroup.clear();
+    }
+
     public List<ResourcesGroup> findAll() {
         return Arrays.asList(findFreshResources(), expiredResourcesGroup, consumedResourcesGroup);
     }

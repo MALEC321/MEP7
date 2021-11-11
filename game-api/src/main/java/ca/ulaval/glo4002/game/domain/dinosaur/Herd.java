@@ -45,4 +45,8 @@ public class Herd {
         return dinosaursByName.get(((DinosaurBaby) dinosaur).getFatherName()) == null
                 && dinosaursByName.get(((DinosaurBaby) dinosaur).getMotherName()) == null;
     }
+
+    public void clear() {
+        dinosaursByName.clear();
+    }
 }
