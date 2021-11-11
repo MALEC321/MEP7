@@ -34,6 +34,7 @@ public class Herd {
     }
 
     public void removeOrphanedBabyDinosaurs() {
+        // Todo make this recursive !
         for (Dinosaur dinosaur : findSortedDinosaursByStrengthThenName()) {
             if (dinosaur instanceof DinosaurBaby && areBothParentsDead(dinosaur)) {
                 removeDinosaur(dinosaur);

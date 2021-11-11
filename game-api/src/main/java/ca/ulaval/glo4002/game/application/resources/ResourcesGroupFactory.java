@@ -13,7 +13,6 @@ public class ResourcesGroupFactory {
         salad = resourcesFactory.create(SALAD, qtySalad);
         water = resourcesFactory.create(WATER, qtyWater);
 
-
         return new ResourcesGroup(burger, salad, water);
     }
 }
