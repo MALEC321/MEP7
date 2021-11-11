@@ -42,7 +42,7 @@ public class BabyUseCase {
     }
 
     private void saveBabyInformationIfBabyAlived(BabyCreationDto dto, Optional<ResponseBreed> babyDto) {
-        if(babyDto.isPresent()) {
+        if (babyDto.isPresent()) {
             Dinosaur baby = dinosaurFactory.create(dto.getName(), dto.getFatherName(), dto.getMotherName(),
                     babyDto.get().getGender(), babyDto.get().getOffspring());
             actionRepository.save(actionFactory.create(baby, herdRepository));
@@ -51,38 +51,37 @@ public class BabyUseCase {
 
     private Optional<ResponseBreed> tryToGiveBirthToBaby(BabyCreationDto dto) {
         RequestBreed requestBreed = getParentsSpecies(dto.getFatherName(), dto.getMotherName());
-        Optional<ResponseBreed> babyDto = breedable.createBaby(requestBreed);
-        return babyDto;
+        return breedable.createBaby(requestBreed);
     }
 
     public RequestBreed getParentsSpecies(String fatherName, String motherName) {
-            Herd herd = herdRepository.findHerd();
+        Herd herd = herdRepository.findHerd();
 
-            String fatherSpecies;
-            String motherSpecies;
+        String fatherSpecies;
+        String motherSpecies;
 
-            if (herd.findDinosaurByName(fatherName) == null) {
-                throw new NotExistentNameException();
-            }
-
-            if (herd.findDinosaurByName(motherName) == null) {
-                throw new NotExistentNameException();
-            }
-
-            if (!Objects.equals(herd.findDinosaurByName(fatherName).getGender(), "m")) {
-                throw new InvalidFatherException();
-            }
-
-            if (!Objects.equals(herd.findDinosaurByName(motherName).getGender(), "f")) {
-                throw new InvalidMotherException();
-            }
-
-            Dinosaur dinosaurFather = herd.findDinosaurByName(fatherName);
-            fatherSpecies = dinosaurFather.getSpecies();
-
-            Dinosaur dinosaurMother = herd.findDinosaurByName(motherName);
-            motherSpecies = dinosaurMother.getSpecies();
-
-            return babyAssembler.toExternalDto(fatherSpecies, motherSpecies);
+        if (herd.findDinosaurByName(fatherName) == null) {
+            throw new NotExistentNameException();
         }
+
+        if (herd.findDinosaurByName(motherName) == null) {
+            throw new NotExistentNameException();
+        }
+
+        if (!Objects.equals(herd.findDinosaurByName(fatherName).getGender(), "m")) {
+            throw new InvalidFatherException();
+        }
+
+        if (!Objects.equals(herd.findDinosaurByName(motherName).getGender(), "f")) {
+            throw new InvalidMotherException();
+        }
+
+        Dinosaur dinosaurFather = herd.findDinosaurByName(fatherName);
+        fatherSpecies = dinosaurFather.getSpecies();
+
+        Dinosaur dinosaurMother = herd.findDinosaurByName(motherName);
+        motherSpecies = dinosaurMother.getSpecies();
+
+        return babyAssembler.toExternalDto(fatherSpecies, motherSpecies);
+    }
 }

@@ -21,7 +21,6 @@ import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 @Provider
 @Produces(MediaType.APPLICATION_JSON)
 public class CustomJsonProvider extends JacksonJaxbJsonProvider {
-
     private static final ObjectMapper mapper = new ObjectMapper();
 
     static {

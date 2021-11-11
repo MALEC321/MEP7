@@ -15,7 +15,6 @@ import ca.ulaval.glo4002.game.domain.dinosaur.HerdRepository;
 import java.util.List;
 
 public class DinosaurUseCase {
-
     private final DinosaurFactory dinosaurFactory;
     private final HerdRepository herdRepository;
     private final DinosaurAssembler dinosaurAssembler;

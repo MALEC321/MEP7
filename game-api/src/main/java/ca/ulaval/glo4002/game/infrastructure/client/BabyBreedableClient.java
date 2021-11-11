@@ -12,7 +12,6 @@ import javax.ws.rs.core.Response;
 import java.util.Optional;
 
 public class BabyBreedableClient implements Breedable {
-
     private static final String URL_CLIENT_EXTERNE = "http://localhost:8080/breed";
     private Client client;
 
@@ -30,5 +29,4 @@ public class BabyBreedableClient implements Breedable {
         }
         return Optional.ofNullable(responseBreed);
     }
-
 }
