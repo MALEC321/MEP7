@@ -3,11 +3,10 @@ package ca.ulaval.glo4002.game.domain.turn;
 import java.util.List;
 
 import ca.ulaval.glo4002.game.domain.actions.Action;
-import ca.ulaval.glo4002.game.domain.turn.aggregate.TurnId;
+import ca.ulaval.glo4002.game.domain.turn.aggregate.Turn;
 
 public class TurnFactory {
-
-    public TurnId create(String turnId, List<Action> actions) {
-        return new TurnId(turnId, actions);
+    public Turn create(String turnNumber, List<Action> actions) {
+        return new Turn(turnNumber, actions);
     }
 }

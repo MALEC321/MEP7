@@ -4,12 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
-import ca.ulaval.glo4002.game.application.manager.ZooManager;
-import ca.ulaval.glo4002.game.application.turn.TurnUseCase;
-import ca.ulaval.glo4002.game.domain.actions.ActionRepository;
-import ca.ulaval.glo4002.game.domain.dinosaur.DinosaurRepository;
-import ca.ulaval.glo4002.game.domain.resources.ResourceRepository;
-import ca.ulaval.glo4002.game.domain.turn.aggregate.TurnId;
+import ca.ulaval.glo4002.game.domain.turn.aggregate.Turn;
 import ca.ulaval.glo4002.game.infrastructure.persistence.turn.TurnRepositoryInMemory;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -17,12 +12,11 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import ca.ulaval.glo4002.game.domain.actions.Action;
-import org.mockito.Mock;
 
 public class TurnTest {
     private String random;
     private List<Action> actions;
-    private TurnId turnId;
+    private Turn turn;
     private TurnRepositoryInMemory turnRepositoryInMemory;
     private  TurnFactory turnFactory;
 
@@ -31,27 +25,27 @@ public class TurnTest {
         turnFactory = new TurnFactory();
         random = UUID.randomUUID().toString().toUpperCase();
         actions = new ArrayList<>();
-        turnId = new TurnId(random.substring(0, random.indexOf("-")), actions);
+        turn = new Turn(random.substring(0, random.indexOf("-")), actions);
         turnRepositoryInMemory = new TurnRepositoryInMemory();
     }
 
     @Test
     void whenAsked_returnsCorrectId() {
-        assertEquals(random.substring(0, random.indexOf("-")), turnId.getTurnId());
+        assertEquals(random.substring(0, random.indexOf("-")), turn.getTurnNumber());
     }
 
     @Test
     void whenAsked_returnsActionsList() {
-        assertEquals(actions, turnId.getActions());
+        assertEquals(actions, turn.getActions());
     }
 
     @Test
     void whenTurnIsPlayed_incrementsTurn() {
         turnFactory.create(random, actions);
-        turnRepositoryInMemory.save(turnId);
+        turnRepositoryInMemory.findTurns().addTurn(turn);
         turnFactory.create(random, actions);
-        turnRepositoryInMemory.save(turnId);
+        turnRepositoryInMemory.findTurns().addTurn(turn);
 
-        assertEquals(2, turnRepositoryInMemory.numberOfTurns());
+        assertEquals(2, turnRepositoryInMemory.findTurns().numberOfTurns());
     }
 }

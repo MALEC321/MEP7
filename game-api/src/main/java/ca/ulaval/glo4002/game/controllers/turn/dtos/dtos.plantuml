@@ -17,7 +17,7 @@ title __DTOS's Class Diagram__\n
       namespace controllers.turn {
         namespace dtos {
           class ca.ulaval.glo4002.game.controllers.turn.dtos.TurnCreationDto {
-              + turnNumber : int
+              + turn : int
           }
         }
       }
@@ -39,7 +39,7 @@ title __DTOS's Class Diagram__\n
       namespace controllers.turn {
         namespace dtos {
           class ca.ulaval.glo4002.game.controllers.turn.dtos.TurnResponse {
-              + turnNumber : int
+              + turn : int
           }
         }
       }

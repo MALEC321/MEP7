@@ -6,7 +6,8 @@ import java.util.UUID;
 
 import ca.ulaval.glo4002.game.domain.actions.Action;
 import ca.ulaval.glo4002.game.domain.turn.TurnFactory;
-import ca.ulaval.glo4002.game.domain.turn.aggregate.TurnId;
+import ca.ulaval.glo4002.game.domain.turn.aggregate.Turn;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.MockitoAnnotations;
@@ -29,36 +30,39 @@ class TurnRepositoryInMemoryTest {
 
     @Test
     void givenATurn_whenFindingThatTurnById_thenThatTurnIsReturned() {
-        String idTurn1 = turnRepositoryInMemory.nextTurnId();
-        TurnId turn1 = turnFactory.create(idTurn1, actions);
+        String idTurn1 = turnRepositoryInMemory.findTurns().nextTurnNumber();
+        Turn turn1 = turnFactory.create(idTurn1, actions);
 
-        turnRepositoryInMemory.save(turn1);
-        TurnId turnFound = turnRepositoryInMemory.findById(turn1.getTurnId());
+        turnRepositoryInMemory.findTurns().addTurn(turn1);
+        Turn turnFound = turnRepositoryInMemory.findTurns().findByNumber(turn1.getTurnNumber());
 
         assertNotNull(turn1);
-        assertEquals(turn1.getTurnId(), turnFound.getTurnId());
+        assertEquals(turn1.getTurnNumber(), turnFound.getTurnNumber());
     }
 
     @Test
     void whenGetOneTurnWithTheBadId_thenNoneTurnIsReturned() {
-        TurnId turn1 = turnFactory.create("123456789", actions);
-        turnRepositoryInMemory.save(turn1);
+        Turn turn1 = turnFactory.create("123456789", actions);
+        turnRepositoryInMemory.findTurns().addTurn(turn1);
 
-        assertNull(turnRepositoryInMemory.findById(fakeTurnId));
+
+        assertNull(turnRepositoryInMemory.findTurns().findByNumber(fakeTurnId));
     }
 
     @Test
     void givenTurns_whenResetTurns_thenRepoContainsNoMoreTurn() {
-        String idTurn1 = turnRepositoryInMemory.nextTurnId();
-        String idTurn2 = turnRepositoryInMemory.nextTurnId();
-        TurnId turn1 = turnFactory.create(idTurn1, actions);
-        TurnId turn2 = turnFactory.create(idTurn2, actions);
+        String idTurn1 = turnRepositoryInMemory.findTurns().nextTurnNumber();
+        Turn turn1 = turnFactory.create(idTurn1, actions);
+        turnRepositoryInMemory.findTurns().addTurn(turn1);
 
-        turnRepositoryInMemory.save(turn1);
-        turnRepositoryInMemory.save(turn2);
+
+        String idTurn2 = turnRepositoryInMemory.findTurns().nextTurnNumber();
+        Turn turn2 = turnFactory.create(idTurn2, actions);
+        turnRepositoryInMemory.findTurns().addTurn(turn2);
+
         turnRepositoryInMemory.reset();
 
-        assertNotEquals(turn1, turnRepositoryInMemory.findById(idTurn1));
-        assertNotEquals(turn2, turnRepositoryInMemory.findById(idTurn2));
+        assertNotEquals(turn1, turnRepositoryInMemory.findTurns().findByNumber(idTurn1));
+        assertNotEquals(turn2, turnRepositoryInMemory.findTurns().findByNumber(idTurn2));
     }
 }

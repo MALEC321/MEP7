@@ -1,5 +1,7 @@
 package ca.ulaval.glo4002.game.application.turn;
 
+import java.util.List;
+
 import ca.ulaval.glo4002.game.application.manager.ZooManager;
 import ca.ulaval.glo4002.game.domain.actions.Action;
 import ca.ulaval.glo4002.game.domain.actions.ActionRepository;
@@ -12,9 +14,8 @@ import ca.ulaval.glo4002.game.domain.resources.Salad;
 import ca.ulaval.glo4002.game.domain.resources.Water;
 import ca.ulaval.glo4002.game.domain.turn.TurnFactory;
 import ca.ulaval.glo4002.game.domain.turn.TurnRepository;
-import ca.ulaval.glo4002.game.domain.turn.aggregate.TurnId;
-
-import java.util.List;
+import ca.ulaval.glo4002.game.domain.turn.Turns;
+import ca.ulaval.glo4002.game.domain.turn.aggregate.Turn;
 
 public class TurnUseCase {
 
@@ -47,8 +48,10 @@ public class TurnUseCase {
         actionRepository.execute();
         postAction();
 
-        TurnId turn = turnFactory.create(turnRepository.nextTurnId(), actions);
-        turnRepository.save(turn);
+        Turns turns = turnRepository.findTurns();
+        Turn turn = turnFactory.create(turns.nextTurnNumber(), actions);
+        turns.addTurn(turn);
+        turnRepository.save(turns);
     }
 
     protected void cookIt() {
@@ -89,7 +92,8 @@ public class TurnUseCase {
     }
 
     public int getTurnNumber() {
-        return turnRepository.numberOfTurns();
+        Turns turns = turnRepository.findTurns();
+        return turns.numberOfTurns();
     }
 
     public void reset() {
