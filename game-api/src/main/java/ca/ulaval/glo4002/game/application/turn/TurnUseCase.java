@@ -43,10 +43,10 @@ public class TurnUseCase {
     }
 
     public void executeTurn() {
-        List<Action> actions = actionRepository.getWaitingActions();
+        List<Action> actions = actionRepository.getActionList();
         cookIt();
 
-        actionRepository.execute();
+        actionRepository.executeActions();
         postAction();
 
         Turn turn = turnFactory.create(actions);

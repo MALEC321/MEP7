@@ -5,11 +5,10 @@ import java.util.List;
 public interface ActionRepository {
     void save(Action action);
 
-    List<Action> getWaitingActions();
+    List<Action> getActionList();
 
-    void addElementToActionWaitingList(Object element);
-
-    void execute();
+    void executeActions();
 
     void reset();
 }
+

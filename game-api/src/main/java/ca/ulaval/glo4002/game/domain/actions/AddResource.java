@@ -1,17 +1,20 @@
 package ca.ulaval.glo4002.game.domain.actions;
 
-import java.util.UUID;
-
+import ca.ulaval.glo4002.game.domain.resources.Pantry;
 import ca.ulaval.glo4002.game.domain.resources.Resources;
-import ca.ulaval.glo4002.game.domain.resources.PantryRepository;
 
-public class AddResource extends Action {
-    public AddResource(UUID id, Resources resources, PantryRepository resourceRepository) {
-        super(id, resources, resourceRepository);
+public class AddResource implements Action {
+
+    private Resources resources;
+    private Pantry pantry;
+
+    public AddResource(Resources resources, Pantry pantry) {
+        this.resources = resources;
+        this.pantry = pantry;
     }
 
     @Override
     public void execute() {
-        ((PantryRepository) getObjectRepository()).findPantry().addResources((Resources) getObject());
+        pantry.addResources(resources);
     }
 }
