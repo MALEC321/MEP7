@@ -1,4 +1,4 @@
-package ca.ulaval.glo4002.game.domain.turn.aggregate;
+package ca.ulaval.glo4002.game.domain.turn;
 
 import java.util.List;
 

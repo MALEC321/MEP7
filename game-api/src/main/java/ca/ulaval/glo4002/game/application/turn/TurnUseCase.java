@@ -15,7 +15,7 @@ import ca.ulaval.glo4002.game.domain.resources.Water;
 import ca.ulaval.glo4002.game.domain.turn.TurnFactory;
 import ca.ulaval.glo4002.game.domain.turn.TurnRepository;
 import ca.ulaval.glo4002.game.domain.turn.Turns;
-import ca.ulaval.glo4002.game.domain.turn.aggregate.Turn;
+import ca.ulaval.glo4002.game.domain.turn.Turn;
 
 public class TurnUseCase {
 

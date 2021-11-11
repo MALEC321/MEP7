@@ -2,8 +2,6 @@ package ca.ulaval.glo4002.game.domain.turn;
 
 import java.util.ArrayList;
 
-import ca.ulaval.glo4002.game.domain.turn.aggregate.Turn;
-
 public class Turns {
     private ArrayList<Turn> turns;
 

@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
-import ca.ulaval.glo4002.game.domain.turn.aggregate.Turn;
 import ca.ulaval.glo4002.game.infrastructure.persistence.turn.TurnRepositoryInMemory;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
