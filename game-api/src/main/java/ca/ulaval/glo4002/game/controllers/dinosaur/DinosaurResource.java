@@ -1,3 +1,4 @@
+
 package ca.ulaval.glo4002.game.controllers.dinosaur;
 
 import ca.ulaval.glo4002.game.application.dinosaur.DinosaurUseCase;

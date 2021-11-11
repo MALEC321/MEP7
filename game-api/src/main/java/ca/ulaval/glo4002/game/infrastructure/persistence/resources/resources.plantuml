@@ -4,9 +4,15 @@ title __RESOURCES's Class Diagram__\n
 
   namespace  {
     namespace a.ulaval.glo4002.game {
+<<<<<<< HEAD:game-api/src/main/java/ca/ulaval/glo4002/game/repositories/resources/resources.plantuml
+      namespace repositories.resourcesGroup {
+        class ca.ulaval.glo4002.game.repositories.resourcesGroup.ResourceRepositoryInMemory {
+            - resourcesGroup : Triplet<Queue<Burger>, Queue<Salad>, Queue<Water>>
+=======
       namespace repositories.resources {
-        class ca.ulaval.glo4002.game.infrastructure.persistence.resources.ResourceRepositoryInMemory {
+        class ca.ulaval.glo4002.game.infrastructure.persistence.resources.PantryRepositoryInMemory {
             - resources : Triplet<Queue<Burger>, Queue<Salad>, Queue<Water>>
+>>>>>>> develop:game-api/src/main/java/ca/ulaval/glo4002/game/infrastructure/persistence/resources/resources.plantuml
             + add()
             + decreaseExpirationDate()
             + drinkWater()
@@ -26,9 +32,15 @@ title __RESOURCES's Class Diagram__\n
   }
   
 
-  ca.ulaval.glo4002.game.infrastructure.persistence.resources.ResourceRepositoryInMemory .up.|> ca.ulaval.glo4002.game.domain.resources.ResourceRepository
-  ca.ulaval.glo4002.game.infrastructure.persistence.resources.ResourceRepositoryInMemory o-- ca.ulaval.glo4002.game.domain.resources.Resource : consumedResources
-  ca.ulaval.glo4002.game.infrastructure.persistence.resources.ResourceRepositoryInMemory o-- ca.ulaval.glo4002.game.domain.resources.Resource : expiredResources
+<<<<<<< HEAD:game-api/src/main/java/ca/ulaval/glo4002/game/repositories/resources/resources.plantuml
+  ca.ulaval.glo4002.game.repositories.resourcesGroup.ResourceRepositoryInMemory .up.|> ca.ulaval.glo4002.game.domain.resourcesGroup.ResourceRepository
+  ca.ulaval.glo4002.game.repositories.resourcesGroup.ResourceRepositoryInMemory o-- ca.ulaval.glo4002.game.domain.resources.ResourceGrouprces : consumedResources
+  ca.ulaval.glo4002.game.repositories.resourcesGroup.ResourceRepositoryInMemory o-- ca.ulaval.glo4002.game.domain.resources.ResourceGrouprces : expiredResources
+=======
+  ca.ulaval.glo4002.game.infrastructure.persistence.resources.PantryRepositoryInMemory .up.|> ca.ulaval.glo4002.game.domain.resources.PantryRepository
+  ca.ulaval.glo4002.game.infrastructure.persistence.resources.PantryRepositoryInMemory o-- ca.ulaval.glo4002.game.domain.resources.Resource : consumedResources
+  ca.ulaval.glo4002.game.infrastructure.persistence.resources.PantryRepositoryInMemory o-- ca.ulaval.glo4002.game.domain.resources.Resource : expiredResources
+>>>>>>> develop:game-api/src/main/java/ca/ulaval/glo4002/game/infrastructure/persistence/resources/resources.plantuml
 
 
 right footer

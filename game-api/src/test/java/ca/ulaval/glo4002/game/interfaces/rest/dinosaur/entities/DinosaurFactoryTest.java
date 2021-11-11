@@ -1,18 +1,7 @@
 package ca.ulaval.glo4002.game.interfaces.rest.dinosaur.entities;
 
-import org.junit.jupiter.api.BeforeEach;
-
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
-
-import ca.ulaval.glo4002.game.domain.dinosaur.Dinosaur;
-import ca.ulaval.glo4002.game.domain.dinosaur.DinosaurFactory;
-import ca.ulaval.glo4002.game.domain.dinosaur.DinosaurRepository;
-import ca.ulaval.glo4002.game.domain.dinosaur.enums.SpeciesDietsCorrespondances;
-import ca.ulaval.glo4002.game.exceptions.types.DuplicateNameException;
-
-class DinosaurFactoryTest {
-    private DinosaurFactory dinosaurFactory;
+public class DinosaurFactoryTest {
+ /*   private DinosaurFactory dinosaurFactory;
     private SpeciesDietsCorrespondances speciesDietsCorrespondances;
 
     @BeforeEach
@@ -23,7 +12,7 @@ class DinosaurFactoryTest {
 
         Dinosaur dinosaur = new Dinosaur("name", 89, "f", "Ankylosaurus");
         when(dinosaurRepository.findByName("name")).thenReturn(dinosaur);
-    }
+    }*/
 
 //    @Test
 //    void whenNameIsValid_thenCreateDinosaur() {
@@ -31,7 +20,7 @@ class DinosaurFactoryTest {
 //
 //        verify(duplicateNameException, never()).getCode();
 //    }
-
+//
 //    @Test
 //    void whenNameIsAlreadyTaken_thenThrowsDuplicateNameException() {
 //        assertThrows(DuplicateNameException.class, () ->

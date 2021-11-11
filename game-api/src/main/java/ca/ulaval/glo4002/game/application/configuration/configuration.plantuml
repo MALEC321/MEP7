@@ -11,16 +11,16 @@ title __CONFIGURATION's Class Diagram__\n
             {static} ~ dinosaurAssembler : DinosaurAssembler
             {static} ~ dinosaurDtoAssembler : DinosaurDtoAssembler
             {static} ~ dinosaurFactory : DinosaurFactory
-            {static} ~ dinosaurRepository : DinosaurRepository
+            {static} ~ herdRepository : DinosaurRepository
             {static} ~ dinosaurResource : DinosaurResource
             {static} ~ dinosaurUseCase : DinosaurUseCase
             {static} ~ heartbeatResource : HeartbeatResource
-            {static} ~ resourceAssemblers : ResourceAssemblers
+            {static} ~ resourcesAssembler : ResourceAssemblers
             {static} ~ resourceDtoAssembler : ResourceDtoAssembler
-            {static} ~ resourceFactory : ResourceFactory
-            {static} ~ resourceRepository : ResourceRepository
+            {static} ~ resourcesGroupFactory : ResourceFactory
+            {static} ~ pantryRepository : ResourceRepository
             {static} ~ resourceResource : ResourceResource
-            {static} ~ resourceUseCase : ResourceUseCase
+            {static} ~ resourcesUseCase : ResourceUseCase
             {static} ~ speciesDietsCorrespondances : SpeciesDietsCorrespondances
             {static} ~ turnAssembler : TurnAssembler
             {static} ~ turnDtoAssembler : TurnDtoAssembler

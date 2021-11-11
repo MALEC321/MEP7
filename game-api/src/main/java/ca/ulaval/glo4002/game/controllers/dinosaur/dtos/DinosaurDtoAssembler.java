@@ -1,3 +1,4 @@
+
 package ca.ulaval.glo4002.game.controllers.dinosaur.dtos;
 
 import ca.ulaval.glo4002.game.application.dinosaur.dtos.DinosaurDto;

@@ -4,8 +4,8 @@ title __RESOURCES's Class Diagram__\n
 
   namespace  {
     namespace a.ulaval.glo4002.game {
-      namespace domain.resources {
-        class ca.ulaval.glo4002.game.domain.resources.Burger {
+      namespace domain.resourcesGroup {
+        class ca.ulaval.glo4002.game.domain.resourcesGroup.Burger {
             - expiration : int
             + Burger()
             + decreaseExpirationDate()
@@ -18,9 +18,9 @@ title __RESOURCES's Class Diagram__\n
 
   namespace  {
     namespace a.ulaval.glo4002.game {
-      namespace domain.resources {
-        class ca.ulaval.glo4002.game.domain.resources.Resource {
-            - resources : Map<String, ResourceElements>
+      namespace domain.resourcesGroup {
+        class ca.ulaval.glo4002.game.domain.resources.ResourceGrouprces {
+            - resourcesGroup : Map<String, ResourceElements>
             + Resource()
             + addBurger()
             + addSalad()
@@ -38,8 +38,8 @@ title __RESOURCES's Class Diagram__\n
 
   namespace  {
     namespace a.ulaval.glo4002.game {
-      namespace domain.resources {
-        abstract class ca.ulaval.glo4002.game.domain.resources.ResourceElements {
+      namespace domain.resourcesGroup {
+        abstract class ca.ulaval.glo4002.game.domain.resourcesGroup.Resource {
             - quantity : int
             + ResourceElements()
             + addQuantity()
@@ -57,8 +57,8 @@ title __RESOURCES's Class Diagram__\n
 
   namespace  {
     namespace a.ulaval.glo4002.game {
-      namespace domain.resources {
-        class ca.ulaval.glo4002.game.domain.resources.ResourceFactory {
+      namespace domain.resourcesGroup {
+        class ca.ulaval.glo4002.game.domain.resourcesGroup.ResourcesFactory {
             + create()
         }
       }
@@ -68,8 +68,8 @@ title __RESOURCES's Class Diagram__\n
 
   namespace  {
     namespace a.ulaval.glo4002.game {
-      namespace domain.resources {
-        interface ca.ulaval.glo4002.game.domain.resources.ResourceRepository {
+      namespace domain.resourcesGroup {
+        interface ca.ulaval.glo4002.game.domain.resourcesGroup.ResourceRepository {
             {abstract} + add()
             {abstract} + decreaseExpirationDate()
             {abstract} + drinkWater()
@@ -89,8 +89,8 @@ title __RESOURCES's Class Diagram__\n
 
   namespace  {
     namespace a.ulaval.glo4002.game {
-      namespace domain.resources {
-        class ca.ulaval.glo4002.game.domain.resources.Salad {
+      namespace domain.resourcesGroup {
+        class ca.ulaval.glo4002.game.domain.resourcesGroup.Salad {
             - expiration : int
             + Salad()
             + decreaseExpirationDate()
@@ -103,8 +103,8 @@ title __RESOURCES's Class Diagram__\n
 
   namespace  {
     namespace a.ulaval.glo4002.game {
-      namespace domain.resources {
-        class ca.ulaval.glo4002.game.domain.resources.Water {
+      namespace domain.resourcesGroup {
+        class ca.ulaval.glo4002.game.domain.resourcesGroup.Water {
             - expiration : int
             + Water()
             + decreaseExpirationDate()
@@ -115,9 +115,9 @@ title __RESOURCES's Class Diagram__\n
   }
   
 
-  ca.ulaval.glo4002.game.domain.resources.Burger -up-|> ca.ulaval.glo4002.game.domain.resources.ResourceElements
-  ca.ulaval.glo4002.game.domain.resources.Salad -up-|> ca.ulaval.glo4002.game.domain.resources.ResourceElements
-  ca.ulaval.glo4002.game.domain.resources.Water -up-|> ca.ulaval.glo4002.game.domain.resources.ResourceElements
+  ca.ulaval.glo4002.game.domain.resourcesGroup.Burger -up-|> ca.ulaval.glo4002.game.domain.resourcesGroup.Resource
+  ca.ulaval.glo4002.game.domain.resourcesGroup.Salad -up-|> ca.ulaval.glo4002.game.domain.resourcesGroup.Resource
+  ca.ulaval.glo4002.game.domain.resourcesGroup.Water -up-|> ca.ulaval.glo4002.game.domain.resourcesGroup.Resource
 
 
 right footer
