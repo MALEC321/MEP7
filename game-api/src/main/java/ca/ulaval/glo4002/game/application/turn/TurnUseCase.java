@@ -1,43 +1,45 @@
 package ca.ulaval.glo4002.game.application.turn;
 
-import ca.ulaval.glo4002.game.domain.resources.ResourcesDistributor;
-import ca.ulaval.glo4002.game.controllers.turn.dtos.TurnDto;
+import java.util.List;
+
+import static ca.ulaval.glo4002.game.domain.resources.ResourceType.*;
+
+import ca.ulaval.glo4002.game.application.resources.ResourcesFactory;
 import ca.ulaval.glo4002.game.domain.actions.Action;
 import ca.ulaval.glo4002.game.domain.actions.ActionRepository;
-import ca.ulaval.glo4002.game.domain.dinosaur.HerdRepository;
 import ca.ulaval.glo4002.game.domain.dinosaur.Herd;
-import ca.ulaval.glo4002.game.domain.resources.Burger;
-import ca.ulaval.glo4002.game.domain.resources.ResourceRepository;
-import ca.ulaval.glo4002.game.domain.resources.Salad;
-import ca.ulaval.glo4002.game.domain.resources.Water;
+import ca.ulaval.glo4002.game.domain.dinosaur.HerdRepository;
+import ca.ulaval.glo4002.game.domain.resources.Pantry;
+import ca.ulaval.glo4002.game.domain.resources.PantryRepository;
+import ca.ulaval.glo4002.game.domain.resources.ResourcesDistributor;
 import ca.ulaval.glo4002.game.domain.turn.Turn;
 import ca.ulaval.glo4002.game.domain.turn.TurnFactory;
 import ca.ulaval.glo4002.game.domain.turn.TurnRepository;
 
-import java.util.List;
-
 public class TurnUseCase {
-
     private final TurnFactory turnFactory;
     private final TurnRepository turnRepository;
-    private final ResourceRepository resourceRepository;
+    private final PantryRepository pantryRepository;
     private final ActionRepository actionRepository;
     private final HerdRepository herdRepository;
     private final ResourcesDistributor resourcesDistributor;
+    private final ResourcesFactory resourcesFactory;
 
     public TurnUseCase(
         TurnFactory turnFactory,
         TurnRepository turnRepository,
-        ResourceRepository resourceRepository,
+        PantryRepository pantryRepository,
         HerdRepository herdRepository,
         ActionRepository actionRepository,
-        ResourcesDistributor resourcesDistributor) {
+        ResourcesDistributor resourcesDistributor,
+        ResourcesFactory resourcesFactory) {
         this.turnFactory = turnFactory;
         this.turnRepository = turnRepository;
-        this.resourceRepository = resourceRepository;
+        this.pantryRepository = pantryRepository;
         this.herdRepository = herdRepository;
         this.actionRepository = actionRepository;
         this.resourcesDistributor = resourcesDistributor;
+        this.resourcesFactory = resourcesFactory;
     }
 
     public void executeTurn() {
@@ -52,20 +54,21 @@ public class TurnUseCase {
     }
 
     protected void cookIt() {
-        resourceRepository.add(new Burger(100));
-        resourceRepository.add(new Salad(250));
-        resourceRepository.add(new Water(10000));
+        Pantry pantry = pantryRepository.findPantry();
+        pantry.addResources(resourcesFactory.create(BURGER, 100));
+        pantry.addResources(resourcesFactory.create(SALAD, 250));
+        pantry.addResources(resourcesFactory.create(WATER, 10000));
     }
 
     // TODO: Should be end turn Actions
     private void postAction() {
-        resourceRepository.decreaseExpirationDate();
+        pantryRepository.findPantry().decreaseExpirationDate();
         feedDinosaurs();
         removeBabyDinosaurs();
     }
 
     protected void feedDinosaurs() {
-        resourcesDistributor.feedDinosaurs(resourceRepository.getPantry(), herdRepository.findHerd());
+        resourcesDistributor.feedDinosaurs(pantryRepository.findPantry(), herdRepository.findHerd());
     }
 
     protected void removeBabyDinosaurs() {
@@ -75,7 +78,7 @@ public class TurnUseCase {
 
     public void reset() {
         turnRepository.reset();
-        resourceRepository.reset();
+        pantryRepository.reset();
         herdRepository.reset();
         actionRepository.reset();
     }

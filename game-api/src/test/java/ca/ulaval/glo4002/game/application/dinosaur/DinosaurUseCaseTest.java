@@ -5,6 +5,7 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
+import ca.ulaval.glo4002.game.domain.resources.PantryRepository;
 import ca.ulaval.glo4002.game.domain.resources.ResourcesDistributor;
 import ca.ulaval.glo4002.game.application.turn.TurnUseCase;
 import ca.ulaval.glo4002.game.application.dinosaur.dtos.DinosaurAssembler;import ca.ulaval.glo4002.game.controllers.dinosaur.dtos.DinosaurCreationDto;
@@ -15,20 +16,16 @@ import ca.ulaval.glo4002.game.domain.actions.ActionRepository;
 import ca.ulaval.glo4002.game.domain.dinosaur.DinosaurFactory;
 import ca.ulaval.glo4002.game.domain.dinosaur.HerdRepository;
 import ca.ulaval.glo4002.game.domain.dinosaur.enums.SpeciesDietsCorrespondances;
-import ca.ulaval.glo4002.game.domain.resources.ResourceRepository;
+import ca.ulaval.glo4002.game.application.resources.ResourcesFactory;
 import ca.ulaval.glo4002.game.domain.turn.TurnFactory;
 import ca.ulaval.glo4002.game.domain.turn.TurnRepository;
-
 import ca.ulaval.glo4002.game.application.exceptions.NotExistentNameException;
 import ca.ulaval.glo4002.game.infrastructure.persistence.actions.ActionRepositoryInMemory;
 import ca.ulaval.glo4002.game.infrastructure.persistence.dinosaur.HerdRepositoryInMemory;
-import ca.ulaval.glo4002.game.infrastructure.persistence.resources.ResourceRepositoryInMemory;
+import ca.ulaval.glo4002.game.infrastructure.persistence.resources.PantryRepositoryInMemory;
 import ca.ulaval.glo4002.game.infrastructure.persistence.turn.TurnRepositoryInMemory;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertThrows;
-
 
 class DinosaurUseCaseTest {
     private DinosaurUseCase dinosaurUseCase;
@@ -41,6 +38,7 @@ class DinosaurUseCaseTest {
         ActionRepository actionRepository = new ActionRepositoryInMemory();
         ResourcesDistributor resourcesDistributor = new ResourcesDistributor();
         ActionFactory actionFactory = new ActionFactory();
+        ResourcesFactory resourcesFactory = new ResourcesFactory();
 
         HerdRepository herdRepository = new HerdRepositoryInMemory();
         DinosaurFactory dinosaurFactory = new DinosaurFactory(herdRepository, speciesDietsCorrespondances);
@@ -50,8 +48,8 @@ class DinosaurUseCaseTest {
 
         TurnFactory turnFactory = new TurnFactory();
         TurnRepository turnRepository = new TurnRepositoryInMemory();
-        ResourceRepository resourceRepository = new ResourceRepositoryInMemory();
-        turnUseCase = new TurnUseCase(turnFactory, turnRepository, resourceRepository, herdRepository, actionRepository, resourcesDistributor);
+        PantryRepository pantryRepository = new PantryRepositoryInMemory();
+        turnUseCase = new TurnUseCase(turnFactory, turnRepository, pantryRepository, herdRepository, actionRepository, resourcesDistributor, resourcesFactory);
     }
 
     @Test
