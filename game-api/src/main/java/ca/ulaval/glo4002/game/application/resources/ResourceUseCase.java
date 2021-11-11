@@ -48,7 +48,7 @@ public class ResourceUseCase {
                 continue;
             }
 
-            Action addResources = actionFactory.create(resource, resourceRepository);
+            Action addResources = actionFactory.create(resource, resourceRepository.getPantry());
             actionRepository.save(addResources);
         }
     }

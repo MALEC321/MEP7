@@ -10,6 +10,7 @@ import static ca.ulaval.glo4002.game.domain.resources.ResourceType.*;
 @SuppressWarnings("unchecked")
 public class Pantry implements FoodContainer {
 
+
     private final HashMap<ResourceType, Object> mapResourceQueue;
 
     private final Resource consumedResources;
