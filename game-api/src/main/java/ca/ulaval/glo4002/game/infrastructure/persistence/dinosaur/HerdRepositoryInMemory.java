@@ -1,7 +1,7 @@
 package ca.ulaval.glo4002.game.infrastructure.persistence.dinosaur;
 
-import ca.ulaval.glo4002.game.domain.dinosaur.HerdRepository;
 import ca.ulaval.glo4002.game.domain.dinosaur.Herd;
+import ca.ulaval.glo4002.game.domain.dinosaur.HerdRepository;
 
 public class HerdRepositoryInMemory implements HerdRepository {
     private Herd herd;
