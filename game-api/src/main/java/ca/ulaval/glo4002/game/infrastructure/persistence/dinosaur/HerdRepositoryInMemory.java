@@ -22,6 +22,6 @@ public class HerdRepositoryInMemory implements HerdRepository {
 
     @Override
     public void reset() {
-        herd = new Herd();
+        herd.clear();
     }
 }

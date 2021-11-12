@@ -17,6 +17,6 @@ public class PantryRepositoryInMemory implements PantryRepository {
 
     @Override
     public void reset() {
-        this.pantry = new Pantry();
+        this.pantry.clear();
     }
 }

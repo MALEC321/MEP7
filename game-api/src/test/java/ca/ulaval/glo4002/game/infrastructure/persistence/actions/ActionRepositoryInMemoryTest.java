@@ -3,7 +3,11 @@ package ca.ulaval.glo4002.game.infrastructure.persistence.actions;
 import ca.ulaval.glo4002.game.domain.actions.Action;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.mockito.*;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.MockitoAnnotations;
+import org.mockito.InOrder;
+import org.mockito.Mockito;
 import org.mockito.internal.util.reflection.Whitebox;
 
 import java.util.ArrayList;
@@ -16,7 +20,7 @@ public class ActionRepositoryInMemoryTest {
     @InjectMocks
     private ActionRepositoryInMemory actionRepositoryInMemory;
 
-    private List<Action> waitingActionsActual;
+    private List<Action> actualActions;
 
     @Mock
     private Action actionTurn;
@@ -30,33 +34,39 @@ public class ActionRepositoryInMemoryTest {
     @BeforeEach
     void setUp() {
         MockitoAnnotations.initMocks(this);
-        this.waitingActionsActual = new ArrayList<>();
+        this.actualActions = new ArrayList<>();
     }
 
     @Test
-    void whenSaveAnAction_thenActionListIsNotEmpty() {
+    void havingAnAction_whenSaveThatAction_thenThatActionIsSaved() {
         this.actionRepositoryInMemory.save(this.actionTurn);
 
-        this.waitingActionsActual = getActions();
-        assertFalse(this.waitingActionsActual.isEmpty());
+        this.actualActions = getActions();
+        assertFalse(this.actualActions.isEmpty());
     }
 
     @Test
-    void listOfActions_whenExecute_thenAllActionsAreExecuted_and_waitingListActionsIcleared() {
-
+    void havingMultipleActions_whenExecuteThem_thenAllActionsAreExecuted() {
         setActionsRepository();
-
-        this.actionRepositoryInMemory.executeActions();
-
         InOrder inOrderActionTurn = Mockito.inOrder(this.actionTurn);
         InOrder inOrderActionDino = Mockito.inOrder(this.actionDino);
         InOrder inOrderActionRessource = Mockito.inOrder(this.actionRessource);
 
+        this.actionRepositoryInMemory.executeActions();
+
         inOrderActionTurn.verify(this.actionTurn, Mockito.calls(1)).execute();
         inOrderActionDino.verify(this.actionDino, Mockito.calls(1)).execute();
         inOrderActionRessource.verify(this.actionRessource, Mockito.calls(1)).execute();
-        this.waitingActionsActual = getActions();
-        assertTrue(this.waitingActionsActual.isEmpty());
+    }
+
+    @Test
+    void havingMultipleActions_whenExecuteThem_thenActionsAreCleared() {
+        setActionsRepository();
+
+        this.actionRepositoryInMemory.executeActions();
+
+        this.actualActions = getActions();
+        assertTrue(this.actualActions.isEmpty());
     }
 
     @Test
@@ -75,6 +85,6 @@ public class ActionRepositoryInMemoryTest {
     }
 
     private List<Action> getActions() {
-        return (List<Action>) Whitebox.getInternalState(this.actionRepositoryInMemory, "waitingActions");
+        return (List<Action>) Whitebox.getInternalState(this.actionRepositoryInMemory, "actionList");
     }
 }
