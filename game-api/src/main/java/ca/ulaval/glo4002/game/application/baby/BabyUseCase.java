@@ -1,22 +1,22 @@
 package ca.ulaval.glo4002.game.application.baby;
 
-import ca.ulaval.glo4002.game.application.baby.dtos.BabyAssembler;
+import java.util.Objects;
+import java.util.Optional;
+
 import ca.ulaval.glo4002.game.application.baby.breed.Breedable;
+import ca.ulaval.glo4002.game.application.baby.dtos.BabyAssembler;
+import ca.ulaval.glo4002.game.application.exceptions.InvalidFatherException;
+import ca.ulaval.glo4002.game.application.exceptions.InvalidMotherException;
+import ca.ulaval.glo4002.game.application.exceptions.NotExistentNameException;
 import ca.ulaval.glo4002.game.controllers.baby.dtos.BabyCreationDto;
-import ca.ulaval.glo4002.game.infrastructure.client.dto.ResponseBreed;
-import ca.ulaval.glo4002.game.infrastructure.client.dto.RequestBreed;
 import ca.ulaval.glo4002.game.domain.actions.ActionFactory;
 import ca.ulaval.glo4002.game.domain.actions.ActionRepository;
 import ca.ulaval.glo4002.game.domain.dinosaur.Dinosaur;
 import ca.ulaval.glo4002.game.domain.dinosaur.DinosaurFactory;
-
-import ca.ulaval.glo4002.game.application.exceptions.InvalidFatherException;
-import ca.ulaval.glo4002.game.application.exceptions.InvalidMotherException;
-import ca.ulaval.glo4002.game.application.exceptions.NotExistentNameException;
-import ca.ulaval.glo4002.game.domain.dinosaur.HerdRepository;
 import ca.ulaval.glo4002.game.domain.dinosaur.Herd;
-import java.util.Objects;
-import java.util.Optional;
+import ca.ulaval.glo4002.game.domain.dinosaur.HerdRepository;
+import ca.ulaval.glo4002.game.infrastructure.client.dto.RequestBreed;
+import ca.ulaval.glo4002.game.infrastructure.client.dto.ResponseBreed;
 
 public class BabyUseCase {
     private final HerdRepository herdRepository;

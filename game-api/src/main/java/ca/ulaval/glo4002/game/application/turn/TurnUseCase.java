@@ -2,8 +2,6 @@ package ca.ulaval.glo4002.game.application.turn;
 
 import java.util.List;
 
-import static ca.ulaval.glo4002.game.domain.resources.ResourceType.*;
-
 import ca.ulaval.glo4002.game.application.resources.ResourcesFactory;
 import ca.ulaval.glo4002.game.domain.actions.Action;
 import ca.ulaval.glo4002.game.domain.actions.ActionRepository;
@@ -15,6 +13,9 @@ import ca.ulaval.glo4002.game.domain.resources.ResourcesDistributor;
 import ca.ulaval.glo4002.game.domain.turn.Turn;
 import ca.ulaval.glo4002.game.domain.turn.TurnFactory;
 import ca.ulaval.glo4002.game.domain.turn.TurnRepository;
+import ca.ulaval.glo4002.game.domain.turn.Turns;
+
+import static ca.ulaval.glo4002.game.domain.resources.ResourceType.*;
 
 public class TurnUseCase {
     private final TurnFactory turnFactory;
@@ -49,8 +50,10 @@ public class TurnUseCase {
         actionRepository.executeActions();
         postAction();
 
-        Turn turn = turnFactory.create(actions);
-        turnRepository.save(turn);
+        Turns turns = turnRepository.findTurns();
+        Turn turn = turnFactory.create(turns.nextTurnNumber(), actions);
+        turns.addTurn(turn);
+        turnRepository.save(turns);
     }
 
     protected void cookIt() {
@@ -64,16 +67,21 @@ public class TurnUseCase {
     private void postAction() {
         pantryRepository.findPantry().decreaseExpirationDate();
         feedDinosaurs();
-        removeBabyDinosaurs();
+        removeOrphanedBabyDinosaurs();
     }
 
     protected void feedDinosaurs() {
         resourcesDistributor.feedDinosaurs(pantryRepository.findPantry(), herdRepository.findHerd());
     }
 
-    protected void removeBabyDinosaurs() {
+    protected void removeOrphanedBabyDinosaurs() {
         Herd herd = herdRepository.findHerd();
         herd.removeOrphanedBabyDinosaurs();
+    }
+
+    public int getTurnNumber() {
+        Turns turns = turnRepository.findTurns();
+        return turns.numberOfTurns();
     }
 
     public void reset() {

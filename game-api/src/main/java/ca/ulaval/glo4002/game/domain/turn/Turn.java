@@ -1,23 +1,25 @@
 package ca.ulaval.glo4002.game.domain.turn;
 
 import java.util.List;
-import java.util.UUID;
 
 import ca.ulaval.glo4002.game.domain.actions.Action;
 
 public class Turn {
-    public static int number = 0;
-    private final UUID id;
-    private final List<Action> actions;
 
-    public Turn(UUID id, List<Action> actions) {
-        this.id = id;
-        number++;
+    private final String turnNumber;
+    private List<Action> actions;
+
+    public Turn(String turnNumber) {
+        this.turnNumber = turnNumber;
+    }
+
+    public Turn(String turnNumber, List<Action> actions) {
+        this.turnNumber = turnNumber;
         this.actions = actions;
     }
 
-    public UUID getId() {
-        return id;
+    public String getTurnNumber() {
+        return this.turnNumber;
     }
 
     public List<Action> getActions() {

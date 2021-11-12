@@ -1,72 +1,69 @@
 package ca.ulaval.glo4002.game.infrastructure.persistence.turn;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.UUID;
+
+import ca.ulaval.glo4002.game.domain.actions.Action;
+import ca.ulaval.glo4002.game.domain.turn.TurnFactory;
 import ca.ulaval.glo4002.game.domain.turn.Turn;
+
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.mockito.Mock;
-import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
-
-import java.util.UUID;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 class TurnRepositoryInMemoryTest {
     private TurnRepositoryInMemory turnRepositoryInMemory;
-    final private UUID fakeTurnId = UUID.fromString("4321-34-56-78-987654");
-
-    @Mock
-    private Turn turn1;
-
-    @Mock
-    private Turn turn2;
+    private List<Action> actions;
+    private TurnFactory turnFactory;
+    final private String fakeTurnId = UUID.randomUUID().toString().toUpperCase();
 
     @BeforeEach
     void setUp() {
         MockitoAnnotations.initMocks(this);
+        turnFactory = new TurnFactory();
+        this.actions = new ArrayList<>();
         this.turnRepositoryInMemory = new TurnRepositoryInMemory();
     }
 
     @Test
     void givenATurn_whenFindingThatTurnById_thenThatTurnIsReturned() {
-        UUID idTurn1 = setTurnMock1();
+        String idTurn1 = turnRepositoryInMemory.findTurns().nextTurnNumber();
+        Turn turn1 = turnFactory.create(idTurn1, actions);
 
-        turnRepositoryInMemory.save(turn1);
-        Turn turn = turnRepositoryInMemory.findById(idTurn1);
+        turnRepositoryInMemory.findTurns().addTurn(turn1);
+        Turn turnFound = turnRepositoryInMemory.findTurns().findByNumber(turn1.getTurnNumber());
 
-        assertNotNull(turn);
-        assertEquals(turn1.getId(), turnRepositoryInMemory.findById(idTurn1).getId());
+        assertNotNull(turn1);
+        assertEquals(turn1.getTurnNumber(), turnFound.getTurnNumber());
     }
 
     @Test
     void whenGetOneTurnWithTheBadId_thenNoneTurnIsReturned() {
-        turnRepositoryInMemory.save(turn1);
+        Turn turn1 = turnFactory.create("123456789", actions);
+        turnRepositoryInMemory.findTurns().addTurn(turn1);
 
-        assertNull(turnRepositoryInMemory.findById(fakeTurnId));
+
+        assertNull(turnRepositoryInMemory.findTurns().findByNumber(fakeTurnId));
     }
 
     @Test
     void givenTurns_whenResetTurns_thenRepoContainsNoMoreTurn() {
-        UUID idTurn1 = setTurnMock1();
-        UUID idTurn2 = setTurnMock2();
+        String idTurn1 = turnRepositoryInMemory.findTurns().nextTurnNumber();
+        Turn turn1 = turnFactory.create(idTurn1, actions);
+        turnRepositoryInMemory.findTurns().addTurn(turn1);
 
-        turnRepositoryInMemory.save(turn1);
-        turnRepositoryInMemory.save(turn2);
+
+        String idTurn2 = turnRepositoryInMemory.findTurns().nextTurnNumber();
+        Turn turn2 = turnFactory.create(idTurn2, actions);
+        turnRepositoryInMemory.findTurns().addTurn(turn2);
+
         turnRepositoryInMemory.reset();
 
-        assertNotEquals(turn1, turnRepositoryInMemory.findById(idTurn1));
-        assertNotEquals(turn2, turnRepositoryInMemory.findById(idTurn2));
-    }
-
-    private UUID setTurnMock1() {
-        UUID id = UUID.fromString("1234-12-34-56-123456");
-        Mockito.when(turn1.getId()).thenReturn(id);
-        return id;
-    }
-
-    private UUID setTurnMock2() {
-        UUID id = UUID.fromString("5678-34-56-78-456789");
-        Mockito.when(turn1.getId()).thenReturn(id);
-        return id;
+        assertNotEquals(turn1, turnRepositoryInMemory.findTurns().findByNumber(idTurn1));
+        assertNotEquals(turn2, turnRepositoryInMemory.findTurns().findByNumber(idTurn2));
     }
 }

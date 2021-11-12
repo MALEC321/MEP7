@@ -44,7 +44,7 @@ Après avoir lancer les tests, le dossier target est généré avec différentes
     Content-Length: 1
 
     {
-        "turnNumber": 1::int
+        "turn": 1::int
     }
 
 ## Reset

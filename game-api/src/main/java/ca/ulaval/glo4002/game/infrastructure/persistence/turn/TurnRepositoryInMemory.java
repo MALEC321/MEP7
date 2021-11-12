@@ -1,27 +1,27 @@
 package ca.ulaval.glo4002.game.infrastructure.persistence.turn;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.UUID;
-
-import ca.ulaval.glo4002.game.domain.turn.Turn;
 import ca.ulaval.glo4002.game.domain.turn.TurnRepository;
+import ca.ulaval.glo4002.game.domain.turn.Turns;
 
 public class TurnRepositoryInMemory implements TurnRepository {
-    private final Map<UUID, Turn> turnsById = new HashMap<>();
+    private Turns turns;
 
-    @Override
-    public void save(Turn turn) {
-        turnsById.put(turn.getId(), turn);
+    public TurnRepositoryInMemory() {
+        this.turns = new Turns();
     }
 
     @Override
-    public Turn findById(UUID id) {
-        return turnsById.get(id);
+    public void save(Turns turns) {
+        this.turns = turns;
+    }
+
+    @Override
+    public Turns findTurns() {
+        return this.turns;
     }
 
     @Override
     public void reset() {
-        turnsById.clear();
+        turns = new Turns();
     }
 }

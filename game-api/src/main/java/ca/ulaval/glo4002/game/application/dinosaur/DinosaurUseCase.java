@@ -1,18 +1,17 @@
 package ca.ulaval.glo4002.game.application.dinosaur;
 
+import java.util.List;
+
 import ca.ulaval.glo4002.game.application.dinosaur.dtos.DinosaurAssembler;
 import ca.ulaval.glo4002.game.application.dinosaur.dtos.DinosaurDto;
+import ca.ulaval.glo4002.game.application.exceptions.NotExistentNameException;
 import ca.ulaval.glo4002.game.controllers.dinosaur.dtos.DinosaurCreationDto;
 import ca.ulaval.glo4002.game.domain.actions.ActionFactory;
 import ca.ulaval.glo4002.game.domain.actions.ActionRepository;
 import ca.ulaval.glo4002.game.domain.dinosaur.Dinosaur;
 import ca.ulaval.glo4002.game.domain.dinosaur.DinosaurFactory;
-import ca.ulaval.glo4002.game.application.exceptions.NotExistentNameException;
-
 import ca.ulaval.glo4002.game.domain.dinosaur.Herd;
 import ca.ulaval.glo4002.game.domain.dinosaur.HerdRepository;
-
-import java.util.List;
 
 public class DinosaurUseCase {
     private final DinosaurFactory dinosaurFactory;
@@ -22,11 +21,11 @@ public class DinosaurUseCase {
     private final ActionFactory actionFactory;
 
     public DinosaurUseCase(
-            DinosaurFactory dinosaurFactory,
-            HerdRepository herdRepository,
-            DinosaurAssembler dinosaurAssembler,
-            ActionRepository actionRepository,
-            ActionFactory actionFactory) {
+        DinosaurFactory dinosaurFactory,
+        HerdRepository herdRepository,
+        DinosaurAssembler dinosaurAssembler,
+        ActionRepository actionRepository,
+        ActionFactory actionFactory) {
         this.dinosaurFactory = dinosaurFactory;
         this.herdRepository = herdRepository;
         this.dinosaurAssembler = dinosaurAssembler;
@@ -54,6 +53,5 @@ public class DinosaurUseCase {
         }
 
         return dinosaurAssembler.toDto(dinosaur);
-
     }
 }
