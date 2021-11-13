@@ -15,10 +15,12 @@ import javax.ws.rs.core.Application;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import static org.mockito.Matchers.anyObject;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
-
 
 public class TurnResourceTest extends JerseyTest {
     private TurnUseCase turnUseCase;
@@ -46,7 +48,7 @@ public class TurnResourceTest extends JerseyTest {
     @Test
     public void givenMakeATurn_whenTurnIsRequested_thenResponseCodeIsOk() {
         Response response = target("turn").request(MediaType.APPLICATION_JSON_TYPE)
-                .get();
+                .post(null);
 
         Assertions.assertEquals(200, response.getStatus());
     }
@@ -57,7 +59,7 @@ public class TurnResourceTest extends JerseyTest {
         when(turnDtoAssembler.toResponse(anyObject())).thenReturn(turnResponse);
 
         Response response = target("turn").request(MediaType.APPLICATION_JSON_TYPE)
-                .get();
+                .post(null);
 
         Assertions.assertEquals(response.readEntity(TurnResponse.class).getTurnNumber(), 1);
         verify(turnUseCase).executeTurn();
@@ -66,7 +68,7 @@ public class TurnResourceTest extends JerseyTest {
     @Test
     void whenReset_thenResponseCodeIsOk() {
         Response response = target("reset").request(MediaType.APPLICATION_JSON_TYPE)
-                .get();
+                .post(null);
 
         verify(turnUseCase).reset();
         Assertions.assertEquals(200, response.getStatus());
@@ -74,7 +76,8 @@ public class TurnResourceTest extends JerseyTest {
 
     @Test
     void whenReset_thenTurnAreReset() {
-        target("reset").request(MediaType.APPLICATION_JSON_TYPE).get();
+        target("reset").request(MediaType.APPLICATION_JSON_TYPE)
+                .post(null);
 
         verify(turnUseCase).reset();
     }

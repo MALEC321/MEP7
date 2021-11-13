@@ -21,7 +21,7 @@ public class TurnResource {
     }
 
     @Path("/turn")
-    @GET
+    @POST
     @Produces(MediaType.APPLICATION_JSON)
     public Response runTurn() {
         turnUseCase.executeTurn();
@@ -33,7 +33,7 @@ public class TurnResource {
     }
 
     @Path("/reset")
-    @GET
+    @POST
     @Produces(MediaType.APPLICATION_JSON)
     public Response reset() {
         turnUseCase.reset();
