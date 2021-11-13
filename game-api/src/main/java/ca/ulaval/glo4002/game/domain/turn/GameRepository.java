@@ -1,6 +1,6 @@
 package ca.ulaval.glo4002.game.domain.turn;
 
-public interface TurnRepository {
+public interface GameRepository {
     Game findGame();
 
     void deleteAll();

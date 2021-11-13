@@ -16,11 +16,11 @@ import ca.ulaval.glo4002.game.domain.turn.Game;
 import ca.ulaval.glo4002.game.domain.turn.Turn;
 import ca.ulaval.glo4002.game.domain.turn.TurnFactory;
 import ca.ulaval.glo4002.game.domain.turn.TurnNumber;
-import ca.ulaval.glo4002.game.domain.turn.TurnRepository;
+import ca.ulaval.glo4002.game.domain.turn.GameRepository;
 
 public class TurnUseCase {
     private final TurnFactory turnFactory;
-    private final TurnRepository turnRepository;
+    private final GameRepository gameRepository;
     private final PantryRepository pantryRepository;
     private final ActionRepository actionRepository;
     private final HerdRepository herdRepository;
@@ -29,14 +29,14 @@ public class TurnUseCase {
 
     public TurnUseCase(
         TurnFactory turnFactory,
-        TurnRepository turnRepository,
+        GameRepository gameRepository,
         PantryRepository pantryRepository,
         HerdRepository herdRepository,
         ActionRepository actionRepository,
         ResourcesDistributor resourcesDistributor,
         ResourcesFactory resourcesFactory) {
         this.turnFactory = turnFactory;
-        this.turnRepository = turnRepository;
+        this.gameRepository = gameRepository;
         this.pantryRepository = pantryRepository;
         this.herdRepository = herdRepository;
         this.actionRepository = actionRepository;
@@ -51,10 +51,10 @@ public class TurnUseCase {
         actionRepository.executeActions();
         postAction();
 
-        Game game = turnRepository.findGame();
+        Game game = gameRepository.findGame();
         Turn turn = turnFactory.create(game.nextTurnNumber(), actions);
         game.addTurn(turn);
-        turnRepository.save(game);
+        gameRepository.save(game);
     }
 
     protected void cookIt() {
@@ -81,12 +81,12 @@ public class TurnUseCase {
     }
 
     public TurnNumber getTurnNumber() {
-        Game game = turnRepository.findGame();
-        return game.lastTurnNumber();
+        Game game = gameRepository.findGame();
+        return game.currentTurnNumber();
     }
 
     public void resetGame() {
-        turnRepository.deleteAll();
+        gameRepository.deleteAll();
         pantryRepository.deleteAll();
         herdRepository.deleteAll();
         actionRepository.deleteAll();

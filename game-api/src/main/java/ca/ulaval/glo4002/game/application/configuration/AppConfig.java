@@ -27,12 +27,13 @@ import ca.ulaval.glo4002.game.domain.dinosaur.enums.SpeciesDietsCorrespondances;
 import ca.ulaval.glo4002.game.domain.resources.PantryRepository;
 import ca.ulaval.glo4002.game.domain.resources.ResourcesDistributor;
 import ca.ulaval.glo4002.game.domain.turn.TurnFactory;
-import ca.ulaval.glo4002.game.domain.turn.TurnRepository;
+import ca.ulaval.glo4002.game.domain.turn.GameRepository;
 import ca.ulaval.glo4002.game.infrastructure.client.BabyBreedableClient;
 import ca.ulaval.glo4002.game.infrastructure.persistence.actions.ActionRepositoryInMemory;
 import ca.ulaval.glo4002.game.infrastructure.persistence.dinosaur.HerdRepositoryInMemory;
 import ca.ulaval.glo4002.game.infrastructure.persistence.resources.PantryRepositoryInMemory;
-import ca.ulaval.glo4002.game.infrastructure.persistence.turn.TurnRepositoryInMemory;
+import ca.ulaval.glo4002.game.infrastructure.persistence.turn.GameRepositoryInMemory;
+
 import org.glassfish.jersey.server.ResourceConfig;
 
 import java.util.HashSet;
@@ -41,7 +42,7 @@ import java.util.Set;
 public class AppConfig {
     // Turn
     private static final TurnFactory turnFactory = new TurnFactory();
-    private static final TurnRepository turnRepository = new TurnRepositoryInMemory();
+    private static final GameRepository GAME_REPOSITORY = new GameRepositoryInMemory();
     private static final PantryRepository resourceRepository = new PantryRepositoryInMemory();
     private static final ActionRepository actionRepository = new ActionRepositoryInMemory();
     private static final ActionFactory actionFactory = new ActionFactory();
@@ -61,7 +62,7 @@ public class AppConfig {
     private static final DinosaurDtoAssembler dinosaurDtoAssembler = new DinosaurDtoAssembler();
     private static final DinosaurResource manageDinosaurResource = new DinosaurResource(dinosaurUseCase, dinosaurDtoAssembler);
 
-    private static final TurnUseCase turnUseCase = new TurnUseCase(turnFactory, turnRepository, resourceRepository, herdRepository, actionRepository, resourcesDistributor, resourcesFactory);
+    private static final TurnUseCase turnUseCase = new TurnUseCase(turnFactory, GAME_REPOSITORY, resourceRepository, herdRepository, actionRepository, resourcesDistributor, resourcesFactory);
 
     private static final TurnDtoAssembler turnDtoAssembler = new TurnDtoAssembler();
     private static final TurnResource executeTurnResource = new TurnResource(turnUseCase, turnDtoAssembler);

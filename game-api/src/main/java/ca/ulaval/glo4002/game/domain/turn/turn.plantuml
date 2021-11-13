@@ -33,7 +33,7 @@ title __TURN's Class Diagram__\n
   namespace  {
     namespace a.ulaval.glo4002.game {
       namespace domain.turn {
-        interface ca.ulaval.glo4002.game.domain.turn.TurnRepository {
+        interface ca.ulaval.glo4002.game.domain.turn.GameRepository {
             {abstract} + findById()
             {abstract} + reset()
             {abstract} + save()

@@ -1,12 +1,12 @@
 package ca.ulaval.glo4002.game.infrastructure.persistence.turn;
 
 import ca.ulaval.glo4002.game.domain.turn.Game;
-import ca.ulaval.glo4002.game.domain.turn.TurnRepository;
+import ca.ulaval.glo4002.game.domain.turn.GameRepository;
 
-public class TurnRepositoryInMemory implements TurnRepository {
+public class GameRepositoryInMemory implements GameRepository {
     private Game game;
 
-    public TurnRepositoryInMemory() {
+    public GameRepositoryInMemory() {
         this.game = new Game();
     }
 

@@ -15,10 +15,10 @@ import org.mockito.MockitoAnnotations;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class TurnRepositoryInMemoryTest {
+class GameRepositoryInMemoryTest {
     TurnNumber firstTurnNumber = new TurnNumber(1);
     TurnNumber secondTurnNumber = new TurnNumber(2);
-    private TurnRepositoryInMemory turnRepositoryInMemory;
+    private GameRepositoryInMemory turnRepositoryInMemory;
     private List<Action> actions;
     private TurnFactory turnFactory;
 
@@ -27,7 +27,7 @@ class TurnRepositoryInMemoryTest {
         MockitoAnnotations.initMocks(this);
         turnFactory = new TurnFactory();
         this.actions = new ArrayList<>();
-        this.turnRepositoryInMemory = new TurnRepositoryInMemory();
+        this.turnRepositoryInMemory = new GameRepositoryInMemory();
     }
 
     @Test
