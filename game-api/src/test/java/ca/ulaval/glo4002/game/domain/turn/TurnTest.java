@@ -12,7 +12,6 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import ca.ulaval.glo4002.game.domain.actions.Action;
 
 public class TurnTest {
-//    private String random;
     private List<Action> actions;
     private Turn turn;
     private TurnRepositoryInMemory turnRepositoryInMemory;
@@ -21,16 +20,10 @@ public class TurnTest {
     @BeforeEach
     void createTurn() {
         turnFactory = new TurnFactory();
-//        random = UUID.randomUUID().toString().toUpperCase();
         actions = new ArrayList<>();
         turn = new Turn(new TurnNumber(1), actions);
         turnRepositoryInMemory = new TurnRepositoryInMemory();
     }
-
-//    @Test
-//    void whenAsked_returnsCorrectId() {
-//        assertEquals(random.substring(0, random.indexOf("-")), turn.getTurnNumber());
-//    }
 
     @Test
     void whenAsked_returnsActionsList() {
