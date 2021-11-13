@@ -1,14 +1,14 @@
 package ca.ulaval.glo4002.game.domain.dinosaur;
 
-import ca.ulaval.glo4002.game.domain.dinosaur.enums.SpeciesDietsCorrespondances;
 import ca.ulaval.glo4002.game.application.exceptions.InvalidGenderException;
 import ca.ulaval.glo4002.game.application.exceptions.InvalidSpeciesException;
 import ca.ulaval.glo4002.game.application.exceptions.InvalidWeightException;
+import ca.ulaval.glo4002.game.domain.dinosaur.enums.SpeciesDietsCorrespondances;
 import ca.ulaval.glo4002.game.infrastructure.persistence.dinosaur.HerdRepositoryInMemory;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.*;
 
 
 public class DinosaurFactoryTest {
@@ -64,4 +64,26 @@ public class DinosaurFactoryTest {
         DinosaurBaby dinosaurBaby = new DinosaurBaby("Carey Price", BABY_WEIGHT, "m", "Ankylosaurus", "Bob", "Angela");
         assertEquals(1, dinosaurBaby.getWeight());
     }*/
+
+    @Test
+    void givenBabyDinosInfo_whenCreating_thenBabyIsCreated() {
+        Dinosaur mother = new Dinosaur("mother", 50000, "f", "Megalosaurus");
+        Dinosaur father = new Dinosaur("father", 50000, "m", "Megalosaurus");
+        Dinosaur dinosaurBaby = new Dinosaur("Carey Price", BABY_WEIGHT, "m", "Ankylosaurus",
+                mother, father);
+
+        Dinosaur currentDino = dinosaurFactory.create("Carey Price", father, mother, "m", "Ankylosaurus");
+
+        assertEquals(dinosaurBaby, currentDino);
+    }
+
+    @Test
+    void givenBabyDinosInfo_whenCreating_thenBabyHaveParents() {
+        Dinosaur mother = new Dinosaur("mother", 50000, "f", "Megalosaurus");
+        Dinosaur father = new Dinosaur("father", 50000, "m", "Megalosaurus");
+
+        Dinosaur currentDino = dinosaurFactory.create("Carey Price", father, mother, "m", "Ankylosaurus");
+
+       assertFalse(currentDino.areBothParentsDead());
+    }
 }

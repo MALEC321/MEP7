@@ -1,7 +1,5 @@
 package ca.ulaval.glo4002.game.application.turn;
 
-import java.util.List;
-
 import ca.ulaval.glo4002.game.application.resources.ResourcesFactory;
 import ca.ulaval.glo4002.game.domain.actions.Action;
 import ca.ulaval.glo4002.game.domain.actions.ActionRepository;
@@ -15,6 +13,8 @@ import ca.ulaval.glo4002.game.domain.resources.ResourcesDistributor;
 import ca.ulaval.glo4002.game.domain.turn.Turn;
 import ca.ulaval.glo4002.game.domain.turn.TurnFactory;
 import ca.ulaval.glo4002.game.domain.turn.TurnNumber;
+
+import java.util.List;
 
 import static ca.ulaval.glo4002.game.domain.resources.ResourceType.*;
 

@@ -1,8 +1,5 @@
 package ca.ulaval.glo4002.game.application.baby;
 
-import java.util.Objects;
-import java.util.Optional;
-
 import ca.ulaval.glo4002.game.application.baby.breed.Breedable;
 import ca.ulaval.glo4002.game.application.baby.dtos.BabyAssembler;
 import ca.ulaval.glo4002.game.application.exceptions.InvalidFatherException;
@@ -17,6 +14,9 @@ import ca.ulaval.glo4002.game.domain.dinosaur.Herd;
 import ca.ulaval.glo4002.game.domain.dinosaur.HerdRepository;
 import ca.ulaval.glo4002.game.infrastructure.client.dto.RequestBreed;
 import ca.ulaval.glo4002.game.infrastructure.client.dto.ResponseBreed;
+
+import java.util.Objects;
+import java.util.Optional;
 
 public class BabyUseCase {
     private final HerdRepository herdRepository;
@@ -43,7 +43,9 @@ public class BabyUseCase {
 
     private void saveBabyInformationIfBabyAlived(BabyCreationDto dto, Optional<ResponseBreed> babyDto) {
         if (babyDto.isPresent()) {
-            Dinosaur baby = dinosaurFactory.create(dto.getName(), dto.getFatherName(), dto.getMotherName(),
+            Dinosaur father = herdRepository.findHerd().findDinosaurByName(dto.getFatherName());
+            Dinosaur mother = herdRepository.findHerd().findDinosaurByName(dto.getMotherName());
+            Dinosaur baby = dinosaurFactory.create(dto.getName(), mother, father,
                     babyDto.get().getGender(), babyDto.get().getOffspring());
             actionRepository.save(actionFactory.create(baby, herdRepository.findHerd()));
         }

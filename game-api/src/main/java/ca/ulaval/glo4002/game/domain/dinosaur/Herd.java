@@ -36,15 +36,10 @@ public class Herd {
     public void removeOrphanedBabyDinosaurs() {
         // Todo make this recursive !
         for (Dinosaur dinosaur : findSortedDinosaursByStrengthThenName()) {
-            if (dinosaur instanceof DinosaurBaby && areBothParentsDead(dinosaur)) {
+            if (dinosaur.areBothParentsDead()) {
                 removeDinosaur(dinosaur);
             }
         }
-    }
-    // TODO: Move method in Dinosaur
-    public boolean areBothParentsDead(Dinosaur dinosaur) {
-        return dinosaursByName.get(((DinosaurBaby) dinosaur).getFatherName()) == null
-                && dinosaursByName.get(((DinosaurBaby) dinosaur).getMotherName()) == null;
     }
 
     public void clear() {

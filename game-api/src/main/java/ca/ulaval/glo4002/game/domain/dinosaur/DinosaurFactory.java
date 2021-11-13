@@ -34,9 +34,9 @@ public class DinosaurFactory {
         return new Dinosaur(name, weight, gender, species);
     }
 
-    public DinosaurBaby create(String name, String fatherName, String motherName, String gender, String species) {
+    public Dinosaur create(String name, Dinosaur father, Dinosaur mother, String gender, String species) {
         validateName(name);
-        return new DinosaurBaby(name, BABY_WEIGHT, gender, species, fatherName, motherName);
+        return new Dinosaur(name, BABY_WEIGHT, gender, species, mother, father);
     }
 
     public void validateName(String name) {
