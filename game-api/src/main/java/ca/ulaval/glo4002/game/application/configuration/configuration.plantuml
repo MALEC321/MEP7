@@ -25,7 +25,7 @@ title __CONFIGURATION's Class Diagram__\n
             {static} ~ turnAssembler : TurnAssembler
             {static} ~ turnDtoAssembler : TurnDtoAssembler
             {static} ~ turnFactory : TurnFactory
-            {static} ~ turnRepository : TurnRepository
+            {static} ~ gameRepository : TurnRepository
             {static} ~ turnResource : TurnResource
             {static} ~ turnUseCase : TurnUseCase
         }

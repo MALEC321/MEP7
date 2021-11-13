@@ -7,19 +7,20 @@ import ca.ulaval.glo4002.game.domain.actions.Action;
 import ca.ulaval.glo4002.game.domain.actions.ActionRepository;
 import ca.ulaval.glo4002.game.domain.dinosaur.Herd;
 import ca.ulaval.glo4002.game.domain.dinosaur.HerdRepository;
+import ca.ulaval.glo4002.game.domain.game.Game;
+import ca.ulaval.glo4002.game.domain.game.GameRepository;
 import ca.ulaval.glo4002.game.domain.resources.Pantry;
 import ca.ulaval.glo4002.game.domain.resources.PantryRepository;
 import ca.ulaval.glo4002.game.domain.resources.ResourcesDistributor;
 import ca.ulaval.glo4002.game.domain.turn.Turn;
 import ca.ulaval.glo4002.game.domain.turn.TurnFactory;
-import ca.ulaval.glo4002.game.domain.turn.TurnRepository;
-import ca.ulaval.glo4002.game.domain.turn.Turns;
+import ca.ulaval.glo4002.game.domain.turn.TurnNumber;
 
 import static ca.ulaval.glo4002.game.domain.resources.ResourceType.*;
 
 public class TurnUseCase {
     private final TurnFactory turnFactory;
-    private final TurnRepository turnRepository;
+    private final GameRepository gameRepository;
     private final PantryRepository pantryRepository;
     private final ActionRepository actionRepository;
     private final HerdRepository herdRepository;
@@ -28,14 +29,14 @@ public class TurnUseCase {
 
     public TurnUseCase(
         TurnFactory turnFactory,
-        TurnRepository turnRepository,
+        GameRepository gameRepository,
         PantryRepository pantryRepository,
         HerdRepository herdRepository,
         ActionRepository actionRepository,
         ResourcesDistributor resourcesDistributor,
         ResourcesFactory resourcesFactory) {
         this.turnFactory = turnFactory;
-        this.turnRepository = turnRepository;
+        this.gameRepository = gameRepository;
         this.pantryRepository = pantryRepository;
         this.herdRepository = herdRepository;
         this.actionRepository = actionRepository;
@@ -50,10 +51,10 @@ public class TurnUseCase {
         actionRepository.executeActions();
         postAction();
 
-        Turns turns = turnRepository.findTurns();
-        Turn turn = turnFactory.create(turns.nextTurnNumber(), actions);
-        turns.addTurn(turn);
-        turnRepository.save(turns);
+        Game game = gameRepository.findGame();
+        Turn turn = turnFactory.create(game.nextTurnNumber(), actions);
+        game.addTurn(turn);
+        gameRepository.save(game);
     }
 
     protected void cookIt() {
@@ -79,15 +80,15 @@ public class TurnUseCase {
         herd.removeOrphanedBabyDinosaurs();
     }
 
-    public int getTurnNumber() {
-        Turns turns = turnRepository.findTurns();
-        return turns.numberOfTurns();
+    public TurnNumber getTurnNumber() {
+        Game game = gameRepository.findGame();
+        return game.currentTurnNumber();
     }
 
-    public void reset() {
-        turnRepository.reset();
-        pantryRepository.reset();
-        herdRepository.reset();
-        actionRepository.reset();
+    public void resetGame() {
+        gameRepository.deleteAll();
+        pantryRepository.deleteAll();
+        herdRepository.deleteAll();
+        actionRepository.deleteAll();
     }
 }

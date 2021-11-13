@@ -28,7 +28,7 @@ public class ActionRepositoryInMemory implements ActionRepository {
     }
 
     @Override
-    public void reset() {
+    public void deleteAll() {
         actionList.clear();
     }
 }

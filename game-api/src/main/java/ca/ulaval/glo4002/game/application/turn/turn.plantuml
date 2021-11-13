@@ -28,7 +28,7 @@ title __TURN's Class Diagram__\n
 >>>>>>> develop
   ca.ulaval.glo4002.game.application.turn.TurnUseCase o-- ca.ulaval.glo4002.game.controllers.turn.dtos.TurnAssembler : turnAssembler
   ca.ulaval.glo4002.game.application.turn.TurnUseCase o-- ca.ulaval.glo4002.game.domain.turn.TurnFactory : turnFactory
-  ca.ulaval.glo4002.game.application.turn.TurnUseCase o-- ca.ulaval.glo4002.game.domain.turn.TurnRepository : turnRepository
+  ca.ulaval.glo4002.game.application.turn.TurnUseCase o-- ca.ulaval.glo4002.game.domain.game.GameRepository : gameRepository
 
 
 right footer

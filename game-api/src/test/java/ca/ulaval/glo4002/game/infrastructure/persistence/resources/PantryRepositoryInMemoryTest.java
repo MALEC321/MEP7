@@ -30,7 +30,7 @@ public class PantryRepositoryInMemoryTest {
 
     @Test
     void repoCreated_whenResetResource_thenPantryIsCleared() {
-        this.resourceRepositoryInMemory.reset();
+        this.resourceRepositoryInMemory.deleteAll();
 
         verify(this.pantry, times(1)).clear();
     }

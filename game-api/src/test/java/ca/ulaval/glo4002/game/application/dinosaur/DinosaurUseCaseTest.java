@@ -18,12 +18,12 @@ import ca.ulaval.glo4002.game.domain.dinosaur.HerdRepository;
 import ca.ulaval.glo4002.game.domain.dinosaur.enums.SpeciesDietsCorrespondances;
 import ca.ulaval.glo4002.game.application.resources.ResourcesFactory;
 import ca.ulaval.glo4002.game.domain.turn.TurnFactory;
-import ca.ulaval.glo4002.game.domain.turn.TurnRepository;
+import ca.ulaval.glo4002.game.domain.game.GameRepository;
 import ca.ulaval.glo4002.game.application.exceptions.NotExistentNameException;
 import ca.ulaval.glo4002.game.infrastructure.persistence.actions.ActionRepositoryInMemory;
 import ca.ulaval.glo4002.game.infrastructure.persistence.dinosaur.HerdRepositoryInMemory;
 import ca.ulaval.glo4002.game.infrastructure.persistence.resources.PantryRepositoryInMemory;
-import ca.ulaval.glo4002.game.infrastructure.persistence.turn.TurnRepositoryInMemory;
+import ca.ulaval.glo4002.game.infrastructure.persistence.turn.GameRepositoryInMemory;
 
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
@@ -47,9 +47,9 @@ class DinosaurUseCaseTest {
         dinosaurUseCase = new DinosaurUseCase(dinosaurFactory, herdRepository, dinosaurAssembler, actionRepository, actionFactory);
 
         TurnFactory turnFactory = new TurnFactory();
-        TurnRepository turnRepository = new TurnRepositoryInMemory();
+        GameRepository gameRepository = new GameRepositoryInMemory();
         PantryRepository pantryRepository = new PantryRepositoryInMemory();
-        turnUseCase = new TurnUseCase(turnFactory, turnRepository, pantryRepository, herdRepository, actionRepository, resourcesDistributor, resourcesFactory);
+        turnUseCase = new TurnUseCase(turnFactory, gameRepository, pantryRepository, herdRepository, actionRepository, resourcesDistributor, resourcesFactory);
     }
 
     @Test

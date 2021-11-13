@@ -11,11 +11,11 @@ import ca.ulaval.glo4002.game.domain.resources.PantryRepository;
 import ca.ulaval.glo4002.game.domain.resources.ResourcesDistributor;
 import ca.ulaval.glo4002.game.domain.resources.ResourcesGroup;
 import ca.ulaval.glo4002.game.domain.turn.TurnFactory;
-import ca.ulaval.glo4002.game.domain.turn.TurnRepository;
+import ca.ulaval.glo4002.game.domain.game.GameRepository;
 import ca.ulaval.glo4002.game.infrastructure.persistence.actions.ActionRepositoryInMemory;
 import ca.ulaval.glo4002.game.infrastructure.persistence.dinosaur.HerdRepositoryInMemory;
 import ca.ulaval.glo4002.game.infrastructure.persistence.resources.PantryRepositoryInMemory;
-import ca.ulaval.glo4002.game.infrastructure.persistence.turn.TurnRepositoryInMemory;
+import ca.ulaval.glo4002.game.infrastructure.persistence.turn.GameRepositoryInMemory;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -42,10 +42,10 @@ public class ResourcesUseCaseTest {
         ResourcesFactory resourcesFactory = new ResourcesFactory();
 
         TurnFactory turnFactory = new TurnFactory();
-        TurnRepository turnRepository = new TurnRepositoryInMemory();
+        GameRepository gameRepository = new GameRepositoryInMemory();
         HerdRepository herdRepository = new HerdRepositoryInMemory();
 
-        turnUseCase = new TurnUseCase(turnFactory, turnRepository, resourceRepository, herdRepository, actionRepository, resourcesDistributor, resourcesFactory);
+        turnUseCase = new TurnUseCase(turnFactory, gameRepository, resourceRepository, herdRepository, actionRepository, resourcesDistributor, resourcesFactory);
         resourcesUseCase = new ResourcesUseCase(resourcesGroupFactory, resourceRepository, resourcesAssembler, actionRepository, actionFactory);
     }
 

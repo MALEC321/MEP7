@@ -5,7 +5,7 @@ import java.util.List;
 import ca.ulaval.glo4002.game.domain.actions.Action;
 
 public class TurnFactory {
-    public Turn create(String turnNumber, List<Action> actions) {
+    public Turn create(TurnNumber turnNumber, List<Action> actions) {
         return new Turn(turnNumber, actions);
     }
 }
