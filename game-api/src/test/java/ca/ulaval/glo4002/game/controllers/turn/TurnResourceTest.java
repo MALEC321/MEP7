@@ -15,9 +15,6 @@ import javax.ws.rs.core.Application;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
-import java.util.HashMap;
-import java.util.Map;
-
 import static org.mockito.Matchers.anyObject;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -70,7 +67,7 @@ public class TurnResourceTest extends JerseyTest {
         Response response = target("reset").request(MediaType.APPLICATION_JSON_TYPE)
                 .post(null);
 
-        verify(turnUseCase).reset();
+        verify(turnUseCase).resetGame();
         Assertions.assertEquals(200, response.getStatus());
     }
 
@@ -79,6 +76,6 @@ public class TurnResourceTest extends JerseyTest {
         target("reset").request(MediaType.APPLICATION_JSON_TYPE)
                 .post(null);
 
-        verify(turnUseCase).reset();
+        verify(turnUseCase).resetGame();
     }
 }
