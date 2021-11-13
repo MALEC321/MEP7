@@ -82,7 +82,7 @@ public class TurnUseCase {
 
     public TurnNumber getTurnNumber() {
         Game game = turnRepository.findGame();
-        return game.numberOfTurns();
+        return game.lastTurnNumber();
     }
 
     public void resetGame() {
