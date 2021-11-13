@@ -14,11 +14,10 @@ public class Dinosaur {
     private String species;
     private int strength;
     private boolean hungry;
-    private boolean starving;
     private DietType diet;
     private Dinosaur mother;
     private Dinosaur father;
-    private boolean isRoot;
+    private boolean isAdult;
     private boolean isDead;
 
     public Dinosaur(String name, int weight, String gender, String species) {
@@ -28,9 +27,8 @@ public class Dinosaur {
         this.species = species;
         this.strength = calculateStrength();
         this.hungry = true;
-        this.starving = false;
         this.diet = SpeciesDietsCorrespondances.getDietFromSpecies(species);
-        this.isRoot = true;
+        this.isAdult = true;
         this.isDead = false;
     }
 
@@ -43,9 +41,8 @@ public class Dinosaur {
         this.species = species;
         this.strength = calculateStrength();
         this.hungry = true;
-        this.starving = false;
         this.diet = SpeciesDietsCorrespondances.getDietFromSpecies(species);
-        this.isRoot = false;
+        this.isAdult = false;
         this.isDead = false;
     }
 
@@ -75,14 +72,6 @@ public class Dinosaur {
         return diet;
     }
 
-    public boolean isStarving() {
-        return starving;
-    }
-
-    public void setStarving(boolean starving) {
-        this.starving = starving;
-    }
-
     public boolean isHungry() {
         return hungry;
     }
@@ -97,8 +86,8 @@ public class Dinosaur {
 
     public void addWeight(int weight) {
         this.weight = this.weight + weight;
-        if(isNotABaby()) {
-            this.isRoot = true;
+        if (isNotABaby()) {
+            this.isAdult = true;
         }
     }
 
@@ -106,8 +95,12 @@ public class Dinosaur {
         isDead = dead;
     }
 
+    public boolean isDead() {
+        return isDead;
+    }
+
     public boolean areBothParentsDead() {
-        return !this.isRoot && (this.mother.isDead && this.father.isDead);
+        return !this.isAdult && this.mother.isDead && this.father.isDead;
     }
 
     private int calculateStrength() {

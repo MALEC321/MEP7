@@ -11,16 +11,15 @@ public class ResourcesDistributor {
     public void feedDinosaurs(FoodContainer foodContainer, Herd herd) {
         for (Dinosaur dinosaur: herd.findSortedDinosaursByStrengthThenName()) {
             if (!foodContainer.removeResourceQty(SALAD, dinosaur.calculateSaladsNeeds())) {
-                dinosaur.setStarving(true);
+                dinosaur.setDead(true);
             }
             if (!foodContainer.removeResourceQty(BURGER, dinosaur.calculateBurgersNeeds())) {
-                dinosaur.setStarving(true);
+                dinosaur.setDead(true);
             }
             if (!foodContainer.removeResourceQty(WATER, dinosaur.calculateWaterNeeds())) {
-                dinosaur.setStarving(true);
-            }
-            if (dinosaur.isStarving()) {
                 dinosaur.setDead(true);
+            }
+            if (dinosaur.isDead()) {
                 herd.removeDinosaur(dinosaur);
             }
         }
