@@ -5,7 +5,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.*;
 
 class DinosaurTest {
 
@@ -154,5 +154,72 @@ class DinosaurTest {
         grosPied.calculateBurgersNeeds();
 
         assertEquals(expectedFoodNeeds, grosPied.calculateBurgersNeeds());
+    }
+
+    @Test
+    void givenNewBaby_whenHaveBothParents_thenParentsAreBothAlive() {
+        Dinosaur mother = new Dinosaur("mother", 50000, "f", "Megalosaurus");
+        Dinosaur father = new Dinosaur("father", 50000, "m", "Megalosaurus");
+        Dinosaur baby = new Dinosaur("baby", 20, "f", "Megalosaurus", mother, father);
+
+        assertFalse(baby.areBothParentsDead());
+    }
+
+    @Test
+    void givenBaby_whenOneParentDied_thenParentsAreNotBothAlive() {
+        Dinosaur deadMother = new Dinosaur("deadMother", 50000, "f", "Megalosaurus");
+        deadMother.setDead(true);
+        Dinosaur aliveFather = new Dinosaur("aliveFather", 50000, "m", "Megalosaurus");
+        aliveFather.setDead(true);
+        Dinosaur baby = new Dinosaur("baby", 20, "f", "Megalosaurus", deadMother, aliveFather);
+
+        assertTrue(baby.areBothParentsDead());
+    }
+
+    @Test
+    void givenBaby_whenBothParentDied_thenParentsAreNotBothAlive() {
+        Dinosaur deadMother = new Dinosaur("deadMother", 50000, "f", "Megalosaurus");
+        deadMother.setDead(true);
+        Dinosaur deadFather = new Dinosaur("deadFather", 50000, "m", "Megalosaurus");
+        deadFather.setDead(true);
+        Dinosaur baby = new Dinosaur("baby", 20, "f", "Megalosaurus", deadMother, deadFather);
+
+        assertTrue(baby.areBothParentsDead());
+    }
+
+    @Test
+    void whenCreateRootFather_thenCannotLooseParents() {
+        Dinosaur rootFather = new Dinosaur("rootFather", 50000, "m", "Megalosaurus");
+
+        assertFalse(rootFather.areBothParentsDead());
+    }
+
+    @Test
+    void whenCreateRootMother_thenCannotLooseParents() {
+        Dinosaur rootMother = new Dinosaur("rootMother", 50000, "m", "Megalosaurus");
+
+        assertFalse(rootMother.areBothParentsDead());
+    }
+
+    @Test
+    void givenBabyWithWeight20kg_whenAdding80kg_thenDinoWeightIs100kg() {
+        Dinosaur babyBecomesAdultDino = new Dinosaur("babyBecomesAdultDino", 20, "m",
+                "Megalosaurus");
+
+        babyBecomesAdultDino.addWeight(80);
+
+        assertEquals(100, babyBecomesAdultDino.getWeight());
+    }
+
+    @Test
+    void whenBabyBecomesAdult_thenCannotLooseParents() {
+        Dinosaur father = new Dinosaur("mother", 50000, "f", "Megalosaurus");
+        Dinosaur mother = new Dinosaur("father", 50000, "m", "Megalosaurus");
+        Dinosaur babyBecomesAdultDino = new Dinosaur("babyBecomesAdultDino", 20, "m",
+                "Megalosaurus", mother, father);
+
+        babyBecomesAdultDino.addWeight(80);
+
+        assertFalse(babyBecomesAdultDino.areBothParentsDead());
     }
 }

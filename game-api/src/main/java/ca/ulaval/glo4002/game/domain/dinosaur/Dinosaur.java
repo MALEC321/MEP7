@@ -1,20 +1,25 @@
 package ca.ulaval.glo4002.game.domain.dinosaur;
 
-import java.math.BigDecimal;
-import java.math.RoundingMode;
-
 import ca.ulaval.glo4002.game.domain.dinosaur.enums.DietType;
 import ca.ulaval.glo4002.game.domain.dinosaur.enums.SpeciesDietsCorrespondances;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
+import java.util.Objects;
+
 public class Dinosaur {
-    private final String name;
-    private final int weight;
-    private final String gender;
-    private final String species;
-    private final int strength;
+    private String name;
+    private int weight;
+    private String gender;
+    private String species;
+    private int strength;
     private boolean hungry;
     private boolean starving;
-    private final DietType diet;
+    private DietType diet;
+    private Dinosaur mother;
+    private Dinosaur father;
+    private boolean isRoot;
+    private boolean isDead;
 
     public Dinosaur(String name, int weight, String gender, String species) {
         this.name = name;
@@ -25,7 +30,26 @@ public class Dinosaur {
         this.hungry = true;
         this.starving = false;
         this.diet = SpeciesDietsCorrespondances.getDietFromSpecies(species);
+        this.isRoot = true;
+        this.isDead = false;
     }
+
+    public Dinosaur(String name, int weight, String gender, String species, Dinosaur mother, Dinosaur father) {
+        this.mother = mother;
+        this.father = father;
+        this.name = name;
+        this.weight = weight;
+        this.gender = gender;
+        this.species = species;
+        this.strength = calculateStrength();
+        this.hungry = true;
+        this.starving = false;
+        this.diet = SpeciesDietsCorrespondances.getDietFromSpecies(species);
+        this.isRoot = false;
+        this.isDead = false;
+    }
+
+    public Dinosaur() {}
 
     public String getName() {
         return name;
@@ -65,6 +89,25 @@ public class Dinosaur {
 
     public void setHungry(boolean isHungry) {
         this.hungry = isHungry;
+    }
+
+    private boolean isNotABaby() {
+        return this.weight >= 100;
+    }
+
+    public void addWeight(int weight) {
+        this.weight = this.weight + weight;
+        if(isNotABaby()) {
+            this.isRoot = true;
+        }
+    }
+
+    public void setDead(boolean dead) {
+        isDead = dead;
+    }
+
+    public boolean areBothParentsDead() {
+        return !this.isRoot && (this.mother.isDead && this.father.isDead);
     }
 
     private int calculateStrength() {
@@ -134,5 +177,18 @@ public class Dinosaur {
     private BigDecimal calculateFoodNeedsForHungryDino(BigDecimal foodNeeds) {
         BigDecimal doubleResourcesNeeds = new BigDecimal(2);
         return foodNeeds.multiply(doubleResourcesNeeds);
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Dinosaur dinosaur = (Dinosaur) o;
+        return getName().equals(dinosaur.getName());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getName());
     }
 }

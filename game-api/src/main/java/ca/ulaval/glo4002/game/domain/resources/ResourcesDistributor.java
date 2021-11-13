@@ -19,8 +19,8 @@ public class ResourcesDistributor {
             if (!foodContainer.removeResourceQty(WATER, dinosaur.calculateWaterNeeds())) {
                 dinosaur.setStarving(true);
             }
-
             if (dinosaur.isStarving()) {
+                dinosaur.setDead(true);
                 herd.removeDinosaur(dinosaur);
             }
         }
