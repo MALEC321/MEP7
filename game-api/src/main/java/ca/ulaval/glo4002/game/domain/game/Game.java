@@ -1,7 +1,10 @@
-package ca.ulaval.glo4002.game.domain.turn;
+package ca.ulaval.glo4002.game.domain.game;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import ca.ulaval.glo4002.game.domain.turn.Turn;
+import ca.ulaval.glo4002.game.domain.turn.TurnNumber;
 
 public class Game {
     private final List<Turn> turns;

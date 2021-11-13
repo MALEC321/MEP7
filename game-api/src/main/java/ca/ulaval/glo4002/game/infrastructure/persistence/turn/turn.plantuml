@@ -16,7 +16,7 @@ title __TURN's Class Diagram__\n
   }
   
 
-  ca.ulaval.glo4002.game.infrastructure.persistence.turn.GameRepositoryInMemory .up.|> ca.ulaval.glo4002.game.domain.turn.GameRepository
+  ca.ulaval.glo4002.game.infrastructure.persistence.turn.GameRepositoryInMemory .up.|> ca.ulaval.glo4002.game.domain.game.GameRepository
 
 
 right footer
