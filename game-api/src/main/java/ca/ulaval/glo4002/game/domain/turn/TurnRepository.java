@@ -1,9 +1,9 @@
 package ca.ulaval.glo4002.game.domain.turn;
 
 public interface TurnRepository {
-    Turns findTurns();
+    Game findGame();
 
-    void reset();
+    void deleteAll();
 
-    void save(Turns turns);
+    void save(Game game);
 }

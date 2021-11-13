@@ -1,13 +1,15 @@
 package ca.ulaval.glo4002.game.controllers.turn.dtos;
 
-public class TurnDto {
-    private final int noTurn;
+import ca.ulaval.glo4002.game.domain.turn.TurnNumber;
 
-    public TurnDto(int noTurn) {
+public class TurnDto {
+    private final TurnNumber noTurn;
+
+    public TurnDto(TurnNumber noTurn) {
         this.noTurn = noTurn;
     }
 
     public int getNoTurn() {
-        return noTurn;
+        return noTurn.getNumber();
     }
 }

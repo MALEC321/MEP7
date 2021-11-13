@@ -2,11 +2,11 @@ package ca.ulaval.glo4002.game.infrastructure.persistence.turn;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.UUID;
 
 import ca.ulaval.glo4002.game.domain.actions.Action;
 import ca.ulaval.glo4002.game.domain.turn.TurnFactory;
 import ca.ulaval.glo4002.game.domain.turn.Turn;
+import ca.ulaval.glo4002.game.domain.turn.TurnNumber;
 
 
 import org.junit.jupiter.api.BeforeEach;
@@ -16,10 +16,11 @@ import org.mockito.MockitoAnnotations;
 import static org.junit.jupiter.api.Assertions.*;
 
 class TurnRepositoryInMemoryTest {
+    TurnNumber firstTurnNumber = new TurnNumber(1);
+    TurnNumber secondTurnNumber = new TurnNumber(2);
     private TurnRepositoryInMemory turnRepositoryInMemory;
     private List<Action> actions;
     private TurnFactory turnFactory;
-    final private String fakeTurnId = UUID.randomUUID().toString().toUpperCase();
 
     @BeforeEach
     void setUp() {
@@ -31,11 +32,10 @@ class TurnRepositoryInMemoryTest {
 
     @Test
     void givenATurn_whenFindingThatTurnById_thenThatTurnIsReturned() {
-        String idTurn1 = turnRepositoryInMemory.findTurns().nextTurnNumber();
-        Turn turn1 = turnFactory.create(idTurn1, actions);
+        Turn turn1 = turnFactory.create(secondTurnNumber, actions);
 
-        turnRepositoryInMemory.findTurns().addTurn(turn1);
-        Turn turnFound = turnRepositoryInMemory.findTurns().findByNumber(turn1.getTurnNumber());
+        turnRepositoryInMemory.findGame().addTurn(turn1);
+        Turn turnFound = turnRepositoryInMemory.findGame().findByNumber(turn1.getTurnNumber());
 
         assertNotNull(turn1);
         assertEquals(turn1.getTurnNumber(), turnFound.getTurnNumber());
@@ -43,27 +43,25 @@ class TurnRepositoryInMemoryTest {
 
     @Test
     void whenGetOneTurnWithTheBadId_thenNoneTurnIsReturned() {
-        Turn turn1 = turnFactory.create("123456789", actions);
-        turnRepositoryInMemory.findTurns().addTurn(turn1);
+        Turn turn1 = turnFactory.create(firstTurnNumber,  actions);
+        turnRepositoryInMemory.findGame().addTurn(turn1);
 
 
-        assertNull(turnRepositoryInMemory.findTurns().findByNumber(fakeTurnId));
+        assertNull(turnRepositoryInMemory.findGame().findByNumber(firstTurnNumber));
     }
 
     @Test
     void givenTurns_whenResetTurns_thenRepoContainsNoMoreTurn() {
-        String idTurn1 = turnRepositoryInMemory.findTurns().nextTurnNumber();
-        Turn turn1 = turnFactory.create(idTurn1, actions);
-        turnRepositoryInMemory.findTurns().addTurn(turn1);
+        Turn turn1 = turnFactory.create(firstTurnNumber, actions);
+        turnRepositoryInMemory.findGame().addTurn(turn1);
 
 
-        String idTurn2 = turnRepositoryInMemory.findTurns().nextTurnNumber();
-        Turn turn2 = turnFactory.create(idTurn2, actions);
-        turnRepositoryInMemory.findTurns().addTurn(turn2);
+        Turn turn2 = turnFactory.create(secondTurnNumber, actions);
+        turnRepositoryInMemory.findGame().addTurn(turn2);
 
-        turnRepositoryInMemory.reset();
+        turnRepositoryInMemory.deleteAll();
 
-        assertNotEquals(turn1, turnRepositoryInMemory.findTurns().findByNumber(idTurn1));
-        assertNotEquals(turn2, turnRepositoryInMemory.findTurns().findByNumber(idTurn2));
+        assertNotEquals(turn1, turnRepositoryInMemory.findGame().findByNumber(firstTurnNumber));
+        assertNotEquals(turn2, turnRepositoryInMemory.findGame().findByNumber(secondTurnNumber));
     }
 }

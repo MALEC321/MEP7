@@ -41,7 +41,7 @@ public class TurnResource {
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
     public Response reset() {
-        turnUseCase.reset();
+        turnUseCase.resetGame();
 
         return Response.status(Response.Status.OK).build();
     }

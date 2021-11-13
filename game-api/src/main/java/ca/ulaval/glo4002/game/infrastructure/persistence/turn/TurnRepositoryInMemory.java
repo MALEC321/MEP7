@@ -1,27 +1,27 @@
 package ca.ulaval.glo4002.game.infrastructure.persistence.turn;
 
+import ca.ulaval.glo4002.game.domain.turn.Game;
 import ca.ulaval.glo4002.game.domain.turn.TurnRepository;
-import ca.ulaval.glo4002.game.domain.turn.Turns;
 
 public class TurnRepositoryInMemory implements TurnRepository {
-    private Turns turns;
+    private Game game;
 
     public TurnRepositoryInMemory() {
-        this.turns = new Turns();
+        this.game = new Game();
     }
 
     @Override
-    public void save(Turns turns) {
-        this.turns = turns;
+    public void save(Game game) {
+        this.game = game;
     }
 
     @Override
-    public Turns findTurns() {
-        return this.turns;
+    public Game findGame() {
+        return this.game;
     }
 
     @Override
-    public void reset() {
-        turns = new Turns();
+    public void deleteAll() {
+        game = new Game();
     }
 }

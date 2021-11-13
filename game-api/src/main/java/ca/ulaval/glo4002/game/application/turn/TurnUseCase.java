@@ -2,6 +2,8 @@ package ca.ulaval.glo4002.game.application.turn;
 
 import java.util.List;
 
+import static ca.ulaval.glo4002.game.domain.resources.ResourceType.*;
+
 import ca.ulaval.glo4002.game.application.resources.ResourcesFactory;
 import ca.ulaval.glo4002.game.domain.actions.Action;
 import ca.ulaval.glo4002.game.domain.actions.ActionRepository;
@@ -10,12 +12,11 @@ import ca.ulaval.glo4002.game.domain.dinosaur.HerdRepository;
 import ca.ulaval.glo4002.game.domain.resources.Pantry;
 import ca.ulaval.glo4002.game.domain.resources.PantryRepository;
 import ca.ulaval.glo4002.game.domain.resources.ResourcesDistributor;
+import ca.ulaval.glo4002.game.domain.turn.Game;
 import ca.ulaval.glo4002.game.domain.turn.Turn;
 import ca.ulaval.glo4002.game.domain.turn.TurnFactory;
+import ca.ulaval.glo4002.game.domain.turn.TurnNumber;
 import ca.ulaval.glo4002.game.domain.turn.TurnRepository;
-import ca.ulaval.glo4002.game.domain.turn.Turns;
-
-import static ca.ulaval.glo4002.game.domain.resources.ResourceType.*;
 
 public class TurnUseCase {
     private final TurnFactory turnFactory;
@@ -50,10 +51,10 @@ public class TurnUseCase {
         actionRepository.executeActions();
         postAction();
 
-        Turns turns = turnRepository.findTurns();
-        Turn turn = turnFactory.create(turns.nextTurnNumber(), actions);
-        turns.addTurn(turn);
-        turnRepository.save(turns);
+        Game game = turnRepository.findGame();
+        Turn turn = turnFactory.create(game.nextTurnNumber(), actions);
+        game.addTurn(turn);
+        turnRepository.save(game);
     }
 
     protected void cookIt() {
@@ -79,15 +80,15 @@ public class TurnUseCase {
         herd.removeOrphanedBabyDinosaurs();
     }
 
-    public int getTurnNumber() {
-        Turns turns = turnRepository.findTurns();
-        return turns.numberOfTurns();
+    public TurnNumber getTurnNumber() {
+        Game game = turnRepository.findGame();
+        return game.numberOfTurns();
     }
 
-    public void reset() {
-        turnRepository.reset();
-        pantryRepository.reset();
-        herdRepository.reset();
-        actionRepository.reset();
+    public void resetGame() {
+        turnRepository.deleteAll();
+        pantryRepository.deleteAll();
+        herdRepository.deleteAll();
+        actionRepository.deleteAll();
     }
 }

@@ -73,7 +73,7 @@ public class ActionRepositoryInMemoryTest {
     void listOfActions_whenResetingActions_thenWaitingActionsListIsEmpty() {
         setActionsRepository();
 
-        this.actionRepositoryInMemory.reset();
+        this.actionRepositoryInMemory.deleteAll();
 
         assertTrue(getActions().isEmpty());
     }

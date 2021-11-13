@@ -9,6 +9,6 @@ public interface ActionRepository {
 
     void executeActions();
 
-    void reset();
+    void deleteAll();
 }
 

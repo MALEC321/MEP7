@@ -6,19 +6,19 @@ import ca.ulaval.glo4002.game.domain.actions.Action;
 
 public class Turn {
 
-    private final String turnNumber;
+    private final TurnNumber turnNumber;
     private List<Action> actions;
 
-    public Turn(String turnNumber) {
+    public Turn(TurnNumber turnNumber) {
         this.turnNumber = turnNumber;
     }
 
-    public Turn(String turnNumber, List<Action> actions) {
+    public Turn(TurnNumber turnNumber, List<Action> actions) {
         this.turnNumber = turnNumber;
         this.actions = actions;
     }
 
-    public String getTurnNumber() {
+    public TurnNumber getTurnNumber() {
         return this.turnNumber;
     }
 
