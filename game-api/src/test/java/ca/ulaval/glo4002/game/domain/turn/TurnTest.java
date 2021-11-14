@@ -37,6 +37,6 @@ public class TurnTest {
         turnFactory.create(new TurnNumber(2), actions);
         turnRepositoryInMemory.findGame().addTurn(turn);
 
-        assertEquals(new TurnNumber(2), turnRepositoryInMemory.findGame().currentTurnNumber());
+        assertEquals(new TurnNumber(2).getNumber(), turnRepositoryInMemory.findGame().currentTurnNumber().nextTurnNumber().getNumber());
     }
 }
