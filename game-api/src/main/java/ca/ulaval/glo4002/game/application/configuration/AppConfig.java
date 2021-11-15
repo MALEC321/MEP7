@@ -13,6 +13,7 @@ import ca.ulaval.glo4002.game.controllers.baby.BabyResource;
 import ca.ulaval.glo4002.game.controllers.baby.dtos.BabyDtoAssembler;
 import ca.ulaval.glo4002.game.controllers.dinosaur.DinosaurResource;
 import ca.ulaval.glo4002.game.controllers.dinosaur.dtos.DinosaurDtoAssembler;
+import ca.ulaval.glo4002.game.controllers.dinosaur.dtos.weightchange.ChangeWeighDtoAssembler;
 import ca.ulaval.glo4002.game.controllers.exceptionMappers.*;
 import ca.ulaval.glo4002.game.controllers.resources.ResourcesResource;
 import ca.ulaval.glo4002.game.controllers.resources.dtos.ResourcesAssembler;
@@ -60,7 +61,8 @@ public class AppConfig {
     private static final DinosaurUseCase dinosaurUseCase = new DinosaurUseCase(dinosaurFactory, herdRepository, dinosaurAssembler, actionRepository, actionFactory);
 
     private static final DinosaurDtoAssembler dinosaurDtoAssembler = new DinosaurDtoAssembler();
-    private static final DinosaurResource manageDinosaurResource = new DinosaurResource(dinosaurUseCase, dinosaurDtoAssembler);
+    private static final ChangeWeighDtoAssembler changeWeighDtoAssembler= new ChangeWeighDtoAssembler();
+    private static final DinosaurResource manageDinosaurResource = new DinosaurResource(dinosaurUseCase, dinosaurDtoAssembler, changeWeighDtoAssembler);
 
     private static final TurnUseCase turnUseCase = new TurnUseCase(turnFactory, GAME_REPOSITORY, resourceRepository, herdRepository, actionRepository, resourcesDistributor, resourcesFactory);
 

@@ -1,10 +1,9 @@
 package ca.ulaval.glo4002.game.application.dinosaur;
 
-import java.util.List;
-
 import ca.ulaval.glo4002.game.application.dinosaur.dtos.DinosaurAssembler;
 import ca.ulaval.glo4002.game.application.dinosaur.dtos.DinosaurDto;
 import ca.ulaval.glo4002.game.application.exceptions.NotExistentNameException;
+import ca.ulaval.glo4002.game.controllers.dinosaur.dtos.weightchange.ChangeWeightDto;
 import ca.ulaval.glo4002.game.controllers.dinosaur.dtos.DinosaurCreationDto;
 import ca.ulaval.glo4002.game.domain.actions.ActionFactory;
 import ca.ulaval.glo4002.game.domain.actions.ActionRepository;
@@ -12,6 +11,8 @@ import ca.ulaval.glo4002.game.domain.dinosaur.Dinosaur;
 import ca.ulaval.glo4002.game.domain.dinosaur.DinosaurFactory;
 import ca.ulaval.glo4002.game.domain.dinosaur.Herd;
 import ca.ulaval.glo4002.game.domain.dinosaur.HerdRepository;
+
+import java.util.List;
 
 public class DinosaurUseCase {
     private final DinosaurFactory dinosaurFactory;
@@ -53,5 +54,9 @@ public class DinosaurUseCase {
         }
 
         return dinosaurAssembler.toDto(dinosaur);
+    }
+
+    public void changeDinosaurWeight(ChangeWeightDto changeWeightDto) {
+        //TODO: IMPLEMENTER
     }
 }
