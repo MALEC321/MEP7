@@ -47,7 +47,7 @@ class GameRepositoryInMemoryTest {
         turnRepositoryInMemory.findGame().addTurn(turn1);
 
 
-        assertNull(turnRepositoryInMemory.findGame().findByNumber(firstTurnNumber));
+        assertNotNull(turnRepositoryInMemory.findGame().findByNumber(firstTurnNumber));
     }
 
     @Test
