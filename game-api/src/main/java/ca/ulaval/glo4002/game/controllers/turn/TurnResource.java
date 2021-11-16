@@ -24,9 +24,9 @@ public class TurnResource {
     @POST
     @Produces(MediaType.APPLICATION_JSON)
     public Response runTurn() {
-        turnUseCase.executeTurn();
+        turnUseCase.playTurn();
 
-        TurnDto turnDto = new TurnDto(turnUseCase.getTurnNumber());
+        TurnDto turnDto = new TurnDto(turnUseCase.getLastPlayedTurnNumber());
         TurnResponse response = turnDtoAssembler.toResponse(turnDto);
 
         return Response.status(Response.Status.OK).entity(response).build();

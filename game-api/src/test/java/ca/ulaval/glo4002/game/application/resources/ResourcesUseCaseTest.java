@@ -24,7 +24,6 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 
 public class ResourcesUseCaseTest {
-
     private static final int QYT_BURGER = 4;
     private static final int QYT_SALAD = 5;
     private static final int QYT_WATER = 6;
@@ -45,8 +44,8 @@ public class ResourcesUseCaseTest {
         GameRepository gameRepository = new GameRepositoryInMemory();
         HerdRepository herdRepository = new HerdRepositoryInMemory();
 
-        turnUseCase = new TurnUseCase(turnFactory, gameRepository, resourceRepository, herdRepository, actionRepository, resourcesDistributor, resourcesFactory);
-        resourcesUseCase = new ResourcesUseCase(resourcesGroupFactory, resourceRepository, resourcesAssembler, actionRepository, actionFactory);
+        turnUseCase = new TurnUseCase(turnFactory, gameRepository, resourceRepository, herdRepository, actionRepository, resourcesDistributor, resourcesFactory, actionFactory);
+        resourcesUseCase = new ResourcesUseCase(resourcesGroupFactory, resourceRepository, resourcesAssembler, actionFactory, gameRepository);
     }
 
     @Test
@@ -69,7 +68,7 @@ public class ResourcesUseCaseTest {
     @Test
     public void givenResource_OneTurn_ResourceRepoNotEmpty() {
         PantryRepository resourceRepository = new PantryRepositoryInMemory();
-        turnUseCase.executeTurn();
+        turnUseCase.playTurn();
 
         List<ResourcesGroup> resources = resourceRepository.findPantry().findAll();
 

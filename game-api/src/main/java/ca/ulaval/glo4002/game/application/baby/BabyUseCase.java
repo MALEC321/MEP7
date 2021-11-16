@@ -1,5 +1,8 @@
 package ca.ulaval.glo4002.game.application.baby;
 
+import java.util.Objects;
+import java.util.Optional;
+
 import ca.ulaval.glo4002.game.application.baby.breed.Breedable;
 import ca.ulaval.glo4002.game.application.baby.dtos.BabyAssembler;
 import ca.ulaval.glo4002.game.application.exceptions.InvalidFatherException;
@@ -7,33 +10,31 @@ import ca.ulaval.glo4002.game.application.exceptions.InvalidMotherException;
 import ca.ulaval.glo4002.game.application.exceptions.NotExistentNameException;
 import ca.ulaval.glo4002.game.controllers.baby.dtos.BabyCreationDto;
 import ca.ulaval.glo4002.game.domain.actions.ActionFactory;
-import ca.ulaval.glo4002.game.domain.actions.ActionRepository;
 import ca.ulaval.glo4002.game.domain.dinosaur.Dinosaur;
 import ca.ulaval.glo4002.game.domain.dinosaur.DinosaurFactory;
 import ca.ulaval.glo4002.game.domain.dinosaur.Herd;
 import ca.ulaval.glo4002.game.domain.dinosaur.HerdRepository;
+import ca.ulaval.glo4002.game.domain.game.Game;
+import ca.ulaval.glo4002.game.domain.game.GameRepository;
 import ca.ulaval.glo4002.game.infrastructure.client.dto.RequestBreed;
 import ca.ulaval.glo4002.game.infrastructure.client.dto.ResponseBreed;
-
-import java.util.Objects;
-import java.util.Optional;
 
 public class BabyUseCase {
     private final HerdRepository herdRepository;
     private final BabyAssembler babyAssembler;
-    private final ActionRepository actionRepository;
     private final ActionFactory actionFactory;
     private final DinosaurFactory dinosaurFactory;
     private final Breedable breedable;
+    private final GameRepository gameRepository;
 
-    public BabyUseCase(HerdRepository herdRepository, BabyAssembler babyAssembler, ActionRepository actionRepository, ActionFactory actionFactory,
-                       DinosaurFactory dinosaurFactory, Breedable breedable) {
+    public BabyUseCase(HerdRepository herdRepository, BabyAssembler babyAssembler, ActionFactory actionFactory,
+                       DinosaurFactory dinosaurFactory, Breedable breedable, GameRepository gameRepository) {
         this.herdRepository = herdRepository;
         this.babyAssembler = babyAssembler;
-        this.actionRepository = actionRepository;
         this.actionFactory = actionFactory;
         this.dinosaurFactory = dinosaurFactory;
         this.breedable = breedable;
+        this.gameRepository = gameRepository;
     }
 
     public void createBaby(BabyCreationDto dto) {
@@ -45,9 +46,13 @@ public class BabyUseCase {
         if (babyDto.isPresent()) {
             Dinosaur father = herdRepository.findHerd().findDinosaurByName(dto.getFatherName());
             Dinosaur mother = herdRepository.findHerd().findDinosaurByName(dto.getMotherName());
-            Dinosaur baby = dinosaurFactory.create(dto.getName(), mother, father,
-                    babyDto.get().getGender(), babyDto.get().getOffspring());
-            actionRepository.save(actionFactory.create(baby, herdRepository.findHerd()));
+            Dinosaur baby = dinosaurFactory.create(dto.getName(), mother, father, babyDto.get().getGender(), babyDto.get().getOffspring());
+
+            Game game = gameRepository.findGame();
+
+            game.currentTurn().addAction(actionFactory.create(baby, herdRepository.findHerd()));
+
+            gameRepository.save(game);
         }
     }
 

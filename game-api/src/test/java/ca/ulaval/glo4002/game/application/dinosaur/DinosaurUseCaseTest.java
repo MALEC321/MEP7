@@ -43,13 +43,13 @@ class DinosaurUseCaseTest {
         HerdRepository herdRepository = new HerdRepositoryInMemory();
         DinosaurFactory dinosaurFactory = new DinosaurFactory(herdRepository, speciesDietsCorrespondances);
         DinosaurAssembler dinosaurAssembler = new DinosaurAssembler();
+        GameRepository gameRepository = new GameRepositoryInMemory();
         dinosaurDtoAssembler = new DinosaurDtoAssembler();
-        dinosaurUseCase = new DinosaurUseCase(dinosaurFactory, herdRepository, dinosaurAssembler, actionRepository, actionFactory);
+        dinosaurUseCase = new DinosaurUseCase(dinosaurFactory, herdRepository, dinosaurAssembler, actionFactory, gameRepository);
 
         TurnFactory turnFactory = new TurnFactory();
-        GameRepository gameRepository = new GameRepositoryInMemory();
         PantryRepository pantryRepository = new PantryRepositoryInMemory();
-        turnUseCase = new TurnUseCase(turnFactory, gameRepository, pantryRepository, herdRepository, actionRepository, resourcesDistributor, resourcesFactory);
+        turnUseCase = new TurnUseCase(turnFactory, gameRepository, pantryRepository, herdRepository, actionRepository, resourcesDistributor, resourcesFactory, actionFactory);
     }
 
     @Test
@@ -58,7 +58,7 @@ class DinosaurUseCaseTest {
 
         DinosaurCreationDto dto = dinosaurDtoAssembler.fromRequest(dinosaurRequest);
         dinosaurUseCase.createDinosaur(dto);
-        turnUseCase.executeTurn();
+        turnUseCase.playTurn();
 
         assertThrows(NotExistentNameException.class, () ->
             dinosaurUseCase.getDinosaur("Willl"));

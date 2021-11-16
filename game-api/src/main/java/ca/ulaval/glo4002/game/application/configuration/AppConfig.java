@@ -43,7 +43,7 @@ import java.util.Set;
 public class AppConfig {
     // Turn
     private static final TurnFactory turnFactory = new TurnFactory();
-    private static final GameRepository GAME_REPOSITORY = new GameRepositoryInMemory();
+    private static final GameRepository gameRepository = new GameRepositoryInMemory();
     private static final PantryRepository resourceRepository = new PantryRepositoryInMemory();
     private static final ActionRepository actionRepository = new ActionRepositoryInMemory();
     private static final ActionFactory actionFactory = new ActionFactory();
@@ -58,27 +58,26 @@ public class AppConfig {
     private static final HerdRepository herdRepository = new HerdRepositoryInMemory();
     private static final DinosaurFactory dinosaurFactory = new DinosaurFactory(herdRepository, speciesDietsCorrespondances);
     private static final DinosaurAssembler dinosaurAssembler = new DinosaurAssembler();
-    private static final DinosaurUseCase dinosaurUseCase = new DinosaurUseCase(dinosaurFactory, herdRepository, dinosaurAssembler, actionRepository, actionFactory);
+    private static final DinosaurUseCase dinosaurUseCase = new DinosaurUseCase(dinosaurFactory, herdRepository, dinosaurAssembler, actionFactory, gameRepository);
 
     private static final DinosaurDtoAssembler dinosaurDtoAssembler = new DinosaurDtoAssembler();
     private static final ChangeWeighDtoAssembler changeWeighDtoAssembler= new ChangeWeighDtoAssembler();
     private static final DinosaurResource manageDinosaurResource = new DinosaurResource(dinosaurUseCase, dinosaurDtoAssembler, changeWeighDtoAssembler);
 
-    private static final TurnUseCase turnUseCase = new TurnUseCase(turnFactory, GAME_REPOSITORY, resourceRepository, herdRepository, actionRepository, resourcesDistributor, resourcesFactory);
+    private static final TurnUseCase turnUseCase = new TurnUseCase(turnFactory, gameRepository, resourceRepository, herdRepository, actionRepository, resourcesDistributor, resourcesFactory, actionFactory);
 
     private static final TurnDtoAssembler turnDtoAssembler = new TurnDtoAssembler();
     private static final TurnResource executeTurnResource = new TurnResource(turnUseCase, turnDtoAssembler);
 
     private static final ResourcesAssembler resourcesAssembler = new ResourcesAssembler();
-    private static final ResourcesUseCase
-            resourcesUseCase = new ResourcesUseCase(resourcesGroupFactory, resourceRepository, resourcesAssembler, actionRepository, actionFactory);
+    private static final ResourcesUseCase resourcesUseCase = new ResourcesUseCase(resourcesGroupFactory, resourceRepository, resourcesAssembler, actionFactory, gameRepository);
     private static final ResourceDtoAssembler resourceDtoAssembler = new ResourceDtoAssembler();
     private static final ResourcesResource manageResources = new ResourcesResource(resourcesUseCase, resourceDtoAssembler);
 
     // Baby
     private static final BabyAssembler babyAssembler = new BabyAssembler();
     private static final Breedable breedable = new BabyBreedableClient();
-    private static final BabyUseCase babyUseCase = new BabyUseCase(herdRepository, babyAssembler, actionRepository, actionFactory, dinosaurFactory, breedable);
+    private static final BabyUseCase babyUseCase = new BabyUseCase(herdRepository, babyAssembler, actionFactory, dinosaurFactory, breedable, gameRepository);
 
     private static final BabyDtoAssembler babyDtoAssembler = new BabyDtoAssembler();
     private static final BabyResource createBabyResource = new BabyResource(babyUseCase, babyDtoAssembler);
