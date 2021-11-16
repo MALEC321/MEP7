@@ -17,6 +17,9 @@ import ca.ulaval.glo4002.game.controllers.exceptionMappers.*;
 import ca.ulaval.glo4002.game.controllers.resources.ResourcesResource;
 import ca.ulaval.glo4002.game.controllers.resources.dtos.ResourcesAssembler;
 import ca.ulaval.glo4002.game.controllers.resources.dtos.ResourceDtoAssembler;
+import ca.ulaval.glo4002.game.controllers.sumo.SumoResource;
+import ca.ulaval.glo4002.game.controllers.sumo.SumoUseCase;
+import ca.ulaval.glo4002.game.controllers.sumo.dtos.SumoDtoAssembler;
 import ca.ulaval.glo4002.game.controllers.turn.TurnResource;
 import ca.ulaval.glo4002.game.controllers.turn.dtos.TurnDtoAssembler;
 import ca.ulaval.glo4002.game.domain.actions.ActionFactory;
@@ -82,6 +85,11 @@ public class AppConfig {
     private static final BabyResource createBabyResource = new BabyResource(babyUseCase, babyDtoAssembler);
     private final ResourceConfig config;
 
+    //Sumo
+    SumoUseCase sumoUseCase = new SumoUseCase(herdRepository, actionFactory, actionRepository, dinosaurUseCase);
+    SumoDtoAssembler sumoDtoAssembler = new SumoDtoAssembler();
+    SumoResource sumoResource = new SumoResource(sumoUseCase, sumoDtoAssembler);
+
     public AppConfig() {
         this.config = new ResourceConfig();
     }
@@ -92,6 +100,7 @@ public class AppConfig {
         resources.add(executeTurnResource);
         resources.add(manageDinosaurResource);
         resources.add(createBabyResource);
+        resources.add(sumoResource);
         resources.add(new InvalidResourceExceptionsMapper());
         resources.add(new UnknownExceptionGrabber());
         resources.add(new NotExistentNameExceptionsMapper());

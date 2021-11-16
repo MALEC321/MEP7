@@ -19,6 +19,7 @@ public class Dinosaur {
     private Dinosaur father;
     private boolean isAdult;
     private boolean isDead;
+    private boolean fighting;
 
     public Dinosaur(String name, int weight, String gender, String species) {
         this.name = name;
@@ -183,5 +184,13 @@ public class Dinosaur {
     @Override
     public int hashCode() {
         return Objects.hash(getName());
+    }
+
+    public boolean isFighting() {
+        return fighting;
+    }
+
+    public void fight() {
+        this.fighting = true;
     }
 }

@@ -25,6 +25,21 @@ public class Herd {
         dinosaursByName.remove(dinosaur.getName());
     }
 
+    public void fight(Dinosaur challenger, Dinosaur challengee) {
+        if (challenger.getStrength() > challengee.getStrength()) {
+            challengee.setDead(true);
+            challenger.setHungry(true);
+        }
+        else if (challenger.getStrength() < challengee.getStrength()) {
+            challenger.setDead(true);
+            challengee.setHungry(true);
+        }
+        else {
+            challengee.setHungry(true);
+            challenger.setHungry(true);
+        }
+    }
+
     public List<Dinosaur> findSortedDinosaursByStrengthThenName() {
         List<Dinosaur> copiedDinoList = this.findAllDinosaurs();
 

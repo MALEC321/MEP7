@@ -1,7 +1,5 @@
 package ca.ulaval.glo4002.game.application.dinosaur;
 
-import java.util.List;
-
 import ca.ulaval.glo4002.game.application.dinosaur.dtos.DinosaurAssembler;
 import ca.ulaval.glo4002.game.application.dinosaur.dtos.DinosaurDto;
 import ca.ulaval.glo4002.game.application.exceptions.NotExistentNameException;
@@ -12,6 +10,8 @@ import ca.ulaval.glo4002.game.domain.dinosaur.Dinosaur;
 import ca.ulaval.glo4002.game.domain.dinosaur.DinosaurFactory;
 import ca.ulaval.glo4002.game.domain.dinosaur.Herd;
 import ca.ulaval.glo4002.game.domain.dinosaur.HerdRepository;
+
+import java.util.List;
 
 public class DinosaurUseCase {
     private final DinosaurFactory dinosaurFactory;
