@@ -1,6 +1,6 @@
 package ca.ulaval.glo4002.game.controllers.dinosaur;
 
-import ca.ulaval.glo4002.game.application.dinosaur.DinosaurUseCase;
+import ca.ulaval.glo4002.game.application.dinosaur.DinosaurService;
 import ca.ulaval.glo4002.game.controllers.dinosaur.dtos.DinosaurDtoAssembler;
 import ca.ulaval.glo4002.game.controllers.dinosaur.dtos.weightchange.ChangeWeighDtoAssembler;
 import ca.ulaval.glo4002.game.controllers.dinosaur.dtos.weightchange.ChangeWeightRequest;
@@ -23,7 +23,7 @@ public class DinosaurResourceTest extends JerseyTest {
     private static final String KEY_QUERY_PARAM = "name";
     private static final String DINO_NAME = "test";
     private static final int WEIGHT = 10;
-    private DinosaurUseCase dinosaurUseCase;
+    private DinosaurService dinosaurService;
     private DinosaurDtoAssembler dinosaurDtoAssembler;
     private ChangeWeighDtoAssembler changeWeighDtoAssembler;
 
@@ -41,10 +41,10 @@ public class DinosaurResourceTest extends JerseyTest {
 
     @Override
     protected Application configure() {
-        dinosaurUseCase = Mockito.mock(DinosaurUseCase.class);
+        dinosaurService = Mockito.mock(DinosaurService.class);
         dinosaurDtoAssembler = Mockito.mock(DinosaurDtoAssembler.class);
         changeWeighDtoAssembler = Mockito.mock(ChangeWeighDtoAssembler.class);
-        return new ResourceConfig().register(new DinosaurResource(dinosaurUseCase, dinosaurDtoAssembler, changeWeighDtoAssembler));
+        return new ResourceConfig().register(new DinosaurResource(dinosaurService, dinosaurDtoAssembler, changeWeighDtoAssembler));
     }
 
     @Override

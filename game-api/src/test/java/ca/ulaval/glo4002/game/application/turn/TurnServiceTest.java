@@ -12,7 +12,7 @@ import org.mockito.MockitoAnnotations;
 
 import static org.mockito.Mockito.when;
 
-public class TurnUseCaseTest {
+public class TurnServiceTest {
 
     @Mock
     private PantryRepository resourceRepository;
@@ -26,7 +26,7 @@ public class TurnUseCaseTest {
     private final Dinosaur dinosaurTest = new Dinosaur("DinoTest", 1, "m", "Ankylosaurus");
 
     @InjectMocks
-    private TurnUseCase turnUseCase;
+    private TurnService turnService;
 
     @BeforeEach
     void setUp() {

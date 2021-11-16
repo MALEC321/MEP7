@@ -1,5 +1,6 @@
 package ca.ulaval.glo4002.game.domain.dinosaur;
 
+import ca.ulaval.glo4002.game.application.exceptions.food.NoWaterLeftException;
 import ca.ulaval.glo4002.game.domain.dinosaur.enums.DietType;
 import ca.ulaval.glo4002.game.domain.dinosaur.enums.SpeciesDietsCorrespondances;
 
@@ -88,6 +89,24 @@ public class Dinosaur {
         this.weight = this.weight + weight;
         if (isNotABaby()) {
             this.isAdult = true;
+        }
+    }
+
+    public void eat(OrderForm orderForm) {
+        try {
+            orderForm.removeBurgerQuantity(calculateBurgersNeeds());
+        } catch (NoWaterLeftException exception) {
+            setDead(true);
+        }
+        try {
+            orderForm.removeSaladQuantity(calculateSaladsNeeds());
+        } catch (NoWaterLeftException exception) {
+            setDead(true);
+        }
+        try {
+            orderForm.removeWaterQuantity(calculateWaterNeeds());
+        } catch (NoWaterLeftException exception) {
+            setDead(true);
         }
     }
 

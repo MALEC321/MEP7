@@ -1,5 +1,7 @@
 package ca.ulaval.glo4002.game.domain.resources;
 
+import ca.ulaval.glo4002.game.domain.dinosaur.OrderForm;
+
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.LinkedList;
@@ -39,6 +41,15 @@ public class Pantry implements FoodContainer {
 
     public void addResources(Resources resources) {
         freshResources.get(resources.getType()).add(resources);
+    }
+
+    public void removeQuantity(OrderForm orderForm) {
+        int burgersQuantity = findFreshResources().getResourceQuantity(BURGER);
+        int saladsQuantity = findFreshResources().getResourceQuantity(SALAD);
+        int waterQuantity = findFreshResources().getResourceQuantity(WATER);
+        removeResourceQty(BURGER, orderForm.getBurgerQuantity() <= 0 ? burgersQuantity : burgersQuantity - orderForm.getBurgerQuantity());
+        removeResourceQty(SALAD, orderForm.getSaladQuantity() <= 0 ? saladsQuantity : saladsQuantity - orderForm.getSaladQuantity());
+        removeResourceQty(WATER, orderForm.getBurgerQuantity() <= 0 ? waterQuantity : waterQuantity - orderForm.getWaterQuantity());
     }
 
     @Override

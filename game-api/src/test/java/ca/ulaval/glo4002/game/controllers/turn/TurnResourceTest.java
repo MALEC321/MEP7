@@ -1,6 +1,6 @@
 package ca.ulaval.glo4002.game.controllers.turn;
 
-import ca.ulaval.glo4002.game.application.turn.TurnUseCase;
+import ca.ulaval.glo4002.game.application.turn.TurnService;
 import ca.ulaval.glo4002.game.controllers.turn.dtos.TurnDtoAssembler;
 import ca.ulaval.glo4002.game.controllers.turn.dtos.TurnResponse;
 import org.glassfish.jersey.server.ResourceConfig;
@@ -20,7 +20,7 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 public class TurnResourceTest extends JerseyTest {
-    private TurnUseCase turnUseCase;
+    private TurnService turnService;
     private TurnDtoAssembler turnDtoAssembler;
 
     @BeforeEach
@@ -37,9 +37,9 @@ public class TurnResourceTest extends JerseyTest {
 
     @Override
     protected Application configure() {
-        turnUseCase = Mockito.mock(TurnUseCase.class);
+        turnService = Mockito.mock(TurnService.class);
         turnDtoAssembler = Mockito.mock(TurnDtoAssembler.class);
-        return new ResourceConfig().register(new TurnResource(turnUseCase, turnDtoAssembler));
+        return new ResourceConfig().register(new TurnResource(turnService, turnDtoAssembler));
     }
 
     @Test
@@ -59,7 +59,7 @@ public class TurnResourceTest extends JerseyTest {
                 .post(null);
 
         Assertions.assertEquals(response.readEntity(TurnResponse.class).getTurnNumber(), 1);
-        verify(turnUseCase).executeTurn();
+        verify(turnService).executeTurn();
     }
 
     @Test
@@ -67,7 +67,7 @@ public class TurnResourceTest extends JerseyTest {
         Response response = target("reset").request(MediaType.APPLICATION_JSON_TYPE)
                 .post(null);
 
-        verify(turnUseCase).resetGame();
+        verify(turnService).resetGame();
         Assertions.assertEquals(200, response.getStatus());
     }
 
@@ -76,6 +76,6 @@ public class TurnResourceTest extends JerseyTest {
         target("reset").request(MediaType.APPLICATION_JSON_TYPE)
                 .post(null);
 
-        verify(turnUseCase).resetGame();
+        verify(turnService).resetGame();
     }
 }

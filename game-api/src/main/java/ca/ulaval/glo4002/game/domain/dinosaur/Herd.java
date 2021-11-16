@@ -42,6 +42,22 @@ public class Herd {
         }
     }
 
+    public OrderForm feedDinosaurs(OrderForm orderForm) {
+        for (Dinosaur dinosaur: findSortedDinosaursByStrengthThenName()) {
+            dinosaur.eat(orderForm);
+        }
+        removeAllHungryDinosaur();
+        return orderForm;
+    }
+
+    public void removeAllHungryDinosaur() {
+        for (Dinosaur dinosaur: findAllDinosaurs()) {
+            if (dinosaur.isDead()) {
+                dinosaursByName.remove(dinosaur.getName());
+            }
+        }
+    }
+
     public void clear() {
         dinosaursByName.clear();
     }

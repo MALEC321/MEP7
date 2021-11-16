@@ -5,6 +5,7 @@ import ca.ulaval.glo4002.game.domain.actions.Action;
 import ca.ulaval.glo4002.game.domain.actions.ActionRepository;
 import ca.ulaval.glo4002.game.domain.dinosaur.Herd;
 import ca.ulaval.glo4002.game.domain.dinosaur.HerdRepository;
+import ca.ulaval.glo4002.game.domain.dinosaur.OrderForm;
 import ca.ulaval.glo4002.game.domain.game.Game;
 import ca.ulaval.glo4002.game.domain.game.GameRepository;
 import ca.ulaval.glo4002.game.domain.resources.Pantry;
@@ -18,7 +19,7 @@ import java.util.List;
 
 import static ca.ulaval.glo4002.game.domain.resources.ResourceType.*;
 
-public class TurnUseCase {
+public class TurnService {
     private final TurnFactory turnFactory;
     private final GameRepository gameRepository;
     private final PantryRepository pantryRepository;
@@ -27,7 +28,7 @@ public class TurnUseCase {
     private final ResourcesDistributor resourcesDistributor;
     private final ResourcesFactory resourcesFactory;
 
-    public TurnUseCase(
+    public TurnService(
         TurnFactory turnFactory,
         GameRepository gameRepository,
         PantryRepository pantryRepository,
@@ -72,7 +73,16 @@ public class TurnUseCase {
     }
 
     protected void feedDinosaurs() {
-        resourcesDistributor.feedDinosaurs(pantryRepository.findPantry(), herdRepository.findHerd());
+        Pantry pantry = pantryRepository.findPantry();
+        Herd herd = herdRepository.findHerd();
+        int burgersQuantity = pantry.findFreshResources().getResourceQuantity(BURGER);
+        int saladsQuantity = pantry.findFreshResources().getResourceQuantity(SALAD);
+        int waterQuantity = pantry.findFreshResources().getResourceQuantity(WATER);
+        OrderForm orderForm = new OrderForm(burgersQuantity, saladsQuantity, waterQuantity);
+        orderForm = herd.feedDinosaurs(orderForm);
+        herdRepository.save(herd);
+        pantry.removeQuantity(orderForm);
+        pantryRepository.save(pantry);
     }
 
     protected void removeOrphanedBabyDinosaurs() {

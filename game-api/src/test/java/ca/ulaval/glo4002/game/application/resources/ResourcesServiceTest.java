@@ -1,7 +1,7 @@
 package ca.ulaval.glo4002.game.application.resources;
 
 import ca.ulaval.glo4002.game.application.resources.dtos.ResourcesDto;
-import ca.ulaval.glo4002.game.application.turn.TurnUseCase;
+import ca.ulaval.glo4002.game.application.turn.TurnService;
 import ca.ulaval.glo4002.game.controllers.resources.dtos.ResourcesAssembler;
 import ca.ulaval.glo4002.game.controllers.resources.dtos.ResourceCreationDto;
 import ca.ulaval.glo4002.game.domain.actions.ActionFactory;
@@ -23,13 +23,13 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
 
-public class ResourcesUseCaseTest {
+public class ResourcesServiceTest {
 
     private static final int QYT_BURGER = 4;
     private static final int QYT_SALAD = 5;
     private static final int QYT_WATER = 6;
-    private ResourcesUseCase resourcesUseCase;
-    private TurnUseCase turnUseCase;
+    private ResourcesService resourcesService;
+    private TurnService turnService;
 
     @BeforeEach
     void setUp() {
@@ -45,23 +45,23 @@ public class ResourcesUseCaseTest {
         GameRepository gameRepository = new GameRepositoryInMemory();
         HerdRepository herdRepository = new HerdRepositoryInMemory();
 
-        turnUseCase = new TurnUseCase(turnFactory, gameRepository, resourceRepository, herdRepository, actionRepository, resourcesDistributor, resourcesFactory);
-        resourcesUseCase = new ResourcesUseCase(resourcesGroupFactory, resourceRepository, resourcesAssembler, actionRepository, actionFactory);
+        turnService = new TurnService(turnFactory, gameRepository, resourceRepository, herdRepository, actionRepository, resourcesDistributor, resourcesFactory);
+        resourcesService = new ResourcesService(resourcesGroupFactory, resourceRepository, resourcesAssembler, actionRepository, actionFactory);
     }
 
     @Test
     public void givenResource_whenCreateOne_ActionsListNotEmpty() {
         ResourceCreationDto resourceCreationDto = new ResourceCreationDto(QYT_BURGER, QYT_SALAD, QYT_WATER);
 
-        resourcesUseCase.createResources(resourceCreationDto);
-        List<ResourcesDto> actionList = resourcesUseCase.getAllResources();
+        resourcesService.createResources(resourceCreationDto);
+        List<ResourcesDto> actionList = resourcesService.getAllResources();
 
         assertFalse(actionList.isEmpty());
     }
 
     @Test
     public void givenResource_ZeroCreated_ActionsListIsEmpty() {
-        List<ResourcesDto> actionList = resourcesUseCase.getAllResources();
+        List<ResourcesDto> actionList = resourcesService.getAllResources();
 
         assertFalse(actionList.isEmpty());
     }
@@ -69,7 +69,7 @@ public class ResourcesUseCaseTest {
     @Test
     public void givenResource_OneTurn_ResourceRepoNotEmpty() {
         PantryRepository resourceRepository = new PantryRepositoryInMemory();
-        turnUseCase.executeTurn();
+        turnService.executeTurn();
 
         List<ResourcesGroup> resources = resourceRepository.findPantry().findAll();
 
