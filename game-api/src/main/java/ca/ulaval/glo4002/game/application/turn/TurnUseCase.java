@@ -60,6 +60,8 @@ public class TurnUseCase {
         Turn turn = turnFactory.create(game.nextTurnNumber());
         game.addTurn(turn);
 
+        endTurn(game);
+
         gameRepository.save(game);
     }
 
@@ -85,6 +87,11 @@ public class TurnUseCase {
         pantryRepository.findPantry().decreaseExpirationDate();
         feedDinosaurs();
         removeOrphanedBabyDinosaurs();
+    }
+
+    private void endTurn(Game game) {
+        Turn turn = turnFactory.create(game.nextTurnNumber());
+        game.addTurn(turn);
     }
 
     protected void feedDinosaurs() {
