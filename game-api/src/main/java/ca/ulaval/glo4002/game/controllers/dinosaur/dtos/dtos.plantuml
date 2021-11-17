@@ -93,7 +93,7 @@ title __DTOS's Class Diagram__\n
     }
   
 
-  ca.ulaval.glo4002.game.controllers.dinosaur.dtos.DinosaurDtoAssembler o-- ca.ulaval.glo4002.game.domain.dinosaur.DinosaurFactory : dinosaurFactory
+  ca.ulaval.glo4002.game.controllers.dinosaur.dtos.DinosaurDtoAssembler o-- ca.ulaval.glo4002.game.application.dinosaur.DinosaurFactory : dinosaurFactory
 
 
 right footer
