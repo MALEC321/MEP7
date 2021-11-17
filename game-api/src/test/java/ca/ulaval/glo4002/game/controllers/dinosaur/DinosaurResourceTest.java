@@ -60,8 +60,8 @@ public class DinosaurResourceTest extends JerseyTest {
 	@Test
 	public void givenDinosaurName_whenGetDinosaur_thenReturnedOkStatus(){
 		String name = "dino";
-		DinosaurDto dinosaurDto = new DinosaurDto("dino", 200, "gender", "specie");
-		when(dinosaurUseCase.getDinosaur(name)).thenReturn(anyObject());
+		ca.ulaval.glo4002.game.application.dinosaur.dtos.DinosaurDto dinosaurDto = dinosaurUseCase.getDinosaur(name);
+		when(dinosaurDtoAssembler.toResponse(dinosaurDto)).thenReturn(dinosaurResponseItem);
 
 		Response response = target("dinosaurs/name").request(MediaType.APPLICATION_JSON_TYPE).get();
 
