@@ -1,6 +1,7 @@
 package ca.ulaval.glo4002.game.controllers.baby.dtos;
 
 import ca.ulaval.glo4002.game.application.baby.dtos.BabyDto;
+import ca.ulaval.glo4002.game.controllers.dinosaur.dtos.DinosaurDto;
 import org.junit.Before;
 import org.junit.Test;
 

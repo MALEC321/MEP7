@@ -24,25 +24,19 @@ public class ResourceDtoAssemblerTest {
 
 	@Before
 	public void setup(){
-		resourceCreationDto = new ResourceCreationDto(5,6,8);
 		resourceRequest = new ResourceRequest(5,6,8);
-
-		resourceResponse = new ResourceResponse(15,16,18);
 		resourcesDto = new ResourcesDto(15,16,18);
-
 		resourcesDtoUn = new ResourcesDto(15,6,8);
-		resourcesDtoDeux = new ResourcesDto(5,16,8);
-		resourcesDtoTrois = new ResourcesDto(5,6,18);
+		resourcesDtoDeux = new ResourcesDto(5,16,18);
+		resourcesDtoTrois = new ResourcesDto(5,16,18);
 		resourceDtoAssembler = new ResourceDtoAssembler();
 		resourcesAssembler = new ResourcesAssembler();
-		resourcesResponse = new ResourcesResponse(resourceResponse, resourceResponse, resourceResponse);
-
 	}
 
 	@Test
 	public void givenResourceRequest_whenFromRequest_thenReturnedNewResource(){
 
-		resourceDtoAssembler.fromRequest(resourceRequest);
+		resourceCreationDto = resourceDtoAssembler.fromRequest(resourceRequest);
 
 		assertEquals(resourceRequest.getQtyBurger(), resourceCreationDto.getQtyBurger());
 		assertEquals(resourceRequest.getQtySalad(), resourceCreationDto.getQtySalad());
@@ -52,7 +46,7 @@ public class ResourceDtoAssemblerTest {
 	@Test
 	public void givenResourcesDto_whenToResponse_thenReturnedNewResourceResponse(){
 
-		resourceDtoAssembler.toResponse(resourcesDto);
+		resourceResponse = resourceDtoAssembler.toResponse(resourcesDto);
 
 		assertEquals(resourcesDto.getQtyBurger(), resourceResponse.getQtyBurger());
 		assertEquals(resourcesDto.getQtySalad(), resourceResponse.getQtySalad());
@@ -66,7 +60,7 @@ public class ResourceDtoAssemblerTest {
 		resourcesDtos.add(resourcesDtoDeux);
 		resourcesDtos.add(resourcesDtoTrois);
 
-		resourceDtoAssembler.toResponse(resourcesDtos);
+		resourcesResponse = resourceDtoAssembler.toResponse(resourcesDtos);
 
 		assertEquals(resourcesDtos.get(0).getQtyBurger(), resourcesResponse.getFresh().getQtyBurger());
 		assertEquals(resourcesDtos.get(1).getQtySalad(), resourcesResponse.getConsumed().getQtySalad());
