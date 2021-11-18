@@ -1,17 +1,16 @@
 package ca.ulaval.glo4002.game.controllers.resources.dtos;
 
 public class ResourceRequest {
-    private int qtyBurger;
-    private int qtySalad;
-    private int qtyWater;
+    private final int qtyBurger;
+    private final int qtySalad;
+    private final int qtyWater;
+
+
 
     public ResourceRequest(int qtyBurger, int qtySalad, int qtyWater) {
         this.qtyBurger = qtyBurger;
         this.qtySalad = qtySalad;
         this.qtyWater = qtyWater;
-    }
-
-    public ResourceRequest() {
     }
 
     public int getQtyBurger() {

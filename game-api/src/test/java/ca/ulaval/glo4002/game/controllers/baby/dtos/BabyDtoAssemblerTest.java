@@ -32,7 +32,6 @@ public class BabyDtoAssemblerTest {
 		assertEquals(babyRequest.getMotherName(), babyCreationDto.getMotherName());
 	}
 
-
 	@Test
 	public void givenBabyDto_whenToResponse_thenReturnedNewBabyResponse(){
 
