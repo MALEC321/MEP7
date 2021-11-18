@@ -23,7 +23,7 @@ public class TurnServiceTest {
     @Mock
     private Pantry pantry;
 
-    private final Dinosaur dinosaurTest = new Dinosaur("DinoTest", 1, "m", "Ankylosaurus");
+//    private final Dinosaur dinosaurTest = new Dinosaur("DinoTest", 1, "m", "Ankylosaurus", );
 
     @InjectMocks
     private TurnService turnService;

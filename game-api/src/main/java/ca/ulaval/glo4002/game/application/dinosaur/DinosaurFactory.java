@@ -1,10 +1,13 @@
-package ca.ulaval.glo4002.game.domain.dinosaur;
+package ca.ulaval.glo4002.game.application.dinosaur;
 
-import ca.ulaval.glo4002.game.domain.dinosaur.enums.SpeciesDietsCorrespondances;
 import ca.ulaval.glo4002.game.application.exceptions.DuplicateNameException;
 import ca.ulaval.glo4002.game.application.exceptions.InvalidGenderException;
 import ca.ulaval.glo4002.game.application.exceptions.InvalidSpeciesException;
 import ca.ulaval.glo4002.game.application.exceptions.InvalidWeightException;
+import ca.ulaval.glo4002.game.domain.dinosaur.Dinosaur;
+import ca.ulaval.glo4002.game.domain.dinosaur.Herd;
+import ca.ulaval.glo4002.game.domain.dinosaur.HerdRepository;
+import ca.ulaval.glo4002.game.domain.dinosaur.enums.SpeciesDietsCorrespondances;
 
 public class DinosaurFactory {
     public static final int MIN_WEIGHT = 0;
@@ -31,12 +34,12 @@ public class DinosaurFactory {
             throw new InvalidSpeciesException();
         }
 
-        return new Dinosaur(name, weight, gender, species);
+        return new Dinosaur(name, weight, gender, new DietStrategyFactory().create(species), species);
     }
 
     public Dinosaur create(String name, Dinosaur father, Dinosaur mother, String gender, String species) {
         validateName(name);
-        return new Dinosaur(name, BABY_WEIGHT, gender, species, mother, father);
+        return new Dinosaur(name, BABY_WEIGHT, gender, new DietStrategyFactory().create(species), mother, father, species);
     }
 
     public void validateName(String name) {

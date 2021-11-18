@@ -47,9 +47,9 @@ public class Pantry implements FoodContainer {
         int burgersQuantity = findFreshResources().getResourceQuantity(BURGER);
         int saladsQuantity = findFreshResources().getResourceQuantity(SALAD);
         int waterQuantity = findFreshResources().getResourceQuantity(WATER);
-        removeResourceQty(BURGER, orderForm.getBurgerQuantity() <= 0 ? burgersQuantity : burgersQuantity - orderForm.getBurgerQuantity());
-        removeResourceQty(SALAD, orderForm.getSaladQuantity() <= 0 ? saladsQuantity : saladsQuantity - orderForm.getSaladQuantity());
-        removeResourceQty(WATER, orderForm.getBurgerQuantity() <= 0 ? waterQuantity : waterQuantity - orderForm.getWaterQuantity());
+        removeResourceQty(BURGER, orderForm.getQtyForResourceType(BURGER) <= 0 ? burgersQuantity : burgersQuantity - orderForm.getQtyForResourceType(BURGER));
+        removeResourceQty(SALAD, orderForm.getQtyForResourceType(SALAD) <= 0 ? saladsQuantity : saladsQuantity - orderForm.getQtyForResourceType(SALAD));
+        removeResourceQty(WATER, orderForm.getQtyForResourceType(WATER) <= 0 ? waterQuantity : waterQuantity - orderForm.getQtyForResourceType(WATER));
     }
 
     @Override
