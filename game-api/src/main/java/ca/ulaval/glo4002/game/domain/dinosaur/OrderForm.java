@@ -7,10 +7,17 @@ import java.util.Map;
 import ca.ulaval.glo4002.game.application.exceptions.food.NoFoodsLeftException;
 import ca.ulaval.glo4002.game.domain.resources.ResourceType;
 
-public class OrderForm {
+public class OrderForm { // TODO change to value object
     private final Map<ResourceType, Integer> foodNeeds = new HashMap<>();
 
-    public void addFood(ResourceType resourceType, Integer qty) {
+    public OrderForm(ResourceTypeQuantity... resourcesAndQuantities) {
+        for (ResourceTypeQuantity resourceTypeQuantity : resourcesAndQuantities) {
+            foodNeeds.put(resourceTypeQuantity.getResourceType(), resourceTypeQuantity.getQuantity());
+        }
+    }
+
+    public void incrementFood(ResourceType resourceType, Integer qty) { // TOdo change to find a domain name
+                                                                        // Todo check Pattern builder Pantry report as name
         if (!foodNeeds.containsKey(resourceType)) {
             foodNeeds.put(resourceType, qty);
         } else {
@@ -22,7 +29,7 @@ public class OrderForm {
 
     public void addFoods(ResourceTypeQuantity... resourcesAndQuantities) {
         for (ResourceTypeQuantity resourceTypeQuantity : resourcesAndQuantities) {
-            addFood(resourceTypeQuantity.getResourceType(), resourceTypeQuantity.getQuantity());
+            incrementFood(resourceTypeQuantity.getResourceType(), resourceTypeQuantity.getQuantity());
         }
     }
 

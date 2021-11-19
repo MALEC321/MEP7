@@ -9,18 +9,18 @@ import ca.ulaval.glo4002.game.domain.dinosaur.enums.SpeciesDietsCorrespondances;
 import ca.ulaval.glo4002.game.domain.resources.ResourceType;
 
 public class Dinosaur {
-    private String name;
-    private int weight;
-    private String gender;
-    private int strength;
-    private boolean hungry;
-    private DietStrategy dietStrategy;
-    private DietType diet;
-    private String species;
-    private Dinosaur mother;
-    private Dinosaur father;
-    private boolean isAdult;
-    private boolean isDead;
+    private     String       name;
+    private     int          weight;
+    private     String       gender;
+    private     int          strength;
+    private     boolean      hungry;
+    private     DietStrategy dietStrategy;
+    private     DietType     diet;
+    private     String       species;
+    private     Dinosaur     mother;
+    private     Dinosaur     father;
+    private     boolean      isAdult;
+    private     boolean      isDead;
 
     public Dinosaur(String name, int weight, String gender, DietStrategy dietStrategy, String species) {
         this.name = name;
