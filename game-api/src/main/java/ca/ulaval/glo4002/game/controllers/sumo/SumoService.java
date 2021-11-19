@@ -27,18 +27,17 @@ public class SumoUseCase {
         Herd herd = herdRepository.findHerd();
         Dinosaur challenger = herd.findDinosaurByName(sumoDto.challenger);
         Dinosaur challengee = herd.findDinosaurByName(sumoDto.challengee);
-        Action fightAction = actionFactory.fight(actionRepository.getActionList(), challenger, challengee, herd);
+        Action fightAction = actionFactory.createFight(actionRepository.getActionList(), challenger, challengee, herd);
         actionRepository.save(fightAction);
 
         SumoResponse response = new SumoResponse();
         if (challenger.getStrength() > challengee.getStrength()) {
             response.predictedWinner = challenger.getName();
-        }
-        else if (challenger.getStrength() < challengee.getStrength()) {
+        } else if (challenger.getStrength() < challengee.getStrength()) {
             response.predictedWinner = challengee.getName();
-        }
-        else
+        } else {
             response.predictedWinner = "tie";
+        }
         return response;
     }
 }
