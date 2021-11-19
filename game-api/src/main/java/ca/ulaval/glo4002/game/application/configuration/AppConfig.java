@@ -18,7 +18,7 @@ import ca.ulaval.glo4002.game.controllers.resources.ResourcesResource;
 import ca.ulaval.glo4002.game.controllers.resources.dtos.ResourcesAssembler;
 import ca.ulaval.glo4002.game.controllers.resources.dtos.ResourceDtoAssembler;
 import ca.ulaval.glo4002.game.controllers.sumo.SumoResource;
-import ca.ulaval.glo4002.game.controllers.sumo.SumoUseCase;
+import ca.ulaval.glo4002.game.controllers.sumo.SumoService;
 import ca.ulaval.glo4002.game.controllers.sumo.dtos.SumoDtoAssembler;
 import ca.ulaval.glo4002.game.controllers.turn.TurnResource;
 import ca.ulaval.glo4002.game.controllers.turn.dtos.TurnDtoAssembler;
@@ -86,9 +86,9 @@ public class AppConfig {
     private final ResourceConfig config;
 
     //Sumo
-    SumoUseCase sumoUseCase = new SumoUseCase(herdRepository, actionFactory, actionRepository, dinosaurUseCase);
+    SumoService sumoService = new SumoService(herdRepository, actionFactory, actionRepository, dinosaurUseCase);
     SumoDtoAssembler sumoDtoAssembler = new SumoDtoAssembler();
-    SumoResource sumoResource = new SumoResource(sumoUseCase, sumoDtoAssembler);
+    SumoResource sumoResource = new SumoResource(sumoService, sumoDtoAssembler);
 
     public AppConfig() {
         this.config = new ResourceConfig();

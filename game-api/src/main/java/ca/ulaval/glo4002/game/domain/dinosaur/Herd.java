@@ -1,10 +1,6 @@
 package ca.ulaval.glo4002.game.domain.dinosaur;
 
-import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class Herd {
     private final Map<String, Dinosaur> dinosaursByName = new HashMap<>();
@@ -14,7 +10,15 @@ public class Herd {
     }
 
     public Dinosaur findDinosaurByName(String name) {
+        Dinosaur dinosaur = dinosaursByName.get(name);
         return dinosaursByName.get(name);
+    }
+
+    public boolean dinosaurExists(String name) {
+        if (dinosaursByName.equals(null))
+            return false;
+        else
+            return true;
     }
 
     public void addDinosaur(Dinosaur dinosaur) {
@@ -29,12 +33,10 @@ public class Herd {
         if (challenger.getStrength() > challengee.getStrength()) {
             challengee.setDead(true);
             challenger.setHungry(true);
-        }
-        else if (challenger.getStrength() < challengee.getStrength()) {
+        } else if (challenger.getStrength() < challengee.getStrength()) {
             challenger.setDead(true);
             challengee.setHungry(true);
-        }
-        else {
+        } else {
             challengee.setHungry(true);
             challenger.setHungry(true);
         }

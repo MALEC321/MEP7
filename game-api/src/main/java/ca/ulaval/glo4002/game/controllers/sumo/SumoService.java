@@ -10,13 +10,13 @@ import ca.ulaval.glo4002.game.domain.dinosaur.Dinosaur;
 import ca.ulaval.glo4002.game.domain.dinosaur.Herd;
 import ca.ulaval.glo4002.game.domain.dinosaur.HerdRepository;
 
-public class SumoUseCase {
+public class SumoService {
     private final HerdRepository herdRepository;
     private final ActionFactory actionFactory;
     private final ActionRepository actionRepository;
     private final DinosaurUseCase dinosaurUseCase;
 
-    public SumoUseCase(HerdRepository herdRepository, ActionFactory actionFactory, ActionRepository actionRepository, DinosaurUseCase dinosaurUseCase) {
+    public SumoService(HerdRepository herdRepository, ActionFactory actionFactory, ActionRepository actionRepository, DinosaurUseCase dinosaurUseCase) {
         this.herdRepository = herdRepository;
         this.actionFactory = actionFactory;
         this.actionRepository = actionRepository;

@@ -1,6 +1,9 @@
 package ca.ulaval.glo4002.game.domain.actions;
 
+import ca.ulaval.glo4002.game.application.exceptions.ArmsTooShortException;
+import ca.ulaval.glo4002.game.application.exceptions.DinosaurAlreadyParticipatingException;
 import ca.ulaval.glo4002.game.application.exceptions.MaxCombatsReachedException;
+import ca.ulaval.glo4002.game.application.exceptions.NotExistentNameException;
 import ca.ulaval.glo4002.game.domain.dinosaur.Dinosaur;
 import ca.ulaval.glo4002.game.domain.dinosaur.Herd;
 import ca.ulaval.glo4002.game.domain.resources.Pantry;
@@ -18,14 +21,26 @@ public class ActionFactory {
     }
 
     //Est-ce à la bonne place?
-    public Action fight(List<Action> actions, Dinosaur challenger, Dinosaur challengee, Herd herd) {
+    public Action createFight(List<Action> actions, Dinosaur challenger, Dinosaur challengee, Herd herd) {
         int fightAmount = 0;
-        for (Action action : actions)
-            if (action instanceof FightAction)
+        for (Action action : actions) {
+            if (action instanceof FightAction) {
                 fightAmount++;
-        if (fightAmount == 2)
+            }
+        }
+        if (fightAmount >= 2) {
             throw new MaxCombatsReachedException();
-        else
+        } else if (challenger == null || challengee == null) {
+            throw new NotExistentNameException();
+        } else if (challenger.getSpecies().equals("Tyrannosaurus Rex") || challengee.getSpecies().equals("Tyrannosaurus Rex")) { //Un enum aurait-il été mieux?
+            throw new ArmsTooShortException();
+        } else if (challenger.isFighting() || challengee.isFighting()) {
+            throw new DinosaurAlreadyParticipatingException();
+        } else {
+            challenger.fight();
+            challengee.fight();
+
             return new FightAction(challenger, challengee, herd);
+        }
     }
 }

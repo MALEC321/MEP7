@@ -14,11 +14,11 @@ import javax.ws.rs.core.Response;
 
 @Path("/sumodino")
 public class SumoResource {
-    private final SumoUseCase sumoUseCase;
+    private final SumoService sumoService;
     private final SumoDtoAssembler sumoDtoAssembler;
 
-    public SumoResource(SumoUseCase sumoUseCase, SumoDtoAssembler sumoDtoAssembler) {
-        this.sumoUseCase = sumoUseCase;
+    public SumoResource(SumoService sumoService, SumoDtoAssembler sumoDtoAssembler) {
+        this.sumoService = sumoService;
         this.sumoDtoAssembler = sumoDtoAssembler;
     }
 
@@ -30,7 +30,7 @@ public class SumoResource {
         dto.challengee = sumoRequest.challengee;
         dto.challenger = sumoRequest.challenger;
 
-        SumoResponse response = sumoUseCase.fight(dto);
+        SumoResponse response = sumoService.fight(dto);
         return Response.ok().entity(response).build();
     }
 }
