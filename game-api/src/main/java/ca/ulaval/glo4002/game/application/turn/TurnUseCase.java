@@ -62,20 +62,10 @@ public class TurnUseCase {
     }
 
     protected void addCookItConsequences(Game game) {
-        Resources burgers =  resourcesFactory.create(BURGER, 100);
-        Resources salads =  resourcesFactory.create(SALAD, 250);
-        Resources water =  resourcesFactory.create(WATER, 10000);
-
         Pantry pantry = pantryRepository.findPantry();
-        Action addBurgers = actionFactory.create(burgers, pantry);
-        Action addSalads = actionFactory.create(salads, pantry);
-        Action addWater = actionFactory.create(water, pantry);
-
+        Action addCookIt = actionFactory.create(pantry, resourcesFactory);
         Turn currentTurn = game.currentTurn();
-
-        currentTurn.addAction(addBurgers);
-        currentTurn.addAction(addSalads);
-        currentTurn.addAction(addWater);
+        currentTurn.addAction(addCookIt);
     }
 
     // TODO: Should be end turn Actions
