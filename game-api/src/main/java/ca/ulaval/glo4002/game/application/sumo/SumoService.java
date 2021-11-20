@@ -1,6 +1,5 @@
-package ca.ulaval.glo4002.game.controllers.sumo;
+package ca.ulaval.glo4002.game.application.sumo;
 
-import ca.ulaval.glo4002.game.application.dinosaur.DinosaurUseCase;
 import ca.ulaval.glo4002.game.controllers.sumo.dtos.SumoDto;
 import ca.ulaval.glo4002.game.controllers.sumo.dtos.SumoResponse;
 import ca.ulaval.glo4002.game.domain.actions.Action;
@@ -14,29 +13,27 @@ public class SumoService {
     private final HerdRepository herdRepository;
     private final ActionFactory actionFactory;
     private final ActionRepository actionRepository;
-    private final DinosaurUseCase dinosaurUseCase;
 
-    public SumoService(HerdRepository herdRepository, ActionFactory actionFactory, ActionRepository actionRepository, DinosaurUseCase dinosaurUseCase) {
+    public SumoService(HerdRepository herdRepository, ActionFactory actionFactory, ActionRepository actionRepository) {
         this.herdRepository = herdRepository;
         this.actionFactory = actionFactory;
         this.actionRepository = actionRepository;
-        this.dinosaurUseCase = dinosaurUseCase;
     }
 
     public SumoResponse fight(SumoDto sumoDto) {
         Herd herd = herdRepository.findHerd();
-        Dinosaur challenger = herd.findDinosaurByName(sumoDto.challenger);
-        Dinosaur challengee = herd.findDinosaurByName(sumoDto.challengee);
+        Dinosaur challenger = herd.findDinosaurByName(sumoDto.getChallenger());
+        Dinosaur challengee = herd.findDinosaurByName(sumoDto.getChallengee());
         Action fightAction = actionFactory.createFight(actionRepository.getActionList(), challenger, challengee, herd);
         actionRepository.save(fightAction);
 
-        SumoResponse response = new SumoResponse();
+        SumoResponse response;
         if (challenger.getStrength() > challengee.getStrength()) {
-            response.predictedWinner = challenger.getName();
+            response = new SumoResponse(challenger.getName());
         } else if (challenger.getStrength() < challengee.getStrength()) {
-            response.predictedWinner = challengee.getName();
+            response = new SumoResponse(challengee.getName());
         } else {
-            response.predictedWinner = "tie";
+            response = new SumoResponse("tie");
         }
         return response;
     }
