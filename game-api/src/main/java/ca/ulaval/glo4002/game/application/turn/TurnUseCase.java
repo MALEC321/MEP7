@@ -57,11 +57,7 @@ public class TurnUseCase {
         currentTurn.executeActions();
         turnConsequences();
 
-        Turn turn = turnFactory.create(game.nextTurnNumber());
-        game.addTurn(turn);
-
         endTurn(game);
-
         gameRepository.save(game);
     }
 
