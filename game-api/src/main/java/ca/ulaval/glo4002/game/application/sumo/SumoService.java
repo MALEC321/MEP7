@@ -1,7 +1,7 @@
 package ca.ulaval.glo4002.game.application.sumo;
 
-import ca.ulaval.glo4002.game.controllers.sumo.dtos.SumoDto;
-import ca.ulaval.glo4002.game.controllers.sumo.dtos.SumoResponse;
+import ca.ulaval.glo4002.game.application.sumo.dtos.SumoDto;
+import ca.ulaval.glo4002.game.application.sumo.dtos.SumoResponse;
 import ca.ulaval.glo4002.game.domain.actions.Action;
 import ca.ulaval.glo4002.game.domain.actions.ActionFactory;
 import ca.ulaval.glo4002.game.domain.actions.ActionRepository;

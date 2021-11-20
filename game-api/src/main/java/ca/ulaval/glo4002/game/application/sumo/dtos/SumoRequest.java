@@ -1,4 +1,4 @@
-package ca.ulaval.glo4002.game.controllers.sumo.dtos;
+package ca.ulaval.glo4002.game.application.sumo.dtos;
 
 public class SumoRequest {
     private String challenger;

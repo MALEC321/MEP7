@@ -1,9 +1,9 @@
 package ca.ulaval.glo4002.game.controllers.sumo;
 
 import ca.ulaval.glo4002.game.application.sumo.SumoService;
-import ca.ulaval.glo4002.game.controllers.sumo.dtos.SumoDto;
-import ca.ulaval.glo4002.game.controllers.sumo.dtos.SumoRequest;
-import ca.ulaval.glo4002.game.controllers.sumo.dtos.SumoResponse;
+import ca.ulaval.glo4002.game.application.sumo.dtos.SumoDto;
+import ca.ulaval.glo4002.game.application.sumo.dtos.SumoRequest;
+import ca.ulaval.glo4002.game.application.sumo.dtos.SumoResponse;
 
 import javax.ws.rs.Consumes;
 import javax.ws.rs.POST;
