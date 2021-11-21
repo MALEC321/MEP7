@@ -4,8 +4,6 @@ import ca.ulaval.glo4002.game.application.dinosaur.DinosaurUseCase;
 import ca.ulaval.glo4002.game.application.dinosaur.dtos.DinosaurDto;
 import ca.ulaval.glo4002.game.controllers.dinosaur.dtos.*;
 import ca.ulaval.glo4002.game.controllers.dinosaur.dtos.weightchange.ChangeWeighDtoAssembler;
-import ca.ulaval.glo4002.game.controllers.dinosaur.dtos.weightchange.ChangeWeightDto;
-import ca.ulaval.glo4002.game.controllers.dinosaur.dtos.weightchange.ChangeWeightRequest;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
@@ -49,14 +47,5 @@ public class DinosaurResource {
         DinosaurDto dinosaur = dinosaurUseCase.getDinosaur(name);
         DinosaurResponseItem response = dinosaurDtoAssembler.toResponse(dinosaur);
         return Response.ok().entity(response).build();
-    }
-
-    @PATCH
-    @Consumes(MediaType.APPLICATION_JSON)
-    public Response changeWeight(@QueryParam("name") String name, ChangeWeightRequest changeWeightRequest) {
-        ChangeWeightDto changeWeightDto = changeWeighDtoAssembler.fromRequest(name, changeWeightRequest);
-        //TODO: IMPLEMENTER LA LOGIQUE DANS DINO_USE_CASE
-        dinosaurUseCase.changeDinosaurWeight(changeWeightDto);
-        return Response.ok().build();
     }
 }
