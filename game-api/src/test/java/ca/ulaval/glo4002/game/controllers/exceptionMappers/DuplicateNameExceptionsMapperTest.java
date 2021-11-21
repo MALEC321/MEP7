@@ -5,7 +5,7 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-class DuplicateNameExceptionsMapperTest {
+public class DuplicateNameExceptionsMapperTest {
 
     @Test
     public void givenDuplicateNameException_whenExceptionThrown_thenReturnedBadRequestStatus() {

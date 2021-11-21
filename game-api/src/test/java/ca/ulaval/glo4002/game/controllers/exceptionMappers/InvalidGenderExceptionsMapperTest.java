@@ -5,8 +5,7 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-class InvalidGenderExceptionsMapperTest {
-
+public class InvalidGenderExceptionsMapperTest {
 
     @Test
     public void givenInvalidGenderException_whenExceptionThrown_thenReturnedBadRequestStatus() {
