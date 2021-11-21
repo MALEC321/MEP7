@@ -9,7 +9,7 @@ public class Turn {
     private final TurnNumber turnNumber;
     private List<Action> actions;
 
-    public Turn(TurnNumber turnNumber) {
+    public Turn( TurnNumber turnNumber){
         this.turnNumber = turnNumber;
     }
 

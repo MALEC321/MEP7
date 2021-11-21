@@ -3,13 +3,14 @@ package ca.ulaval.glo4002.game.application.configuration;
 import ca.ulaval.glo4002.game.application.baby.BabyUseCase;
 import ca.ulaval.glo4002.game.application.baby.breed.Breedable;
 import ca.ulaval.glo4002.game.application.baby.dtos.BabyAssembler;
+import ca.ulaval.glo4002.game.application.dinosaur.DinosaurFactory;
 import ca.ulaval.glo4002.game.application.dinosaur.DinosaurUseCase;
 import ca.ulaval.glo4002.game.application.dinosaur.dtos.DinosaurAssembler;
 import ca.ulaval.glo4002.game.application.resources.ResourcesFactory;
 import ca.ulaval.glo4002.game.application.resources.ResourcesGroupFactory;
 import ca.ulaval.glo4002.game.application.resources.ResourcesUseCase;
 import ca.ulaval.glo4002.game.application.sumo.SumoService;
-import ca.ulaval.glo4002.game.application.turn.TurnUseCase;
+import ca.ulaval.glo4002.game.application.turn.TurnService;
 import ca.ulaval.glo4002.game.controllers.baby.BabyResource;
 import ca.ulaval.glo4002.game.controllers.baby.dtos.BabyDtoAssembler;
 import ca.ulaval.glo4002.game.controllers.dinosaur.DinosaurResource;
@@ -23,7 +24,6 @@ import ca.ulaval.glo4002.game.controllers.turn.TurnResource;
 import ca.ulaval.glo4002.game.controllers.turn.dtos.TurnDtoAssembler;
 import ca.ulaval.glo4002.game.domain.actions.ActionFactory;
 import ca.ulaval.glo4002.game.domain.actions.ActionRepository;
-import ca.ulaval.glo4002.game.domain.dinosaur.DinosaurFactory;
 import ca.ulaval.glo4002.game.domain.dinosaur.HerdRepository;
 import ca.ulaval.glo4002.game.domain.dinosaur.enums.SpeciesDietsCorrespondances;
 import ca.ulaval.glo4002.game.domain.game.GameRepository;
@@ -43,7 +43,7 @@ import java.util.Set;
 public class AppConfig {
     // Turn
     private static final TurnFactory turnFactory = new TurnFactory();
-    private static final GameRepository GAME_REPOSITORY = new GameRepositoryInMemory();
+    private static final GameRepository gameRepository = new GameRepositoryInMemory();
     private static final PantryRepository resourceRepository = new PantryRepositoryInMemory();
     private static final ActionRepository actionRepository = new ActionRepositoryInMemory();
     private static final ActionFactory actionFactory = new ActionFactory();
@@ -63,10 +63,10 @@ public class AppConfig {
     private static final DinosaurDtoAssembler dinosaurDtoAssembler = new DinosaurDtoAssembler();
     private static final DinosaurResource manageDinosaurResource = new DinosaurResource(dinosaurUseCase, dinosaurDtoAssembler);
 
-    private static final TurnUseCase turnUseCase = new TurnUseCase(turnFactory, GAME_REPOSITORY, resourceRepository, herdRepository, actionRepository, resourcesDistributor, resourcesFactory);
+    private static final TurnService turnService = new TurnService(turnFactory, gameRepository, resourceRepository, herdRepository, actionRepository, resourcesDistributor, resourcesFactory);
 
     private static final TurnDtoAssembler turnDtoAssembler = new TurnDtoAssembler();
-    private static final TurnResource executeTurnResource = new TurnResource(turnUseCase, turnDtoAssembler);
+    private static final TurnResource executeTurnResource = new TurnResource(turnService, turnDtoAssembler);
 
     private static final ResourcesAssembler resourcesAssembler = new ResourcesAssembler();
     private static final ResourcesUseCase
@@ -103,16 +103,12 @@ public class AppConfig {
         resources.add(new NotExistentNameExceptionsMapper());
         resources.add(new InvalidGenderExceptionsMapper());
         resources.add(new InvalidSpeciesExceptionsMapper());
-        resources.add(new InvalidWeightExceptionsMapper());
         resources.add(new DuplicateNameExceptionsMapper());
         resources.add(new InvalidMotherExceptionsMapper());
         resources.add(new InvalidFatherExceptionsMapper());
         resources.add(new ArmsTooShortExceptionsMapper());
         resources.add(new DinosaurAlreadyParticipatingExceptionsMapper());
         resources.add(new MaxCombatsReachedExceptionsMapper());
-        resources.add(new InvalidBabyWeightChangeExceptionMapper());
-        resources.add(new GrowInvalidWeightExceptionMapper());
-        resources.add(new InvalidWeightChangeExceptionMapper());
         return resources;
     }
 

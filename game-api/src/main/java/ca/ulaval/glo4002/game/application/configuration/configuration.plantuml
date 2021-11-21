@@ -27,7 +27,7 @@ title __CONFIGURATION's Class Diagram__\n
             {static} ~ turnFactory : TurnFactory
             {static} ~ gameRepository : TurnRepository
             {static} ~ turnResource : TurnResource
-            {static} ~ turnUseCase : TurnUseCase
+            {static} ~ turnService : TurnUseCase
         }
       }
     }
