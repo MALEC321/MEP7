@@ -42,16 +42,32 @@ public class Herd {
         }
     }
 
-    public OrderForm feedDinosaurs(OrderForm orderForm) {
-        for (Dinosaur dinosaur: findSortedDinosaursByStrengthThenName()) {
-            dinosaur.eat(orderForm);
+
+    private PantryReport feedAllDinosaurs(PantryReport pantryReport, int index) {
+        List<ResourceTypeQuantity> resourceTypeQuantitiesLeft = findSortedDinosaursByStrengthThenName().get(index).eat(pantryReport);
+        PantryReport updatedPantryReport = new PantryReport(resourceTypeQuantitiesLeft);
+        index++;
+        if (index == findSortedDinosaursByStrengthThenName().size()) {
+            return new PantryReport(resourceTypeQuantitiesLeft);
+        } else {
+            return feedAllDinosaurs(updatedPantryReport, index);
         }
-        removeAllHungryDinosaur();
-        return orderForm;
     }
 
+    public PantryReport feedDinosaurs(PantryReport pantryReport) {
+        int index = 0;
+        PantryReport updatedPantryReport = feedAllDinosaurs(pantryReport, index);
+        removeAllHungryDinosaur();
+        return updatedPantryReport;
+    }
+
+    //            for (Dinosaur dinosaur: findSortedDinosaursByStrengthThenName()) {
+//        resourceTypeQuantitiesLeft = dinosaur.eat(pantryReport);
+//        PantryReport updatedPantryReport = new PantryReport(resourceTypeQuantitiesLeft);
+//        feedDinosaurs(updatedPantryReport);
+//    }
     public void removeAllHungryDinosaur() {
-        for (Dinosaur dinosaur: findAllDinosaurs()) {
+        for (Dinosaur dinosaur : findAllDinosaurs()) {
             if (dinosaur.isDead()) {
                 dinosaursByName.remove(dinosaur.getName());
             }

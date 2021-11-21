@@ -1,7 +1,9 @@
 package ca.ulaval.glo4002.game.domain.resources;
 
-import ca.ulaval.glo4002.game.domain.dinosaur.OrderForm;
+import ca.ulaval.glo4002.game.domain.dinosaur.PantryReport;
+import ca.ulaval.glo4002.game.domain.dinosaur.ResourceTypeQuantity;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.LinkedList;
@@ -29,7 +31,23 @@ public class Pantry implements FoodContainer {
         freshResources.put(WATER, waterQueue);
     }
 
-    public ResourcesGroup findFreshResources() {
+    public PantryReport getFreshResourcesReport() {
+        List<ResourceTypeQuantity> resourceTypes = new ArrayList<>(findFreshResources());
+        return new PantryReport(resourceTypes);
+    }
+    public List<ResourceTypeQuantity> findFreshResources() {
+        List<ResourceTypeQuantity> resourceTypeQuantities = new ArrayList<>();
+        for (Map.Entry<ResourceType, Queue<Resources>> entry : freshResources.entrySet()) {
+            ResourceTypeQuantity resourceTypeQuantity = new ResourceTypeQuantity(entry.getKey());
+            for (Resources resources : entry.getValue()) {
+                resourceTypeQuantity.add(resources.getQuantity());
+            }
+            resourceTypeQuantities.add(resourceTypeQuantity);
+        }
+        return resourceTypeQuantities;
+    }
+
+    public ResourcesGroup findFreshResourcesGroup() {
         ResourcesGroup foundResource = new ResourcesGroup();
         for (Map.Entry<ResourceType, Queue<Resources>> entry : freshResources.entrySet()) {
             for (Resources resources : entry.getValue()) {
@@ -43,13 +61,12 @@ public class Pantry implements FoodContainer {
         freshResources.get(resources.getType()).add(resources);
     }
 
-    public void removeQuantity(OrderForm orderForm) {
-        int burgersQuantity = findFreshResources().getResourceQuantity(BURGER);
-        int saladsQuantity = findFreshResources().getResourceQuantity(SALAD);
-        int waterQuantity = findFreshResources().getResourceQuantity(WATER);
-        removeResourceQty(BURGER, orderForm.getQtyForResourceType(BURGER) <= 0 ? burgersQuantity : burgersQuantity - orderForm.getQtyForResourceType(BURGER));
-        removeResourceQty(SALAD, orderForm.getQtyForResourceType(SALAD) <= 0 ? saladsQuantity : saladsQuantity - orderForm.getQtyForResourceType(SALAD));
-        removeResourceQty(WATER, orderForm.getQtyForResourceType(WATER) <= 0 ? waterQuantity : waterQuantity - orderForm.getQtyForResourceType(WATER));
+    public void removeQuantity(PantryReport updatedPantryReport) {
+        PantryReport actualPantryReport = getFreshResourcesReport();
+        actualPantryReport.getPantryQuantities().forEach((resourceType, resourceTypeQuantity) -> {
+            int actualResourceQuantity = resourceTypeQuantity;
+            removeResourceQty(resourceType, Math.subtractExact(actualResourceQuantity, updatedPantryReport.getQtyForResourceType(resourceType)));
+        });
     }
 
     @Override
@@ -111,6 +128,6 @@ public class Pantry implements FoodContainer {
     }
 
     public List<ResourcesGroup> findAll() {
-        return Arrays.asList(findFreshResources(), expiredResourcesGroup, consumedResourcesGroup);
+        return Arrays.asList(findFreshResourcesGroup(), expiredResourcesGroup, consumedResourcesGroup);
     }
 }

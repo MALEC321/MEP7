@@ -1,19 +1,21 @@
 package ca.ulaval.glo4002.game.domain.dinosaur;
 
-import ca.ulaval.glo4002.game.domain.dinosaur.enums.DietMultiplicand;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
+import java.util.Arrays;
+import java.util.List;
 
 import static ca.ulaval.glo4002.game.domain.resources.ResourceType.*;
 
+import ca.ulaval.glo4002.game.domain.dinosaur.enums.DietMultiplicand;
+
 public class DietStrategyForHerbivore implements DietStrategy {
     @Override
-    public OrderForm calculateFoodNeeds(int weight, boolean isHungry) {
-        OrderForm orderForm = new OrderForm();
-        orderForm.addFoods(new ResourceTypeQuantity(BURGER, 0),
+    public PantryReport calculateFoodNeeds(int weight, boolean isHungry) {
+        List<ResourceTypeQuantity> resourceTypeQuantities = Arrays.asList(new ResourceTypeQuantity(BURGER, 0),
             new ResourceTypeQuantity(SALAD, calculateSaladNeeds(weight, isHungry)),
             new ResourceTypeQuantity(WATER, calculateWaterNeeds(weight, isHungry)));
-        return orderForm;
+        return new PantryReport(resourceTypeQuantities);
     }
 
     public int calculateWaterNeeds(int weight, boolean isHungry) {

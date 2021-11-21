@@ -30,7 +30,7 @@ public class ResourcesGroup {
         return resources;
     }
 
-    public void addResource(ResourceType type, int quantity) {
+    public void addResource(ResourceType type,int quantity) {
         resources.get(type).addQuantity(quantity);
     }
 

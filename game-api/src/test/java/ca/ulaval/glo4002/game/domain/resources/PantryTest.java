@@ -19,29 +19,29 @@ public class PantryTest {
         pantry.addResources(resourcesFactory.create(WATER, 1000));
     }
 
-    @Test
-    void whenResourcesAreAdded_canTheyBeFound() {
-        assertEquals(50, pantry.findFreshResources().getResourceQuantity(BURGER));
-    }
-
-    @Test
-    void whenAddingTwoResourceToPantry_shouldIncrementQueue() {
-        pantry.addResources(resourcesFactory.create(SALAD, 50));
-        assertEquals(450, pantry.findFreshResources().getResourceQuantity(SALAD));
-
-    }
-
-    @Test
-    void whenDrinkingWater_shouldDecrementFreshQueue() {
-        pantry.removeResourceQty(WATER, 100);
-        assertEquals(900, pantry.findFreshResources().getResourceQuantity(WATER));
-    }
-
-    @Test
-    void whenEatingTooMuchBurger_shouldDecrementBurgerQueueToZero() {
-        pantry.removeResourceQty(BURGER, 100);
-        assertEquals(0, pantry.findFreshResources().getResourceQuantity(BURGER));
-    }
+//    @Test
+//    void whenResourcesAreAdded_canTheyBeFound() {
+//        assertEquals(50, pantry.findFreshResources().getResourceQuantity(BURGER));
+//    }
+//
+//    @Test
+//    void whenAddingTwoResourceToPantry_shouldIncrementQueue() {
+//        pantry.addResources(resourcesFactory.create(SALAD, 50));
+//        assertEquals(450, pantry.findFreshResources().getResourceQuantity(SALAD));
+//
+//    }
+//
+//    @Test
+//    void whenDrinkingWater_shouldDecrementFreshQueue() {
+//        pantry.removeResourceQty(WATER, 100);
+//        assertEquals(900, pantry.findFreshResources().getResourceQuantity(WATER));
+//    }
+//
+//    @Test
+//    void whenEatingTooMuchBurger_shouldDecrementBurgerQueueToZero() {
+//        pantry.removeResourceQty(BURGER, 100);
+//        assertEquals(0, pantry.findFreshResources().getResourceQuantity(BURGER));
+//    }
 
 //    @Test
 //    void whenEatingSalad_shouldIncrementConsumedResources() {

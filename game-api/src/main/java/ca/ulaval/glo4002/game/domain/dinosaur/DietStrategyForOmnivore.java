@@ -2,6 +2,8 @@ package ca.ulaval.glo4002.game.domain.dinosaur;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
+import java.util.Arrays;
+import java.util.List;
 
 import static ca.ulaval.glo4002.game.domain.resources.ResourceType.*;
 
@@ -9,12 +11,11 @@ import ca.ulaval.glo4002.game.domain.dinosaur.enums.DietMultiplicand;
 
 public class DietStrategyForOmnivore implements DietStrategy {
     @Override
-    public OrderForm calculateFoodNeeds(int weight, boolean isHungry) {
-        OrderForm orderForm = new OrderForm();
-        orderForm.addFoods(new ResourceTypeQuantity(BURGER, calculateBurgersNeeds(weight, isHungry)),
+    public PantryReport calculateFoodNeeds(int weight, boolean isHungry) {
+        List<ResourceTypeQuantity> resourceTypeQuantities = Arrays.asList(new ResourceTypeQuantity(BURGER, calculateBurgersNeeds(weight, isHungry)),
             new ResourceTypeQuantity(SALAD, calculateSaladsNeeds(weight, isHungry)),
             new ResourceTypeQuantity(WATER, calculateWaterNeeds(weight, isHungry)));
-        return orderForm;
+        return new PantryReport(resourceTypeQuantities);
     }
 
     public int calculateWaterNeeds(int weight, boolean isHungry) {

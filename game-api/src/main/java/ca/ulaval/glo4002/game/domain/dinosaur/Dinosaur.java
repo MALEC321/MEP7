@@ -1,27 +1,26 @@
 package ca.ulaval.glo4002.game.domain.dinosaur;
 
-import ca.ulaval.glo4002.game.application.exceptions.food.NoFoodsLeftException;
-import ca.ulaval.glo4002.game.domain.dinosaur.enums.DietType;
-import ca.ulaval.glo4002.game.domain.dinosaur.enums.SpeciesDietsCorrespondances;
-import ca.ulaval.glo4002.game.domain.resources.ResourceType;
-
 import java.math.BigDecimal;
 import java.math.RoundingMode;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
+import ca.ulaval.glo4002.game.domain.dinosaur.enums.DietType;
+import ca.ulaval.glo4002.game.domain.dinosaur.enums.SpeciesDietsCorrespondances;
 
 public class Dinosaur {
-    private     String       name;
-    private     int          weight;
-    private     String       gender;
-    private     int          strength;
-    private     boolean      hungry;
-    private     DietStrategy dietStrategy;
-    private     DietType     diet;
-    private     String       species;
-    private     Dinosaur     mother;
-    private     Dinosaur     father;
-    private     boolean      isAdult;
-    private     boolean      isDead;
+    private String name;
+    private int weight;
+    private String gender;
+    private int strength;
+    private boolean hungry;
+    private DietStrategy dietStrategy;
+    private DietType diet;
+    private String species;
+    private Dinosaur mother;
+    private Dinosaur father;
+    private boolean isAdult;
+    private boolean isDead;
 
     public Dinosaur(String name, int weight, String gender, DietStrategy dietStrategy, String species) {
         this.name = name;
@@ -51,7 +50,8 @@ public class Dinosaur {
         this.isDead = false;
     }
 
-    public Dinosaur() {}
+    public Dinosaur() {
+    }
 
     public String getName() {
         return name;
@@ -77,16 +77,20 @@ public class Dinosaur {
         this.hungry = isHungry;
     }
 
-    public void eat(OrderForm orderForm) {
-        for (ResourceType resourceType : orderForm.getResourcesTypes()) {
-            try {
-                int resourceQuantityNeeded = dietStrategy.calculateFoodNeeds(weight, isHungry()).getQtyForResourceType(resourceType);
-                orderForm.removeQuantityForResource(resourceType, resourceQuantityNeeded);
-            } catch (NoFoodsLeftException exception) {
+    public List<ResourceTypeQuantity> eat(PantryReport pantryReport) {
+        List<ResourceTypeQuantity> resourceTypeQuantitiesLeft = new ArrayList<>();
+        pantryReport.getPantryQuantities().forEach((resourceType, resourceTypeQuantity) -> {
+            int resourceQuantityNeeded = dietStrategy.calculateFoodNeeds(weight, isHungry()).getQtyForResourceType(resourceType);
+            int resourceQuantityLeft = 0;
+            if (resourceTypeQuantity < resourceQuantityNeeded) {
                 setDead(true);
+            } else {
+                resourceQuantityLeft = resourceTypeQuantity - resourceQuantityNeeded;
             }
-        }
+            resourceTypeQuantitiesLeft.add(new ResourceTypeQuantity(resourceType, resourceQuantityLeft));
+        });
         setHungry(false);
+        return resourceTypeQuantitiesLeft;
     }
 
     public boolean isDead() {

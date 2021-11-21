@@ -4,11 +4,16 @@ import ca.ulaval.glo4002.game.domain.resources.ResourceType;
 
 public class ResourceTypeQuantity {
     private final ResourceType resourceType;
-    private final int quantity;
+    private int quantity;
 
     public ResourceTypeQuantity(ResourceType resourceType, int quantity) {
         this.resourceType = resourceType;
         this.quantity = quantity;
+    }
+
+    public ResourceTypeQuantity(ResourceType resourceType) {
+        this.resourceType = resourceType;
+        this.quantity = 0;
     }
 
     public ResourceType getResourceType() {
@@ -17,5 +22,8 @@ public class ResourceTypeQuantity {
 
     public int getQuantity() {
         return quantity;
+    }
+    public void add(int quantity) {
+        this.quantity += quantity;
     }
 }
