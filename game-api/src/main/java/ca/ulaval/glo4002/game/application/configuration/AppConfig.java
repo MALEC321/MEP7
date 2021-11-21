@@ -3,38 +3,36 @@ package ca.ulaval.glo4002.game.application.configuration;
 import ca.ulaval.glo4002.game.application.baby.BabyUseCase;
 import ca.ulaval.glo4002.game.application.baby.breed.Breedable;
 import ca.ulaval.glo4002.game.application.baby.dtos.BabyAssembler;
+import ca.ulaval.glo4002.game.application.dinosaur.DinosaurFactory;
 import ca.ulaval.glo4002.game.application.dinosaur.DinosaurUseCase;
 import ca.ulaval.glo4002.game.application.dinosaur.dtos.DinosaurAssembler;
+import ca.ulaval.glo4002.game.application.resources.ResourcesFactory;
 import ca.ulaval.glo4002.game.application.resources.ResourcesGroupFactory;
 import ca.ulaval.glo4002.game.application.resources.ResourcesUseCase;
-import ca.ulaval.glo4002.game.application.resources.ResourcesFactory;
 import ca.ulaval.glo4002.game.application.turn.TurnUseCase;
 import ca.ulaval.glo4002.game.controllers.baby.BabyResource;
 import ca.ulaval.glo4002.game.controllers.baby.dtos.BabyDtoAssembler;
 import ca.ulaval.glo4002.game.controllers.dinosaur.DinosaurResource;
 import ca.ulaval.glo4002.game.controllers.dinosaur.dtos.DinosaurDtoAssembler;
-import ca.ulaval.glo4002.game.controllers.dinosaur.dtos.weightchange.ChangeWeighDtoAssembler;
 import ca.ulaval.glo4002.game.controllers.exceptionMappers.*;
 import ca.ulaval.glo4002.game.controllers.resources.ResourcesResource;
-import ca.ulaval.glo4002.game.controllers.resources.dtos.ResourcesAssembler;
 import ca.ulaval.glo4002.game.controllers.resources.dtos.ResourceDtoAssembler;
+import ca.ulaval.glo4002.game.controllers.resources.dtos.ResourcesAssembler;
 import ca.ulaval.glo4002.game.controllers.turn.TurnResource;
 import ca.ulaval.glo4002.game.controllers.turn.dtos.TurnDtoAssembler;
 import ca.ulaval.glo4002.game.domain.actions.ActionFactory;
 import ca.ulaval.glo4002.game.domain.actions.ActionRepository;
-import ca.ulaval.glo4002.game.application.dinosaur.DinosaurFactory;
 import ca.ulaval.glo4002.game.domain.dinosaur.HerdRepository;
 import ca.ulaval.glo4002.game.domain.dinosaur.enums.SpeciesDietsCorrespondances;
+import ca.ulaval.glo4002.game.domain.game.GameRepository;
 import ca.ulaval.glo4002.game.domain.resources.PantryRepository;
 import ca.ulaval.glo4002.game.domain.resources.ResourcesDistributor;
 import ca.ulaval.glo4002.game.domain.turn.TurnFactory;
-import ca.ulaval.glo4002.game.domain.game.GameRepository;
 import ca.ulaval.glo4002.game.infrastructure.client.BabyBreedableClient;
 import ca.ulaval.glo4002.game.infrastructure.persistence.actions.ActionRepositoryInMemory;
 import ca.ulaval.glo4002.game.infrastructure.persistence.dinosaur.HerdRepositoryInMemory;
 import ca.ulaval.glo4002.game.infrastructure.persistence.resources.PantryRepositoryInMemory;
 import ca.ulaval.glo4002.game.infrastructure.persistence.turn.GameRepositoryInMemory;
-
 import org.glassfish.jersey.server.ResourceConfig;
 
 import java.util.HashSet;
@@ -61,8 +59,7 @@ public class AppConfig {
     private static final DinosaurUseCase dinosaurUseCase = new DinosaurUseCase(dinosaurFactory, herdRepository, dinosaurAssembler, actionRepository, actionFactory);
 
     private static final DinosaurDtoAssembler dinosaurDtoAssembler = new DinosaurDtoAssembler();
-    private static final ChangeWeighDtoAssembler changeWeighDtoAssembler= new ChangeWeighDtoAssembler();
-    private static final DinosaurResource manageDinosaurResource = new DinosaurResource(dinosaurUseCase, dinosaurDtoAssembler, changeWeighDtoAssembler);
+    private static final DinosaurResource manageDinosaurResource = new DinosaurResource(dinosaurUseCase, dinosaurDtoAssembler);
 
     private static final TurnUseCase turnUseCase = new TurnUseCase(turnFactory, GAME_REPOSITORY, resourceRepository, herdRepository, actionRepository, resourcesDistributor, resourcesFactory);
 
