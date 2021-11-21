@@ -48,7 +48,7 @@ public class ResourcesUseCase {
         Game game = gameRepository.findGame();
         for (Resources resources : resourcesGroup.getResources().values()) {
             if (!resources.isEmpty()) {
-                Action addResources = actionFactory.create(resources, pantryRepository.findPantry());
+                Action addResources = actionFactory.createAddResourceAction(resources, pantryRepository.findPantry());
                 game.currentTurn().addAction(addResources);
             }
         }

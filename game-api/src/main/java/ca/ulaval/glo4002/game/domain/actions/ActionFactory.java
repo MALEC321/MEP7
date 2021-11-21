@@ -9,27 +9,27 @@ import ca.ulaval.glo4002.game.domain.resources.Resources;
 import ca.ulaval.glo4002.game.domain.resources.ResourcesDistributor;
 
 public class ActionFactory {
-    public Action create(Dinosaur dinosaur, Herd herd) {
+    public Action createAddDinoAction(Dinosaur dinosaur, Herd herd) {
         return new AddDino(dinosaur, herd);
     }
 
-    public Action create(Resources resources, Pantry pantry) {
+    public Action createAddResourceAction(Resources resources, Pantry pantry) {
         return new AddResource(resources, pantry);
     }
 
-    public Action create(Pantry pantry, ResourcesFactory resourcesFactory) {
+    public Action createCookItAction(Pantry pantry, ResourcesFactory resourcesFactory) {
         return new CookItAction(pantry, resourcesFactory);
     }
 
-    public Action create(Pantry pantry) {
-        return new DecreaseResourcesExpiration(pantry);
+    public Action createRemoveAllExpiredResourcesAction(Pantry pantry) {
+        return new RemoveAllExpiredResourcesAction(pantry);
     }
 
-    public Action create(ResourcesDistributor resourcesDistributor, FoodContainer foodContainer, Herd herd) {
-        return new FeedDinosaurs(resourcesDistributor, foodContainer, herd);
+    public Action createRemoveAllEmptyResourcesAction(Pantry pantry) {
+        return new RemoveAllEmptyResourcesAction(pantry);
     }
 
-    public Action create(Herd herd) {
+    public Action createRemoveOrphanedBabyDinosaursAction(Herd herd) {
         return new RemoveOrphanedBabyDinosaurs(herd);
     }
 }

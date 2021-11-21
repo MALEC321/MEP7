@@ -38,7 +38,7 @@ public class DinosaurUseCase {
 
     public void createDinosaur(DinosaurCreationDto dto) {
         Dinosaur dinosaur = dinosaurFactory.create(dto.getName(), dto.getWeight(), dto.getGender(), dto.getSpecies());
-        Action addDinosaurAction = actionFactory.create(dinosaur, herdRepository.findHerd());
+        Action addDinosaurAction = actionFactory.createAddDinoAction(dinosaur, herdRepository.findHerd());
 
         Game game = gameRepository.findGame();
         game.currentTurn().addAction(addDinosaurAction);

@@ -17,10 +17,10 @@ public class CookItAction implements Action{
 
     @Override
     public void execute() {
-        AddCookitAction();
+        addCookitAction();
     }
 
-    private void AddCookitAction() {
+    private void addCookitAction() {
         Resources burgers =  resourcesFactory.create(BURGER, 100);
         Resources salads =  resourcesFactory.create(SALAD, 250);
         Resources water =  resourcesFactory.create(WATER, 10000);

@@ -80,8 +80,6 @@ public class Pantry implements FoodContainer {
     }
 
     public void decreaseExpirationDate() {
-        removeAllEmptyResources();
-        removeAllExpiredResources();
         for (Map.Entry<ResourceType, Queue<Resources>> entry : freshResources.entrySet()) {
             for (Resources resources :  entry.getValue()) {
                 resources.decreaseExpirationDate();

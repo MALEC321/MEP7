@@ -50,7 +50,7 @@ public class BabyUseCase {
 
             Game game = gameRepository.findGame();
 
-            game.currentTurn().addAction(actionFactory.create(baby, herdRepository.findHerd()));
+            game.currentTurn().addAction(actionFactory.createAddDinoAction(baby, herdRepository.findHerd()));
 
             gameRepository.save(game);
         }
