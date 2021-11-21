@@ -42,30 +42,15 @@ public class Herd {
         }
     }
 
-
-    private PantryReport feedAllDinosaurs(PantryReport pantryReport, int index) {
-        List<ResourceTypeQuantity> resourceTypeQuantitiesLeft = findSortedDinosaursByStrengthThenName().get(index).eat(pantryReport);
-        PantryReport updatedPantryReport = new PantryReport(resourceTypeQuantitiesLeft);
-        index++;
-        if (index == findSortedDinosaursByStrengthThenName().size()) {
-            return new PantryReport(resourceTypeQuantitiesLeft);
-        } else {
-            return feedAllDinosaurs(updatedPantryReport, index);
+    public PantryReport feedDinosaurs(final PantryReport pantryReport) {
+        PantryReport updatedPantryReport = pantryReport;
+        for (Dinosaur dinosaur: findSortedDinosaursByStrengthThenName()) {
+            updatedPantryReport = dinosaur.eat(updatedPantryReport);
         }
-    }
-
-    public PantryReport feedDinosaurs(PantryReport pantryReport) {
-        int index = 0;
-        PantryReport updatedPantryReport = feedAllDinosaurs(pantryReport, index);
         removeAllHungryDinosaur();
         return updatedPantryReport;
     }
 
-    //            for (Dinosaur dinosaur: findSortedDinosaursByStrengthThenName()) {
-//        resourceTypeQuantitiesLeft = dinosaur.eat(pantryReport);
-//        PantryReport updatedPantryReport = new PantryReport(resourceTypeQuantitiesLeft);
-//        feedDinosaurs(updatedPantryReport);
-//    }
     public void removeAllHungryDinosaur() {
         for (Dinosaur dinosaur : findAllDinosaurs()) {
             if (dinosaur.isDead()) {

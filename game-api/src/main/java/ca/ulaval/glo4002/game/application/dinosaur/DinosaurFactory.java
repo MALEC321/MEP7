@@ -48,7 +48,7 @@ public class DinosaurFactory {
     }
 
     private void validateWeight(int weight) {
-        if (weight < MIN_ADULT_WEIGHT) {
+            if (weight < MIN_ADULT_WEIGHT) {
             throw new InvalidWeightException();
         }
     }

@@ -77,7 +77,7 @@ public class Dinosaur {
         this.hungry = isHungry;
     }
 
-    public List<ResourceTypeQuantity> eat(PantryReport pantryReport) {
+    public PantryReport eat(PantryReport pantryReport) {
         List<ResourceTypeQuantity> resourceTypeQuantitiesLeft = new ArrayList<>();
         pantryReport.getPantryQuantities().forEach((resourceType, resourceTypeQuantity) -> {
             int resourceQuantityNeeded = dietStrategy.calculateFoodNeeds(weight, isHungry()).getQtyForResourceType(resourceType);
@@ -90,7 +90,7 @@ public class Dinosaur {
             resourceTypeQuantitiesLeft.add(new ResourceTypeQuantity(resourceType, resourceQuantityLeft));
         });
         setHungry(false);
-        return resourceTypeQuantitiesLeft;
+        return new PantryReport(resourceTypeQuantitiesLeft);
     }
 
     public boolean isDead() {
