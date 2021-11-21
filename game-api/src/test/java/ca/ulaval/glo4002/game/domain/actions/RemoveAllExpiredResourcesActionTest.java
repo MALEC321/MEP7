@@ -1,6 +1,5 @@
 package ca.ulaval.glo4002.game.domain.actions;
 
-import ca.ulaval.glo4002.game.application.resources.ResourcesFactory;
 import ca.ulaval.glo4002.game.domain.resources.Pantry;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -10,27 +9,24 @@ import org.mockito.MockitoAnnotations;
 
 import static org.mockito.Mockito.verify;
 
-public class CookItActionTest {
+public class RemoveAllExpiredResourcesActionTest {
 
     @InjectMocks
-    private Action cookItAction;
-
-    @Mock
-    private ResourcesFactory resourcesFactory;
+    private Action removeAllExpiredResources;
 
     @Mock
     private Pantry pantry;
 
     @BeforeEach
     void init() {
-        cookItAction = new CookItAction(pantry, resourcesFactory);
+        removeAllExpiredResources = new RemoveAllExpiredResourcesAction(pantry);
         MockitoAnnotations.initMocks(this);
     }
 
-//    @Test
-//    void givenAddDinoAction_whenExecuting_thenAddDinosaurShouldBeCalled() {
-//        cookItAction.execute();
-//
-//        verify(cookItAction);
-//    }
+    @Test
+    void givenRemoveAllExpiredResourcesAction_whenExecuting_thenRemoveAllExpiredResourcesShouldBeCalled() {
+        removeAllExpiredResources.execute();
+
+        verify(pantry).removeAllExpiredResources();
+    }
 }

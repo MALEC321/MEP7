@@ -12,6 +12,14 @@ public class AddDino implements Action {
         this.herd = herd;
     }
 
+    public Dinosaur getDinosaur() {
+        return dinosaur;
+    }
+
+    public Herd getHerd() {
+        return herd;
+    }
+
     @Override
     public void execute() {
         herd.addDinosaur(dinosaur);
