@@ -44,7 +44,7 @@ public class TurnUseCase {
         Game game = gameRepository.findGame();
         Turn currentTurn = game.currentTurn();
 
-        turnConsequences(game);
+        resourcesConsequences(game);
         currentTurn.executeActions();
 
         feedDinosaurs();
@@ -67,7 +67,7 @@ public class TurnUseCase {
         herdRepository.deleteAll();
     }
 
-    private void turnConsequences(Game game) {
+    private void resourcesConsequences(Game game) {
         addCookItConsequences(game);
         addRemoveAllExpiredResourcesAction(game);
         addRemoveAllEmptyResourcesAction(game);
@@ -106,7 +106,7 @@ public class TurnUseCase {
         resourcesDistributor.feedDinosaurs(pantryRepository.findPantry(), herdRepository.findHerd());
     }
 
-    private void decreaseResourcesExpirationDate(){
+    private void decreaseResourcesExpirationDate() {
         Pantry pantry = pantryRepository.findPantry();
         pantry.decreaseExpirationDate();
     }

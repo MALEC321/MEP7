@@ -1,11 +1,6 @@
 package ca.ulaval.glo4002.game.domain.resources;
 
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Map;
-import java.util.Queue;
+import java.util.*;
 
 import static ca.ulaval.glo4002.game.domain.resources.ResourceType.*;
 

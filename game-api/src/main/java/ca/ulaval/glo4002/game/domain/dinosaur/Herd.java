@@ -1,10 +1,6 @@
 package ca.ulaval.glo4002.game.domain.dinosaur;
 
-import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class Herd {
     private final Map<String, Dinosaur> dinosaursByName = new HashMap<>();
