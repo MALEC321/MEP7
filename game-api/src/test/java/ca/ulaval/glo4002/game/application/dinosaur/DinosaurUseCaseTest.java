@@ -3,7 +3,7 @@ package ca.ulaval.glo4002.game.application.dinosaur;
 import ca.ulaval.glo4002.game.application.dinosaur.dtos.DinosaurAssembler;
 import ca.ulaval.glo4002.game.application.exceptions.NotExistentNameException;
 import ca.ulaval.glo4002.game.application.resources.ResourcesFactory;
-import ca.ulaval.glo4002.game.application.turn.TurnUseCase;
+import ca.ulaval.glo4002.game.application.turn.TurnService;
 import ca.ulaval.glo4002.game.controllers.dinosaur.dtos.DinosaurCreationDto;
 import ca.ulaval.glo4002.game.controllers.dinosaur.dtos.DinosaurDtoAssembler;
 import ca.ulaval.glo4002.game.controllers.dinosaur.dtos.DinosaurRequest;
@@ -27,7 +27,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 class DinosaurUseCaseTest {
     private DinosaurUseCase dinosaurUseCase;
     private DinosaurDtoAssembler dinosaurDtoAssembler;
-    private TurnUseCase turnUseCase;
+    private TurnService turnService;
 
     @BeforeEach
     void setUp() {
@@ -46,7 +46,7 @@ class DinosaurUseCaseTest {
         TurnFactory turnFactory = new TurnFactory();
         GameRepository gameRepository = new GameRepositoryInMemory();
         PantryRepository pantryRepository = new PantryRepositoryInMemory();
-        turnUseCase = new TurnUseCase(turnFactory, gameRepository, pantryRepository, herdRepository, actionRepository, resourcesDistributor, resourcesFactory);
+        turnService = new TurnService(turnFactory, gameRepository, pantryRepository, herdRepository, actionRepository, resourcesDistributor, resourcesFactory);
     }
 
     @Test
@@ -55,7 +55,7 @@ class DinosaurUseCaseTest {
 
         DinosaurCreationDto dto = dinosaurDtoAssembler.fromRequest(dinosaurRequest);
         dinosaurUseCase.createDinosaur(dto);
-        turnUseCase.executeTurn();
+        turnService.executeTurn();
 
         assertThrows(NotExistentNameException.class, () ->
             dinosaurUseCase.getDinosaur("Willl"));

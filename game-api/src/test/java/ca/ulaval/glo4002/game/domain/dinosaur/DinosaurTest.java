@@ -200,26 +200,4 @@ class DinosaurTest {
 
         assertFalse(rootMother.areBothParentsDead());
     }
-
-    @Test
-    void givenBabyWithWeight20kg_whenAdding80kg_thenDinoWeightIs100kg() {
-        Dinosaur babyBecomesAdultDino = new Dinosaur("babyBecomesAdultDino", 20, "m",
-                "Megalosaurus");
-
-        babyBecomesAdultDino.addWeight(80);
-
-        assertEquals(100, babyBecomesAdultDino.getWeight());
-    }
-
-    @Test
-    void whenBabyBecomesAdult_thenCannotLooseParents() {
-        Dinosaur father = new Dinosaur("mother", 50000, "f", "Megalosaurus");
-        Dinosaur mother = new Dinosaur("father", 50000, "m", "Megalosaurus");
-        Dinosaur babyBecomesAdultDino = new Dinosaur("babyBecomesAdultDino", 20, "m",
-                "Megalosaurus", mother, father);
-
-        babyBecomesAdultDino.addWeight(80);
-
-        assertFalse(babyBecomesAdultDino.areBothParentsDead());
-    }
 }

@@ -9,7 +9,7 @@ import ca.ulaval.glo4002.game.application.dinosaur.dtos.DinosaurAssembler;
 import ca.ulaval.glo4002.game.application.resources.ResourcesFactory;
 import ca.ulaval.glo4002.game.application.resources.ResourcesGroupFactory;
 import ca.ulaval.glo4002.game.application.resources.ResourcesUseCase;
-import ca.ulaval.glo4002.game.application.turn.TurnUseCase;
+import ca.ulaval.glo4002.game.application.turn.TurnService;
 import ca.ulaval.glo4002.game.controllers.baby.BabyResource;
 import ca.ulaval.glo4002.game.controllers.baby.dtos.BabyDtoAssembler;
 import ca.ulaval.glo4002.game.controllers.dinosaur.DinosaurResource;
@@ -61,10 +61,10 @@ public class AppConfig {
     private static final DinosaurDtoAssembler dinosaurDtoAssembler = new DinosaurDtoAssembler();
     private static final DinosaurResource manageDinosaurResource = new DinosaurResource(dinosaurUseCase, dinosaurDtoAssembler);
 
-    private static final TurnUseCase turnUseCase = new TurnUseCase(turnFactory, GAME_REPOSITORY, resourceRepository, herdRepository, actionRepository, resourcesDistributor, resourcesFactory);
+    private static final TurnService TURN_SERVICE = new TurnService(turnFactory, GAME_REPOSITORY, resourceRepository, herdRepository, actionRepository, resourcesDistributor, resourcesFactory);
 
     private static final TurnDtoAssembler turnDtoAssembler = new TurnDtoAssembler();
-    private static final TurnResource executeTurnResource = new TurnResource(turnUseCase, turnDtoAssembler);
+    private static final TurnResource executeTurnResource = new TurnResource(TURN_SERVICE, turnDtoAssembler);
 
     private static final ResourcesAssembler resourcesAssembler = new ResourcesAssembler();
     private static final ResourcesUseCase

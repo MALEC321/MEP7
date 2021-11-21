@@ -14,7 +14,7 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class GameRepositoryInMemoryTest {
+public class GameRepositoryInMemoryTest {
     TurnNumber firstTurnNumber = new TurnNumber(1);
     TurnNumber secondTurnNumber = new TurnNumber(2);
     private GameRepositoryInMemory turnRepositoryInMemory;
