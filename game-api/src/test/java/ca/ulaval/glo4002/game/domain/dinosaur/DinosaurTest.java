@@ -8,7 +8,6 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
 class DinosaurTest {
-
     private Dinosaur herbivoreFemale;
     private Dinosaur carnivoreMale;
 
@@ -76,7 +75,7 @@ class DinosaurTest {
     }
 
     @Test
-    void given123kgFemaleCarnivore_thenStrengthIsEqualTo277() {//12345678
+    void given123kgFemaleCarnivore_thenStrengthIsEqualTo277() {
         Dinosaur grosPied = new Dinosaur("grosPied", 1, "f", "Velociraptor");
         int expectedStrength = 3;
 
