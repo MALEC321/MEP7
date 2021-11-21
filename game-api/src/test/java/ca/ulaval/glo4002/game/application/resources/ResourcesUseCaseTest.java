@@ -5,14 +5,12 @@ import ca.ulaval.glo4002.game.application.turn.TurnUseCase;
 import ca.ulaval.glo4002.game.controllers.resources.dtos.ResourcesAssembler;
 import ca.ulaval.glo4002.game.controllers.resources.dtos.ResourceCreationDto;
 import ca.ulaval.glo4002.game.domain.actions.ActionFactory;
-import ca.ulaval.glo4002.game.domain.actions.ActionRepository;
 import ca.ulaval.glo4002.game.domain.dinosaur.HerdRepository;
 import ca.ulaval.glo4002.game.domain.resources.PantryRepository;
 import ca.ulaval.glo4002.game.domain.resources.ResourcesDistributor;
 import ca.ulaval.glo4002.game.domain.resources.ResourcesGroup;
 import ca.ulaval.glo4002.game.domain.turn.TurnFactory;
 import ca.ulaval.glo4002.game.domain.game.GameRepository;
-import ca.ulaval.glo4002.game.infrastructure.persistence.actions.ActionRepositoryInMemory;
 import ca.ulaval.glo4002.game.infrastructure.persistence.dinosaur.HerdRepositoryInMemory;
 import ca.ulaval.glo4002.game.infrastructure.persistence.resources.PantryRepositoryInMemory;
 import ca.ulaval.glo4002.game.infrastructure.persistence.turn.GameRepositoryInMemory;
@@ -35,7 +33,6 @@ public class ResourcesUseCaseTest {
         ResourcesGroupFactory resourcesGroupFactory = new ResourcesGroupFactory();
         ResourcesAssembler resourcesAssembler = new ResourcesAssembler();
         PantryRepository resourceRepository = new PantryRepositoryInMemory();
-        ActionRepository actionRepository = new ActionRepositoryInMemory();
         ResourcesDistributor resourcesDistributor = new ResourcesDistributor();
         ActionFactory actionFactory = new ActionFactory();
         ResourcesFactory resourcesFactory = new ResourcesFactory();
@@ -44,7 +41,7 @@ public class ResourcesUseCaseTest {
         GameRepository gameRepository = new GameRepositoryInMemory();
         HerdRepository herdRepository = new HerdRepositoryInMemory();
 
-        turnUseCase = new TurnUseCase(turnFactory, gameRepository, resourceRepository, herdRepository, actionRepository, resourcesDistributor, resourcesFactory, actionFactory);
+        turnUseCase = new TurnUseCase(turnFactory, gameRepository, resourceRepository, herdRepository, resourcesDistributor, resourcesFactory, actionFactory);
         resourcesUseCase = new ResourcesUseCase(resourcesGroupFactory, resourceRepository, resourcesAssembler, actionFactory, gameRepository);
     }
 

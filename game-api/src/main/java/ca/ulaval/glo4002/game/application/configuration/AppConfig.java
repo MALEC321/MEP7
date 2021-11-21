@@ -21,7 +21,6 @@ import ca.ulaval.glo4002.game.controllers.resources.dtos.ResourceDtoAssembler;
 import ca.ulaval.glo4002.game.controllers.turn.TurnResource;
 import ca.ulaval.glo4002.game.controllers.turn.dtos.TurnDtoAssembler;
 import ca.ulaval.glo4002.game.domain.actions.ActionFactory;
-import ca.ulaval.glo4002.game.domain.actions.ActionRepository;
 import ca.ulaval.glo4002.game.domain.dinosaur.DinosaurFactory;
 import ca.ulaval.glo4002.game.domain.dinosaur.HerdRepository;
 import ca.ulaval.glo4002.game.domain.dinosaur.enums.SpeciesDietsCorrespondances;
@@ -30,7 +29,6 @@ import ca.ulaval.glo4002.game.domain.resources.ResourcesDistributor;
 import ca.ulaval.glo4002.game.domain.turn.TurnFactory;
 import ca.ulaval.glo4002.game.domain.game.GameRepository;
 import ca.ulaval.glo4002.game.infrastructure.client.BabyBreedableClient;
-import ca.ulaval.glo4002.game.infrastructure.persistence.actions.ActionRepositoryInMemory;
 import ca.ulaval.glo4002.game.infrastructure.persistence.dinosaur.HerdRepositoryInMemory;
 import ca.ulaval.glo4002.game.infrastructure.persistence.resources.PantryRepositoryInMemory;
 import ca.ulaval.glo4002.game.infrastructure.persistence.turn.GameRepositoryInMemory;
@@ -45,7 +43,6 @@ public class AppConfig {
     private static final TurnFactory turnFactory = new TurnFactory();
     private static final GameRepository gameRepository = new GameRepositoryInMemory();
     private static final PantryRepository resourceRepository = new PantryRepositoryInMemory();
-    private static final ActionRepository actionRepository = new ActionRepositoryInMemory();
     private static final ActionFactory actionFactory = new ActionFactory();
     private static final SpeciesDietsCorrespondances speciesDietsCorrespondances = new SpeciesDietsCorrespondances();
     private static final ResourcesDistributor resourcesDistributor = new ResourcesDistributor();
@@ -64,7 +61,7 @@ public class AppConfig {
     private static final ChangeWeighDtoAssembler changeWeighDtoAssembler= new ChangeWeighDtoAssembler();
     private static final DinosaurResource manageDinosaurResource = new DinosaurResource(dinosaurUseCase, dinosaurDtoAssembler, changeWeighDtoAssembler);
 
-    private static final TurnUseCase turnUseCase = new TurnUseCase(turnFactory, gameRepository, resourceRepository, herdRepository, actionRepository, resourcesDistributor, resourcesFactory, actionFactory);
+    private static final TurnUseCase turnUseCase = new TurnUseCase(turnFactory, gameRepository, resourceRepository, herdRepository, resourcesDistributor, resourcesFactory, actionFactory);
 
     private static final TurnDtoAssembler turnDtoAssembler = new TurnDtoAssembler();
     private static final TurnResource executeTurnResource = new TurnResource(turnUseCase, turnDtoAssembler);
