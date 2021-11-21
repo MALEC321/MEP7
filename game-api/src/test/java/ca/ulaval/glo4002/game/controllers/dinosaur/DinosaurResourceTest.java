@@ -1,64 +1,75 @@
 package ca.ulaval.glo4002.game.controllers.dinosaur;
 
-import ca.ulaval.glo4002.game.application.dinosaur.DinosaurService;
+import ca.ulaval.glo4002.game.application.dinosaur.DinosaurUseCase;
+import ca.ulaval.glo4002.game.application.dinosaur.dtos.DinosaurDto;
+import ca.ulaval.glo4002.game.controllers.dinosaur.dtos.DinosaurCreationDto;
 import ca.ulaval.glo4002.game.controllers.dinosaur.dtos.DinosaurDtoAssembler;
-import ca.ulaval.glo4002.game.controllers.dinosaur.dtos.weightchange.ChangeWeighDtoAssembler;
-import ca.ulaval.glo4002.game.controllers.dinosaur.dtos.weightchange.ChangeWeightRequest;
-import org.glassfish.jersey.client.ClientConfig;
-import org.glassfish.jersey.client.HttpUrlConnectorProvider;
+import ca.ulaval.glo4002.game.controllers.dinosaur.dtos.DinosaurResponseItem;
+import ca.ulaval.glo4002.game.controllers.dinosaur.dtos.DinosaursResponse;
 import org.glassfish.jersey.server.ResourceConfig;
 import org.glassfish.jersey.test.JerseyTest;
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
-import org.mockito.Mockito;
+import org.junit.Before;
+import org.junit.Test;
 
-import javax.ws.rs.client.Entity;
 import javax.ws.rs.core.Application;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+import java.util.ArrayList;
+import java.util.List;
+
+import static org.junit.Assert.assertEquals;
+import static org.mockito.Mockito.*;
 
 public class DinosaurResourceTest extends JerseyTest {
-    private static final String KEY_QUERY_PARAM = "name";
-    private static final String DINO_NAME = "test";
-    private static final int WEIGHT = 10;
-    private DinosaurService dinosaurService;
+    private DinosaursResponse dinosaursResponse;
+    private DinosaurUseCase dinosaurUseCase;
     private DinosaurDtoAssembler dinosaurDtoAssembler;
-    private ChangeWeighDtoAssembler changeWeighDtoAssembler;
+    private DinosaurResponseItem dinosaurResponseItem;
 
-    @BeforeEach
-    @Override
-    public void setUp() throws Exception {
-        super.setUp();
-    }
-
-    @AfterEach
-    @Override
-    public void tearDown() throws Exception {
-        super.tearDown();
+    @Before
+    public void setup() {
+        List<DinosaurResponseItem> items = new ArrayList<>();
+        dinosaursResponse = new DinosaursResponse(items);
+        dinosaurResponseItem = new DinosaurResponseItem("dino", 1, "gender", "species");
     }
 
     @Override
     protected Application configure() {
-        dinosaurService = Mockito.mock(DinosaurService.class);
-        dinosaurDtoAssembler = Mockito.mock(DinosaurDtoAssembler.class);
-        changeWeighDtoAssembler = Mockito.mock(ChangeWeighDtoAssembler.class);
-        return new ResourceConfig().register(new DinosaurResource(dinosaurService, dinosaurDtoAssembler, changeWeighDtoAssembler));
-    }
-
-    @Override
-    protected void configureClient(final ClientConfig config) {
-        config.property(HttpUrlConnectorProvider.SET_METHOD_WORKAROUND, true);
+        dinosaurUseCase = mock(DinosaurUseCase.class);
+        dinosaurDtoAssembler = mock(DinosaurDtoAssembler.class);
+        return new ResourceConfig().register(new DinosaurResource(dinosaurUseCase, dinosaurDtoAssembler));
     }
 
     @Test
-    void givenCorrectRequest_whenWantToChangeDinoWeight_thenResponseIsOK() {
-        ChangeWeightRequest changeWeightRequest = new ChangeWeightRequest(WEIGHT);
-        Response response = target("dinosaurs").queryParam(KEY_QUERY_PARAM, DINO_NAME)
-                .request()
-                .build("PATCH", Entity.entity(changeWeightRequest, MediaType.APPLICATION_JSON)).invoke();
+    public void givenDinosaurRequest_whenCreateDinosaur_thenReturnedOkStatus() {
+        DinosaurCreationDto dinosaurCreationDto = new DinosaurCreationDto("dino", 1, "gender", "species");
+        when(dinosaurDtoAssembler.fromRequest(anyObject())).thenReturn(dinosaurCreationDto);
 
-        Assertions.assertEquals(200, response.getStatus());
+        Response response = target("dinosaurs").request(MediaType.APPLICATION_JSON_TYPE).post(null);
+
+        verify(dinosaurUseCase).createDinosaur(dinosaurCreationDto);
+        assertEquals(200, response.getStatus());
+    }
+
+    @Test
+    public void whenGetAllDinosaurs_thenReturnedOkStatus() {
+        List<DinosaurDto> dinosaurDtos = mock(List.class);
+        when(dinosaurUseCase.getAllDinosaurs()).thenReturn(dinosaurDtos);
+        when(dinosaurDtoAssembler.toResponse(dinosaurDtos)).thenReturn(dinosaursResponse);
+
+        Response response = target("dinosaurs").request(MediaType.APPLICATION_JSON_TYPE).get();
+
+        assertEquals(200, response.getStatus());
+    }
+
+    @Test
+    public void givenDinosaurName_whenGetDinosaur_thenReturnedOkStatus() {
+        String name = "dino";
+        DinosaurDto dinosaurDto = dinosaurUseCase.getDinosaur(name);
+        when(dinosaurDtoAssembler.toResponse(dinosaurDto)).thenReturn(dinosaurResponseItem);
+
+        Response response = target("dinosaurs/name").request(MediaType.APPLICATION_JSON_TYPE).get();
+
+        assertEquals(200, response.getStatus());
     }
 }

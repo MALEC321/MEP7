@@ -10,8 +10,8 @@ import ca.ulaval.glo4002.game.domain.dinosaur.HerdRepository;
 import ca.ulaval.glo4002.game.domain.dinosaur.enums.SpeciesDietsCorrespondances;
 
 public class DinosaurFactory {
-    public static final int MIN_WEIGHT = 0;
-    public static final int BABY_WEIGHT = 1;
+    public static final int MIN_ADULT_WEIGHT = 0;
+    public static final int DEFAULT_BABY_WEIGHT = 1;
     private final HerdRepository herdRepository;
     private final SpeciesDietsCorrespondances speciesDietsCorrespondances;
 
@@ -20,29 +20,38 @@ public class DinosaurFactory {
         this.speciesDietsCorrespondances = speciesDietsCorrespondances;
     }
 
-    public Dinosaur create(String name, int weight, String gender, String species) {
+    public Dinosaur createDinosaur(String name, int weight, String gender, String species) {
         validateName(name);
+        validateWeight(weight);
+        validateGender(gender);
+        validateSpecies(species);
+        return new Dinosaur(name, weight, gender, species);
+    }
 
-        if (weight <= MIN_WEIGHT) {
-            throw new InvalidWeightException();
-        }
-        if (!"f".equals(gender) && !"m".equals(gender)) {
-            throw new InvalidGenderException();
-        }
+    public Dinosaur createBabyDinosaur(String name, Dinosaur father, Dinosaur mother, String gender, String species) {
+        validateName(name);
+        return new Dinosaur(name, DEFAULT_BABY_WEIGHT, gender, species, mother, father);
+    }
 
+    private void validateSpecies(String species) {
         if (!speciesDietsCorrespondances.dinosaurTypeExists(species)) {
             throw new InvalidSpeciesException();
         }
-
-        return new Dinosaur(name, weight, gender, new DietStrategyFactory().create(species), species);
     }
 
-    public Dinosaur create(String name, Dinosaur father, Dinosaur mother, String gender, String species) {
-        validateName(name);
-        return new Dinosaur(name, BABY_WEIGHT, gender, new DietStrategyFactory().create(species), mother, father, species);
+    private void validateGender(String gender) {
+        if (!"f".equals(gender) && !"m".equals(gender)) {
+            throw new InvalidGenderException();
+        }
     }
 
-    public void validateName(String name) {
+    private void validateWeight(int weight) {
+        if (weight < MIN_ADULT_WEIGHT) {
+            throw new InvalidWeightException();
+        }
+    }
+
+    private void validateName(String name) {
         Herd herd = herdRepository.findHerd();
         if (herd.findDinosaurByName(name) != null) {
             throw new DuplicateNameException();

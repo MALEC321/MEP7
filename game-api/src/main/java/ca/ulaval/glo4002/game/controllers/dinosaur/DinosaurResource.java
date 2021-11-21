@@ -16,12 +16,10 @@ import java.util.List;
 public class DinosaurResource {
     private final DinosaurService dinosaurService;
     private final DinosaurDtoAssembler dinosaurDtoAssembler;
-    private final ChangeWeighDtoAssembler changeWeighDtoAssembler;
 
     public DinosaurResource(DinosaurService dinosaurService, DinosaurDtoAssembler dinosaurDtoAssembler, ChangeWeighDtoAssembler changeWeighDtoAssembler) {
         this.dinosaurService = dinosaurService;
         this.dinosaurDtoAssembler = dinosaurDtoAssembler;
-        this.changeWeighDtoAssembler = changeWeighDtoAssembler;
     }
 
     @POST
@@ -49,14 +47,5 @@ public class DinosaurResource {
         DinosaurDto dinosaur = dinosaurService.getDinosaur(name);
         DinosaurResponseItem response = dinosaurDtoAssembler.toResponse(dinosaur);
         return Response.ok().entity(response).build();
-    }
-
-    @PATCH
-    @Consumes(MediaType.APPLICATION_JSON)
-    public Response changeWeight(@QueryParam("name") String name, ChangeWeightRequest changeWeightRequest) {
-        ChangeWeightDto changeWeightDto = changeWeighDtoAssembler.fromRequest(name, changeWeightRequest);
-        //TODO: IMPLEMENTER LA LOGIQUE DANS DINO_USE_CASE
-        dinosaurService.changeDinosaurWeight(changeWeightDto);
-        return Response.ok().build();
     }
 }

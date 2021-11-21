@@ -1,9 +1,5 @@
 package ca.ulaval.glo4002.game.application.turn;
 
-import java.util.List;
-
-import static ca.ulaval.glo4002.game.domain.resources.ResourceType.*;
-
 import ca.ulaval.glo4002.game.application.resources.ResourcesFactory;
 import ca.ulaval.glo4002.game.domain.actions.Action;
 import ca.ulaval.glo4002.game.domain.actions.ActionRepository;
@@ -20,7 +16,14 @@ import ca.ulaval.glo4002.game.domain.turn.Turn;
 import ca.ulaval.glo4002.game.domain.turn.TurnFactory;
 import ca.ulaval.glo4002.game.domain.turn.TurnNumber;
 
+import java.util.List;
+
+import static ca.ulaval.glo4002.game.domain.resources.ResourceType.*;
+
 public class TurnService {
+    public static final int TURN_BURGERS_QUANTITY = 100;
+    public static final int TURN_SALADS_QUANTITY = 250;
+    public static final int TURN_WATER_QUANTITY = 10000;
     private final TurnFactory turnFactory;
     private final GameRepository gameRepository;
     private final PantryRepository pantryRepository;
@@ -61,9 +64,9 @@ public class TurnService {
 
     protected void cookIt() {
         Pantry pantry = pantryRepository.findPantry();
-        pantry.addResources(resourcesFactory.create(BURGER, 100));
-        pantry.addResources(resourcesFactory.create(SALAD, 250));
-        pantry.addResources(resourcesFactory.create(WATER, 10000));
+        pantry.addResources(resourcesFactory.create(BURGER, TURN_BURGERS_QUANTITY));
+        pantry.addResources(resourcesFactory.create(SALAD, TURN_SALADS_QUANTITY));
+        pantry.addResources(resourcesFactory.create(WATER, TURN_WATER_QUANTITY));
     }
 
     // TODO: Should be end turn Actions

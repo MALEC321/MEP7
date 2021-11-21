@@ -11,8 +11,7 @@ public class ResourceRequest {
         this.qtyWater = qtyWater;
     }
 
-    public ResourceRequest() {
-    }
+    public ResourceRequest() {}
 
     public int getQtyBurger() {
         return qtyBurger;

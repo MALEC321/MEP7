@@ -22,63 +22,73 @@ public class ResourcesTest {
     }
 
     @Test
-    void whenCreatingBurger_shouldExpireIn4() {
+    void whenCreatingBurger_thenExpireIn4() {
         assertEquals(4, burger.getDaysLeft());
     }
 
     @Test
-    void whenCreatingSalad_shouldExpireIn3() {
+    void whenCreatingSalad_thenExpireIn3() {
         assertEquals(3, salad.getDaysLeft());
     }
 
     @Test
-    void whenCreatingWater_shouldExpireIn10() {
+    void whenCreatingWater_thenExpireIn10() {
         assertEquals(10, water.getDaysLeft());
     }
 
     @Test
-    void whenDecreasingBurgerExpirationDate_shouldExpireIn3() {
+    void whenDecreasingBurgerExpirationDate_thenExpireIn3() {
         burger.decreaseExpirationDate();
+
         assertEquals(3, burger.getDaysLeft());
     }
 
     @Test
-    void whenDecreasingSaladExpirationDate_shouldExpireIn2() {
+    void whenDecreasingSaladExpirationDate_thenExpireIn2() {
         salad.decreaseExpirationDate();
+
         assertEquals(2, salad.getDaysLeft());
     }
 
     @Test
-    void whenDecreasingWaterExpirationDate_shouldExpireIn9() {
+    void whenDecreasingWaterExpirationDate_thenExpireIn9() {
         water.decreaseExpirationDate();
+
         assertEquals(9, water.getDaysLeft());
     }
 
-    /************************ TESTING RESOURCEELEMENTS ************************/
+    @Test
+    void given50Burgers_whenRemoving49_thenQuantityDecreasedTo1() {
+        burger.removeElement(49);
+
+        assertEquals(1, burger.getQuantity());
+    }
 
     @Test
-    void whenRemovingResourceElement_shouldDecreaseQuantity() {
-        burger.removeElement(49); // there's 50 at the start
-        assertEquals(1, burger.getQuantity());
-        burger.removeElement(2);
+    void given50Burgers_whenRemovingMoreThanCapacity_thenQuantityDecreasedTo0() {
+        burger.removeElement(100);
+
         assertEquals(0, burger.getQuantity());
     }
 
     @Test
-    void whenResetingResourceElement_quantityShouldEqualZero() {
+    void whenResetingResourceElement_thenQuantityEqualZero() {
         salad.reset();
+
         assertEquals(0, salad.getQuantity());
     }
 
     @Test
-    void whenSettingResourceElementQuantity_shouldChangeQuantity() {
+    void whenSettingResourceElementQuantity_thenChangeQuantity() {
         water.setQuantity(20);
+
         assertEquals(20, water.getQuantity());
     }
 
     @Test
-    void whenAddingResourceElementQuantity_shouldChangeQuantity() {
+    void whenAddingResourceElementQuantity_thenChangeQuantity() {
         burger.addQuantity(1971);
+
         assertEquals(2021, burger.getQuantity());
     }
 }
