@@ -5,8 +5,6 @@ public class ResourceRequest {
     private int qtySalad;
     private int qtyWater;
 
-
-
     public ResourceRequest(int qtyBurger, int qtySalad, int qtyWater) {
         this.qtyBurger = qtyBurger;
         this.qtySalad = qtySalad;

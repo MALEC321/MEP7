@@ -41,7 +41,7 @@ import java.util.Set;
 public class AppConfig {
     // Turn
     private static final TurnFactory turnFactory = new TurnFactory();
-    private static final GameRepository GAME_REPOSITORY = new GameRepositoryInMemory();
+    private static final GameRepository gameRepository = new GameRepositoryInMemory();
     private static final PantryRepository resourceRepository = new PantryRepositoryInMemory();
     private static final ActionRepository actionRepository = new ActionRepositoryInMemory();
     private static final ActionFactory actionFactory = new ActionFactory();
@@ -61,10 +61,10 @@ public class AppConfig {
     private static final DinosaurDtoAssembler dinosaurDtoAssembler = new DinosaurDtoAssembler();
     private static final DinosaurResource manageDinosaurResource = new DinosaurResource(dinosaurUseCase, dinosaurDtoAssembler);
 
-    private static final TurnService TURN_SERVICE = new TurnService(turnFactory, GAME_REPOSITORY, resourceRepository, herdRepository, actionRepository, resourcesDistributor, resourcesFactory);
+    private static final TurnService turnService = new TurnService(turnFactory, gameRepository, resourceRepository, herdRepository, actionRepository, resourcesDistributor, resourcesFactory);
 
     private static final TurnDtoAssembler turnDtoAssembler = new TurnDtoAssembler();
-    private static final TurnResource executeTurnResource = new TurnResource(TURN_SERVICE, turnDtoAssembler);
+    private static final TurnResource executeTurnResource = new TurnResource(turnService, turnDtoAssembler);
 
     private static final ResourcesAssembler resourcesAssembler = new ResourcesAssembler();
     private static final ResourcesUseCase
