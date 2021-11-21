@@ -3,9 +3,6 @@ package ca.ulaval.glo4002.game.controllers.dinosaur;
 import ca.ulaval.glo4002.game.application.dinosaur.DinosaurService;
 import ca.ulaval.glo4002.game.application.dinosaur.dtos.DinosaurDto;
 import ca.ulaval.glo4002.game.controllers.dinosaur.dtos.*;
-import ca.ulaval.glo4002.game.controllers.dinosaur.dtos.weightchange.ChangeWeighDtoAssembler;
-import ca.ulaval.glo4002.game.controllers.dinosaur.dtos.weightchange.ChangeWeightDto;
-import ca.ulaval.glo4002.game.controllers.dinosaur.dtos.weightchange.ChangeWeightRequest;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
@@ -17,7 +14,7 @@ public class DinosaurResource {
     private final DinosaurService dinosaurService;
     private final DinosaurDtoAssembler dinosaurDtoAssembler;
 
-    public DinosaurResource(DinosaurService dinosaurService, DinosaurDtoAssembler dinosaurDtoAssembler, ChangeWeighDtoAssembler changeWeighDtoAssembler) {
+    public DinosaurResource(DinosaurService dinosaurService, DinosaurDtoAssembler dinosaurDtoAssembler) {
         this.dinosaurService = dinosaurService;
         this.dinosaurDtoAssembler = dinosaurDtoAssembler;
     }

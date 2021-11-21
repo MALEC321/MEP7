@@ -46,6 +46,9 @@ public class DinosaurFactoryTest {
     private HerdRepository herdRepository;
 
     @Mock
+    private DietStrategyFactory dietStrategyFactory;
+
+    @Mock
     private Herd herd;
 
     @Mock
@@ -126,8 +129,8 @@ public class DinosaurFactoryTest {
     }
 
     private void setBabyDinosParents() {
-        mother = new Dinosaur(MOTHER_NAME, PARENT_WEIGHT, FEMALE, PARENT_SPECIES);
-        father = new Dinosaur(FATHER_NAME, PARENT_WEIGHT, MALE, PARENT_SPECIES);
+        mother = new Dinosaur(MOTHER_NAME, PARENT_WEIGHT, FEMALE, dietStrategyFactory.create(PARENT_SPECIES), PARENT_SPECIES);
+        father = new Dinosaur(FATHER_NAME, PARENT_WEIGHT, MALE,dietStrategyFactory.create(PARENT_SPECIES), PARENT_SPECIES);
     }
 
     private void setDuplicatedNameContext() {
@@ -141,7 +144,7 @@ public class DinosaurFactoryTest {
     }
 
     private void createBabyDino() {
-        dinosaurBaby = new Dinosaur(BABYDINO_NAME, DinosaurFactory.DEFAULT_BABY_WEIGHT, MALE, BABY_SPECIES,
-                mother, father);
+        dinosaurBaby = new Dinosaur(BABYDINO_NAME, DinosaurFactory.DEFAULT_BABY_WEIGHT, MALE, dietStrategyFactory.create(PARENT_SPECIES),
+                 mother, father, BABY_SPECIES);
     }
 }

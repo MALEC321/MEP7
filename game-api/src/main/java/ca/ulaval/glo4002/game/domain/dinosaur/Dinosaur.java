@@ -1,12 +1,13 @@
 package ca.ulaval.glo4002.game.domain.dinosaur;
 
-import java.math.BigDecimal;
-import java.math.RoundingMode;
-import java.util.Objects;
 import ca.ulaval.glo4002.game.application.exceptions.food.NoFoodsLeftException;
 import ca.ulaval.glo4002.game.domain.dinosaur.enums.DietType;
 import ca.ulaval.glo4002.game.domain.dinosaur.enums.SpeciesDietsCorrespondances;
 import ca.ulaval.glo4002.game.domain.resources.ResourceType;
+
+import java.math.BigDecimal;
+import java.math.RoundingMode;
+import java.util.Objects;
 
 public class Dinosaur {
     private     String       name;
@@ -50,6 +51,8 @@ public class Dinosaur {
         this.isDead = false;
     }
 
+    public Dinosaur() {}
+
     public String getName() {
         return name;
     }
@@ -72,17 +75,6 @@ public class Dinosaur {
 
     public void setHungry(boolean isHungry) {
         this.hungry = isHungry;
-    }
-
-    private boolean isNotABaby() {
-        return this.weight >= 100;
-    }
-
-    public void addWeight(int weight) {
-        this.weight = this.weight + weight;
-        if (isNotABaby()) {
-            this.isAdult = true;
-        }
     }
 
     public void eat(OrderForm orderForm) {
