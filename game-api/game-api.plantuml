@@ -19,7 +19,7 @@ title __GAME-API's Class Diagram__\n
     
     namespace ca.ulaval.glo4002.game {
       namespace application.turn {
-        class ca.ulaval.glo4002.game.application.turn.TurnUseCase {
+        class ca.ulaval.glo4002.game.application.turn.TurnService {
         }
       }
     }
@@ -401,7 +401,7 @@ title __GAME-API's Class Diagram__\n
     namespace ca.ulaval.glo4002.game {
       namespace exceptions {
         namespace dtos {
-          class ca.ulaval.glo4002.game.controllers.exceptionMappers.dtos.ExceptionResponse {
+          class ca.ulaval.glo4002.game.controllers.exceptionMappers.response.ExceptionResponse {
           }
         }
       }
@@ -632,12 +632,12 @@ title __GAME-API's Class Diagram__\n
   ca.ulaval.glo4002.game.application.resources.ResourcesUseCase o-- ca.ulaval.glo4002.game.domain.resources.ResourceFactory : resourceFactory
   ca.ulaval.glo4002.game.application.resources.ResourcesUseCase o-- ca.ulaval.glo4002.game.domain.resources.PantryRepository : pantryRepository
 >>>>>>> develop
-  ca.ulaval.glo4002.game.application.turn.TurnUseCase o-- ca.ulaval.glo4002.game.domain.actions.ActionRepository : actionRepository
-  ca.ulaval.glo4002.game.application.turn.TurnUseCase o-- ca.ulaval.glo4002.game.domain.dinosaur.DinosaurRepository : dinosaurRepository
-  ca.ulaval.glo4002.game.application.turn.TurnUseCase o-- ca.ulaval.glo4002.game.domain.resourcesGroup.ResourceRepository : pantryRepository
-  ca.ulaval.glo4002.game.application.turn.TurnUseCase o-- ca.ulaval.glo4002.game.controllers.turn.dtos.TurnAssembler : turnAssembler
-  ca.ulaval.glo4002.game.application.turn.TurnUseCase o-- ca.ulaval.glo4002.game.domain.turn.TurnFactory : turnFactory
-  ca.ulaval.glo4002.game.application.turn.TurnUseCase o-- ca.ulaval.glo4002.game.domain.game.GameRepository : gameRepository
+  ca.ulaval.glo4002.game.application.turn.TurnService o-- ca.ulaval.glo4002.game.domain.actions.ActionRepository : actionRepository
+  ca.ulaval.glo4002.game.application.turn.TurnService o-- ca.ulaval.glo4002.game.domain.dinosaur.DinosaurRepository : dinosaurRepository
+  ca.ulaval.glo4002.game.application.turn.TurnService o-- ca.ulaval.glo4002.game.domain.resourcesGroup.ResourceRepository : pantryRepository
+  ca.ulaval.glo4002.game.application.turn.TurnService o-- ca.ulaval.glo4002.game.controllers.turn.dtos.TurnAssembler : turnAssembler
+  ca.ulaval.glo4002.game.application.turn.TurnService o-- ca.ulaval.glo4002.game.domain.turn.TurnFactory : turnFactory
+  ca.ulaval.glo4002.game.application.turn.TurnService o-- ca.ulaval.glo4002.game.domain.game.GameRepository : gameRepository
   ca.ulaval.glo4002.game.configuration.CustomJsonProvider -up-|> org.glassfish.jersey.jackson.internal.jackson.jaxrs.json.JacksonJaxbJsonProvider
   ca.ulaval.glo4002.game.controllers.dinosaur.DinosaurResource o-- ca.ulaval.glo4002.game.controllers.dinosaur.dtos.DinosaurDtoAssembler : dinosaurDtoAssembler
   ca.ulaval.glo4002.game.controllers.dinosaur.DinosaurResource o-- ca.ulaval.glo4002.game.application.dinosaur.DinosaurUseCase : dinosaurUseCase
@@ -648,7 +648,7 @@ title __GAME-API's Class Diagram__\n
   ca.ulaval.glo4002.game.controllers.resourcesGroup.dtos.ResourcesResponse o-- ca.ulaval.glo4002.game.controllers.resourcesGroup.dtos.ResourceResponse : expired
   ca.ulaval.glo4002.game.controllers.resourcesGroup.dtos.ResourcesResponse o-- ca.ulaval.glo4002.game.controllers.resourcesGroup.dtos.ResourceResponse : fresh
   ca.ulaval.glo4002.game.controllers.turn.TurnResource o-- ca.ulaval.glo4002.game.controllers.turn.dtos.TurnDtoAssembler : turnDtoAssembler
-  ca.ulaval.glo4002.game.controllers.turn.TurnResource o-- ca.ulaval.glo4002.game.application.turn.TurnUseCase : turnUseCase
+  ca.ulaval.glo4002.game.controllers.turn.TurnResource o-- ca.ulaval.glo4002.game.application.turn.TurnService : turnService
   ca.ulaval.glo4002.game.domain.actions.AddDino -up-|> ca.ulaval.glo4002.game.domain.actions.Action
   ca.ulaval.glo4002.game.domain.actions.AddResource -up-|> ca.ulaval.glo4002.game.domain.actions.Action
   ca.ulaval.glo4002.game.domain.dinosaur.Dinosaur o-- ca.ulaval.glo4002.game.domain.dinosaur.enums.DietType : diet

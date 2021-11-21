@@ -80,17 +80,6 @@ public class Dinosaur {
         this.hungry = isHungry;
     }
 
-    private boolean isNotABaby() {
-        return this.weight >= 100;
-    }
-
-    public void addWeight(int weight) {
-        this.weight = this.weight + weight;
-        if (isNotABaby()) {
-            this.isAdult = true;
-        }
-    }
-
     public void setDead(boolean dead) {
         isDead = dead;
     }
