@@ -105,7 +105,7 @@ public class AppConfig {
         resources.add(new MaxCombatsReachedExceptionsMapper());
         resources.add(new InvalidBabyWeightChangeExceptionMapper());
         resources.add(new GrowInvalidWeightExceptionMapper());
-        resources.add(new InvalidWeightChangeExceptionMapper());
+        resources.add(new InvalidWeightChangeExceptionsMapper());
         return resources;
     }
 

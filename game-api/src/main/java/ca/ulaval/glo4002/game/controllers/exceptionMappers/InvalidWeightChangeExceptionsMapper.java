@@ -7,7 +7,7 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.ext.ExceptionMapper;
 
-public class InvalidWeightChangeExceptionMapper implements ExceptionMapper<InvalidWeightChangeException> {
+public class InvalidWeightChangeExceptionsMapper implements ExceptionMapper<InvalidWeightChangeException> {
 	@Override
 	public Response toResponse(InvalidWeightChangeException e) {
 		ExceptionResponse exceptionResponse = new ExceptionResponse();
