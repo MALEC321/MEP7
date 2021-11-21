@@ -10,6 +10,10 @@ public class RemoveAllEmptyResourcesAction implements Action {
         this.pantry = pantry;
     }
 
+    public Pantry getPantry() {
+        return pantry;
+    }
+
     @Override
     public void execute() {
         pantry.removeAllEmptyResources();

@@ -12,6 +12,14 @@ public class AddResource implements Action {
         this.pantry = pantry;
     }
 
+    public Resources getResources() {
+        return resources;
+    }
+
+    public Pantry getPantry() {
+        return pantry;
+    }
+
     @Override
     public void execute() {
         pantry.addResources(resources);

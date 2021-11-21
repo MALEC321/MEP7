@@ -15,6 +15,14 @@ public class CookItAction implements Action{
         this.resourcesFactory = resourcesFactory;
     }
 
+    public Pantry getPantry() {
+        return pantry;
+    }
+
+    public ResourcesFactory getResourcesFactory() {
+        return resourcesFactory;
+    }
+
     @Override
     public void execute() {
         addCookitAction();

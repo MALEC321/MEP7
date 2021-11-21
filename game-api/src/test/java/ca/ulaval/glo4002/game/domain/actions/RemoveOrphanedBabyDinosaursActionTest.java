@@ -9,7 +9,7 @@ import org.mockito.MockitoAnnotations;
 
 import static org.mockito.Mockito.verify;
 
-public class RemoveOrphanedBabyDinosaursTest {
+public class RemoveOrphanedBabyDinosaursActionTest {
 
     @InjectMocks
     private Action removeOrphanedBabyDinosaurs;
@@ -19,7 +19,7 @@ public class RemoveOrphanedBabyDinosaursTest {
 
     @BeforeEach
     void init() {
-        removeOrphanedBabyDinosaurs = new RemoveOrphanedBabyDinosaurs(herd);
+        removeOrphanedBabyDinosaurs = new RemoveOrphanedBabyDinosaursAction(herd);
         MockitoAnnotations.initMocks(this);
     }
 
