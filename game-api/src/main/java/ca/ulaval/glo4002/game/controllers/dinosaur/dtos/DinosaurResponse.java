@@ -1,12 +1,12 @@
 package ca.ulaval.glo4002.game.controllers.dinosaur.dtos;
 
-public class DinosaurResponseItem {
+public class DinosaurResponse {
     private final String name;
     private final int weight;
     private final String gender;
     private final String species;
 
-    public DinosaurResponseItem(String name, int weight, String gender, String species) {
+    public DinosaurResponse(String name, int weight, String gender, String species) {
         this.name = name;
         this.weight = weight;
         this.gender = gender;
