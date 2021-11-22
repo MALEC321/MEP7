@@ -23,7 +23,7 @@ public class SumoResource {
     @POST
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
-    public Response createDinosaur(SumoRequest sumoRequest) {
+    public Response dinosaurFight(SumoRequest sumoRequest) {
         SumoDto dto = new SumoDto(sumoRequest.getChallenger(), sumoRequest.getChallengee());
         SumoResponse response = sumoService.fight(dto);
         return Response.ok().entity(response).build();
