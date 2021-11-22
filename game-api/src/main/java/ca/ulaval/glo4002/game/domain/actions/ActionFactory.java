@@ -21,6 +21,15 @@ public class ActionFactory {
     }
 
     public Action createFight(List<Action> actions, Dinosaur challenger, Dinosaur challengee, Herd herd) {
+        validateNumberOfCurrentFights(actions);
+        validateFighters(challenger, challengee);
+        challenger.fight();
+        challengee.fight();
+        return new FightAction(challenger, challengee, herd);
+    }
+
+
+    public void validateNumberOfCurrentFights(List<Action> actions) {
         int numberOfCurrentFights = 0;
         for (Action action : actions) {
             if (action instanceof FightAction) {
@@ -29,16 +38,16 @@ public class ActionFactory {
         }
         if (numberOfCurrentFights >= 2) {
             throw new MaxCombatsReachedException();
-        } else if (challenger == null || challengee == null) {
+        }
+    }
+
+    public void validateFighters(Dinosaur challenger, Dinosaur challengee) {
+        if (challenger == null || challengee == null) {
             throw new NotExistentNameException();
         } else if (challenger.getSpecies().equals("Tyrannosaurus Rex") || challengee.getSpecies().equals("Tyrannosaurus Rex")) { //Un enum aurait-il été mieux?
             throw new ArmsTooShortException();
         } else if (challenger.isFighting() || challengee.isFighting()) {
             throw new DinosaurAlreadyParticipatingException();
-        } else {
-            challenger.fight();
-            challengee.fight();
-            return new FightAction(challenger, challengee, herd);
         }
     }
 }

@@ -63,7 +63,7 @@ class ActionFactoryTest {
         actions.add(action2);
 
         assertThrows(MaxCombatsReachedException.class, () ->
-                actionFactory.createFight(actions, dinoTest1, dinoTest2, herd));
+                actionFactory.validateNumberOfCurrentFights(actions));
 
     }
 
@@ -72,20 +72,20 @@ class ActionFactoryTest {
         Dinosaur nonExistentDino1 = herd.findDinosaurByName("John");
         Dinosaur nonExistentDino2 = herd.findDinosaurByName("Jane");
         assertThrows(NotExistentNameException.class, () ->
-                actionFactory.createFight(actions, nonExistentDino1, nonExistentDino2, herd));
+                actionFactory.validateFighters(nonExistentDino1, nonExistentDino2));
     }
 
     @Test
     void givenTyrannosaurusRex_whenCreatingAFight_thenThrowsArmsTooShortException() {
         assertThrows(ArmsTooShortException.class, () ->
-                actionFactory.createFight(actions, dinoTest1, dinoTestTyrannosaurus, herd));
+                actionFactory.validateFighters(dinoTest1, dinoTestTyrannosaurus));
     }
 
     @Test
     void givenDinosaurWhoIsAlreadyFighting_whenCreatingAFight_thenThrowsDinosaurAlreadyParticipatingException() {
         dinoTest1.setFighting(true);
         assertThrows(DinosaurAlreadyParticipatingException.class, () ->
-                actionFactory.createFight(actions, dinoTest1, dinoTest2, herd));
+                actionFactory.validateFighters(dinoTest1, dinoTest2));
     }
 
     @Test
