@@ -1,10 +1,13 @@
 package ca.ulaval.glo4002.game.domain.dinosaur;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import static ca.ulaval.glo4002.game.domain.dinosaur.enums.DietType.*;
 
 public class Herd {
     private final Map<String, Dinosaur> dinosaursByName = new HashMap<>();
@@ -33,6 +36,21 @@ public class Herd {
         return copiedDinoList;
     }
 
+    private List<Dinosaur> findSortedHerbivoreAndOmnivore(List<Dinosaur> sortedDinosaursByStrengthThenName) {
+        List<Dinosaur> copiedDinoList = new ArrayList<>(sortedDinosaursByStrengthThenName);
+        Collections.reverse(copiedDinoList);
+        copiedDinoList.removeIf(dinosaur -> dinosaur.getDiet() == CARNIVORE);
+
+        return copiedDinoList;
+    }
+
+    private List<Dinosaur> findSortedCarnivoreAndOmnivore(List<Dinosaur> sortedDinosaursByStrengthThenName) {
+        List<Dinosaur> copiedDinoList = new ArrayList<>(sortedDinosaursByStrengthThenName);
+        copiedDinoList.removeIf(dinosaur -> dinosaur.getDiet() == HERBIVORE);
+
+        return copiedDinoList;
+    }
+
     public void removeOrphanedBabyDinosaurs() {
         // Todo make this recursive !
         for (Dinosaur dinosaur : findSortedDinosaursByStrengthThenName()) {
@@ -47,7 +65,6 @@ public class Herd {
         for (Dinosaur dinosaur: findSortedDinosaursByStrengthThenName()) {
             updatedPantryReport = dinosaur.eat(updatedPantryReport);
         }
-        removeAllHungryDinosaur();
         return updatedPantryReport;
     }
 

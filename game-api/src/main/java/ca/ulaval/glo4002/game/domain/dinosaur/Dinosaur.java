@@ -77,6 +77,10 @@ public class Dinosaur {
         this.hungry = isHungry;
     }
 
+    public DietType getDiet() {
+        return diet;
+    }
+
     public PantryReport eat(PantryReport pantryReport) {
         List<ResourceTypeQuantity> resourceTypeQuantitiesLeft = new ArrayList<>();
         pantryReport.getPantryQuantities().forEach((resourceType, resourceTypeQuantity) -> {

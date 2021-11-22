@@ -80,6 +80,7 @@ public class TurnService {
         Herd herd = herdRepository.findHerd();
         PantryReport pantryReport = pantry.getFreshResourcesReport();
         PantryReport updatePantryReport = herd.feedDinosaurs(pantryReport);
+        herdRepository.findHerd().removeAllHungryDinosaur();
         herdRepository.save(herd);
         pantry.removeQuantity(updatePantryReport);
         pantryRepository.save(pantry);
