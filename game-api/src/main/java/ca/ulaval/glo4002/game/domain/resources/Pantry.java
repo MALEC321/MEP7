@@ -64,6 +64,8 @@ public class Pantry implements FoodContainer {
     }
 
     public void removeAllExpiredResources() {
+        removeAllEmptyResources();
+
         for (Map.Entry<ResourceType, Queue<Resources>> entry : freshResources.entrySet()) {
             Queue<Resources> resourcesQueue =  entry.getValue();
             while (resourcesQueue.peek() != null && resourcesQueue.peek().isExpired()) {
