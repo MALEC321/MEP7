@@ -7,8 +7,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import static ca.ulaval.glo4002.game.domain.resources.ResourceType.*;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class ResourcesStateDtoTest {
     private static final int DTO_STATE_BURGERS_QUANTITY = 10;
@@ -47,8 +46,27 @@ public class ResourcesStateDtoTest {
     }
 
     @Test
-    void withdraw() {
+    void givenAResourceStateDto_whenwWithdrawingSaladsFromThatResourceState_thenAResourceStateWithoutBurgersIsReturned() {
 
+        ResourcesStateDto actualResourcesStateDto = resourcesStateDto.withdraw(SALAD);
+
+        assertFalse(actualResourcesStateDto.getPantryQuantities().containsKey(BURGER));
+    }
+
+    @Test
+    void givenAResourceStateDto_whenwWithdrawingBurgersFromThatResourceState_thenAResourceStateWithoutSaladssIsReturned() {
+
+        ResourcesStateDto actualResourcesStateDto = resourcesStateDto.withdraw(SALAD);
+
+        assertFalse(actualResourcesStateDto.getPantryQuantities().containsKey(BURGER));
+    }
+
+    @Test
+    void givenAResourceStateDtoWithAQuantityOfWater_whenwWithdrawingSaladResourceFromThatResourceState_thenAResourceStateWithHalfThatWaterQuantityIsReturned() {
+
+        ResourcesStateDto actualResourcesStateDto = resourcesStateDto.withdraw(SALAD);
+
+        assertTrue(DTO_STATE_WATER_QUANTITY / 2 == actualResourcesStateDto.getQtyForResourceType(WATER));
     }
 
     private void setResourcesStateDtoContext() {
