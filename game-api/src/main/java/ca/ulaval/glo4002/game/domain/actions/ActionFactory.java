@@ -38,7 +38,6 @@ public class ActionFactory {
         } else {
             challenger.fight();
             challengee.fight();
-
             return new FightAction(challenger, challengee, herd);
         }
     }

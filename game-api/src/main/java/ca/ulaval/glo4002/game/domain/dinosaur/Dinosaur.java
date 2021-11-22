@@ -179,6 +179,10 @@ public class Dinosaur {
         return fighting;
     }
 
+    public void setFighting(boolean fighting) {
+        this.fighting = fighting;
+    }
+
     public void fight() {
         this.fighting = true;
     }
