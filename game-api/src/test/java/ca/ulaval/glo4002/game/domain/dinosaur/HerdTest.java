@@ -18,7 +18,6 @@ public class HerdTest {
     private final Dinosaur lastDino = new Dinosaur("aa", 1, "f", DIET_STRATEGY_FOR_HERBIVORE, "Ankylosaurus");
     private Herd herd;
     private List<Dinosaur> dinoInDisorderList;
-    private ResourcesStateDto resourcesStateDtoMock;
 
     @BeforeEach
     void setup() {
