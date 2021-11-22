@@ -20,15 +20,14 @@ public class ActionFactory {
         return new AddResource(resources, pantry);
     }
 
-    //Est-ce à la bonne place?
     public Action createFight(List<Action> actions, Dinosaur challenger, Dinosaur challengee, Herd herd) {
-        int fightAmount = 0;
+        int numberOfCurrentFights = 0;
         for (Action action : actions) {
             if (action instanceof FightAction) {
-                fightAmount++;
+                numberOfCurrentFights++;
             }
         }
-        if (fightAmount >= 2) {
+        if (numberOfCurrentFights >= 2) {
             throw new MaxCombatsReachedException();
         } else if (challenger == null || challengee == null) {
             throw new NotExistentNameException();

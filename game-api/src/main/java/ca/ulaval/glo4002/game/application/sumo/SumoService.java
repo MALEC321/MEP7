@@ -26,7 +26,10 @@ public class SumoService {
         Dinosaur challengee = herd.findDinosaurByName(sumoDto.getChallengee());
         Action fightAction = actionFactory.createFight(actionRepository.getActionList(), challenger, challengee, herd);
         actionRepository.save(fightAction);
+        return predictWinner(challenger, challengee);
+    }
 
+    public SumoResponse predictWinner(Dinosaur challenger, Dinosaur challengee) {
         SumoResponse response;
         if (challenger.getStrength() > challengee.getStrength()) {
             response = new SumoResponse(challenger.getName());
