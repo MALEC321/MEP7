@@ -16,23 +16,23 @@ public class ActionFactory {
         return new AddResource(resources, pantry);
     }
 
-    public CookItAction createCookItAction(Pantry pantry, ResourcesFactory resourcesFactory) {
-        return new CookItAction(pantry, resourcesFactory);
+    public CookIt createCookItAction(Pantry pantry, ResourcesFactory resourcesFactory) {
+        return new CookIt(pantry, resourcesFactory);
     }
 
-    public FeedDinosaursAction createFeedDinosaursAction(ResourcesDistributor resourcesDistributor, Pantry pantry, Herd herd) {
-        return new FeedDinosaursAction(resourcesDistributor, pantry, herd);
+    public FeedDinosaurs createFeedDinosaursAction(ResourcesDistributor resourcesDistributor, Pantry pantry, Herd herd) {
+        return new FeedDinosaurs(resourcesDistributor, pantry, herd);
     }
 
-    public RemoveAllExpiredResourcesAction createRemoveAllExpiredResourcesAction(Pantry pantry) {
-        return new RemoveAllExpiredResourcesAction(pantry);
+    public RemoveExpiredResources createRemoveAllExpiredResourcesAction(Pantry pantry) {
+        return new RemoveExpiredResources(pantry);
     }
 
     public RemoveAllEmptyResourcesAction createRemoveAllEmptyResourcesAction(Pantry pantry) {
         return new RemoveAllEmptyResourcesAction(pantry);
     }
 
-    public RemoveOrphanedBabyDinosaursAction createRemoveOrphanedBabyDinosaursAction(Herd herd) {
-        return new RemoveOrphanedBabyDinosaursAction(herd);
+    public RemoveOrphanedBabyDinosaurs createRemoveOrphanedBabyDinosaursAction(Herd herd) {
+        return new RemoveOrphanedBabyDinosaurs(herd);
     }
 }

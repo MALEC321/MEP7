@@ -6,11 +6,11 @@ import ca.ulaval.glo4002.game.domain.resources.Resources;
 
 import static ca.ulaval.glo4002.game.domain.resources.ResourceType.*;
 
-public class CookItAction implements Action{
+public class CookIt implements Action{
     private Pantry pantry;
     private ResourcesFactory resourcesFactory;
 
-    public CookItAction(Pantry pantry, ResourcesFactory resourcesFactory) {
+    public CookIt(Pantry pantry, ResourcesFactory resourcesFactory) {
         this.pantry = pantry;
         this.resourcesFactory = resourcesFactory;
     }

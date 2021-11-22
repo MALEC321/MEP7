@@ -44,7 +44,7 @@ public class TurnUseCase {
         Game game = gameRepository.findGame();
         Turn currentTurn = game.currentTurn();
 
-        turnConsequences(game);
+        turnConsequences(currentTurn);
         currentTurn.executeActions();
 
         endTurn(game);
@@ -62,39 +62,35 @@ public class TurnUseCase {
         herdRepository.deleteAll();
     }
 
-    private void turnConsequences(Game game) {
-        addCookItConsequences(game);
-        addRemoveAllExpiredResourcesAction(game);
-        addFeedDinosaursAction(game);
-        addRemoveOrphanedBabyDinosaursAction(game);
+    private void turnConsequences(Turn currentTurn) {
+        addCookItConsequence(currentTurn);
+        addRemoveExpiredResourcesConsequence(currentTurn);
+        addFeedDinosaursConsequence(currentTurn);
+        addRemoveOrphanedBabyDinosaursConsequence(currentTurn);
     }
 
-    private void addCookItConsequences(Game game) {
+    private void addCookItConsequence(Turn currentTurn) {
         Pantry pantry = pantryRepository.findPantry();
         Action addCookIt = actionFactory.createCookItAction(pantry, resourcesFactory);
-        Turn currentTurn = game.currentTurn();
         currentTurn.addAction(addCookIt);
     }
 
-    private void addRemoveAllExpiredResourcesAction(Game game) {
+    private void addRemoveExpiredResourcesConsequence(Turn currentTurn) {
         Pantry pantry = pantryRepository.findPantry();
         Action removeAllExpiredResourcesAction = actionFactory.createRemoveAllExpiredResourcesAction(pantry);
-        Turn currentTurn = game.currentTurn();
         currentTurn.addAction(removeAllExpiredResourcesAction);
     }
 
-    private void addFeedDinosaursAction(Game game) {
+    private void addFeedDinosaursConsequence(Turn currentTurn) {
         Herd herd = herdRepository.findHerd();
         Pantry pantry = pantryRepository.findPantry();
         Action feedDinosaursAction = actionFactory.createFeedDinosaursAction(resourcesDistributor, pantry, herd);
-        Turn currentTurn = game.currentTurn();
         currentTurn.addAction(feedDinosaursAction);
     }
 
-    private void addRemoveOrphanedBabyDinosaursAction(Game game) {
+    private void addRemoveOrphanedBabyDinosaursConsequence(Turn currentTurn) {
         Herd herd = herdRepository.findHerd();
         Action removeOrphanedBabyDinosaurs = actionFactory.createRemoveOrphanedBabyDinosaursAction(herd);
-        Turn currentTurn = game.currentTurn();
         currentTurn.addAction(removeOrphanedBabyDinosaurs);
     }
 

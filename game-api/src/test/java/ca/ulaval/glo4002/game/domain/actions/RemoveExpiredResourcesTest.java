@@ -9,24 +9,24 @@ import org.mockito.MockitoAnnotations;
 
 import static org.mockito.Mockito.verify;
 
-public class RemoveAllEmptyResourcesActionTest {
+public class RemoveExpiredResourcesTest {
 
     @InjectMocks
-    private Action removeAllEmptyResources;
+    private Action removeAllExpiredResources;
 
     @Mock
     private Pantry pantry;
 
     @BeforeEach
     void init() {
-        removeAllEmptyResources = new RemoveAllEmptyResourcesAction(pantry);
+        removeAllExpiredResources = new RemoveExpiredResources(pantry);
         MockitoAnnotations.initMocks(this);
     }
 
     @Test
-    void givenRemoveAllEmptyResourcesAction_whenExecuting_thenRemoveAllEmptyResourcesShouldBeCalled() {
-        removeAllEmptyResources.execute();
+    void givenRemoveAllExpiredResourcesAction_whenExecuting_thenRemoveAllExpiredResourcesShouldBeCalled() {
+        removeAllExpiredResources.execute();
 
-        verify(pantry).removeAllEmptyResources();
+        verify(pantry).removeAllExpiredResources();
     }
 }

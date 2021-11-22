@@ -6,13 +6,13 @@ import ca.ulaval.glo4002.game.domain.resources.Pantry;
 import ca.ulaval.glo4002.game.domain.resources.Resources;
 import ca.ulaval.glo4002.game.domain.resources.ResourcesDistributor;
 
-public class FeedDinosaursAction implements Action {
+public class FeedDinosaurs implements Action {
 
     private ResourcesDistributor resourcesDistributor;
     private Pantry pantry;
     private Herd herd;
 
-    public FeedDinosaursAction(ResourcesDistributor resourcesDistributor, Pantry pantry, Herd herd) {
+    public FeedDinosaurs(ResourcesDistributor resourcesDistributor, Pantry pantry, Herd herd) {
         this.resourcesDistributor = resourcesDistributor;
         this.pantry = pantry;
         this.herd = herd;

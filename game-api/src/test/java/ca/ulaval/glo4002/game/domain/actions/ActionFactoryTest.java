@@ -73,57 +73,50 @@ public class ActionFactoryTest {
 
     @Test
     void givenAnActionFactory_whenCreatingCookItAction_thenReferencesToThePantry() {
-        CookItAction cookItAction = actionFactory.createCookItAction(pantry, resourcesFactory);
+        CookIt cookIt = actionFactory.createCookItAction(pantry, resourcesFactory);
 
-        assertEquals(cookItAction.getPantry(), pantry);
+        assertEquals(cookIt.getPantry(), pantry);
     }
 
     @Test
     void givenAnActionFactory_whenCreatingCookItAction_thenReferencesToTheResourcesFactory() {
-        CookItAction cookItAction = actionFactory.createCookItAction(pantry, resourcesFactory);
+        CookIt cookIt = actionFactory.createCookItAction(pantry, resourcesFactory);
 
-        assertEquals(cookItAction.getResourcesFactory(), resourcesFactory);
+        assertEquals(cookIt.getResourcesFactory(), resourcesFactory);
     }
 
     @Test
     void givenAnActionFactory_whenCreatingRemoveAllExpiredResourcesAction_thenReferencesToThePantry() {
-        RemoveAllExpiredResourcesAction removeAllExpiredResourcesAction = actionFactory.createRemoveAllExpiredResourcesAction(pantry);
+        RemoveExpiredResources removeExpiredResources = actionFactory.createRemoveAllExpiredResourcesAction(pantry);
 
-        assertEquals(removeAllExpiredResourcesAction.getPantry(), pantry);
-    }
-
-    @Test
-    void givenAnActionFactory_whenCreatingRemoveAllEmptyResourcesAction_thenReferencesToThePantry() {
-        RemoveAllEmptyResourcesAction removeAllEmptyResourcesAction = actionFactory.createRemoveAllEmptyResourcesAction(pantry);
-
-        assertEquals(removeAllEmptyResourcesAction.getPantry(), pantry);
+        assertEquals(removeExpiredResources.getPantry(), pantry);
     }
 
     @Test
     void givenAnActionFactory_whenCreatingFeedDinosaursAction_thenReferencesToTheResourcesDistributor() {
-        FeedDinosaursAction feedDinosaursAction = actionFactory.createFeedDinosaursAction(resourcesDistributor, pantry, herd);
+        FeedDinosaurs feedDinosaurs = actionFactory.createFeedDinosaursAction(resourcesDistributor, pantry, herd);
 
-        assertEquals(feedDinosaursAction.getResourcesDistributor(), resourcesDistributor);
+        assertEquals(feedDinosaurs.getResourcesDistributor(), resourcesDistributor);
     }
 
     @Test
     void givenAnActionFactory_whenCreatingFeedDinosaursAction_thenReferencesToThePantry() {
-        FeedDinosaursAction feedDinosaursAction = actionFactory.createFeedDinosaursAction(resourcesDistributor, pantry, herd);
+        FeedDinosaurs feedDinosaurs = actionFactory.createFeedDinosaursAction(resourcesDistributor, pantry, herd);
 
-        assertEquals(feedDinosaursAction.getPantry(), pantry);
+        assertEquals(feedDinosaurs.getPantry(), pantry);
     }
 
     @Test
     void givenAnActionFactory_whenCreatingFeedDinosaursAction_thenReferencesToTheHerd() {
-        FeedDinosaursAction feedDinosaursAction = actionFactory.createFeedDinosaursAction(resourcesDistributor, pantry, herd);
+        FeedDinosaurs feedDinosaurs = actionFactory.createFeedDinosaursAction(resourcesDistributor, pantry, herd);
 
-        assertEquals(feedDinosaursAction.getHerd(), herd);
+        assertEquals(feedDinosaurs.getHerd(), herd);
     }
 
     @Test
     void givenAnActionFactory_whenCreatingRemoveOrphanedBabyDinosaursAction_thenReferencesToTheHerd() {
-        RemoveOrphanedBabyDinosaursAction removeOrphanedBabyDinosaursAction = actionFactory.createRemoveOrphanedBabyDinosaursAction(herd);
+        RemoveOrphanedBabyDinosaurs removeOrphanedBabyDinosaurs = actionFactory.createRemoveOrphanedBabyDinosaursAction(herd);
 
-        assertEquals(removeOrphanedBabyDinosaursAction.getHerd(), herd);
+        assertEquals(removeOrphanedBabyDinosaurs.getHerd(), herd);
     }
 }

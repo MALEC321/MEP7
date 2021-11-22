@@ -3,14 +3,13 @@ package ca.ulaval.glo4002.game.domain.actions;
 import ca.ulaval.glo4002.game.application.resources.ResourcesFactory;
 import ca.ulaval.glo4002.game.domain.resources.Pantry;
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
 import static org.mockito.Mockito.verify;
 
-public class CookItActionTest {
+public class CookItTest {
 
     @InjectMocks
     private Action cookItAction;
@@ -23,7 +22,7 @@ public class CookItActionTest {
 
     @BeforeEach
     void init() {
-        cookItAction = new CookItAction(pantry, resourcesFactory);
+        cookItAction = new CookIt(pantry, resourcesFactory);
         MockitoAnnotations.initMocks(this);
     }
 

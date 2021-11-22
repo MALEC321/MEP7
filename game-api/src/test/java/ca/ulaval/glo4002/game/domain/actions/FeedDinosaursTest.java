@@ -11,7 +11,7 @@ import org.mockito.MockitoAnnotations;
 
 import static org.mockito.Mockito.verify;
 
-class FeedDinosaursActionTest {
+class FeedDinosaursTest {
 
     @InjectMocks
     private Action feedDinosaurs;
@@ -27,7 +27,7 @@ class FeedDinosaursActionTest {
 
     @BeforeEach
     void init() {
-        feedDinosaurs = new FeedDinosaursAction(resourcesDistributor, pantry, herd);
+        feedDinosaurs = new FeedDinosaurs(resourcesDistributor, pantry, herd);
         MockitoAnnotations.initMocks(this);
     }
 

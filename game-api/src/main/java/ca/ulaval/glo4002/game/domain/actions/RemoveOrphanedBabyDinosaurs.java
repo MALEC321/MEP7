@@ -2,11 +2,11 @@ package ca.ulaval.glo4002.game.domain.actions;
 
 import ca.ulaval.glo4002.game.domain.dinosaur.Herd;
 
-public class RemoveOrphanedBabyDinosaursAction implements Action {
+public class RemoveOrphanedBabyDinosaurs implements Action {
 
     private Herd herd;
 
-    public RemoveOrphanedBabyDinosaursAction(Herd herd) {
+    public RemoveOrphanedBabyDinosaurs(Herd herd) {
         this.herd = herd;
     }
 
