@@ -65,8 +65,6 @@ public class TurnUseCase {
     private void turnConsequences(Game game) {
         addCookItConsequences(game);
         addRemoveAllExpiredResourcesAction(game);
-        addRemoveAllEmptyResourcesAction(game);
-        decreaseResourcesExpirationDate();
         addFeedDinosaursAction(game);
         addRemoveOrphanedBabyDinosaursAction(game);
     }
@@ -76,13 +74,6 @@ public class TurnUseCase {
         Action addCookIt = actionFactory.createCookItAction(pantry, resourcesFactory);
         Turn currentTurn = game.currentTurn();
         currentTurn.addAction(addCookIt);
-    }
-
-    private void addRemoveAllEmptyResourcesAction(Game game) {
-        Pantry pantry = pantryRepository.findPantry();
-        Action removeAllEmptyResourcesAction = actionFactory.createRemoveAllEmptyResourcesAction(pantry);
-        Turn currentTurn = game.currentTurn();
-        currentTurn.addAction(removeAllEmptyResourcesAction);
     }
 
     private void addRemoveAllExpiredResourcesAction(Game game) {
@@ -105,11 +96,6 @@ public class TurnUseCase {
         Action removeOrphanedBabyDinosaurs = actionFactory.createRemoveOrphanedBabyDinosaursAction(herd);
         Turn currentTurn = game.currentTurn();
         currentTurn.addAction(removeOrphanedBabyDinosaurs);
-    }
-
-    private void decreaseResourcesExpirationDate() {
-        Pantry pantry = pantryRepository.findPantry();
-        pantry.decreaseExpirationDate();
     }
 
     private void endTurn(Game game) {

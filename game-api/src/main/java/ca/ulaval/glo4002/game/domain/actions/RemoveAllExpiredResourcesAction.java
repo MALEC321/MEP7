@@ -16,6 +16,8 @@ public class RemoveAllExpiredResourcesAction implements Action {
 
     @Override
     public void execute() {
+        pantry.removeAllEmptyResources();
         pantry.removeAllExpiredResources();
+        pantry.decreaseExpirationDate();
     }
 }
