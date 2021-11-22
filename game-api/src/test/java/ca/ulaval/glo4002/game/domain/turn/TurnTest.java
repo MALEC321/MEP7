@@ -3,7 +3,6 @@ package ca.ulaval.glo4002.game.domain.turn;
 import ca.ulaval.glo4002.game.domain.actions.Action;
 import ca.ulaval.glo4002.game.infrastructure.persistence.turn.GameRepositoryInMemory;
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
@@ -15,7 +14,7 @@ public class TurnTest {
     private List<Action> actions;
     private Turn turn;
     private GameRepositoryInMemory turnRepositoryInMemory;
-    private  TurnFactory turnFactory;
+    private TurnFactory turnFactory;
 
     @BeforeEach
     void createTurn() {
@@ -30,7 +29,6 @@ public class TurnTest {
         assertEquals(actions, turn.getActions());
     }
 
-    @Disabled
     @Test
     void whenTurnIsPlayed_incrementsTurn() {
         turnFactory.create(new TurnNumber(1), actions);

@@ -42,7 +42,7 @@ public class DinosaurResource {
     @Produces(MediaType.APPLICATION_JSON)
     public Response getDinosaur(@PathParam("name") String name) {
         DinosaurDto dinosaur = dinosaurService.getDinosaur(name);
-        DinosaurResponseItem response = dinosaurDtoAssembler.toResponse(dinosaur);
+        DinosaurResponse response = dinosaurDtoAssembler.toResponse(dinosaur);
         return Response.ok().entity(response).build();
     }
 }
