@@ -1,10 +1,10 @@
 package ca.ulaval.glo4002.game.controllers.dinosaur;
 
-import ca.ulaval.glo4002.game.application.dinosaur.DinosaurService;
+import ca.ulaval.glo4002.game.application.dinosaur.DinosaurUseCase;
 import ca.ulaval.glo4002.game.application.dinosaur.dtos.DinosaurDto;
 import ca.ulaval.glo4002.game.controllers.dinosaur.dtos.DinosaurCreationDto;
 import ca.ulaval.glo4002.game.controllers.dinosaur.dtos.DinosaurDtoAssembler;
-import ca.ulaval.glo4002.game.controllers.dinosaur.dtos.DinosaurResponseItem;
+import ca.ulaval.glo4002.game.controllers.dinosaur.dtos.DinosaurResponse;
 import ca.ulaval.glo4002.game.controllers.dinosaur.dtos.DinosaursResponse;
 import org.glassfish.jersey.server.ResourceConfig;
 import org.glassfish.jersey.test.JerseyTest;
@@ -22,22 +22,22 @@ import static org.mockito.Mockito.*;
 
 public class DinosaurResourceTest extends JerseyTest {
     private DinosaursResponse dinosaursResponse;
-    private DinosaurService dinosaurService;
+    private DinosaurUseCase dinosaurUseCase;
     private DinosaurDtoAssembler dinosaurDtoAssembler;
-    private DinosaurResponseItem dinosaurResponseItem;
+    private DinosaurResponse dinosaurResponse;
 
     @Before
     public void setup() {
-        List<DinosaurResponseItem> items = new ArrayList<>();
+        List<DinosaurResponse> items = new ArrayList<>();
         dinosaursResponse = new DinosaursResponse(items);
-        dinosaurResponseItem = new DinosaurResponseItem("dino", 1, "gender", "species");
+        dinosaurResponse = new DinosaurResponse("dino", 1, "gender", "species");
     }
 
     @Override
     protected Application configure() {
-        dinosaurService = mock(DinosaurService.class);
+        dinosaurUseCase = mock(DinosaurUseCase.class);
         dinosaurDtoAssembler = mock(DinosaurDtoAssembler.class);
-        return new ResourceConfig().register(new DinosaurResource(dinosaurService, dinosaurDtoAssembler));
+        return new ResourceConfig().register(new DinosaurResource(dinosaurUseCase, dinosaurDtoAssembler));
     }
 
     @Test
@@ -47,29 +47,31 @@ public class DinosaurResourceTest extends JerseyTest {
 
         Response response = target("dinosaurs").request(MediaType.APPLICATION_JSON_TYPE).post(null);
 
-        verify(dinosaurService).createDinosaur(dinosaurCreationDto);
+        verify(dinosaurUseCase).createDinosaur(dinosaurCreationDto);
         assertEquals(200, response.getStatus());
     }
 
     @Test
     public void whenGetAllDinosaurs_thenReturnedOkStatus() {
         List<DinosaurDto> dinosaurDtos = mock(List.class);
-        when(dinosaurService.getAllDinosaurs()).thenReturn(dinosaurDtos);
+        when(dinosaurUseCase.getAllDinosaurs()).thenReturn(dinosaurDtos);
         when(dinosaurDtoAssembler.toResponse(dinosaurDtos)).thenReturn(dinosaursResponse);
 
         Response response = target("dinosaurs").request(MediaType.APPLICATION_JSON_TYPE).get();
 
+        verify(dinosaurUseCase).getAllDinosaurs();
         assertEquals(200, response.getStatus());
     }
 
     @Test
     public void givenDinosaurName_whenGetDinosaur_thenReturnedOkStatus() {
         String name = "dino";
-        DinosaurDto dinosaurDto = dinosaurService.getDinosaur(name);
-        when(dinosaurDtoAssembler.toResponse(dinosaurDto)).thenReturn(dinosaurResponseItem);
+        DinosaurDto dinosaurDto = dinosaurUseCase.getDinosaur(name);
+        when(dinosaurDtoAssembler.toResponse(dinosaurDto)).thenReturn(dinosaurResponse);
 
         Response response = target("dinosaurs/name").request(MediaType.APPLICATION_JSON_TYPE).get();
 
+        verify(dinosaurUseCase).getDinosaur(name);
         assertEquals(200, response.getStatus());
     }
 }

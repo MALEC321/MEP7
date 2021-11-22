@@ -97,7 +97,7 @@ title __GAME-API's Class Diagram__\n
     namespace ca.ulaval.glo4002.game {
       namespace controllers.dinosaur {
         namespace dtos {
-          class ca.ulaval.glo4002.game.controllers.dinosaur.dtos.DinosaurResponseItem {
+          class ca.ulaval.glo4002.game.controllers.dinosaur.dtos.DinosaurResponse {
           }
         }
       }
