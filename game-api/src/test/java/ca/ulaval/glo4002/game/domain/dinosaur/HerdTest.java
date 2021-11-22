@@ -8,7 +8,6 @@ import java.util.List;
 
 import static ca.ulaval.glo4002.game.domain.dinosaur.enums.DietType.HERBIVORE;
 import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.Mockito.mock;
 
 public class HerdTest {
     public static final DietStrategyForHerbivore DIET_STRATEGY_FOR_HERBIVORE = new DietStrategyForHerbivore(HERBIVORE);
@@ -23,7 +22,6 @@ public class HerdTest {
     void setup() {
         herd = new Herd();
         setHerdWithDinos();
-        resourcesStateDtoMock = mock(ResourcesStateDto.class);
     }
 
     @Test
