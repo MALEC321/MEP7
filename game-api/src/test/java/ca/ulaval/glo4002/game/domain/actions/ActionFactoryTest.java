@@ -5,6 +5,7 @@ import ca.ulaval.glo4002.game.domain.dinosaur.Dinosaur;
 import ca.ulaval.glo4002.game.domain.dinosaur.Herd;
 import ca.ulaval.glo4002.game.domain.resources.Pantry;
 import ca.ulaval.glo4002.game.domain.resources.Resources;
+import ca.ulaval.glo4002.game.domain.resources.ResourcesDistributor;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
@@ -21,7 +22,6 @@ public class ActionFactoryTest {
     @Mock
     Dinosaur dinosaur;
 
-
     @Mock
     Herd herd;
 
@@ -33,6 +33,9 @@ public class ActionFactoryTest {
 
     @Mock
     ResourcesFactory resourcesFactory;
+
+    @Mock
+    ResourcesDistributor resourcesDistributor;
 
     @BeforeEach
     void init() {
@@ -94,6 +97,27 @@ public class ActionFactoryTest {
         RemoveAllEmptyResourcesAction removeAllEmptyResourcesAction = actionFactory.createRemoveAllEmptyResourcesAction(pantry);
 
         assertEquals(removeAllEmptyResourcesAction.getPantry(), pantry);
+    }
+
+    @Test
+    void givenAnActionFactory_whenCreatingFeedDinosaursAction_thenReferencesToTheResourcesDistributor() {
+        FeedDinosaursAction feedDinosaursAction = actionFactory.createFeedDinosaursAction(resourcesDistributor, pantry, herd);
+
+        assertEquals(feedDinosaursAction.getResourcesDistributor(), resourcesDistributor);
+    }
+
+    @Test
+    void givenAnActionFactory_whenCreatingFeedDinosaursAction_thenReferencesToThePantry() {
+        FeedDinosaursAction feedDinosaursAction = actionFactory.createFeedDinosaursAction(resourcesDistributor, pantry, herd);
+
+        assertEquals(feedDinosaursAction.getPantry(), pantry);
+    }
+
+    @Test
+    void givenAnActionFactory_whenCreatingFeedDinosaursAction_thenReferencesToTheHerd() {
+        FeedDinosaursAction feedDinosaursAction = actionFactory.createFeedDinosaursAction(resourcesDistributor, pantry, herd);
+
+        assertEquals(feedDinosaursAction.getHerd(), herd);
     }
 
     @Test
