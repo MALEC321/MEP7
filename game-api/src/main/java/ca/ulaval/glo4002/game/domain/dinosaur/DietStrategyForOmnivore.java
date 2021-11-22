@@ -12,9 +12,10 @@ import ca.ulaval.glo4002.game.domain.dinosaur.enums.DietMultiplicand;
 public class DietStrategyForOmnivore implements DietStrategy {
     @Override
     public PantryReport calculateFoodNeeds(int weight, boolean isHungry) {
-        List<ResourceTypeQuantity> resourceTypeQuantities = Arrays.asList(new ResourceTypeQuantity(BURGER, calculateBurgersNeeds(weight, isHungry)),
-            new ResourceTypeQuantity(SALAD, calculateSaladsNeeds(weight, isHungry)),
-            new ResourceTypeQuantity(WATER, calculateWaterNeeds(weight, isHungry)));
+        List<ResourceTypeQuantity> resourceTypeQuantities =
+            Arrays.asList(new ResourceTypeQuantity(BURGER, Math.floorDiv(calculateBurgersNeeds(weight, isHungry), 2)),
+                new ResourceTypeQuantity(SALAD, Math.floorDiv(calculateSaladsNeeds(weight, isHungry), 2)),
+                new ResourceTypeQuantity(WATER, Math.floorDiv(calculateWaterNeeds(weight, isHungry), 2)));
         return new PantryReport(resourceTypeQuantities);
     }
 
