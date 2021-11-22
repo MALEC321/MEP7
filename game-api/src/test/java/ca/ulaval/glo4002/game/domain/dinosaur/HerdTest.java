@@ -11,16 +11,20 @@ import static org.junit.jupiter.api.Assertions.*;
 public class HerdTest {
     private Herd herd;
 
-    private final Dinosaur firstDino = new Dinosaur("aaa", 100, "f", "Ankylosaurus");
-    private final Dinosaur secondDino = new Dinosaur("ab", 100, "f", "Ankylosaurus");
-    private final Dinosaur thirdDino = new Dinosaur("a", 50, "m", "Ankylosaurus");
-    private final Dinosaur lastDino = new Dinosaur("aa", 1, "f", "Ankylosaurus");
+    private Dinosaur firstDino;
+    private Dinosaur secondDino;
+    private Dinosaur thirdDino;
+    private Dinosaur lastDino;
 
     private List<Dinosaur> dinoInDisorderList;
 
     @BeforeEach
     void setup() {
         herd = new Herd();
+        firstDino = new Dinosaur("aaa", 100, "f", "Ankylosaurus");
+        secondDino = new Dinosaur("ab", 100, "f", "Ankylosaurus");
+        thirdDino = new Dinosaur("a", 50, "m", "Ankylosaurus");
+        lastDino = new Dinosaur("aa", 1, "f", "Ankylosaurus");
     }
 
     @Test
@@ -34,6 +38,23 @@ public class HerdTest {
 
         List<Dinosaur> dinoInStrengthOrderList = createDinoInStrengthOrderList();
         assertArrayEquals(dinoInStrengthOrderList.toArray(), sortedDinosaurs.toArray());
+    }
+
+    @Test
+    void givenTwoDinosaursOfDifferentWeight_whenFighting_thenHeaviestIsHungryAndLightestIsDead() {
+        herd.fight(firstDino, thirdDino);
+        assertEquals(firstDino.isHungry(), true);
+        assertEquals(thirdDino.isDead(), true);
+        herd.fight(lastDino, secondDino);
+        assertEquals(secondDino.isHungry(), true);
+        assertEquals(lastDino.isDead(), true);
+    }
+
+    @Test
+    void givenTwoDinosaursOfIdenticalWeight_whenFighting_thenBothAreHungry() {
+        herd.fight(firstDino, secondDino);
+        assertEquals(firstDino.isHungry(), true);
+        assertEquals(secondDino.isHungry(), true);
     }
 
     private List<Dinosaur> createDinoInStrengthOrderList() {
