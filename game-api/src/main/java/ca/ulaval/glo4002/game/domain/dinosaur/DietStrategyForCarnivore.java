@@ -20,11 +20,11 @@ public class DietStrategyForCarnivore extends AbstractDietStrategy {
     }
 
     @Override
-    public PantryReport calculateFoodNeeds(int weight, boolean isHungry) {
+    public ResourcesStateDto calculateFoodNeeds(int weight, boolean isHungry) {
         List<ResourceTypeQuantity> resourceTypeQuantities = Arrays.asList(new ResourceTypeQuantity(BURGER, calculateBurgersNeeds(weight, isHungry)),
             new ResourceTypeQuantity(SALAD, 0),
             new ResourceTypeQuantity(WATER, waterNeedsCalculator.calculateNeeds(weight, isHungry, getDietType())));
-        return new PantryReport(resourceTypeQuantities);
+        return new ResourcesStateDto(resourceTypeQuantities);
     }
 
     private BigDecimal calculateFoodNeedsForHungryDino(BigDecimal foodNeeds) {

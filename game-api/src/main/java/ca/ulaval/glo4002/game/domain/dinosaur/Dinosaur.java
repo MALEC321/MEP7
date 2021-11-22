@@ -21,7 +21,7 @@ public class Dinosaur {
     private Dinosaur father;
     private boolean isAdult;
     private boolean isDead;
-
+    private boolean secondTimeEating = false;
     public Dinosaur(String name, int weight, String gender, DietStrategy dietStrategy, String species) {
         this.name = name;
         this.weight = weight;
@@ -81,9 +81,9 @@ public class Dinosaur {
         return diet;
     }
 
-    public PantryReport eat(PantryReport pantryReport) {
+    public ResourcesStateDto eat(ResourcesStateDto resourcesStateDto) {
         List<ResourceTypeQuantity> resourceTypeQuantitiesLeft = new ArrayList<>();
-        pantryReport.getPantryQuantities().forEach((resourceType, resourceTypeQuantity) -> {
+        resourcesStateDto.getPantryQuantities().forEach((resourceType, resourceTypeQuantity) -> {
             int resourceQuantityNeeded = dietStrategy.calculateFoodNeeds(weight, isHungry()).getQtyForResourceType(resourceType);
             int resourceQuantityLeft = 0;
             if (resourceTypeQuantity < resourceQuantityNeeded) {
@@ -93,8 +93,15 @@ public class Dinosaur {
             }
             resourceTypeQuantitiesLeft.add(new ResourceTypeQuantity(resourceType, resourceQuantityLeft));
         });
-        setHungry(false);
-        return new PantryReport(resourceTypeQuantitiesLeft);
+        if (diet != DietType.OMNIVORE) {
+            setHungry(false); //Todo add a two factor boolean for Omni ex: hungry && secondTime eating
+        }
+        if (diet == DietType.OMNIVORE && secondTimeEating) {
+            setHungry(false);
+        }
+        secondTimeEating = true;
+
+        return new ResourcesStateDto(resourceTypeQuantitiesLeft);
     }
 
     public boolean isDead() {

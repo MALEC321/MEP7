@@ -1,6 +1,6 @@
 package ca.ulaval.glo4002.game.domain.resources;
 
-import ca.ulaval.glo4002.game.domain.dinosaur.PantryReport;
+import ca.ulaval.glo4002.game.domain.dinosaur.ResourcesStateDto;
 import ca.ulaval.glo4002.game.domain.dinosaur.ResourceTypeQuantity;
 
 import java.util.ArrayList;
@@ -31,9 +31,9 @@ public class Pantry implements FoodContainer {
         freshResources.put(WATER, waterQueue);
     }
 
-    public PantryReport getFreshResourcesReport() {
+    public ResourcesStateDto getFreshResourcesReport() {
         List<ResourceTypeQuantity> resourceTypes = new ArrayList<>(findFreshResources());
-        return new PantryReport(resourceTypes);
+        return new ResourcesStateDto(resourceTypes);
     }
     public List<ResourceTypeQuantity> findFreshResources() {
         List<ResourceTypeQuantity> resourceTypeQuantities = new ArrayList<>();
@@ -61,11 +61,11 @@ public class Pantry implements FoodContainer {
         freshResources.get(resources.getType()).add(resources);
     }
 
-    public void removeQuantity(PantryReport updatedPantryReport) {
-        PantryReport actualPantryReport = getFreshResourcesReport();
-        actualPantryReport.getPantryQuantities().forEach((resourceType, resourceTypeQuantity) -> {
+    public void removeQuantity(ResourcesStateDto updatedResourcesStateDto) {
+        ResourcesStateDto actualResourcesStateDto = getFreshResourcesReport();
+        actualResourcesStateDto.getPantryQuantities().forEach((resourceType, resourceTypeQuantity) -> {
             int actualResourceQuantity = resourceTypeQuantity;
-            removeResourceQty(resourceType, Math.subtractExact(actualResourceQuantity, updatedPantryReport.getQtyForResourceType(resourceType)));
+            removeResourceQty(resourceType, Math.subtractExact(actualResourceQuantity, updatedResourcesStateDto.getQtyForResourceType(resourceType)));
         });
     }
 

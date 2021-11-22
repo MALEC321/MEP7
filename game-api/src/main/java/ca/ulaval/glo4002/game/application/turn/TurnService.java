@@ -5,7 +5,7 @@ import ca.ulaval.glo4002.game.domain.actions.Action;
 import ca.ulaval.glo4002.game.domain.actions.ActionRepository;
 import ca.ulaval.glo4002.game.domain.dinosaur.Herd;
 import ca.ulaval.glo4002.game.domain.dinosaur.HerdRepository;
-import ca.ulaval.glo4002.game.domain.dinosaur.PantryReport;
+import ca.ulaval.glo4002.game.domain.dinosaur.ResourcesStateDto;
 import ca.ulaval.glo4002.game.domain.game.Game;
 import ca.ulaval.glo4002.game.domain.game.GameRepository;
 import ca.ulaval.glo4002.game.domain.resources.Pantry;
@@ -78,11 +78,11 @@ public class TurnService {
     protected void feedDinosaurs() {
         Pantry pantry = pantryRepository.findPantry();
         Herd herd = herdRepository.findHerd();
-        PantryReport pantryReport = pantry.getFreshResourcesReport();
-        PantryReport updatePantryReport = herd.feedDinosaurs(pantryReport);
+        ResourcesStateDto resourcesStateDto = pantry.getFreshResourcesReport();
+        ResourcesStateDto updateResourcesStateDto = herd.feedDinosaurs(resourcesStateDto);
         herdRepository.findHerd().removeAllHungryDinosaur();
         herdRepository.save(herd);
-        pantry.removeQuantity(updatePantryReport);
+        pantry.removeQuantity(updateResourcesStateDto);
         pantryRepository.save(pantry);
     }
 

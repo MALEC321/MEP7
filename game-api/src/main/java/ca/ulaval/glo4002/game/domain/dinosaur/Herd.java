@@ -8,6 +8,8 @@ import java.util.List;
 import java.util.Map;
 
 import static ca.ulaval.glo4002.game.domain.dinosaur.enums.DietType.*;
+import static ca.ulaval.glo4002.game.domain.resources.ResourceType.BURGER;
+import static ca.ulaval.glo4002.game.domain.resources.ResourceType.SALAD;
 
 public class Herd {
     private final Map<String, Dinosaur> dinosaursByName = new HashMap<>();
@@ -60,16 +62,20 @@ public class Herd {
         }
     }
 
-    public PantryReport feedDinosaurs(final PantryReport pantryReport) {
-        PantryReport updatedPantryReport = pantryReport;
-//        for (Dinosaur dinosaur: findSortedHerbivoreAndOmnivore(findSortedDinosaursByStrengthThenName())) {
-//            updatedPantryReport = dinosaur.eat(updatedPantryReport);
-//        }
+    public ResourcesStateDto feedDinosaurs(final ResourcesStateDto resourcesStateDto) {
+        // S1 Split state into states of burger and half water
+        // S2 Split state into states of salad and half water
+        ResourcesStateDto halfResourcesStateDtoForHerbivore = resourcesStateDto.withdraw(SALAD);
+        ResourcesStateDto halfResourcesStateDtoForCarnivore = resourcesStateDto.withdraw(BURGER);
+        for (Dinosaur dinosaur: findSortedHerbivoreAndOmnivore(findSortedDinosaursByStrengthThenName())) {
+            halfResourcesStateDtoForHerbivore = dinosaur.eat(halfResourcesStateDtoForHerbivore); // S2
+        }
         for (Dinosaur dinosaur: findSortedDinosaursByStrengthThenName()) {
-            updatedPantryReport = dinosaur.eat(updatedPantryReport);
+            halfResourcesStateDtoForCarnivore = dinosaur.eat(halfResourcesStateDtoForCarnivore);
         }
 
-        return updatedPantryReport;
+        // S1 U S2
+        return halfResourcesStateDtoForHerbivore.add(halfResourcesStateDtoForCarnivore);
     }
 
     public void removeAllHungryDinosaur() {
