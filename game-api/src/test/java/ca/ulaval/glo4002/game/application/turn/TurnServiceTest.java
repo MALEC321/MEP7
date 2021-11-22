@@ -101,7 +101,7 @@ public class TurnServiceTest {
     }
 
     @Test
-    public void givenAturn_whenExecuteTurn_thenOrphanedDinonaursAreRemoved(){
+    public void givenAturn_whenExecuteTurn_thenOrphanedDinonaursAreRemoved() {
         turnService.executeTurn();
 
         verify(herd).removeOrphanedBabyDinosaurs();
@@ -120,7 +120,7 @@ public class TurnServiceTest {
         when(turnFactory.create(any(), any())).thenReturn(new Turn(turnNumber));
     }
 
-    private List<Action> createActionsToExecute()  {
+    private List<Action> createActionsToExecute() {
         Resources resources = new Resources(ResourceType.BURGER, TURN_BURGERS_QUANTITY, ResourceType.BURGER.getExpiration());
         Action action = new AddResource(resources, pantry);
         return Arrays.asList(action);
