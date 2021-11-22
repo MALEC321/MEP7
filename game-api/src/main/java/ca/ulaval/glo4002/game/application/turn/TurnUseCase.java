@@ -44,7 +44,7 @@ public class TurnUseCase {
         Game game = gameRepository.findGame();
         Turn currentTurn = game.currentTurn();
 
-        turnConsequences(currentTurn);
+        addTurnConsequences(currentTurn);
         currentTurn.executeActions();
 
         endTurn(game);
@@ -62,7 +62,7 @@ public class TurnUseCase {
         herdRepository.deleteAll();
     }
 
-    private void turnConsequences(Turn currentTurn) {
+    private void addTurnConsequences(Turn currentTurn) {
         addCookItConsequence(currentTurn);
         addRemoveExpiredResourcesConsequence(currentTurn);
         addFeedDinosaursConsequence(currentTurn);
