@@ -54,15 +54,6 @@ public class Pantry implements FoodContainer {
         return false;
     }
 
-    public void removeAllEmptyResources() {
-        for (Map.Entry<ResourceType, Queue<Resources>> entry : freshResources.entrySet()) {
-            Queue<Resources> resourcesQueue = entry.getValue();
-            while (resourcesQueue.peek() != null && resourcesQueue.peek().isEmpty()) {
-                resourcesQueue.poll();
-            }
-        }
-    }
-
     public void removeAllExpiredResources() {
         removeAllEmptyResources();
 
@@ -96,5 +87,14 @@ public class Pantry implements FoodContainer {
 
     public List<ResourcesGroup> findAll() {
         return Arrays.asList(findFreshResources(), expiredResourcesGroup, consumedResourcesGroup);
+    }
+
+    private void removeAllEmptyResources() {
+        for (Map.Entry<ResourceType, Queue<Resources>> entry : freshResources.entrySet()) {
+            Queue<Resources> resourcesQueue = entry.getValue();
+            while (resourcesQueue.peek() != null && resourcesQueue.peek().isEmpty()) {
+                resourcesQueue.poll();
+            }
+        }
     }
 }
