@@ -62,10 +62,10 @@ public class Herd {
 
     public PantryReport feedDinosaurs(final PantryReport pantryReport) {
         PantryReport updatedPantryReport = pantryReport;
-        for (Dinosaur dinosaur: findSortedHerbivoreAndOmnivore(findSortedDinosaursByStrengthThenName())) {
-            updatedPantryReport = dinosaur.eat(updatedPantryReport);
-        }
-        for (Dinosaur dinosaur: findSortedCarnivoreAndOmnivore(findSortedDinosaursByStrengthThenName())) {
+//        for (Dinosaur dinosaur: findSortedHerbivoreAndOmnivore(findSortedDinosaursByStrengthThenName())) {
+//            updatedPantryReport = dinosaur.eat(updatedPantryReport);
+//        }
+        for (Dinosaur dinosaur: findSortedDinosaursByStrengthThenName()) {
             updatedPantryReport = dinosaur.eat(updatedPantryReport);
         }
 

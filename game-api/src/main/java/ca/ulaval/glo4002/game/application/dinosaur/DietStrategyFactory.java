@@ -13,11 +13,11 @@ public class DietStrategyFactory {
     public DietStrategy create(String species) {
         DietType dietType = SpeciesDietsCorrespondances.getDietFromSpecies(species);
         if (dietType == CARNIVORE) {
-            return new DietStrategyForCarnivore();
+            return new DietStrategyForCarnivore(dietType);
         } else if (dietType == HERBIVORE) {
-            return new DietStrategyForHerbivore();
+            return new DietStrategyForHerbivore(dietType);
         } else {
-            return new DietStrategyForOmnivore();
+            return new DietStrategyForOmnivore(dietType);
         }
     }
 }

@@ -5,29 +5,26 @@ import java.math.RoundingMode;
 import java.util.Arrays;
 import java.util.List;
 
+import static ca.ulaval.glo4002.game.domain.dinosaur.enums.DietType.OMNIVORE;
 import static ca.ulaval.glo4002.game.domain.resources.ResourceType.*;
 
 import ca.ulaval.glo4002.game.domain.dinosaur.enums.DietMultiplicand;
+import ca.ulaval.glo4002.game.domain.dinosaur.enums.DietType;
 
-public class DietStrategyForCarnivore implements DietStrategy {
+public class DietStrategyForCarnivore extends AbstractDietStrategy {
+    private final WaterNeedsCalculator waterNeedsCalculator;
+
+    public DietStrategyForCarnivore(DietType dietType) {
+        super(dietType);
+        this.waterNeedsCalculator = new WaterNeedsCalculator();
+    }
 
     @Override
     public PantryReport calculateFoodNeeds(int weight, boolean isHungry) {
         List<ResourceTypeQuantity> resourceTypeQuantities = Arrays.asList(new ResourceTypeQuantity(BURGER, calculateBurgersNeeds(weight, isHungry)),
             new ResourceTypeQuantity(SALAD, 0),
-            new ResourceTypeQuantity(WATER, calculateWaterNeeds(weight, isHungry)));
+            new ResourceTypeQuantity(WATER, waterNeedsCalculator.calculateNeeds(weight, isHungry, getDietType())));
         return new PantryReport(resourceTypeQuantities);
-    }
-
-    public int calculateWaterNeeds(int weight, boolean isHungry) {
-        BigDecimal dinosaurWeight = new BigDecimal(weight);
-
-        BigDecimal waterNeeds = dinosaurWeight.multiply(DietMultiplicand.WATER.getMultiplicand());
-
-        if (isHungry) {
-            waterNeeds = calculateFoodNeedsForHungryDino(waterNeeds);
-        }
-        return waterNeeds.setScale(0, RoundingMode.CEILING).intValue();
     }
 
     private BigDecimal calculateFoodNeedsForHungryDino(BigDecimal foodNeeds) {
@@ -43,6 +40,10 @@ public class DietStrategyForCarnivore implements DietStrategy {
 
         if (isHungry) {
             return calculateFoodNeedsForHungryDino(foodNeeds).setScale(0, RoundingMode.CEILING).intValue();
+        }
+
+        if (getDietType() == OMNIVORE) {
+            foodNeeds = foodNeeds.multiply(new BigDecimal("0.5"));
         }
 
         return foodNeeds.setScale(0, RoundingMode.CEILING).intValue();
