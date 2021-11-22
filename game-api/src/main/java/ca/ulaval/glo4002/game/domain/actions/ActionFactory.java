@@ -28,10 +28,6 @@ public class ActionFactory {
         return new RemoveExpiredResources(pantry);
     }
 
-    public RemoveAllEmptyResourcesAction createRemoveAllEmptyResourcesAction(Pantry pantry) {
-        return new RemoveAllEmptyResourcesAction(pantry);
-    }
-
     public RemoveOrphanedBabyDinosaurs createRemoveOrphanedBabyDinosaursAction(Herd herd) {
         return new RemoveOrphanedBabyDinosaurs(herd);
     }
