@@ -28,9 +28,17 @@ class SumoServiceTest {
     private Dinosaur dinoTest3;
     private SumoService sumoService;
 
+    private Herd herd;
+    private HerdRepository herdRepository;
+    private ActionFactory actionFactory;
+    private ActionRepository actionRepository;
+    private Action fightAction;
+    private SumoDto sumoDto;
+    private List<Action> actions;
+
     @BeforeEach
     public void setUp() {
-        Herd herd = mock(Herd.class);
+        //Pour créer les dinos
         HerdRepositoryInMemory herdRepository = new HerdRepositoryInMemory();
         SpeciesDietsCorrespondances speciesDietCorrespondances = new SpeciesDietsCorrespondances();
         DinosaurFactory dinosaurFactory = new DinosaurFactory(herdRepository, speciesDietCorrespondances);
@@ -40,7 +48,14 @@ class SumoServiceTest {
         dinoTest2 = dinosaurFactory.createDinosaur("Marc-Antoine", 10, "m", "Brachiosaurus");
         dinoTest3 = dinosaurFactory.createDinosaur("Beno", 9, "m", "Diplodocus");
         sumoService = new SumoService(herdRepository, actionFactory, actionRepository);
-    }
+        actions = new ArrayList<>();
+
+        //Pour les tests
+        this.herd = mock(Herd.class);
+        this.herdRepository = mock(HerdRepository.class);
+        this.actionFactory = mock(ActionFactory.class);
+        this.actionRepository = mock(ActionRepository.class);
+        this.fightAction = mock(FightAction.class);}
 
     @Test
     void givenTwoDinosaurOfIdenticalStrength_whenPredictingWinner_thenResponseIsTie() {
@@ -58,15 +73,7 @@ class SumoServiceTest {
 
     @Test
     void givenValidDto_whenCallingFightMethod_thenAddFightActionToActionRepository() {
-        SumoDto sumoDto = new SumoDto("Maxence", "Beno");
-        List<Action> actions = new ArrayList<>();
-
-        Herd herd = mock(Herd.class);
-        HerdRepository herdRepository = mock(HerdRepository.class);
-        ActionFactory actionFactory = mock(ActionFactory.class);
-        ActionRepository actionRepository = mock(ActionRepository.class);
-        Action fightAction = mock(FightAction.class);
-
+        sumoDto = new SumoDto("Maxence", "Beno");
         sumoService = new SumoService(herdRepository, actionFactory, actionRepository);
 
         when(herdRepository.findHerd()).thenReturn(herd);
