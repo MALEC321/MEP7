@@ -7,7 +7,7 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class DinosaurTest {
+public class DinosaurTest {
     private Dinosaur herbivoreFemale;
     private Dinosaur carnivoreMale;
 

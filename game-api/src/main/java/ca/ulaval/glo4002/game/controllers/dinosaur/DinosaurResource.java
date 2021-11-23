@@ -1,6 +1,6 @@
 package ca.ulaval.glo4002.game.controllers.dinosaur;
 
-import ca.ulaval.glo4002.game.application.dinosaur.DinosaurUseCase;
+import ca.ulaval.glo4002.game.application.dinosaur.DinosaurService;
 import ca.ulaval.glo4002.game.application.dinosaur.dtos.DinosaurDto;
 import ca.ulaval.glo4002.game.controllers.dinosaur.dtos.*;
 
@@ -11,11 +11,11 @@ import java.util.List;
 
 @Path("/dinosaurs")
 public class DinosaurResource {
-    private final DinosaurUseCase dinosaurUseCase;
+    private final DinosaurService dinosaurService;
     private final DinosaurDtoAssembler dinosaurDtoAssembler;
 
-    public DinosaurResource(DinosaurUseCase dinosaurUseCase, DinosaurDtoAssembler dinosaurDtoAssembler) {
-        this.dinosaurUseCase = dinosaurUseCase;
+    public DinosaurResource(DinosaurService dinosaurService, DinosaurDtoAssembler dinosaurDtoAssembler) {
+        this.dinosaurService = dinosaurService;
         this.dinosaurDtoAssembler = dinosaurDtoAssembler;
     }
 
@@ -24,7 +24,7 @@ public class DinosaurResource {
     @Consumes(MediaType.APPLICATION_JSON)
     public Response createDinosaur(DinosaurRequest dinosaurRequest) {
         DinosaurCreationDto dto = dinosaurDtoAssembler.fromRequest(dinosaurRequest);
-        dinosaurUseCase.createDinosaur(dto);
+        dinosaurService.createDinosaur(dto);
 
         return Response.status(Response.Status.OK).build();
     }
@@ -32,7 +32,7 @@ public class DinosaurResource {
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     public Response getAllDinosaurs() {
-        List<DinosaurDto> dinosaurs = dinosaurUseCase.getAllDinosaurs();
+        List<DinosaurDto> dinosaurs = dinosaurService.getAllDinosaurs();
         DinosaursResponse response = dinosaurDtoAssembler.toResponse(dinosaurs);
         return Response.ok().entity(response.getItems()).build();
     }
@@ -41,7 +41,7 @@ public class DinosaurResource {
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     public Response getDinosaur(@PathParam("name") String name) {
-        DinosaurDto dinosaur = dinosaurUseCase.getDinosaur(name);
+        DinosaurDto dinosaur = dinosaurService.getDinosaur(name);
         DinosaurResponse response = dinosaurDtoAssembler.toResponse(dinosaur);
         return Response.ok().entity(response).build();
     }

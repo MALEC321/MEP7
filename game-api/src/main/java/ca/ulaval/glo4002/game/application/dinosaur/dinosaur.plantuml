@@ -4,7 +4,7 @@ title __DINOSAUR's Class Diagram__\n
 
     namespace ca.ulaval.glo4002.game {
       namespace application.dinosaur {
-        class ca.ulaval.glo4002.game.application.dinosaur.DinosaurUseCase {
+        class ca.ulaval.glo4002.game.application.dinosaur.DinosaurService {
             + DinosaurUseCase()
             + createDinosaur()
             + getAllDinosaurs()
@@ -14,11 +14,11 @@ title __DINOSAUR's Class Diagram__\n
       }
     }
 
-  ca.ulaval.glo4002.game.application.dinosaur.DinosaurUseCase o-- ca.ulaval.glo4002.game.domain.actions.ActionFactory : actionFactory
-  ca.ulaval.glo4002.game.application.dinosaur.DinosaurUseCase o-- ca.ulaval.glo4002.game.domain.actions.ActionRepository : actionRepository
-  ca.ulaval.glo4002.game.application.dinosaur.DinosaurUseCase o-- ca.ulaval.glo4002.game.application.dinosaur.dtos.DinosaurAssembler : dinosaurAssembler
-  ca.ulaval.glo4002.game.application.dinosaur.DinosaurUseCase o-- ca.ulaval.glo4002.game.application.dinosaur.DinosaurFactory : dinosaurFactory
-  ca.ulaval.glo4002.game.application.dinosaur.DinosaurUseCase o-- ca.ulaval.glo4002.game.domain.dinosaur.HerdRepository : herdRepository
+  ca.ulaval.glo4002.game.application.dinosaur.DinosaurService o-- ca.ulaval.glo4002.game.domain.actions.ActionFactory : actionFactory
+  ca.ulaval.glo4002.game.application.dinosaur.DinosaurService o-- ca.ulaval.glo4002.game.domain.actions.ActionRepository : actionRepository
+  ca.ulaval.glo4002.game.application.dinosaur.DinosaurService o-- ca.ulaval.glo4002.game.application.dinosaur.dtos.DinosaurAssembler : dinosaurAssembler
+  ca.ulaval.glo4002.game.application.dinosaur.DinosaurService o-- ca.ulaval.glo4002.game.application.dinosaur.DinosaurFactory : dinosaurFactory
+  ca.ulaval.glo4002.game.application.dinosaur.DinosaurService o-- ca.ulaval.glo4002.game.domain.dinosaur.HerdRepository : herdRepository
 
 
 right footer

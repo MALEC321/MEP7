@@ -1,17 +1,14 @@
 package ca.ulaval.glo4002.game.application.baby;
 
-import java.util.Objects;
-import java.util.Optional;
-
 import ca.ulaval.glo4002.game.application.baby.breed.Breedable;
 import ca.ulaval.glo4002.game.application.baby.dtos.BabyAssembler;
+import ca.ulaval.glo4002.game.application.dinosaur.DinosaurFactory;
 import ca.ulaval.glo4002.game.application.exceptions.InvalidFatherException;
 import ca.ulaval.glo4002.game.application.exceptions.InvalidMotherException;
 import ca.ulaval.glo4002.game.application.exceptions.NotExistentNameException;
 import ca.ulaval.glo4002.game.controllers.baby.dtos.BabyCreationDto;
 import ca.ulaval.glo4002.game.domain.actions.ActionFactory;
 import ca.ulaval.glo4002.game.domain.dinosaur.Dinosaur;
-import ca.ulaval.glo4002.game.application.dinosaur.DinosaurFactory;
 import ca.ulaval.glo4002.game.domain.dinosaur.Herd;
 import ca.ulaval.glo4002.game.domain.dinosaur.HerdRepository;
 import ca.ulaval.glo4002.game.domain.game.Game;
@@ -19,7 +16,10 @@ import ca.ulaval.glo4002.game.domain.game.GameRepository;
 import ca.ulaval.glo4002.game.infrastructure.client.dto.RequestBreed;
 import ca.ulaval.glo4002.game.infrastructure.client.dto.ResponseBreed;
 
-public class BabyUseCase {
+import java.util.Objects;
+import java.util.Optional;
+
+public class BabyService {
     private final HerdRepository herdRepository;
     private final BabyAssembler babyAssembler;
     private final ActionFactory actionFactory;
@@ -27,7 +27,7 @@ public class BabyUseCase {
     private final Breedable breedable;
     private final GameRepository gameRepository;
 
-    public BabyUseCase(HerdRepository herdRepository, BabyAssembler babyAssembler, ActionFactory actionFactory,
+    public BabyService(HerdRepository herdRepository, BabyAssembler babyAssembler, ActionFactory actionFactory,
                        DinosaurFactory dinosaurFactory, Breedable breedable, GameRepository gameRepository) {
         this.herdRepository = herdRepository;
         this.babyAssembler = babyAssembler;

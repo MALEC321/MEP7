@@ -22,8 +22,8 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
-class DinosaurUseCaseTest {
-    private DinosaurUseCase dinosaurUseCase;
+public class DinosaurServiceTest {
+    private DinosaurService dinosaurService;
     private DinosaurDtoAssembler dinosaurDtoAssembler;
     private TurnService turnService;
 
@@ -39,7 +39,7 @@ class DinosaurUseCaseTest {
         DinosaurAssembler dinosaurAssembler = new DinosaurAssembler();
         GameRepository gameRepository = new GameRepositoryInMemory();
         dinosaurDtoAssembler = new DinosaurDtoAssembler();
-        dinosaurUseCase = new DinosaurUseCase(dinosaurFactory, herdRepository, dinosaurAssembler, actionFactory, gameRepository);
+        dinosaurService = new DinosaurService(dinosaurFactory, herdRepository, dinosaurAssembler, actionFactory, gameRepository);
 
         TurnFactory turnFactory = new TurnFactory();
         PantryRepository pantryRepository = new PantryRepositoryInMemory();
@@ -51,10 +51,10 @@ class DinosaurUseCaseTest {
         DinosaurRequest dinosaurRequest = new DinosaurRequest("Will", 1000, "m", "Allosaurus");
 
         DinosaurCreationDto dto = dinosaurDtoAssembler.fromRequest(dinosaurRequest);
-        dinosaurUseCase.createDinosaur(dto);
+        dinosaurService.createDinosaur(dto);
         turnService.playTurn();
 
         assertThrows(NotExistentNameException.class, () ->
-            dinosaurUseCase.getDinosaur("Willl"));
+            dinosaurService.getDinosaur("Willl"));
     }
 }

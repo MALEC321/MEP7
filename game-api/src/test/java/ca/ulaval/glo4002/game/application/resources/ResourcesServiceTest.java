@@ -21,11 +21,11 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
 
-public class ResourcesUseCaseTest {
+public class ResourcesServiceTest {
     private static final int QYT_BURGER = 4;
     private static final int QYT_SALAD = 5;
     private static final int QYT_WATER = 6;
-    private ResourcesUseCase resourcesUseCase;
+    private ResourcesService resourcesService;
     private TurnService turnService;
 
     @BeforeEach
@@ -42,22 +42,22 @@ public class ResourcesUseCaseTest {
         HerdRepository herdRepository = new HerdRepositoryInMemory();
 
         turnService = new TurnService(turnFactory, gameRepository, resourceRepository, herdRepository, resourcesDistributor, resourcesFactory, actionFactory);
-        resourcesUseCase = new ResourcesUseCase(resourcesGroupFactory, resourceRepository, resourcesAssembler, actionFactory, gameRepository);
+        resourcesService = new ResourcesService(resourcesGroupFactory, resourceRepository, resourcesAssembler, actionFactory, gameRepository);
     }
 
     @Test
     public void givenResource_whenCreateOne_ActionsListNotEmpty() {
         ResourceCreationDto resourceCreationDto = new ResourceCreationDto(QYT_BURGER, QYT_SALAD, QYT_WATER);
 
-        resourcesUseCase.createResources(resourceCreationDto);
-        List<ResourcesDto> actionList = resourcesUseCase.getAllResources();
+        resourcesService.createResources(resourceCreationDto);
+        List<ResourcesDto> actionList = resourcesService.getAllResources();
 
         assertFalse(actionList.isEmpty());
     }
 
     @Test
     public void givenResource_ZeroCreated_ActionsListIsEmpty() {
-        List<ResourcesDto> actionList = resourcesUseCase.getAllResources();
+        List<ResourcesDto> actionList = resourcesService.getAllResources();
 
         assertFalse(actionList.isEmpty());
     }

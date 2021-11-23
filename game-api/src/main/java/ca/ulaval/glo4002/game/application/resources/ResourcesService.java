@@ -1,10 +1,8 @@
 package ca.ulaval.glo4002.game.application.resources;
 
-import java.util.List;
-
 import ca.ulaval.glo4002.game.application.resources.dtos.ResourcesDto;
-import ca.ulaval.glo4002.game.controllers.resources.dtos.ResourcesAssembler;
 import ca.ulaval.glo4002.game.controllers.resources.dtos.ResourceCreationDto;
+import ca.ulaval.glo4002.game.controllers.resources.dtos.ResourcesAssembler;
 import ca.ulaval.glo4002.game.domain.actions.Action;
 import ca.ulaval.glo4002.game.domain.actions.ActionFactory;
 import ca.ulaval.glo4002.game.domain.game.Game;
@@ -14,14 +12,16 @@ import ca.ulaval.glo4002.game.domain.resources.PantryRepository;
 import ca.ulaval.glo4002.game.domain.resources.Resources;
 import ca.ulaval.glo4002.game.domain.resources.ResourcesGroup;
 
-public class ResourcesUseCase {
+import java.util.List;
+
+public class ResourcesService {
     private final ResourcesGroupFactory resourcesGroupFactory;
     private final PantryRepository pantryRepository;
     private final ResourcesAssembler resourcesAssembler;
     private final ActionFactory actionFactory;
     private final GameRepository gameRepository;
 
-    public ResourcesUseCase(ResourcesGroupFactory resourcesGroupFactory, PantryRepository pantryRepository, ResourcesAssembler resourcesAssembler,
+    public ResourcesService(ResourcesGroupFactory resourcesGroupFactory, PantryRepository pantryRepository, ResourcesAssembler resourcesAssembler,
                             ActionFactory actionFactory,
                             GameRepository gameRepository) {
         this.resourcesGroupFactory = resourcesGroupFactory;

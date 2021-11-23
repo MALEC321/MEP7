@@ -14,14 +14,14 @@ import ca.ulaval.glo4002.game.domain.game.GameRepository;
 
 import java.util.List;
 
-public class DinosaurUseCase {
+public class DinosaurService {
     private final DinosaurFactory dinosaurFactory;
     private final HerdRepository herdRepository;
     private final DinosaurAssembler dinosaurAssembler;
     private final ActionFactory actionFactory;
     private final GameRepository gameRepository;
 
-    public DinosaurUseCase(
+    public DinosaurService(
         DinosaurFactory dinosaurFactory,
         HerdRepository herdRepository,
         DinosaurAssembler dinosaurAssembler,
