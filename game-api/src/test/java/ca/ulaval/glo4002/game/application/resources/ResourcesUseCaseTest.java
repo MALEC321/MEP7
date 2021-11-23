@@ -65,7 +65,7 @@ public class ResourcesUseCaseTest {
     @Test
     public void givenResource_OneTurn_ResourceRepoNotEmpty() {
         PantryRepository resourceRepository = new PantryRepositoryInMemory();
-        turnService.executeTurn();
+        turnService.playTurn();
 
         List<ResourcesGroup> resources = resourceRepository.findPantry().findAll();
 

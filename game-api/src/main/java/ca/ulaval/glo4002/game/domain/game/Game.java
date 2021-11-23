@@ -31,10 +31,6 @@ public class Game {
         return turns.get(turns.size() - 2).getTurnNumber();
     }
 
-/*    private boolean isFistTurn() {
-        return turns.size() == 0;
-    }*/
-
     public void addTurn(Turn turn) {
         turns.add(turn);
     }

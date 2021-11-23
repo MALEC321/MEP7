@@ -15,10 +15,6 @@ import ca.ulaval.glo4002.game.domain.turn.TurnFactory;
 import ca.ulaval.glo4002.game.domain.turn.TurnNumber;
 
 public class TurnService {
-    public static final int TURN_BURGERS_QUANTITY = 100;
-    public static final int TURN_SALADS_QUANTITY = 250;
-    public static final int TURN_WATER_QUANTITY = 10000;
-
     private final TurnFactory turnFactory;
     private final GameRepository gameRepository;
     private final PantryRepository pantryRepository;

@@ -2,7 +2,7 @@ package ca.ulaval.glo4002.game.application.turn;
 
 import ca.ulaval.glo4002.game.application.resources.ResourcesFactory;
 import ca.ulaval.glo4002.game.domain.actions.Action;
-import ca.ulaval.glo4002.game.domain.actions.ActionRepository;
+import ca.ulaval.glo4002.game.domain.actions.ActionFactory;
 import ca.ulaval.glo4002.game.domain.actions.AddResource;
 import ca.ulaval.glo4002.game.domain.dinosaur.Herd;
 import ca.ulaval.glo4002.game.domain.dinosaur.HerdRepository;
@@ -28,10 +28,10 @@ public class TurnServiceTest {
     private HerdRepository herdRepository;
     private ResourcesDistributor resourcesDistributor;
     private TurnFactory turnFactory;
-    private ActionRepository actionRepository;
     private GameRepository gameRepository;
     private PantryRepository pantryRepository;
     private ResourcesFactory resourcesFactory;
+    private ActionFactory actionFactory;
     private TurnService turnService;
     private Game game;
     private Pantry pantry;
@@ -43,7 +43,7 @@ public class TurnServiceTest {
 
     @Before
     public void setUp() {
-        setResources();
+        //setResources();
         game = mock(Game.class);
         pantry = mock(Pantry.class);
         herd = mock(Herd.class);
@@ -51,42 +51,41 @@ public class TurnServiceTest {
         turnFactory = mock(TurnFactory.class);
         pantryRepository = mock(PantryRepository.class);
         herdRepository = mock(HerdRepository.class);
-        actionRepository = mock(ActionRepository.class);
         resourcesDistributor = mock(ResourcesDistributor.class);
         resourcesFactory = mock(ResourcesFactory.class);
-        turnService = new TurnService(turnFactory, gameRepository, pantryRepository, herdRepository, actionRepository,resourcesDistributor, resourcesFactory);
-        setTurnContext();
+        actionFactory = mock(ActionFactory.class);
+        turnService = new TurnService(turnFactory, gameRepository, pantryRepository, herdRepository, resourcesDistributor, resourcesFactory, actionFactory);
+        //setTurnContext();
     }
 
-    @Test
-   public void givenATurn_whenGetTurnNumber_thenReturnsCurrentTurnNumber(){
+/*    @Test
+   public void givenATurn_whenGetTurnNumber_thenReturnsCurrentTurnNumber() {
         TurnNumber turnNumber = new TurnNumber(1);
         when(gameRepository.findGame()).thenReturn(game);
         when(game.currentTurnNumber()).thenReturn(turnNumber);
 
-        assertEquals(EXPECTED, turnService.getTurnNumber().getNumber());
-    }
+        assertEquals(EXPECTED, turnService.TurnNumber().getNumber());
+    }*/
 
     @Test
-    public void givenATurn_whenResetTurn_thenTurnIsReset(){
+    public void givenATurn_whenResetTurn_thenTurnIsReset() {
         turnService.resetGame();
 
         verify(gameRepository).deleteAll();
         verify(pantryRepository).deleteAll();
         verify(herdRepository).deleteAll();
-        verify(actionRepository).deleteAll();
     }
 
     @Test
-    public void givenAturn_whenExecuteTurn_thenTurnConclusionsAreExecuted(){
-        turnService.executeTurn();
+    public void givenAturn_whenExecuteTurn_thenTurnConclusionsAreExecuted() {
+        turnService.playTurn();
 
-        verify(actionRepository).getActionList();
+
     }
 
     @Test
-    public void givenAturn_whenExecuteTurn_thenPantryIsFilledWithTurnDefaultResourcesNumber(){
-        turnService.executeTurn();
+    public void givenAturn_whenExecuteTurn_thenPantryIsFilledWithTurnDefaultResourcesNumber() {
+        turnService.playTurn();
 
         verify(pantry).addResources(burgers);
         verify(pantry).addResources(salads);
@@ -94,22 +93,21 @@ public class TurnServiceTest {
     }
 
     @Test
-    public void givenAturn_whenExecuteTurn_thenDinosaursAreFed(){
-        turnService.executeTurn();
+    public void givenAturn_whenExecuteTurn_thenDinosaursAreFed() {
+        turnService.playTurn();
 
         verify(resourcesDistributor).feedDinosaurs(pantry, herd);
     }
 
     @Test
-    public void givenAturn_whenExecuteTurn_thenOrphanedDinonaursAreRemoved(){
-        turnService.executeTurn();
+    public void givenAturn_whenExecuteTurn_thenOrphanedDinonaursAreRemoved() {
+        turnService.playTurn();
 
         verify(herd).removeOrphanedBabyDinosaurs();
     }
 
-    private void setTurnContext() {
+/*    private void setTurnContext() {
         TurnNumber turnNumber = new TurnNumber(1);
-        when(actionRepository.getActionList()).thenReturn(createActionsToExecute());
         when(pantryRepository.findPantry()).thenReturn(pantry);
         when(herdRepository.findHerd()).thenReturn(herd);
         when(resourcesFactory.create(BURGER, TURN_BURGERS_QUANTITY)).thenReturn(burgers);
@@ -120,16 +118,10 @@ public class TurnServiceTest {
         when(turnFactory.create(any(), any())).thenReturn(new Turn(turnNumber));
     }
 
-    private List<Action> createActionsToExecute()  {
-        Resources resources = new Resources(ResourceType.BURGER, TURN_BURGERS_QUANTITY, ResourceType.BURGER.getExpiration());
-        Action action = new AddResource(resources, pantry);
-        return Arrays.asList(action);
-    }
-
     private void setResources() {
         burgers = new Resources(BURGER, TURN_BURGERS_QUANTITY, BURGER.getExpiration());
         salads = new Resources(SALAD, TURN_SALADS_QUANTITY, SALAD.getExpiration());
         water = new Resources(WATER, TURN_WATER_QUANTITY, WATER.getExpiration());
-    }
+    }*/
 
 }
