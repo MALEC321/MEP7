@@ -36,12 +36,6 @@ class BabyServiceTest {
         MockitoAnnotations.initMocks(this);
     }
 
-//    @Test
-//    public void givenBabyDinosaur_whenGetDinosaurNotExistent_shouldThrowsNotExistentNameException() {
-//        BabyCreationDto babyCreationDto = new BabyCreationDto(this.name, this.fatherName, this.motherName);
-//        assertThrows(NotExistentNameException.class, () ->
-//                babyService.createBaby(babyCreationDto));
-//    }
 
     @Test
     public void givenBabyInformation_whenBabyIsBorn_thenBabyInformationAreSaved() {
