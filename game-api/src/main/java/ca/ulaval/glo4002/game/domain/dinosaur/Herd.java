@@ -70,7 +70,7 @@ public class Herd {
         for (Dinosaur dinosaur: findSortedHerbivoreAndOmnivore(findSortedDinosaursByStrengthThenName())) {
             halfResourcesStateDtoForHerbivore = dinosaur.eat(halfResourcesStateDtoForHerbivore); // S2
         }
-        for (Dinosaur dinosaur: findSortedDinosaursByStrengthThenName()) {
+        for (Dinosaur dinosaur: findSortedCarnivoreAndOmnivore(findSortedDinosaursByStrengthThenName())) {
             halfResourcesStateDtoForCarnivore = dinosaur.eat(halfResourcesStateDtoForCarnivore);
         }
 
