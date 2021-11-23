@@ -60,13 +60,11 @@ public class ResourcesStateDto {
 
     public ResourcesStateDto removeQuantities(final ResourcesStateDto resourcesStateDto) {
         List<ResourceTypeQuantity> resourceTypeQuantitiesLeft = new ArrayList<>();
-        pantryQuantities.forEach((resourceType, resourceTypeQuantity) -> {
+        pantryQuantities.forEach((resourceType, currentResourceQuantity) -> {
             int resourceQuantityNeeded = resourcesStateDto.getQtyForResourceType(resourceType);
             int resourceQuantityLeft = 0;
-            if (resourceTypeQuantity < resourceQuantityNeeded) {
-                resourceTypeQuantitiesLeft.add(new ResourceTypeQuantity(resourceType, resourceQuantityLeft));
-            } else {
-                resourceQuantityLeft = resourceTypeQuantity - resourceQuantityNeeded;
+            if (currentResourceQuantity >= resourceQuantityNeeded) {
+                resourceQuantityLeft = currentResourceQuantity - resourceQuantityNeeded;
             }
             resourceTypeQuantitiesLeft.add(new ResourceTypeQuantity(resourceType, resourceQuantityLeft));
         });
