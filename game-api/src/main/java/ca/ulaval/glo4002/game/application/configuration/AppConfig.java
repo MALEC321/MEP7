@@ -1,6 +1,9 @@
 package ca.ulaval.glo4002.game.application.configuration;
 
+import ca.ulaval.glo4002.game.application.baby.BabyRegistrationService;
 import ca.ulaval.glo4002.game.application.baby.BabyService;
+import ca.ulaval.glo4002.game.application.baby.HealthCenter;
+import ca.ulaval.glo4002.game.application.baby.ParentInformationCenter;
 import ca.ulaval.glo4002.game.application.baby.breed.Breedable;
 import ca.ulaval.glo4002.game.application.baby.dtos.BabyAssembler;
 import ca.ulaval.glo4002.game.application.dinosaur.DinosaurFactory;
@@ -71,7 +74,10 @@ public class AppConfig {
     // Baby
     private static final BabyAssembler babyAssembler = new BabyAssembler();
     private static final Breedable breedable = new BabyBreedableClient();
-    private static final BabyService babyService = new BabyService(herdRepository, babyAssembler, actionFactory, dinosaurFactory, breedable, gameRepository);
+    private static final ParentInformationCenter parentInformationCenter = new ParentInformationCenter(herdRepository, babyAssembler);;
+    private static final HealthCenter healthCenter = new HealthCenter(parentInformationCenter, breedable);
+    private static final BabyRegistrationService babyRegistrationService = new BabyRegistrationService(herdRepository, actionFactory, dinosaurFactory, gameRepository);
+    private static final BabyService babyService = new BabyService(healthCenter, babyRegistrationService);
 
     private static final BabyDtoAssembler babyDtoAssembler = new BabyDtoAssembler();
     private static final BabyResource createBabyResource = new BabyResource(babyService, babyDtoAssembler);
