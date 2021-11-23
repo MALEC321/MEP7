@@ -37,11 +37,12 @@ public class DietStrategyForHerbivore extends AbstractDietStrategy {
         BigDecimal dividend = new BigDecimal("200");
 
         BigDecimal foodNeeds = dinosaurWeight.multiply(DietMultiplicand.SALAD.getMultiplicand());
-        foodNeeds = foodNeeds.divide(dividend).setScale(0, RoundingMode.CEILING);
+        foodNeeds = foodNeeds.divide(dividend);
 
         if (getDietType() == OMNIVORE) {
-            foodNeeds = foodNeeds.multiply(new BigDecimal("0.5")).setScale(0, RoundingMode.CEILING);
+            foodNeeds = foodNeeds.multiply(new BigDecimal("0.5"));
         }
+        foodNeeds = foodNeeds.setScale(0, RoundingMode.CEILING);
 
         if (isHungry) {
             foodNeeds = calculateFoodNeedsForHungryDino(foodNeeds);
