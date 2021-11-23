@@ -96,6 +96,7 @@ public class AppConfig {
         resources.add(new NotExistentNameExceptionsMapper());
         resources.add(new InvalidGenderExceptionsMapper());
         resources.add(new InvalidSpeciesExceptionsMapper());
+        resources.add(new InvalidWeightExceptionsMapper());
         resources.add(new DuplicateNameExceptionsMapper());
         resources.add(new InvalidMotherExceptionsMapper());
         resources.add(new InvalidFatherExceptionsMapper());
