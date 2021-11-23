@@ -66,7 +66,7 @@ public class Pantry implements FoodContainer {
         ResourcesStateDto actualResourcesStateDto = getFreshResourcesReport();
         actualResourcesStateDto.getPantryQuantities().forEach((resourceType, resourceTypeQuantity) -> {
             int actualResourceQuantity = resourceTypeQuantity;
-            removeResourceQty(resourceType, Math.subtractExact(actualResourceQuantity, updatedResourcesStateDto.getQtyForResourceType(resourceType)));
+            removeResourceQty(resourceType, actualResourceQuantity - updatedResourcesStateDto.getQtyForResourceType(resourceType));
         });
     }
 
