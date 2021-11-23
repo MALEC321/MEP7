@@ -38,14 +38,14 @@ public class DietStrategyForCarnivore extends AbstractDietStrategy {
 
         BigDecimal foodNeeds = dinosaurWeight.multiply(DietMultiplicand.BURGER.getMultiplicand()).divide(dividend);
 
+
+        if (getDietType() == OMNIVORE) {
+            foodNeeds = foodNeeds.multiply(new BigDecimal("0.5")).setScale(0, RoundingMode.CEILING);
+        }
+
         if (isHungry) {
             foodNeeds = calculateFoodNeedsForHungryDino(foodNeeds);
         }
-
-        if (getDietType() == OMNIVORE) {
-            foodNeeds = foodNeeds.multiply(new BigDecimal("0.5"));
-        }
-
         return foodNeeds.setScale(0, RoundingMode.CEILING).intValue();
     }
 }
