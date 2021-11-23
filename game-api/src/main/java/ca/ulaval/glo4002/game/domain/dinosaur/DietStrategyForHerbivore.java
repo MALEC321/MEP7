@@ -42,7 +42,6 @@ public class DietStrategyForHerbivore extends AbstractDietStrategy {
         if (getDietType() == OMNIVORE) {
             foodNeeds = foodNeeds.multiply(new BigDecimal("0.5"));
         }
-        foodNeeds = foodNeeds.setScale(0, RoundingMode.CEILING);
 
         if (isHungry) {
             foodNeeds = calculateFoodNeedsForHungryDino(foodNeeds);
