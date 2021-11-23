@@ -53,6 +53,7 @@ class ParentInformationCenterTest {
     @BeforeEach
     void setUp() {
         MockitoAnnotations.initMocks(this);
+        when(herdRepository.findHerd()).thenReturn(herd);
         when(validDinosaurFather.getGender()).thenReturn(validFatherGender);
         when(validDinosaurFather.getSpecies()).thenReturn(validFatherSpecie);
         when(validDinosaurMother.getGender()).thenReturn(validMotherGender);
@@ -61,7 +62,6 @@ class ParentInformationCenterTest {
 
     @Test
     void givenValidInformation_whenGetParentSpecies_thenRequestBreedIsReturn() {
-        when(herdRepository.findHerd()).thenReturn(herd);
         when(herd.findDinosaurByName(validFatherName)).thenReturn(validDinosaurFather);
         when(herd.findDinosaurByName(validMotherName)).thenReturn(validDinosaurMother);
         when(babyAssembler.toExternalDto(validFatherSpecie, validMotherSpecie)).thenReturn(requestBreed);
@@ -76,7 +76,6 @@ class ParentInformationCenterTest {
 
     @Test
     void givenInvalidFatherName_whenGetParentSpecies_thenNotExistentNameIsThrown() {
-        when(herdRepository.findHerd()).thenReturn(herd);
         when(herd.findDinosaurByName(invalidFatherName)).thenReturn(null);
         when(herd.findDinosaurByName(validMotherName)).thenReturn(validDinosaurMother);
 
@@ -90,7 +89,6 @@ class ParentInformationCenterTest {
 
     @Test
     void givenInvalidMotherName_whenGetParentSpecies_thenNotExistentNameIsThrown() {
-        when(herdRepository.findHerd()).thenReturn(herd);
         when(herd.findDinosaurByName(validFatherName)).thenReturn(validDinosaurFather);
         when(herd.findDinosaurByName(invalidMotherName)).thenReturn(null);
 
@@ -104,7 +102,6 @@ class ParentInformationCenterTest {
 
     @Test
     void givenInvalidFatherGender_whenGetParentSpecies_thenInvalidFatherExceptionIsThrown() {
-        when(herdRepository.findHerd()).thenReturn(herd);
         when(herd.findDinosaurByName(validFatherName)).thenReturn(invalidDinosaurFather);
         when(invalidDinosaurFather.getGender()).thenReturn(validMotherGender);
         when(herd.findDinosaurByName(validMotherName)).thenReturn(validDinosaurMother);
@@ -119,7 +116,6 @@ class ParentInformationCenterTest {
 
     @Test
     void givenInvalidMotherGender_whenGetParentSpecies_thenInvalidMotherExceptionIsThrown() {
-        when(herdRepository.findHerd()).thenReturn(herd);
         when(herd.findDinosaurByName(validFatherName)).thenReturn(validDinosaurFather);
         when(herd.findDinosaurByName(validMotherName)).thenReturn(invalidDinosaurMother);
         when(invalidDinosaurMother.getGender()).thenReturn(validFatherGender);
