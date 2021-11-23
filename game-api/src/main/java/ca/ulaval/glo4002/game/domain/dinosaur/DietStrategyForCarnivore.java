@@ -36,7 +36,7 @@ public class DietStrategyForCarnivore extends AbstractDietStrategy {
         BigDecimal dinosaurWeight = new BigDecimal(weight);
         BigDecimal dividend = new BigDecimal(200);
 
-        BigDecimal foodNeeds = dinosaurWeight.multiply(DietMultiplicand.BURGER.getMultiplicand()).divide(dividend);
+        BigDecimal foodNeeds = dinosaurWeight.multiply(DietMultiplicand.BURGER.getMultiplicand()).divide(dividend).setScale(0, RoundingMode.CEILING);
 
 
         if (getDietType() == OMNIVORE) {
