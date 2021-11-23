@@ -11,14 +11,28 @@ public class Game {
 
     public Game() {
         turns = new ArrayList<>();
+
+        turns.add(new Turn(new TurnNumber(1)));
     }
 
     public TurnNumber nextTurnNumber() {
         return currentTurnNumber().nextTurnNumber();
     }
 
+    public Turn currentTurn() {
+        return turns.get(turns.size() - 1);
+    }
+
     public TurnNumber currentTurnNumber() {
-        return isFistTurn() ? new TurnNumber(0) : turns.get(turns.size() - 1).getTurnNumber();
+        return turns.get(turns.size() - 1).getTurnNumber();
+    }
+
+    public TurnNumber lastPlayedTurnNumber() {
+        return turns.get(turns.size() - 2).getTurnNumber();
+    }
+
+    public void addTurn(Turn turn) {
+        turns.add(turn);
     }
 
     public Turn findByNumber(TurnNumber turnNumber) {
@@ -28,13 +42,5 @@ public class Game {
             }
         }
         return null;
-    }
-
-    public void addTurn(Turn turn) {
-        turns.add(turn);
-    }
-
-    private boolean isFistTurn() {
-        return turns.size() == 0;
     }
 }
