@@ -10,6 +10,7 @@
 # misc
 *.log
 *.plantuml
+*.puml
 
 #System Files
 .DS_Store
