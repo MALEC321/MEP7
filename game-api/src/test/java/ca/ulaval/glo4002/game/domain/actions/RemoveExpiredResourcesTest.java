@@ -29,4 +29,11 @@ public class RemoveExpiredResourcesTest {
 
         verify(pantry).removeAllExpiredResources();
     }
+
+    @Test
+    void givenRemoveAllExpiredResourcesAction_whenExecuting_thenDecreaseExpirationDateShouldBeCalled() {
+        removeAllExpiredResources.execute();
+
+        verify(pantry).decreaseExpirationDate();
+    }
 }
