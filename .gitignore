@@ -9,6 +9,7 @@
 
 # misc
 *.log
+*.plantuml
 
 #System Files
 .DS_Store
