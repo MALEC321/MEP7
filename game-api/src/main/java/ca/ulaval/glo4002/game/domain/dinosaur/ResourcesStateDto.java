@@ -57,4 +57,23 @@ public class ResourcesStateDto {
         resultResourcesState.removeIf(resourceTypeQuantity -> resourceTypeQuantity.getResourceType() == unWantedResourceTypeWanted);
         return new ResourcesStateDto(resultResourcesState);
     }
+
+    public ResourcesStateDto removeQuantities(final ResourcesStateDto resourcesStateDto) {
+        List<ResourceTypeQuantity> resourceTypeQuantitiesLeft = new ArrayList<>();
+        pantryQuantities.forEach((resourceType, resourceTypeQuantity) -> {
+            int resourceQuantityNeeded = resourcesStateDto.getQtyForResourceType(resourceType);
+            int resourceQuantityLeft = 0;
+            if (resourceTypeQuantity < resourceQuantityNeeded) {
+                resourceTypeQuantitiesLeft.add(new ResourceTypeQuantity(resourceType, resourceQuantityLeft));
+            } else {
+                resourceQuantityLeft = resourceTypeQuantity - resourceQuantityNeeded;
+            }
+            resourceTypeQuantitiesLeft.add(new ResourceTypeQuantity(resourceType, resourceQuantityLeft));
+        });
+        return new ResourcesStateDto(resourceTypeQuantitiesLeft);
+    }
+
+    public boolean checkIfThereIsEnoughQuantity(final ResourcesStateDto resourcesStateDto) {
+        return resourcesStateDto.getPantryQuantities().entrySet().stream().noneMatch(entry -> getQtyForResourceType(entry.getKey()) < entry.getValue());
+    }
 }
