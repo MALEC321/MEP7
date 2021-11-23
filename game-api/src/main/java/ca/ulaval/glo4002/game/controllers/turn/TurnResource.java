@@ -1,6 +1,6 @@
 package ca.ulaval.glo4002.game.controllers.turn;
 
-import ca.ulaval.glo4002.game.application.turn.TurnUseCase;
+import ca.ulaval.glo4002.game.application.turn.TurnService;
 import ca.ulaval.glo4002.game.controllers.turn.dtos.TurnDto;
 import ca.ulaval.glo4002.game.controllers.turn.dtos.TurnDtoAssembler;
 import ca.ulaval.glo4002.game.controllers.turn.dtos.TurnResponse;
@@ -11,12 +11,12 @@ import javax.ws.rs.core.Response;
 
 @Path("/")
 public class TurnResource {
-    private final TurnUseCase turnUseCase;
+    private final TurnService turnService;
     private final TurnDtoAssembler turnDtoAssembler;
 
-    public TurnResource(TurnUseCase turnUseCase,
+    public TurnResource(TurnService turnService,
                         TurnDtoAssembler turnDtoAssembler) {
-        this.turnUseCase = turnUseCase;
+        this.turnService = turnService;
         this.turnDtoAssembler = turnDtoAssembler;
     }
 
@@ -24,9 +24,9 @@ public class TurnResource {
     @POST
     @Produces(MediaType.APPLICATION_JSON)
     public Response runTurn() {
-        turnUseCase.playTurn();
+        turnService.playTurn();
 
-        TurnDto turnDto = new TurnDto(turnUseCase.getLastPlayedTurnNumber());
+        TurnDto turnDto = new TurnDto(turnService.getLastPlayedTurnNumber());
         TurnResponse response = turnDtoAssembler.toResponse(turnDto);
 
         return Response.status(Response.Status.OK).entity(response).build();
@@ -36,7 +36,7 @@ public class TurnResource {
     @POST
     @Produces(MediaType.APPLICATION_JSON)
     public Response reset() {
-        turnUseCase.resetGame();
+        turnService.resetGame();
 
         return Response.status(Response.Status.OK).build();
     }

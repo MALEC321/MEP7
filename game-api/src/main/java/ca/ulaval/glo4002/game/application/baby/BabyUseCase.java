@@ -11,7 +11,7 @@ import ca.ulaval.glo4002.game.application.exceptions.NotExistentNameException;
 import ca.ulaval.glo4002.game.controllers.baby.dtos.BabyCreationDto;
 import ca.ulaval.glo4002.game.domain.actions.ActionFactory;
 import ca.ulaval.glo4002.game.domain.dinosaur.Dinosaur;
-import ca.ulaval.glo4002.game.domain.dinosaur.DinosaurFactory;
+import ca.ulaval.glo4002.game.application.dinosaur.DinosaurFactory;
 import ca.ulaval.glo4002.game.domain.dinosaur.Herd;
 import ca.ulaval.glo4002.game.domain.dinosaur.HerdRepository;
 import ca.ulaval.glo4002.game.domain.game.Game;
@@ -46,7 +46,7 @@ public class BabyUseCase {
         if (babyDto.isPresent()) {
             Dinosaur father = herdRepository.findHerd().findDinosaurByName(dto.getFatherName());
             Dinosaur mother = herdRepository.findHerd().findDinosaurByName(dto.getMotherName());
-            Dinosaur baby = dinosaurFactory.create(dto.getName(), mother, father, babyDto.get().getGender(), babyDto.get().getOffspring());
+            Dinosaur baby = dinosaurFactory.createBabyDinosaur(dto.getName(), mother, father, babyDto.get().getGender(), babyDto.get().getOffspring());
 
             Game game = gameRepository.findGame();
 

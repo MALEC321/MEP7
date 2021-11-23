@@ -20,10 +20,10 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.Matchers.anyObject;
 import static org.mockito.Matchers.anyString;
 
-class BabyCreationClientImpTest {
-
+public class BabyCreationClientImpTest {
     private static final String FATHER_SPECIE = "fatherSpecie";
     private static final String MOTHER_SPECIE = "motherSpecie";
+
     @InjectMocks
     BabyBreedableClient babyCreationClient;
 

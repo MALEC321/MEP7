@@ -1,7 +1,7 @@
 package ca.ulaval.glo4002.game.application.resources;
 
 import ca.ulaval.glo4002.game.application.resources.dtos.ResourcesDto;
-import ca.ulaval.glo4002.game.application.turn.TurnUseCase;
+import ca.ulaval.glo4002.game.application.turn.TurnService;
 import ca.ulaval.glo4002.game.controllers.resources.dtos.ResourcesAssembler;
 import ca.ulaval.glo4002.game.controllers.resources.dtos.ResourceCreationDto;
 import ca.ulaval.glo4002.game.domain.actions.ActionFactory;
@@ -26,7 +26,7 @@ public class ResourcesUseCaseTest {
     private static final int QYT_SALAD = 5;
     private static final int QYT_WATER = 6;
     private ResourcesUseCase resourcesUseCase;
-    private TurnUseCase turnUseCase;
+    private TurnService turnService;
 
     @BeforeEach
     void setUp() {
@@ -41,7 +41,7 @@ public class ResourcesUseCaseTest {
         GameRepository gameRepository = new GameRepositoryInMemory();
         HerdRepository herdRepository = new HerdRepositoryInMemory();
 
-        turnUseCase = new TurnUseCase(turnFactory, gameRepository, resourceRepository, herdRepository, resourcesDistributor, resourcesFactory, actionFactory);
+        turnService = new TurnService(turnFactory, gameRepository, resourceRepository, herdRepository, resourcesDistributor, resourcesFactory, actionFactory);
         resourcesUseCase = new ResourcesUseCase(resourcesGroupFactory, resourceRepository, resourcesAssembler, actionFactory, gameRepository);
     }
 
@@ -65,7 +65,7 @@ public class ResourcesUseCaseTest {
     @Test
     public void givenResource_OneTurn_ResourceRepoNotEmpty() {
         PantryRepository resourceRepository = new PantryRepositoryInMemory();
-        turnUseCase.playTurn();
+        turnService.executeTurn();
 
         List<ResourcesGroup> resources = resourceRepository.findPantry().findAll();
 

@@ -8,7 +8,6 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
 class DinosaurTest {
-
     private Dinosaur herbivoreFemale;
     private Dinosaur carnivoreMale;
 
@@ -76,7 +75,7 @@ class DinosaurTest {
     }
 
     @Test
-    void given123kgFemaleCarnivore_thenStrengthIsEqualTo277() {//12345678
+    void given123kgFemaleCarnivore_thenStrengthIsEqualTo277() {
         Dinosaur grosPied = new Dinosaur("grosPied", 1, "f", "Velociraptor");
         int expectedStrength = 3;
 
@@ -199,27 +198,5 @@ class DinosaurTest {
         Dinosaur rootMother = new Dinosaur("rootMother", 50000, "m", "Megalosaurus");
 
         assertFalse(rootMother.areBothParentsDead());
-    }
-
-    @Test
-    void givenBabyWithWeight20kg_whenAdding80kg_thenDinoWeightIs100kg() {
-        Dinosaur babyBecomesAdultDino = new Dinosaur("babyBecomesAdultDino", 20, "m",
-                "Megalosaurus");
-
-        babyBecomesAdultDino.addWeight(80);
-
-        assertEquals(100, babyBecomesAdultDino.getWeight());
-    }
-
-    @Test
-    void whenBabyBecomesAdult_thenCannotLooseParents() {
-        Dinosaur father = new Dinosaur("mother", 50000, "f", "Megalosaurus");
-        Dinosaur mother = new Dinosaur("father", 50000, "m", "Megalosaurus");
-        Dinosaur babyBecomesAdultDino = new Dinosaur("babyBecomesAdultDino", 20, "m",
-                "Megalosaurus", mother, father);
-
-        babyBecomesAdultDino.addWeight(80);
-
-        assertFalse(babyBecomesAdultDino.areBothParentsDead());
     }
 }
