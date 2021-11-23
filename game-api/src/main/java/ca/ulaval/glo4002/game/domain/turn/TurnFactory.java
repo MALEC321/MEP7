@@ -8,4 +8,7 @@ public class TurnFactory {
     public Turn create(TurnNumber turnNumber, List<Action> actions) {
         return new Turn(turnNumber, actions);
     }
+    public Turn create(TurnNumber turnNumber) {
+        return new Turn(turnNumber);
+    }
 }

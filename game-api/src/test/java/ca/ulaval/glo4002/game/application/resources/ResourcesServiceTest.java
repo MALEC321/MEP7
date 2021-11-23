@@ -5,14 +5,12 @@ import ca.ulaval.glo4002.game.application.turn.TurnService;
 import ca.ulaval.glo4002.game.controllers.resources.dtos.ResourcesAssembler;
 import ca.ulaval.glo4002.game.controllers.resources.dtos.ResourceCreationDto;
 import ca.ulaval.glo4002.game.domain.actions.ActionFactory;
-import ca.ulaval.glo4002.game.domain.actions.ActionRepository;
 import ca.ulaval.glo4002.game.domain.dinosaur.HerdRepository;
 import ca.ulaval.glo4002.game.domain.resources.PantryRepository;
 import ca.ulaval.glo4002.game.domain.resources.ResourcesDistributor;
 import ca.ulaval.glo4002.game.domain.resources.ResourcesGroup;
 import ca.ulaval.glo4002.game.domain.turn.TurnFactory;
 import ca.ulaval.glo4002.game.domain.game.GameRepository;
-import ca.ulaval.glo4002.game.infrastructure.persistence.actions.ActionRepositoryInMemory;
 import ca.ulaval.glo4002.game.infrastructure.persistence.dinosaur.HerdRepositoryInMemory;
 import ca.ulaval.glo4002.game.infrastructure.persistence.resources.PantryRepositoryInMemory;
 import ca.ulaval.glo4002.game.infrastructure.persistence.turn.GameRepositoryInMemory;
@@ -24,7 +22,6 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 
 public class ResourcesServiceTest {
-
     private static final int QYT_BURGER = 4;
     private static final int QYT_SALAD = 5;
     private static final int QYT_WATER = 6;
@@ -36,7 +33,6 @@ public class ResourcesServiceTest {
         ResourcesGroupFactory resourcesGroupFactory = new ResourcesGroupFactory();
         ResourcesAssembler resourcesAssembler = new ResourcesAssembler();
         PantryRepository resourceRepository = new PantryRepositoryInMemory();
-        ActionRepository actionRepository = new ActionRepositoryInMemory();
         ResourcesDistributor resourcesDistributor = new ResourcesDistributor();
         ActionFactory actionFactory = new ActionFactory();
         ResourcesFactory resourcesFactory = new ResourcesFactory();
@@ -45,8 +41,8 @@ public class ResourcesServiceTest {
         GameRepository gameRepository = new GameRepositoryInMemory();
         HerdRepository herdRepository = new HerdRepositoryInMemory();
 
-        turnService = new TurnService(turnFactory, gameRepository, resourceRepository, herdRepository, actionRepository, resourcesDistributor, resourcesFactory);
-        resourcesService = new ResourcesService(resourcesGroupFactory, resourceRepository, resourcesAssembler, actionRepository, actionFactory);
+        turnService = new TurnService(turnFactory, gameRepository, resourceRepository, herdRepository, resourcesDistributor, resourcesFactory, actionFactory);
+        resourcesService = new ResourcesService(resourcesGroupFactory, resourceRepository, resourcesAssembler, actionFactory, gameRepository);
     }
 
     @Test
@@ -69,7 +65,7 @@ public class ResourcesServiceTest {
     @Test
     public void givenResource_OneTurn_ResourceRepoNotEmpty() {
         PantryRepository resourceRepository = new PantryRepositoryInMemory();
-        turnService.executeTurn();
+        turnService.playTurn();
 
         List<ResourcesGroup> resources = resourceRepository.findPantry().findAll();
 

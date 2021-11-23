@@ -1,8 +1,5 @@
 package ca.ulaval.glo4002.game.domain.resources;
 
-import ca.ulaval.glo4002.game.domain.dinosaur.ResourcesStateDto;
-import ca.ulaval.glo4002.game.domain.dinosaur.ResourceTypeQuantity;
-
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -10,6 +7,9 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.Queue;
+
+import ca.ulaval.glo4002.game.domain.dinosaur.ResourceTypeQuantity;
+import ca.ulaval.glo4002.game.domain.dinosaur.ResourcesStateDto;
 
 import static ca.ulaval.glo4002.game.domain.resources.ResourceType.*;
 
@@ -35,6 +35,7 @@ public class Pantry implements FoodContainer {
         List<ResourceTypeQuantity> resourceTypes = new ArrayList<>(findFreshResources());
         return new ResourcesStateDto(resourceTypes);
     }
+
     public List<ResourceTypeQuantity> findFreshResources() {
         List<ResourceTypeQuantity> resourceTypeQuantities = new ArrayList<>();
         for (Map.Entry<ResourceType, Queue<Resources>> entry : freshResources.entrySet()) {
@@ -87,18 +88,11 @@ public class Pantry implements FoodContainer {
         return false;
     }
 
-    public void removeAllEmptyResources() {
+    public void removeAllExpiredResources() {
+        removeAllEmptyResources();
+
         for (Map.Entry<ResourceType, Queue<Resources>> entry : freshResources.entrySet()) {
             Queue<Resources> resourcesQueue = entry.getValue();
-            while (resourcesQueue.peek() != null && resourcesQueue.peek().isEmpty()) {
-                resourcesQueue.poll();
-            }
-        }
-    }
-
-    public void removeAllExpiredResources() {
-        for (Map.Entry<ResourceType, Queue<Resources>> entry : freshResources.entrySet()) {
-            Queue<Resources> resourcesQueue =  entry.getValue();
             while (resourcesQueue.peek() != null && resourcesQueue.peek().isExpired()) {
                 assert resourcesQueue.peek() != null;
                 expiredResourcesGroup.addResource(entry.getKey(), resourcesQueue.peek().getQuantity());
@@ -108,10 +102,8 @@ public class Pantry implements FoodContainer {
     }
 
     public void decreaseExpirationDate() {
-        removeAllEmptyResources();
-        removeAllExpiredResources();
         for (Map.Entry<ResourceType, Queue<Resources>> entry : freshResources.entrySet()) {
-            for (Resources resources :  entry.getValue()) {
+            for (Resources resources : entry.getValue()) {
                 resources.decreaseExpirationDate();
             }
         }
@@ -129,5 +121,14 @@ public class Pantry implements FoodContainer {
 
     public List<ResourcesGroup> findAll() {
         return Arrays.asList(findFreshResourcesGroup(), expiredResourcesGroup, consumedResourcesGroup);
+    }
+
+    private void removeAllEmptyResources() {
+        for (Map.Entry<ResourceType, Queue<Resources>> entry : freshResources.entrySet()) {
+            Queue<Resources> resourcesQueue = entry.getValue();
+            while (resourcesQueue.peek() != null && resourcesQueue.peek().isEmpty()) {
+                resourcesQueue.poll();
+            }
+        }
     }
 }
