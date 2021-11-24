@@ -47,8 +47,8 @@ public class Herd {
     public List<Dinosaur> findSortedHerbivoreAndOmnivore() {
         List<Dinosaur> copiedDinoList = this.findAllDinosaurs();
 
-        copiedDinoList.sort(Comparator.comparing(Dinosaur::getStrength).thenComparing(Dinosaur::getName).reversed());
         copiedDinoList.removeIf(dinosaur -> dinosaur.getDiet() == CARNIVORE);
+        copiedDinoList.sort(Comparator.comparing(Dinosaur::getStrength).thenComparing(Dinosaur::getName, Comparator.reverseOrder()));
 
         return copiedDinoList;
     }
