@@ -1,6 +1,6 @@
 package ca.ulaval.glo4002.game.controllers.baby;
 
-import ca.ulaval.glo4002.game.application.baby.BabyUseCase;
+import ca.ulaval.glo4002.game.application.baby.BabyService;
 import ca.ulaval.glo4002.game.controllers.baby.dtos.BabyCreationDto;
 import ca.ulaval.glo4002.game.controllers.baby.dtos.BabyDtoAssembler;
 import org.glassfish.jersey.server.ResourceConfig;
@@ -18,14 +18,14 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 public class BabyResourceTest extends JerseyTest {
-    private BabyUseCase babyUseCase;
+    private BabyService babyService;
     private BabyDtoAssembler babyDtoAssembler;
 
     @Override
     protected Application configure() {
-        babyUseCase = Mockito.mock(BabyUseCase.class);
+        babyService = Mockito.mock(BabyService.class);
         babyDtoAssembler = Mockito.mock(BabyDtoAssembler.class);
-        return new ResourceConfig().register(new BabyResource(babyUseCase, babyDtoAssembler));
+        return new ResourceConfig().register(new BabyResource(babyService, babyDtoAssembler));
     }
 
     @Test
@@ -35,7 +35,7 @@ public class BabyResourceTest extends JerseyTest {
 
         Response response = target("breed").request(MediaType.APPLICATION_JSON_TYPE).post(null);
 
-        verify(babyUseCase).createBaby(babyCreationDto);
+        verify(babyService).createBaby(babyCreationDto);
         assertEquals(200, response.getStatus());
     }
 }

@@ -1,15 +1,15 @@
 package ca.ulaval.glo4002.game.application.configuration;
 
-import ca.ulaval.glo4002.game.application.baby.BabyUseCase;
+import ca.ulaval.glo4002.game.application.baby.BabyService;
 import ca.ulaval.glo4002.game.application.baby.breed.Breedable;
 import ca.ulaval.glo4002.game.application.baby.dtos.BabyAssembler;
 import ca.ulaval.glo4002.game.application.dinosaur.DinosaurFactory;
-import ca.ulaval.glo4002.game.application.dinosaur.DinosaurUseCase;
+import ca.ulaval.glo4002.game.application.dinosaur.DinosaurService;
 import ca.ulaval.glo4002.game.application.dinosaur.dtos.DinosaurAssembler;
 import ca.ulaval.glo4002.game.application.resources.ResourcesFactory;
 import ca.ulaval.glo4002.game.application.resources.ResourcesGroupFactory;
-import ca.ulaval.glo4002.game.application.resources.ResourcesUseCase;
 import ca.ulaval.glo4002.game.application.sumo.SumoService;
+import ca.ulaval.glo4002.game.application.resources.ResourcesService;
 import ca.ulaval.glo4002.game.application.turn.TurnService;
 import ca.ulaval.glo4002.game.controllers.baby.BabyResource;
 import ca.ulaval.glo4002.game.controllers.baby.dtos.BabyDtoAssembler;
@@ -23,7 +23,6 @@ import ca.ulaval.glo4002.game.controllers.sumo.SumoResource;
 import ca.ulaval.glo4002.game.controllers.turn.TurnResource;
 import ca.ulaval.glo4002.game.controllers.turn.dtos.TurnDtoAssembler;
 import ca.ulaval.glo4002.game.domain.actions.ActionFactory;
-import ca.ulaval.glo4002.game.domain.actions.ActionRepository;
 import ca.ulaval.glo4002.game.domain.dinosaur.HerdRepository;
 import ca.ulaval.glo4002.game.domain.dinosaur.enums.SpeciesDietsCorrespondances;
 import ca.ulaval.glo4002.game.domain.game.GameRepository;
@@ -31,7 +30,6 @@ import ca.ulaval.glo4002.game.domain.resources.PantryRepository;
 import ca.ulaval.glo4002.game.domain.resources.ResourcesDistributor;
 import ca.ulaval.glo4002.game.domain.turn.TurnFactory;
 import ca.ulaval.glo4002.game.infrastructure.client.BabyBreedableClient;
-import ca.ulaval.glo4002.game.infrastructure.persistence.actions.ActionRepositoryInMemory;
 import ca.ulaval.glo4002.game.infrastructure.persistence.dinosaur.HerdRepositoryInMemory;
 import ca.ulaval.glo4002.game.infrastructure.persistence.resources.PantryRepositoryInMemory;
 import ca.ulaval.glo4002.game.infrastructure.persistence.turn.GameRepositoryInMemory;
@@ -45,7 +43,6 @@ public class AppConfig {
     private static final TurnFactory turnFactory = new TurnFactory();
     private static final GameRepository gameRepository = new GameRepositoryInMemory();
     private static final PantryRepository resourceRepository = new PantryRepositoryInMemory();
-    private static final ActionRepository actionRepository = new ActionRepositoryInMemory();
     private static final ActionFactory actionFactory = new ActionFactory();
     private static final SpeciesDietsCorrespondances speciesDietsCorrespondances = new SpeciesDietsCorrespondances();
     private static final ResourcesDistributor resourcesDistributor = new ResourcesDistributor();
@@ -58,33 +55,32 @@ public class AppConfig {
     private static final HerdRepository herdRepository = new HerdRepositoryInMemory();
     private static final DinosaurFactory dinosaurFactory = new DinosaurFactory(herdRepository, speciesDietsCorrespondances);
     private static final DinosaurAssembler dinosaurAssembler = new DinosaurAssembler();
-    private static final DinosaurUseCase dinosaurUseCase = new DinosaurUseCase(dinosaurFactory, herdRepository, dinosaurAssembler, actionRepository, actionFactory);
+    private static final DinosaurService dinosaurService = new DinosaurService(dinosaurFactory, herdRepository, dinosaurAssembler, actionFactory, gameRepository);
 
     private static final DinosaurDtoAssembler dinosaurDtoAssembler = new DinosaurDtoAssembler();
-    private static final DinosaurResource manageDinosaurResource = new DinosaurResource(dinosaurUseCase, dinosaurDtoAssembler);
+    private static final DinosaurResource manageDinosaurResource = new DinosaurResource(dinosaurService, dinosaurDtoAssembler);
 
-    private static final TurnService turnService = new TurnService(turnFactory, gameRepository, resourceRepository, herdRepository, actionRepository, resourcesDistributor, resourcesFactory);
+    private static final TurnService turnService = new TurnService(turnFactory, gameRepository, resourceRepository, herdRepository, resourcesDistributor, resourcesFactory, actionFactory);
 
     private static final TurnDtoAssembler turnDtoAssembler = new TurnDtoAssembler();
     private static final TurnResource executeTurnResource = new TurnResource(turnService, turnDtoAssembler);
 
     private static final ResourcesAssembler resourcesAssembler = new ResourcesAssembler();
-    private static final ResourcesUseCase
-            resourcesUseCase = new ResourcesUseCase(resourcesGroupFactory, resourceRepository, resourcesAssembler, actionRepository, actionFactory);
+    private static final ResourcesService resourcesService = new ResourcesService(resourcesGroupFactory, resourceRepository, resourcesAssembler, actionFactory, gameRepository);
     private static final ResourceDtoAssembler resourceDtoAssembler = new ResourceDtoAssembler();
-    private static final ResourcesResource manageResources = new ResourcesResource(resourcesUseCase, resourceDtoAssembler);
+    private static final ResourcesResource manageResources = new ResourcesResource(resourcesService, resourceDtoAssembler);
 
     // Baby
     private static final BabyAssembler babyAssembler = new BabyAssembler();
     private static final Breedable breedable = new BabyBreedableClient();
-    private static final BabyUseCase babyUseCase = new BabyUseCase(herdRepository, babyAssembler, actionRepository, actionFactory, dinosaurFactory, breedable);
+    private static final BabyService babyService = new BabyService(herdRepository, babyAssembler, actionFactory, dinosaurFactory, breedable, gameRepository);
 
     private static final BabyDtoAssembler babyDtoAssembler = new BabyDtoAssembler();
-    private static final BabyResource createBabyResource = new BabyResource(babyUseCase, babyDtoAssembler);
+    private static final BabyResource createBabyResource = new BabyResource(babyService, babyDtoAssembler);
     private final ResourceConfig config;
 
     //Sumo
-    SumoService sumoService = new SumoService(herdRepository, actionFactory, actionRepository);
+    SumoService sumoService = new SumoService(herdRepository, actionFactory, gameRepository);
     SumoResource sumoResource = new SumoResource(sumoService);
 
     public AppConfig() {
@@ -103,6 +99,7 @@ public class AppConfig {
         resources.add(new NotExistentNameExceptionsMapper());
         resources.add(new InvalidGenderExceptionsMapper());
         resources.add(new InvalidSpeciesExceptionsMapper());
+        resources.add(new InvalidWeightExceptionsMapper());
         resources.add(new DuplicateNameExceptionsMapper());
         resources.add(new InvalidMotherExceptionsMapper());
         resources.add(new InvalidFatherExceptionsMapper());

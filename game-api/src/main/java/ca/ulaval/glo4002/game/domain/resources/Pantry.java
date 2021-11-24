@@ -1,11 +1,6 @@
 package ca.ulaval.glo4002.game.domain.resources;
 
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Map;
-import java.util.Queue;
+import java.util.*;
 
 import static ca.ulaval.glo4002.game.domain.resources.ResourceType.*;
 
@@ -59,16 +54,9 @@ public class Pantry implements FoodContainer {
         return false;
     }
 
-    public void removeAllEmptyResources() {
-        for (Map.Entry<ResourceType, Queue<Resources>> entry : freshResources.entrySet()) {
-            Queue<Resources> resourcesQueue = entry.getValue();
-            while (resourcesQueue.peek() != null && resourcesQueue.peek().isEmpty()) {
-                resourcesQueue.poll();
-            }
-        }
-    }
-
     public void removeAllExpiredResources() {
+        removeAllEmptyResources();
+
         for (Map.Entry<ResourceType, Queue<Resources>> entry : freshResources.entrySet()) {
             Queue<Resources> resourcesQueue =  entry.getValue();
             while (resourcesQueue.peek() != null && resourcesQueue.peek().isExpired()) {
@@ -80,8 +68,6 @@ public class Pantry implements FoodContainer {
     }
 
     public void decreaseExpirationDate() {
-        removeAllEmptyResources();
-        removeAllExpiredResources();
         for (Map.Entry<ResourceType, Queue<Resources>> entry : freshResources.entrySet()) {
             for (Resources resources :  entry.getValue()) {
                 resources.decreaseExpirationDate();
@@ -101,5 +87,14 @@ public class Pantry implements FoodContainer {
 
     public List<ResourcesGroup> findAll() {
         return Arrays.asList(findFreshResources(), expiredResourcesGroup, consumedResourcesGroup);
+    }
+
+    private void removeAllEmptyResources() {
+        for (Map.Entry<ResourceType, Queue<Resources>> entry : freshResources.entrySet()) {
+            Queue<Resources> resourcesQueue = entry.getValue();
+            while (resourcesQueue.peek() != null && resourcesQueue.peek().isEmpty()) {
+                resourcesQueue.poll();
+            }
+        }
     }
 }

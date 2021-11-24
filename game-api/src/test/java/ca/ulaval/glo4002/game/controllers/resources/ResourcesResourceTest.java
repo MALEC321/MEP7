@@ -1,6 +1,6 @@
 package ca.ulaval.glo4002.game.controllers.resources;
 
-import ca.ulaval.glo4002.game.application.resources.ResourcesUseCase;
+import ca.ulaval.glo4002.game.application.resources.ResourcesService;
 import ca.ulaval.glo4002.game.application.resources.dtos.ResourcesDto;
 import ca.ulaval.glo4002.game.controllers.resources.dtos.ResourceCreationDto;
 import ca.ulaval.glo4002.game.controllers.resources.dtos.ResourceDtoAssembler;
@@ -24,7 +24,7 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 public class ResourcesResourceTest extends JerseyTest {
-    private ResourcesUseCase resourcesUseCase;
+    private ResourcesService resourcesService;
     private ResourceDtoAssembler resourceDtoAssembler;
     private ResourceCreationDto resourceCreationDto;
     private ResourceResponse fresh;
@@ -39,10 +39,10 @@ public class ResourcesResourceTest extends JerseyTest {
 
     @Override
     protected Application configure() {
-        resourcesUseCase = Mockito.mock(ResourcesUseCase.class);
+        resourcesService = Mockito.mock(ResourcesService.class);
         resourceDtoAssembler = Mockito.mock(ResourceDtoAssembler.class);
         resourcesResponse = Mockito.mock(ResourcesResponse.class);
-        return new ResourceConfig().register(new ResourcesResource(resourcesUseCase, resourceDtoAssembler));
+        return new ResourceConfig().register(new ResourcesResource(resourcesService, resourceDtoAssembler));
     }
 
     @Test
@@ -52,14 +52,14 @@ public class ResourcesResourceTest extends JerseyTest {
 
         Response response = target("resources").request(MediaType.APPLICATION_JSON_TYPE).post(null);
 
-        verify(resourcesUseCase).createResources(resourceCreationDto);
+        verify(resourcesService).createResources(resourceCreationDto);
         assertEquals(200, response.getStatus());
     }
 
     @Test
     public void givenResourceRequest_whenGetAllResources_thenReturnedOkStatus() {
         List<ResourcesDto> resourcesDtos = new ArrayList<>();
-        when(resourcesUseCase.getAllResources()).thenReturn(resourcesDtos);
+        when(resourcesService.getAllResources()).thenReturn(resourcesDtos);
         when(resourceDtoAssembler.toResponse(resourcesDtos)).thenReturn(resourcesResponse);
 
         Response response = target("resources").request(MediaType.APPLICATION_JSON_TYPE).get();

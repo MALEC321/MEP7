@@ -59,7 +59,7 @@ public class TurnResourceTest extends JerseyTest {
                 .post(null);
 
         Assertions.assertEquals(response.readEntity(TurnResponse.class).getTurnNumber(), 1);
-        verify(turnService).executeTurn();
+        verify(turnService).playTurn();
     }
 
     @Test

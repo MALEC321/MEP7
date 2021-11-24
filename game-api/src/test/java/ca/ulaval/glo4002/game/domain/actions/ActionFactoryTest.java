@@ -1,55 +1,74 @@
 package ca.ulaval.glo4002.game.domain.actions;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.MockitoAnnotations;
+import org.mockito.Spy;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.mockito.Mockito.mock;
+
 import ca.ulaval.glo4002.game.application.dinosaur.DinosaurFactory;
 import ca.ulaval.glo4002.game.application.exceptions.ArmsTooShortException;
 import ca.ulaval.glo4002.game.application.exceptions.DinosaurAlreadyParticipatingException;
 import ca.ulaval.glo4002.game.application.exceptions.MaxCombatsReachedException;
 import ca.ulaval.glo4002.game.application.exceptions.NotExistentNameException;
+import ca.ulaval.glo4002.game.application.resources.ResourcesFactory;
 import ca.ulaval.glo4002.game.domain.dinosaur.Dinosaur;
 import ca.ulaval.glo4002.game.domain.dinosaur.Herd;
 import ca.ulaval.glo4002.game.domain.dinosaur.enums.SpeciesDietsCorrespondances;
+import ca.ulaval.glo4002.game.domain.resources.Pantry;
+import ca.ulaval.glo4002.game.domain.resources.Resources;
+import ca.ulaval.glo4002.game.domain.resources.ResourcesDistributor;
 import ca.ulaval.glo4002.game.infrastructure.persistence.dinosaur.HerdRepositoryInMemory;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
 
-import java.util.ArrayList;
-import java.util.List;
+public class ActionFactoryTest {
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.mockito.Mockito.*;
+    @InjectMocks
+    private ActionFactory actionFactory;
 
-class ActionFactoryTest {
+    @Mock
+    private Dinosaur dinosaur;
 
-    private DinosaurFactory dinosaurFactory;
+    @Spy
     private Herd herd;
+
+    @Mock
+    private Resources resources;
+
+    @Mock
+    private Pantry pantry;
+
+    @Mock
+    private ResourcesFactory resourcesFactory;
+
+    @Mock
+    private ResourcesDistributor resourcesDistributor;
+    List<Action> actions;
+    private DinosaurFactory dinosaurFactory;
     private HerdRepositoryInMemory herdRepository;
     private SpeciesDietsCorrespondances speciesDietCorrespondances;
     private Dinosaur dinoTest1;
     private Dinosaur dinoTest2;
-    private Dinosaur dinoTest3;
     private Dinosaur dinoTestTyrannosaurus;
-    private Dinosaur dinoTest5;
-    private Dinosaur dinoTest6;
-    private Dinosaur dinoTest7;
-    private Dinosaur dinoTest8;
-    private ActionFactory actionFactory;
-    List<Action> actions;
 
     @BeforeEach
     public void setUp() {
+        actionFactory = new ActionFactory();
+        MockitoAnnotations.initMocks(this);
         herd = new Herd();
         herdRepository = new HerdRepositoryInMemory();
         speciesDietCorrespondances = new SpeciesDietsCorrespondances();
         dinosaurFactory = new DinosaurFactory(herdRepository, speciesDietCorrespondances);
         dinoTest1 = dinosaurFactory.createDinosaur("Maxence", 10, "m", "Ankylosaurus");
         dinoTest2 = dinosaurFactory.createDinosaur("Marc-Antoine", 10, "m", "Brachiosaurus");
-        dinoTest3 = dinosaurFactory.createDinosaur("Beno", 9, "m", "Diplodocus");
         dinoTestTyrannosaurus = dinosaurFactory.createDinosaur("Ariau", 11, "m", "Tyrannosaurus Rex");
-        dinoTest5 = dinosaurFactory.createDinosaur("Maxime", 12, "m", "Megalosaurus");
-        dinoTest6 = dinosaurFactory.createDinosaur("Miguel", 13, "m", "Spinosaurus");
-        dinoTest7 = dinosaurFactory.createDinosaur("Debonnaire", 14, "m", "Spinosaurus");
-        dinoTest8 = dinosaurFactory.createDinosaur("Christian", 15, "m", "Spinosaurus");
         actionFactory = new ActionFactory();
         actions = new ArrayList<>();
 
@@ -63,7 +82,7 @@ class ActionFactoryTest {
         actions.add(action2);
 
         assertThrows(MaxCombatsReachedException.class, () ->
-                actionFactory.validateNumberOfCurrentFights(actions));
+            actionFactory.validateNumberOfCurrentFights(actions));
 
     }
 
@@ -72,20 +91,20 @@ class ActionFactoryTest {
         Dinosaur nonExistentDino1 = herd.findDinosaurByName("John");
         Dinosaur nonExistentDino2 = herd.findDinosaurByName("Jane");
         assertThrows(NotExistentNameException.class, () ->
-                actionFactory.validateFighters(nonExistentDino1, nonExistentDino2));
+            actionFactory.validateFighters(nonExistentDino1, nonExistentDino2));
     }
 
     @Test
     void givenTyrannosaurusRex_whenCreatingAFight_thenThrowsArmsTooShortException() {
         assertThrows(ArmsTooShortException.class, () ->
-                actionFactory.validateFighters(dinoTest1, dinoTestTyrannosaurus));
+            actionFactory.validateFighters(dinoTest1, dinoTestTyrannosaurus));
     }
 
     @Test
     void givenDinosaurWhoIsAlreadyFighting_whenCreatingAFight_thenThrowsDinosaurAlreadyParticipatingException() {
         dinoTest1.setFighting(true);
         assertThrows(DinosaurAlreadyParticipatingException.class, () ->
-                actionFactory.validateFighters(dinoTest1, dinoTest2));
+            actionFactory.validateFighters(dinoTest1, dinoTest2));
     }
 
     @Test
@@ -93,5 +112,82 @@ class ActionFactoryTest {
         Action fightingAction = actionFactory.createFight(actions, dinoTest1, dinoTest2, herd);
         assertEquals(dinoTest1.isFighting(), true);
         assertEquals(dinoTest2.isFighting(), true);
+    }
+
+    @Test
+    void givenAnActionFactory_whenCreatingAddDinoAction_thenReferencesToTheDinosaur() {
+        AddDino addDino = actionFactory.createAddDinoAction(dinosaur, herd);
+
+        assertEquals(addDino.getDinosaur(), dinosaur);
+    }
+
+    @Test
+    void givenAnActionFactory_whenCreatingAddDinoAction_thenReferencesToTheHerd() {
+        AddDino addDino = actionFactory.createAddDinoAction(dinosaur, herd);
+
+        assertEquals(addDino.getHerd(), herd);
+    }
+
+    @Test
+    void givenAnActionFactory_whenCreatingAddResourceAction_thenReferencesToTheResources() {
+        AddResource addResource = actionFactory.createAddResourceAction(resources, pantry);
+
+        assertEquals(addResource.getResources(), resources);
+    }
+
+    @Test
+    void givenAnActionFactory_whenCreatingAddResourceAction_thenReferencesToThePantry() {
+        AddResource addResource = actionFactory.createAddResourceAction(resources, pantry);
+
+        assertEquals(addResource.getPantry(), pantry);
+    }
+
+    @Test
+    void givenAnActionFactory_whenCreatingCookItAction_thenReferencesToThePantry() {
+        CookIt cookIt = actionFactory.createCookItAction(pantry, resourcesFactory);
+
+        assertEquals(cookIt.getPantry(), pantry);
+    }
+
+    @Test
+    void givenAnActionFactory_whenCreatingCookItAction_thenReferencesToTheResourcesFactory() {
+        CookIt cookIt = actionFactory.createCookItAction(pantry, resourcesFactory);
+
+        assertEquals(cookIt.getResourcesFactory(), resourcesFactory);
+    }
+
+    @Test
+    void givenAnActionFactory_whenCreatingRemoveAllExpiredResourcesAction_thenReferencesToThePantry() {
+        RemoveExpiredResources removeExpiredResources = actionFactory.createRemoveAllExpiredResourcesAction(pantry);
+
+        assertEquals(removeExpiredResources.getPantry(), pantry);
+    }
+
+    @Test
+    void givenAnActionFactory_whenCreatingFeedDinosaursAction_thenReferencesToTheResourcesDistributor() {
+        FeedDinosaurs feedDinosaurs = actionFactory.createFeedDinosaursAction(resourcesDistributor, pantry, herd);
+
+        assertEquals(feedDinosaurs.getResourcesDistributor(), resourcesDistributor);
+    }
+
+    @Test
+    void givenAnActionFactory_whenCreatingFeedDinosaursAction_thenReferencesToThePantry() {
+        FeedDinosaurs feedDinosaurs = actionFactory.createFeedDinosaursAction(resourcesDistributor, pantry, herd);
+
+        assertEquals(feedDinosaurs.getPantry(), pantry);
+    }
+
+    @Test
+    void givenAnActionFactory_whenCreatingFeedDinosaursAction_thenReferencesToTheHerd() {
+        FeedDinosaurs feedDinosaurs = actionFactory.createFeedDinosaursAction(resourcesDistributor, pantry, herd);
+
+        assertEquals(feedDinosaurs.getHerd(), herd);
+    }
+
+    @Test
+    void givenAnActionFactory_whenCreatingRemoveOrphanedBabyDinosaursAction_thenReferencesToTheHerd() {
+        RemoveOrphanedBabyDinosaurs removeOrphanedBabyDinosaurs = actionFactory.createRemoveOrphanedBabyDinosaursAction(herd);
+
+        assertEquals(removeOrphanedBabyDinosaurs.getHerd(), herd);
     }
 }

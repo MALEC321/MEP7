@@ -13,14 +13,14 @@ title __CONFIGURATION's Class Diagram__\n
             {static} ~ dinosaurFactory : DinosaurFactory
             {static} ~ herdRepository : DinosaurRepository
             {static} ~ dinosaurResource : DinosaurResource
-            {static} ~ dinosaurUseCase : DinosaurUseCase
+            {static} ~ dinosaurService : DinosaurUseCase
             {static} ~ heartbeatResource : HeartbeatResource
             {static} ~ resourcesAssembler : ResourceAssemblers
             {static} ~ resourceDtoAssembler : ResourceDtoAssembler
             {static} ~ resourcesGroupFactory : ResourceFactory
             {static} ~ pantryRepository : ResourceRepository
             {static} ~ resourceResource : ResourceResource
-            {static} ~ resourcesUseCase : ResourceUseCase
+            {static} ~ resourcesService : ResourceUseCase
             {static} ~ speciesDietsCorrespondances : SpeciesDietsCorrespondances
             {static} ~ turnAssembler : TurnAssembler
             {static} ~ turnDtoAssembler : TurnDtoAssembler

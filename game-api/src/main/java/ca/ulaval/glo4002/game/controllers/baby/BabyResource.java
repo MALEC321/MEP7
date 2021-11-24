@@ -1,6 +1,6 @@
 package ca.ulaval.glo4002.game.controllers.baby;
 
-import ca.ulaval.glo4002.game.application.baby.BabyUseCase;
+import ca.ulaval.glo4002.game.application.baby.BabyService;
 import ca.ulaval.glo4002.game.controllers.baby.dtos.BabyCreationDto;
 import ca.ulaval.glo4002.game.controllers.baby.dtos.BabyDtoAssembler;
 import ca.ulaval.glo4002.game.controllers.baby.dtos.BabyRequest;
@@ -14,11 +14,11 @@ import javax.ws.rs.core.Response;
 
 @Path("/breed")
 public class BabyResource {
-    private final BabyUseCase babyUseCase;
+    private final BabyService babyService;
     private final BabyDtoAssembler babyDtoAssembler;
 
-    public BabyResource(BabyUseCase babyUseCase, BabyDtoAssembler babyDtoAssembler) {
-        this.babyUseCase = babyUseCase;
+    public BabyResource(BabyService babyService, BabyDtoAssembler babyDtoAssembler) {
+        this.babyService = babyService;
         this.babyDtoAssembler = babyDtoAssembler;
     }
 
@@ -27,7 +27,7 @@ public class BabyResource {
     @Consumes(MediaType.APPLICATION_JSON)
     public Response createBaby(BabyRequest babyRequest) {
         BabyCreationDto dto = babyDtoAssembler.fromRequest(babyRequest);
-        babyUseCase.createBaby(dto);
+        babyService.createBaby(dto);
         return Response.status(Response.Status.OK).build();
     }
 }
