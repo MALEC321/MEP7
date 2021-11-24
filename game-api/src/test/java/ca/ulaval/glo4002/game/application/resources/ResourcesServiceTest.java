@@ -29,7 +29,7 @@ public class ResourcesServiceTest {
     private TurnService turnService;
 
     @BeforeEach
-    void setUp() {
+    public void setUp() {
         ResourcesGroupFactory resourcesGroupFactory = new ResourcesGroupFactory();
         ResourcesAssembler resourcesAssembler = new ResourcesAssembler();
         PantryRepository resourceRepository = new PantryRepositoryInMemory();

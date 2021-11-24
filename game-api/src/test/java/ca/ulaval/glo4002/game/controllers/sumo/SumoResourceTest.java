@@ -3,36 +3,60 @@ package ca.ulaval.glo4002.game.controllers.sumo;
 import ca.ulaval.glo4002.game.application.sumo.SumoService;
 import ca.ulaval.glo4002.game.application.sumo.dtos.SumoDto;
 import ca.ulaval.glo4002.game.application.sumo.dtos.SumoResponse;
+import ca.ulaval.glo4002.game.controllers.sumo.dtos.SumoDtoAssembler;
 import ca.ulaval.glo4002.game.controllers.sumo.dtos.SumoRequest;
+import org.glassfish.jersey.server.ResourceConfig;
+import org.glassfish.jersey.test.JerseyTest;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import javax.ws.rs.core.Application;
+import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
 import static org.junit.Assert.assertEquals;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
-class SumoResourceTest {
-
-    private SumoResource sumoResource;
-    SumoService sumoService;
+public class SumoResourceTest extends JerseyTest {
+    private SumoRequest sumoRequest;
+    private SumoService sumoService;
+    private SumoDtoAssembler sumoDtoAssembler;
 
     @BeforeEach
-    public void setup () {
+    @Override
+    public void setUp() throws Exception {
+        super.setUp();
+    }
+
+    @AfterEach
+    @Override
+    public void tearDown() throws Exception {
+        super.tearDown();
+    }
+
+    @Override
+    protected Application configure() {
+        sumoRequest = mock(SumoRequest.class);
         sumoService = mock(SumoService.class);
-        sumoResource = new SumoResource(sumoService);
+        sumoDtoAssembler = mock(SumoDtoAssembler.class);
+        return new ResourceConfig().register(new SumoResource(sumoService, sumoDtoAssembler));
     }
 
     @Test
-    void givenSumoRequest_whenCallingDinosaurFight_thenSendResponse() {
-        SumoRequest sumoRequest = new SumoRequest("Maxence", "Beno");
-        SumoDto dto = mock(SumoDto.class);
-        SumoResponse sumoResponse = new SumoResponse("Maxence");
+    public void givenSumoRequest_whenCallingDinosaurFight_thenResponseCodeIsOk() {
+        setSumoFightContext();
 
-        when(sumoService.fight(dto)).thenReturn(sumoResponse);
-        Response response = sumoResource.dinosaurFight(sumoRequest);
+        Response response = target("sumodino").request(MediaType.APPLICATION_JSON_TYPE).post(null);
+
+        verify(sumoService).fight(any());
         assertEquals(200, response.getStatus());
     }
 
+    private void setSumoFightContext() {
+        SumoResponse sumoResponse = new SumoResponse("Beno");
+        SumoDto sumoDto = new SumoDto("Maxence", "Beno");
+        when(sumoDtoAssembler.fromRequest(sumoRequest)).thenReturn(sumoDto);
+        when(sumoService.fight(sumoDto)).thenReturn(sumoResponse);
+    }
 }

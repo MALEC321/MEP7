@@ -23,8 +23,9 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.*;
+import org.mockito.InjectMocks;
 
-class SumoServiceTest {
+public class SumoServiceTest {
     private Dinosaur dinoTest1;
     private Dinosaur dinoTest2;
     private Dinosaur dinoTest3;
@@ -50,7 +51,8 @@ class SumoServiceTest {
 
     @BeforeEach
     public void setUp() {
-        //Pour créer les dinos
+        MockitoAnnotations.initMocks(this);
+
         HerdRepositoryInMemory herdRepository = new HerdRepositoryInMemory();
         SpeciesDietsCorrespondances speciesDietCorrespondances = new SpeciesDietsCorrespondances();
         DinosaurFactory dinosaurFactory = new DinosaurFactory(herdRepository, speciesDietCorrespondances);
@@ -65,13 +67,11 @@ class SumoServiceTest {
         sumoService = new SumoService(herdRepository, actionFactory, gameRepository);
         actions = new ArrayList<>();
 
-        //Pour les tests
         this.herd = mock(Herd.class);
         this.herdRepository = mock(HerdRepository.class);
         this.actionFactory = mock(ActionFactory.class);
         this.gameRepository = mock(GameRepository.class);
         this.fightAction = mock(FightAction.class);
-        MockitoAnnotations.initMocks(this);
     }
 
     @Test
@@ -104,7 +104,6 @@ class SumoServiceTest {
     void givenValidDto_whenCallingFightMethod_thenAddFightActionToActionRepository() {
         sumoDto = new SumoDto("Maxence", "Beno");
         sumoService = new SumoService(herdRepository, actionFactory, gameRepository);
-
         when(herdRepository.findHerd()).thenReturn(herd);
         when(herd.findDinosaurByName(sumoDto.getChallenger())).thenReturn(dinoTest1);
         when(herd.findDinosaurByName(sumoDto.getChallengee())).thenReturn(dinoTest2);
@@ -113,6 +112,7 @@ class SumoServiceTest {
         when(actionFactory.createFight(actions, dinoTest1, dinoTest2, herd)).thenReturn(fightAction);
 
         sumoService.fight(sumoDto);
+
         verify(gameRepository).findGame();
     }
 }

@@ -10,15 +10,7 @@ public class Herd {
     }
 
     public Dinosaur findDinosaurByName(String name) {
-        Dinosaur dinosaur = dinosaursByName.get(name);
         return dinosaursByName.get(name);
-    }
-
-    public boolean dinosaurExists(String name) {
-        if (dinosaursByName.equals(null))
-            return false;
-        else
-            return true;
     }
 
     public void addDinosaur(Dinosaur dinosaur) {
@@ -62,7 +54,6 @@ public class Herd {
     }
 
     public void removeOrphanedBabyDinosaurs() {
-        // Todo make this recursive !
         for (Dinosaur dinosaur : findSortedDinosaursByStrengthThenName()) {
             if (dinosaur.areBothParentsDead()) {
                 removeDinosaur(dinosaur);

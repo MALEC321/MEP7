@@ -30,7 +30,6 @@ public class ActionFactory {
         return new FightAction(challenger, challengee, herd);
     }
 
-
     public void validateNumberOfCurrentFights(List<Action> actions) {
         int numberOfCurrentFights = 0;
         for (Action action : actions) {

@@ -1,27 +1,25 @@
 package ca.ulaval.glo4002.game.infrastructure.persistence.dinosaur;
 
-import ca.ulaval.glo4002.game.domain.dinosaur.Dinosaur;
 import ca.ulaval.glo4002.game.domain.dinosaur.Herd;
 import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.Test;;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
-import static org.mockito.Mockito.*;
+
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
 
 public class HerdRepositoryInMemoryTest {
-
     @InjectMocks
     private HerdRepositoryInMemory herdRepositoryInMemory;
 
     @Mock
     private Herd herd;
 
-
-
     @BeforeEach
-    void setup() {
+    public void setup() {
         MockitoAnnotations.initMocks(this);
     }
 
