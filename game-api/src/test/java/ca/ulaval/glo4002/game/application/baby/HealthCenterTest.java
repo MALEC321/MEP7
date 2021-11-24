@@ -18,20 +18,24 @@ import ca.ulaval.glo4002.game.controllers.baby.dtos.BabyCreationDto;
 import ca.ulaval.glo4002.game.infrastructure.client.dto.RequestBreed;
 import ca.ulaval.glo4002.game.infrastructure.client.dto.ResponseBreed;
 
-class HealthCenterTest {
-
+public class HealthCenterTest {
     private final String fatherName = "father";
     private final String motherName = "father";
     @Mock
     private BabyCreationDto babyCreationDto;
+
     @Mock
     private RequestBreed requestBreed;
+
     @Mock
     private ResponseBreed responseBreed;
+
     @Mock
     private Breedable breedable;
+
     @Mock
     private ParentInformationCenter parentInformationCenter;
+
     @InjectMocks
     private HealthCenter healthCenter;
 
@@ -56,7 +60,7 @@ class HealthCenterTest {
         when(parentInformationCenter.getParentsSpecies(fatherName, motherName)).thenThrow(new NotExistentNameException());
 
         assertThrows(NotExistentNameException.class, () ->
-                healthCenter.tryToGiveBirthToBaby(babyCreationDto));
+            healthCenter.tryToGiveBirthToBaby(babyCreationDto));
         verify(parentInformationCenter).getParentsSpecies(fatherName, motherName);
         verify(breedable, never()).createBaby(requestBreed);
     }

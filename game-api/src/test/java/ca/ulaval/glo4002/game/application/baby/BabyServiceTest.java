@@ -15,7 +15,7 @@ import ca.ulaval.glo4002.game.application.exceptions.NotExistentNameException;
 import ca.ulaval.glo4002.game.controllers.baby.dtos.BabyCreationDto;
 import ca.ulaval.glo4002.game.infrastructure.client.dto.ResponseBreed;
 
-class BabyServiceTest {
+public class BabyServiceTest {
     @Mock
     private BabyCreationDto babyCreationDto;
 
@@ -32,10 +32,9 @@ class BabyServiceTest {
     private BabyService babyService;
 
     @BeforeEach
-    void setUp() {
+    public void setUp() {
         MockitoAnnotations.initMocks(this);
     }
-
 
     @Test
     public void givenBabyInformation_whenBabyIsBorn_thenBabyInformationAreSaved() {

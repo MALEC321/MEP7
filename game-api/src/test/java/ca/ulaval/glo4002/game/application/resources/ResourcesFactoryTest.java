@@ -7,8 +7,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import ca.ulaval.glo4002.game.application.exceptions.InvalidResourceQuantityException;
 import ca.ulaval.glo4002.game.domain.resources.ResourceType;
 
-class ResourcesFactoryTest {
-
+public class ResourcesFactoryTest {
     private final ResourcesFactory resourcesFactory = new ResourcesFactory();
     private final ResourceType resourceType = ResourceType.BURGER;
     private final int invalidQuantity = -432;

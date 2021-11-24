@@ -1,14 +1,5 @@
 package ca.ulaval.glo4002.game.application.baby;
 
-import ca.ulaval.glo4002.game.application.baby.dtos.BabyAssembler;
-import ca.ulaval.glo4002.game.application.exceptions.InvalidFatherException;
-import ca.ulaval.glo4002.game.application.exceptions.InvalidMotherException;
-import ca.ulaval.glo4002.game.application.exceptions.NotExistentNameException;
-import ca.ulaval.glo4002.game.domain.dinosaur.Dinosaur;
-import ca.ulaval.glo4002.game.domain.dinosaur.Herd;
-import ca.ulaval.glo4002.game.domain.dinosaur.HerdRepository;
-import ca.ulaval.glo4002.game.infrastructure.client.dto.RequestBreed;
-
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
@@ -19,19 +10,16 @@ import static org.junit.Assert.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.*;
 
-class ParentInformationCenterTest {
+import ca.ulaval.glo4002.game.application.baby.dtos.BabyAssembler;
+import ca.ulaval.glo4002.game.application.exceptions.InvalidFatherException;
+import ca.ulaval.glo4002.game.application.exceptions.InvalidMotherException;
+import ca.ulaval.glo4002.game.application.exceptions.NotExistentNameException;
+import ca.ulaval.glo4002.game.domain.dinosaur.Dinosaur;
+import ca.ulaval.glo4002.game.domain.dinosaur.Herd;
+import ca.ulaval.glo4002.game.domain.dinosaur.HerdRepository;
+import ca.ulaval.glo4002.game.infrastructure.client.dto.RequestBreed;
 
-    @Mock
-    RequestBreed requestBreed;
-    @Mock
-    private HerdRepository herdRepository;
-    @Mock
-    private BabyAssembler babyAssembler;
-    @Mock
-    Herd herd;
-    @InjectMocks
-    private ParentInformationCenter parentInformationCenter;
-
+public class ParentInformationCenterTest {
     private final String validFatherName = "Father";
     private final String validFatherSpecie = "Ankylosaurus";
     private final String validFatherGender = "m";
@@ -40,18 +28,35 @@ class ParentInformationCenterTest {
     private final String validMotherSpecie = "Brachiosaurus";
     private final String validMotherGender = "f";
     private final String invalidMotherName = "";
+    @Mock
+    private RequestBreed requestBreed;
+
+    @Mock
+    private Herd herd;
+
+    @Mock
+    private HerdRepository herdRepository;
+
+    @Mock
+    private BabyAssembler babyAssembler;
+
+    @InjectMocks
+    private ParentInformationCenter parentInformationCenter;
 
     @Mock
     private Dinosaur validDinosaurFather;
+
     @Mock
     private Dinosaur invalidDinosaurFather;
+
     @Mock
     private Dinosaur validDinosaurMother;
+
     @Mock
     private Dinosaur invalidDinosaurMother;
 
     @BeforeEach
-    void setUp() {
+    public void setUp() {
         MockitoAnnotations.initMocks(this);
         when(herdRepository.findHerd()).thenReturn(herd);
         when(validDinosaurFather.getGender()).thenReturn(validFatherGender);

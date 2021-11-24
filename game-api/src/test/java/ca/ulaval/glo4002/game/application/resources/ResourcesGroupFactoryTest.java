@@ -4,8 +4,7 @@ import org.junit.jupiter.api.BeforeEach;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class ResourcesGroupFactoryTest {
-
+public class ResourcesGroupFactoryTest {
     @BeforeEach
     void setUp() {
     }
