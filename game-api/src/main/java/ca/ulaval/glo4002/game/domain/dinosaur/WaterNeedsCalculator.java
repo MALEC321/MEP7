@@ -18,7 +18,7 @@ public class WaterNeedsCalculator {
             waterNeeds = waterNeeds.multiply(new BigDecimal("2"));
         }
         if (dietType == OMNIVORE) {
-            return waterNeeds.multiply(new BigDecimal("0.5")).setScale(0, RoundingMode.CEILING).intValue();
+            waterNeeds = waterNeeds.multiply(new BigDecimal("0.5"));
         }
         return waterNeeds.setScale(0, RoundingMode.CEILING).intValue();
     }

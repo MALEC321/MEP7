@@ -21,7 +21,7 @@ public class DietStrategyForHerbivore extends AbstractDietStrategy {
 
     @Override
     public ResourcesStateDto calculateFoodNeeds(int weight, boolean isHungry) {
-        List<ResourceTypeQuantity> resourceTypeQuantities = Arrays.asList(new ResourceTypeQuantity(BURGER, 0),
+        List<ResourceTypeQuantity> resourceTypeQuantities = Arrays.asList(new ResourceTypeQuantity(BURGER),
             new ResourceTypeQuantity(SALAD, calculateSaladNeeds(weight, isHungry)),
             new ResourceTypeQuantity(WATER, waterNeedsCalculator.calculateNeeds(weight, isHungry, getDietType())));
         return new ResourcesStateDto(resourceTypeQuantities);
