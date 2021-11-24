@@ -70,8 +70,8 @@ public class Herd {
     }
 
     public ResourcesStateDto feedDinosaurs(final ResourcesStateDto resourcesStateDto) { // {burger: 10} {salad: 10}  {water: 11}
-        //{burger: 10} {salad: 0}  {water: 5} GM carnivore
-        //{burger: 0} {salad: 10}  {water: 5} GM herbivore
+        //{burger: 10} {salad: 0}  {water: 5} GM carnivore {burger:4} {salad: 0}  {water: 2}
+        //{burger: 0} {salad: 10}  {water: 5} GM herbivore {burger: 0} {salad: 2}  {water: 1}
         // S1 Split state into states of burger and half water
         // S2 Split state into states of salad and half water
         ResourcesStateDto foodContainerForHerbivore = resourcesStateDto.createFoodContainerForHerbivore();
@@ -84,7 +84,7 @@ public class Herd {
         }
 
         // S1 U S2
-        return foodContainerForHerbivore.add(foodContainerForCarnivore);
+        return foodContainerForHerbivore.add(foodContainerForCarnivore); // {burger: 4} {salad: 2}  {water: 3}
     }
 
     public void removeAllHungryDinosaur() {

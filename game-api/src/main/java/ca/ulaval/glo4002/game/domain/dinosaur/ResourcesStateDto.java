@@ -32,16 +32,21 @@ public class ResourcesStateDto {
         return Collections.unmodifiableMap(resourceTypeQuantities);
     }
 
-    public ResourcesStateDto add(ResourcesStateDto resourcesStateDto) {
-        List<ResourceTypeQuantity> resultPantryReport = new ArrayList<>();
-        Set<ResourceType> keysOfBothResourceState = new HashSet<>(this.resourceTypeQuantities.keySet());
+    private Set<ResourceType> addedMissingResourcesType(ResourcesStateDto resourcesStateDto) {
+        Set<ResourceType> keysOfBothResourceState = new HashSet<>(getResourceTypeQuantities().keySet());
         keysOfBothResourceState.addAll(resourcesStateDto.getResourceTypeQuantities().keySet());
-        for (ResourceType resourceType : keysOfBothResourceState) {
+        return keysOfBothResourceState;
+    }
+
+    public ResourcesStateDto add(ResourcesStateDto resourcesStateDto) {
+        List<ResourceTypeQuantity> bothPantryReportUnified = new ArrayList<>();
+        Set<ResourceType> bothResourceTypes = addedMissingResourcesType(resourcesStateDto);
+        for (ResourceType resourceType : bothResourceTypes) {
             int resultQuantity = resourcesStateDto.getQtyForResourceType(resourceType);
             resultQuantity += getQtyForResourceType(resourceType);
-            resultPantryReport.add(new ResourceTypeQuantity(resourceType, resultQuantity));
+            bothPantryReportUnified.add(new ResourceTypeQuantity(resourceType, resultQuantity));
         }
-        return new ResourcesStateDto(resultPantryReport);
+        return new ResourcesStateDto(bothPantryReportUnified);
     }
 
     public ResourcesStateDto createFoodContainerForHerbivore() {
@@ -67,6 +72,7 @@ public class ResourcesStateDto {
         BigDecimal quantityBd = new BigDecimal(waterQuantity);
         return quantityBd.multiply(new BigDecimal("0.5")).setScale(0, RoundingMode.FLOOR).intValue();
     }
+
     public ResourcesStateDto removeQuantities(final ResourcesStateDto resourcesStateDto) {
         List<ResourceTypeQuantity> resourceTypeQuantitiesLeft = new ArrayList<>();
         resourceTypeQuantities.forEach((resourceType, currentResourceQuantity) -> {
