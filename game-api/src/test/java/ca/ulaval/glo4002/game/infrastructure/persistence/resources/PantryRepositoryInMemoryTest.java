@@ -19,20 +19,19 @@ public class PantryRepositoryInMemoryTest {
     private Pantry pantry;
 
     @BeforeEach
-    void setUp() {
+    public void setUp() {
         MockitoAnnotations.initMocks(this);
     }
 
     @Test
-    void repoCreated_whenFindPantry_thenThatPantryIsFound() {
+    public void repoCreated_whenFindPantry_thenThatPantryIsFound() {
         assertEquals(pantry, this.resourceRepositoryInMemory.findPantry());
     }
 
     @Test
-    void repoCreated_whenResetResource_thenPantryIsCleared() {
+    public void repoCreated_whenResetResource_thenPantryIsCleared() {
         this.resourceRepositoryInMemory.deleteAll();
 
         verify(this.pantry, times(1)).clear();
     }
-
 }

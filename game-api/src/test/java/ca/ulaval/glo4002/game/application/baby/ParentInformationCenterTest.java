@@ -1,5 +1,13 @@
 package ca.ulaval.glo4002.game.application.baby;
 
+import ca.ulaval.glo4002.game.application.baby.dtos.BabyAssembler;
+import ca.ulaval.glo4002.game.application.exceptions.InvalidFatherException;
+import ca.ulaval.glo4002.game.application.exceptions.InvalidMotherException;
+import ca.ulaval.glo4002.game.application.exceptions.NotExistentNameException;
+import ca.ulaval.glo4002.game.domain.dinosaur.Dinosaur;
+import ca.ulaval.glo4002.game.domain.dinosaur.Herd;
+import ca.ulaval.glo4002.game.domain.dinosaur.HerdRepository;
+import ca.ulaval.glo4002.game.infrastructure.client.dto.RequestBreed;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
@@ -9,15 +17,6 @@ import org.mockito.MockitoAnnotations;
 import static org.junit.Assert.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.*;
-
-import ca.ulaval.glo4002.game.application.baby.dtos.BabyAssembler;
-import ca.ulaval.glo4002.game.application.exceptions.InvalidFatherException;
-import ca.ulaval.glo4002.game.application.exceptions.InvalidMotherException;
-import ca.ulaval.glo4002.game.application.exceptions.NotExistentNameException;
-import ca.ulaval.glo4002.game.domain.dinosaur.Dinosaur;
-import ca.ulaval.glo4002.game.domain.dinosaur.Herd;
-import ca.ulaval.glo4002.game.domain.dinosaur.HerdRepository;
-import ca.ulaval.glo4002.game.infrastructure.client.dto.RequestBreed;
 
 public class ParentInformationCenterTest {
     private final String validFatherName = "Father";
@@ -66,7 +65,7 @@ public class ParentInformationCenterTest {
     }
 
     @Test
-    void givenValidInformation_whenGetParentSpecies_thenRequestBreedIsReturn() {
+    public void givenValidInformation_whenGetParentSpecies_thenRequestBreedIsReturn() {
         when(herd.findDinosaurByName(validFatherName)).thenReturn(validDinosaurFather);
         when(herd.findDinosaurByName(validMotherName)).thenReturn(validDinosaurMother);
         when(babyAssembler.toExternalDto(validFatherSpecie, validMotherSpecie)).thenReturn(requestBreed);
@@ -80,7 +79,7 @@ public class ParentInformationCenterTest {
     }
 
     @Test
-    void givenInvalidFatherName_whenGetParentSpecies_thenNotExistentNameIsThrown() {
+    public void givenInvalidFatherName_whenGetParentSpecies_thenNotExistentNameIsThrown() {
         when(herd.findDinosaurByName(invalidFatherName)).thenReturn(null);
         when(herd.findDinosaurByName(validMotherName)).thenReturn(validDinosaurMother);
 
@@ -93,7 +92,7 @@ public class ParentInformationCenterTest {
     }
 
     @Test
-    void givenInvalidMotherName_whenGetParentSpecies_thenNotExistentNameIsThrown() {
+    public void givenInvalidMotherName_whenGetParentSpecies_thenNotExistentNameIsThrown() {
         when(herd.findDinosaurByName(validFatherName)).thenReturn(validDinosaurFather);
         when(herd.findDinosaurByName(invalidMotherName)).thenReturn(null);
 
@@ -106,7 +105,7 @@ public class ParentInformationCenterTest {
     }
 
     @Test
-    void givenInvalidFatherGender_whenGetParentSpecies_thenInvalidFatherExceptionIsThrown() {
+    public void givenInvalidFatherGender_whenGetParentSpecies_thenInvalidFatherExceptionIsThrown() {
         when(herd.findDinosaurByName(validFatherName)).thenReturn(invalidDinosaurFather);
         when(invalidDinosaurFather.getGender()).thenReturn(validMotherGender);
         when(herd.findDinosaurByName(validMotherName)).thenReturn(validDinosaurMother);
@@ -120,7 +119,7 @@ public class ParentInformationCenterTest {
     }
 
     @Test
-    void givenInvalidMotherGender_whenGetParentSpecies_thenInvalidMotherExceptionIsThrown() {
+    public void givenInvalidMotherGender_whenGetParentSpecies_thenInvalidMotherExceptionIsThrown() {
         when(herd.findDinosaurByName(validFatherName)).thenReturn(validDinosaurFather);
         when(herd.findDinosaurByName(validMotherName)).thenReturn(invalidDinosaurMother);
         when(invalidDinosaurMother.getGender()).thenReturn(validFatherGender);

@@ -1,16 +1,5 @@
 package ca.ulaval.glo4002.game.application.dinosaur;
 
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
-import org.mockito.InjectMocks;
-import org.mockito.Mock;
-import org.mockito.MockitoAnnotations;
-import org.mockito.Spy;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.mockito.Mockito.*;
-
 import ca.ulaval.glo4002.game.application.exceptions.InvalidWeightException;
 import ca.ulaval.glo4002.game.controllers.dinosaur.dtos.DinosaurCreationDto;
 import ca.ulaval.glo4002.game.domain.actions.ActionFactory;
@@ -22,6 +11,16 @@ import ca.ulaval.glo4002.game.domain.game.Game;
 import ca.ulaval.glo4002.game.domain.game.GameRepository;
 import ca.ulaval.glo4002.game.domain.turn.Turn;
 import ca.ulaval.glo4002.game.domain.turn.TurnNumber;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.MockitoAnnotations;
+import org.mockito.Spy;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.mockito.Mockito.*;
 
 public class DinosaurServiceTest {
     @Spy
@@ -61,7 +60,7 @@ public class DinosaurServiceTest {
     private DinosaurService dinosaurService;
 
     @BeforeEach
-    void setUp() {
+    public void setUp() {
         MockitoAnnotations.initMocks(this);
         when(herdRepository.findHerd()).thenReturn(herd);
         when(dinosaurFactory.createDinosaur(validDinoName, weight, validGender, validSpecie)).thenReturn(validDinosaur);
@@ -72,13 +71,13 @@ public class DinosaurServiceTest {
     }
 
     @Test
-    void givenValidDinoInformation_whenCreateDinosaur_thenDinosaurIsCreate() {
+    public void givenValidDinoInformation_whenCreateDinosaur_thenDinosaurIsCreate() {
         dinosaurService.createDinosaur(dinosaurCreationDto);
         verify(dinosaurFactory).createDinosaur(validDinoName, weight, validGender, validSpecie);
     }
 
     @Test
-    void givenInvalidDinoName_whenCreateDinosaur_thenDinosaurIsNotCreated() {
+    public void givenInvalidDinoName_whenCreateDinosaur_thenDinosaurIsNotCreated() {
         assertThrows(InvalidWeightException.class, () -> dinosaurService.createDinosaur(invalidDinosaurCreationDto));
         verify(dinosaurFactory).createDinosaur(validDinoName, invalidWeight, validGender, validSpecie);
         verify(actionFactory, never()).createAddDinoAction(validDinosaur, herd);
@@ -86,13 +85,13 @@ public class DinosaurServiceTest {
     }
 
     @Test
-    void givenValidDinoInformation_whenCreateDinosaur_thenAddDinoActionIsCreate() {
+    public void givenValidDinoInformation_whenCreateDinosaur_thenAddDinoActionIsCreate() {
         dinosaurService.createDinosaur(dinosaurCreationDto);
         verify(actionFactory).createAddDinoAction(validDinosaur, herd);
     }
 
     @Test
-    void givenValidDinoInformation_whenCreateDinosaur_thenDinosaurIsAddInTurnActions() {
+    public void givenValidDinoInformation_whenCreateDinosaur_thenDinosaurIsAddInTurnActions() {
         dinosaurService.createDinosaur(dinosaurCreationDto);
 
         verify(turn).addAction(addDinosaurAction);
@@ -100,7 +99,7 @@ public class DinosaurServiceTest {
     }
 
     @Test
-    void givenValidDinoInformation_whenCreateDinosaur_thenGameStateIsUpdated() {
+    public void givenValidDinoInformation_whenCreateDinosaur_thenGameStateIsUpdated() {
         dinosaurService.createDinosaur(dinosaurCreationDto);
         verify(gameRepository).save(game);
     }
