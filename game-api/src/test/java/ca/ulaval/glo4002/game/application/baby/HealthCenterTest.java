@@ -1,22 +1,21 @@
 package ca.ulaval.glo4002.game.application.baby;
 
-import java.util.Optional;
-
+import ca.ulaval.glo4002.game.application.baby.breed.Breedable;
+import ca.ulaval.glo4002.game.application.exceptions.NotExistentNameException;
+import ca.ulaval.glo4002.game.controllers.baby.dtos.BabyCreationDto;
+import ca.ulaval.glo4002.game.infrastructure.client.dto.RequestBreed;
+import ca.ulaval.glo4002.game.infrastructure.client.dto.ResponseBreed;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
+import java.util.Optional;
+
 import static org.junit.Assert.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.*;
-
-import ca.ulaval.glo4002.game.application.baby.breed.Breedable;
-import ca.ulaval.glo4002.game.application.exceptions.NotExistentNameException;
-import ca.ulaval.glo4002.game.controllers.baby.dtos.BabyCreationDto;
-import ca.ulaval.glo4002.game.infrastructure.client.dto.RequestBreed;
-import ca.ulaval.glo4002.game.infrastructure.client.dto.ResponseBreed;
 
 public class HealthCenterTest {
     private final String fatherName = "father";
@@ -40,7 +39,7 @@ public class HealthCenterTest {
     private HealthCenter healthCenter;
 
     @BeforeEach
-    void setUp() {
+    public void setUp() {
         MockitoAnnotations.initMocks(this);
         when(babyCreationDto.getFatherName()).thenReturn(fatherName);
         when(babyCreationDto.getMotherName()).thenReturn(motherName);

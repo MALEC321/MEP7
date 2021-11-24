@@ -25,28 +25,28 @@ public class BabyCreationClientImpTest {
     private static final String MOTHER_SPECIE = "motherSpecie";
 
     @InjectMocks
-    BabyBreedableClient babyCreationClient;
+    private BabyBreedableClient babyCreationClient;
 
     @Mock
-    Client clientMock;
+    private Client clientMock;
 
     @Mock
-    WebTarget webTargetMock;
+    private WebTarget webTargetMock;
 
     @Mock
-    Response responseMock;
+    private Response responseMock;
 
     @Mock
-    Invocation.Builder builderMock;
+    private Invocation.Builder builderMock;
 
     @BeforeEach
-    void setUp() {
+    public void setUp() {
         MockitoAnnotations.initMocks(this);
         setClientBreed();
     }
 
     @Test
-    void whenCallExternalApiResponse200_thenBabyDinoCreated() {
+    public void whenCallExternalApiResponse200_thenBabyDinoCreated() {
         Mockito.when(responseMock.getStatus()).thenReturn(Response.Status.OK.getStatusCode());
         RequestBreed requestBreed = new RequestBreed(FATHER_SPECIE, MOTHER_SPECIE);
 
@@ -58,7 +58,7 @@ public class BabyCreationClientImpTest {
     }
 
     @Test
-    void whenCallExternalApiResponse400_thenBabyDinoNotCreated() {
+    public void whenCallExternalApiResponse400_thenBabyDinoNotCreated() {
         Mockito.when(responseMock.getStatus()).thenReturn(Response.Status.BAD_REQUEST.getStatusCode());
         RequestBreed requestBreed = new RequestBreed(FATHER_SPECIE, FATHER_SPECIE);
 

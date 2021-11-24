@@ -1,19 +1,18 @@
 package ca.ulaval.glo4002.game.application.baby;
 
-import java.util.Optional;
-
+import ca.ulaval.glo4002.game.application.exceptions.NotExistentNameException;
+import ca.ulaval.glo4002.game.controllers.baby.dtos.BabyCreationDto;
+import ca.ulaval.glo4002.game.infrastructure.client.dto.ResponseBreed;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
+import java.util.Optional;
+
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.Mockito.*;
-
-import ca.ulaval.glo4002.game.application.exceptions.NotExistentNameException;
-import ca.ulaval.glo4002.game.controllers.baby.dtos.BabyCreationDto;
-import ca.ulaval.glo4002.game.infrastructure.client.dto.ResponseBreed;
 
 public class BabyServiceTest {
     @Mock
@@ -56,5 +55,4 @@ public class BabyServiceTest {
         verify(healthCenter).tryToGiveBirthToBaby(babyCreationDto);
         verify(babyRegistrationService, never()).saveBabyInformationIfBabyAlived(babyCreationDto, Optional.of(babyDto));
     }
-
 }
