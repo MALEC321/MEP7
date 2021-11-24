@@ -40,7 +40,7 @@ public class ResourcesService {
 
     public List<ResourcesDto> getAllResources() {
         Pantry pantry = pantryRepository.findPantry();
-        List<ResourcesGroup> resources = pantry.findAll();
+        List<ResourcesGroup> resources = pantry.findAllResourcesGroup();
         return resourcesAssembler.toDtos(resources);
     }
 

@@ -32,20 +32,34 @@ public class Pantry {
     }
 
     public ResourcesStateDto getFreshResourcesReport() {
-        List<ResourceTypeQuantity> resourceTypes = new ArrayList<>(findFreshResources());
-        return new ResourcesStateDto(resourceTypes);
+        List<ResourceTypeQuantity> resourceTypeQuantityList = new ArrayList<>(findFreshResources());
+        return new ResourcesStateDto(resourceTypeQuantityList);
     }
 
-    public List<ResourceTypeQuantity> findFreshResources() {
-        List<ResourceTypeQuantity> resourceTypeQuantities = new ArrayList<>();
+    public HashMap<ResourceType, Queue<Resources>> getFreshResources() {
+        return freshResources;
+    }
+
+    public ResourcesGroup getConsumedResourcesGroup() {
+        return consumedResourcesGroup;
+    }
+
+    public ResourcesGroup getExpiredResourcesGroup() {
+        return expiredResourcesGroup;
+    }
+
+    public List<ResourcesGroup> findAllResourcesGroup() {
+        return Arrays.asList(findFreshResourcesGroup(), expiredResourcesGroup, consumedResourcesGroup);
+    }
+
+    public ResourcesGroup findFreshResourcesGroup() {
+        ResourcesGroup foundResource = new ResourcesGroup();
         for (Map.Entry<ResourceType, Queue<Resources>> entry : freshResources.entrySet()) {
-            ResourceTypeQuantity resourceTypeQuantity = new ResourceTypeQuantity(entry.getKey());
             for (Resources resources : entry.getValue()) {
-                resourceTypeQuantity.add(resources.getQuantity());
+                foundResource.addResource(entry.getKey(), resources.getQuantity());
             }
-            resourceTypeQuantities.add(resourceTypeQuantity);
         }
-        return resourceTypeQuantities;
+        return foundResource;
     }
 
     public void addResources(Resources resources) {
@@ -91,8 +105,16 @@ public class Pantry {
         expiredResourcesGroup.clear();
     }
 
-    public List<ResourcesGroup> findAll() {
-        return Arrays.asList(findFreshResourcesGroup(), expiredResourcesGroup, consumedResourcesGroup);
+    private List<ResourceTypeQuantity> findFreshResources() {
+        List<ResourceTypeQuantity> resourceTypeQuantities = new ArrayList<>();
+        for (Map.Entry<ResourceType, Queue<Resources>> entry : freshResources.entrySet()) {
+            ResourceTypeQuantity resourceTypeQuantity = new ResourceTypeQuantity(entry.getKey());
+            for (Resources resources : entry.getValue()) {
+                resourceTypeQuantity.add(resources.getQuantity());
+            }
+            resourceTypeQuantities.add(resourceTypeQuantity);
+        }
+        return resourceTypeQuantities;
     }
 
     private void removeAllEmptyResources() {
@@ -118,15 +140,5 @@ public class Pantry {
             consumedResourcesGroup.addResource(resourceType, actualQuantity);
             quantity -= actualQuantity;
         }
-    }
-
-    private ResourcesGroup findFreshResourcesGroup() {
-        ResourcesGroup foundResource = new ResourcesGroup();
-        for (Map.Entry<ResourceType, Queue<Resources>> entry : freshResources.entrySet()) {
-            for (Resources resources : entry.getValue()) {
-                foundResource.addResource(entry.getKey(), resources.getQuantity());
-            }
-        }
-        return foundResource;
     }
 }
