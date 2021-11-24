@@ -2,7 +2,6 @@ package ca.ulaval.glo4002.game.application.sumo;
 
 import ca.ulaval.glo4002.game.application.dinosaur.DinosaurFactory;
 import ca.ulaval.glo4002.game.application.sumo.dtos.SumoDto;
-import ca.ulaval.glo4002.game.application.sumo.dtos.SumoResponse;
 import ca.ulaval.glo4002.game.domain.actions.Action;
 import ca.ulaval.glo4002.game.domain.actions.ActionFactory;
 import ca.ulaval.glo4002.game.domain.actions.FightAction;
@@ -32,6 +31,7 @@ class SumoServiceTest {
     private SumoService sumoService;
     private SumoDto sumoDto;
     private List<Action> actions;
+    private Herd realHerd;
 
     @Mock
     private Herd herd;
@@ -55,9 +55,13 @@ class SumoServiceTest {
         SpeciesDietsCorrespondances speciesDietCorrespondances = new SpeciesDietsCorrespondances();
         DinosaurFactory dinosaurFactory = new DinosaurFactory(herdRepository, speciesDietCorrespondances);
         ActionFactory actionFactory = new ActionFactory();
+        realHerd = new Herd();
         dinoTest1 = dinosaurFactory.createDinosaur("Maxence", 10, "m", "Ankylosaurus");
         dinoTest2 = dinosaurFactory.createDinosaur("Marc-Antoine", 10, "m", "Brachiosaurus");
         dinoTest3 = dinosaurFactory.createDinosaur("Beno", 9, "m", "Diplodocus");
+        realHerd.addDinosaur(dinoTest1);
+        realHerd.addDinosaur(dinoTest2);
+        realHerd.addDinosaur(dinoTest3);
         sumoService = new SumoService(herdRepository, actionFactory, gameRepository);
         actions = new ArrayList<>();
 
@@ -72,30 +76,28 @@ class SumoServiceTest {
 
     @Test
     void givenTwoDinosaurOfIdenticalStrength_whenPredictingWinner_thenResponseIsTie() {
-
-
-
-        sumoDto = new SumoDto("Maxence", "Beno");
+        sumoDto = new SumoDto("Maxence", "Marc-Antoine");
         sumoService = new SumoService(herdRepository, actionFactory, gameRepository);
 
-        when(herdRepository.findHerd()).thenReturn(herd);
-        when(herd.findDinosaurByName(sumoDto.getChallenger())).thenReturn(dinoTest1);
-        when(herd.findDinosaurByName(sumoDto.getChallengee())).thenReturn(dinoTest2);
+        when(herdRepository.findHerd()).thenReturn(realHerd);
         when(gameRepository.findGame()).thenReturn(game);
         when(game.currentTurn()).thenReturn(turn);
-        when(actionFactory.createFight(actions, dinoTest1, dinoTest2, herd)).thenReturn(fightAction);
+        when(actionFactory.createFight(actions, dinoTest1, dinoTest2, realHerd)).thenReturn(fightAction);
 
-        sumoService.fight(sumoDto);
-        verify(gameRepository).findGame();
-        assertEquals(sumoService.fight(sumoDto).getPredictedWinner(), "Maxence");
+        assertEquals(sumoService.fight(sumoDto).getPredictedWinner(), "tie");
     }
 
     @Test
     void givenTwoDinosaurOfDifferentStrength_whenPredictingWinner_thenResponseIsNameOfHeaviestDino() {
-        sumoDto = new SumoDto("Maxence", "Ariau");
-        SumoResponse sumoResponse;
-        sumoResponse = sumoService.fight(sumoDto);
-        assertEquals(sumoResponse.getPredictedWinner(), "Maxence");
+        sumoDto = new SumoDto("Maxence", "Beno");
+        sumoService = new SumoService(herdRepository, actionFactory, gameRepository);
+
+        when(herdRepository.findHerd()).thenReturn(realHerd);
+        when(gameRepository.findGame()).thenReturn(game);
+        when(game.currentTurn()).thenReturn(turn);
+        when(actionFactory.createFight(actions, dinoTest1, dinoTest2, realHerd)).thenReturn(fightAction);
+
+        assertEquals(sumoService.fight(sumoDto).getPredictedWinner(), "Maxence");
     }
 
     @Test

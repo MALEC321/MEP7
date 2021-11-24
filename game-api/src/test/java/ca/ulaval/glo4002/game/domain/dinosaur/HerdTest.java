@@ -41,20 +41,28 @@ public class HerdTest {
     }
 
     @Test
-    void givenTwoDinosaursOfDifferentWeight_whenFighting_thenHeaviestIsHungryAndLightestIsDead() {
-        herd.fight(firstDino, thirdDino, true);
-        assertEquals(firstDino.isHungry(), true);
-        assertEquals(thirdDino.isDead(), true);
-        herd.fight(lastDino, secondDino, true);
-        assertEquals(secondDino.isHungry(), true);
-        assertEquals(lastDino.isDead(), true);
+    void givenTwoDinosaursOfDifferentWeight_whenFightingForReal_thenHeaviestIsHungryAndLightestIsDead() {
+        String winner;
+
+        winner = herd.fight(firstDino, thirdDino, true);
+        assertTrue(firstDino.isHungry());
+        assertTrue(thirdDino.isDead());
+        assertEquals(winner, firstDino.getName());
+
+        winner = herd.fight(lastDino, secondDino, true);
+        assertTrue(secondDino.isHungry());
+        assertTrue(lastDino.isDead());
+        assertEquals(winner, secondDino.getName());
     }
 
     @Test
-    void givenTwoDinosaursOfIdenticalWeight_whenFighting_thenBothAreHungry() {
-        herd.fight(firstDino, secondDino, true);
-        assertEquals(firstDino.isHungry(), true);
-        assertEquals(secondDino.isHungry(), true);
+    void givenTwoDinosaursOfIdenticalWeight_whenFightingForReal_thenBothAreHungry() {
+        String winner;
+
+        winner = herd.fight(firstDino, secondDino, true);
+        assertTrue(firstDino.isHungry());
+        assertTrue(secondDino.isHungry());
+        assertEquals(winner, "tie");
     }
 
     private List<Dinosaur> createDinoInStrengthOrderList() {

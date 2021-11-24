@@ -31,7 +31,7 @@ public class Herd {
 
     public String fight(Dinosaur challenger, Dinosaur challengee, boolean isReal) {
         String winner;
-        if (challenger.getStrength() >= challengee.getStrength()) {
+        if (challenger.getStrength() > challengee.getStrength()) {
             winner = challenger.getName();
             if (isReal) {
                 challengee.setDead(true);
