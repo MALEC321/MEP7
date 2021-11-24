@@ -1,6 +1,5 @@
 package ca.ulaval.glo4002.game.application.dinosaur;
 
-import ca.ulaval.glo4002.game.application.exceptions.InvalidWeightException;
 import ca.ulaval.glo4002.game.controllers.dinosaur.dtos.DinosaurCreationDto;
 import ca.ulaval.glo4002.game.domain.actions.ActionFactory;
 import ca.ulaval.glo4002.game.domain.actions.AddDino;

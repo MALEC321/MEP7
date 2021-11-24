@@ -1,7 +1,7 @@
 package ca.ulaval.glo4002.game.application.baby;
 
 import ca.ulaval.glo4002.game.application.baby.breed.Breedable;
-import ca.ulaval.glo4002.game.application.exceptions.NotExistentNameException;
+import ca.ulaval.glo4002.game.domain.actions.NotExistentNameException;
 import ca.ulaval.glo4002.game.controllers.baby.dtos.BabyCreationDto;
 import ca.ulaval.glo4002.game.infrastructure.client.dto.RequestBreed;
 import ca.ulaval.glo4002.game.infrastructure.client.dto.ResponseBreed;

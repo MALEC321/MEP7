@@ -1,6 +1,6 @@
 package ca.ulaval.glo4002.game.controllers.exceptionMappers;
 
-import ca.ulaval.glo4002.game.application.exceptions.InvalidWeightException;
+import ca.ulaval.glo4002.game.application.dinosaur.InvalidWeightException;
 import ca.ulaval.glo4002.game.controllers.exceptionMappers.response.ExceptionResponse;
 
 import javax.ws.rs.core.MediaType;
