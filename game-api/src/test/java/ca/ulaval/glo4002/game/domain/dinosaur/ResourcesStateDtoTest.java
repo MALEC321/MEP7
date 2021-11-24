@@ -48,25 +48,25 @@ public class ResourcesStateDtoTest {
     @Test
     void givenAResourceStateDto_whenwWithdrawingSaladsFromThatResourceState_thenAResourceStateWithoutBurgersIsReturned() {
 
-        ResourcesStateDto actualResourcesStateDto = resourcesStateDto.withdraw(SALAD);
+        ResourcesStateDto actualResourcesStateDto = resourcesStateDto.createFoodContainerForHerbivore();
 
-        assertFalse(actualResourcesStateDto.getPantryQuantities().containsKey(BURGER));
+        assertFalse(actualResourcesStateDto.getResourceTypeQuantities().containsKey(BURGER));
     }
 
     @Test
     void givenAResourceStateDto_whenwWithdrawingBurgersFromThatResourceState_thenAResourceStateWithoutSaladssIsReturned() {
 
-        ResourcesStateDto actualResourcesStateDto = resourcesStateDto.withdraw(SALAD);
+        ResourcesStateDto actualResourcesStateDto = resourcesStateDto.createFoodContainerForHerbivore();
 
-        assertFalse(actualResourcesStateDto.getPantryQuantities().containsKey(BURGER));
+        assertFalse(actualResourcesStateDto.getResourceTypeQuantities().containsKey(BURGER));
     }
 
     @Test
     void givenAResourceStateDtoWithAQuantityOfWater_whenwWithdrawingSaladResourceFromThatResourceState_thenAResourceStateWithHalfThatWaterQuantityIsReturned() {
 
-        ResourcesStateDto actualResourcesStateDto = resourcesStateDto.withdraw(SALAD);
+        ResourcesStateDto actualResourcesStateDto = resourcesStateDto.createFoodContainerForHerbivore();
 
-        assertTrue(DTO_STATE_WATER_QUANTITY / 2 == actualResourcesStateDto.getQtyForResourceType(WATER));
+        assertEquals(DTO_STATE_WATER_QUANTITY / 2, actualResourcesStateDto.getQtyForResourceType(WATER));
     }
 
     private void setResourcesStateDtoContext() {

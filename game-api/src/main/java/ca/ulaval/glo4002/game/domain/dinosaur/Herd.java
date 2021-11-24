@@ -38,9 +38,18 @@ public class Herd {
         return copiedDinoList;
     }
 
-    private List<Dinosaur> findSortedHerbivoreAndOmnivore(List<Dinosaur> sortedDinosaursByStrengthThenName) {
-        List<Dinosaur> copiedDinoList = new ArrayList<>(sortedDinosaursByStrengthThenName);
-        Collections.reverse(copiedDinoList);
+//    private List<Dinosaur> findSortedHerbivoreAndOmnivore(final List<Dinosaur> sortedDinosaursByStrengthThenName) {
+//        List<Dinosaur> copiedDinoList = new ArrayList<>(sortedDinosaursByStrengthThenName);
+//        Collections.reverse(copiedDinoList);
+//        copiedDinoList.removeIf(dinosaur -> dinosaur.getDiet() == CARNIVORE);
+//
+//        return copiedDinoList;
+//    }
+
+    public List<Dinosaur> findSortedHerbivoreAndOmnivore() {
+        List<Dinosaur> copiedDinoList = this.findAllDinosaurs();
+
+        copiedDinoList.sort(Comparator.comparing(Dinosaur::getStrength).thenComparing(Dinosaur::getName).reversed());
         copiedDinoList.removeIf(dinosaur -> dinosaur.getDiet() == CARNIVORE);
 
         return copiedDinoList;
@@ -62,20 +71,22 @@ public class Herd {
         }
     }
 
-    public ResourcesStateDto feedDinosaurs(final ResourcesStateDto resourcesStateDto) {
+    public ResourcesStateDto feedDinosaurs(final ResourcesStateDto resourcesStateDto) { // {burger: 10} {salad: 10}  {water: 11}
+                                                                                        //{burger: 10} {salad: 0}  {water: 5} GM carnivore
+                                                                                        //{burger: 0} {salad: 10}  {water: 5} GM herbivore
         // S1 Split state into states of burger and half water
         // S2 Split state into states of salad and half water
-        ResourcesStateDto halfResourcesStateDtoForHerbivore = resourcesStateDto.withdraw(SALAD);
-        ResourcesStateDto halfResourcesStateDtoForCarnivore = resourcesStateDto.withdraw(BURGER);
-        for (Dinosaur dinosaur: findSortedHerbivoreAndOmnivore(findSortedDinosaursByStrengthThenName())) {
-            halfResourcesStateDtoForHerbivore = dinosaur.eat(halfResourcesStateDtoForHerbivore); // S2
+        ResourcesStateDto foodContainerForHerbivore = resourcesStateDto.createFoodContainerForHerbivore();
+        ResourcesStateDto foodContainerForCarnivore = resourcesStateDto.createFoodContainerForCarnivore();
+        for (Dinosaur dinosaur: findSortedHerbivoreAndOmnivore()) {
+            foodContainerForHerbivore = dinosaur.eat(foodContainerForHerbivore); // S2
         }
         for (Dinosaur dinosaur: findSortedCarnivoreAndOmnivore(findSortedDinosaursByStrengthThenName())) {
-            halfResourcesStateDtoForCarnivore = dinosaur.eat(halfResourcesStateDtoForCarnivore);
+            foodContainerForCarnivore = dinosaur.eat(foodContainerForCarnivore);
         }
 
         // S1 U S2
-        return halfResourcesStateDtoForHerbivore.add(halfResourcesStateDtoForCarnivore);
+        return foodContainerForHerbivore.add(foodContainerForCarnivore);
     }
 
     public void removeAllHungryDinosaur() {

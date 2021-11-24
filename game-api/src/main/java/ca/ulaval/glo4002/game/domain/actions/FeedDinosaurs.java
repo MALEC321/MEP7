@@ -24,9 +24,9 @@ public class FeedDinosaurs implements Action {
 
     @Override
     public void execute() {
-        ResourcesStateDto resourcesStateDto = pantry.getFreshResourcesReport();
-        ResourcesStateDto updateResourcesStateDto = herd.feedDinosaurs(resourcesStateDto);
+        ResourcesStateDto resourcesStateDto = pantry.getFreshResourcesReport(); // 10 10 10
+        ResourcesStateDto updateResourcesStateDto = herd.feedDinosaurs(resourcesStateDto); // 2 2 2
         herd.removeAllHungryDinosaur();
-        pantry.removeQuantity(updateResourcesStateDto);
+        pantry.updateQuantities(updateResourcesStateDto); // 2 2 2
     }
 }
