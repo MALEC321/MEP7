@@ -37,7 +37,6 @@ import java.util.HashSet;
 import java.util.Set;
 
 public class AppConfig {
-    // Turn
     private static final TurnFactory turnFactory = new TurnFactory();
     private static final GameRepository gameRepository = new GameRepositoryInMemory();
     private static final PantryRepository resourceRepository = new PantryRepositoryInMemory();
@@ -48,8 +47,6 @@ public class AppConfig {
     private static final ResourcesFactory resourcesFactory = new ResourcesFactory();
     private static final ResourcesGroupFactory resourcesGroupFactory = new ResourcesGroupFactory();
 
-
-    // Dinosaur
     private static final HerdRepository herdRepository = new HerdRepositoryInMemory();
     private static final DinosaurFactory dinosaurFactory = new DinosaurFactory(herdRepository, speciesDietsCorrespondances);
     private static final DinosaurAssembler dinosaurAssembler = new DinosaurAssembler();
@@ -68,7 +65,6 @@ public class AppConfig {
     private static final ResourceDtoAssembler resourceDtoAssembler = new ResourceDtoAssembler();
     private static final ResourcesResource manageResources = new ResourcesResource(resourcesService, resourceDtoAssembler);
 
-    // Baby
     private static final BabyAssembler babyAssembler = new BabyAssembler();
     private static final Breedable breedable = new BabyBreedableClient();
     private static final BabyService babyService = new BabyService(herdRepository, babyAssembler, actionFactory, dinosaurFactory, breedable, gameRepository);
