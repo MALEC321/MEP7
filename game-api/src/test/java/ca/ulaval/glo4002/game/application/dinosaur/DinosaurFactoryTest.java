@@ -18,7 +18,6 @@ import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Matchers.anyString;
 import static org.mockito.Mockito.when;
 
-
 public class DinosaurFactoryTest {
     private static final Dinosaur NO_DINO_WITH_SAME_NAME = null;
     private static final String MOTHER_NAME = "mother";

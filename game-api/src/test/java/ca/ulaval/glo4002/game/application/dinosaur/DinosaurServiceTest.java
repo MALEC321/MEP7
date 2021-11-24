@@ -1,60 +1,107 @@
 package ca.ulaval.glo4002.game.application.dinosaur;
 
-import ca.ulaval.glo4002.game.application.dinosaur.dtos.DinosaurAssembler;
-import ca.ulaval.glo4002.game.application.exceptions.NotExistentNameException;
-import ca.ulaval.glo4002.game.application.resources.ResourcesFactory;
-import ca.ulaval.glo4002.game.application.turn.TurnService;
-import ca.ulaval.glo4002.game.controllers.dinosaur.dtos.DinosaurCreationDto;
-import ca.ulaval.glo4002.game.controllers.dinosaur.dtos.DinosaurDtoAssembler;
-import ca.ulaval.glo4002.game.controllers.dinosaur.dtos.DinosaurRequest;
-import ca.ulaval.glo4002.game.domain.actions.ActionFactory;
-import ca.ulaval.glo4002.game.domain.dinosaur.HerdRepository;
-import ca.ulaval.glo4002.game.domain.dinosaur.enums.SpeciesDietsCorrespondances;
-import ca.ulaval.glo4002.game.domain.game.GameRepository;
-import ca.ulaval.glo4002.game.domain.resources.PantryRepository;
-import ca.ulaval.glo4002.game.domain.resources.ResourcesDistributor;
-import ca.ulaval.glo4002.game.domain.turn.TurnFactory;
-import ca.ulaval.glo4002.game.infrastructure.persistence.dinosaur.HerdRepositoryInMemory;
-import ca.ulaval.glo4002.game.infrastructure.persistence.resources.PantryRepositoryInMemory;
-import ca.ulaval.glo4002.game.infrastructure.persistence.turn.GameRepositoryInMemory;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.MockitoAnnotations;
+import org.mockito.Spy;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.mockito.Mockito.*;
+
+import ca.ulaval.glo4002.game.application.exceptions.InvalidWeightException;
+import ca.ulaval.glo4002.game.controllers.dinosaur.dtos.DinosaurCreationDto;
+import ca.ulaval.glo4002.game.domain.actions.ActionFactory;
+import ca.ulaval.glo4002.game.domain.actions.AddDino;
+import ca.ulaval.glo4002.game.domain.dinosaur.Dinosaur;
+import ca.ulaval.glo4002.game.domain.dinosaur.Herd;
+import ca.ulaval.glo4002.game.domain.dinosaur.HerdRepository;
+import ca.ulaval.glo4002.game.domain.game.Game;
+import ca.ulaval.glo4002.game.domain.game.GameRepository;
+import ca.ulaval.glo4002.game.domain.turn.Turn;
+import ca.ulaval.glo4002.game.domain.turn.TurnNumber;
 
 public class DinosaurServiceTest {
+    @Spy
+    private final Turn turn = new Turn(new TurnNumber(432));
+    private final String validDinoName = "Dino";
+    private final int weight = 200;
+    private final int invalidWeight = -10;
+    private final String validGender = "m";
+    private final String validSpecie = "Ankylosaurus";
+    private final DinosaurCreationDto dinosaurCreationDto = new DinosaurCreationDto(validDinoName, weight, validGender, validSpecie);
+    private final DinosaurCreationDto invalidDinosaurCreationDto = new DinosaurCreationDto(validDinoName, invalidWeight, validGender, validSpecie);
+    @Mock
+    private DinosaurFactory dinosaurFactory;
+
+    @Mock
+    private HerdRepository herdRepository;
+
+    @Mock
+    private ActionFactory actionFactory;
+
+    @Mock
+    private GameRepository gameRepository;
+
+    @Mock
+    private Dinosaur validDinosaur;
+
+    @Mock
+    private Herd herd;
+
+    @Mock
+    private AddDino addDinosaurAction;
+
+    @Mock
+    private Game game;
+
+    @InjectMocks
     private DinosaurService dinosaurService;
-    private DinosaurDtoAssembler dinosaurDtoAssembler;
-    private TurnService turnService;
 
     @BeforeEach
     void setUp() {
-        SpeciesDietsCorrespondances speciesDietsCorrespondances = new SpeciesDietsCorrespondances();
-        ResourcesDistributor resourcesDistributor = new ResourcesDistributor();
-        ActionFactory actionFactory = new ActionFactory();
-        ResourcesFactory resourcesFactory = new ResourcesFactory();
-
-        HerdRepository herdRepository = new HerdRepositoryInMemory();
-        DinosaurFactory dinosaurFactory = new DinosaurFactory(herdRepository, speciesDietsCorrespondances);
-        DinosaurAssembler dinosaurAssembler = new DinosaurAssembler();
-        GameRepository gameRepository = new GameRepositoryInMemory();
-        dinosaurDtoAssembler = new DinosaurDtoAssembler();
-        dinosaurService = new DinosaurService(dinosaurFactory, herdRepository, dinosaurAssembler, actionFactory, gameRepository);
-
-        TurnFactory turnFactory = new TurnFactory();
-        PantryRepository pantryRepository = new PantryRepositoryInMemory();
-        turnService = new TurnService(turnFactory, gameRepository, pantryRepository, herdRepository, resourcesDistributor, resourcesFactory, actionFactory);
+        MockitoAnnotations.initMocks(this);
+        when(herdRepository.findHerd()).thenReturn(herd);
+        when(dinosaurFactory.createDinosaur(validDinoName, weight, validGender, validSpecie)).thenReturn(validDinosaur);
+        when(dinosaurFactory.createDinosaur(validDinoName, invalidWeight, validGender, validSpecie)).thenThrow(new InvalidWeightException());
+        when(actionFactory.createAddDinoAction(validDinosaur, herd)).thenReturn(addDinosaurAction);
+        when(gameRepository.findGame()).thenReturn(game);
+        when(game.currentTurn()).thenReturn(turn);
     }
 
     @Test
-    void whenGetDinosaurNotExistent_shouldThrowsNotExistentNameException() {
-        DinosaurRequest dinosaurRequest = new DinosaurRequest("Will", 1000, "m", "Allosaurus");
+    void givenValidDinoInformation_whenCreateDinosaur_thenDinosaurIsCreate() {
+        dinosaurService.createDinosaur(dinosaurCreationDto);
+        verify(dinosaurFactory).createDinosaur(validDinoName, weight, validGender, validSpecie);
+    }
 
-        DinosaurCreationDto dto = dinosaurDtoAssembler.fromRequest(dinosaurRequest);
-        dinosaurService.createDinosaur(dto);
-        turnService.playTurn();
+    @Test
+    void givenInvalidDinoName_whenCreateDinosaur_thenDinosaurIsNotCreated() {
+        assertThrows(InvalidWeightException.class, () -> dinosaurService.createDinosaur(invalidDinosaurCreationDto));
+        verify(dinosaurFactory).createDinosaur(validDinoName, invalidWeight, validGender, validSpecie);
+        verify(actionFactory, never()).createAddDinoAction(validDinosaur, herd);
+        verify(gameRepository, never()).save(game);
+    }
 
-        assertThrows(NotExistentNameException.class, () ->
-            dinosaurService.getDinosaur("Willl"));
+    @Test
+    void givenValidDinoInformation_whenCreateDinosaur_thenAddDinoActionIsCreate() {
+        dinosaurService.createDinosaur(dinosaurCreationDto);
+        verify(actionFactory).createAddDinoAction(validDinosaur, herd);
+    }
+
+    @Test
+    void givenValidDinoInformation_whenCreateDinosaur_thenDinosaurIsAddInTurnActions() {
+        dinosaurService.createDinosaur(dinosaurCreationDto);
+
+        verify(turn).addAction(addDinosaurAction);
+        assertEquals(1, turn.getActions().size());
+    }
+
+    @Test
+    void givenValidDinoInformation_whenCreateDinosaur_thenGameStateIsUpdated() {
+        dinosaurService.createDinosaur(dinosaurCreationDto);
+        verify(gameRepository).save(game);
     }
 }
