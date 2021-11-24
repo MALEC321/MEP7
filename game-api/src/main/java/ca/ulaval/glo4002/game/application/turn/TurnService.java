@@ -42,12 +42,18 @@ public class TurnService {
 
     public void playTurn() {
         Game game = gameRepository.findGame();
+        Herd herd = herdRepository.findHerd();
+        Pantry pantry = pantryRepository.findPantry();;
+
         Turn currentTurn = game.currentTurn();
 
-        addTurnConsequences(currentTurn);
+        addTurnConsequences(currentTurn, herd, pantry);
         currentTurn.executeActions();
 
         endTurn(game);
+
+        pantryRepository.save(pantry);
+        herdRepository.save(herd);
         gameRepository.save(game);
     }
 
@@ -62,34 +68,29 @@ public class TurnService {
         herdRepository.deleteAll();
     }
 
-    private void addTurnConsequences(Turn currentTurn) {
-        addCookItConsequence(currentTurn);
-        addRemoveExpiredResourcesConsequence(currentTurn);
-        addFeedDinosaursConsequence(currentTurn);
-        addRemoveOrphanedBabyDinosaursConsequence(currentTurn);
+    private void addTurnConsequences(Turn currentTurn, Herd herd, Pantry pantry) {
+        addCookItConsequence(currentTurn, pantry);
+        addRemoveExpiredResourcesConsequence(currentTurn, pantry);
+        addFeedDinosaursConsequence(currentTurn, herd, pantry);
+        addRemoveOrphanedBabyDinosaursConsequence(currentTurn, herd);
     }
 
-    private void addCookItConsequence(Turn currentTurn) {
-        Pantry pantry = pantryRepository.findPantry();
+    private void addCookItConsequence(Turn currentTurn, Pantry pantry) {
         Action addCookIt = actionFactory.createCookItAction(pantry, resourcesFactory);
         currentTurn.addAction(addCookIt);
     }
 
-    private void addRemoveExpiredResourcesConsequence(Turn currentTurn) {
-        Pantry pantry = pantryRepository.findPantry();
+    private void addRemoveExpiredResourcesConsequence(Turn currentTurn, Pantry pantry) {
         Action removeAllExpiredResourcesAction = actionFactory.createRemoveAllExpiredResourcesAction(pantry);
         currentTurn.addAction(removeAllExpiredResourcesAction);
     }
 
-    private void addFeedDinosaursConsequence(Turn currentTurn) {
-        Herd herd = herdRepository.findHerd();
-        Pantry pantry = pantryRepository.findPantry();
+    private void addFeedDinosaursConsequence(Turn currentTurn, Herd herd, Pantry pantry) {
         Action feedDinosaursAction = actionFactory.createFeedDinosaursAction(resourcesDistributor, pantry, herd);
         currentTurn.addAction(feedDinosaursAction);
     }
 
-    private void addRemoveOrphanedBabyDinosaursConsequence(Turn currentTurn) {
-        Herd herd = herdRepository.findHerd();
+    private void addRemoveOrphanedBabyDinosaursConsequence(Turn currentTurn, Herd herd) {
         Action removeOrphanedBabyDinosaurs = actionFactory.createRemoveOrphanedBabyDinosaursAction(herd);
         currentTurn.addAction(removeOrphanedBabyDinosaurs);
     }

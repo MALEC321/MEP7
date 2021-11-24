@@ -170,11 +170,6 @@ public class Dinosaur {
         return getName().equals(dinosaur.getName());
     }
 
-    @Override
-    public int hashCode() {
-        return Objects.hash(getName());
-    }
-
     public boolean isFighting() {
         return fighting;
     }
