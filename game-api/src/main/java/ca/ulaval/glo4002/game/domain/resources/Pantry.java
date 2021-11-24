@@ -13,7 +13,7 @@ import ca.ulaval.glo4002.game.domain.dinosaur.ResourcesStateDto;
 
 import static ca.ulaval.glo4002.game.domain.resources.ResourceType.*;
 
-public class Pantry implements FoodContainer {
+public class Pantry {
     private final HashMap<ResourceType, Queue<Resources>> freshResources;
     private final ResourcesGroup consumedResourcesGroup;
     private final ResourcesGroup expiredResourcesGroup;
@@ -70,8 +70,7 @@ public class Pantry implements FoodContainer {
         });
     }
 
-    @Override
-    public boolean removeResourceQty(ResourceType resourceType, int quantityParam) {
+    private void removeResourceQty(ResourceType resourceType, int quantityParam) {
         int quantity = quantityParam;
         for (Resources resources : freshResources.get(resourceType)) {
             int actualQuantity = resources.getQuantity();
@@ -79,13 +78,12 @@ public class Pantry implements FoodContainer {
             boolean enoughQuantity = resources.removeElement(quantity);
             if (enoughQuantity) {
                 consumedResourcesGroup.addResource(resourceType, quantity);
-                return true;
+                return;
             }
 
             consumedResourcesGroup.addResource(resourceType, actualQuantity);
             quantity -= actualQuantity;
         }
-        return false;
     }
 
     public void removeAllExpiredResources() {
