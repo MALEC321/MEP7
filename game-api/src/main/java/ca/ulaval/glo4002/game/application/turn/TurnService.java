@@ -84,7 +84,7 @@ public class TurnService {
     private void addFeedDinosaursConsequence(Turn currentTurn) {
         Herd herd = herdRepository.findHerd();
         Pantry pantry = pantryRepository.findPantry();
-        Action feedDinosaursAction = actionFactory.createFeedDinosaursAction(herdRepository, pantry, herd);
+        Action feedDinosaursAction = actionFactory.createFeedDinosaursAction(pantry, herd);
         currentTurn.addAction(feedDinosaursAction);
     }
 

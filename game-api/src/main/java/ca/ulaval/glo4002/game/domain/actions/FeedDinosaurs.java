@@ -10,12 +10,10 @@ import ca.ulaval.glo4002.game.domain.resources.ResourcesDistributor;
 
 public class FeedDinosaurs implements Action {
 
-    private HerdRepository herdRepository;
     private Pantry pantry;
     private Herd herd;
 
-    public FeedDinosaurs(HerdRepository herdRepository, Pantry pantry, Herd herd) {
-        this.herdRepository = herdRepository;
+    public FeedDinosaurs(Pantry pantry, Herd herd) {
         this.pantry = pantry;
         this.herd = herd;
     }
@@ -32,8 +30,7 @@ public class FeedDinosaurs implements Action {
     public void execute() {
         ResourcesStateDto resourcesStateDto = pantry.getFreshResourcesReport();
         ResourcesStateDto updateResourcesStateDto = herd.feedDinosaurs(resourcesStateDto);
-        herdRepository.findHerd().removeAllHungryDinosaur();
-        herdRepository.save(herd);
+        herd.removeAllHungryDinosaur();
         pantry.removeQuantity(updateResourcesStateDto);
     }
 }

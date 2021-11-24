@@ -28,7 +28,7 @@ public class FeedDinosaursTest {
 
     @BeforeEach
     void init() {
-        feedDinosaurs = new FeedDinosaurs(herdRepository, pantry, herd);
+        feedDinosaurs = new FeedDinosaurs(pantry, herd);
         MockitoAnnotations.initMocks(this);
     }
 

@@ -21,8 +21,8 @@ public class ActionFactory {
         return new CookIt(pantry, resourcesFactory);
     }
 
-    public FeedDinosaurs createFeedDinosaursAction(HerdRepository herdRepository, Pantry pantry, Herd herd) {
-        return new FeedDinosaurs(herdRepository, pantry, herd);
+    public FeedDinosaurs createFeedDinosaursAction(Pantry pantry, Herd herd) {
+        return new FeedDinosaurs(pantry, herd);
     }
 
     public RemoveExpiredResources createRemoveAllExpiredResourcesAction(Pantry pantry) {
