@@ -35,20 +35,28 @@ public class DinosaurServiceTest {
     private final DinosaurCreationDto invalidDinosaurCreationDto = new DinosaurCreationDto(validDinoName, invalidWeight, validGender, validSpecie);
     @Mock
     private DinosaurFactory dinosaurFactory;
+
     @Mock
     private HerdRepository herdRepository;
+
     @Mock
     private ActionFactory actionFactory;
+
     @Mock
     private GameRepository gameRepository;
+
     @Mock
     private Dinosaur validDinosaur;
+
     @Mock
     private Herd herd;
+
     @Mock
     private AddDino addDinosaurAction;
+
     @Mock
     private Game game;
+
     @InjectMocks
     private DinosaurService dinosaurService;
 
@@ -95,6 +103,5 @@ public class DinosaurServiceTest {
     void givenValidDinoInformation_whenCreateDinosaur_thenGameStateIsUpdated() {
         dinosaurService.createDinosaur(dinosaurCreationDto);
         verify(gameRepository).save(game);
-
     }
 }
