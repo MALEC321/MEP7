@@ -48,16 +48,6 @@ public class Pantry {
         return resourceTypeQuantities;
     }
 
-    public ResourcesGroup findFreshResourcesGroup() {
-        ResourcesGroup foundResource = new ResourcesGroup();
-        for (Map.Entry<ResourceType, Queue<Resources>> entry : freshResources.entrySet()) {
-            for (Resources resources : entry.getValue()) {
-                foundResource.addResource(entry.getKey(), resources.getQuantity());
-            }
-        }
-        return foundResource;
-    }
-
     public void addResources(Resources resources) {
         freshResources.get(resources.getType()).add(resources);
     }
@@ -68,22 +58,6 @@ public class Pantry {
             int resourceQuantityLeft = updatedResourcesStateDto.getQtyForResourceType(resourceType);
             removeResourceQty(resourceType, actualResourceQuantity - resourceQuantityLeft);
         });
-    }
-
-    private void removeResourceQty(ResourceType resourceType, int quantityParam) {
-        int quantity = quantityParam;
-        for (Resources resources : freshResources.get(resourceType)) {
-            int actualQuantity = resources.getQuantity();
-
-            boolean enoughQuantity = resources.removeElement(quantity);
-            if (enoughQuantity) {
-                consumedResourcesGroup.addResource(resourceType, quantity);
-                return;
-            }
-
-            consumedResourcesGroup.addResource(resourceType, actualQuantity);
-            quantity -= actualQuantity;
-        }
     }
 
     public void removeAllExpiredResources() {
@@ -128,5 +102,31 @@ public class Pantry {
                 resourcesQueue.poll();
             }
         }
+    }
+
+    private void removeResourceQty(ResourceType resourceType, int quantityParam) {
+        int quantity = quantityParam;
+        for (Resources resources : freshResources.get(resourceType)) {
+            int actualQuantity = resources.getQuantity();
+
+            boolean enoughQuantity = resources.removeElement(quantity);
+            if (enoughQuantity) {
+                consumedResourcesGroup.addResource(resourceType, quantity);
+                return;
+            }
+
+            consumedResourcesGroup.addResource(resourceType, actualQuantity);
+            quantity -= actualQuantity;
+        }
+    }
+
+    private ResourcesGroup findFreshResourcesGroup() {
+        ResourcesGroup foundResource = new ResourcesGroup();
+        for (Map.Entry<ResourceType, Queue<Resources>> entry : freshResources.entrySet()) {
+            for (Resources resources : entry.getValue()) {
+                foundResource.addResource(entry.getKey(), resources.getQuantity());
+            }
+        }
+        return foundResource;
     }
 }
