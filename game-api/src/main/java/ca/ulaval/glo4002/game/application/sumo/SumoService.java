@@ -31,18 +31,6 @@ public class SumoService {
         Action fightAction = actionFactory.createFight(turn.getActions(), challenger, challengee, herd);
         turn.addAction(fightAction);
         gameRepository.save(game);
-        return predictWinner(challenger, challengee);
-    }
-
-    public SumoResponse predictWinner(Dinosaur challenger, Dinosaur challengee) {
-        SumoResponse response;
-        if (challenger.getStrength() > challengee.getStrength()) {
-            response = new SumoResponse(challenger.getName());
-        } else if (challenger.getStrength() < challengee.getStrength()) {
-            response = new SumoResponse(challengee.getName());
-        } else {
-            response = new SumoResponse("tie");
-        }
-        return response;
+        return new SumoResponse(herd.fight(challenger, challengee, false));
     }
 }

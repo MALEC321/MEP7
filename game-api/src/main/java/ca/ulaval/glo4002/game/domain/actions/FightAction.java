@@ -16,6 +16,6 @@ public class FightAction implements Action {
 
     @Override
     public void execute() {
-        herd.fight(challenger, challengee);
+        herd.fight(challenger, challengee, true);
     }
 }

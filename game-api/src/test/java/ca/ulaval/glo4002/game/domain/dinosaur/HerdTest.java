@@ -42,17 +42,17 @@ public class HerdTest {
 
     @Test
     void givenTwoDinosaursOfDifferentWeight_whenFighting_thenHeaviestIsHungryAndLightestIsDead() {
-        herd.fight(firstDino, thirdDino);
+        herd.fight(firstDino, thirdDino, true);
         assertEquals(firstDino.isHungry(), true);
         assertEquals(thirdDino.isDead(), true);
-        herd.fight(lastDino, secondDino);
+        herd.fight(lastDino, secondDino, true);
         assertEquals(secondDino.isHungry(), true);
         assertEquals(lastDino.isDead(), true);
     }
 
     @Test
     void givenTwoDinosaursOfIdenticalWeight_whenFighting_thenBothAreHungry() {
-        herd.fight(firstDino, secondDino);
+        herd.fight(firstDino, secondDino, true);
         assertEquals(firstDino.isHungry(), true);
         assertEquals(secondDino.isHungry(), true);
     }

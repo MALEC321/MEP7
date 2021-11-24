@@ -29,17 +29,28 @@ public class Herd {
         dinosaursByName.remove(dinosaur.getName());
     }
 
-    public void fight(Dinosaur challenger, Dinosaur challengee) {
-        if (challenger.getStrength() > challengee.getStrength()) {
-            challengee.setDead(true);
-            challenger.setHungry(true);
+    public String fight(Dinosaur challenger, Dinosaur challengee, boolean isReal) {
+        String winner;
+        if (challenger.getStrength() >= challengee.getStrength()) {
+            winner = challenger.getName();
+            if (isReal) {
+                challengee.setDead(true);
+                challenger.setHungry(true);
+            }
         } else if (challenger.getStrength() < challengee.getStrength()) {
-            challenger.setDead(true);
-            challengee.setHungry(true);
+            winner = challengee.getName();
+            if (isReal) {
+                challenger.setDead(true);
+                challengee.setHungry(true);
+            }
         } else {
-            challengee.setHungry(true);
-            challenger.setHungry(true);
+            winner = "tie";
+            if (isReal) {
+                challengee.setDead(true);
+                challenger.setDead(true);
+            }
         }
+        return winner;
     }
 
     public List<Dinosaur> findSortedDinosaursByStrengthThenName() {
