@@ -10,7 +10,7 @@ import javax.ws.rs.ext.ExceptionMapper;
 public class MaxCombatsReachedExceptionsMapper implements ExceptionMapper<MaxCombatsReachedException> {
 	@Override
 	public Response toResponse(MaxCombatsReachedException e) {
-		ExceptionResponse exceptionResponse = new ExceptionResponse("MAX_COMBATS_REACHED","ax number of combats has been reached.");
+		ExceptionResponse exceptionResponse = new ExceptionResponse("MAX_COMBATS_REACHED","Max number of combats has been reached.");
 		return Response.status(Response.Status.BAD_REQUEST).entity(exceptionResponse).type(MediaType.APPLICATION_JSON).build();
 	}
 }
