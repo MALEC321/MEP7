@@ -1,6 +1,5 @@
 package ca.ulaval.glo4002.game.infrastructure.persistence.resources;
 
-import ca.ulaval.glo4002.game.domain.resources.Pantry;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
@@ -8,8 +7,9 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
+
+import ca.ulaval.glo4002.game.domain.resources.Pantry;
 
 public class PantryRepositoryInMemoryTest {
     @InjectMocks
@@ -31,8 +31,6 @@ public class PantryRepositoryInMemoryTest {
     @Test
     void repoCreated_whenResetResource_thenPantryIsCleared() {
         this.resourceRepositoryInMemory.deleteAll();
-
-        verify(this.pantry, times(1)).clear();
+        verify(this.pantry).clear();
     }
-
 }
