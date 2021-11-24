@@ -1,15 +1,13 @@
 package ca.ulaval.glo4002.game.domain.dinosaur;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import static ca.ulaval.glo4002.game.domain.dinosaur.enums.DietType.*;
-import static ca.ulaval.glo4002.game.domain.resources.ResourceType.BURGER;
-import static ca.ulaval.glo4002.game.domain.resources.ResourceType.SALAD;
+import static ca.ulaval.glo4002.game.domain.dinosaur.enums.DietType.CARNIVORE;
+import static ca.ulaval.glo4002.game.domain.dinosaur.enums.DietType.HERBIVORE;
 
 public class Herd {
     private final Map<String, Dinosaur> dinosaursByName = new HashMap<>();
@@ -72,16 +70,16 @@ public class Herd {
     }
 
     public ResourcesStateDto feedDinosaurs(final ResourcesStateDto resourcesStateDto) { // {burger: 10} {salad: 10}  {water: 11}
-                                                                                        //{burger: 10} {salad: 0}  {water: 5} GM carnivore
-                                                                                        //{burger: 0} {salad: 10}  {water: 5} GM herbivore
+        //{burger: 10} {salad: 0}  {water: 5} GM carnivore
+        //{burger: 0} {salad: 10}  {water: 5} GM herbivore
         // S1 Split state into states of burger and half water
         // S2 Split state into states of salad and half water
         ResourcesStateDto foodContainerForHerbivore = resourcesStateDto.createFoodContainerForHerbivore();
         ResourcesStateDto foodContainerForCarnivore = resourcesStateDto.createFoodContainerForCarnivore();
-        for (Dinosaur dinosaur: findSortedHerbivoreAndOmnivore()) {
+        for (Dinosaur dinosaur : findSortedHerbivoreAndOmnivore()) {
             foodContainerForHerbivore = dinosaur.eat(foodContainerForHerbivore); // S2
         }
-        for (Dinosaur dinosaur: findSortedCarnivoreAndOmnivore(findSortedDinosaursByStrengthThenName())) {
+        for (Dinosaur dinosaur : findSortedCarnivoreAndOmnivore(findSortedDinosaursByStrengthThenName())) {
             foodContainerForCarnivore = dinosaur.eat(foodContainerForCarnivore);
         }
 
