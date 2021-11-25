@@ -11,9 +11,8 @@ import org.mockito.MockitoAnnotations;
 import static org.mockito.Mockito.verify;
 
 public class AddDinoTest {
-
     @InjectMocks
-    private Action addDino;
+    private AddDino addDino;
 
     @Mock
     private Dinosaur dinosaur;
@@ -22,13 +21,12 @@ public class AddDinoTest {
     private Herd herd;
 
     @BeforeEach
-    void init() {
-        addDino = new AddDino(dinosaur, herd);
+    public void setUp() {
         MockitoAnnotations.initMocks(this);
     }
 
     @Test
-    void givenAddDinoAction_whenExecuting_thenAddDinosaurShouldBeCalled() {
+    public void givenAddDinoAction_whenExecuting_thenAddDinosaurShouldBeCalled() {
         addDino.execute();
 
         verify(herd).addDinosaur(dinosaur);

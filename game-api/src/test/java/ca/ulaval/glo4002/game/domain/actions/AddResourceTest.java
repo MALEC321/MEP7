@@ -11,9 +11,8 @@ import org.mockito.MockitoAnnotations;
 import static org.mockito.Mockito.verify;
 
 public class AddResourceTest {
-
     @InjectMocks
-    private Action addResource;
+    private AddResource addResource;
 
     @Mock
     private Resources resources;
@@ -23,7 +22,6 @@ public class AddResourceTest {
 
     @BeforeEach
     void init() {
-        addResource = new AddResource(resources, pantry);
         MockitoAnnotations.initMocks(this);
     }
 
