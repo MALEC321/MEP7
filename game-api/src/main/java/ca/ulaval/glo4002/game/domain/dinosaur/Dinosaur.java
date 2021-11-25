@@ -46,7 +46,7 @@ public class Dinosaur {
         this.isDead = false;
     }
 
-    public Dinosaur() {}
+    public Dinosaur() { }
 
     public String getName() {
         return name;

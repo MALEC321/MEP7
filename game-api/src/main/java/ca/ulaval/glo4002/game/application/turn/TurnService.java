@@ -43,7 +43,7 @@ public class TurnService {
     public void playTurn() {
         Game game = gameRepository.findGame();
         Herd herd = herdRepository.findHerd();
-        Pantry pantry = pantryRepository.findPantry();;
+        Pantry pantry = pantryRepository.findPantry();
 
         Turn currentTurn = game.currentTurn();
 

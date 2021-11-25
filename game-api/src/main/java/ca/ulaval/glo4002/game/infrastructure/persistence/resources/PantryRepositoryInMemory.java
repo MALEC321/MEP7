@@ -1,6 +1,5 @@
 package ca.ulaval.glo4002.game.infrastructure.persistence.resources;
 
-import ca.ulaval.glo4002.game.domain.dinosaur.Herd;
 import ca.ulaval.glo4002.game.domain.resources.Pantry;
 import ca.ulaval.glo4002.game.domain.resources.PantryRepository;
 

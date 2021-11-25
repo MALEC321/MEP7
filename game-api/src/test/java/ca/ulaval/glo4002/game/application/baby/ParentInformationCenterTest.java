@@ -1,6 +1,7 @@
 package ca.ulaval.glo4002.game.application.baby;
 
 import ca.ulaval.glo4002.game.application.baby.dtos.BabyAssembler;
+import ca.ulaval.glo4002.game.application.dinosaur.NotExistentNameException;
 import ca.ulaval.glo4002.game.domain.dinosaur.Dinosaur;
 import ca.ulaval.glo4002.game.domain.dinosaur.Herd;
 import ca.ulaval.glo4002.game.domain.dinosaur.HerdRepository;

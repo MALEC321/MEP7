@@ -4,8 +4,8 @@ import ca.ulaval.glo4002.game.domain.resources.Pantry;
 import ca.ulaval.glo4002.game.domain.resources.Resources;
 
 public class AddResource implements Action {
-    private Resources resources;
-    private Pantry pantry;
+    private final Resources resources;
+    private final Pantry pantry;
 
     public AddResource(Resources resources, Pantry pantry) {
         this.resources = resources;
