@@ -1,46 +1,34 @@
 package ca.ulaval.glo4002.game.application.resources;
 
-import ca.ulaval.glo4002.game.application.resources.dtos.ResourcesDto;
-import ca.ulaval.glo4002.game.application.turn.TurnService;
-import ca.ulaval.glo4002.game.controllers.resources.dtos.ResourcesAssembler;
-import ca.ulaval.glo4002.game.controllers.resources.dtos.ResourceCreationDto;
-import ca.ulaval.glo4002.game.domain.actions.ActionFactory;
-import ca.ulaval.glo4002.game.domain.dinosaur.HerdRepository;
-import ca.ulaval.glo4002.game.domain.resources.PantryRepository;
-import ca.ulaval.glo4002.game.domain.resources.ResourcesGroup;
-import ca.ulaval.glo4002.game.domain.turn.TurnFactory;
-import ca.ulaval.glo4002.game.domain.game.GameRepository;
-import ca.ulaval.glo4002.game.infrastructure.persistence.dinosaur.HerdRepositoryInMemory;
-import ca.ulaval.glo4002.game.infrastructure.persistence.resources.PantryRepositoryInMemory;
-import ca.ulaval.glo4002.game.infrastructure.persistence.turn.GameRepositoryInMemory;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
-
 import java.util.List;
 
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.mockito.Mock;
+import org.mockito.MockitoAnnotations;
+
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
+import ca.ulaval.glo4002.game.application.resources.dtos.ResourcesDto;
+import ca.ulaval.glo4002.game.application.turn.TurnService;
+import ca.ulaval.glo4002.game.controllers.resources.dtos.ResourceCreationDto;
+import ca.ulaval.glo4002.game.domain.resources.PantryRepository;
+import ca.ulaval.glo4002.game.domain.resources.ResourcesGroup;
+import ca.ulaval.glo4002.game.infrastructure.persistence.resources.PantryRepositoryInMemory;
 
 public class ResourcesServiceTest {
     private static final int QYT_BURGER = 4;
     private static final int QYT_SALAD = 5;
     private static final int QYT_WATER = 6;
+    @Mock
     private ResourcesService resourcesService;
+    @Mock
     private TurnService turnService;
 
     @BeforeEach
     public void setUp() {
-        ResourcesGroupFactory resourcesGroupFactory = new ResourcesGroupFactory();
-        ResourcesAssembler resourcesAssembler = new ResourcesAssembler();
-        PantryRepository resourceRepository = new PantryRepositoryInMemory();
-        ActionFactory actionFactory = new ActionFactory();
-        ResourcesFactory resourcesFactory = new ResourcesFactory();
-
-        TurnFactory turnFactory = new TurnFactory();
-        GameRepository gameRepository = new GameRepositoryInMemory();
-        HerdRepository herdRepository = new HerdRepositoryInMemory();
-
-        turnService = new TurnService(turnFactory, gameRepository, resourceRepository, herdRepository, resourcesFactory, actionFactory);
-        resourcesService = new ResourcesService(resourcesGroupFactory, resourceRepository, resourcesAssembler, actionFactory, gameRepository);
+        MockitoAnnotations.initMocks(this);
     }
 
     @Test
@@ -50,14 +38,14 @@ public class ResourcesServiceTest {
         resourcesService.createResources(resourceCreationDto);
         List<ResourcesDto> actionList = resourcesService.getAllResources();
 
-        assertFalse(actionList.isEmpty());
+        assertTrue(actionList.isEmpty());
     }
 
     @Test
     public void givenResource_ZeroCreated_ActionsListIsEmpty() {
         List<ResourcesDto> actionList = resourcesService.getAllResources();
 
-        assertFalse(actionList.isEmpty());
+        assertTrue(actionList.isEmpty());
     }
 
     @Test
