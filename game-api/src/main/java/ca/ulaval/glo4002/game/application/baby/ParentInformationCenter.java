@@ -3,9 +3,6 @@ package ca.ulaval.glo4002.game.application.baby;
 import java.util.Objects;
 
 import ca.ulaval.glo4002.game.application.baby.dtos.BabyAssembler;
-import ca.ulaval.glo4002.game.application.exceptions.InvalidFatherException;
-import ca.ulaval.glo4002.game.application.exceptions.InvalidMotherException;
-import ca.ulaval.glo4002.game.application.exceptions.NotExistentNameException;
 import ca.ulaval.glo4002.game.domain.dinosaur.Dinosaur;
 import ca.ulaval.glo4002.game.domain.dinosaur.Herd;
 import ca.ulaval.glo4002.game.domain.dinosaur.HerdRepository;

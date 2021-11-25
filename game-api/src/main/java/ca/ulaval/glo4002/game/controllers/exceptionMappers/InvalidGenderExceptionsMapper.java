@@ -1,6 +1,6 @@
 package ca.ulaval.glo4002.game.controllers.exceptionMappers;
 
-import ca.ulaval.glo4002.game.application.exceptions.InvalidGenderException;
+import ca.ulaval.glo4002.game.application.dinosaur.InvalidGenderException;
 import ca.ulaval.glo4002.game.controllers.exceptionMappers.response.ExceptionResponse;
 
 import javax.ws.rs.core.MediaType;

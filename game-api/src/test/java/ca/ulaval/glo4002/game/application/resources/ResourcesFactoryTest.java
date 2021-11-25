@@ -4,7 +4,6 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
-import ca.ulaval.glo4002.game.application.exceptions.InvalidResourceQuantityException;
 import ca.ulaval.glo4002.game.domain.resources.ResourceType;
 
 public class ResourcesFactoryTest {

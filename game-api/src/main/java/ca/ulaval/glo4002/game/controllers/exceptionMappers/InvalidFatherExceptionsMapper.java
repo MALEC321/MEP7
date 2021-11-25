@@ -1,6 +1,6 @@
 package ca.ulaval.glo4002.game.controllers.exceptionMappers;
 
-import ca.ulaval.glo4002.game.application.exceptions.InvalidFatherException;
+import ca.ulaval.glo4002.game.application.baby.InvalidFatherException;
 import ca.ulaval.glo4002.game.controllers.exceptionMappers.response.ExceptionResponse;
 
 import javax.ws.rs.core.MediaType;
