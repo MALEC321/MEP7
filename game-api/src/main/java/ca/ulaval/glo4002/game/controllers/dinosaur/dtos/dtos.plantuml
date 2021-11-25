@@ -5,7 +5,7 @@ title __DTOS's Class Diagram__\n
     namespace ca.ulaval.glo4002.game {
       namespace controllers.dinosaur {
         namespace dtos {
-          class ca.ulaval.glo4002.game.controllers.dinosaur.dtos.DinosaurAssembler {
+          class ca.ulaval.glo4002.game.application.dinosaur.dtos.DinosaurAssembler {
               + toDto()
               + toDtos()
           }
@@ -31,7 +31,7 @@ title __DTOS's Class Diagram__\n
     namespace ca.ulaval.glo4002.game {
       namespace controllers.dinosaur {
         namespace dtos {
-          class ca.ulaval.glo4002.game.controllers.dinosaur.dtos.DinosaurDto {
+          class ca.ulaval.glo4002.game.application.dinosaur.dtos.DinosaurDto {
               + gender : String
               + name : String
               + species : String
@@ -71,7 +71,7 @@ title __DTOS's Class Diagram__\n
     namespace ca.ulaval.glo4002.game {
       namespace controllers.dinosaur {
         namespace dtos {
-          class ca.ulaval.glo4002.game.controllers.dinosaur.dtos.DinosaurResponseItem {
+          class ca.ulaval.glo4002.game.controllers.dinosaur.dtos.DinosaurResponse {
               + gender : String
               + name : String
               + species : String
@@ -93,7 +93,7 @@ title __DTOS's Class Diagram__\n
     }
   
 
-  ca.ulaval.glo4002.game.controllers.dinosaur.dtos.DinosaurDtoAssembler o-- ca.ulaval.glo4002.game.domain.dinosaur.DinosaurFactory : dinosaurFactory
+  ca.ulaval.glo4002.game.controllers.dinosaur.dtos.DinosaurDtoAssembler o-- ca.ulaval.glo4002.game.application.dinosaur.DinosaurFactory : dinosaurFactory
 
 
 right footer

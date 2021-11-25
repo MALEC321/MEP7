@@ -1,124 +1,144 @@
 package ca.ulaval.glo4002.game.domain.resources;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.LinkedList;
+import java.util.List;
 import java.util.Map;
 import java.util.Queue;
 
+import ca.ulaval.glo4002.game.domain.dinosaur.ResourceTypeQuantity;
+import ca.ulaval.glo4002.game.domain.dinosaur.ResourcesStateDto;
+
 import static ca.ulaval.glo4002.game.domain.resources.ResourceType.*;
 
-@SuppressWarnings("unchecked")
-public class Pantry implements Eatable {
-
-    private final HashMap<ResourceType, Object> mapResourceQueue;
-
-    private final Resource consumedResources;
-    private final Resource expiredResources;
+public class Pantry {
+    private final HashMap<ResourceType, Queue<Resources>> freshResources;
+    private final ResourcesGroup consumedResourcesGroup;
+    private final ResourcesGroup expiredResourcesGroup;
 
     public Pantry() {
-        Queue<Burger> burgerQueue = new LinkedList<>();
-        Queue<Salad> saladQueue = new LinkedList<>();
-        Queue<Water> waterQueue = new LinkedList<>();
-        mapResourceQueue = new HashMap<>();
-        consumedResources = new Resource();
-        expiredResources = new Resource();
+        Queue<Resources> burgerQueue = new LinkedList<>();
+        Queue<Resources> saladQueue = new LinkedList<>();
+        Queue<Resources> waterQueue = new LinkedList<>();
+        freshResources = new HashMap<>();
+        consumedResourcesGroup = new ResourcesGroup();
+        expiredResourcesGroup = new ResourcesGroup();
 
-        mapResourceQueue.put(BURGER, burgerQueue);
-        mapResourceQueue.put(SALAD, saladQueue);
-        mapResourceQueue.put(WATER, waterQueue);
+        freshResources.put(BURGER, burgerQueue);
+        freshResources.put(SALAD, saladQueue);
+        freshResources.put(WATER, waterQueue);
     }
 
-    public Resource findFreshResource() {
-        Resource resource = new Resource();
-        for (Map.Entry<ResourceType, Object> entry : mapResourceQueue.entrySet()) {
-            for (ResourceElements resourceElement : (Queue<ResourceElements>) entry.getValue()) {
-                resource.addResource(entry.getKey(), resourceElement.getQuantity());
+    public ResourcesStateDto getFreshResourcesReport() {
+        List<ResourceTypeQuantity> resourceTypeQuantityList = new ArrayList<>(findFreshResources());
+        return new ResourcesStateDto(resourceTypeQuantityList);
+    }
+
+    public HashMap<ResourceType, Queue<Resources>> getFreshResources() {
+        return freshResources;
+    }
+
+    public ResourcesGroup getConsumedResourcesGroup() {
+        return consumedResourcesGroup;
+    }
+
+    public ResourcesGroup getExpiredResourcesGroup() {
+        return expiredResourcesGroup;
+    }
+
+    public List<ResourcesGroup> findAllResourcesGroup() {
+        return Arrays.asList(findFreshResourcesGroup(), expiredResourcesGroup, consumedResourcesGroup);
+    }
+
+    public ResourcesGroup findFreshResourcesGroup() {
+        ResourcesGroup foundResource = new ResourcesGroup();
+        for (Map.Entry<ResourceType, Queue<Resources>> entry : freshResources.entrySet()) {
+            for (Resources resources : entry.getValue()) {
+                foundResource.addResource(entry.getKey(), resources.getQuantity());
             }
         }
-        return resource;
+        return foundResource;
     }
 
-    public void add(ResourceElements resourceElements) {
-        Queue<ResourceElements> burgerQueue = (Queue<ResourceElements>) mapResourceQueue.get(BURGER);
-        Queue<ResourceElements> saladQueue = (Queue<ResourceElements>) mapResourceQueue.get(SALAD);
-        Queue<ResourceElements> waterQueue = (Queue<ResourceElements>) mapResourceQueue.get(WATER);
-
-        if (resourceElements instanceof Burger) {
-            burgerQueue.add(resourceElements);
-        } else if (resourceElements instanceof Salad) {
-            saladQueue.add(resourceElements);
-        } else if (resourceElements instanceof Water) {
-            waterQueue.add(resourceElements);
-        }
+    public void addResources(Resources resources) {
+        freshResources.get(resources.getType()).add(resources);
     }
 
-    @SuppressWarnings("checkstyle:ParameterAssignment")
-    @Override
-    public boolean removeResource(ResourceType typeResource, int quantity) {
-        for (ResourceElements resourceElement : (Queue<ResourceElements>) mapResourceQueue.get(typeResource)) {
-            int actualQuantity = resourceElement.getQuantity();
-
-            boolean enoughQuantity = resourceElement.removeElement(quantity);
-            if (enoughQuantity) {
-                consumedResources.addResource(typeResource, quantity);
-                return true;
-            }
-
-            consumedResources.addResource(typeResource, actualQuantity);
-            quantity -= actualQuantity;
-        }
-        return false;
-    }
-
-    public void removeAllEmptyResources() {
-        for (Map.Entry<ResourceType, Object> entry : mapResourceQueue.entrySet()) {
-            Queue<ResourceElements> resourceQueue = (Queue<ResourceElements>) entry.getValue();
-            while (resourceQueue.peek() != null && resourceQueue.peek().isEmpty()) {
-                resourceQueue.poll();
-            }
-        }
+    public void updateQuantities(ResourcesStateDto updatedResourcesStateDto) {
+        ResourcesStateDto actualResourcesStateDto = getFreshResourcesReport();
+        actualResourcesStateDto.getResourceTypeQuantities().forEach((resourceType, actualResourceQuantity) -> {
+            int resourceQuantityNeeded = updatedResourcesStateDto.getQtyForResourceType(resourceType);
+            removeResourceQty(resourceType, resourceQuantityNeeded);
+        });
     }
 
     public void removeAllExpiredResources() {
-        for (Map.Entry<ResourceType, Object> entry : mapResourceQueue.entrySet()) {
-            Queue<ResourceElements> resourceQueue = (Queue<ResourceElements>) entry.getValue();
-            while (resourceQueue.peek() != null && resourceQueue.peek().isExpired()) {
-                assert resourceQueue.peek() != null;
-                expiredResources.addResource(entry.getKey(), resourceQueue.peek().getQuantity());
-                resourceQueue.poll();
+        removeAllEmptyResources();
+
+        for (Map.Entry<ResourceType, Queue<Resources>> entry : freshResources.entrySet()) {
+            Queue<Resources> resourcesQueue = entry.getValue();
+            while (resourcesQueue.peek() != null && resourcesQueue.peek().isExpired()) {
+                assert resourcesQueue.peek() != null;
+                expiredResourcesGroup.addResource(entry.getKey(), resourcesQueue.peek().getQuantity());
+                resourcesQueue.poll();
             }
         }
     }
 
     public void decreaseExpirationDate() {
-        removeAllEmptyResources();
-        removeAllExpiredResources();
-        for (Map.Entry<ResourceType, Object> entry : mapResourceQueue.entrySet()) {
-            for (ResourceElements resourceElement : (Queue<ResourceElements>) entry.getValue()) {
-                resourceElement.decreaseExpirationDate();
+        for (Map.Entry<ResourceType, Queue<Resources>> entry : freshResources.entrySet()) {
+            for (Resources resources : entry.getValue()) {
+                resources.decreaseExpirationDate();
             }
         }
     }
 
-    public Resource getConsumedResources() {
-        return consumedResources;
-    }
-
-    public Resource getExpiredResources() {
-        return expiredResources;
-    }
-
-    public int getFreshResourceQuantity(ResourceType resourceType) {
-        return ((Queue<ResourceElements>) mapResourceQueue.get(resourceType)).size();
-    }
-
     public void clear() {
-        for (Map.Entry<ResourceType, Object> entry : mapResourceQueue.entrySet()) {
-            Queue<ResourceElements> resourceQueue = (Queue<ResourceElements>) entry.getValue();
+        for (Map.Entry<ResourceType, Queue<Resources>> entry : freshResources.entrySet()) {
+            Queue<Resources> resourceQueue = entry.getValue();
             resourceQueue.clear();
         }
 
-        expiredResources.clear();
-        consumedResources.clear();
+        consumedResourcesGroup.clear();
+        expiredResourcesGroup.clear();
+    }
+
+    private List<ResourceTypeQuantity> findFreshResources() {
+        List<ResourceTypeQuantity> resourceTypeQuantities = new ArrayList<>();
+        for (Map.Entry<ResourceType, Queue<Resources>> entry : freshResources.entrySet()) {
+            ResourceTypeQuantity resourceTypeQuantity = new ResourceTypeQuantity(entry.getKey());
+            for (Resources resources : entry.getValue()) {
+                resourceTypeQuantity.add(resources.getQuantity());
+            }
+            resourceTypeQuantities.add(resourceTypeQuantity);
+        }
+        return resourceTypeQuantities;
+    }
+
+    private void removeAllEmptyResources() {
+        for (Map.Entry<ResourceType, Queue<Resources>> entry : freshResources.entrySet()) {
+            Queue<Resources> resourcesQueue = entry.getValue();
+            while (resourcesQueue.peek() != null && resourcesQueue.peek().isEmpty()) {
+                resourcesQueue.poll();
+            }
+        }
+    }
+
+    private void removeResourceQty(ResourceType resourceType, int quantityParam) {
+        int quantity = quantityParam;
+        for (Resources resources : freshResources.get(resourceType)) {
+            int actualQuantity = resources.getQuantity();
+
+            boolean enoughQuantity = resources.removeElement(quantity);
+            if (enoughQuantity) {
+                consumedResourcesGroup.addResource(resourceType, quantity);
+                return;
+            }
+
+            consumedResourcesGroup.addResource(resourceType, actualQuantity);
+            quantity -= actualQuantity;
+        }
     }
 }

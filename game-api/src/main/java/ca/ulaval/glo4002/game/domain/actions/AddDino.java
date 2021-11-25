@@ -1,17 +1,27 @@
 package ca.ulaval.glo4002.game.domain.actions;
 
-import java.util.UUID;
-
 import ca.ulaval.glo4002.game.domain.dinosaur.Dinosaur;
-import ca.ulaval.glo4002.game.domain.dinosaur.DinosaurRepository;
+import ca.ulaval.glo4002.game.domain.dinosaur.Herd;
 
-public class AddDino extends Action {
-    public AddDino(UUID id, Dinosaur dinosaur, DinosaurRepository dinosaurRepository) {
-        super(id, dinosaur, dinosaurRepository);
+public class AddDino implements Action {
+    private final Dinosaur dinosaur;
+    private final Herd herd;
+
+    public AddDino(Dinosaur dinosaur, Herd herd) {
+        this.dinosaur = dinosaur;
+        this.herd = herd;
+    }
+
+    public Dinosaur getDinosaur() {
+        return dinosaur;
+    }
+
+    public Herd getHerd() {
+        return herd;
     }
 
     @Override
     public void execute() {
-        ((DinosaurRepository) getObjectRepository()).save((Dinosaur) getObject());
+        herd.addDinosaur(dinosaur);
     }
 }

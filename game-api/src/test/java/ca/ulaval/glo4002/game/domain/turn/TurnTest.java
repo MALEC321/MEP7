@@ -1,42 +1,50 @@
 package ca.ulaval.glo4002.game.domain.turn;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.UUID;
-
+import ca.ulaval.glo4002.game.domain.actions.Action;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.MockitoAnnotations;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-
-import ca.ulaval.glo4002.game.domain.actions.Action;
+import static org.mockito.Mockito.verify;
 
 public class TurnTest {
-    private UUID id;
+    private static final int FIRST_TURN_NUMBER = 1;
     private List<Action> actions;
+
+    @InjectMocks
     private Turn turn;
 
+    @Mock
+    private Action action;
+
     @BeforeEach
-    void createTurn() {
-        id = UUID.randomUUID();
+    public void setUp() {
+        MockitoAnnotations.initMocks(this);
         actions = new ArrayList<>();
-        turn = new Turn(id, actions);
+        actions.add(action);
+        turn = new Turn(new TurnNumber(FIRST_TURN_NUMBER), actions);
     }
 
     @Test
-    void whenAsked_returnsCorrectId() {
-        assertEquals(id, turn.getId());
-        Turn.number = 1;
-    }
-
-    @Test
-    void whenAsked_returnsActionsList() {
+    public void whenAsked_returnsActionsList() {
         assertEquals(actions, turn.getActions());
-        Turn.number = 1;
     }
 
     @Test
-    void whenTurnIsPlayed_incrementsTurn() {
-        assertEquals(2, Turn.number);
+    public void turnWithNumber_whenFirstTurnIsPlayed_thenTurnNumberIsone() {
+        assertEquals(FIRST_TURN_NUMBER, turn.getTurnNumber().getNumber());
+    }
+
+    @Test
+    public void firstTurn_whenTurnIsPlayed_thenActionIsExecuted() {
+        turn.executeActions();
+
+        verify(action).execute();
     }
 }
