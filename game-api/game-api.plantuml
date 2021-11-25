@@ -495,7 +495,7 @@ title __GAME-API's Class Diagram__\n
     namespace ca.ulaval.glo4002.game {
       namespace exceptions {
         namespace types {
-          class ca.ulaval.glo4002.game.application.exceptions.DuplicateNameException {
+          class ca.ulaval.glo4002.game.application.dinosaur.DuplicateNameException {
           }
         }
       }
@@ -504,7 +504,7 @@ title __GAME-API's Class Diagram__\n
     namespace ca.ulaval.glo4002.game {
       namespace exceptions {
         namespace types {
-          class ca.ulaval.glo4002.game.application.exceptions.InvalidFatherException {
+          class ca.ulaval.glo4002.game.application.baby.InvalidFatherException {
           }
         }
       }
@@ -513,7 +513,7 @@ title __GAME-API's Class Diagram__\n
     namespace ca.ulaval.glo4002.game {
       namespace exceptions {
         namespace types {
-          class ca.ulaval.glo4002.game.application.exceptions.InvalidGenderException {
+          class ca.ulaval.glo4002.game.application.dinosaur.InvalidGenderException {
           }
         }
       }
@@ -522,7 +522,7 @@ title __GAME-API's Class Diagram__\n
     namespace ca.ulaval.glo4002.game {
       namespace exceptions {
         namespace types {
-          class ca.ulaval.glo4002.game.application.exceptions.InvalidMotherException {
+          class ca.ulaval.glo4002.game.application.baby.InvalidMotherException {
           }
         }
       }
@@ -531,7 +531,7 @@ title __GAME-API's Class Diagram__\n
     namespace ca.ulaval.glo4002.game {
       namespace exceptions {
         namespace types {
-          class ca.ulaval.glo4002.game.application.exceptions.InvalidResourceQuantityException {
+          class ca.ulaval.glo4002.game.application.resources.InvalidResourceQuantityException {
           }
         }
       }
@@ -540,7 +540,7 @@ title __GAME-API's Class Diagram__\n
     namespace ca.ulaval.glo4002.game {
       namespace exceptions {
         namespace types {
-          class ca.ulaval.glo4002.game.application.exceptions.InvalidSpeciesException {
+          class ca.ulaval.glo4002.game.application.dinosaur.InvalidSpeciesException {
           }
         }
       }
@@ -549,7 +549,7 @@ title __GAME-API's Class Diagram__\n
     namespace ca.ulaval.glo4002.game {
       namespace exceptions {
         namespace types {
-          class ca.ulaval.glo4002.game.application.exceptions.InvalidWeightException {
+          class ca.ulaval.glo4002.game.application.dinosaur.InvalidWeightException {
           }
         }
       }
@@ -558,7 +558,7 @@ title __GAME-API's Class Diagram__\n
     namespace ca.ulaval.glo4002.game {
       namespace exceptions {
         namespace types {
-          class ca.ulaval.glo4002.game.application.exceptions.NotExistentNameException {
+          class ca.ulaval.glo4002.game.domain.actions.NotExistentNameException {
           }
         }
       }

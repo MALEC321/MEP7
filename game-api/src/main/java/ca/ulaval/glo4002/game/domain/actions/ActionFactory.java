@@ -2,10 +2,6 @@ package ca.ulaval.glo4002.game.domain.actions;
 
 import java.util.List;
 
-import ca.ulaval.glo4002.game.application.exceptions.ArmsTooShortException;
-import ca.ulaval.glo4002.game.application.exceptions.DinosaurAlreadyParticipatingException;
-import ca.ulaval.glo4002.game.application.exceptions.MaxCombatsReachedException;
-import ca.ulaval.glo4002.game.application.exceptions.NotExistentNameException;
 import ca.ulaval.glo4002.game.application.resources.ResourcesFactory;
 import ca.ulaval.glo4002.game.domain.dinosaur.Dinosaur;
 import ca.ulaval.glo4002.game.domain.dinosaur.Herd;
