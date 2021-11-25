@@ -5,21 +5,14 @@ import ca.ulaval.glo4002.game.domain.dinosaur.ResourceTypeQuantity;
 import ca.ulaval.glo4002.game.domain.dinosaur.ResourcesStateDto;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.mockito.*;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Stream;
 
 import static ca.ulaval.glo4002.game.domain.resources.ResourceType.*;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertNull;
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.mockito.Mockito.when;
 
 public class PantryTest {
-
     private Pantry pantry;
     private ResourcesFactory resourcesFactory;
     private final List<ResourceTypeQuantity> resourceTypeQuantityList = new ArrayList<>();
@@ -33,16 +26,12 @@ public class PantryTest {
         pantry.addResources(resourcesFactory.create(WATER, 1000));
     }
 
-    //TODO getFreshResourcesReport
     @Test
     public void givenAPopulatedPantry_whenGettingFreshResourcesReport_thenFreshRessourcesAreAddedToResourcesStateDto(){
         ResourcesStateDto resourcesStateDto = pantry.getFreshResourcesReport();
 
         assertEquals(resourcesStateDto.getQtyForResourceType(BURGER), pantry.getFreshResources().get(BURGER).element().getQuantity());
     }
-
-    //TODO findAllResourcesGroup
-
 
     @Test
     public void givenAPopulatedPantry_whenFindingFreshResourcesGroup_thenFreshResourcesAreAddedInResourceGroup() {
@@ -61,7 +50,6 @@ public class PantryTest {
         assertEquals(100, pantry.findFreshResourcesGroup().getResourceQuantity(BURGER));
     }
 
-    //TODO updateQuantities
     @Test
     public void givenAnUpdatedResourcesStateDto_whenUpdatingQuantities_thenResourcesAreConsumed(){
         ResourceTypeQuantity resourceTypeQuantity = new ResourceTypeQuantity(BURGER, 25);
@@ -71,17 +59,6 @@ public class PantryTest {
         pantry.updateQuantities(resourcesStateDto);
 
         assertEquals(25, pantry.getConsumedResourcesGroup().getResourceQuantity(BURGER));
-    }
-
-    //TODO removeAllExpiredResources
-    @Test
-    public void givenAnUpdatedPantry_whenRemovingAllExpiredResources_thenAllEmptyResourcesShouldBeRemove(){
-        ResourcesStateDto resourcesStateDto = new ResourcesStateDto(resourceTypeQuantityList);
-        pantry.updateQuantities(resourcesStateDto);
-
-        pantry.removeAllExpiredResources();
-
-        assertTrue(pantry.getFreshResources().get(BURGER).isEmpty());
     }
 
     @Test
@@ -94,7 +71,6 @@ public class PantryTest {
         assertEquals(400, pantry.getExpiredResourcesGroup().getResourceQuantity(SALAD));
     }
 
-    //TODO decreaseExpirationDate
     @Test
     public void givenAPopulatedPantry_whenDecreasingExpirationDate_thenResourceElementExpirationIsDecreaseByOne(){
         pantry.decreaseExpirationDate();
@@ -102,7 +78,6 @@ public class PantryTest {
         assertEquals(3, pantry.getFreshResources().get(BURGER).element().getExpiration());
     }
 
-    //TODO clear
     @Test
     public void givenAPopulatedPantry_whenClearing_thenFreshResourcesAreClear(){
         pantry.clear();
