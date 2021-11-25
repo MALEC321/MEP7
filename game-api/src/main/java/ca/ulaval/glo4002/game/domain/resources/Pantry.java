@@ -1,10 +1,19 @@
 package ca.ulaval.glo4002.game.domain.resources;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Map;
+import java.util.Queue;
+
+import ca.ulaval.glo4002.game.domain.dinosaur.ResourceTypeQuantity;
+import ca.ulaval.glo4002.game.domain.dinosaur.ResourcesStateDto;
 
 import static ca.ulaval.glo4002.game.domain.resources.ResourceType.*;
 
-public class Pantry implements FoodContainer {
+public class Pantry {
     private final HashMap<ResourceType, Queue<Resources>> freshResources;
     private final ResourcesGroup consumedResourcesGroup;
     private final ResourcesGroup expiredResourcesGroup;
@@ -22,7 +31,28 @@ public class Pantry implements FoodContainer {
         freshResources.put(WATER, waterQueue);
     }
 
-    public ResourcesGroup findFreshResources() {
+    public ResourcesStateDto getFreshResourcesReport() {
+        List<ResourceTypeQuantity> resourceTypeQuantityList = new ArrayList<>(findFreshResources());
+        return new ResourcesStateDto(resourceTypeQuantityList);
+    }
+
+    public HashMap<ResourceType, Queue<Resources>> getFreshResources() {
+        return freshResources;
+    }
+
+    public ResourcesGroup getConsumedResourcesGroup() {
+        return consumedResourcesGroup;
+    }
+
+    public ResourcesGroup getExpiredResourcesGroup() {
+        return expiredResourcesGroup;
+    }
+
+    public List<ResourcesGroup> findAllResourcesGroup() {
+        return Arrays.asList(findFreshResourcesGroup(), expiredResourcesGroup, consumedResourcesGroup);
+    }
+
+    public ResourcesGroup findFreshResourcesGroup() {
         ResourcesGroup foundResource = new ResourcesGroup();
         for (Map.Entry<ResourceType, Queue<Resources>> entry : freshResources.entrySet()) {
             for (Resources resources : entry.getValue()) {
@@ -36,29 +66,19 @@ public class Pantry implements FoodContainer {
         freshResources.get(resources.getType()).add(resources);
     }
 
-    @Override
-    public boolean removeResourceQty(ResourceType resourceType, int quantityParam) {
-        int quantity = quantityParam;
-        for (Resources resources : freshResources.get(resourceType)) {
-            int actualQuantity = resources.getQuantity();
-
-            boolean enoughQuantity = resources.removeElement(quantity);
-            if (enoughQuantity) {
-                consumedResourcesGroup.addResource(resourceType, quantity);
-                return true;
-            }
-
-            consumedResourcesGroup.addResource(resourceType, actualQuantity);
-            quantity -= actualQuantity;
-        }
-        return false;
+    public void updateQuantities(ResourcesStateDto updatedResourcesStateDto) {
+        ResourcesStateDto actualResourcesStateDto = getFreshResourcesReport();
+        actualResourcesStateDto.getResourceTypeQuantities().forEach((resourceType, actualResourceQuantity) -> {
+            int resourceQuantityNeeded = updatedResourcesStateDto.getQtyForResourceType(resourceType);
+            removeResourceQty(resourceType, resourceQuantityNeeded);
+        });
     }
 
     public void removeAllExpiredResources() {
         removeAllEmptyResources();
 
         for (Map.Entry<ResourceType, Queue<Resources>> entry : freshResources.entrySet()) {
-            Queue<Resources> resourcesQueue =  entry.getValue();
+            Queue<Resources> resourcesQueue = entry.getValue();
             while (resourcesQueue.peek() != null && resourcesQueue.peek().isExpired()) {
                 assert resourcesQueue.peek() != null;
                 expiredResourcesGroup.addResource(entry.getKey(), resourcesQueue.peek().getQuantity());
@@ -69,7 +89,7 @@ public class Pantry implements FoodContainer {
 
     public void decreaseExpirationDate() {
         for (Map.Entry<ResourceType, Queue<Resources>> entry : freshResources.entrySet()) {
-            for (Resources resources :  entry.getValue()) {
+            for (Resources resources : entry.getValue()) {
                 resources.decreaseExpirationDate();
             }
         }
@@ -85,8 +105,16 @@ public class Pantry implements FoodContainer {
         expiredResourcesGroup.clear();
     }
 
-    public List<ResourcesGroup> findAll() {
-        return Arrays.asList(findFreshResources(), expiredResourcesGroup, consumedResourcesGroup);
+    private List<ResourceTypeQuantity> findFreshResources() {
+        List<ResourceTypeQuantity> resourceTypeQuantities = new ArrayList<>();
+        for (Map.Entry<ResourceType, Queue<Resources>> entry : freshResources.entrySet()) {
+            ResourceTypeQuantity resourceTypeQuantity = new ResourceTypeQuantity(entry.getKey());
+            for (Resources resources : entry.getValue()) {
+                resourceTypeQuantity.add(resources.getQuantity());
+            }
+            resourceTypeQuantities.add(resourceTypeQuantity);
+        }
+        return resourceTypeQuantities;
     }
 
     private void removeAllEmptyResources() {
@@ -95,6 +123,22 @@ public class Pantry implements FoodContainer {
             while (resourcesQueue.peek() != null && resourcesQueue.peek().isEmpty()) {
                 resourcesQueue.poll();
             }
+        }
+    }
+
+    private void removeResourceQty(ResourceType resourceType, int quantityParam) {
+        int quantity = quantityParam;
+        for (Resources resources : freshResources.get(resourceType)) {
+            int actualQuantity = resources.getQuantity();
+
+            boolean enoughQuantity = resources.removeElement(quantity);
+            if (enoughQuantity) {
+                consumedResourcesGroup.addResource(resourceType, quantity);
+                return;
+            }
+
+            consumedResourcesGroup.addResource(resourceType, actualQuantity);
+            quantity -= actualQuantity;
         }
     }
 }

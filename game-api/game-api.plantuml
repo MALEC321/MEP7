@@ -401,7 +401,7 @@ title __GAME-API's Class Diagram__\n
     namespace ca.ulaval.glo4002.game {
       namespace exceptions {
         namespace dtos {
-          class ca.ulaval.glo4002.game.controllers.exceptionMappers.response.ExceptionResponse {
+          class ca.ulaval.glo4002.game.controllers.exceptionMappers.dtos.ExceptionResponse {
           }
         }
       }

@@ -1,4 +1,4 @@
-package ca.ulaval.glo4002.game.application.configuration;
+package ca.ulaval.glo4002.game.configuration;
 
 import ca.ulaval.glo4002.game.application.baby.BabyRegistrationService;
 import ca.ulaval.glo4002.game.application.baby.BabyService;

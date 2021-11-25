@@ -19,6 +19,10 @@ public class Resources {
         return quantity;
     }
 
+    public int getExpiration() {
+        return expiration;
+    }
+
     public void setQuantity(int quantity) {
         this.quantity = quantity;
     }

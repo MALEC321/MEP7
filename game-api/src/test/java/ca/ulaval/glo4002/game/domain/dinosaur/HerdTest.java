@@ -1,38 +1,42 @@
-    package ca.ulaval.glo4002.game.domain.dinosaur;
+package ca.ulaval.glo4002.game.domain.dinosaur;
 
-    import org.junit.jupiter.api.BeforeEach;
-    import org.junit.jupiter.api.Test;
-    import org.mockito.Mock;
+import ca.ulaval.glo4002.game.application.dinosaur.DietStrategyFactory;
+import ca.ulaval.glo4002.game.domain.dinosaur.enums.DietType;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.mockito.Mock;
 
-    import java.util.Arrays;
-    import java.util.List;
+import java.util.Arrays;
+import java.util.List;
 
-    import static org.junit.jupiter.api.Assertions.*;
-    import static org.mockito.Mockito.*;
+import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.Mockito.*;
 
-    public class HerdTest {
+public class HerdTest {
     private Herd herd;
-
     private Dinosaur firstDino;
     private Dinosaur secondDino;
     private Dinosaur thirdDino;
     private Dinosaur lastDino;
-
+    private DietStrategyFactory dietStrategyFactory;
     private List<Dinosaur> dinoInDisorderList;
 
     @Mock
     private Dinosaur firstDinoMock;
+
     @Mock
     private Dinosaur secondDinoMock;
-
 
     @BeforeEach
     void setup() {
         herd = new Herd();
-        firstDino = new Dinosaur("aaa", 100, "f", "Ankylosaurus");
-        secondDino = new Dinosaur("ab", 100, "f", "Ankylosaurus");
-        thirdDino = new Dinosaur("a", 50, "m", "Ankylosaurus");
-        lastDino = new Dinosaur("aa", 1, "f", "Ankylosaurus");
+        dietStrategyFactory = new DietStrategyFactory();
+
+        DietStrategy dietStrategy = dietStrategyFactory.create(DietType.HERBIVORE.name());
+        firstDino = new Dinosaur("aaa", 100, "f", dietStrategy, "Ankylosaurus");
+        secondDino = new Dinosaur("ab", 100, "f", dietStrategy, "Ankylosaurus");
+        thirdDino = new Dinosaur("a", 50, "m", dietStrategy, "Ankylosaurus");
+        lastDino = new Dinosaur("aa", 1, "f", dietStrategy, "Ankylosaurus");
 
         firstDinoMock = mock(Dinosaur.class);
         secondDinoMock = mock(Dinosaur.class);
@@ -87,37 +91,37 @@
         assertEquals(winner, secondDino.getName());
     }
 
-     @Test
-     void givenTwoDinosaursOfDifferentWeight_whenFightingNotForRealAndChallengerWins_thenChallengeeIsNotDead() {
-         herd.fight(firstDino, thirdDino, false);
-         assertFalse(thirdDino.isDead());
-     }
+    @Test
+    void givenTwoDinosaursOfDifferentWeight_whenFightingNotForRealAndChallengerWins_thenChallengeeIsNotDead() {
+        herd.fight(firstDino, thirdDino, false);
+        assertFalse(thirdDino.isDead());
+    }
 
-     @Test
-     void givenTwoDinosaursOfDifferentWeight_whenFightingNotForRealAndChallengerWins_thenReturnsNameOfChallenger() {
-         String winner = herd.fight(firstDino, thirdDino, false);
-         assertEquals(winner, firstDino.getName());
-     }
+    @Test
+    void givenTwoDinosaursOfDifferentWeight_whenFightingNotForRealAndChallengerWins_thenReturnsNameOfChallenger() {
+        String winner = herd.fight(firstDino, thirdDino, false);
+        assertEquals(winner, firstDino.getName());
+    }
 
-     @Test
-     void givenTwoDinosaursOfDifferentWeight_whenFightingNotForRealAndChallengeeWins_thenChallengeeSetHungryIsNotCalled() {
-         herd.fight(firstDinoMock, secondDinoMock, false);
-         when(firstDinoMock.getStrength()).thenReturn(10);
-         when(secondDinoMock.getStrength()).thenReturn(100);
-         verify(firstDinoMock, never()).setHungry(true);
-     }
+    @Test
+    void givenTwoDinosaursOfDifferentWeight_whenFightingNotForRealAndChallengeeWins_thenChallengeeSetHungryIsNotCalled() {
+        herd.fight(firstDinoMock, secondDinoMock, false);
+        when(firstDinoMock.getStrength()).thenReturn(10);
+        when(secondDinoMock.getStrength()).thenReturn(100);
+        verify(firstDinoMock, never()).setHungry(true);
+    }
 
-     @Test
-     void givenTwoDinosaursOfDifferentWeight_whenFightingForNotRealAndChallengeeWins_thenChallengerIsNotDead() {
-         herd.fight(lastDino, secondDino, false);
-         assertFalse(lastDino.isDead());
-     }
+    @Test
+    void givenTwoDinosaursOfDifferentWeight_whenFightingForNotRealAndChallengeeWins_thenChallengerIsNotDead() {
+        herd.fight(lastDino, secondDino, false);
+        assertFalse(lastDino.isDead());
+    }
 
-     @Test
-     void givenTwoDinosaursOfDifferentWeight_whenNotFightingForRealAndChallengeeWins_thenReturnsNameOfChallengee() {
-         String winner = herd.fight(lastDino, secondDino, false);
-         assertEquals(winner, secondDino.getName());
-     }
+    @Test
+    void givenTwoDinosaursOfDifferentWeight_whenNotFightingForRealAndChallengeeWins_thenReturnsNameOfChallengee() {
+        String winner = herd.fight(lastDino, secondDino, false);
+        assertEquals(winner, secondDino.getName());
+    }
 
     @Test
     void givenTwoDinosaursOfIdenticalWeight_whenFightingForReal_thenChallengerIsHungry() {
@@ -170,36 +174,4 @@
     private List<Dinosaur> createDinoInDisorderList() {
         return Arrays.asList(lastDino, secondDino, thirdDino, firstDino);
     }
-
-/*    @Test
-    void whenFindAll_thenGetAllDinos() {
-        setRepoWithDinos();
-
-        assertEquals(dinoInDisorderList.size(), herd.findAll().size());
-    }
-
-    @Test
-    void whenFindByName_thenGetDinoWithTheRightName() {
-        setRepoWithDinos();
-
-        assertEquals(lastDino, herd.findByName(lastDino.getName()));
-    }
-
-    @Test
-    void dinoHasBeenRemoved_whenFindByName_thenCanNotGetDino() {
-        setRepoWithDinos();
-
-        herd.remove(firstDino);
-
-        assertNull(herd.findByName(firstDino.getName()));
-        assertNotEquals(firstDino, herd.findByName(firstDino.getName()));
-    }
-
-    private void setRepoWithDinos() {
-        this.dinoInDisorderList = createDinoInDisorderList();
-
-        for (Dinosaur dino : this.dinoInDisorderList) {
-            herd.save(dino);
-        }
-    }*/
 }

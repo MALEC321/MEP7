@@ -10,10 +10,12 @@ public class DinosaurFactory {
     public static final int DEFAULT_BABY_WEIGHT = 1;
     private final HerdRepository herdRepository;
     private final SpeciesDietsCorrespondances speciesDietsCorrespondances;
+    private final DietStrategyFactory dietStrategyFactory;
 
     public DinosaurFactory(HerdRepository herdRepository, SpeciesDietsCorrespondances speciesDietsCorrespondances) {
         this.herdRepository = herdRepository;
         this.speciesDietsCorrespondances = speciesDietsCorrespondances;
+        this.dietStrategyFactory = new DietStrategyFactory();
     }
 
     public Dinosaur createDinosaur(String name, int weight, String gender, String species) {
@@ -21,12 +23,12 @@ public class DinosaurFactory {
         validateWeight(weight);
         validateGender(gender);
         validateSpecies(species);
-        return new Dinosaur(name, weight, gender, species);
+        return new Dinosaur(name, weight, gender, dietStrategyFactory.create(species), species);
     }
 
     public Dinosaur createBabyDinosaur(String name, Dinosaur father, Dinosaur mother, String gender, String species) {
         validateName(name);
-        return new Dinosaur(name, DEFAULT_BABY_WEIGHT, gender, species, mother, father);
+        return new Dinosaur(name, DEFAULT_BABY_WEIGHT, gender, dietStrategyFactory.create(species), mother, father, species);
     }
 
     private void validateSpecies(String species) {
@@ -42,7 +44,7 @@ public class DinosaurFactory {
     }
 
     private void validateWeight(int weight) {
-        if (weight < MIN_ADULT_WEIGHT) {
+        if (weight < MIN_ADULT_WEIGHT || weight == 0) {
             throw new InvalidWeightException();
         }
     }
