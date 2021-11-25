@@ -223,6 +223,25 @@
 //        when(gameRepository.findGame()).thenReturn(game);
 //
 //        turnService.getLastPlayedTurnNumber();
+//    public void givenAturn_whenExecuteTurn_thenOrphanedDinonaursAreRemoved() {
+//        turnService.executeTurn();
+//
+//        verify(herd).removeOrphanedBabyDinosaurs();
+//    }
+//
+//    private void setTurnContext() {
+//        TurnNumber turnNumber = new TurnNumber(1);
+//        when(actionRepository.getActionList()).thenReturn(createActionsToExecute());
+//        when(pantryRepository.findPantry()).thenReturn(pantry);
+//        when(herdRepository.findHerd()).thenReturn(herd);
+//        when(resourcesFactory.create(BURGER, TURN_BURGERS_QUANTITY)).thenReturn(burgers);
+//        when(resourcesFactory.create(SALAD, TURN_SALADS_QUANTITY)).thenReturn(salads);
+//        when(resourcesFactory.create(WATER, TURN_WATER_QUANTITY)).thenReturn(water);
+//    public void whengetLastPlayerTurnNumber_thenReturnedTurnNumber() {
+//        when(gameRepository.findGame()).thenReturn(game);
+//
+//        turnService.getLastPlayedTurnNumber();
+
 //
 //        verify(game).lastPlayedTurnNumber();
 //    }
