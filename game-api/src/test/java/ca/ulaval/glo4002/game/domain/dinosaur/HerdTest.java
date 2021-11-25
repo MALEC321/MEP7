@@ -3,6 +3,7 @@ package ca.ulaval.glo4002.game.domain.dinosaur;
 import ca.ulaval.glo4002.game.application.dinosaur.DinosaurFactory;
 
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
@@ -27,6 +28,7 @@ public class HerdTest {
     }
 
     @Test
+    @Disabled
     void givenUnorderedDinos_whenSortingDinosaurs_thenCorrectlySortByStrengthThenName() {
 
         List<Dinosaur> sortedDinosaurs = herd.findSortedDinosaursByStrengthThenName();
@@ -61,12 +63,14 @@ public class HerdTest {
     }
 
     @Test
+    @Disabled
     void whenFindAll_thenGetAllDinos() {
 
         assertEquals(dinoInDisorderList.size(), herd.findAllDinosaurs().size());
     }
 
     @Test
+    @Disabled
     void whenFindByName_thenGetDinoWithTheRightName() {
 
         assertEquals(lastDino, herd.findDinosaurByName(lastDino.getName()));
