@@ -1,9 +1,5 @@
 package ca.ulaval.glo4002.game.application.dinosaur;
 
-import ca.ulaval.glo4002.game.application.exceptions.DuplicateNameException;
-import ca.ulaval.glo4002.game.application.exceptions.InvalidGenderException;
-import ca.ulaval.glo4002.game.application.exceptions.InvalidSpeciesException;
-import ca.ulaval.glo4002.game.application.exceptions.InvalidWeightException;
 import ca.ulaval.glo4002.game.domain.dinosaur.Dinosaur;
 import ca.ulaval.glo4002.game.domain.dinosaur.Herd;
 import ca.ulaval.glo4002.game.domain.dinosaur.HerdRepository;
@@ -17,7 +13,6 @@ import org.mockito.MockitoAnnotations;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Matchers.anyString;
 import static org.mockito.Mockito.when;
-
 
 public class DinosaurFactoryTest {
     private static final Dinosaur NO_DINO_WITH_SAME_NAME = null;
@@ -55,38 +50,38 @@ public class DinosaurFactoryTest {
     private SpeciesDietsCorrespondances speciesDietsCorrespondances;
 
     @BeforeEach
-    void setUp() {MockitoAnnotations.initMocks(this);}
+    public void setUp() {MockitoAnnotations.initMocks(this);}
 
     @Test
-    void givenADinosaur_whenNameIsAlreadyTaken_thenThrowsDuplicateNameException() {
+    public void givenADinosaur_whenNameIsAlreadyTaken_thenThrowsDuplicateNameException() {
         setDuplicatedNameContext();
         assertThrows(DuplicateNameException.class, () ->
                 dinosaurFactory.createDinosaur(REGULAR_NAME, REGULAR_WEIGHT, FEMALE, BABY_SPECIES));
     }
 
     @Test
-    void givenADinosaur_whenGenderIsInvalid_thenThrowsInvalidGenderException() {
+    public void givenADinosaur_whenGenderIsInvalid_thenThrowsInvalidGenderException() {
         setNoDuplicatedNameContext();
         assertThrows(InvalidGenderException.class, () ->
                 dinosaurFactory.createDinosaur(REGULAR_NAME, REGULAR_WEIGHT, INVALID_GENDER, BABY_SPECIES));
     }
 
     @Test
-    void givenADinosaur_whenWeightIsNegative_thenThrowsInvalidWeightException() {
+    public void givenADinosaur_whenWeightIsNegative_thenThrowsInvalidWeightException() {
         setNoDuplicatedNameContext();
         assertThrows(InvalidWeightException.class, () ->
                 dinosaurFactory.createDinosaur(REGULAR_NAME, NEGATIVE_WEIGHT, FEMALE, BABY_SPECIES));
     }
 
     @Test
-    void givenADinosaur_whenSpecieIsNotSupported_thenThrowsInvalidSpeciesException() {
+    public void givenADinosaur_whenSpecieIsNotSupported_thenThrowsInvalidSpeciesException() {
         setNoDuplicatedNameContext();
         assertThrows(InvalidSpeciesException.class, () ->
                 dinosaurFactory.createDinosaur(REGULAR_NAME, REGULAR_WEIGHT, FEMALE, INVALID_SPECIES));
     }
 
     @Test
-    void givenADinosaurBaby_whenNameIsAlreadyTaken_thenThrowsDuplicateNameException() {
+    public void givenADinosaurBaby_whenNameIsAlreadyTaken_thenThrowsDuplicateNameException() {
         setBabyDinosParents();
         when(herdRepository.findHerd()).thenReturn(herd);
         when(herd.findDinosaurByName(father.getName())).thenReturn(father);
@@ -96,14 +91,14 @@ public class DinosaurFactoryTest {
     }
 
     @Test
-    void givenABabyDinosaur_whenCreating_thenWeightIsOne() {
+    public void givenABabyDinosaur_whenCreating_thenWeightIsOne() {
         setBabyDinosParents();
         createBabyDino();
         assertEquals(1, dinosaurBaby.getWeight());
     }
 
     @Test
-    void givenBabyDinosInfo_whenCreating_thenBabyIsCreated() {
+    public void givenBabyDinosInfo_whenCreating_thenBabyIsCreated() {
         setBabyDinoDuplicatedNameValidation();
         setBabyDinosParents();
         createBabyDino();
@@ -114,7 +109,7 @@ public class DinosaurFactoryTest {
     }
 
     @Test
-    void givenBabyDinosInfo_whenCreating_thenBabyHaveParents() {
+    public void givenBabyDinosInfo_whenCreating_thenBabyHaveParents() {
         setBabyDinoDuplicatedNameValidation();
         setBabyDinosParents();
 

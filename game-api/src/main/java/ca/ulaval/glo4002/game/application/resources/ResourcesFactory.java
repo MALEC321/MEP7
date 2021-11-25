@@ -1,8 +1,8 @@
 package ca.ulaval.glo4002.game.application.resources;
 
-import ca.ulaval.glo4002.game.application.exceptions.InvalidResourceQuantityException;
 import ca.ulaval.glo4002.game.domain.resources.ResourceType;
 import ca.ulaval.glo4002.game.domain.resources.Resources;
+
 public class ResourcesFactory {
     public Resources create(ResourceType resourceType, int quantity) {
         if (quantity < 0) {

@@ -4,4 +4,5 @@ public interface PantryRepository {
     Pantry findPantry();
     void save(Pantry pantry);
     void deleteAll();
+    void save(Pantry pantry);
 }

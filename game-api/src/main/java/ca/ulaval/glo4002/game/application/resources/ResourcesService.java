@@ -1,5 +1,7 @@
 package ca.ulaval.glo4002.game.application.resources;
 
+import java.util.List;
+
 import ca.ulaval.glo4002.game.application.resources.dtos.ResourcesDto;
 import ca.ulaval.glo4002.game.controllers.resources.dtos.ResourceCreationDto;
 import ca.ulaval.glo4002.game.controllers.resources.dtos.ResourcesAssembler;
@@ -11,8 +13,6 @@ import ca.ulaval.glo4002.game.domain.resources.Pantry;
 import ca.ulaval.glo4002.game.domain.resources.PantryRepository;
 import ca.ulaval.glo4002.game.domain.resources.Resources;
 import ca.ulaval.glo4002.game.domain.resources.ResourcesGroup;
-
-import java.util.List;
 
 public class ResourcesService {
     private final ResourcesGroupFactory resourcesGroupFactory;

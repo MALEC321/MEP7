@@ -1,41 +1,50 @@
 package ca.ulaval.glo4002.game.domain.turn;
 
 import ca.ulaval.glo4002.game.domain.actions.Action;
-import ca.ulaval.glo4002.game.infrastructure.persistence.turn.GameRepositoryInMemory;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.MockitoAnnotations;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.mockito.Mockito.verify;
 
 public class TurnTest {
+    private static final int FIRST_TURN_NUMBER = 1;
     private List<Action> actions;
+
+    @InjectMocks
     private Turn turn;
-    private GameRepositoryInMemory turnRepositoryInMemory;
-    private TurnFactory turnFactory;
+
+    @Mock
+    private Action action;
 
     @BeforeEach
-    void createTurn() {
-        turnFactory = new TurnFactory();
+    public void setUp() {
+        MockitoAnnotations.initMocks(this);
         actions = new ArrayList<>();
-        turn = new Turn(new TurnNumber(1), actions);
-        turnRepositoryInMemory = new GameRepositoryInMemory();
+        actions.add(action);
+        turn = new Turn(new TurnNumber(FIRST_TURN_NUMBER), actions);
     }
 
     @Test
-    void whenAsked_returnsActionsList() {
+    public void whenAsked_returnsActionsList() {
         assertEquals(actions, turn.getActions());
     }
 
     @Test
-    void whenTurnIsPlayed_incrementsTurn() {
-        turnFactory.create(new TurnNumber(1), actions);
-        turnRepositoryInMemory.findGame().addTurn(turn);
-        turnFactory.create(new TurnNumber(2), actions);
-        turnRepositoryInMemory.findGame().addTurn(turn);
+    public void turnWithNumber_whenFirstTurnIsPlayed_thenTurnNumberIsone() {
+        assertEquals(FIRST_TURN_NUMBER, turn.getTurnNumber().getNumber());
+    }
 
-        assertEquals(new TurnNumber(2).getNumber(), turnRepositoryInMemory.findGame().currentTurnNumber().nextTurnNumber().getNumber());
+    @Test
+    public void firstTurn_whenTurnIsPlayed_thenActionIsExecuted() {
+        turn.executeActions();
+
+        verify(action).execute();
     }
 }

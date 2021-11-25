@@ -1,6 +1,6 @@
 package ca.ulaval.glo4002.game.controllers.exceptionMappers;
 
-import ca.ulaval.glo4002.game.application.exceptions.DuplicateNameException;
+import ca.ulaval.glo4002.game.application.dinosaur.DuplicateNameException;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;

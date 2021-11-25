@@ -28,6 +28,30 @@ public class Herd {
         dinosaursByName.remove(dinosaur.getName());
     }
 
+    public String fight(Dinosaur challenger, Dinosaur challengee, boolean isReal) {
+        String winner = "";
+        if (challenger.getStrength() > challengee.getStrength()) {
+            winner = challenger.getName();
+            if (isReal) {
+                challengee.setDead(true);
+                challenger.setHungry(true);
+            }
+        } else if (challenger.getStrength() < challengee.getStrength()) {
+            winner = challengee.getName();
+            if (isReal) {
+                challenger.setDead(true);
+                challengee.setHungry(true);
+            }
+        } else {
+            winner = "tie";
+            if (isReal) {
+                challengee.setHungry(true);
+                challenger.setHungry(true);
+            }
+        }
+        return winner;
+    }
+
     public List<Dinosaur> findSortedDinosaursByStrengthThenName() {
         List<Dinosaur> copiedDinoList = this.findAllDinosaurs();
 
@@ -61,7 +85,6 @@ public class Herd {
     }
 
     public void removeOrphanedBabyDinosaurs() {
-        // Todo make this recursive !
         for (Dinosaur dinosaur : findSortedDinosaursByStrengthThenName()) {
             if (dinosaur.areBothParentsDead()) {
                 removeDinosaur(dinosaur);

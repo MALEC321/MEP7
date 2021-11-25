@@ -1,6 +1,9 @@
-package ca.ulaval.glo4002.game.configuration;
+package ca.ulaval.glo4002.game.application.configuration;
 
+import ca.ulaval.glo4002.game.application.baby.BabyRegistrationService;
 import ca.ulaval.glo4002.game.application.baby.BabyService;
+import ca.ulaval.glo4002.game.application.baby.HealthCenter;
+import ca.ulaval.glo4002.game.application.baby.ParentInformationCenter;
 import ca.ulaval.glo4002.game.application.baby.breed.Breedable;
 import ca.ulaval.glo4002.game.application.baby.dtos.BabyAssembler;
 import ca.ulaval.glo4002.game.application.dinosaur.DinosaurFactory;
@@ -9,6 +12,7 @@ import ca.ulaval.glo4002.game.application.dinosaur.dtos.DinosaurAssembler;
 import ca.ulaval.glo4002.game.application.resources.ResourcesFactory;
 import ca.ulaval.glo4002.game.application.resources.ResourcesGroupFactory;
 import ca.ulaval.glo4002.game.application.resources.ResourcesService;
+import ca.ulaval.glo4002.game.application.sumo.SumoService;
 import ca.ulaval.glo4002.game.application.turn.TurnService;
 import ca.ulaval.glo4002.game.controllers.baby.BabyResource;
 import ca.ulaval.glo4002.game.controllers.baby.dtos.BabyDtoAssembler;
@@ -18,6 +22,8 @@ import ca.ulaval.glo4002.game.controllers.exceptionMappers.*;
 import ca.ulaval.glo4002.game.controllers.resources.ResourcesResource;
 import ca.ulaval.glo4002.game.controllers.resources.dtos.ResourceDtoAssembler;
 import ca.ulaval.glo4002.game.controllers.resources.dtos.ResourcesAssembler;
+import ca.ulaval.glo4002.game.controllers.sumo.SumoResource;
+import ca.ulaval.glo4002.game.controllers.sumo.dtos.SumoDtoAssembler;
 import ca.ulaval.glo4002.game.controllers.turn.TurnResource;
 import ca.ulaval.glo4002.game.controllers.turn.dtos.TurnDtoAssembler;
 import ca.ulaval.glo4002.game.domain.actions.ActionFactory;
@@ -49,28 +55,8 @@ public class AppConfig {
 
     private static final HerdRepository herdRepository = new HerdRepositoryInMemory();
     private static final DinosaurFactory dinosaurFactory = new DinosaurFactory(herdRepository, speciesDietsCorrespondances);
-    private static final DinosaurAssembler dinosaurAssembler = new DinosaurAssembler();
-    private static final DinosaurService dinosaurService = new DinosaurService(dinosaurFactory, herdRepository, dinosaurAssembler, actionFactory, gameRepository);
-
-    private static final DinosaurDtoAssembler dinosaurDtoAssembler = new DinosaurDtoAssembler();
-    private static final DinosaurResource manageDinosaurResource = new DinosaurResource(dinosaurService, dinosaurDtoAssembler);
-
     private static final TurnService turnService = new TurnService(turnFactory, gameRepository, resourceRepository, herdRepository, resourcesDistributor, resourcesFactory, actionFactory);
 
-    private static final TurnDtoAssembler turnDtoAssembler = new TurnDtoAssembler();
-    private static final TurnResource executeTurnResource = new TurnResource(turnService, turnDtoAssembler);
-
-    private static final ResourcesAssembler resourcesAssembler = new ResourcesAssembler();
-    private static final ResourcesService resourcesService = new ResourcesService(resourcesGroupFactory, resourceRepository, resourcesAssembler, actionFactory, gameRepository);
-    private static final ResourceDtoAssembler resourceDtoAssembler = new ResourceDtoAssembler();
-    private static final ResourcesResource manageResources = new ResourcesResource(resourcesService, resourceDtoAssembler);
-
-    private static final BabyAssembler babyAssembler = new BabyAssembler();
-    private static final Breedable breedable = new BabyBreedableClient();
-    private static final BabyService babyService = new BabyService(herdRepository, babyAssembler, actionFactory, dinosaurFactory, breedable, gameRepository);
-
-    private static final BabyDtoAssembler babyDtoAssembler = new BabyDtoAssembler();
-    private static final BabyResource createBabyResource = new BabyResource(babyService, babyDtoAssembler);
     private final ResourceConfig config;
 
     public AppConfig() {
@@ -79,10 +65,11 @@ public class AppConfig {
 
     private Set<Object> instances() {
         Set<Object> resources = new HashSet<>();
-        resources.add(manageResources);
-        resources.add(executeTurnResource);
-        resources.add(manageDinosaurResource);
-        resources.add(createBabyResource);
+        resources.add(createResourcesResource());
+        resources.add(createTurnResource());
+        resources.add(createDinosaurResource());
+        resources.add(createBabyResource());
+        resources.add(createSumoResource());
         resources.add(new InvalidResourceExceptionsMapper());
         resources.add(new UnknownExceptionGrabber());
         resources.add(new NotExistentNameExceptionsMapper());
@@ -100,5 +87,46 @@ public class AppConfig {
 
     public ResourceConfig getConfig() {
         return this.config.registerInstances(instances());
+    }
+
+    private DinosaurResource createDinosaurResource() {
+        DinosaurAssembler dinosaurAssembler = new DinosaurAssembler();
+        DinosaurService dinosaurService = new DinosaurService(dinosaurFactory, herdRepository, dinosaurAssembler, actionFactory, gameRepository);
+        DinosaurDtoAssembler dinosaurDtoAssembler = new DinosaurDtoAssembler();
+        DinosaurResource dinosaurResource = new DinosaurResource(dinosaurService, dinosaurDtoAssembler);
+        return dinosaurResource;
+    }
+
+    private ResourcesResource createResourcesResource() {
+        ResourcesAssembler resourcesAssembler = new ResourcesAssembler();
+        ResourcesService resourcesService = new ResourcesService(resourcesGroupFactory, resourceRepository, resourcesAssembler, actionFactory, gameRepository);
+        ResourceDtoAssembler resourceDtoAssembler = new ResourceDtoAssembler();
+        ResourcesResource resourcesResource = new ResourcesResource(resourcesService, resourceDtoAssembler);
+        return resourcesResource;
+    }
+
+    private BabyResource createBabyResource() {
+        BabyAssembler babyAssembler = new BabyAssembler();
+        Breedable breedable = new BabyBreedableClient();
+        ParentInformationCenter parentInformationCenter = new ParentInformationCenter(herdRepository, babyAssembler);
+        HealthCenter healthCenter = new HealthCenter(parentInformationCenter, breedable);
+        BabyRegistrationService babyRegistrationService = new BabyRegistrationService(herdRepository, actionFactory, dinosaurFactory, gameRepository);
+        BabyService babyService = new BabyService(healthCenter, babyRegistrationService);
+        BabyDtoAssembler babyDtoAssembler = new BabyDtoAssembler();
+        BabyResource createBabyResource = new BabyResource(babyService, babyDtoAssembler);
+        return createBabyResource;
+    }
+
+    private SumoResource createSumoResource() {
+        SumoDtoAssembler sumoDtoAssembler = new SumoDtoAssembler();
+        SumoService sumoService = new SumoService(herdRepository, actionFactory, gameRepository);
+        SumoResource sumoResource = new SumoResource(sumoService, sumoDtoAssembler);
+        return sumoResource;
+    }
+
+    private TurnResource createTurnResource() {
+        TurnDtoAssembler turnDtoAssembler = new TurnDtoAssembler();
+        TurnResource turnResource = new TurnResource(turnService, turnDtoAssembler);
+        return turnResource;
     }
 }
