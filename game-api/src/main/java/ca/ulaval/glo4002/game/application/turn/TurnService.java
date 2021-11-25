@@ -9,7 +9,6 @@ import ca.ulaval.glo4002.game.domain.game.Game;
 import ca.ulaval.glo4002.game.domain.game.GameRepository;
 import ca.ulaval.glo4002.game.domain.resources.Pantry;
 import ca.ulaval.glo4002.game.domain.resources.PantryRepository;
-import ca.ulaval.glo4002.game.domain.resources.ResourcesDistributor;
 import ca.ulaval.glo4002.game.domain.turn.Turn;
 import ca.ulaval.glo4002.game.domain.turn.TurnFactory;
 import ca.ulaval.glo4002.game.domain.turn.TurnNumber;
@@ -19,7 +18,6 @@ public class TurnService {
     private final GameRepository gameRepository;
     private final PantryRepository pantryRepository;
     private final HerdRepository herdRepository;
-    private final ResourcesDistributor resourcesDistributor;
     private final ResourcesFactory resourcesFactory;
     private final ActionFactory actionFactory;
 
@@ -28,14 +26,12 @@ public class TurnService {
         GameRepository gameRepository,
         PantryRepository pantryRepository,
         HerdRepository herdRepository,
-        ResourcesDistributor resourcesDistributor,
         ResourcesFactory resourcesFactory,
         ActionFactory actionFactory) {
         this.turnFactory = turnFactory;
         this.gameRepository = gameRepository;
         this.pantryRepository = pantryRepository;
         this.herdRepository = herdRepository;
-        this.resourcesDistributor = resourcesDistributor;
         this.resourcesFactory = resourcesFactory;
         this.actionFactory = actionFactory;
     }

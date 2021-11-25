@@ -7,7 +7,6 @@ import ca.ulaval.glo4002.game.controllers.resources.dtos.ResourceCreationDto;
 import ca.ulaval.glo4002.game.domain.actions.ActionFactory;
 import ca.ulaval.glo4002.game.domain.dinosaur.HerdRepository;
 import ca.ulaval.glo4002.game.domain.resources.PantryRepository;
-import ca.ulaval.glo4002.game.domain.resources.ResourcesDistributor;
 import ca.ulaval.glo4002.game.domain.resources.ResourcesGroup;
 import ca.ulaval.glo4002.game.domain.turn.TurnFactory;
 import ca.ulaval.glo4002.game.domain.game.GameRepository;
@@ -33,7 +32,6 @@ public class ResourcesServiceTest {
         ResourcesGroupFactory resourcesGroupFactory = new ResourcesGroupFactory();
         ResourcesAssembler resourcesAssembler = new ResourcesAssembler();
         PantryRepository resourceRepository = new PantryRepositoryInMemory();
-        ResourcesDistributor resourcesDistributor = new ResourcesDistributor();
         ActionFactory actionFactory = new ActionFactory();
         ResourcesFactory resourcesFactory = new ResourcesFactory();
 
@@ -41,7 +39,7 @@ public class ResourcesServiceTest {
         GameRepository gameRepository = new GameRepositoryInMemory();
         HerdRepository herdRepository = new HerdRepositoryInMemory();
 
-        turnService = new TurnService(turnFactory, gameRepository, resourceRepository, herdRepository, resourcesDistributor, resourcesFactory, actionFactory);
+        turnService = new TurnService(turnFactory, gameRepository, resourceRepository, herdRepository, resourcesFactory, actionFactory);
         resourcesService = new ResourcesService(resourcesGroupFactory, resourceRepository, resourcesAssembler, actionFactory, gameRepository);
     }
 

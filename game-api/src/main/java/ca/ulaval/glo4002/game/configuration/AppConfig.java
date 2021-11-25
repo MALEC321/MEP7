@@ -31,7 +31,6 @@ import ca.ulaval.glo4002.game.domain.dinosaur.HerdRepository;
 import ca.ulaval.glo4002.game.domain.dinosaur.enums.SpeciesDietsCorrespondances;
 import ca.ulaval.glo4002.game.domain.game.GameRepository;
 import ca.ulaval.glo4002.game.domain.resources.PantryRepository;
-import ca.ulaval.glo4002.game.domain.resources.ResourcesDistributor;
 import ca.ulaval.glo4002.game.domain.turn.TurnFactory;
 import ca.ulaval.glo4002.game.infrastructure.client.BabyBreedableClient;
 import ca.ulaval.glo4002.game.infrastructure.persistence.dinosaur.HerdRepositoryInMemory;
@@ -48,14 +47,13 @@ public class AppConfig {
     private static final PantryRepository resourceRepository = new PantryRepositoryInMemory();
     private static final ActionFactory actionFactory = new ActionFactory();
     private static final SpeciesDietsCorrespondances speciesDietsCorrespondances = new SpeciesDietsCorrespondances();
-    private static final ResourcesDistributor resourcesDistributor = new ResourcesDistributor();
 
     private static final ResourcesFactory resourcesFactory = new ResourcesFactory();
     private static final ResourcesGroupFactory resourcesGroupFactory = new ResourcesGroupFactory();
 
     private static final HerdRepository herdRepository = new HerdRepositoryInMemory();
     private static final DinosaurFactory dinosaurFactory = new DinosaurFactory(herdRepository, speciesDietsCorrespondances);
-    private static final TurnService turnService = new TurnService(turnFactory, gameRepository, resourceRepository, herdRepository, resourcesDistributor, resourcesFactory, actionFactory);
+    private static final TurnService turnService = new TurnService(turnFactory, gameRepository, resourceRepository, herdRepository, resourcesFactory, actionFactory);
 
     private final ResourceConfig config;
 

@@ -8,7 +8,6 @@ import ca.ulaval.glo4002.game.domain.dinosaur.Herd;
 import ca.ulaval.glo4002.game.domain.dinosaur.enums.SpeciesDietsCorrespondances;
 import ca.ulaval.glo4002.game.domain.resources.Pantry;
 import ca.ulaval.glo4002.game.domain.resources.Resources;
-import ca.ulaval.glo4002.game.domain.resources.ResourcesDistributor;
 import ca.ulaval.glo4002.game.infrastructure.persistence.dinosaur.HerdRepositoryInMemory;
 import java.util.ArrayList;
 import java.util.List;
@@ -43,9 +42,6 @@ public class ActionFactoryTest {
     private Pantry pantry;
     @Mock
     private ResourcesFactory resourcesFactory;
-
-    @Mock
-    private ResourcesDistributor resourcesDistributor;
 
     private DinosaurFactory dinosaurFactory;
     private SpeciesDietsCorrespondances speciesDietCorrespondances;
