@@ -70,7 +70,7 @@ public class ResourcesStateDto {
 
     private int divideWaterInHalf(int waterQuantity) {
         BigDecimal quantityBd = new BigDecimal(waterQuantity);
-        return Math.floorDiv(quantityBd.intValue(), 2);
+        return (int) Math.floor(quantityBd.multiply(new BigDecimal("0.5")).doubleValue());
     }
 
     public ResourcesStateDto removeQuantities(final ResourcesStateDto resourcesStateDto) {
