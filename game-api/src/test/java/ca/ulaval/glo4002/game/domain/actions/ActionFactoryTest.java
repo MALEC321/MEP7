@@ -1,6 +1,7 @@
 package ca.ulaval.glo4002.game.domain.actions;
 
 import ca.ulaval.glo4002.game.application.dinosaur.DinosaurFactory;
+import ca.ulaval.glo4002.game.application.dinosaur.NotExistentNameException;
 import ca.ulaval.glo4002.game.application.resources.ResourcesFactory;
 import ca.ulaval.glo4002.game.domain.dinosaur.Dinosaur;
 import ca.ulaval.glo4002.game.domain.dinosaur.Herd;
