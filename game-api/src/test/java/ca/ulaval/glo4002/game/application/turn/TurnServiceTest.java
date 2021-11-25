@@ -223,8 +223,38 @@
 //        when(gameRepository.findGame()).thenReturn(game);
 //
 //        turnService.getLastPlayedTurnNumber();
+//<<<<<<< HEAD
+//    public void givenAturn_whenExecuteTurn_thenOrphanedDinonaursAreRemoved() {
+//        turnService.executeTurn();
+//
+//        verify(herd).removeOrphanedBabyDinosaurs();
+//    }
+//
+//    private void setTurnContext() {
+//        TurnNumber turnNumber = new TurnNumber(1);
+//        when(actionRepository.getActionList()).thenReturn(createActionsToExecute());
+//        when(pantryRepository.findPantry()).thenReturn(pantry);
+//        when(herdRepository.findHerd()).thenReturn(herd);
+//        when(resourcesFactory.create(BURGER, TURN_BURGERS_QUANTITY)).thenReturn(burgers);
+//        when(resourcesFactory.create(SALAD, TURN_SALADS_QUANTITY)).thenReturn(salads);
+//        when(resourcesFactory.create(WATER, TURN_WATER_QUANTITY)).thenReturn(water);
+//=======
+//    public void whengetLastPlayerTurnNumber_thenReturnedTurnNumber() {
+//>>>>>>> develop
+//        when(gameRepository.findGame()).thenReturn(game);
+//
+//<<<<<<< HEAD
+//    private List<Action> createActionsToExecute() {
+//        Resources resources = new Resources(ResourceType.BURGER, TURN_BURGERS_QUANTITY, ResourceType.BURGER.getExpiration());
+//        Action action = new AddResource(resources, pantry);
+//        return Arrays.asList(action);
+//    }
+//=======
+//        turnService.getLastPlayedTurnNumber();
+//>>>>>>> develop
 //
 //        verify(game).lastPlayedTurnNumber();
 //    }
 //
+//}
 //}

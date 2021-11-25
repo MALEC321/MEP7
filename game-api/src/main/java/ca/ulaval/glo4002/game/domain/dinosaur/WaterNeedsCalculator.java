@@ -20,6 +20,6 @@ public class WaterNeedsCalculator {
         if (isHungry) {
             waterNeeds = waterNeeds.multiply(new BigDecimal("2"));
         }
-        return waterNeeds.setScale(0, RoundingMode.CEILING).intValue();
+        return (int) Math.ceil(waterNeeds.doubleValue());
     }
 }

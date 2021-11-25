@@ -1,5 +1,7 @@
 package ca.ulaval.glo4002.game.domain.dinosaur;
 
+import ca.ulaval.glo4002.game.application.dinosaur.DinosaurFactory;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -16,12 +18,12 @@ public class HerdTest {
     private final Dinosaur thirdDino = new Dinosaur("a", 50, "m", DIET_STRATEGY_FOR_HERBIVORE, "Ankylosaurus");
     private final Dinosaur lastDino = new Dinosaur("aa", 1, "f", DIET_STRATEGY_FOR_HERBIVORE, "Ankylosaurus");
     private Herd herd;
+
     private List<Dinosaur> dinoInDisorderList;
 
     @BeforeEach
     void setup() {
         herd = new Herd();
-        setHerdWithDinos();
     }
 
     @Test
@@ -31,6 +33,31 @@ public class HerdTest {
 
         List<Dinosaur> dinoInStrengthOrderList = createDinoInStrengthOrderList();
         assertArrayEquals(dinoInStrengthOrderList.toArray(), sortedDinosaurs.toArray());
+    }
+
+    @Test
+    void givenTwoDinosaursOfDifferentWeight_whenFighting_thenHeaviestIsHungryAndLightestIsDead() {
+        herd.fight(firstDino, thirdDino);
+        assertEquals(firstDino.isHungry(), true);
+        assertEquals(thirdDino.isDead(), true);
+        herd.fight(lastDino, secondDino);
+        assertEquals(secondDino.isHungry(), true);
+        assertEquals(lastDino.isDead(), true);
+    }
+
+    @Test
+    void givenTwoDinosaursOfIdenticalWeight_whenFighting_thenBothAreHungry() {
+        herd.fight(firstDino, secondDino);
+        assertEquals(firstDino.isHungry(), true);
+        assertEquals(secondDino.isHungry(), true);
+    }
+
+    private List<Dinosaur> createDinoInStrengthOrderList() {
+        return Arrays.asList(firstDino, secondDino, thirdDino, lastDino);
+    }
+
+    private List<Dinosaur> createDinoInDisorderList() {
+        return Arrays.asList(lastDino, secondDino, thirdDino, firstDino);
     }
 
     @Test
@@ -59,13 +86,5 @@ public class HerdTest {
         for (Dinosaur dino : dinoInDisorderList) {
             herd.addDinosaur(dino);
         }
-    }
-
-    private List<Dinosaur> createDinoInStrengthOrderList() {
-        return Arrays.asList(firstDino, secondDino, thirdDino, lastDino);
-    }
-
-    private List<Dinosaur> createDinoInDisorderList() {
-        return Arrays.asList(lastDino, secondDino, thirdDino, firstDino);
     }
 }
