@@ -5,7 +5,6 @@ import ca.ulaval.glo4002.game.domain.dinosaur.enums.SpeciesDietsCorrespondances;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
-import java.util.Objects;
 
 public class Dinosaur {
     private String name;
@@ -47,7 +46,7 @@ public class Dinosaur {
         this.isDead = false;
     }
 
-    public Dinosaur() {}
+    public Dinosaur() { }
 
     public String getName() {
         return name;

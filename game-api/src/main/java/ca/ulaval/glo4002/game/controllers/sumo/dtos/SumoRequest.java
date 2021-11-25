@@ -9,7 +9,7 @@ public class SumoRequest {
         this.challengee = challengee;
     }
 
-    public SumoRequest() {}
+    public SumoRequest() { }
 
     public String getChallenger() {
         return challenger;

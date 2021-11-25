@@ -3,7 +3,6 @@ package ca.ulaval.glo4002.game.domain.actions;
 import ca.ulaval.glo4002.game.domain.resources.Pantry;
 
 public class RemoveExpiredResources implements Action {
-
     private Pantry pantry;
 
     public RemoveExpiredResources(Pantry pantry) {
