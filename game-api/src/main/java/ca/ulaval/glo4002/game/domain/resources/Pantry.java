@@ -65,8 +65,8 @@ public class Pantry {
     public void updateQuantities(ResourcesStateDto updatedResourcesStateDto) {
         ResourcesStateDto actualResourcesStateDto = getFreshResourcesReport();
         actualResourcesStateDto.getResourceTypeQuantities().forEach((resourceType, actualResourceQuantity) -> {
-            int resourceQuantityLeft = updatedResourcesStateDto.getQtyForResourceType(resourceType);
-            removeResourceQty(resourceType, actualResourceQuantity - resourceQuantityLeft);
+            int resourceQuantityNeeded = updatedResourcesStateDto.getQtyForResourceType(resourceType);
+            removeResourceQty(resourceType, resourceQuantityNeeded);
         });
     }
 

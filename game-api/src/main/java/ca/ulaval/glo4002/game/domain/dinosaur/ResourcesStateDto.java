@@ -1,7 +1,6 @@
 package ca.ulaval.glo4002.game.domain.dinosaur;
 
 import java.math.BigDecimal;
-import java.math.RoundingMode;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -11,9 +10,9 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import ca.ulaval.glo4002.game.domain.resources.ResourceType;
-
 import static ca.ulaval.glo4002.game.domain.resources.ResourceType.*;
+
+import ca.ulaval.glo4002.game.domain.resources.ResourceType;
 
 public class ResourcesStateDto {
     private final Map<ResourceType, Integer> resourceTypeQuantities = new HashMap<>();
