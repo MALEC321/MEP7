@@ -5,7 +5,6 @@ import ca.ulaval.glo4002.game.domain.dinosaur.enums.SpeciesDietsCorrespondances;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
-import java.util.Objects;
 
 public class Dinosaur {
     private String name;
@@ -169,6 +168,15 @@ public class Dinosaur {
         Dinosaur dinosaur = (Dinosaur) o;
         return getName().equals(dinosaur.getName());
     }
+
+    //public void setFightAftermath (boolean winner) {
+    //    if (winner) {
+    //        this.isDead = true;
+    //    }
+    //    else {
+    //        this.isDead = false;
+    //    }
+    //}
 
     public boolean isFighting() {
         return fighting;
