@@ -13,6 +13,8 @@ import ca.ulaval.glo4002.game.application.resources.ResourcesFactory;
 import ca.ulaval.glo4002.game.application.resources.ResourcesGroupFactory;
 import ca.ulaval.glo4002.game.application.resources.ResourcesService;
 import ca.ulaval.glo4002.game.application.sumo.SumoService;
+import ca.ulaval.glo4002.game.application.turn.ActionService;
+import ca.ulaval.glo4002.game.application.turn.TurnEffect;
 import ca.ulaval.glo4002.game.application.turn.TurnService;
 import ca.ulaval.glo4002.game.controllers.baby.BabyResource;
 import ca.ulaval.glo4002.game.controllers.baby.dtos.BabyDtoAssembler;
@@ -53,7 +55,9 @@ public class AppConfig {
 
     private static final HerdRepository herdRepository = new HerdRepositoryInMemory();
     private static final DinosaurFactory dinosaurFactory = new DinosaurFactory(herdRepository, speciesDietsCorrespondances);
-    private static final TurnService turnService = new TurnService(turnFactory, gameRepository, resourceRepository, herdRepository, resourcesFactory, actionFactory);
+    private static final ActionService actionService = new ActionService(resourcesFactory, actionFactory);
+    private static final TurnEffect turnEffect = new TurnEffect(turnFactory, actionService);
+    private static final TurnService turnService = new TurnService(gameRepository, resourceRepository, herdRepository, turnEffect);
 
     private final ResourceConfig config;
 
