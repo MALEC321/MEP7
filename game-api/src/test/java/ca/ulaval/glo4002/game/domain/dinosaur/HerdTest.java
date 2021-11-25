@@ -5,7 +5,9 @@ import ca.ulaval.glo4002.game.domain.dinosaur.enums.DietType;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
+import org.mockito.Spy;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -26,6 +28,8 @@ public class HerdTest {
 
     @Mock
     private Dinosaur secondDinoMock;
+    @Spy
+    private List<Dinosaur> dinosaurs = new ArrayList<>();
 
     @BeforeEach
     void setup() {
@@ -38,21 +42,17 @@ public class HerdTest {
         thirdDino = new Dinosaur("a", 50, "m", dietStrategy, "Ankylosaurus");
         lastDino = new Dinosaur("aa", 1, "f", dietStrategy, "Ankylosaurus");
 
+        firstDino = new Dinosaur("aaa", 100, "f", dietStrategy, "Ankylosaurus");
+        herd.addDinosaur(firstDino);
+        secondDino = new Dinosaur("ab", 100, "f", dietStrategy, "Ankylosaurus");
+        herd.addDinosaur(secondDino);
+        thirdDino = new Dinosaur("a", 50, "m", dietStrategy, "Ankylosaurus");
+        herd.addDinosaur(thirdDino);
+        lastDino = new Dinosaur("aa", 1, "f", dietStrategy, "Ankylosaurus");
+        herd.addDinosaur(lastDino);
+
         firstDinoMock = mock(Dinosaur.class);
         secondDinoMock = mock(Dinosaur.class);
-    }
-
-    @Test
-    void givenUnorderedDinos_whenSortingDinosaurs_thenCorrectlySortByStrengthThenName() {
-        this.dinoInDisorderList = createDinoInDisorderList();
-        for (Dinosaur dino : this.dinoInDisorderList) {
-            herd.addDinosaur(dino);
-        }
-
-        List<Dinosaur> sortedDinosaurs = herd.findSortedDinosaursByStrengthThenName();
-
-        List<Dinosaur> dinoInStrengthOrderList = createDinoInStrengthOrderList();
-        assertArrayEquals(dinoInStrengthOrderList.toArray(), sortedDinosaurs.toArray());
     }
 
     @Test
@@ -165,6 +165,44 @@ public class HerdTest {
         when(firstDinoMock.getStrength()).thenReturn(10);
         when(secondDinoMock.getStrength()).thenReturn(100);
         verify(secondDinoMock, never()).setHungry(true);
+    }
+
+    @Test
+    void givenUnorderedDinos_whenSortingDinosaurs_thenCorrectlySortByStrengthThenName() {
+        this.dinoInDisorderList = createDinoInDisorderList();
+        for (Dinosaur dino : this.dinoInDisorderList) {
+            herd.addDinosaur(dino);
+        }
+
+        List<Dinosaur> sortedDinosaurs = herd.findSortedDinosaursByStrengthThenName();
+
+        List<Dinosaur> dinoInStrengthOrderList = createDinoInStrengthOrderList();
+        assertArrayEquals(dinoInStrengthOrderList.toArray(), sortedDinosaurs.toArray());
+    }
+
+    @Test
+    void givenHerdWithDinosaurs_whenFindAllDInosaurs_thenReturnsAllDinos() {
+        List<Dinosaur> dinoList = createDinoInDisorderList();
+        assertEquals(dinoList.size(), herd.findAllDinosaurs().size());
+    }
+    @Test
+    void givenValidDinosaur_whenFindingByName_thenReturnsDinoWithTheRightName() {
+        assertEquals(lastDino, herd.findDinosaurByName(lastDino.getName()));
+    }
+
+    @Test
+    void givenDinoThatHasBeenRemoved_whenFindingByName_thenCanNotGetDino() {
+        herd.removeDinosaur(firstDino);
+        assertNull(herd.findDinosaurByName(firstDino.getName()));
+        assertNotEquals(firstDino, herd.findDinosaurByName(firstDino.getName()));
+    }
+
+    @Test
+    void givenValidDinosaur_whenAddingItToHerd_thenCallDinosaurIsAdded (){
+        DietStrategy dietStrategy = dietStrategyFactory.create(DietType.HERBIVORE.name());
+        Dinosaur newDino = new Dinosaur ("Max", 100, "f", dietStrategy, "Ankylosaurus");
+        herd.addDinosaur(newDino);
+        assertEquals(herd.findDinosaurByName("Max"), newDino);
     }
 
     private List<Dinosaur> createDinoInStrengthOrderList() {
