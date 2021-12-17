@@ -115,7 +115,7 @@ public class DinosaurFactoryTest {
 
         dinosaurBaby = dinosaurFactory.createBabyDinosaur(BABYDINO_NAME, father, mother, MALE, BABY_SPECIES);
 
-        assertFalse(dinosaurBaby.areBothParentsDead());
+        assertFalse(dinosaurBaby.isOrphan());
     }
 
     private void setBabyDinoDuplicatedNameValidation() {

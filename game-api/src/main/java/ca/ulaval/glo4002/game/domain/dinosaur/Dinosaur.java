@@ -12,28 +12,29 @@ public class Dinosaur {
     private int weight;
     private String gender;
     private int strength;
-    private boolean hungry;
+    private boolean isHungry;
     private DietStrategy dietStrategy;
-    private DietType diet;
+    private DietType dietType;
     private String species;
     private Dinosaur mother;
     private Dinosaur father;
     private boolean isAdult;
     private boolean isDead;
-    private boolean secondTimeEating = false;
-    private boolean fighting;
+    private boolean secondTimeEating;
+    private boolean isFighting;
 
     public Dinosaur(String name, int weight, String gender, DietStrategy dietStrategy, String species) {
         this.name = name;
         this.weight = weight;
         this.gender = gender;
-        this.strength = calculateStrength();
-        this.hungry = true;
-        this.diet = SpeciesDietsCorrespondances.getDietFromSpecies(species);
+        this.isHungry = true;
         this.species = species;
         this.dietStrategy = dietStrategy;
         this.isAdult = true;
         this.isDead = false;
+        this.secondTimeEating = false;
+        this.dietType = SpeciesDietsCorrespondances.getDietFromSpecies(species);
+        this.strength = calculateStrength();
     }
 
     public Dinosaur(String name, int weight, String gender, DietStrategy dietStrategy, Dinosaur mother, Dinosaur father, String species) {
@@ -42,13 +43,13 @@ public class Dinosaur {
         this.name = name;
         this.weight = weight;
         this.gender = gender;
-        this.strength = calculateStrength();
-        this.hungry = true;
+        this.isHungry = true;
         this.dietStrategy = dietStrategy;
         this.species = species;
-        this.diet = SpeciesDietsCorrespondances.getDietFromSpecies(species);
         this.isAdult = false;
         this.isDead = false;
+        this.dietType = SpeciesDietsCorrespondances.getDietFromSpecies(species);
+        this.strength = calculateStrength();
     }
 
     public Dinosaur() {
@@ -70,46 +71,44 @@ public class Dinosaur {
         return strength;
     }
 
-    public boolean isHungry() {
-        return hungry;
+    public boolean getIsHungry() {
+        return isHungry;
     }
 
-    public void setHungry(boolean isHungry) {
-        this.hungry = isHungry;
+    public void setIsHungry(boolean isHungry) {
+        this.isHungry = isHungry;
     }
 
-    public DietType getDiet() {
-        return diet;
+    public DietType getDietType() {
+        return dietType;
     }
 
     public ResourcesStateDto eat(ResourcesStateDto resourcesStateDto) {
-//        ResourcesStateDto resourceStateLeft;
-        ResourcesStateDto resourceStateNeeded = dietStrategy.calculateFoodNeeds(weight, isHungry());
+        ResourcesStateDto resourceStateNeeded = dietStrategy.calculateFoodNeeds(weight, getIsHungry());
         if (!resourcesStateDto.checkIfThereIsEnoughQuantity(resourceStateNeeded)) {
             resourceStateNeeded = resourcesStateDto;
-            setDead(true);
+            setIsDead(true);
         }
-//        resourceStateLeft = resourcesStateDto.removeQuantities(resourceStateNeeded);
-        if (diet != DietType.OMNIVORE) {
-            setHungry(false);
+        if (dietType != DietType.OMNIVORE) {
+            setIsHungry(false);
         }
-        if (diet == DietType.OMNIVORE && secondTimeEating) {
-            setHungry(false);
+        if (dietType == DietType.OMNIVORE && secondTimeEating) {
+            setIsHungry(false);
         }
         secondTimeEating = true;
 
         return resourceStateNeeded;
     }
 
-    public boolean isDead() {
+    public boolean getIsDead() {
         return isDead;
     }
 
-    public void setDead(boolean dead) {
-        isDead = dead;
+    public void setIsDead(boolean isDead) {
+        this.isDead = isDead;
     }
 
-    public boolean areBothParentsDead() {
+    public boolean isOrphan() {
         return !this.isAdult && this.mother.isDead && this.father.isDead;
     }
 
@@ -120,7 +119,7 @@ public class Dinosaur {
     private int calculateStrength() {
         BigDecimal herbivoreMultiplicand = new BigDecimal("1");
         BigDecimal meatEaterMultiplicand = new BigDecimal("1.5");
-        BigDecimal dietMultiplicand = diet == DietType.HERBIVORE ? herbivoreMultiplicand : meatEaterMultiplicand;
+        BigDecimal dietMultiplicand = dietType == DietType.HERBIVORE ? herbivoreMultiplicand : meatEaterMultiplicand;
 
         BigDecimal femaleMultiplicand = new BigDecimal("1.5");
         BigDecimal maleMultiplicand = new BigDecimal("1");
@@ -130,16 +129,16 @@ public class Dinosaur {
         return strength.setScale(0, RoundingMode.CEILING).intValue();
     }
 
-    public boolean isFighting() {
-        return fighting;
+    public boolean getIsFighting() {
+        return isFighting;
     }
 
-    public void setFighting(boolean fighting) {
-        this.fighting = fighting;
+    public void setIsFighting(boolean fighting) {
+        this.isFighting = fighting;
     }
 
     public void fight() {
-        this.fighting = true;
+        this.isFighting = true;
     }
 
     @Override

@@ -33,20 +33,20 @@ public class Herd {
         if (challenger.getStrength() > challengee.getStrength()) {
             winner = challenger.getName();
             if (isReal) {
-                challengee.setDead(true);
-                challenger.setHungry(true);
+                challengee.setIsDead(true);
+                challenger.setIsHungry(true);
             }
         } else if (challenger.getStrength() < challengee.getStrength()) {
             winner = challengee.getName();
             if (isReal) {
-                challenger.setDead(true);
-                challengee.setHungry(true);
+                challenger.setIsDead(true);
+                challengee.setIsHungry(true);
             }
         } else {
             winner = "tie";
             if (isReal) {
-                challengee.setHungry(true);
-                challenger.setHungry(true);
+                challengee.setIsHungry(true);
+                challenger.setIsHungry(true);
             }
         }
         return winner;
@@ -71,7 +71,7 @@ public class Herd {
     public List<Dinosaur> findSortedHerbivoreAndOmnivore() {
         List<Dinosaur> copiedDinoList = this.findAllDinosaurs();
 
-        copiedDinoList.removeIf(dinosaur -> dinosaur.getDiet() == CARNIVORE);
+        copiedDinoList.removeIf(dinosaur -> dinosaur.getDietType() == CARNIVORE);
         copiedDinoList.sort(Comparator.comparing(Dinosaur::getStrength).thenComparing(Dinosaur::getName, Comparator.reverseOrder()));
 
         return copiedDinoList;
@@ -79,14 +79,14 @@ public class Herd {
 
     private List<Dinosaur> findSortedCarnivoreAndOmnivore(List<Dinosaur> sortedDinosaursByStrengthThenName) {
         List<Dinosaur> copiedDinoList = new ArrayList<>(sortedDinosaursByStrengthThenName);
-        copiedDinoList.removeIf(dinosaur -> dinosaur.getDiet() == HERBIVORE);
+        copiedDinoList.removeIf(dinosaur -> dinosaur.getDietType() == HERBIVORE);
 
         return copiedDinoList;
     }
 
     public void removeOrphanedBabyDinosaurs() {
         for (Dinosaur dinosaur : findSortedDinosaursByStrengthThenName()) {
-            if (dinosaur.areBothParentsDead()) {
+            if (dinosaur.isOrphan()) {
                 removeDinosaur(dinosaur);
             }
         }
@@ -112,7 +112,7 @@ public class Herd {
 
     public void removeAllHungryDinosaur() {
         for (Dinosaur dinosaur : findAllDinosaurs()) {
-            if (dinosaur.isDead()) {
+            if (dinosaur.getIsDead()) {
                 dinosaursByName.remove(dinosaur.getName());
             }
         }

@@ -43,7 +43,7 @@ public class ActionFactory {
             throw new NotExistentNameException();
         } else if (challenger.getSpecies().equals("Tyrannosaurus Rex") || challengee.getSpecies().equals("Tyrannosaurus Rex")) { //Un enum aurait-il été mieux?
             throw new ArmsTooShortException();
-        } else if (challenger.isFighting() || challengee.isFighting()) {
+        } else if (challenger.getIsFighting() || challengee.getIsFighting()) {
             throw new DinosaurAlreadyParticipatingException();
         }
     }

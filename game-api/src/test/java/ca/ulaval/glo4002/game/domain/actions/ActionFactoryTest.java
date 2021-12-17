@@ -93,7 +93,7 @@ public class ActionFactoryTest {
 
     @Test
     public void givenDinosaurWhoIsAlreadyFighting_whenCreatingAFight_thenThrowsDinosaurAlreadyParticipatingException() {
-        dinoTest1.setFighting(true);
+        dinoTest1.setIsFighting(true);
         assertThrows(DinosaurAlreadyParticipatingException.class, () ->
                 actionFactory.validateFighters(dinoTest1, dinoTest2));
     }
@@ -101,8 +101,8 @@ public class ActionFactoryTest {
     @Test
     public void givenTwoDinosaurs_whenCreatingAFight_thenFightingIsTrue_AndNewFightingActionIsReturned() {
         Action fightingAction = actionFactory.createFight(actions, dinoTest1, dinoTest2, herd);
-        assertTrue(dinoTest1.isFighting());
-        assertTrue(dinoTest2.isFighting());
+        assertTrue(dinoTest1.getIsFighting());
+        assertTrue(dinoTest2.getIsFighting());
     }
 
     @Test

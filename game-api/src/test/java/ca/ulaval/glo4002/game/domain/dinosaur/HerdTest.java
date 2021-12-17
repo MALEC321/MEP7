@@ -58,13 +58,13 @@ public class HerdTest {
     @Test
     void givenTwoDinosaursOfDifferentWeight_whenFightingForRealAndChallengerWins_thenChallengerIsHungry() {
         herd.fight(firstDino, thirdDino, true);
-        assertTrue(firstDino.isHungry());
+        assertTrue(firstDino.getIsHungry());
     }
 
     @Test
     void givenTwoDinosaursOfDifferentWeight_whenFightingForRealAndChallengerWins_thenChallengeeIsDead() {
         herd.fight(firstDino, thirdDino, true);
-        assertTrue(thirdDino.isDead());
+        assertTrue(thirdDino.getIsDead());
     }
 
     @Test
@@ -76,13 +76,13 @@ public class HerdTest {
     @Test
     void givenTwoDinosaursOfDifferentWeight_whenFightingForRealAndChallengeeWins_thenChallengeeIsHungry() {
         herd.fight(lastDino, secondDino, true);
-        assertTrue(secondDino.isHungry());
+        assertTrue(secondDino.getIsHungry());
     }
 
     @Test
     void givenTwoDinosaursOfDifferentWeight_whenFightingForRealAndChallengeeWins_thenChallengerIsDead() {
         herd.fight(lastDino, secondDino, true);
-        assertTrue(lastDino.isDead());
+        assertTrue(lastDino.getIsDead());
     }
 
     @Test
@@ -94,7 +94,7 @@ public class HerdTest {
     @Test
     void givenTwoDinosaursOfDifferentWeight_whenFightingNotForRealAndChallengerWins_thenChallengeeIsNotDead() {
         herd.fight(firstDino, thirdDino, false);
-        assertFalse(thirdDino.isDead());
+        assertFalse(thirdDino.getIsDead());
     }
 
     @Test
@@ -108,13 +108,13 @@ public class HerdTest {
         herd.fight(firstDinoMock, secondDinoMock, false);
         when(firstDinoMock.getStrength()).thenReturn(10);
         when(secondDinoMock.getStrength()).thenReturn(100);
-        verify(firstDinoMock, never()).setHungry(true);
+        verify(firstDinoMock, never()).setIsHungry(true);
     }
 
     @Test
     void givenTwoDinosaursOfDifferentWeight_whenFightingForNotRealAndChallengeeWins_thenChallengerIsNotDead() {
         herd.fight(lastDino, secondDino, false);
-        assertFalse(lastDino.isDead());
+        assertFalse(lastDino.getIsDead());
     }
 
     @Test
@@ -126,7 +126,7 @@ public class HerdTest {
     @Test
     void givenTwoDinosaursOfIdenticalWeight_whenFightingForReal_thenChallengerIsHungry() {
         herd.fight(firstDino, secondDino, true);
-        assertTrue(firstDino.isHungry());
+        assertTrue(firstDino.getIsHungry());
     }
 
     @Test
@@ -139,7 +139,7 @@ public class HerdTest {
     @Test
     void givenTwoDinosaursOfIdenticalWeight_whenFightingForReal_thenChallengeeIsHungry() {
         herd.fight(firstDino, secondDino, true);
-        assertTrue(secondDino.isHungry());
+        assertTrue(secondDino.getIsHungry());
     }
 
     @Test
@@ -149,7 +149,7 @@ public class HerdTest {
 
         when(firstDinoMock.getStrength()).thenReturn(100);
         when(secondDinoMock.getStrength()).thenReturn(10);
-        verify(firstDinoMock, never()).setHungry(true);
+        verify(firstDinoMock, never()).setIsHungry(true);
     }
 
     @Test
@@ -164,7 +164,7 @@ public class HerdTest {
         herd.fight(firstDinoMock, secondDinoMock, false);
         when(firstDinoMock.getStrength()).thenReturn(10);
         when(secondDinoMock.getStrength()).thenReturn(100);
-        verify(secondDinoMock, never()).setHungry(true);
+        verify(secondDinoMock, never()).setIsHungry(true);
     }
 
     @Test
