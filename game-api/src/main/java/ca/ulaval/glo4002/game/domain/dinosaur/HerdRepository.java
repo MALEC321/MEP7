@@ -6,4 +6,6 @@ public interface HerdRepository {
     Herd findCurrentHerd();
 
     void save(Herd herd);
+
+    void deleteAll();
 }

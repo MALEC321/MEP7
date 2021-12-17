@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class HerdRepositoryInMemory implements HerdRepository {
-    private final List<Herd> herds = new ArrayList<>();
+    private List<Herd> herds = new ArrayList<>();
 
     @Override
     public Herd findPreviousHerd() {
@@ -22,5 +22,10 @@ public class HerdRepositoryInMemory implements HerdRepository {
     @Override
     public Herd findCurrentHerd(){
         return herds.get(herds.size()-1);
+    }
+
+    @Override
+    public void deleteAll() {
+        herds = new ArrayList<>();
     }
 }

@@ -9,19 +9,15 @@ import org.mockito.MockitoAnnotations;
 
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.mockito.Mockito.times;
-import static org.mockito.Mockito.verify;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class HerdRepositoryInMemoryTest {
     @InjectMocks
     private HerdRepositoryInMemory herdRepositoryInMemory;
 
     @Mock
-    private Herd herd;
-
-    @Mock
-    private List<Herd> herds;
+    List<Herd> herds;
 
     @BeforeEach
     public void setup() {
@@ -29,23 +25,37 @@ public class HerdRepositoryInMemoryTest {
     }
 
     @Test
-    public void repoContainingHerd_whenFindHerd_thenReturnedHerd() {
-
-        assertEquals(this.herd, this.herdRepositoryInMemory.findCurrentHerd());
+    public void givenZeroHerd_whenSave_thenFindCurrentHerdThrowsException() {
+        assertThrows(IndexOutOfBoundsException.class, () -> herdRepositoryInMemory.findCurrentHerd());
     }
 
     @Test
-    public void givenHerd_whenSave_thenHerdsSizeIsIncremented() {
-        int herdSize = herds.size();
-        this.herdRepositoryInMemory.save(herd);
-        assertEquals(herdSize+1, herds);
+    public void givenZeroHerd_whenSave_thenFindPreviousHerdThrowsException() {
+        assertThrows(IndexOutOfBoundsException.class, () -> herdRepositoryInMemory.findCurrentHerd());
     }
 
     @Test
-    public void whenFindByName_thenGetDinoWithTheRightName() {
+    public void givenOneHerd_whenSave_thenFindCurrentHerdReturnsHerd() {
+        herdRepositoryInMemory.save(new Herd());
+        assertNotNull(herdRepositoryInMemory.findCurrentHerd());
+    }
 
+    @Test
+    public void givenOneHerd_whenSave_thenFindPreviousHerdThrowsException() {
+        herdRepositoryInMemory.save(new Herd());
+        assertThrows(IndexOutOfBoundsException.class, () -> herdRepositoryInMemory.findPreviousHerd());
+    }
+
+    @Test
+    public void givenTwoHerds_whenSave_thenFindPreviousHerdReturnsHerd() {
+        herdRepositoryInMemory.save(new Herd());
+        herdRepositoryInMemory.save(new Herd());
+        assertNotNull(herdRepositoryInMemory.findPreviousHerd());
+    }
+
+    @Test
+    public void givenNothing_whenDeleteAll_thenFindCurrentHerdThrowsException() {
         this.herdRepositoryInMemory.deleteAll();
-
-        verify(this.herd, times(1)).clear();
+        assertThrows(IndexOutOfBoundsException.class, () -> herdRepositoryInMemory.findPreviousHerd());
     }
 }
