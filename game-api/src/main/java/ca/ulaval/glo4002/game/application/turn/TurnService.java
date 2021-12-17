@@ -45,7 +45,7 @@ public class TurnService {
         Turn currentTurn = game.currentTurn();
         game.removeLastTurn();
 
-        pantryRepository.deleteLast();
+        pantryRepository.deleteLast();;
         herdRepository.deleteLast();
         gameRepository.deleteLast();
     }
