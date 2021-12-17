@@ -63,7 +63,7 @@ public class TurnServiceTest {
         MockitoAnnotations.initMocks(this);
         when(resourceRepository.findPantry()).thenReturn(pantry);
         when(gameRepository.findGame()).thenReturn(game);
-        when(herdRepository.findHerd()).thenReturn(herd);
+        when(herdRepository.findCurrentHerd()).thenReturn(herd);
         when(game.currentTurn()).thenReturn(turn);
         when(pantryRepository.findPantry()).thenReturn(pantry);
         when(turnFactory.create(game.nextTurnNumber())).thenReturn(nextTurn);

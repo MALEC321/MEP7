@@ -19,7 +19,7 @@ public class ParentInformationCenter {
     }
 
     public RequestBreed getParentsSpecies(String fatherName, String motherName) {
-        Herd herd = herdRepository.findHerd();
+        Herd herd = herdRepository.findCurrentHerd();
 
         String fatherSpecies;
         String motherSpecies;

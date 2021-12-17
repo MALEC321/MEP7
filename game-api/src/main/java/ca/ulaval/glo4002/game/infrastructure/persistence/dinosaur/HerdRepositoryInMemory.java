@@ -3,25 +3,24 @@ package ca.ulaval.glo4002.game.infrastructure.persistence.dinosaur;
 import ca.ulaval.glo4002.game.domain.dinosaur.Herd;
 import ca.ulaval.glo4002.game.domain.dinosaur.HerdRepository;
 
-public class HerdRepositoryInMemory implements HerdRepository {
-    private Herd herd;
+import java.util.ArrayList;
+import java.util.List;
 
-    public HerdRepositoryInMemory() {
-        this.herd = new Herd();
-    }
+public class HerdRepositoryInMemory implements HerdRepository {
+    private final List<Herd> herds = new ArrayList<>();
 
     @Override
-    public Herd findHerd() {
-        return this.herd;
+    public Herd findPreviousHerd() {
+        return herds.get(herds.size()-2);
     }
 
     @Override
     public void save(Herd herd) {
-        this.herd = herd;
+        this.herds.add(herd);
     }
 
     @Override
-    public void deleteAll() {
-        herd.clear();
+    public Herd findCurrentHerd(){
+        return herds.get(herds.size()-1);
     }
 }

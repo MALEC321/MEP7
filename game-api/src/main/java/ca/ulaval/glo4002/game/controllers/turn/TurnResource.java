@@ -32,6 +32,18 @@ public class TurnResource {
         return Response.status(Response.Status.OK).entity(response).build();
     }
 
+    @Path("/unturn")
+    @POST
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response unturn() {
+        turnService.playTurn();
+
+        TurnDto turnDto = new TurnDto(turnService.getLastPlayedTurnNumber());
+        TurnResponse response = turnDtoAssembler.toResponse(turnDto);
+
+        return Response.status(Response.Status.OK).entity(response).build();
+    }
+
     @Path("/reset")
     @POST
     @Produces(MediaType.APPLICATION_JSON)

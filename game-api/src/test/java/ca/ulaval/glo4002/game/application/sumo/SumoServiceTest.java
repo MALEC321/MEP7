@@ -23,7 +23,6 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.*;
-import org.mockito.InjectMocks;
 
 public class SumoServiceTest {
     private Dinosaur dinoTest1;
@@ -79,7 +78,7 @@ public class SumoServiceTest {
         sumoDto = new SumoDto("Maxence", "Marc-Antoine");
         sumoService = new SumoService(herdRepository, actionFactory, gameRepository);
 
-        when(herdRepository.findHerd()).thenReturn(realHerd);
+        when(herdRepository.findCurrentHerd()).thenReturn(realHerd);
         when(gameRepository.findGame()).thenReturn(game);
         when(game.currentTurn()).thenReturn(turn);
         when(actionFactory.createFight(actions, dinoTest1, dinoTest2, realHerd)).thenReturn(fightAction);
@@ -92,7 +91,7 @@ public class SumoServiceTest {
         sumoDto = new SumoDto("Maxence", "Beno");
         sumoService = new SumoService(herdRepository, actionFactory, gameRepository);
 
-        when(herdRepository.findHerd()).thenReturn(realHerd);
+        when(herdRepository.findCurrentHerd()).thenReturn(realHerd);
         when(gameRepository.findGame()).thenReturn(game);
         when(game.currentTurn()).thenReturn(turn);
         when(actionFactory.createFight(actions, dinoTest1, dinoTest2, realHerd)).thenReturn(fightAction);
@@ -104,7 +103,7 @@ public class SumoServiceTest {
     void givenValidDto_whenCallingFightMethod_thenAddFightActionToActionRepository() {
         sumoDto = new SumoDto("Maxence", "Beno");
         sumoService = new SumoService(herdRepository, actionFactory, gameRepository);
-        when(herdRepository.findHerd()).thenReturn(herd);
+        when(herdRepository.findCurrentHerd()).thenReturn(herd);
         when(herd.findDinosaurByName(sumoDto.getChallenger())).thenReturn(dinoTest1);
         when(herd.findDinosaurByName(sumoDto.getChallengee())).thenReturn(dinoTest2);
         when(gameRepository.findGame()).thenReturn(game);

@@ -83,7 +83,7 @@ public class DinosaurFactoryTest {
     @Test
     public void givenADinosaurBaby_whenNameIsAlreadyTaken_thenThrowsDuplicateNameException() {
         setBabyDinosParents();
-        when(herdRepository.findHerd()).thenReturn(herd);
+        when(herdRepository.findCurrentHerd()).thenReturn(herd);
         when(herd.findDinosaurByName(father.getName())).thenReturn(father);
 
         assertThrows(DuplicateNameException.class, () ->
@@ -119,7 +119,7 @@ public class DinosaurFactoryTest {
     }
 
     private void setBabyDinoDuplicatedNameValidation() {
-        when(herdRepository.findHerd()).thenReturn(herd);
+        when(herdRepository.findCurrentHerd()).thenReturn(herd);
         when(herd.findDinosaurByName(BABYDINO_NAME)).thenReturn(NO_DINO_WITH_SAME_NAME);
     }
 
@@ -129,12 +129,12 @@ public class DinosaurFactoryTest {
     }
 
     private void setDuplicatedNameContext() {
-        when(herdRepository.findHerd()).thenReturn(herd);
+        when(herdRepository.findCurrentHerd()).thenReturn(herd);
         when(herd.findDinosaurByName(anyString())).thenReturn(new Dinosaur());
     }
 
     private void setNoDuplicatedNameContext() {
-        when(herdRepository.findHerd()).thenReturn(herd);
+        when(herdRepository.findCurrentHerd()).thenReturn(herd);
         when(herd.findDinosaurByName(anyString())).thenReturn(NO_DINO_WITH_SAME_NAME);
     }
 

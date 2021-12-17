@@ -23,7 +23,7 @@ public class SumoService {
     }
 
     public SumoResponse fight(SumoDto sumoDto) {
-        Herd herd = herdRepository.findHerd();
+        Herd herd = herdRepository.findCurrentHerd();
         Game game = gameRepository.findGame();
         Dinosaur challenger = herd.findDinosaurByName(sumoDto.getChallenger());
         Dinosaur challengee = herd.findDinosaurByName(sumoDto.getChallengee());
