@@ -9,6 +9,10 @@ import java.util.List;
 public class PantryRepositoryInMemory implements PantryRepository {
     private List<Pantry> pantries = new ArrayList<>();
 
+    public PantryRepositoryInMemory() {
+        this.pantries.add(new Pantry());
+    }
+
     @Override
     public Pantry findCurrentPantry() {
         return pantries.get(pantries.size()-1);

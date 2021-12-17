@@ -9,6 +9,10 @@ import java.util.List;
 public class GameRepositoryInMemory implements GameRepository {
     private List<Game> games = new ArrayList<>();
 
+    public GameRepositoryInMemory() {
+        this.games.add(new Game());
+    }
+
     @Override
     public void save(Game game) {
         this.games.add(game);

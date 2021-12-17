@@ -45,6 +45,6 @@ public class Game {
     }
 
     public void removeLastTurn() {
-        turns.remove(turns.size()-1);
+        turns.remove(turns.size() - 1);
     }
 }

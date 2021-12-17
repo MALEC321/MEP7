@@ -84,6 +84,7 @@ public class AppConfig {
         resources.add(new ArmsTooShortExceptionsMapper());
         resources.add(new DinosaurAlreadyParticipatingExceptionsMapper());
         resources.add(new MaxCombatsReachedExceptionsMapper());
+        resources.add(new NoTurnsToUnturnExceptionMapper());
         return resources;
     }
 

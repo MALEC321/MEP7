@@ -9,6 +9,10 @@ import java.util.List;
 public class HerdRepositoryInMemory implements HerdRepository {
     private List<Herd> herds = new ArrayList<>();
 
+    public HerdRepositoryInMemory() {
+        this.herds.add(new Herd());
+    }
+
     @Override
     public Herd findPreviousHerd() {
         return herds.get(herds.size()-2);

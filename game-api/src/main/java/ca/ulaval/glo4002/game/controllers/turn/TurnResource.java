@@ -38,7 +38,7 @@ public class TurnResource {
     public Response unturn() {
         turnService.unturn();
 
-        TurnDto turnDto = new TurnDto(turnService.getLastPlayedTurnNumber());
+        TurnDto turnDto = new TurnDto(turnService.getCurrentTurnNumber());
         TurnResponse response = turnDtoAssembler.toResponse(turnDto);
 
         return Response.status(Response.Status.OK).entity(response).build();
