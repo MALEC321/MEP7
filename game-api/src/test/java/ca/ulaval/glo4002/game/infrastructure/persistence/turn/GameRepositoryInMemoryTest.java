@@ -31,9 +31,9 @@ public class GameRepositoryInMemoryTest {
     @Test
     void givenATurn_whenFindingThatTurnById_thenThatTurnIsReturned() {
         Turn turn1 = turnFactory.create(secondTurnNumber, actions);
-        turnRepositoryInMemory.findGame().addTurn(turn1);
+        turnRepositoryInMemory.findCurrentGame().addTurn(turn1);
 
-        Turn turnFound = turnRepositoryInMemory.findGame().findByNumber(turn1.getTurnNumber());
+        Turn turnFound = turnRepositoryInMemory.findCurrentGame().findByNumber(turn1.getTurnNumber());
 
         assertNotNull(turn1);
         assertEquals(turn1.getTurnNumber(), turnFound.getTurnNumber());
@@ -42,21 +42,21 @@ public class GameRepositoryInMemoryTest {
     @Test
     void givenATurn_whenGetOneTurnWithTheBadId_thenNoneTurnIsReturned() {
         Turn turn1 = turnFactory.create(firstTurnNumber, actions);
-        turnRepositoryInMemory.findGame().addTurn(turn1);
+        turnRepositoryInMemory.findCurrentGame().addTurn(turn1);
 
-        assertNull(turnRepositoryInMemory.findGame().findByNumber(secondTurnNumber));
+        assertNull(turnRepositoryInMemory.findCurrentGame().findByNumber(secondTurnNumber));
     }
 
     @Test
     void givenTurns_whenResetting_thenRepoContainsNoMoreTurn() {
         Turn turn1 = turnFactory.create(firstTurnNumber, actions);
-        turnRepositoryInMemory.findGame().addTurn(turn1);
+        turnRepositoryInMemory.findCurrentGame().addTurn(turn1);
         Turn turn2 = turnFactory.create(secondTurnNumber, actions);
-        turnRepositoryInMemory.findGame().addTurn(turn2);
+        turnRepositoryInMemory.findCurrentGame().addTurn(turn2);
 
         turnRepositoryInMemory.deleteAll();
 
-        assertNotEquals(turn1, turnRepositoryInMemory.findGame().findByNumber(firstTurnNumber));
-        assertNotEquals(turn2, turnRepositoryInMemory.findGame().findByNumber(secondTurnNumber));
+        assertNotEquals(turn1, turnRepositoryInMemory.findCurrentGame().findByNumber(firstTurnNumber));
+        assertNotEquals(turn2, turnRepositoryInMemory.findCurrentGame().findByNumber(secondTurnNumber));
     }
 }

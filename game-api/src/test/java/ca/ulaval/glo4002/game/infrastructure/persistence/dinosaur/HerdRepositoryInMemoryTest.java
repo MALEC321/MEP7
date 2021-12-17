@@ -4,10 +4,7 @@ import ca.ulaval.glo4002.game.domain.dinosaur.Herd;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
-import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
-
-import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
@@ -15,9 +12,6 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 public class HerdRepositoryInMemoryTest {
     @InjectMocks
     private HerdRepositoryInMemory herdRepositoryInMemory;
-
-    @Mock
-    List<Herd> herds;
 
     @BeforeEach
     public void setup() {

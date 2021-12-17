@@ -3,25 +3,34 @@ package ca.ulaval.glo4002.game.infrastructure.persistence.turn;
 import ca.ulaval.glo4002.game.domain.game.Game;
 import ca.ulaval.glo4002.game.domain.game.GameRepository;
 
-public class GameRepositoryInMemory implements GameRepository {
-    private Game game;
+import java.util.ArrayList;
+import java.util.List;
 
-    public GameRepositoryInMemory() {
-        this.game = new Game();
-    }
+public class GameRepositoryInMemory implements GameRepository {
+    private List<Game> games = new ArrayList<>();
 
     @Override
     public void save(Game game) {
-        this.game = game;
+        this.games.add(game);
     }
 
     @Override
-    public Game findGame() {
-        return this.game;
+    public Game findCurrentGame() {
+        return this.games.get(games.size()-1);
     }
 
     @Override
     public void deleteAll() {
-        game = new Game();
+        games = new ArrayList<>();
+    }
+
+    @Override
+    public Game findPreviousGame() {
+        return this.games.get(games.size()-2);
+    }
+
+    @Override
+    public void deleteLast() {
+        games.remove(games.size()-1);
     }
 }

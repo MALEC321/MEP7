@@ -79,7 +79,7 @@ public class SumoServiceTest {
         sumoService = new SumoService(herdRepository, actionFactory, gameRepository);
 
         when(herdRepository.findCurrentHerd()).thenReturn(realHerd);
-        when(gameRepository.findGame()).thenReturn(game);
+        when(gameRepository.findCurrentGame()).thenReturn(game);
         when(game.currentTurn()).thenReturn(turn);
         when(actionFactory.createFight(actions, dinoTest1, dinoTest2, realHerd)).thenReturn(fightAction);
 
@@ -92,7 +92,7 @@ public class SumoServiceTest {
         sumoService = new SumoService(herdRepository, actionFactory, gameRepository);
 
         when(herdRepository.findCurrentHerd()).thenReturn(realHerd);
-        when(gameRepository.findGame()).thenReturn(game);
+        when(gameRepository.findCurrentGame()).thenReturn(game);
         when(game.currentTurn()).thenReturn(turn);
         when(actionFactory.createFight(actions, dinoTest1, dinoTest2, realHerd)).thenReturn(fightAction);
 
@@ -106,12 +106,12 @@ public class SumoServiceTest {
         when(herdRepository.findCurrentHerd()).thenReturn(herd);
         when(herd.findDinosaurByName(sumoDto.getChallenger())).thenReturn(dinoTest1);
         when(herd.findDinosaurByName(sumoDto.getChallengee())).thenReturn(dinoTest2);
-        when(gameRepository.findGame()).thenReturn(game);
+        when(gameRepository.findCurrentGame()).thenReturn(game);
         when(game.currentTurn()).thenReturn(turn);
         when(actionFactory.createFight(actions, dinoTest1, dinoTest2, herd)).thenReturn(fightAction);
 
         sumoService.fight(sumoDto);
 
-        verify(gameRepository).findGame();
+        verify(gameRepository).findCurrentGame();
     }
 }

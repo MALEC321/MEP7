@@ -28,4 +28,9 @@ public class HerdRepositoryInMemory implements HerdRepository {
     public void deleteAll() {
         herds = new ArrayList<>();
     }
+
+    @Override
+    public void deleteLast() {
+        herds.remove(herds.size()-1);
+    }
 }

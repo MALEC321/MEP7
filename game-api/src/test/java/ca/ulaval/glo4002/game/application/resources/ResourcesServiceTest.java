@@ -53,7 +53,7 @@ public class ResourcesServiceTest {
         PantryRepository resourceRepository = new PantryRepositoryInMemory();
         turnService.playTurn();
 
-        List<ResourcesGroup> resources = resourceRepository.findPantry().findAllResourcesGroup();
+        List<ResourcesGroup> resources = resourceRepository.findCurrentPantry().findAllResourcesGroup();
 
         assertFalse(resources.isEmpty());
     }

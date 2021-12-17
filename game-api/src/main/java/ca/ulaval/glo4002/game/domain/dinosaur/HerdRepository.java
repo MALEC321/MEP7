@@ -8,4 +8,6 @@ public interface HerdRepository {
     void save(Herd herd);
 
     void deleteAll();
+
+    void deleteLast();
 }

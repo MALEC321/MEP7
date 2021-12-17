@@ -36,7 +36,7 @@ public class TurnResource {
     @POST
     @Produces(MediaType.APPLICATION_JSON)
     public Response unturn() {
-        turnService.playTurn();
+        turnService.unturn();
 
         TurnDto turnDto = new TurnDto(turnService.getLastPlayedTurnNumber());
         TurnResponse response = turnDtoAssembler.toResponse(turnDto);

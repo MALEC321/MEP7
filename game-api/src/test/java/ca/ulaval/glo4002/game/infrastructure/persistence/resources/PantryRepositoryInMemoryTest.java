@@ -26,7 +26,7 @@ public class PantryRepositoryInMemoryTest {
 
     @Test
     public void repoCreated_whenFindPantry_thenThatPantryIsFound() {
-        assertEquals(pantry, this.pantryRepositoryInMemory.findPantry());
+        assertEquals(pantry, this.pantryRepositoryInMemory.findCurrentPantry());
     }
 
     @Test
