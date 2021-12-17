@@ -25,7 +25,8 @@ public class GameRepositoryInMemory implements GameRepository {
 
     @Override
     public void deleteAll() {
-        games = new ArrayList<>();
+        games.remove(games.size()-1);
+        games.add(new Game());
     }
 
     @Override

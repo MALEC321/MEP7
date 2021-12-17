@@ -41,18 +41,13 @@ public class TurnService {
     }
 
     public void unturn() {
-
         Game game = gameRepository.findCurrentGame();
-        TurnNumber currentTurnNumber = game.currentTurnNumber();
+        Turn currentTurn = game.currentTurn();
+        game.removeLastTurn();
 
-        if (currentTurnNumber.getNumber() > 1) {
-            game.removeLastTurn();
-            pantryRepository.deleteLast();
-            herdRepository.deleteLast();
-            gameRepository.deleteLast();
-        } else {
-            throw new NoTurnsToUnturnException();
-        }
+        pantryRepository.deleteLast();
+        herdRepository.deleteLast();
+        gameRepository.deleteLast();
     }
 
     public TurnNumber getLastPlayedTurnNumber() {

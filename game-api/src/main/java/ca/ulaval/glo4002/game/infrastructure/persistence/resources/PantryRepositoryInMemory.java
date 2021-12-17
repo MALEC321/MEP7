@@ -25,7 +25,8 @@ public class PantryRepositoryInMemory implements PantryRepository {
 
     @Override
     public void deleteAll() {
-        pantries = new ArrayList<>();
+        pantries.remove(pantries.size()-1);
+        pantries.add(new Pantry());
     }
 
     @Override

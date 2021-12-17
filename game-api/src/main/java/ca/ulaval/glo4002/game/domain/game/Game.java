@@ -1,5 +1,6 @@
 package ca.ulaval.glo4002.game.domain.game;
 
+import ca.ulaval.glo4002.game.application.turn.NoTurnsToUnturnException;
 import ca.ulaval.glo4002.game.domain.turn.Turn;
 import ca.ulaval.glo4002.game.domain.turn.TurnNumber;
 
@@ -45,6 +46,10 @@ public class Game {
     }
 
     public void removeLastTurn() {
-        turns.remove(turns.size() - 1);
+        if (turns.size() == 1) {
+            throw new NoTurnsToUnturnException();
+        } else {
+            turns.remove(turns.size() - 1);
+        }
     }
 }

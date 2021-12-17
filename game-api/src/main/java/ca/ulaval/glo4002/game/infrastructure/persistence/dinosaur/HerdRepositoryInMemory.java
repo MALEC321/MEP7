@@ -25,12 +25,13 @@ public class HerdRepositoryInMemory implements HerdRepository {
 
     @Override
     public Herd findCurrentHerd(){
-        return herds.get(herds.size()-1);
+        return this.herds.get(herds.size()-1);
     }
 
     @Override
     public void deleteAll() {
-        herds = new ArrayList<>();
+        herds.remove(herds.size()-1);
+        herds.add(new Herd());
     }
 
     @Override
