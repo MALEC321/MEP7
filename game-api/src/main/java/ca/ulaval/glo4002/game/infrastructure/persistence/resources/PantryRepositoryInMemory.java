@@ -20,7 +20,7 @@ public class PantryRepositoryInMemory implements PantryRepository {
 
     @Override
     public void save(Pantry pantry) {
-        this.pantries.add(pantry);
+        this.pantries.add(new Pantry(pantry));
     }
 
     @Override
@@ -32,5 +32,10 @@ public class PantryRepositoryInMemory implements PantryRepository {
     @Override
     public Pantry findPrevious() {
         return pantries.get(pantries.size()-2);
+    }
+
+    @Override
+    public void deleteLast() {
+        pantries.remove(pantries.size()-1);
     }
 }

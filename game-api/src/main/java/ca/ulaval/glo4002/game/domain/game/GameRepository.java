@@ -8,4 +8,6 @@ public interface GameRepository {
     void save(Game game);
 
     Game findPrevious();
+
+    public void deleteLast();
 }

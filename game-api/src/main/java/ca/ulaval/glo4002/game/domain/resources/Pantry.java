@@ -25,6 +25,12 @@ public class Pantry {
         freshResources.put(WATER, waterQueue);
     }
 
+    public Pantry(Pantry pantry){
+        this.freshResources = pantry.freshResources;
+        this.consumedResourcesGroup = pantry.consumedResourcesGroup;
+        this.expiredResourcesGroup = pantry.expiredResourcesGroup;
+    }
+
     public ResourcesStateDto getFreshResourcesReport() {
         List<ResourceTypeQuantity> resourceTypeQuantityList = new ArrayList<>(findFreshResources());
         return new ResourcesStateDto(resourceTypeQuantityList);

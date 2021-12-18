@@ -15,7 +15,7 @@ public class GameRepositoryInMemory implements GameRepository {
 
     @Override
     public void save(Game game) {
-        this.games.add(game);
+        this.games.add(new Game(game));
     }
 
     @Override
@@ -32,5 +32,10 @@ public class GameRepositoryInMemory implements GameRepository {
     @Override
     public Game findPrevious() {
         return this.games.get(games.size()-2);
+    }
+
+    @Override
+    public void deleteLast() {
+        games.remove(games.size()-1);
     }
 }

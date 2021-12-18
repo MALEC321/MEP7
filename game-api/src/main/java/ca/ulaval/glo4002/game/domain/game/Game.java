@@ -16,6 +16,10 @@ public class Game {
         turns.add(new Turn(new TurnNumber(1)));
     }
 
+    public Game(Game game) {
+        this.turns = game.turns;
+    }
+
     public TurnNumber nextTurnNumber() {
         return currentTurnNumber().nextTurnNumber();
     }

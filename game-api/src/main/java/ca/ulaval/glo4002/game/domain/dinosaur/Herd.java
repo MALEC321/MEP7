@@ -10,7 +10,15 @@ import static ca.ulaval.glo4002.game.domain.dinosaur.enums.DietType.CARNIVORE;
 import static ca.ulaval.glo4002.game.domain.dinosaur.enums.DietType.HERBIVORE;
 
 public class Herd {
-    private final Map<String, Dinosaur> dinosaursByName = new HashMap<>();
+
+    private Map<String, Dinosaur> dinosaursByName = new HashMap<>();
+
+    public Herd(Herd herd) {
+        this.dinosaursByName = herd.dinosaursByName;
+    }
+
+    public Herd() {
+    }
 
     public List<Dinosaur> findAllDinosaurs() {
         return new ArrayList<>(dinosaursByName.values());
@@ -86,7 +94,7 @@ public class Herd {
 
     public void removeOrphanedBabyDinosaurs() {
         for (Dinosaur dinosaur : findSortedDinosaursByStrengthThenName()) {
-            if (dinosaur.areBothParentsDead()) {
+            if (dinosaur.isOrphan()) {
                 removeDinosaur(dinosaur);
             }
         }

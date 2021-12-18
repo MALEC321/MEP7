@@ -85,7 +85,7 @@ public class Dinosaur {
 
     public ResourcesStateDto eat(ResourcesStateDto resourcesStateDto) {
         ResourcesStateDto resourceStateLeft;
-        ResourcesStateDto resourceStateNeeded = dietStrategy.calculateFoodNeeds(weight, isHungry());
+        ResourcesStateDto resourceStateNeeded = dietStrategy.calculateFoodNeeds(weight, getIsHungry());
         if (!resourcesStateDto.checkIfThereIsEnoughQuantity(resourceStateNeeded)) {
             setIsDead(true);
         }

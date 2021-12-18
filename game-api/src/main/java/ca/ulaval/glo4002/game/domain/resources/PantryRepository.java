@@ -6,4 +6,5 @@ public interface PantryRepository {
     void deleteAll();
 
     Pantry findPrevious();
+    public void deleteLast();
 }

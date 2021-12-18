@@ -15,11 +15,11 @@ public class HerdRepositoryInMemory implements HerdRepository {
 
     @Override
     public void save(Herd herd) {
-        this.herds.add(herd);
+        this.herds.add(new Herd(herd));
     }
 
     @Override
-    public Herd findCurrent(){
+    public Herd findCurrent() {
         return this.herds.get(herds.size()-1);
     }
 
@@ -32,5 +32,10 @@ public class HerdRepositoryInMemory implements HerdRepository {
     public void deleteAll() {
         herds = new ArrayList<>();
         herds.add(new Herd());
+    }
+
+    @Override
+    public void deleteLast() {
+        herds.remove(herds.size()-1);
     }
 }
