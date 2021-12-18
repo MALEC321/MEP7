@@ -45,7 +45,7 @@ public class Herd {
         } else {
             winner = "tie";
             if (isReal) {
-                challengee.setIsHungry(true);
+                challengee.setIsDead(true);
                 challenger.setIsHungry(true);
             }
         }
@@ -86,7 +86,7 @@ public class Herd {
 
     public void removeOrphanedBabyDinosaurs() {
         for (Dinosaur dinosaur : findSortedDinosaursByStrengthThenName()) {
-            if (dinosaur.isOrphan()) {
+            if (dinosaur.areBothParentsDead()) {
                 removeDinosaur(dinosaur);
             }
         }
@@ -99,6 +99,8 @@ public class Herd {
         // S2 Split state into states of salad and half water
         ResourcesStateDto foodContainerForHerbivore = resourcesStateDto.createFoodContainerForHerbivore();
         ResourcesStateDto foodContainerForCarnivore = resourcesStateDto.createFoodContainerForCarnivore();
+        ResourcesStateDto totalFoodGiven = foodContainerForHerbivore.add(foodContainerForCarnivore);
+        ResourcesStateDto leftOver = resourcesStateDto.minus(totalFoodGiven);
         for (Dinosaur dinosaur : findSortedHerbivoreAndOmnivore()) {
             foodContainerForHerbivore = dinosaur.eat(foodContainerForHerbivore); // S2
         }
@@ -107,7 +109,7 @@ public class Herd {
         }
 
         // S1 U S2
-        return foodContainerForHerbivore.add(foodContainerForCarnivore); // {burger: 4} {salad: 2}  {water: 3}
+        return foodContainerForHerbivore.add(foodContainerForCarnivore).add(leftOver); // {burger: 4} {salad: 2}  {water: 3}
     }
 
     public void removeAllHungryDinosaur() {

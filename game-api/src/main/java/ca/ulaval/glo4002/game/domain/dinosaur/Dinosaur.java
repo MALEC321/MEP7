@@ -84,11 +84,12 @@ public class Dinosaur {
     }
 
     public ResourcesStateDto eat(ResourcesStateDto resourcesStateDto) {
-        ResourcesStateDto resourceStateNeeded = dietStrategy.calculateFoodNeeds(weight, getIsHungry());
+        ResourcesStateDto resourceStateLeft;
+        ResourcesStateDto resourceStateNeeded = dietStrategy.calculateFoodNeeds(weight, isHungry());
         if (!resourcesStateDto.checkIfThereIsEnoughQuantity(resourceStateNeeded)) {
-            resourceStateNeeded = resourcesStateDto;
             setIsDead(true);
         }
+        resourceStateLeft = resourcesStateDto.removeQuantities(resourceStateNeeded);
         if (dietType != DietType.OMNIVORE) {
             setIsHungry(false);
         }
@@ -97,7 +98,7 @@ public class Dinosaur {
         }
         secondTimeEating = true;
 
-        return resourceStateNeeded;
+        return resourceStateLeft;
     }
 
     public boolean getIsDead() {

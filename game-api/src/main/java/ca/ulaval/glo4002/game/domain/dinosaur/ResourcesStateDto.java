@@ -1,18 +1,11 @@
 package ca.ulaval.glo4002.game.domain.dinosaur;
 
+import ca.ulaval.glo4002.game.domain.resources.ResourceType;
+
 import java.math.BigDecimal;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
 import static ca.ulaval.glo4002.game.domain.resources.ResourceType.*;
-
-import ca.ulaval.glo4002.game.domain.resources.ResourceType;
 
 public class ResourcesStateDto {
     private final Map<ResourceType, Integer> resourceTypeQuantities = new HashMap<>();
@@ -43,6 +36,17 @@ public class ResourcesStateDto {
         for (ResourceType resourceType : bothResourceTypes) {
             int resultQuantity = resourcesStateDto.getQtyForResourceType(resourceType);
             resultQuantity += getQtyForResourceType(resourceType);
+            bothPantryReportUnified.add(new ResourceTypeQuantity(resourceType, resultQuantity));
+        }
+        return new ResourcesStateDto(bothPantryReportUnified);
+    }
+
+    public ResourcesStateDto minus(ResourcesStateDto resourcesStateDto) {
+        List<ResourceTypeQuantity> bothPantryReportUnified = new ArrayList<>();
+        Set<ResourceType> bothResourceTypes = addedMissingResourcesType(resourcesStateDto);
+        for (ResourceType resourceType : bothResourceTypes) {
+            int resultQuantity = getQtyForResourceType(resourceType);
+            resultQuantity -= resourcesStateDto.getQtyForResourceType(resourceType);
             bothPantryReportUnified.add(new ResourceTypeQuantity(resourceType, resultQuantity));
         }
         return new ResourcesStateDto(bothPantryReportUnified);

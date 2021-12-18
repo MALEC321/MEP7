@@ -1,15 +1,9 @@
 package ca.ulaval.glo4002.game.domain.resources;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Map;
-import java.util.Queue;
-
 import ca.ulaval.glo4002.game.domain.dinosaur.ResourceTypeQuantity;
 import ca.ulaval.glo4002.game.domain.dinosaur.ResourcesStateDto;
+
+import java.util.*;
 
 import static ca.ulaval.glo4002.game.domain.resources.ResourceType.*;
 
@@ -69,8 +63,8 @@ public class Pantry {
     public void updateQuantities(ResourcesStateDto updatedResourcesStateDto) {
         ResourcesStateDto actualResourcesStateDto = getFreshResourcesReport();
         actualResourcesStateDto.getResourceTypeQuantities().forEach((resourceType, actualResourceQuantity) -> {
-            int resourceQuantityNeeded = updatedResourcesStateDto.getQtyForResourceType(resourceType);
-            removeResourceQty(resourceType, resourceQuantityNeeded);
+            int quantityLeft = updatedResourcesStateDto.getQtyForResourceType(resourceType);
+            removeResourceQty(resourceType, actualResourceQuantity - quantityLeft);
         });
     }
 
