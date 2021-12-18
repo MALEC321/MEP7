@@ -61,7 +61,7 @@ public class DinosaurServiceTest {
     @BeforeEach
     public void setUp() {
         MockitoAnnotations.initMocks(this);
-        when(herdRepository.findCurrentHerd()).thenReturn(herd);
+        when(herdRepository.findCurrent()).thenReturn(herd);
         when(dinosaurFactory.createDinosaur(validDinoName, weight, validGender, validSpecie)).thenReturn(validDinosaur);
         when(dinosaurFactory.createDinosaur(validDinoName, invalidWeight, validGender, validSpecie)).thenThrow(new InvalidWeightException());
         when(actionFactory.createAddDinoAction(validDinosaur, herd)).thenReturn(addDinosaurAction);

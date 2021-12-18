@@ -35,7 +35,7 @@ public class DinosaurService {
 
     public void createDinosaur(DinosaurCreationDto dto) {
         Dinosaur dinosaur = dinosaurFactory.createDinosaur(dto.getName(), dto.getWeight(), dto.getGender(), dto.getSpecies());
-        Action addDinosaurAction = actionFactory.createAddDinoAction(dinosaur, herdRepository.findCurrentHerd());
+        Action addDinosaurAction = actionFactory.createAddDinoAction(dinosaur, herdRepository.findCurrent());
 
         Game game = gameRepository.findCurrentGame();
         game.currentTurn().addAction(addDinosaurAction);
@@ -43,13 +43,13 @@ public class DinosaurService {
     }
 
     public List<DinosaurDto> getAllDinosaurs() {
-        Herd herd = herdRepository.findCurrentHerd();
+        Herd herd = herdRepository.findCurrent();
         List<Dinosaur> dinosaurs = herd.findAllDinosaurs();
         return dinosaurAssembler.toDtos(dinosaurs);
     }
 
     public DinosaurDto getDinosaur(String name) throws NotExistentNameException {
-        Herd herd = herdRepository.findCurrentHerd();
+        Herd herd = herdRepository.findCurrent();
 
         Dinosaur dinosaur = herd.findDinosaurByName(name);
         if (dinosaur == null) {

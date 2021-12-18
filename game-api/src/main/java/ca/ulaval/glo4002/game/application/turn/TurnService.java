@@ -25,7 +25,7 @@ public class TurnService {
 
     public void playTurn() {
         Game game = gameRepository.findCurrentGame();
-        Herd herd = herdRepository.findCurrentHerd();
+        Herd herd = herdRepository.findCurrent();
         Pantry pantry = pantryRepository.findCurrentPantry();
 
         Turn currentTurn = game.currentTurn();
@@ -46,7 +46,7 @@ public class TurnService {
         game.removeLastTurn();
 
         pantryRepository.deleteLast();
-        herdRepository.deleteLast();
+        herdRepository.resetCurrent();
         gameRepository.deleteLast();
     }
 
@@ -58,7 +58,7 @@ public class TurnService {
     public void resetGame() {
         gameRepository.deleteAll();
         pantryRepository.deleteAll();
-        herdRepository.deleteAll();
+        herdRepository.resetCurrent();
     }
 
     public TurnNumber getCurrentTurnNumber() {

@@ -27,13 +27,13 @@ public class BabyRegistrationService {
 
     public void saveBabyInformationIfBabyAlived(BabyCreationDto dto, Optional<ResponseBreed> babyDto) {
         if (babyDto.isPresent()) {
-            Dinosaur father = herdRepository.findCurrentHerd().findDinosaurByName(dto.getFatherName());
-            Dinosaur mother = herdRepository.findCurrentHerd().findDinosaurByName(dto.getMotherName());
+            Dinosaur father = herdRepository.findCurrent().findDinosaurByName(dto.getFatherName());
+            Dinosaur mother = herdRepository.findCurrent().findDinosaurByName(dto.getMotherName());
             Dinosaur baby = dinosaurFactory.createBabyDinosaur(dto.getName(), mother, father, babyDto.get().getGender(), babyDto.get().getOffspring());
 
             Game game = gameRepository.findCurrentGame();
 
-            game.currentTurn().addAction(actionFactory.createAddDinoAction(baby, herdRepository.findCurrentHerd()));
+            game.currentTurn().addAction(actionFactory.createAddDinoAction(baby, herdRepository.findCurrent()));
 
             gameRepository.save(game);
         }

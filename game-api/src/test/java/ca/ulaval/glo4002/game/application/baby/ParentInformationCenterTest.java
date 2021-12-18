@@ -55,7 +55,7 @@ public class ParentInformationCenterTest {
     @BeforeEach
     public void setUp() {
         MockitoAnnotations.initMocks(this);
-        when(herdRepository.findCurrentHerd()).thenReturn(herd);
+        when(herdRepository.findCurrent()).thenReturn(herd);
         when(validDinosaurFather.getGender()).thenReturn(validFatherGender);
         when(validDinosaurFather.getSpecies()).thenReturn(validFatherSpecie);
         when(validDinosaurMother.getGender()).thenReturn(validMotherGender);

@@ -63,7 +63,7 @@ public class TurnServiceTest {
         MockitoAnnotations.initMocks(this);
         when(resourceRepository.findCurrentPantry()).thenReturn(pantry);
         when(gameRepository.findCurrentGame()).thenReturn(game);
-        when(herdRepository.findCurrentHerd()).thenReturn(herd);
+        when(herdRepository.findCurrent()).thenReturn(herd);
         when(game.currentTurn()).thenReturn(turn);
         when(pantryRepository.findCurrentPantry()).thenReturn(pantry);
         when(turnFactory.create(game.nextTurnNumber())).thenReturn(nextTurn);
@@ -91,7 +91,7 @@ public class TurnServiceTest {
 
         verify(gameRepository).deleteAll();
         verify(pantryRepository).deleteAll();
-        verify(herdRepository).deleteAll();
+        verify(herdRepository).resetCurrent();
     }
 
     @Test
