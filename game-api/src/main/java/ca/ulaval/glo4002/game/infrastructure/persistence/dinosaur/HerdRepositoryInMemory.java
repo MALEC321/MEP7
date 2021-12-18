@@ -28,10 +28,9 @@ public class HerdRepositoryInMemory implements HerdRepository {
         return this.herds.get(herds.size()-2);
     }
 
-
     @Override
-    public void resetCurrent() {
-        herds.remove(herds.size()-1);
+    public void deleteAll() {
+        herds = new ArrayList<>();
         herds.add(new Herd());
     }
 }

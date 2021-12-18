@@ -30,7 +30,7 @@ public class BabyResourceTest extends JerseyTest {
 
     @Test
     public void givenBabyDinosaurRequest_whenCreateBabyDinosaur_thenReturnedOkStatus() {
-        BabyCreationDto babyCreationDto = new BabyCreationDto("name", "fatherName", "motherName");
+        BabyCreationDto babyCreationDto = new BabyCreationDto("name", "fatherName", "mothexrName");
         when(babyDtoAssembler.fromRequest(anyObject())).thenReturn(babyCreationDto);
 
         Response response = target("breed").request(MediaType.APPLICATION_JSON_TYPE).post(null);

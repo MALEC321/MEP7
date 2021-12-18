@@ -1,21 +1,20 @@
 package ca.ulaval.glo4002.game.application.resources;
 
-import java.util.List;
-
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
-import org.mockito.Mock;
-import org.mockito.MockitoAnnotations;
-
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-
 import ca.ulaval.glo4002.game.application.resources.dtos.ResourcesDto;
 import ca.ulaval.glo4002.game.application.turn.TurnService;
 import ca.ulaval.glo4002.game.controllers.resources.dtos.ResourceCreationDto;
 import ca.ulaval.glo4002.game.domain.resources.PantryRepository;
 import ca.ulaval.glo4002.game.domain.resources.ResourcesGroup;
 import ca.ulaval.glo4002.game.infrastructure.persistence.resources.PantryRepositoryInMemory;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.mockito.Mock;
+import org.mockito.MockitoAnnotations;
+
+import java.util.List;
+
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class ResourcesServiceTest {
     private static final int QYT_BURGER = 4;
@@ -53,7 +52,7 @@ public class ResourcesServiceTest {
         PantryRepository resourceRepository = new PantryRepositoryInMemory();
         turnService.playTurn();
 
-        List<ResourcesGroup> resources = resourceRepository.findCurrentPantry().findAllResourcesGroup();
+        List<ResourcesGroup> resources = resourceRepository.findCurrent().findAllResourcesGroup();
 
         assertFalse(resources.isEmpty());
     }

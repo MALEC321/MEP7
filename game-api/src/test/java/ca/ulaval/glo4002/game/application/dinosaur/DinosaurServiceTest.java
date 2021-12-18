@@ -65,7 +65,7 @@ public class DinosaurServiceTest {
         when(dinosaurFactory.createDinosaur(validDinoName, weight, validGender, validSpecie)).thenReturn(validDinosaur);
         when(dinosaurFactory.createDinosaur(validDinoName, invalidWeight, validGender, validSpecie)).thenThrow(new InvalidWeightException());
         when(actionFactory.createAddDinoAction(validDinosaur, herd)).thenReturn(addDinosaurAction);
-        when(gameRepository.findCurrentGame()).thenReturn(game);
+        when(gameRepository.findCurrent()).thenReturn(game);
         when(game.currentTurn()).thenReturn(turn);
     }
 

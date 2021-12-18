@@ -35,7 +35,7 @@ public class HerdRepositoryInMemoryTest {
     @Test
     public void givenHerd_whenResetCurrent_thenCurrentHerdIsReset() {
         herdRepositoryInMemory.save(herd);
-        herdRepositoryInMemory.resetCurrent();
+        herdRepositoryInMemory.deleteAll();
 
         assertNotEquals(herd, herdRepositoryInMemory.findCurrent());
     }

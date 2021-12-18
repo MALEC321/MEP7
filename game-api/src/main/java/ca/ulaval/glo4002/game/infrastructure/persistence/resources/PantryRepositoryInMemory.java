@@ -14,7 +14,7 @@ public class PantryRepositoryInMemory implements PantryRepository {
     }
 
     @Override
-    public Pantry findCurrentPantry() {
+    public Pantry findCurrent() {
         return pantries.get(pantries.size()-1);
     }
 
@@ -25,17 +25,12 @@ public class PantryRepositoryInMemory implements PantryRepository {
 
     @Override
     public void deleteAll() {
-        pantries.remove(pantries.size()-1);
+        pantries = new ArrayList<>();
         pantries.add(new Pantry());
     }
 
     @Override
-    public Pantry findPreviousPantry() {
+    public Pantry findPrevious() {
         return pantries.get(pantries.size()-2);
-    }
-
-    @Override
-    public void deleteLast() {
-        pantries.remove(pantries.size()-1);
     }
 }

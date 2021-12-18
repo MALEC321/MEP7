@@ -123,7 +123,7 @@ public class SumoServiceTest {
     @Test
     void givenSumoDto_whenFight_thenAddFightActionToTurn() {
         when (herdRepository.findCurrent()).thenReturn(herd);
-        when (gameRepository.findCurrentGame()).thenReturn(game);
+        when (gameRepository.findCurrent()).thenReturn(game);
         when(game.currentTurn()).thenReturn(turn);
         when(actionFactory.createFight(turn.getActions(), challenger, challengee, herd)).thenReturn(fightAction);
         sumoService.fight(sumoDto);
@@ -134,7 +134,7 @@ public class SumoServiceTest {
     @Test
     void givenSumoDto_whenFight_thenSaveGameToGameRepository() {
         when (herdRepository.findCurrent()).thenReturn(herd);
-        when (gameRepository.findCurrentGame()).thenReturn(game);
+        when (gameRepository.findCurrent()).thenReturn(game);
         when(game.currentTurn()).thenReturn(turn);
         when(actionFactory.createFight(turn.getActions(), challenger, challengee, herd)).thenReturn(fightAction);
         sumoService.fight(sumoDto);
@@ -145,7 +145,7 @@ public class SumoServiceTest {
     @Test
     void givenSumoDto_whenFight_thenSumoResponseContainsThePredictedWinner() {
         when (herdRepository.findCurrent()).thenReturn(herd);
-        when (gameRepository.findCurrentGame()).thenReturn(game);
+        when (gameRepository.findCurrent()).thenReturn(game);
         when(game.currentTurn()).thenReturn(turn);
         when(actionFactory.createFight(turn.getActions(), challenger, challengee, herd)).thenReturn(fightAction);
         when(herd.fight(challenger, challengee, false)).thenReturn("nameOfWinner");

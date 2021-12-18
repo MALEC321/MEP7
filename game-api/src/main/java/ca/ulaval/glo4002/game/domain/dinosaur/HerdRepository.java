@@ -8,5 +8,5 @@ public interface HerdRepository {
 
     void save(Herd herd);
 
-    void resetCurrent();
+    void deleteAll();
 }

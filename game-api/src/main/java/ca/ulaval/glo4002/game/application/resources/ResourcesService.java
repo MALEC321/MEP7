@@ -39,16 +39,16 @@ public class ResourcesService {
     }
 
     public List<ResourcesDto> getAllResources() {
-        Pantry pantry = pantryRepository.findCurrentPantry();
+        Pantry pantry = pantryRepository.findCurrent();
         List<ResourcesGroup> resources = pantry.findAllResourcesGroup();
         return resourcesAssembler.toDtos(resources);
     }
 
     private void addResourcesToActionWaitingList(ResourcesGroup resourcesGroup) {
-        Game game = gameRepository.findCurrentGame();
+        Game game = gameRepository.findCurrent();
         for (Resources resources : resourcesGroup.getResources().values()) {
             if (!resources.isEmpty()) {
-                Action addResources = actionFactory.createAddResourceAction(resources, pantryRepository.findCurrentPantry());
+                Action addResources = actionFactory.createAddResourceAction(resources, pantryRepository.findCurrent());
                 game.currentTurn().addAction(addResources);
             }
         }

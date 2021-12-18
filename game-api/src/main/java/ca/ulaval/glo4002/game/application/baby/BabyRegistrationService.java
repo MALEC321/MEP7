@@ -31,7 +31,7 @@ public class BabyRegistrationService {
             Dinosaur mother = herdRepository.findCurrent().findDinosaurByName(dto.getMotherName());
             Dinosaur baby = dinosaurFactory.createBabyDinosaur(dto.getName(), mother, father, babyDto.get().getGender(), babyDto.get().getOffspring());
 
-            Game game = gameRepository.findCurrentGame();
+            Game game = gameRepository.findCurrent();
 
             game.currentTurn().addAction(actionFactory.createAddDinoAction(baby, herdRepository.findCurrent()));
 

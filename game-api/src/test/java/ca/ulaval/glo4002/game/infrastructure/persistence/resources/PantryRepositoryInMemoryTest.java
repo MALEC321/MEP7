@@ -1,16 +1,13 @@
 package ca.ulaval.glo4002.game.infrastructure.persistence.resources;
 
 import ca.ulaval.glo4002.game.domain.resources.Pantry;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.mockito.Mockito.times;
-import static org.mockito.Mockito.verify;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class PantryRepositoryInMemoryTest {
     @InjectMocks
@@ -20,27 +17,38 @@ public class PantryRepositoryInMemoryTest {
     private Pantry pantry;
 
     @BeforeEach
-    public void setUp() {
+    public void setup() {
         MockitoAnnotations.initMocks(this);
     }
 
     @Test
-    public void repoCreated_whenFindPantry_thenThatPantryIsFound() {
-        assertEquals(pantry, this.pantryRepositoryInMemory.findCurrentPantry());
+    public void givenNoPantry_whenFindCurrentPantry_thenReturnsPantry() {
+        assertNotNull(pantryRepositoryInMemory.findCurrent());
     }
 
     @Test
-    public void givenPantry_whenSave_thenReturnedNotEmptyPantry() {
-
-        this.pantryRepositoryInMemory.save(pantry);
-
-        Assertions.assertNotNull(this.pantryRepositoryInMemory);
+    public void givenPantry_whenSave_thenFindCurrentPantryReturnsSavedPantry() {
+        pantryRepositoryInMemory.save(pantry);
+        assertEquals(pantry, pantryRepositoryInMemory.findCurrent());
     }
 
     @Test
-    public void repoCreated_whenResetResource_thenPantryIsCleared() {
-        this.pantryRepositoryInMemory.deleteAll();
+    public void givenPantry_whenResetCurrent_thenCurrentPantryIsReset() {
+        pantryRepositoryInMemory.save(pantry);
+        pantryRepositoryInMemory.deleteAll();
 
-        verify(this.pantry, times(1)).clear();
+        assertNotEquals(pantry, pantryRepositoryInMemory.findCurrent());
     }
+
+    @Test
+    public void givenNoPantry_whenSave_thenFindPreviousPantryThrowsException() {
+        assertThrows(IndexOutOfBoundsException.class, () -> pantryRepositoryInMemory.findPrevious());
+    }
+
+    @Test
+    public void givenOnePantrys_whenSave_thenFindPreviousPantryReturnsPantry() {
+        pantryRepositoryInMemory.save(pantry);
+        assertNotNull(pantryRepositoryInMemory.findPrevious());
+    }
+
 }

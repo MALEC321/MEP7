@@ -37,7 +37,7 @@ public class DinosaurService {
         Dinosaur dinosaur = dinosaurFactory.createDinosaur(dto.getName(), dto.getWeight(), dto.getGender(), dto.getSpecies());
         Action addDinosaurAction = actionFactory.createAddDinoAction(dinosaur, herdRepository.findCurrent());
 
-        Game game = gameRepository.findCurrentGame();
+        Game game = gameRepository.findCurrent();
         game.currentTurn().addAction(addDinosaurAction);
         gameRepository.save(game);
     }

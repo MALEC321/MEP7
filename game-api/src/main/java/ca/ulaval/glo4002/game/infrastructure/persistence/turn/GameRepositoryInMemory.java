@@ -19,23 +19,18 @@ public class GameRepositoryInMemory implements GameRepository {
     }
 
     @Override
-    public Game findCurrentGame() {
+    public Game findCurrent() {
         return this.games.get(games.size()-1);
     }
 
     @Override
     public void deleteAll() {
-        games.remove(games.size()-1);
+        games = new ArrayList<>();
         games.add(new Game());
     }
 
     @Override
-    public Game findPreviousGame() {
+    public Game findPrevious() {
         return this.games.get(games.size()-2);
-    }
-
-    @Override
-    public void deleteLast() {
-        games.remove(games.size()-1);
     }
 }
