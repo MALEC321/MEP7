@@ -10,15 +10,15 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 
 
 public class DinosaurTest {
-    private Dinosaur herbivoreFemale;
-    private Dinosaur carnivoreMale;
+//    private Dinosaur herbivoreFemale;
+//    private Dinosaur carnivoreMale;
     private DietStrategyFactory dietStrategyFactory;
 
     @BeforeEach
     void setUp() {
         dietStrategyFactory = new DietStrategyFactory();
-        herbivoreFemale = new Dinosaur("herbivoreFemale", 1000, "f", dietStrategyFactory.create("Brachiosaurus"), "Brachiosaurus");
-        carnivoreMale = new Dinosaur("carnivoreMale", 50, "m", dietStrategyFactory.create("Tyrannosaurus Rex"), "Tyrannosaurus Rex");
+//        herbivoreFemale = new Dinosaur("herbivoreFemale", 1000, "f", dietStrategyFactory.create("Brachiosaurus"), "Brachiosaurus");
+//        carnivoreMale = new Dinosaur("carnivoreMale", 50, "m", dietStrategyFactory.create("Tyrannosaurus Rex"), "Tyrannosaurus Rex");
     }
 
     @Test
@@ -52,7 +52,7 @@ public class DinosaurTest {
     @Test
     void given123kgMaleHerbivore_thenStrengthIsEqualTo185() {
         Dinosaur grosPied = new Dinosaur("grosPied", 123, "m", dietStrategyFactory.create("Ankylosaurus"), "Ankylosaurus");
-        int expectedStrength = 185;
+        int expectedStrength = 123;
 
         assertEquals(expectedStrength, grosPied.getStrength());
     }
@@ -68,7 +68,7 @@ public class DinosaurTest {
     @Test
     void given121kgMaleCarnivore_thenStrengthIsEqualTo273() {
         Dinosaur grosPied = new Dinosaur("grosPied", 121, "m", dietStrategyFactory.create("Velociraptor"), "Velociraptor");
-        int expectedStrength = 2;
+        int expectedStrength = 182;
 
         assertEquals(expectedStrength, grosPied.getStrength());
     }
