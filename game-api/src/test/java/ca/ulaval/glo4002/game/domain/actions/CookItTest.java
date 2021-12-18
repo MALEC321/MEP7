@@ -25,11 +25,4 @@ public class CookItTest {
         cookItAction = new CookIt(pantry, resourcesFactory);
         MockitoAnnotations.initMocks(this);
     }
-
-//    @Test
-//    void givenAddDinoAction_whenExecuting_thenAddDinosaurShouldBeCalled() {
-//        cookItAction.execute();
-//
-//        verify(cookItAction);
-//    }
 }
